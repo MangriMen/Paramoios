@@ -11,7 +11,6 @@ class MainWindow(QMainWindow):
         QMainWindow.__init__(self, parent)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-        self.initUI()
 
     def __del__(self):
         self.ui = None
