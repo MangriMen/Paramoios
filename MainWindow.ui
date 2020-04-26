@@ -131,9 +131,15 @@
            </property>
            <property name="sizePolicy">
             <sizepolicy hsizetype="Maximum" vsizetype="Minimum">
-             <horstretch>0</horstretch>
+             <horstretch>1</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>46</width>
+             <height>0</height>
+            </size>
            </property>
            <property name="autoFillBackground">
             <bool>false</bool>
@@ -147,9 +153,15 @@
           <widget class="QPushButton" name="btnMaximize">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Maximum" vsizetype="Minimum">
-             <horstretch>0</horstretch>
+             <horstretch>1</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>46</width>
+             <height>0</height>
+            </size>
            </property>
            <property name="text">
             <string/>
@@ -160,9 +172,15 @@
           <widget class="QPushButton" name="btnClose">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Maximum" vsizetype="Minimum">
-             <horstretch>0</horstretch>
+             <horstretch>1</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>46</width>
+             <height>0</height>
+            </size>
            </property>
            <property name="text">
             <string/>
