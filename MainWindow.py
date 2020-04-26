@@ -3,7 +3,8 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import QCoreApplication
 
-(Ui_MainWindow, QMainWindow) = uic.loadUiType('design.ui')
+(Ui_MainWindow, QMainWindow) = uic.loadUiType('MainWindow.ui')
+
 
 class MainWindow(QMainWindow):
 
