@@ -1,11 +1,9 @@
 from PyQt5 import uic
 from PyQt5 import QtWidgets
-# from PyQt5.QtWidgets import *
 from PyQt5 import QtGui
-# from PyQt5.QtGui import *
 from PyQt5 import QtCore
 from PyQt5.QtCore import Qt
-# from PyQt5.QtCore import *
+import style
 
 (Ui_MainWindow, QMainWindow) = uic.loadUiType('MainWindow.ui')
 
@@ -16,13 +14,12 @@ class MainWindow(QMainWindow):
         QMainWindow.__init__(self, parent)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+        style.setupStyle(self)
 
         self.setMouseTracking(True)
         self.ui.centralwidget.setMouseTracking(True)
 
         self.initVariables()
-
-        self.ui.menuBox.hide()
 
     def initVariables(self):
         self.previousPosition = QtCore.QPoint()
