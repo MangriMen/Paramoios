@@ -3,7 +3,10 @@ from PyQt5 import QtWidgets
 from PyQt5 import QtGui
 from PyQt5 import QtCore
 from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QPixmap
+
 import style
+import character_IO
 
 (Ui_MainWindow, QMainWindow) = uic.loadUiType('MainWindow.ui')
 
@@ -35,6 +38,8 @@ class MainWindow(QMainWindow):
         self.rectInterface = None
         self.rectMenu = None
         self.isMenuButtonClicked = False
+        self.loadedCharacter = None
+        self.pathToJson = ""
 
     def menuButtonClicked(self):
         if not self.isMenuButtonClicked:
@@ -51,6 +56,22 @@ class MainWindow(QMainWindow):
             self.ui.menuButton.setGeometry(0, 0, 128, 32)
             self.ui.menuBox.hide()
             self.isMenuButtonClicked = False
+
+    def openFileClicked(self):
+        self.pathToJson = QtWidgets.QFileDialog.getOpenFileName(
+            self, "Open Character", "./save/characters", "JSON (*.json)")[0]
+        try:
+            character_IO.loadCharacter(self)
+        except:
+            notFoundWarning = QtWidgets.QMessageBox()
+            notFoundWarning.setWindowTitle(self.ui.label.text())
+            notFoundWarning.setText(
+                "Ошибка открытия, неверная структура файла.")
+            notFoundWarning.setIconPixmap(QPixmap(
+                "images/messages/warning").scaled(24, 24, Qt.KeepAspectRatio, Qt.SmoothTransformation))
+            notFoundWarning.exec()
+        else:
+            self.fileIsNew = False
 
     def changedMaximize(self):
         if not self.isMaximized():
