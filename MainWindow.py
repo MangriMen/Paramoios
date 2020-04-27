@@ -1,9 +1,15 @@
+import functools
+import json
+
 from PyQt5 import uic
 from PyQt5 import QtWidgets
 from PyQt5 import QtGui
 from PyQt5 import QtCore
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPixmap
+from PyQt5.QtWidgets import QMessageBox
+from PyQt5.QtWidgets import QFileDialog
+
 
 import style
 import character_IO
@@ -23,6 +29,7 @@ class MainWindow(QMainWindow):
         self.ui.centralwidget.setMouseTracking(True)
 
         self.initVariables()
+        self.newCharClicked()
 
     def initVariables(self):
         self.previousPosition = QtCore.QPoint()
@@ -39,7 +46,12 @@ class MainWindow(QMainWindow):
         self.rectMenu = None
         self.isMenuButtonClicked = False
         self.loadedCharacter = None
+        self.backupCharacter = None
+        setEnteredSignal = self.findChildren(QtWidgets.QLineEdit)
+        for QLineEdit in setEnteredSignal:
+            QLineEdit.textEdited.connect(functools.partial(self.fieldSaving, QLineEdit))
         self.pathToJson = ""
+        self.fileIsNew = False
 
     def menuButtonClicked(self):
         if not self.isMenuButtonClicked:
@@ -63,7 +75,7 @@ class MainWindow(QMainWindow):
         try:
             character_IO.loadCharacter(self)
         except:
-            notFoundWarning = QtWidgets.QMessageBox()
+            notFoundWarning = QMessageBox()
             notFoundWarning.setWindowTitle(self.ui.label.text())
             notFoundWarning.setText(
                 "Ошибка открытия, неверная структура файла.")
@@ -72,6 +84,51 @@ class MainWindow(QMainWindow):
             notFoundWarning.exec()
         else:
             self.fileIsNew = False
+
+    def fieldSaving(self, QLineEdit):
+        character_IO.backupCharacter(self)
+
+    def newCharClicked(self):
+        self.pathToJson = "default_data/default_character.json"
+        try:
+            character_IO.loadCharacter(self)
+        except:
+            notFoundWarning = QMessageBox()
+            notFoundWarning.setWindowTitle(self.ui.label.text())
+            notFoundWarning.setText(
+                "Ошибка загрузки, файлы повреждены или не найдены.")
+            notFoundWarning.setIconPixmap(QPixmap(
+                "images/messages/warning").scaled(24, 24, Qt.KeepAspectRatio, Qt.SmoothTransformation))
+            notFoundWarning.exec()
+        else:
+            self.fileIsNew = True
+            self.ui.save.setEnabled(True)
+
+    def saveClicked(self):
+        character_IO.saveCharacter(self)
+        character_IO.loadCharacter(self)
+
+    def saveAs(self):
+        try:
+            self.pathToJson = QFileDialog.getSaveFileName(
+                self, "Open Character", "./default_data", "JSON (*.json)")[0]
+            with open(self.pathToJson, 'w') as f:
+                f.write(json.dumps(self.loadedCharacter,
+                                   sort_keys=False, indent=2))
+        except FileNotFoundError:
+            notFoundWarning = QMessageBox()
+            notFoundWarning.setWindowTitle(self.ui.label.text())
+            notFoundWarning.setText("Файл не найден")
+            notFoundWarning.setIconPixmap(QPixmap(
+                "images/messages/warning").scaled(24, 24, Qt.KeepAspectRatio, Qt.SmoothTransformation))
+            notFoundWarning.exec()
+        except:
+            notFoundWarning = QMessageBox()
+            notFoundWarning.setWindowTitle(self.ui.label.text())
+            notFoundWarning.setText("Файл не найден")
+            notFoundWarning.setIconPixmap(QPixmap(
+                "images/messages/warning").scaled(24, 24, Qt.KeepAspectRatio, Qt.SmoothTransformation))
+            notFoundWarning.exec()
 
     def changedMaximize(self):
         if not self.isMaximized():
