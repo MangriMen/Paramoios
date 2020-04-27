@@ -4458,207 +4458,179 @@ p, li { white-space: pre-wrap; }
         <widget class="QFrame" name="moneyBox">
          <property name="geometry">
           <rect>
-           <x>345</x>
-           <y>10</y>
-           <width>120</width>
-           <height>140</height>
+           <x>475</x>
+           <y>-5</y>
+           <width>486</width>
+           <height>41</height>
           </rect>
          </property>
-         <widget class="QFrame" name="copperBox">
-          <property name="geometry">
-           <rect>
-            <x>0</x>
-            <y>0</y>
-            <width>114</width>
-            <height>24</height>
-           </rect>
-          </property>
-          <widget class="QWidget" name="copper" native="true">
-           <property name="geometry">
-            <rect>
-             <x>0</x>
-             <y>0</y>
-             <width>24</width>
-             <height>24</height>
-            </rect>
-           </property>
-          </widget>
-          <widget class="QLabel" name="copperLabel">
-           <property name="geometry">
-            <rect>
-             <x>24</x>
-             <y>0</y>
-             <width>90</width>
-             <height>24</height>
-            </rect>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
-           </property>
-           <property name="text">
-            <string>0</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-          </widget>
-         </widget>
-         <widget class="QFrame" name="silverBox">
-          <property name="geometry">
-           <rect>
-            <x>0</x>
-            <y>24</y>
-            <width>114</width>
-            <height>24</height>
-           </rect>
-          </property>
-          <widget class="QLabel" name="silverLabel">
-           <property name="geometry">
-            <rect>
-             <x>24</x>
-             <y>0</y>
-             <width>90</width>
-             <height>24</height>
-            </rect>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
-           </property>
-           <property name="text">
-            <string>0</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-          </widget>
-          <widget class="QWidget" name="silver" native="true">
-           <property name="geometry">
-            <rect>
-             <x>0</x>
-             <y>0</y>
-             <width>24</width>
-             <height>24</height>
-            </rect>
-           </property>
-          </widget>
-         </widget>
-         <widget class="QFrame" name="electrumBox">
-          <property name="geometry">
-           <rect>
-            <x>0</x>
-            <y>48</y>
-            <width>114</width>
-            <height>24</height>
-           </rect>
-          </property>
-          <widget class="QLabel" name="electrumLabel">
-           <property name="geometry">
-            <rect>
-             <x>24</x>
-             <y>0</y>
-             <width>90</width>
-             <height>24</height>
-            </rect>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
-           </property>
-           <property name="text">
-            <string>0</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-          </widget>
-          <widget class="QWidget" name="electrum" native="true">
-           <property name="geometry">
-            <rect>
-             <x>0</x>
-             <y>0</y>
-             <width>24</width>
-             <height>24</height>
-            </rect>
-           </property>
-          </widget>
-         </widget>
-         <widget class="QFrame" name="goldBox">
-          <property name="geometry">
-           <rect>
-            <x>0</x>
-            <y>72</y>
-            <width>114</width>
-            <height>24</height>
-           </rect>
-          </property>
-          <widget class="QLabel" name="goldLabel">
-           <property name="geometry">
-            <rect>
-             <x>24</x>
-             <y>0</y>
-             <width>90</width>
-             <height>24</height>
-            </rect>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
-           </property>
-           <property name="text">
-            <string>0</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-          </widget>
-          <widget class="QWidget" name="gold" native="true">
-           <property name="geometry">
-            <rect>
-             <x>0</x>
-             <y>0</y>
-             <width>24</width>
-             <height>24</height>
-            </rect>
-           </property>
-          </widget>
-         </widget>
-         <widget class="QFrame" name="platinumBox">
-          <property name="geometry">
-           <rect>
-            <x>0</x>
-            <y>96</y>
-            <width>114</width>
-            <height>24</height>
-           </rect>
-          </property>
-          <widget class="QLabel" name="platinumLabel">
-           <property name="geometry">
-            <rect>
-             <x>24</x>
-             <y>0</y>
-             <width>90</width>
-             <height>24</height>
-            </rect>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
-           </property>
-           <property name="text">
-            <string>0</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-          </widget>
-          <widget class="QWidget" name="platinum" native="true">
-           <property name="geometry">
-            <rect>
-             <x>0</x>
-             <y>0</y>
-             <width>24</width>
-             <height>24</height>
-            </rect>
-           </property>
-          </widget>
-         </widget>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <widget class="QFrame" name="platinumBox">
+            <widget class="QLabel" name="platinumLabel">
+             <property name="geometry">
+              <rect>
+               <x>24</x>
+               <y>-2</y>
+               <width>71</width>
+               <height>26</height>
+              </rect>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
+             </property>
+             <property name="text">
+              <string>0</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+            <widget class="QWidget" name="platinum" native="true">
+             <property name="geometry">
+              <rect>
+               <x>0</x>
+               <y>0</y>
+               <width>24</width>
+               <height>24</height>
+              </rect>
+             </property>
+            </widget>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="goldBox">
+            <widget class="QLabel" name="goldLabel">
+             <property name="geometry">
+              <rect>
+               <x>24</x>
+               <y>-2</y>
+               <width>76</width>
+               <height>26</height>
+              </rect>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
+             </property>
+             <property name="text">
+              <string>0</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+            <widget class="QWidget" name="gold" native="true">
+             <property name="geometry">
+              <rect>
+               <x>0</x>
+               <y>0</y>
+               <width>24</width>
+               <height>24</height>
+              </rect>
+             </property>
+            </widget>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="electrumBox">
+            <widget class="QLabel" name="electrumLabel">
+             <property name="geometry">
+              <rect>
+               <x>24</x>
+               <y>-2</y>
+               <width>71</width>
+               <height>26</height>
+              </rect>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
+             </property>
+             <property name="text">
+              <string>0</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+            <widget class="QWidget" name="electrum" native="true">
+             <property name="geometry">
+              <rect>
+               <x>0</x>
+               <y>0</y>
+               <width>24</width>
+               <height>24</height>
+              </rect>
+             </property>
+            </widget>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="silverBox">
+            <widget class="QLabel" name="silverLabel">
+             <property name="geometry">
+              <rect>
+               <x>24</x>
+               <y>-2</y>
+               <width>71</width>
+               <height>26</height>
+              </rect>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
+             </property>
+             <property name="text">
+              <string>0</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+            <widget class="QWidget" name="silver" native="true">
+             <property name="geometry">
+              <rect>
+               <x>0</x>
+               <y>0</y>
+               <width>24</width>
+               <height>24</height>
+              </rect>
+             </property>
+            </widget>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="copperBox">
+            <widget class="QWidget" name="copper" native="true">
+             <property name="geometry">
+              <rect>
+               <x>0</x>
+               <y>0</y>
+               <width>24</width>
+               <height>24</height>
+              </rect>
+             </property>
+            </widget>
+            <widget class="QLabel" name="copperLabel">
+             <property name="geometry">
+              <rect>
+               <x>24</x>
+               <y>-2</y>
+               <width>90</width>
+               <height>26</height>
+              </rect>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
+             </property>
+             <property name="text">
+              <string>0</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </widget>
+          </item>
+         </layout>
         </widget>
        </widget>
       </item>
@@ -4742,6 +4714,22 @@ p, li { white-space: pre-wrap; }
     <hint type="sourcelabel">
      <x>76</x>
      <y>203</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>511</x>
+     <y>359</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>openFile</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>openFileClicked(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>76</x>
+     <y>113</y>
     </hint>
     <hint type="destinationlabel">
      <x>511</x>
