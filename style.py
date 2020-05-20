@@ -5,7 +5,7 @@ from PyQt5 import QtCore
 from PyQt5.QtCore import Qt
 
 
-def setupStyle(self):
+def setupMain(self):
     QtGui.QFontDatabase.addApplicationFont('fonts/BOOKMANIA-REGULAR.TTF')
     QtGui.QFontDatabase.addApplicationFont('fonts/EBERRON_RUS.TTF')
 
@@ -18,6 +18,9 @@ def setupStyle(self):
     self.ui.menuButton.setIcon(QtGui.QIcon('images/buttons/bookmark_bottom.png'))
     self.ui.menuButton.setIconSize(QtCore.QSize(128, 64))
     self.ui.menuBox.hide()
+
+    self.ui.temperBox.hide()
+    CreateLineEditShadow(self, self.ui.temperBox)
 
     self.ui.newChar.setStyleSheet(getMenuButtonStyleSheet())
     self.ui.openFile.setStyleSheet(getMenuButtonStyleSheet())
@@ -100,17 +103,28 @@ def getWindowStyleSheet():
             "background-color: white;"
             "background-image: url('images/background/backmenu.png');"
             "background-position: center;"
+            "border: 1px solid #681e22;"
             "}"
             "QLineEdit {"
-            "background-color: #d6c48d;"
+            "background-color: #dcc48d;"
             "border: 2px ridge #6e3320;"
-            "border-radius: 3px"
+            "border-radius: 3px;"
             "}"
             "QLabel {"
             "color: black;"
             "}"
             "QPushButton#menuButton {"
             "border: none"
+            "}"
+            "QFrame#temperBox {"
+            "background-color: #efe7cf;;"
+            "border: 2px ridge #6e3320;"
+            "border-radius: 3px;"
+            "}"
+            "QTextEdit {"
+            "background-color: #dcc48d;"
+            "border: 2px ridge #6e3320;"
+            "border-radius: 3px"
             "}"
             "QRadioButton::indicator {"
             "width: 14px;"
@@ -142,10 +156,10 @@ def getCloseStyleSheet():
             "border: none"
             "}"
             "QPushButton:hover {"
-            "background-color: #eb385b"
+            "background-color: #e81123"
             "}"
             "QPushButton:pressed { "
-            "background-color: #ff365d; "
+            "background-color: #b51623; "
             "}")
 
 
@@ -157,7 +171,7 @@ def getMaximizeStyleSheet():
             "border: none;"
             "}"
             "QPushButton:hover {"
-            "background-color: #383838"
+            "background-color: #19ffffff"
             "}"
             "QPushButton:pressed { "
             "background-color: #de8e37; "
@@ -172,7 +186,7 @@ def getRestoreStyleSheet():
             "border: none;"
             "}"
             "QPushButton:hover {"
-            "background-color: #383838"
+            "background-color: #19ffffff"
             "}"
             "QPushButton:pressed { "
             "background-color: #de8e37; "
@@ -187,10 +201,10 @@ def getMinimizeStyleSheet():
             "border: none; "
             "}"
             "QPushButton:hover { "
-            "background-color: #383838"
+            "background-color: #19ffffff"
             "}"
             "QPushButton:pressed { "
-            "background-color: #d6c48d; "
+            "background-color: #dcc48d; "
             "}")
 
 
@@ -212,7 +226,7 @@ def getMenuStyleSheet():
 def getMenuButtonStyleSheet():
     return ("QPushButton {"
             "font: 12pt \"Eberron\";"
-            "background-color: #d6c48d;"
+            "background-color: #dcc48d;"
             "}")
 
 
