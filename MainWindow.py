@@ -10,6 +10,7 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QMessageBox
 from PyQt5.QtWidgets import QFileDialog
+from CharGenWindow import CharGenWindow
 
 import style
 import character_IO
@@ -114,6 +115,12 @@ class MainWindow(QMainWindow):
 
     def fieldSaving(self, QLineEdit):
         character_IO.backupCharacter(self)
+
+    def loadGenerated(self):
+        self.pathToJson = "saves/CharGenTemp/your_new_character.json"
+        character_IO.loadCharacter(self)
+        self.fileIsNew = True
+        self.ui.save.setEnabled(True)
 
     def newCharClicked(self):
         self.pathToJson = "default_data/default_character.json"
@@ -250,6 +257,9 @@ class MainWindow(QMainWindow):
             self.ui.temperButton.x(), self.ui.temperButton.y(), self.ui.temperButton.width(), self.ui.temperButton.height())
         if not (self.rectTemper.contains(self.position)) and (self.isTemperButtonClicked == True):
             self.temperButtonClicked()
+
+    def closeEvent(self, event):
+        self.CGW.close()
 
     def __del__(self):
         self.ui = None
