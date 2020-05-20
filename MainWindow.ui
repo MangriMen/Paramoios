@@ -87,13 +87,13 @@
           <number>4</number>
          </property>
          <property name="topMargin">
-          <number>0</number>
+          <number>1</number>
          </property>
          <property name="rightMargin">
-          <number>0</number>
+          <number>1</number>
          </property>
          <property name="bottomMargin">
-          <number>0</number>
+          <number>1</number>
          </property>
          <item>
           <widget class="QLabel" name="label">
@@ -202,7 +202,7 @@
          <property name="geometry">
           <rect>
            <x>470</x>
-           <y>30</y>
+           <y>35</y>
            <width>497</width>
            <height>97</height>
           </rect>
@@ -261,6 +261,9 @@
              <property name="text">
               <string/>
              </property>
+             <property name="maxLength">
+              <number>28</number>
+             </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
@@ -278,7 +281,7 @@
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
              <property name="text">
-              <string>Класс</string>
+              <string>Class</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -318,6 +321,9 @@
              <property name="text">
               <string/>
              </property>
+             <property name="maxLength">
+              <number>28</number>
+             </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
@@ -335,7 +341,7 @@
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
              <property name="text">
-              <string>Предыстория</string>
+              <string>Background</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -375,6 +381,9 @@
              <property name="text">
               <string/>
              </property>
+             <property name="maxLength">
+              <number>28</number>
+             </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
@@ -392,7 +401,7 @@
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
              <property name="text">
-              <string>Раса</string>
+              <string>Race</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -432,6 +441,9 @@
              <property name="text">
               <string/>
              </property>
+             <property name="maxLength">
+              <number>28</number>
+             </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
@@ -449,7 +461,7 @@
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
              <property name="text">
-              <string>Мировоззрение</string>
+              <string>Alignment</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -467,7 +479,7 @@
           <rect>
            <x>20</x>
            <y>30</y>
-           <width>327</width>
+           <width>421</width>
            <height>98</height>
           </rect>
          </property>
@@ -498,6 +510,9 @@
           <property name="text">
            <string/>
           </property>
+          <property name="maxLength">
+           <number>2</number>
+          </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
           </property>
@@ -515,10 +530,13 @@
            <string>charName</string>
           </property>
           <property name="styleSheet">
-           <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
+           <string notr="true">font: 18pt &quot;Eberron&quot;;</string>
           </property>
           <property name="text">
            <string/>
+          </property>
+          <property name="maxLength">
+           <number>20</number>
           </property>
           <property name="echoMode">
            <enum>QLineEdit::Normal</enum>
@@ -526,16 +544,13 @@
           <property name="alignment">
            <set>Qt::AlignCenter</set>
           </property>
-          <property name="placeholderText">
-           <string>Имя персонажа...</string>
-          </property>
          </widget>
          <widget class="QLineEdit" name="playerName">
           <property name="geometry">
            <rect>
             <x>225</x>
             <y>0</y>
-            <width>100</width>
+            <width>181</width>
             <height>34</height>
            </rect>
           </property>
@@ -560,6 +575,9 @@
           <property name="text">
            <string/>
           </property>
+          <property name="maxLength">
+           <number>20</number>
+          </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
           </property>
@@ -582,14 +600,31 @@
           <property name="text">
            <string/>
           </property>
+          <property name="maxLength">
+           <number>6</number>
+          </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="temperButton">
+          <property name="geometry">
+           <rect>
+            <x>320</x>
+            <y>50</y>
+            <width>40</width>
+            <height>40</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string/>
           </property>
          </widget>
          <zorder>charName</zorder>
          <zorder>playerName</zorder>
          <zorder>expField</zorder>
          <zorder>levelField</zorder>
+         <zorder>temperButton</zorder>
         </widget>
         <widget class="QFrame" name="skillsBox">
          <property name="geometry">
@@ -601,7 +636,7 @@
           </rect>
          </property>
          <property name="styleSheet">
-          <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
+          <string notr="true">font: 14pt &quot;Eberron&quot;;</string>
          </property>
          <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
@@ -670,6 +705,9 @@
              <property name="styleSheet">
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
+             <property name="maxLength">
+              <number>2</number>
+             </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
@@ -687,7 +725,7 @@
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
              <property name="text">
-              <string>Акробатика</string>
+              <string>Acrobatics</string>
              </property>
              <property name="textInteractionFlags">
               <set>Qt::NoTextInteraction</set>
@@ -735,10 +773,13 @@
               </rect>
              </property>
              <property name="accessibleName">
-              <string>strenghtBonus</string>
+              <string>strengthBonus</string>
              </property>
              <property name="styleSheet">
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
+             </property>
+             <property name="maxLength">
+              <number>2</number>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -757,7 +798,7 @@
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
              <property name="text">
-              <string>Атлетика</string>
+              <string>Athletics</string>
              </property>
              <property name="textInteractionFlags">
               <set>Qt::NoTextInteraction</set>
@@ -805,10 +846,13 @@
               </rect>
              </property>
              <property name="accessibleName">
-              <string>intellegenceBonus</string>
+              <string>intelligenceBonus</string>
              </property>
              <property name="styleSheet">
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
+             </property>
+             <property name="maxLength">
+              <number>2</number>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -827,7 +871,7 @@
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
              <property name="text">
-              <string>Магия</string>
+              <string>Arcana</string>
              </property>
              <property name="textInteractionFlags">
               <set>Qt::NoTextInteraction</set>
@@ -880,6 +924,9 @@
              <property name="styleSheet">
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
+             <property name="maxLength">
+              <number>2</number>
+             </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
@@ -897,7 +944,7 @@
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
              <property name="text">
-              <string>Обман</string>
+              <string>Deception</string>
              </property>
              <property name="textInteractionFlags">
               <set>Qt::NoTextInteraction</set>
@@ -945,10 +992,13 @@
               </rect>
              </property>
              <property name="accessibleName">
-              <string>intellegenceBonus</string>
+              <string>intelligenceBonus</string>
              </property>
              <property name="styleSheet">
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
+             </property>
+             <property name="maxLength">
+              <number>2</number>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -967,7 +1017,7 @@
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
              <property name="text">
-              <string>История</string>
+              <string>History</string>
              </property>
              <property name="textInteractionFlags">
               <set>Qt::NoTextInteraction</set>
@@ -1020,6 +1070,9 @@
              <property name="styleSheet">
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
+             <property name="maxLength">
+              <number>2</number>
+             </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
@@ -1037,7 +1090,7 @@
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
              <property name="text">
-              <string>Проницательность</string>
+              <string>Insight</string>
              </property>
              <property name="textInteractionFlags">
               <set>Qt::NoTextInteraction</set>
@@ -1090,6 +1143,9 @@
              <property name="styleSheet">
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
+             <property name="maxLength">
+              <number>2</number>
+             </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
@@ -1107,7 +1163,7 @@
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
              <property name="text">
-              <string>Запугивание</string>
+              <string>Intimidation</string>
              </property>
              <property name="textInteractionFlags">
               <set>Qt::NoTextInteraction</set>
@@ -1155,10 +1211,13 @@
               </rect>
              </property>
              <property name="accessibleName">
-              <string>intellegenceBonus</string>
+              <string>intelligenceBonus</string>
              </property>
              <property name="styleSheet">
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
+             </property>
+             <property name="maxLength">
+              <number>2</number>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -1177,7 +1236,7 @@
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
              <property name="text">
-              <string>Расследование</string>
+              <string>Investigation</string>
              </property>
              <property name="textInteractionFlags">
               <set>Qt::NoTextInteraction</set>
@@ -1230,6 +1289,9 @@
              <property name="styleSheet">
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
+             <property name="maxLength">
+              <number>2</number>
+             </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
@@ -1247,7 +1309,7 @@
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
              <property name="text">
-              <string>Медицина</string>
+              <string>Medicine</string>
              </property>
              <property name="textInteractionFlags">
               <set>Qt::NoTextInteraction</set>
@@ -1300,6 +1362,9 @@
              <property name="styleSheet">
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
+             <property name="maxLength">
+              <number>2</number>
+             </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
@@ -1320,7 +1385,7 @@
               <enum>QFrame::Plain</enum>
              </property>
              <property name="text">
-              <string>Природа</string>
+              <string>Nature</string>
              </property>
              <property name="scaledContents">
               <bool>false</bool>
@@ -1376,6 +1441,9 @@
              <property name="styleSheet">
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
+             <property name="maxLength">
+              <number>2</number>
+             </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
@@ -1393,7 +1461,7 @@
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
              <property name="text">
-              <string>Восприятие</string>
+              <string>Perception</string>
              </property>
              <property name="textInteractionFlags">
               <set>Qt::NoTextInteraction</set>
@@ -1446,6 +1514,9 @@
              <property name="styleSheet">
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
+             <property name="maxLength">
+              <number>2</number>
+             </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
@@ -1463,7 +1534,7 @@
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
              <property name="text">
-              <string>Выступление</string>
+              <string>Perfomance</string>
              </property>
              <property name="textInteractionFlags">
               <set>Qt::NoTextInteraction</set>
@@ -1516,6 +1587,9 @@
              <property name="styleSheet">
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
+             <property name="maxLength">
+              <number>2</number>
+             </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
@@ -1533,7 +1607,7 @@
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
              <property name="text">
-              <string>Убеждение</string>
+              <string>Persuasion</string>
              </property>
              <property name="textInteractionFlags">
               <set>Qt::NoTextInteraction</set>
@@ -1581,10 +1655,13 @@
               </rect>
              </property>
              <property name="accessibleName">
-              <string>intellegenceBonus</string>
+              <string>intelligenceBonus</string>
              </property>
              <property name="styleSheet">
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
+             </property>
+             <property name="maxLength">
+              <number>2</number>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -1603,7 +1680,7 @@
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
              <property name="text">
-              <string>Религия</string>
+              <string>Religion</string>
              </property>
              <property name="textInteractionFlags">
               <set>Qt::NoTextInteraction</set>
@@ -1656,6 +1733,9 @@
              <property name="styleSheet">
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
+             <property name="maxLength">
+              <number>2</number>
+             </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
@@ -1673,7 +1753,7 @@
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
              <property name="text">
-              <string>Ловкость рук</string>
+              <string>Sleight of hand</string>
              </property>
              <property name="textInteractionFlags">
               <set>Qt::NoTextInteraction</set>
@@ -1726,6 +1806,9 @@
              <property name="styleSheet">
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
+             <property name="maxLength">
+              <number>2</number>
+             </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
@@ -1743,7 +1826,7 @@
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
              <property name="text">
-              <string>Скрытность</string>
+              <string>Stealth</string>
              </property>
              <property name="textInteractionFlags">
               <set>Qt::NoTextInteraction</set>
@@ -1796,6 +1879,9 @@
              <property name="styleSheet">
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
+             <property name="maxLength">
+              <number>2</number>
+             </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
@@ -1813,7 +1899,7 @@
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
              <property name="text">
-              <string>Выживание</string>
+              <string>Survival</string>
              </property>
              <property name="textInteractionFlags">
               <set>Qt::NoTextInteraction</set>
@@ -1872,6 +1958,9 @@
              <property name="styleSheet">
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
+             <property name="maxLength">
+              <number>2</number>
+             </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
@@ -1889,7 +1978,7 @@
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
              <property name="text">
-              <string>Обращение с животными</string>
+              <string>Animal handling</string>
              </property>
              <property name="scaledContents">
               <bool>false</bool>
@@ -1958,11 +2047,11 @@
            <number>5</number>
           </property>
           <item row="0" column="0">
-           <widget class="QFrame" name="strenghtBox">
+           <widget class="QFrame" name="strengthBox">
             <property name="styleSheet">
              <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
             </property>
-            <widget class="QLineEdit" name="strenght">
+            <widget class="QLineEdit" name="strength">
              <property name="geometry">
               <rect>
                <x>30</x>
@@ -1972,7 +2061,7 @@
               </rect>
              </property>
              <property name="accessibleName">
-              <string>strenght</string>
+              <string>strength</string>
              </property>
              <property name="accessibleDescription">
               <string>base</string>
@@ -1983,11 +2072,14 @@
              <property name="text">
               <string/>
              </property>
+             <property name="maxLength">
+              <number>2</number>
+             </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
             </widget>
-            <widget class="QLineEdit" name="strenghtBonus">
+            <widget class="QLineEdit" name="strengthBonus">
              <property name="geometry">
               <rect>
                <x>20</x>
@@ -1997,7 +2089,7 @@
               </rect>
              </property>
              <property name="accessibleName">
-              <string>strenghtBonus</string>
+              <string>strengthBonus</string>
              </property>
              <property name="accessibleDescription">
               <string>bonus</string>
@@ -2008,11 +2100,14 @@
              <property name="text">
               <string/>
              </property>
+             <property name="maxLength">
+              <number>2</number>
+             </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
             </widget>
-            <widget class="QLabel" name="strenghtLabel">
+            <widget class="QLabel" name="strengthLabel">
              <property name="geometry">
               <rect>
                <x>0</x>
@@ -2025,7 +2120,7 @@
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
              <property name="text">
-              <string>Сила</string>
+              <string>Strength</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -2034,17 +2129,17 @@
               <set>Qt::NoTextInteraction</set>
              </property>
             </widget>
-            <zorder>strenghtLabel</zorder>
-            <zorder>strenghtBonus</zorder>
-            <zorder>strenght</zorder>
+            <zorder>strengthLabel</zorder>
+            <zorder>strengthBonus</zorder>
+            <zorder>strength</zorder>
            </widget>
           </item>
           <item row="0" column="1">
-           <widget class="QFrame" name="intellegenceBox">
+           <widget class="QFrame" name="intelligenceBox">
             <property name="styleSheet">
              <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
             </property>
-            <widget class="QLineEdit" name="intellegence">
+            <widget class="QLineEdit" name="intelligence">
              <property name="geometry">
               <rect>
                <x>30</x>
@@ -2054,7 +2149,7 @@
               </rect>
              </property>
              <property name="accessibleName">
-              <string>intellegence</string>
+              <string>intelligence</string>
              </property>
              <property name="accessibleDescription">
               <string>base</string>
@@ -2065,11 +2160,14 @@
              <property name="text">
               <string/>
              </property>
+             <property name="maxLength">
+              <number>2</number>
+             </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
             </widget>
-            <widget class="QLineEdit" name="intellegenceBonus">
+            <widget class="QLineEdit" name="intelligenceBonus">
              <property name="geometry">
               <rect>
                <x>20</x>
@@ -2079,7 +2177,7 @@
               </rect>
              </property>
              <property name="accessibleName">
-              <string>intellegenceBonus</string>
+              <string>intelligenceBonus</string>
              </property>
              <property name="accessibleDescription">
               <string>bonus</string>
@@ -2090,11 +2188,14 @@
              <property name="text">
               <string/>
              </property>
+             <property name="maxLength">
+              <number>2</number>
+             </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
             </widget>
-            <widget class="QLabel" name="intellegenceLabel">
+            <widget class="QLabel" name="intelligenceLabel">
              <property name="geometry">
               <rect>
                <x>0</x>
@@ -2107,7 +2208,7 @@
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
              <property name="text">
-              <string>Интеллект</string>
+              <string>Intelligence</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -2116,9 +2217,9 @@
               <set>Qt::NoTextInteraction</set>
              </property>
             </widget>
-            <zorder>intellegenceBonus</zorder>
-            <zorder>intellegenceLabel</zorder>
-            <zorder>intellegence</zorder>
+            <zorder>intelligenceBonus</zorder>
+            <zorder>intelligenceLabel</zorder>
+            <zorder>intelligence</zorder>
            </widget>
           </item>
           <item row="1" column="0">
@@ -2147,6 +2248,9 @@
              <property name="text">
               <string/>
              </property>
+             <property name="maxLength">
+              <number>2</number>
+             </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
@@ -2172,6 +2276,9 @@
              <property name="text">
               <string/>
              </property>
+             <property name="maxLength">
+              <number>2</number>
+             </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
@@ -2189,7 +2296,7 @@
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
              <property name="text">
-              <string>Ловкость</string>
+              <string>Dexterity</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -2229,6 +2336,9 @@
              <property name="text">
               <string/>
              </property>
+             <property name="maxLength">
+              <number>2</number>
+             </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
@@ -2254,6 +2364,9 @@
              <property name="text">
               <string/>
              </property>
+             <property name="maxLength">
+              <number>2</number>
+             </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
@@ -2271,7 +2384,7 @@
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
              <property name="text">
-              <string>Мудрость</string>
+              <string>Wisdom</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -2311,6 +2424,9 @@
              <property name="text">
               <string/>
              </property>
+             <property name="maxLength">
+              <number>2</number>
+             </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
@@ -2336,6 +2452,9 @@
              <property name="text">
               <string/>
              </property>
+             <property name="maxLength">
+              <number>2</number>
+             </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
@@ -2353,7 +2472,7 @@
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
              <property name="text">
-              <string>Телосложение</string>
+              <string>Constitution</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -2393,6 +2512,9 @@
              <property name="text">
               <string/>
              </property>
+             <property name="maxLength">
+              <number>2</number>
+             </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
@@ -2418,6 +2540,9 @@
              <property name="text">
               <string/>
              </property>
+             <property name="maxLength">
+              <number>2</number>
+             </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
@@ -2435,7 +2560,7 @@
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
              <property name="text">
-              <string>Харизма</string>
+              <string>Charisma</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -2455,7 +2580,7 @@
          <property name="geometry">
           <rect>
            <x>502</x>
-           <y>122</y>
+           <y>127</y>
            <width>430</width>
            <height>60</height>
           </rect>
@@ -2520,6 +2645,9 @@
              <property name="text">
               <string/>
              </property>
+             <property name="maxLength">
+              <number>2</number>
+             </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
@@ -2540,7 +2668,7 @@
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
              <property name="text">
-              <string>Вопсприятие</string>
+              <string>Passive Wisdom</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -2586,6 +2714,9 @@
              <property name="text">
               <string/>
              </property>
+             <property name="maxLength">
+              <number>2</number>
+             </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
@@ -2603,7 +2734,7 @@
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
              <property name="text">
-              <string>Бонус мастерства</string>
+              <string>Proficiency Bonus</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -2646,6 +2777,9 @@
              <property name="text">
               <string/>
              </property>
+             <property name="maxLength">
+              <number>2</number>
+             </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
@@ -2663,7 +2797,7 @@
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
              <property name="text">
-              <string>Вдохновение</string>
+              <string>Inspiration</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -2714,7 +2848,7 @@
            <number>5</number>
           </property>
           <item>
-           <widget class="QFrame" name="strenghtThrowsBox">
+           <widget class="QFrame" name="strengthThrowsBox">
             <property name="styleSheet">
              <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
             </property>
@@ -2724,7 +2858,7 @@
             <property name="frameShadow">
              <enum>QFrame::Raised</enum>
             </property>
-            <widget class="QRadioButton" name="strenghtThrowsRButton">
+            <widget class="QRadioButton" name="strengthThrowsRButton">
              <property name="geometry">
               <rect>
                <x>0</x>
@@ -2734,7 +2868,7 @@
               </rect>
              </property>
              <property name="accessibleName">
-              <string>strenght</string>
+              <string>strength</string>
              </property>
              <property name="styleSheet">
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
@@ -2743,7 +2877,7 @@
               <string/>
              </property>
             </widget>
-            <widget class="QLineEdit" name="strenghtThrows">
+            <widget class="QLineEdit" name="strengthThrows">
              <property name="geometry">
               <rect>
                <x>20</x>
@@ -2753,7 +2887,7 @@
               </rect>
              </property>
              <property name="accessibleName">
-              <string>strenghtBonus</string>
+              <string>strengthBonus</string>
              </property>
              <property name="accessibleDescription">
               <string/>
@@ -2761,11 +2895,14 @@
              <property name="styleSheet">
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
+             <property name="maxLength">
+              <number>2</number>
+             </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
             </widget>
-            <widget class="QLabel" name="strenghtThrowsLabel">
+            <widget class="QLabel" name="strengthThrowsLabel">
              <property name="geometry">
               <rect>
                <x>60</x>
@@ -2778,7 +2915,7 @@
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
              <property name="text">
-              <string>Сила</string>
+              <string>Strength</string>
              </property>
              <property name="textInteractionFlags">
               <set>Qt::NoTextInteraction</set>
@@ -2834,6 +2971,9 @@
              <property name="styleSheet">
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
+             <property name="maxLength">
+              <number>2</number>
+             </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
@@ -2851,7 +2991,7 @@
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
              <property name="text">
-              <string>Ловкость</string>
+              <string>Dexterity</string>
              </property>
              <property name="textInteractionFlags">
               <set>Qt::NoTextInteraction</set>
@@ -2907,6 +3047,9 @@
              <property name="styleSheet">
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
+             <property name="maxLength">
+              <number>2</number>
+             </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
@@ -2924,7 +3067,7 @@
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
              <property name="text">
-              <string>Телосложение</string>
+              <string>Constitution</string>
              </property>
              <property name="textInteractionFlags">
               <set>Qt::NoTextInteraction</set>
@@ -2933,7 +3076,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QFrame" name="intellegenceThrowsBox">
+           <widget class="QFrame" name="intelligenceThrowsBox">
             <property name="styleSheet">
              <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
             </property>
@@ -2943,7 +3086,7 @@
             <property name="frameShadow">
              <enum>QFrame::Raised</enum>
             </property>
-            <widget class="QRadioButton" name="intellegenceThrowsRButton">
+            <widget class="QRadioButton" name="intelligenceThrowsRButton">
              <property name="geometry">
               <rect>
                <x>0</x>
@@ -2953,7 +3096,7 @@
               </rect>
              </property>
              <property name="accessibleName">
-              <string>intellegence</string>
+              <string>intelligence</string>
              </property>
              <property name="styleSheet">
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
@@ -2962,7 +3105,7 @@
               <string/>
              </property>
             </widget>
-            <widget class="QLineEdit" name="intellegenceThrows">
+            <widget class="QLineEdit" name="intelligenceThrows">
              <property name="geometry">
               <rect>
                <x>20</x>
@@ -2972,7 +3115,7 @@
               </rect>
              </property>
              <property name="accessibleName">
-              <string>intellegenceBonus</string>
+              <string>intelligenceBonus</string>
              </property>
              <property name="accessibleDescription">
               <string/>
@@ -2980,11 +3123,14 @@
              <property name="styleSheet">
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
+             <property name="maxLength">
+              <number>2</number>
+             </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
             </widget>
-            <widget class="QLabel" name="intellegenceThrowsLabel">
+            <widget class="QLabel" name="intelligenceThrowsLabel">
              <property name="geometry">
               <rect>
                <x>60</x>
@@ -2997,7 +3143,7 @@
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
              <property name="text">
-              <string>Интеллект</string>
+              <string>Intelligence</string>
              </property>
              <property name="textInteractionFlags">
               <set>Qt::NoTextInteraction</set>
@@ -3053,6 +3199,9 @@
              <property name="styleSheet">
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
+             <property name="maxLength">
+              <number>2</number>
+             </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
@@ -3070,7 +3219,7 @@
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
              <property name="text">
-              <string>Мудрость</string>
+              <string>Wisdom</string>
              </property>
              <property name="textInteractionFlags">
               <set>Qt::NoTextInteraction</set>
@@ -3126,6 +3275,9 @@
              <property name="styleSheet">
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
+             <property name="maxLength">
+              <number>2</number>
+             </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
@@ -3143,7 +3295,7 @@
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
              <property name="text">
-              <string>Харизма</string>
+              <string>Charisma</string>
              </property>
              <property name="textInteractionFlags">
               <set>Qt::NoTextInteraction</set>
@@ -3157,7 +3309,7 @@
          <property name="geometry">
           <rect>
            <x>475</x>
-           <y>200</y>
+           <y>205</y>
            <width>260</width>
            <height>260</height>
           </rect>
@@ -3207,6 +3359,9 @@
            <property name="text">
             <string/>
            </property>
+           <property name="maxLength">
+            <number>2</number>
+           </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
            </property>
@@ -3224,7 +3379,7 @@
             <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
            </property>
            <property name="text">
-            <string>Класс Доспеха</string>
+            <string>Armor Class</string>
            </property>
            <property name="textFormat">
             <enum>Qt::AutoText</enum>
@@ -3279,6 +3434,9 @@
            <property name="text">
             <string/>
            </property>
+           <property name="maxLength">
+            <number>2</number>
+           </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
            </property>
@@ -3296,7 +3454,7 @@
             <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
            </property>
            <property name="text">
-            <string>Инициатива</string>
+            <string>Initiative</string>
            </property>
            <property name="textFormat">
             <enum>Qt::AutoText</enum>
@@ -3351,6 +3509,9 @@
            <property name="text">
             <string/>
            </property>
+           <property name="maxLength">
+            <number>2</number>
+           </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
            </property>
@@ -3368,7 +3529,7 @@
             <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
            </property>
            <property name="text">
-            <string>Скорость</string>
+            <string>Speed</string>
            </property>
            <property name="textFormat">
             <enum>Qt::AutoText</enum>
@@ -3423,11 +3584,14 @@
            <property name="text">
             <string/>
            </property>
+           <property name="maxLength">
+            <number>4</number>
+           </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
            </property>
            <property name="placeholderText">
-            <string>Макс</string>
+            <string>Max</string>
            </property>
           </widget>
           <widget class="QLineEdit" name="hpMaxField">
@@ -3448,11 +3612,14 @@
            <property name="text">
             <string/>
            </property>
+           <property name="maxLength">
+            <number>4</number>
+           </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
            </property>
            <property name="placeholderText">
-            <string>Врем</string>
+            <string>Temp</string>
            </property>
           </widget>
           <widget class="QLineEdit" name="hpActualField">
@@ -3473,11 +3640,14 @@
            <property name="text">
             <string/>
            </property>
+           <property name="maxLength">
+            <number>4</number>
+           </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
            </property>
            <property name="placeholderText">
-            <string>Текущее здоровье</string>
+            <string>Now</string>
            </property>
           </widget>
          </widget>
@@ -3517,6 +3687,9 @@
            <property name="text">
             <string/>
            </property>
+           <property name="maxLength">
+            <number>6</number>
+           </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
            </property>
@@ -3538,6 +3711,9 @@
            </property>
            <property name="text">
             <string/>
+           </property>
+           <property name="maxLength">
+            <number>6</number>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -3561,6 +3737,9 @@
            <property name="text">
             <string/>
            </property>
+           <property name="maxLength">
+            <number>6</number>
+           </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
            </property>
@@ -3578,7 +3757,7 @@
             <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
            </property>
            <property name="text">
-            <string>Кубы здоровья</string>
+            <string>Hit dice</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -3623,7 +3802,7 @@
             <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
            </property>
            <property name="text">
-            <string>Спасброски от смерти</string>
+            <string>Death Saves</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -3669,10 +3848,10 @@
              <string/>
             </property>
             <property name="styleSheet">
-             <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
+             <string notr="true">font: 10pt &quot;Eberron&quot;;</string>
             </property>
             <property name="text">
-             <string>Успехи</string>
+             <string>Successes</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -3791,10 +3970,10 @@
              </rect>
             </property>
             <property name="styleSheet">
-             <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
+             <string notr="true">font: 10pt &quot;Eberron&quot;;</string>
             </property>
             <property name="text">
-             <string>Провалы</string>
+             <string>Failures</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -4003,8 +4182,8 @@
          <property name="geometry">
           <rect>
            <x>740</x>
-           <y>195</y>
-           <width>260</width>
+           <y>200</y>
+           <width>246</width>
            <height>260</height>
           </rect>
          </property>
@@ -4019,7 +4198,7 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>260</width>
+            <width>246</width>
             <height>116</height>
            </rect>
           </property>
@@ -4097,7 +4276,7 @@
           </row>
           <column>
            <property name="text">
-            <string>Б</string>
+            <string>B</string>
            </property>
            <property name="font">
             <font>
@@ -4110,7 +4289,7 @@
           </column>
           <column>
            <property name="text">
-            <string>Тип урона</string>
+            <string>D type</string>
            </property>
            <property name="textAlignment">
             <set>AlignCenter</set>
@@ -4118,7 +4297,7 @@
           </column>
           <column>
            <property name="text">
-            <string>Урон</string>
+            <string>Damage</string>
            </property>
            <property name="textAlignment">
             <set>AlignCenter</set>
@@ -4154,20 +4333,23 @@
            <rect>
             <x>0</x>
             <y>135</y>
-            <width>256</width>
+            <width>246</width>
             <height>121</height>
            </rect>
           </property>
           <property name="styleSheet">
-           <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
+           <string notr="true">font: 14pt &quot;Eberron&quot;;</string>
           </property>
           <property name="html">
            <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Eberron'; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Eberron'; font-size:14pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="acceptRichText">
+           <bool>true</bool>
           </property>
          </widget>
          <widget class="QLabel" name="equipmentLabel">
@@ -4175,15 +4357,15 @@ p, li { white-space: pre-wrap; }
            <rect>
             <x>1</x>
             <y>120</y>
-            <width>256</width>
-            <height>14</height>
+            <width>246</width>
+            <height>16</height>
            </rect>
           </property>
           <property name="styleSheet">
            <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
           </property>
           <property name="text">
-           <string>Снаряжение</string>
+           <string>Equipment</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
@@ -4193,10 +4375,10 @@ p, li { white-space: pre-wrap; }
         <widget class="QFrame" name="temperBox">
          <property name="geometry">
           <rect>
-           <x>475</x>
-           <y>455</y>
+           <x>395</x>
+           <y>30</y>
            <width>520</width>
-           <height>200</height>
+           <height>201</height>
           </rect>
          </property>
          <property name="frameShape">
@@ -4238,6 +4420,9 @@ p, li { white-space: pre-wrap; }
                <height>70</height>
               </rect>
              </property>
+             <property name="accessibleName">
+              <string>personalityTraits</string>
+             </property>
              <property name="styleSheet">
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
@@ -4271,7 +4456,7 @@ p, li { white-space: pre-wrap; }
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
              <property name="text">
-              <string>Персональные черты</string>
+              <string>Personality Traits</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -4295,6 +4480,9 @@ p, li { white-space: pre-wrap; }
                <width>250</width>
                <height>70</height>
               </rect>
+             </property>
+             <property name="accessibleName">
+              <string>ideals</string>
              </property>
              <property name="styleSheet">
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
@@ -4329,7 +4517,7 @@ p, li { white-space: pre-wrap; }
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
              <property name="text">
-              <string>Идеалы</string>
+              <string>Ideals</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -4353,6 +4541,9 @@ p, li { white-space: pre-wrap; }
                <width>250</width>
                <height>70</height>
               </rect>
+             </property>
+             <property name="accessibleName">
+              <string>bonds</string>
              </property>
              <property name="styleSheet">
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
@@ -4387,7 +4578,7 @@ p, li { white-space: pre-wrap; }
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
              <property name="text">
-              <string>Привязанности</string>
+              <string>Bonds</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -4411,6 +4602,9 @@ p, li { white-space: pre-wrap; }
                <width>250</width>
                <height>70</height>
               </rect>
+             </property>
+             <property name="accessibleName">
+              <string>flaws</string>
              </property>
              <property name="styleSheet">
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
@@ -4445,7 +4639,7 @@ p, li { white-space: pre-wrap; }
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
              <property name="text">
-              <string>Пороки</string>
+              <string>Flaws</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -4459,33 +4653,29 @@ p, li { white-space: pre-wrap; }
          <property name="geometry">
           <rect>
            <x>475</x>
-           <y>-5</y>
+           <y>0</y>
            <width>486</width>
            <height>41</height>
           </rect>
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <property name="spacing">
+           <number>10</number>
+          </property>
+          <property name="leftMargin">
+           <number>5</number>
+          </property>
+          <property name="topMargin">
+           <number>5</number>
+          </property>
+          <property name="rightMargin">
+           <number>5</number>
+          </property>
+          <property name="bottomMargin">
+           <number>5</number>
+          </property>
           <item>
            <widget class="QFrame" name="platinumBox">
-            <widget class="QLabel" name="platinumLabel">
-             <property name="geometry">
-              <rect>
-               <x>24</x>
-               <y>-2</y>
-               <width>71</width>
-               <height>26</height>
-              </rect>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
-             </property>
-             <property name="text">
-              <string>0</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
             <widget class="QWidget" name="platinum" native="true">
              <property name="geometry">
               <rect>
@@ -4495,30 +4685,36 @@ p, li { white-space: pre-wrap; }
                <height>24</height>
               </rect>
              </property>
+             <property name="accessibleName">
+              <string/>
+             </property>
             </widget>
-           </widget>
-          </item>
-          <item>
-           <widget class="QFrame" name="goldBox">
-            <widget class="QLabel" name="goldLabel">
+            <widget class="QLineEdit" name="platinumEdit">
              <property name="geometry">
               <rect>
-               <x>24</x>
-               <y>-2</y>
-               <width>76</width>
-               <height>26</height>
+               <x>28</x>
+               <y>0</y>
+               <width>51</width>
+               <height>23</height>
               </rect>
+             </property>
+             <property name="accessibleName">
+              <string>platinum</string>
              </property>
              <property name="styleSheet">
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
-             <property name="text">
-              <string>0</string>
+             <property name="maxLength">
+              <number>5</number>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
             </widget>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="goldBox">
             <widget class="QWidget" name="gold" native="true">
              <property name="geometry">
               <rect>
@@ -4528,30 +4724,36 @@ p, li { white-space: pre-wrap; }
                <height>24</height>
               </rect>
              </property>
+             <property name="accessibleName">
+              <string/>
+             </property>
             </widget>
-           </widget>
-          </item>
-          <item>
-           <widget class="QFrame" name="electrumBox">
-            <widget class="QLabel" name="electrumLabel">
+            <widget class="QLineEdit" name="goldEdit">
              <property name="geometry">
               <rect>
-               <x>24</x>
-               <y>-2</y>
-               <width>71</width>
-               <height>26</height>
+               <x>28</x>
+               <y>0</y>
+               <width>56</width>
+               <height>23</height>
               </rect>
+             </property>
+             <property name="accessibleName">
+              <string>gold</string>
              </property>
              <property name="styleSheet">
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
-             <property name="text">
-              <string>0</string>
+             <property name="maxLength">
+              <number>5</number>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
             </widget>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="electrumBox">
             <widget class="QWidget" name="electrum" native="true">
              <property name="geometry">
               <rect>
@@ -4561,30 +4763,36 @@ p, li { white-space: pre-wrap; }
                <height>24</height>
               </rect>
              </property>
+             <property name="accessibleName">
+              <string/>
+             </property>
             </widget>
-           </widget>
-          </item>
-          <item>
-           <widget class="QFrame" name="silverBox">
-            <widget class="QLabel" name="silverLabel">
+            <widget class="QLineEdit" name="electrumEdit">
              <property name="geometry">
               <rect>
-               <x>24</x>
-               <y>-2</y>
-               <width>71</width>
-               <height>26</height>
+               <x>28</x>
+               <y>0</y>
+               <width>56</width>
+               <height>23</height>
               </rect>
+             </property>
+             <property name="accessibleName">
+              <string>electrum</string>
              </property>
              <property name="styleSheet">
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
-             <property name="text">
-              <string>0</string>
+             <property name="maxLength">
+              <number>5</number>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
             </widget>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="silverBox">
             <widget class="QWidget" name="silver" native="true">
              <property name="geometry">
               <rect>
@@ -4593,6 +4801,31 @@ p, li { white-space: pre-wrap; }
                <width>24</width>
                <height>24</height>
               </rect>
+             </property>
+             <property name="accessibleName">
+              <string/>
+             </property>
+            </widget>
+            <widget class="QLineEdit" name="silverEdit">
+             <property name="geometry">
+              <rect>
+               <x>28</x>
+               <y>0</y>
+               <width>51</width>
+               <height>23</height>
+              </rect>
+             </property>
+             <property name="accessibleName">
+              <string>silver</string>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
+             </property>
+             <property name="maxLength">
+              <number>5</number>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
              </property>
             </widget>
            </widget>
@@ -4608,21 +4841,27 @@ p, li { white-space: pre-wrap; }
                <height>24</height>
               </rect>
              </property>
+             <property name="accessibleName">
+              <string/>
+             </property>
             </widget>
-            <widget class="QLabel" name="copperLabel">
+            <widget class="QLineEdit" name="copperEdit">
              <property name="geometry">
               <rect>
-               <x>24</x>
-               <y>-2</y>
-               <width>90</width>
-               <height>26</height>
+               <x>28</x>
+               <y>0</y>
+               <width>56</width>
+               <height>23</height>
               </rect>
+             </property>
+             <property name="accessibleName">
+              <string>copper</string>
              </property>
              <property name="styleSheet">
               <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
              </property>
-             <property name="text">
-              <string>0</string>
+             <property name="maxLength">
+              <number>5</number>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -4631,6 +4870,61 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
          </layout>
+        </widget>
+        <widget class="QFrame" name="featuresAndTraitsBox">
+         <property name="geometry">
+          <rect>
+           <x>475</x>
+           <y>470</y>
+           <width>511</width>
+           <height>181</height>
+          </rect>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <widget class="QTextEdit" name="featuresAndTraitsEdit">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>20</y>
+            <width>511</width>
+            <height>161</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">font: 14pt &quot;Eberron&quot;;</string>
+          </property>
+          <property name="html">
+           <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Eberron'; font-size:14pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot;-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="featuresAndTraitsLabel">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>511</width>
+            <height>20</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
+          </property>
+          <property name="text">
+           <string>Features And Traits</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
         </widget>
        </widget>
       </item>
@@ -4785,6 +5079,22 @@ p, li { white-space: pre-wrap; }
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>temperButton</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>temperButtonClicked(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>381</x>
+     <y>91</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>511</x>
+     <y>359</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>saveClicked(bool)</slot>
@@ -4793,5 +5103,6 @@ p, li { white-space: pre-wrap; }
   <slot>changedMaximize(bool)</slot>
   <slot>menuButtonClicked(bool)</slot>
   <slot>saveAs(bool)</slot>
+  <slot>temperButtonClicked(bool)</slot>
  </slots>
 </ui>
