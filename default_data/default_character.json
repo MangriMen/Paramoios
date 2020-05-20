@@ -1,0 +1,128 @@
+{
+  "default": true,
+  "initiative": 0,
+  "playerName": "",
+  "charName": "",
+  "class": "",
+  "race": "",
+  "alignment": "",
+  "background": "",
+  "level": 1,
+  "expirience": 0,
+  "hpMax": 0,
+  "hp": 0,
+  "hpTemp": 0,
+  "armorClass": 0,
+  "speed": 0,
+  "proficiencyBonus": 0,
+  "passiveWisdom": -5,
+  "inspiration": 0,
+  "hitDiceCoeffiecient": 0,
+  "hitDiceLeft": 0,
+  "maxWeight": 0,
+  "specialization": "",
+  "deathSaves": {
+    "successes": 0,
+    "failures": 0
+  },
+  "characteristic": {
+    "strength": 0,
+    "dexterity": 0,
+    "constitution": 0,
+    "intelligence": 0,
+    "wisdom": 0,
+    "charisma": 0
+  },
+  "characteristicBonus": {
+    "strengthBonus": -5,
+    "dexterityBonus": -5,
+    "constitutionBonus": -5,
+    "intelligenceBonus": -5,
+    "wisdomBonus": -5,
+    "charismaBonus": -5
+  },
+  "savingThrowsBonus": {
+    "strength": false,
+    "dexterity": false,
+    "constitution": false,
+    "intelligence": false,
+    "wisdom": false,
+    "charisma": false
+  },
+  "skillsBonus": {
+    "acrobatics": false,
+    "animalHandling": false,
+    "arcana": false,
+    "athletics": false,
+    "deception": false,
+    "history": false,
+    "insight": false,
+    "intimidation": false,
+    "investigation": false,
+    "medicine": false,
+    "nature": false,
+    "perception": false,
+    "perfomance": false,
+    "persuasion": false,
+    "religion": false,
+    "sleightOfHand": false,
+    "stealth": false,
+    "survival": false
+  },
+  "armament": {
+    "weapons": [
+      "fists"
+    ],
+    "armor": [
+      ""
+    ],
+    "offHandWeapon": ""
+  },
+  "equipment": [
+    ""
+  ],
+  "money": {
+    "copper": 0,
+    "silver": 0,
+    "electrum": 0,
+    "gold": 0,
+    "platinum": 0
+  },
+  "personality": {
+    "languages": [
+      "default"
+    ],
+    "otherProfincies": [
+      ""
+    ],
+    "features": [
+      ""
+    ],
+    "traits": [
+      ""
+    ],
+    "appearance": {
+      "age": 0,
+      "height": 0,
+      "weight": 0,
+      "eyes": "",
+      "skin": "",
+      "hair": "",
+      "backstory": "",
+      "additionalFeaturesAndTraits": "",
+      "treasure": [
+        {
+          "name": "",
+          "description": "",
+          "else": ""
+        }
+      ],
+      "image": "default",
+      "look": "",
+      "personalityTraits": "",
+      "ideals": "",
+      "bonds": "",
+      "flaws": ""
+    }
+  }
+}
