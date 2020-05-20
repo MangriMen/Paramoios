@@ -1,5 +1,6 @@
 import functools
 import json
+import math
 
 from PyQt5 import uic
 from PyQt5 import QtWidgets
@@ -9,7 +10,6 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QMessageBox
 from PyQt5.QtWidgets import QFileDialog
-
 
 import style
 import character_IO
@@ -23,12 +23,14 @@ class MainWindow(QMainWindow):
         QMainWindow.__init__(self, parent)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-        style.setupStyle(self)
+        style.setupMain(self)
 
         self.setMouseTracking(True)
         self.ui.centralwidget.setMouseTracking(True)
 
         self.initVariables()
+        self.CGW = CharGenWindow()
+        self.CGW.parent = self
         self.newCharClicked()
 
     def initVariables(self):
@@ -44,14 +46,41 @@ class MainWindow(QMainWindow):
         self.moving = False
         self.rectInterface = None
         self.rectMenu = None
+        self.rectTemper = None
         self.isMenuButtonClicked = False
+        self.isTemperButtonClicked = False
         self.loadedCharacter = None
         self.backupCharacter = None
-        setEnteredSignal = self.findChildren(QtWidgets.QLineEdit)
-        for QLineEdit in setEnteredSignal:
+        setEnteredSignalQLineEdit = self.findChildren(QtWidgets.QLineEdit)
+        setEnteredSignalQTextEdit = self.findChildren(QtWidgets.QTextEdit)
+        for QLineEdit in setEnteredSignalQLineEdit:
             QLineEdit.textEdited.connect(functools.partial(self.fieldSaving, QLineEdit))
+        # for QTextEdit in setEnteredSignalQTextEdit:
+        #     QTextEdit.textChanged.connect(functools.partial(self.fieldSaving, QLineEdit))
+        self.setCharacteristicUpdate = self.ui.characteristicBox.findChildren(
+            QtWidgets.QLineEdit, QtCore.QRegularExpression("^[a-z]{6,12}$"))
+        for QLineEdit in self.setCharacteristicUpdate:
+            QLineEdit.textEdited.connect(
+                functools.partial(self.modifireUpdate, QLineEdit))
         self.pathToJson = ""
         self.fileIsNew = False
+        self.isAvailableToGenerate = True
+
+    def modifireUpdate(self, QLineEdit):
+        characteristics = self.ui.characteristicBox.findChildren(QtWidgets.QLineEdit)
+        for QLineEdit in characteristics:
+            if (QLineEdit.accessibleDescription() == "base"):
+                self.loadedCharacter["characteristic"][QLineEdit.accessibleName()] = int(
+                    QLineEdit.text().replace("+", "")) if (QLineEdit.text().replace("+", "") != "") else 0
+                self.loadedCharacter["characteristicBonus"][
+                    QLineEdit.accessibleName() + "Bonus"] = math.floor((self.loadedCharacter["characteristic"][QLineEdit.accessibleName()] - 10) / 2)
+
+        for QLineEdit in characteristics:
+            if (QLineEdit.accessibleDescription() == "bonus"):
+                tempBonus = self.loadedCharacter[
+                    "characteristicBonus"][QLineEdit.accessibleName()]
+                QLineEdit.setText(
+                    (("+" if tempBonus >= 0 else "") + str(tempBonus)))
 
     def menuButtonClicked(self):
         if not self.isMenuButtonClicked:
@@ -69,40 +98,28 @@ class MainWindow(QMainWindow):
             self.ui.menuBox.hide()
             self.isMenuButtonClicked = False
 
+    def temperButtonClicked(self):
+        if not self.isTemperButtonClicked:
+            self.ui.temperBox.show()
+            self.isTemperButtonClicked = True
+        else:
+            self.ui.temperBox.hide()
+            self.isTemperButtonClicked = False
+
     def openFileClicked(self):
         self.pathToJson = QtWidgets.QFileDialog.getOpenFileName(
             self, "Open Character", "./save/characters", "JSON (*.json)")[0]
-        try:
-            character_IO.loadCharacter(self)
-        except:
-            notFoundWarning = QMessageBox()
-            notFoundWarning.setWindowTitle(self.ui.label.text())
-            notFoundWarning.setText(
-                "Ошибка открытия, неверная структура файла.")
-            notFoundWarning.setIconPixmap(QPixmap(
-                "images/messages/warning").scaled(24, 24, Qt.KeepAspectRatio, Qt.SmoothTransformation))
-            notFoundWarning.exec()
-        else:
-            self.fileIsNew = False
+        character_IO.loadCharacter(self)
+        self.fileIsNew = False
 
     def fieldSaving(self, QLineEdit):
         character_IO.backupCharacter(self)
 
     def newCharClicked(self):
         self.pathToJson = "default_data/default_character.json"
-        try:
-            character_IO.loadCharacter(self)
-        except:
-            notFoundWarning = QMessageBox()
-            notFoundWarning.setWindowTitle(self.ui.label.text())
-            notFoundWarning.setText(
-                "Ошибка загрузки, файлы повреждены или не найдены.")
-            notFoundWarning.setIconPixmap(QPixmap(
-                "images/messages/warning").scaled(24, 24, Qt.KeepAspectRatio, Qt.SmoothTransformation))
-            notFoundWarning.exec()
-        else:
-            self.fileIsNew = True
-            self.ui.save.setEnabled(True)
+        character_IO.loadCharacter(self)
+        self.fileIsNew = True
+        self.ui.save.setEnabled(True)
 
     def saveClicked(self):
         character_IO.saveCharacter(self)
@@ -110,25 +127,27 @@ class MainWindow(QMainWindow):
 
     def saveAs(self):
         try:
-            self.pathToJson = QFileDialog.getSaveFileName(
-                self, "Open Character", "./default_data", "JSON (*.json)")[0]
-            with open(self.pathToJson, 'w') as f:
+            self.bufPath = QFileDialog.getSaveFileName(
+                self, "Open Character", "./saves", "JSON (*.json)")[0]
+            with open(self.bufPath, 'w') as f:
                 f.write(json.dumps(self.loadedCharacter,
                                    sort_keys=False, indent=2))
         except FileNotFoundError:
             notFoundWarning = QMessageBox()
             notFoundWarning.setWindowTitle(self.ui.label.text())
-            notFoundWarning.setText("Файл не найден")
+            notFoundWarning.setText("[ALL|SAVEAS]Файл не найден")
             notFoundWarning.setIconPixmap(QPixmap(
                 "images/messages/warning").scaled(24, 24, Qt.KeepAspectRatio, Qt.SmoothTransformation))
             notFoundWarning.exec()
         except:
             notFoundWarning = QMessageBox()
             notFoundWarning.setWindowTitle(self.ui.label.text())
-            notFoundWarning.setText("Файл не найден")
+            notFoundWarning.setText("[ALL|SAVEAS]Ошибка")
             notFoundWarning.setIconPixmap(QPixmap(
                 "images/messages/warning").scaled(24, 24, Qt.KeepAspectRatio, Qt.SmoothTransformation))
             notFoundWarning.exec()
+        else:
+            self.pathToJson = self.bufPath
 
     def changedMaximize(self):
         if not self.isMaximized():
@@ -156,12 +175,13 @@ class MainWindow(QMainWindow):
         if (self.m_previousPosition == self.previousPosition):
             return
         self.m_previousPosition = self.previousPosition
-        self.emit(previousPositionChanged(self.previousPosition))
+        self.emit(self.previousPositionChanged(self.previousPosition))
 
     def mousePressEvent(self, event):
         if (event.button() == Qt.LeftButton):
             self.m_leftMouseButtonPressed = self.checkResizableField(event)
             self.mlb_isMenu = self.checkMenuButtonField(event)
+            self.mlb_isTemper = self.checkTemperButtonField(event)
             self.setPreviousPosition(event.pos())
         return QtWidgets.QWidget.mousePressEvent(self, event)
 
@@ -223,6 +243,13 @@ class MainWindow(QMainWindow):
             0, 0, self.ui.menuButton.width(), self.ui.menuButton.height())
         if not (self.rectMenu.contains(self.position)) and (self.isMenuButtonClicked == True):
             self.menuButtonClicked()
+
+    def checkTemperButtonField(self, event):
+        self.position = event.screenPos()
+        self.rectTemper = QtCore.QRectF(
+            self.ui.temperButton.x(), self.ui.temperButton.y(), self.ui.temperButton.width(), self.ui.temperButton.height())
+        if not (self.rectTemper.contains(self.position)) and (self.isTemperButtonClicked == True):
+            self.temperButtonClicked()
 
     def __del__(self):
         self.ui = None
