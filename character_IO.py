@@ -1,12 +1,29 @@
 import json
+import random
 
 from PyQt5 import QtWidgets
-from PyQt5 import QtGui
-from PyQt5 import QtCore
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QMessageBox
 from PyQt5.QtWidgets import QFileDialog
+
+
+def notFoundWarning(self, text):
+    notFoundWarning = QMessageBox()
+    notFoundWarning.setWindowTitle(self.ui.label.text())
+    notFoundWarning.setText(text)
+    notFoundWarning.setIconPixmap(QPixmap(
+        "images/messages/warning").scaled(24, 24, Qt.KeepAspectRatio, Qt.SmoothTransformation))
+    notFoundWarning.exec()
+
+
+def errorReadWarning(self, text):
+    errorReadingWarning = QMessageBox()
+    errorReadingWarning.setWindowTitle(self.ui.label.text())
+    errorReadingWarning.setText(text)
+    errorReadingWarning.setIconPixmap(QPixmap(
+        "images/messages/warning").scaled(24, 24, Qt.KeepAspectRatio, Qt.SmoothTransformation))
+    errorReadingWarning.exec()
 
 
 def loadCharacter(self, clear=False):
@@ -14,43 +31,23 @@ def loadCharacter(self, clear=False):
         with open(self.pathToJson, 'r') as f:
             self.loadedCharacter = json.loads(f.read())
         self.backupCharacter = self.loadedCharacter
+        needClear = self.loadedCharacter["default"]
     except FileNotFoundError:
-        notFoundWarning = QMessageBox()
-        notFoundWarning.setWindowTitle(self.ui.label.text())
-        notFoundWarning.setText("Файл не найден")
-        notFoundWarning.setIconPixmap(QPixmap(
-            "images/messages/warning").scaled(24, 24, Qt.KeepAspectRatio, Qt.SmoothTransformation))
-        notFoundWarning.exec()
+        notFoundWarning(self, "[LOAD] Файл не найден.")
     except:
-        errorReadingWarning = QMessageBox()
-        errorReadingWarning.setWindowTitle(self.ui.label.text())
-        errorReadingWarning.setText(
-            "Ошибка загрузки, неверная структура файла.")
-        errorReadingWarning.setIconPixmap(QPixmap(
-            "images/messages/warning").scaled(24, 24, Qt.KeepAspectRatio, Qt.SmoothTransformation))
-        errorReadingWarning.exec()
+        errorReadWarning(self, "[LOAD] Ошибка загрузки, выбран неверный файл или он повреждён.")
     else:
-        if self.loadedCharacter["default"] == True:
-            needClear = self.loadedCharacter["default"]
-            loadCharacteristicsAndBonus(self, needClear)
-            loadSavingThowsBonus(self, needClear)
-            loadSkillsBonus(self, needClear)
-            loadCharacterInfo(self, needClear)
-            loadCharacterPersonality(self, needClear)
-            loadD20BonusBox(self, needClear)
-            loadLifeBox(self, needClear)
-            self.loadedCharacter["default"] = False
-        else:
-            loadCharacteristicsAndBonus(self)
-            loadSavingThowsBonus(self)
-            loadSkillsBonus(self)
-            loadCharacterInfo(self)
-            loadCharacterPersonality(self)
-            loadD20BonusBox(self)
-            loadLifeBox(self)
-            with open(self.pathToJson, 'w') as f:
-                f.write(json.dumps(self.loadedCharacter,
-                                   sort_keys=False, indent=2))
+        loadCharacteristicsAndBonus(self, needClear)
+        loadSavingThowsBonus(self, needClear)
+        loadSkillsBonus(self, needClear)
+        loadCharacterInfo(self, needClear)
+        loadCharacterPersonality(self, needClear)
+        loadD20BonusBox(self, needClear)
+        loadLifeBox(self, needClear)
+        loadEquipmentBox(self, needClear)
+        loadMoneyBox(self, needClear)
+        self.loadedCharacter["default"] = False
+        needClear = False
 
 
 def loadCharacteristicsAndBonus(self, clear=False):
@@ -77,7 +74,7 @@ def loadSavingThowsBonus(self, clear=False):
         QtWidgets.QRadioButton)
     for QRadioButton in savingThrowsBool:
         QRadioButton.setChecked(self.loadedCharacter["savingThrowsBonus"][
-                                QRadioButton.accessibleName()] if not clear else False)
+            QRadioButton.accessibleName()] if not clear else False)
 
     savingThrows = self.ui.savingThrowsBox.findChildren(QtWidgets.QLineEdit)
     for QLineEdit in savingThrows:
@@ -91,7 +88,7 @@ def loadSkillsBonus(self, clear=False):
     skillsBool = self.ui.skillsBox.findChildren(QtWidgets.QRadioButton)
     for QRadioButton in skillsBool:
         QRadioButton.setChecked(self.loadedCharacter["skillsBonus"][
-                                QRadioButton.accessibleName()] if not clear else False)
+            QRadioButton.accessibleName()] if not clear else False)
 
     skills = self.ui.skillsBox.findChildren(QtWidgets.QLineEdit)
     for QLineEdit in skills:
@@ -113,6 +110,16 @@ def loadCharacterPersonality(self, clear=False):
     for QLineEdit in personalities:
         QLineEdit.setText(
             str(self.loadedCharacter[QLineEdit.accessibleName()]) if not clear else None)
+
+    four = self.ui.temperBox.findChildren(QtWidgets.QTextEdit)
+    for QTextEdit in four:
+        QTextEdit.setText(
+            str(self.loadedCharacter["personality"]["appearance"][QTextEdit.accessibleName()]) if not clear else None)
+
+    temp = ""
+    for features in self.loadedCharacter["personality"]["features"]:
+        temp += str(features) + ", "
+    self.ui.featuresAndTraitsEdit.setText(temp if not clear else None)
 
 
 def loadD20BonusBox(self, clear=False):
@@ -148,67 +155,50 @@ def loadLifeBox(self, clear=False):
         (True if failures == 3 else False) if not clear else False)
 
 
+def loadEquipmentBox(self, clear=False):
+    temp = ""
+    for equipment in self.loadedCharacter["equipment"]:
+        temp += str(equipment) + ", "
+    self.ui.equipment.setText(temp)
+
+
+def loadMoneyBox(self, clear=False):
+    moneyBoxValues = self.ui.moneyBox.findChildren(QtWidgets.QLineEdit)
+    for QLineEdit in moneyBoxValues:
+        QLineEdit.setText(str(self.loadedCharacter["money"][
+            QLineEdit.accessibleName()]) if not clear else None)
+
+
 def saveCharacter(self):
     if self.fileIsNew:
         try:
             self.pathToJson = QFileDialog.getSaveFileName(
-                self, "Open Character", "./default_data", "JSON (*.json)")[0]
-            saveCharacteristicsAndBonus(self)
-            saveSavingThowsBonus(self)
-            saveSkillsBonus(self)
-            saveCharacterInfo(self)
-            saveCharacterPersonality(self)
-            saveD20BonusBox(self)
-            saveLifeBox(self)
+                self, "Open Character", "./saves", "JSON (*.json)")[0]
         except FileNotFoundError:
-            notFoundWarning = QMessageBox()
-            notFoundWarning.setWindowTitle(self.ui.label.text())
-            notFoundWarning.setText("Файл не найден")
-            notFoundWarning.setIconPixmap(QPixmap(
-                "images/messages/warning").scaled(24, 24, Qt.KeepAspectRatio, Qt.SmoothTransformation))
-            notFoundWarning.exec()
+            notFoundWarning(self, "[SAVE] Путь не выбран.")
+            self.fileIsNew = True
         except:
-            errorReadingWarning = QMessageBox()
-            errorReadingWarning.setWindowTitle(self.ui.label.text())
-            errorReadingWarning.setText(
-                "Ошибка.")
-            errorReadingWarning.setIconPixmap(QPixmap(
-                "images/messages/warning").scaled(24, 24, Qt.KeepAspectRatio, Qt.SmoothTransformation))
-            errorReadingWarning.exec()
-        else:
-            try:
-                with open(self.pathToJson, 'w') as f:
-                    f.write(json.dumps(self.loadedCharacter,
-                                       sort_keys=False, indent=2))
-            except:
-                errorReadingWarning = QMessageBox()
-                errorReadingWarning.setWindowTitle(self.ui.label.text())
-                errorReadingWarning.setText(
-                    "Ошибка. Путь не выбран.")
-                errorReadingWarning.setIconPixmap(QPixmap(
-                    "images/messages/warning").scaled(24, 24, Qt.KeepAspectRatio, Qt.SmoothTransformation))
-                errorReadingWarning.exec()
+            errorReadWarning(self, "[SAVE] Ещё какая-то ошибка.")
+            self.fileIsNew = True
+    saveCharacteristicsAndBonus(self)
+    saveSavingThowsBonus(self)
+    saveSkillsBonus(self)
+    saveCharacterInfo(self)
+    saveCharacterPersonality(self)
+    saveD20BonusBox(self)
+    saveLifeBox(self)
+    saveEquipmentBox(self)
+    saveMoneyBox(self)
+    try:
+        with open(self.pathToJson, 'w') as f:
+            f.write(json.dumps(self.loadedCharacter,
+                               sort_keys=False, indent=2))
+    except FileNotFoundError:
+        notFoundWarning(self, "[SAVE] Путь не выбран.")
+    except:
+        errorReadWarning(self, "[SAVE] Ещё какая-то ошибка.")
     else:
-        try:
-            saveCharacteristicsAndBonus(self)
-            saveSavingThowsBonus(self)
-            saveSkillsBonus(self)
-            saveCharacterInfo(self)
-            saveCharacterPersonality(self)
-            saveD20BonusBox(self)
-            saveLifeBox(self)
-        except:
-            errorReadingWarning = QMessageBox()
-            errorReadingWarning.setWindowTitle(self.ui.label.text())
-            errorReadingWarning.setText(
-                "Ошибка. Путь не выбран.")
-            errorReadingWarning.setIconPixmap(QPixmap(
-                "images/messages/warning").scaled(24, 24, Qt.KeepAspectRatio, Qt.SmoothTransformation))
-            errorReadingWarning.exec()
-        else:
-            with open(self.pathToJson, 'w') as f:
-                f.write(json.dumps(self.loadedCharacter,
-                                   sort_keys=False, indent=2))
+        self.fileIsNew = False
 
 
 def saveCharacteristicsAndBonus(self, clear=False):
@@ -219,7 +209,8 @@ def saveCharacteristicsAndBonus(self, clear=False):
             self.loadedCharacter["characteristic"][QLineEdit.accessibleName()] = int(
                 QLineEdit.text().replace("+", "")) if (QLineEdit.text().replace("+", "") != "") else 0
             self.loadedCharacter["characteristicBonus"][
-                QLineEdit.accessibleName() + "Bonus"] = int((self.loadedCharacter["characteristic"][QLineEdit.accessibleName()] - 10) / 2)
+                QLineEdit.accessibleName() + "Bonus"] = int(
+                (self.loadedCharacter["characteristic"][QLineEdit.accessibleName()] - 10) / 2)
 
     for QLineEdit in characteristics:
         if (QLineEdit.accessibleDescription() == "bonus"):
@@ -249,7 +240,8 @@ def saveSkillsBonus(self, clear=False):
     skills = self.ui.skillsBox.findChildren(QtWidgets.QLineEdit)
     for QLineEdit in skills:
         self.loadedCharacter[
-            "characteristicBonus"][QLineEdit.accessibleName()] = int(QLineEdit.text().replace("+", "")) if (QLineEdit.text().replace("+", "") != "") else 0
+            "characteristicBonus"][QLineEdit.accessibleName()] = int(QLineEdit.text().replace("+", "")) if (
+                QLineEdit.text().replace("+", "") != "") else 0
 
 
 def saveCharacterInfo(self, clear=False):
@@ -262,6 +254,15 @@ def saveCharacterPersonality(self, clear=False):
     personalities = self.ui.characterBox.findChildren(QtWidgets.QLineEdit)
     for QLineEdit in personalities:
         self.loadedCharacter[QLineEdit.accessibleName()] = QLineEdit.text()
+
+    four = self.ui.temperBox.findChildren(QtWidgets.QLineEdit)
+    for QLineEdit in four:
+        self.loadedCharacter[QLineEdit.accessibleName()] = QLineEdit.text()
+
+    features = self.ui.featuresAndTraitsEdit.toPlainText().split(", ")
+    if features[-1] == "":
+        del features[-1]
+    self.loadedCharacter["personality"]["features"] = features
 
 
 def saveD20BonusBox(self, clear=False):
@@ -299,24 +300,35 @@ def saveLifeBox(self, clear=False):
     self.loadedCharacter["deathSaves"]["failures"] = howManyFailuresChecked
 
 
+def saveEquipmentBox(self, clean=False):
+    equipment = self.ui.equipment.toPlainText().split(", ")
+    if equipment[-1] == "":
+        del equipment[-1]
+    self.loadedCharacter["equipment"] = equipment
+
+
+def saveMoneyBox(self, clean=False):
+    moneyBoxValues = self.ui.moneyBox.findChildren(QtWidgets.QLineEdit)
+    for QLineEdit in moneyBoxValues:
+        self.loadedCharacter["money"][QLineEdit.accessibleName()] = QLineEdit.text()
+
+
+# TODO Fix backup equipment and features
+
 def backupCharacter(self):
-    if self.fileIsNew:
-        pass
-    else:
-        try:
-            backupCharacteristicsAndBonus(self)
-            backupSavingThowsBonus(self)
-            backupSkillsBonus(self)
-            backupCharacterInfo(self)
-            backupCharacterPersonality(self)
-            backupD20BonusBox(self)
-            backupLifeBox(self)
-        except:
-            print("existed file error")
-        else:
-            with open(self.pathToJson.replace(".json", "_bck.json"), 'w') as f:
-                f.write(json.dumps(self.backupCharacter,
-                                   sort_keys=False, indent=2))
+    if not self.fileIsNew:
+        backupCharacteristicsAndBonus(self)
+        backupSavingThowsBonus(self)
+        backupSkillsBonus(self)
+        backupCharacterInfo(self)
+        backupCharacterPersonality(self)
+        backupD20BonusBox(self)
+        backupLifeBox(self)
+        backupEquipmentBox(self)
+        backupMoneyBox(self)
+        with open(self.pathToJson.replace(".json", "_bck.json"), 'w') as f:
+            f.write(json.dumps(self.backupCharacter,
+                               sort_keys=False, indent=2))
 
 
 def backupCharacteristicsAndBonus(self, clear=False):
@@ -327,7 +339,8 @@ def backupCharacteristicsAndBonus(self, clear=False):
             self.backupCharacter["characteristic"][QLineEdit.accessibleName()] = int(
                 QLineEdit.text().replace("+", "")) if (QLineEdit.text().replace("+", "") != "") else 0
             self.backupCharacter["characteristicBonus"][
-                QLineEdit.accessibleName() + "Bonus"] = int((self.backupCharacter["characteristic"][QLineEdit.accessibleName()] - 10) / 2)
+                QLineEdit.accessibleName() + "Bonus"] = int(
+                (self.backupCharacter["characteristic"][QLineEdit.accessibleName()] - 10) / 2)
 
     for QLineEdit in characteristics:
         if (QLineEdit.accessibleDescription() == "bonus"):
@@ -357,7 +370,8 @@ def backupSkillsBonus(self, clear=False):
     skills = self.ui.skillsBox.findChildren(QtWidgets.QLineEdit)
     for QLineEdit in skills:
         self.backupCharacter[
-            "characteristicBonus"][QLineEdit.accessibleName()] = int(QLineEdit.text().replace("+", "")) if (QLineEdit.text().replace("+", "") != "") else 0
+            "characteristicBonus"][QLineEdit.accessibleName()] = int(QLineEdit.text().replace("+", "")) if (
+                QLineEdit.text().replace("+", "") != "") else 0
 
 
 def backupCharacterInfo(self, clear=False):
@@ -405,3 +419,16 @@ def backupLifeBox(self, clear=False):
     if self.ui.failures_3.isChecked():
         howManyFailuresChecked = 3
     self.backupCharacter["deathSaves"]["failures"] = howManyFailuresChecked
+
+
+def backupEquipmentBox(self, clean=False):
+    equipment = self.ui.equipment.toPlainText().split(", ")
+    if equipment[-1] == "":
+        del equipment[-1]
+    self.backupCharacter["equipment"] = equipment
+
+
+def backupMoneyBox(self, clean=False):
+    moneyBoxValues = self.ui.moneyBox.findChildren(QtWidgets.QLineEdit)
+    for QLineEdit in moneyBoxValues:
+        self.backupCharacter["money"][QLineEdit.accessibleName()] = QLineEdit.text()
