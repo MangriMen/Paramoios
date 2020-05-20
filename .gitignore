@@ -130,3 +130,6 @@ dmypy.json
 
 #BAT files
 *.bat
+
+#PyCharm
+.idea/

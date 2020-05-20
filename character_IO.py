@@ -74,7 +74,7 @@ def loadSavingThowsBonus(self, clear=False):
         QtWidgets.QRadioButton)
     for QRadioButton in savingThrowsBool:
         QRadioButton.setChecked(self.loadedCharacter["savingThrowsBonus"][
-            QRadioButton.accessibleName()] if not clear else False)
+                                    QRadioButton.accessibleName()] if not clear else False)
 
     savingThrows = self.ui.savingThrowsBox.findChildren(QtWidgets.QLineEdit)
     for QLineEdit in savingThrows:
@@ -88,7 +88,7 @@ def loadSkillsBonus(self, clear=False):
     skillsBool = self.ui.skillsBox.findChildren(QtWidgets.QRadioButton)
     for QRadioButton in skillsBool:
         QRadioButton.setChecked(self.loadedCharacter["skillsBonus"][
-            QRadioButton.accessibleName()] if not clear else False)
+                                    QRadioButton.accessibleName()] if not clear else False)
 
     skills = self.ui.skillsBox.findChildren(QtWidgets.QLineEdit)
     for QLineEdit in skills:
@@ -166,7 +166,7 @@ def loadMoneyBox(self, clear=False):
     moneyBoxValues = self.ui.moneyBox.findChildren(QtWidgets.QLineEdit)
     for QLineEdit in moneyBoxValues:
         QLineEdit.setText(str(self.loadedCharacter["money"][
-            QLineEdit.accessibleName()]) if not clear else None)
+                                  QLineEdit.accessibleName()]) if not clear else None)
 
 
 def saveCharacter(self):
@@ -432,3 +432,69 @@ def backupMoneyBox(self, clean=False):
     moneyBoxValues = self.ui.moneyBox.findChildren(QtWidgets.QLineEdit)
     for QLineEdit in moneyBoxValues:
         self.backupCharacter["money"][QLineEdit.accessibleName()] = QLineEdit.text()
+
+
+def saveGenerated(self):
+    self.newCharacterGen["default"] = False
+    self.newCharacterGen["playerName"] = self.ui.playerName.text()
+    self.newCharacterGen["charName"] = self.ui.charName.text()
+
+    characteristics = self.ui.characteristicBox.findChildren(QtWidgets.QLineEdit)
+    for QLineEdit in characteristics:
+        if (QLineEdit.accessibleDescription() == "base"):
+            self.newCharacterGen["characteristic"][QLineEdit.accessibleName()] = int(
+                QLineEdit.text().replace("+", "")) if (QLineEdit.text().replace("+", "") != "") else 0
+            self.newCharacterGen["characteristicBonus"][
+                QLineEdit.accessibleName() + "Bonus"] = int(
+                (self.newCharacterGen["characteristic"][QLineEdit.accessibleName()] - 10) / 2)
+
+    self.newCharacterGen["personality"]["appearance"][
+        "personalityTraits"] = self.ui.personalityEdit.toPlainText()
+    self.newCharacterGen["personality"]["appearance"]["ideals"] = self.ui.idealsEdit.toPlainText()
+    self.newCharacterGen["personality"]["appearance"]["bonds"] = self.ui.bondsEdit.toPlainText()
+    self.newCharacterGen["personality"]["appearance"]["flaws"] = self.ui.flawsEdit.toPlainText()
+
+    self.newCharacterGen["class"] = self.selectedClass
+    self.newCharacterGen["hitDiceCoeffiecient"] = self.loadedClasses[
+        self.selectedClass]["init"]["hitDiceCoeffiecient"]
+    self.newCharacterGen["savingThrowsBonus"] = self.loadedClasses[
+        self.selectedClass]["init"]["savingThrowsBonus"]
+    for i in range(self.loadedClasses[self.selectedClass]["init"]["money"]):
+        self.newCharacterGen["money"]["gold"] += random.randint(1, 4)
+    self.newCharacterGen["money"]["gold"] *= 10 if self.selectedClass != "Monk" else 1
+    self.newCharacterGen["proficiencyBonus"] = self.loadedClasses[self.selectedClass][
+        "table"][self.newCharacterGen["level"] - 1]["proficiencyBonus"]
+    self.newCharacterGen["personality"]["features"] = self.loadedClasses[
+        self.selectedClass]["table"][self.newCharacterGen["level"] - 1]["skills"]
+    self.newCharacterGen["equipment"] = self.loadedClasses[self.selectedClass]["init"]["equipment"]
+    for additionalEquipment in self.classEquipmentChecked:
+        for eq in additionalEquipment:
+            self.newCharacterGen["equipment"].append(eq.text())
+    for skillTrue in self.classSkillsChecked:
+        if skillTrue.text() in self.newCharacterGen["skillsBonus"]:
+            self.newCharacterGen["skillsBonus"][skillTrue.text()] = True
+
+    self.newCharacterGen["race"] = self.selectedRace
+    self.newCharacterGen["speed"] = self.loadedRaces[self.selectedRace]["speed"]
+    for skills in self.loadedRaces[self.selectedRace]["skills"]:
+        self.newCharacterGen["personality"]["features"].append(skills)
+
+    if "subraces" in self.loadedRaces[self.selectedRace]:
+        if self.ui.raceSubCombo.currentText() in self.loadedRaces[self.selectedRace]["subraces"]:
+            if "bonuses" in self.loadedRaces[self.selectedRace]["subraces"][self.ui.raceSubCombo.currentText()]:
+                for sub in self.loadedRaces[self.selectedRace]["subraces"][self.ui.raceSubCombo.currentText()][
+                    "bonuses"]:
+                    if sub == "characteristic":
+                        for characteristic in self.loadedRaces[self.selectedRace]["subraces"][
+                            self.ui.raceSubCombo.currentText()]["bonuses"][sub]:
+                            self.newCharacterGen[sub][characteristic] += self.loadedRaces[self.selectedRace][
+                                "subraces"][self.ui.raceSubCombo.currentText()]["bonuses"][sub][characteristic]
+                    else:
+                        self.newCharacterGen[sub] += self.loadedRaces[self.selectedRace]["subraces"][
+                            self.ui.raceSubCombo.currentText()]["bonuses"][sub]
+
+    self.newCharacterGen["background"] = self.selectedBackground
+
+    self.newCharacterGen["specialization"] = self.ui.backgroundSpecChoose.currentText()
+
+    self.newCharacterGen["alignment"] = self.selectedAlignment
