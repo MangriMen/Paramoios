@@ -1,0 +1,268 @@
+{
+  "Dwarf": {
+    "bonuses": {
+      "characteristic": {
+        "constitution": 2
+      }
+    },
+    "speed": 25,
+    "skills": [
+      "Darkvision",
+      "Dwarven resilience",
+      "Dwarven combat training",
+      "Tool proficiency",
+      "Stonecunning"
+    ],
+    "languages": [
+      "Dwarvish"
+    ],
+    "subraces": {
+      "hill": {
+        "bonuses": {
+          "characteristic": {
+            "wisdom": 1
+          },
+          "hpMax": 10
+        }
+      },
+      "mountain": {
+        "bonuses": {
+          "characteristic": {
+            "strength": 2
+          }
+        }
+      }
+    }
+  },
+  "Elf": {
+    "bonuses": {
+      "characteristic": {
+        "dexterity": 2
+      }
+    },
+    "speed": 30,
+    "skills": [
+      "Darkvision",
+      "Kenn Senses",
+      "Fey Ancestry",
+      "Trance"
+    ],
+    "languages": [
+      "Elvish"
+    ],
+    "subraces": {
+      "High Elf": {
+        "bonuses": {
+          "characteristic": {
+            "intelligence": 1
+          }
+        }
+      },
+      "Wood Elf": {
+        "bonuses": {
+          "characteristic": {
+            "wisdom": 2
+          },
+          "speed": 35,
+          "skills": [
+            "Mask of the Wild"
+          ]
+        }
+      },
+      "Dark Elf(Drow)": {
+        "bonuses": {
+          "characteristic": {
+            "charisma": 1
+          },
+          "skills": [
+            "Superior Darkvision",
+            "Sunlight Sensitivity",
+            "Drow Magic",
+            "Drop Weapon Training"
+          ]
+        }
+      }
+    }
+  },
+  "Hafling": {
+    "bonuses": {
+      "characteristic": {
+        "dexterity": 2
+      }
+    },
+    "speed": 25,
+    "skills": [
+      "Lucky",
+      "Brave",
+      "Hafling Nimbleness"
+    ],
+    "languages": [
+      "dwarvish"
+    ],
+    "subraces": {
+      "Lightfoot": {
+        "bonuses": {
+          "characteristic": {
+            "charisma": 1
+          },
+          "skills": [
+            "Naturally Stealthy"
+          ]
+        }
+      },
+      "Stout": {
+        "bonuses": {
+          "characteristic": {
+            "constitution": 1
+          },
+          "skills": [
+            "Stout Resilience"
+          ]
+        }
+      }
+    }
+  },
+  "Human": {
+    "bonuses": {
+      "characteristic": {
+        "strength": 1,
+        "dexterity": 1,
+        "constitution": 1,
+        "intelligence": 1,
+        "wisdom": 1,
+        "charisma": 1
+      }
+    },
+    "speed": 30,
+    "skills": [
+      "darkvision",
+      "dwarven resilience",
+      "dwarven combat training",
+      "tool proficiency",
+      "stonecunning"
+    ],
+    "languages": [
+      "extra"
+    ],
+    "subraces": {
+    }
+  },
+  "Dragonborn": {
+    "bonuses": {
+      "characteristic": {
+        "strength": 2,
+        "charisma": 1
+      }
+    },
+    "speed": 30,
+    "skills": [
+      "darkvision",
+      "dwarven resilience",
+      "dwarven combat training",
+      "tool proficiency",
+      "stonecunning"
+    ],
+    "languages": [
+      "dwarvish"
+    ],
+    "subraces": {
+    }
+  },
+  "Gnome": {
+    "bonuses": {
+      "characteristic": {
+        "intelligence": 2
+      }
+    },
+    "speed": 25,
+    "skills": [
+      "Darkvision",
+      "Gnome Cunning"
+    ],
+    "languages": [
+      "Gnomish"
+    ],
+    "subraces": {
+      "Forest Gnome": {
+        "bonuses": {
+          "characteristic": {
+            "dexterity": 1
+          },
+          "skills": [
+            "Natural Illusionist",
+            "Speak with Small Beasts"
+          ]
+        }
+      },
+      "Rock Gnome": {
+        "bonuses": {
+          "characteristic": {
+            "constitution": 1
+          },
+          "skills": [
+            "Artificer's Lore",
+            "Tinker"
+          ]
+        }
+      }
+    }
+  },
+  "Half-Elf": {
+    "bonuses": {
+      "characteristic": {
+        "charisma": 2
+      }
+    },
+    "speed": 30,
+    "skills": [
+      "Darkvision",
+      "Fey Ancestry",
+      "Skill Versatility"
+    ],
+    "languages": [
+      "Elvish",
+      "extra"
+    ],
+    "subraces": {
+    }
+  },
+  "Half-Orc": {
+    "bonuses": {
+      "characteristic": {
+        "strength": 2,
+        "constitution": 1
+      }
+    },
+    "speed": 30,
+    "skills": [
+      "Darkvision",
+      "Menacing",
+      "Relentless Endurance",
+      "Savage Attacks"
+    ],
+    "languages": [
+      "Orc"
+    ],
+    "subraces": {
+    }
+  },
+  "Tiefling": {
+    "bonuses": {
+      "characteristic": {
+        "intelligence": 1,
+        "charisma": 2
+      }
+    },
+    "speed": 30,
+    "skills": [
+      "Darkvision",
+      "Hellish Resistance",
+      "Infernal Legacy"
+    ],
+    "languages": [
+      "Infernal"
+    ],
+    "subraces": {
+    }
+  }
+}
