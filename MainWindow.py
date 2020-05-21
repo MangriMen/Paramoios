@@ -66,12 +66,12 @@ class MainWindow(QMainWindow):
             QtWidgets.QLineEdit, QtCore.QRegularExpression("^[a-z]{6,12}$"))
         for QLineEdit in self.setCharacteristicUpdate:
             QLineEdit.textEdited.connect(
-                functools.partial(self.modifireUpdate, QLineEdit))
+                functools.partial(self.modifierUpdate, QLineEdit))
         self.pathToJson = ""
         self.fileIsNew = False
         self.isAvailableToGenerate = True
 
-    def modifireUpdate(self):
+    def modifierUpdate(self):
         characteristics = self.ui.characteristicBox.findChildren(QtWidgets.QLineEdit)
         for QLineEdit in characteristics:
             if (QLineEdit.accessibleDescription() == "base"):
@@ -194,7 +194,7 @@ class MainWindow(QMainWindow):
             self.m_leftMouseButtonPressed = self.checkResizableField(event)
             self.mlb_isMenu = self.checkMenuButtonField(event)
             self.mlb_isTemper = self.checkTemperButtonField(event)
-            self.setPreviousPosition(event.pos())
+            self.setPreviousPosition()
         return QtWidgets.QWidget.mousePressEvent(self, event)
 
     def mouseReleaseEvent(self, event):
@@ -263,7 +263,7 @@ class MainWindow(QMainWindow):
         if not (self.rectTemper.contains(self.position)) and (self.isTemperButtonClicked == True):
             self.temperButtonClicked()
 
-    def closeEvent(self):
+    def closeEvent(self, event):
         self.CGW.close()
 
     def __del__(self):
