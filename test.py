@@ -19,10 +19,7 @@ class TestUM(unittest2.TestCase):
 
     def test_modifierUpdate(self):
         characteristics = self.w.ui.characteristicBox.findChildren(QtWidgets.QLineEdit)
-        for QLineEdit in characteristics:
-            if QLineEdit.accessibleDescription() == "base":
-                QLineEdit.setText("12")
-        self.w.modifireUpdate(QLineEdit)
+        self.w.modifireUpdate()
         for QLineEdit in characteristics:
             if QLineEdit.accessibleDescription() == "bonus":
                 self.assertEqual("+1", QLineEdit.text())
