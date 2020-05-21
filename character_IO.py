@@ -469,7 +469,7 @@ def saveGenerated(self):
     self.newCharacterGen["proficiencyBonus"] = self.loadedClasses[self.selectedClass][
         "table"][self.newCharacterGen["level"] - 1]["proficiencyBonus"]
     self.newCharacterGen["personality"]["features"] = self.loadedClasses[
-        self.selectedClass]["table"][self.newCharacterGen["level"] - 1]["skills"]
+        self.selectedClass]["table"][self.newCharacterGen["level"] - 1]["features"]
     self.newCharacterGen["equipment"] = self.loadedClasses[self.selectedClass]["init"]["equipment"]
     for additionalEquipment in self.classEquipmentChecked:
         for eq in additionalEquipment:
@@ -493,6 +493,9 @@ def saveGenerated(self):
                             self.ui.raceSubCombo.currentText()]["bonuses"][sub]:
                             self.newCharacterGen[sub][characteristic] += self.loadedRaces[self.selectedRace][
                                 "subraces"][self.ui.raceSubCombo.currentText()]["bonuses"][sub][characteristic]
+                    elif sub == "skills":
+                        self.newCharacterGen["personality"]["features"] += self.loadedRaces[self.selectedRace]["subraces"][
+                            self.ui.raceSubCombo.currentText()]["bonuses"][sub]
                     else:
                         self.newCharacterGen[sub] += self.loadedRaces[self.selectedRace]["subraces"][
                             self.ui.raceSubCombo.currentText()]["bonuses"][sub]
