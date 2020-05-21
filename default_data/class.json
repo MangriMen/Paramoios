@@ -51,7 +51,7 @@
     "table": [
       {
         "proficiencyBonus": 2,
-        "skills": [
+        "features": [
           "rage",
           "unarmored",
           "defense"
@@ -61,7 +61,7 @@
       },
       {
         "proficiencyBonus": 2,
-        "skills": [
+        "features": [
           "reckles aattack",
           "danger sense"
         ],
@@ -70,7 +70,7 @@
       },
       {
         "proficiencyBonus": 2,
-        "skills": [
+        "features": [
           "primal path"
         ],
         "rage": 3,
@@ -78,7 +78,7 @@
       },
       {
         "proficiencyBonus": 2,
-        "skills": [
+        "features": [
           "levelup"
         ],
         "rage": 3,
@@ -86,7 +86,7 @@
       },
       {
         "proficiencyBonus": 3,
-        "skills": [
+        "features": [
           "extra attack",
           "fast movement"
         ],
@@ -95,7 +95,7 @@
       },
       {
         "proficiencyBonus": 3,
-        "skills": [
+        "features": [
           "path feature"
         ],
         "rage": 4,
@@ -103,7 +103,7 @@
       },
       {
         "proficiencyBonus": 3,
-        "skills": [
+        "features": [
           "feral instinct"
         ],
         "rage": 4,
@@ -111,7 +111,7 @@
       },
       {
         "proficiencyBonus": 3,
-        "skills": [
+        "features": [
           "levelup"
         ],
         "rage": 4,
@@ -119,7 +119,7 @@
       },
       {
         "proficiencyBonus": 4,
-        "skills": [
+        "features": [
           "brutal critical 1"
         ],
         "rage": 4,
@@ -127,7 +127,7 @@
       },
       {
         "proficiencyBonus": 4,
-        "skills": [
+        "features": [
           "path feature"
         ],
         "rage": 4,
@@ -135,7 +135,7 @@
       },
       {
         "proficiencyBonus": 4,
-        "skills": [
+        "features": [
           "relentless rage"
         ],
         "rage": 4,
@@ -143,7 +143,7 @@
       },
       {
         "proficiencyBonus": 4,
-        "skills": [
+        "features": [
           "levelup"
         ],
         "rage": 5,
@@ -151,7 +151,7 @@
       },
       {
         "proficiencyBonus": 5,
-        "skills": [
+        "features": [
           "brutal critical 2"
         ],
         "rage": 5,
@@ -159,7 +159,7 @@
       },
       {
         "proficiencyBonus": 5,
-        "skills": [
+        "features": [
           "path feature"
         ],
         "rage": 5,
@@ -167,7 +167,7 @@
       },
       {
         "proficiencyBonus": 5,
-        "skills": [
+        "features": [
           "persistent rage"
         ],
         "rage": 5,
@@ -175,7 +175,7 @@
       },
       {
         "proficiencyBonus": 5,
-        "skills": [
+        "features": [
           "levelup"
         ],
         "rage": 5,
@@ -183,7 +183,7 @@
       },
       {
         "proficiencyBonus": 6,
-        "skills": [
+        "features": [
           "brutal critical 3"
         ],
         "rage": 6,
@@ -191,7 +191,7 @@
       },
       {
         "proficiencyBonus": 6,
-        "skills": [
+        "features": [
           "indomitable might"
         ],
         "rage": 6,
@@ -199,7 +199,7 @@
       },
       {
         "proficiencyBonus": 6,
-        "skills": [
+        "features": [
           "levelup"
         ],
         "rage": 6,
@@ -207,7 +207,7 @@
       },
       {
         "proficiencyBonus": 6,
-        "skills": [
+        "features": [
           "primal champion"
         ],
         "rage": 2147300000,
