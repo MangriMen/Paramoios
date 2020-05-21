@@ -18,29 +18,29 @@ def notFoundWarning(self, text):
     notFoundWarning.exec()
 
 
-def errorReadWarning(self, text):
+def errorReadWarning(self, text, detailed=None):
     errorReadingWarning = QMessageBox()
     errorReadingWarning.setWindowTitle(self.ui.label.text())
     errorReadingWarning.setText(text)
     errorReadingWarning.setIconPixmap(QPixmap(
         "images/messages/warning").scaled(24, 24, Qt.KeepAspectRatio, Qt.SmoothTransformation))
+    errorReadingWarning.setDetailedText(str(detailed))
     errorReadingWarning.exec()
-
 
 def loadCharacter(self, clear=False):
     try:
         with open(self.pathToJson, 'r') as f:
             self.loadedCharacter = json.loads(f.read())
         self.backupCharacter = self.loadedCharacter
-        validate(self.loadedCharacter, self.characterSchema)
-        needClear = self.loadedCharacter["default"]
+        validate(self.loadedCharacter, self.charSchema)
     except FileNotFoundError:
         notFoundWarning(self, "[LOAD] Файл не найден.")
     except ValidationError:
         notFoundWarning(self, "[LOAD] Файл не соответствует шаблону.")
-    except:
-        errorReadWarning(self, "[LOAD] Ошибка загрузки, выбран неверный файл или он повреждён.")
+    except Exception as e:
+        errorReadWarning(self, "[LOAD] Ошибка загрузки, выбран неверный файл или он повреждён.", e)
     else:
+        needClear = self.loadedCharacter["default"]
         loadCharacteristicsAndBonus(self, needClear)
         loadSavingThowsBonus(self, needClear)
         loadSkillsBonus(self, needClear)
@@ -181,8 +181,8 @@ def saveCharacter(self):
         except FileNotFoundError:
             notFoundWarning(self, "[SAVE] Путь не выбран.")
             self.fileIsNew = True
-        except:
-            errorReadWarning(self, "[SAVE] Ещё какая-то ошибка.")
+        except Exception as e:
+            errorReadWarning(self, "[SAVE] Ещё какая-то ошибка.", e)
             self.fileIsNew = True
     saveCharacteristicsAndBonus(self)
     saveSavingThowsBonus(self)
@@ -199,8 +199,8 @@ def saveCharacter(self):
                                sort_keys=False, indent=2))
     except FileNotFoundError:
         notFoundWarning(self, "[SAVE] Путь не выбран.")
-    except:
-        errorReadWarning(self, "[SAVE] Ещё какая-то ошибка.")
+    except Exception as e:
+        errorReadWarning(self, "[SAVE] Ещё какая-то ошибка.", e)
     else:
         self.fileIsNew = False
 
