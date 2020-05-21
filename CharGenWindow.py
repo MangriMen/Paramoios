@@ -8,6 +8,7 @@ from PyQt5 import QtGui
 from PyQt5 import QtWidgets
 from PyQt5 import uic
 from PyQt5.QtCore import Qt
+from jsonschema import validate, ValidationError
 
 import character_IO
 import style
@@ -48,6 +49,24 @@ class CharGenWindow(QCharGenWindow):
         # self.ui.alignmentCombo.addItem(self.defaultAlignment)
         for alignment_ in self.loadedAlignments:
             self.ui.alignmentCombo.addItem(alignment_)
+
+        with open('default_data/json_schemes/raceSchema.json', 'r') as f:
+            self.raceSchema = json.loads(f.read())
+        with open('default_data/json_schemes/classSchema.json', 'r') as f:
+            self.classSchema = json.loads(f.read())
+        with open('default_data/json_schemes/backgroundSchema.json', 'r') as f:
+            self.backgroundSchema = json.loads(f.read())
+        with open('default_data/json_schemes/alignmentSchema.json', 'r') as f:
+            self.alignmentSchema = json.loads(f.read())
+
+        try:
+            validate(self.loadedRaces, self.raceSchema)
+            # validate(self.loadedClasses, self.classSchema)
+            # validate(self.loadedBackgrounds, self.backgroundSchema)
+            validate(self.loadedAlignments, self.alignmentSchema)
+        except ValidationError:
+            self.close()
+            character_IO.errorReadWarning(self, "Ошибка. Файл, возможно, повреждён.")
 
         self.createCharacter()
 

@@ -14,6 +14,7 @@ from CharGenWindow import CharGenWindow
 
 import style
 import character_IO
+import jsonschema
 
 (Ui_MainWindow, QMainWindow) = uic.loadUiType('MainWindow.ui')
 
@@ -33,6 +34,10 @@ class MainWindow(QMainWindow):
         self.CGW = CharGenWindow()
         self.CGW.parent = self
         self.newCharClicked()
+        with open('default_data/json_schemes/characterSchema.json', 'r') as f:
+            self.charSchema = json.loads(f.read())
+
+
 
     def initVariables(self):
         self.previousPosition = QtCore.QPoint()
