@@ -6,6 +6,7 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QMessageBox
 from PyQt5.QtWidgets import QFileDialog
+from jsonschema import validate, ValidationError
 
 
 def notFoundWarning(self, text):
@@ -31,9 +32,12 @@ def loadCharacter(self, clear=False):
         with open(self.pathToJson, 'r') as f:
             self.loadedCharacter = json.loads(f.read())
         self.backupCharacter = self.loadedCharacter
+        validate(self.loadedCharacter, self.characterSchema)
         needClear = self.loadedCharacter["default"]
     except FileNotFoundError:
         notFoundWarning(self, "[LOAD] Файл не найден.")
+    except ValidationError:
+        notFoundWarning(self, "[LOAD] Файл не соответствует шаблону.")
     except:
         errorReadWarning(self, "[LOAD] Ошибка загрузки, выбран неверный файл или он повреждён.")
     else:
