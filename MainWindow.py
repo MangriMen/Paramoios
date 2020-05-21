@@ -151,12 +151,13 @@ class MainWindow(QMainWindow):
             notFoundWarning.setIconPixmap(QPixmap(
                 "images/messages/warning").scaled(24, 24, Qt.KeepAspectRatio, Qt.SmoothTransformation))
             notFoundWarning.exec()
-        except:
+        except Exception as e:
             notFoundWarning = QMessageBox()
             notFoundWarning.setWindowTitle(self.ui.label.text())
             notFoundWarning.setText("[ALL|SAVEAS]Ошибка")
             notFoundWarning.setIconPixmap(QPixmap(
                 "images/messages/warning").scaled(24, 24, Qt.KeepAspectRatio, Qt.SmoothTransformation))
+            notFoundWarning.setDetailedText(str(e))
             notFoundWarning.exec()
         else:
             self.pathToJson = self.bufPath
