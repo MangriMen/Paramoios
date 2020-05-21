@@ -14,7 +14,6 @@ from CharGenWindow import CharGenWindow
 
 import style
 import character_IO
-import jsonschema
 
 (Ui_MainWindow, QMainWindow) = uic.loadUiType('MainWindow.ui')
 
@@ -72,7 +71,7 @@ class MainWindow(QMainWindow):
         self.fileIsNew = False
         self.isAvailableToGenerate = True
 
-    def modifireUpdate(self, QLineEdit):
+    def modifireUpdate(self):
         characteristics = self.ui.characteristicBox.findChildren(QtWidgets.QLineEdit)
         for QLineEdit in characteristics:
             if (QLineEdit.accessibleDescription() == "base"):
@@ -118,7 +117,7 @@ class MainWindow(QMainWindow):
         character_IO.loadCharacter(self)
         self.fileIsNew = False
 
-    def fieldSaving(self, QLineEdit):
+    def fieldSaving(self):
         character_IO.backupCharacter(self)
 
     def loadGenerated(self):
@@ -181,10 +180,10 @@ class MainWindow(QMainWindow):
             self.ui.mainLayout.setContentsMargins(12, 12, 12, 12)
             self.showNormal()
 
-    def previousPosition(self, previousPosition):
+    def previousPosition(self):
         return self.m_previousPosition
 
-    def setPreviousPosition(self, previousPosition):
+    def setPreviousPosition(self):
         if (self.m_previousPosition == self.previousPosition):
             return
         self.m_previousPosition = self.previousPosition
@@ -264,7 +263,7 @@ class MainWindow(QMainWindow):
         if not (self.rectTemper.contains(self.position)) and (self.isTemperButtonClicked == True):
             self.temperButtonClicked()
 
-    def closeEvent(self, event):
+    def closeEvent(self):
         self.CGW.close()
 
     def __del__(self):
