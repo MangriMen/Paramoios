@@ -33,9 +33,9 @@ class MainWindow(QMainWindow):
         self.initVariables()
         self.CGW = CharGenWindow()
         self.CGW.parent = self
-        self.newCharClicked()
         with open('default_data/json_schemes/characterSchema.json', 'r') as f:
             self.charSchema = json.loads(f.read())
+        self.newCharClicked()
 
 
 
