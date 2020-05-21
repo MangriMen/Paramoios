@@ -133,3 +133,7 @@ dmypy.json
 
 #PyCharm
 .idea/
+
+#json saves
+saves/*.json
+saves/CharGenTemp/*.json
