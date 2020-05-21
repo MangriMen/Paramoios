@@ -86,7 +86,7 @@ class CharGenWindow(QCharGenWindow):
             QtWidgets.QLineEdit, QtCore.QRegularExpression("^[a-z]{6,12}$"))
         for QLineEdit in self.setCharacteristicUpdate:
             QLineEdit.textEdited.connect(
-                functools.partial(self.characteristicUpdate, QLineEdit))
+                functools.partial(self.characteristicUpdate))
         self.defaultRace = "Choose race..."
         self.defaultClass = "Choose class..."
         self.defaultBackground = "Choose background..."
@@ -98,17 +98,29 @@ class CharGenWindow(QCharGenWindow):
         self.characteristicSum = 0
 
     def createCharacter(self):
-        with open("default_data/default_character.json", 'r') as f:
-            self.newCharacterGen = json.loads(f.read())
+        try:
+            with open("default_data/default_character.json", 'r') as f:
+                self.newCharacterGen = json.loads(f.read())
+        except FileNotFoundError:
+            character_IO.notFoundWarning(self, "[LOAD] Файл не найден.")
+        except ValidationError:
+            character_IO.notFoundWarning(self, "[LOAD] Файл не соответствует шаблону.")
+        except Exception as e:
+            character_IO.errorReadWarning(self, "[LOAD] Ошибка загрузки, выбран неверный файл или он повреждён.", e)
 
     def btnDoneClicked(self):
         character_IO.saveGenerated(self)
-        with open("saves/CharGenTemp/your_new_character.json", 'w') as f:
-            f.write(json.dumps(self.newCharacterGen, sort_keys=False, indent=2))
+        try:
+            with open("saves/CharGenTemp/your_new_character.json", 'w') as f:
+                f.write(json.dumps(self.newCharacterGen, sort_keys=False, indent=2))
+        except FileNotFoundError:
+            character_IO.notFoundWarning(self, "[SAVE] Путь не выбран.")
+        except Exception as e:
+            character_IO.errorReadWarning(self, "[SAVE] Ещё какая-то ошибка.", e)
         self.close()
         self.parent.loadGenerated()
 
-    def characteristicUpdate(self, QLineEdit):
+    def characteristicUpdate(self):
         self.characteristicSum = 0
         self.numsConvertion = {
             8: 0,
@@ -281,17 +293,25 @@ class CharGenWindow(QCharGenWindow):
         self.btnDoneUpdate()
 
     def btnDoneUpdate(self):
-        numstate = False
+        nums = []
         for num in self.setCharacteristicUpdate:
             textToInt = int(num.text()) if num.text() != "" else 8
             if textToInt in range(8, 16):
-                numstate = True
+                nums.append(True)
             else:
-                numstate = False
+                nums.append(False)
+        numsTrue = 0
+        for num in nums:
+            if num:
+                numsTrue += 1
+        if numsTrue == len(nums):
+            numstate = True
+        else:
+            numstate = False
         if (self.selectedRace != self.defaultRace and self.selectedClass != self.defaultClass
                 and self.selectedBackground != self.defaultBackground
                 and self.selectedAlignment != self.defaultAlignment and self.characteristicSum == 27
-                and numstate == True):
+                and numstate is True):
             self.ui.btnDone.setEnabled(True)
         else:
             self.ui.btnDone.setEnabled(False)
