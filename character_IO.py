@@ -6,6 +6,7 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QMessageBox
 from PyQt5.QtWidgets import QFileDialog
+from jsonschema import validate, ValidationError
 
 
 def notFoundWarning(self, text):
@@ -17,26 +18,29 @@ def notFoundWarning(self, text):
     notFoundWarning.exec()
 
 
-def errorReadWarning(self, text):
+def errorReadWarning(self, text, detailed=None):
     errorReadingWarning = QMessageBox()
     errorReadingWarning.setWindowTitle(self.ui.label.text())
     errorReadingWarning.setText(text)
     errorReadingWarning.setIconPixmap(QPixmap(
         "images/messages/warning").scaled(24, 24, Qt.KeepAspectRatio, Qt.SmoothTransformation))
+    errorReadingWarning.setDetailedText(str(detailed))
     errorReadingWarning.exec()
-
 
 def loadCharacter(self, clear=False):
     try:
         with open(self.pathToJson, 'r') as f:
             self.loadedCharacter = json.loads(f.read())
         self.backupCharacter = self.loadedCharacter
-        needClear = self.loadedCharacter["default"]
+        validate(self.loadedCharacter, self.charSchema)
     except FileNotFoundError:
         notFoundWarning(self, "[LOAD] Файл не найден.")
-    except:
-        errorReadWarning(self, "[LOAD] Ошибка загрузки, выбран неверный файл или он повреждён.")
+    except ValidationError:
+        notFoundWarning(self, "[LOAD] Файл не соответствует шаблону.")
+    except Exception as e:
+        errorReadWarning(self, "[LOAD] Ошибка загрузки, выбран неверный файл или он повреждён.", e)
     else:
+        needClear = self.loadedCharacter["default"]
         loadCharacteristicsAndBonus(self, needClear)
         loadSavingThowsBonus(self, needClear)
         loadSkillsBonus(self, needClear)
@@ -177,8 +181,8 @@ def saveCharacter(self):
         except FileNotFoundError:
             notFoundWarning(self, "[SAVE] Путь не выбран.")
             self.fileIsNew = True
-        except:
-            errorReadWarning(self, "[SAVE] Ещё какая-то ошибка.")
+        except Exception as e:
+            errorReadWarning(self, "[SAVE] Ещё какая-то ошибка.", e)
             self.fileIsNew = True
     saveCharacteristicsAndBonus(self)
     saveSavingThowsBonus(self)
@@ -195,8 +199,8 @@ def saveCharacter(self):
                                sort_keys=False, indent=2))
     except FileNotFoundError:
         notFoundWarning(self, "[SAVE] Путь не выбран.")
-    except:
-        errorReadWarning(self, "[SAVE] Ещё какая-то ошибка.")
+    except Exception as e:
+        errorReadWarning(self, "[SAVE] Ещё какая-то ошибка.", e)
     else:
         self.fileIsNew = False
 
@@ -465,7 +469,7 @@ def saveGenerated(self):
     self.newCharacterGen["proficiencyBonus"] = self.loadedClasses[self.selectedClass][
         "table"][self.newCharacterGen["level"] - 1]["proficiencyBonus"]
     self.newCharacterGen["personality"]["features"] = self.loadedClasses[
-        self.selectedClass]["table"][self.newCharacterGen["level"] - 1]["skills"]
+        self.selectedClass]["table"][self.newCharacterGen["level"] - 1]["features"]
     self.newCharacterGen["equipment"] = self.loadedClasses[self.selectedClass]["init"]["equipment"]
     for additionalEquipment in self.classEquipmentChecked:
         for eq in additionalEquipment:
@@ -489,6 +493,9 @@ def saveGenerated(self):
                             self.ui.raceSubCombo.currentText()]["bonuses"][sub]:
                             self.newCharacterGen[sub][characteristic] += self.loadedRaces[self.selectedRace][
                                 "subraces"][self.ui.raceSubCombo.currentText()]["bonuses"][sub][characteristic]
+                    elif sub == "skills":
+                        self.newCharacterGen["personality"]["features"] += self.loadedRaces[self.selectedRace]["subraces"][
+                            self.ui.raceSubCombo.currentText()]["bonuses"][sub]
                     else:
                         self.newCharacterGen[sub] += self.loadedRaces[self.selectedRace]["subraces"][
                             self.ui.raceSubCombo.currentText()]["bonuses"][sub]

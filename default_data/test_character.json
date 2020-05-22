@@ -1,26 +1,26 @@
 {
   "default": false,
   "initiative": 0,
-  "playerName": "",
-  "charName": "",
-  "class": "Barbarian",
-  "race": "Dwarf",
+  "playerName": "test",
+  "charName": "test",
+  "class": "Fighter",
+  "race": "Human",
   "alignment": "Lawful Good",
-  "background": "Acolyte",
+  "background": "Folk Hero",
   "level": 1,
   "expirience": 0,
   "hpMax": 10,
-  "hp": 0,
-  "hpTemp": 0,
-  "armorClass": 0,
-  "speed": 25,
+  "hp": 10,
+  "hpTemp": 10,
+  "armorClass": 14,
+  "speed": 30,
   "proficiencyBonus": 2,
-  "passiveWisdom": -5,
+  "passiveWisdom": 1,
   "inspiration": 0,
-  "hitDiceCoeffiecient": 12,
-  "hitDiceLeft": 0,
-  "maxWeight": 0,
-  "specialization": "",
+  "hitDiceCoeffiecient": 10,
+  "hitDiceLeft": 1,
+  "maxWeight": 255,
+  "specialization": "I led a militia to fight off an invading army.",
   "deathSaves": {
     "successes": 0,
     "failures": 0
@@ -30,7 +30,7 @@
     "dexterity": 12,
     "constitution": 12,
     "intelligence": 12,
-    "wisdom": 13,
+    "wisdom": 12,
     "charisma": 14
   },
   "characteristicBonus": {
@@ -50,10 +50,10 @@
     "charisma": false
   },
   "skillsBonus": {
-    "acrobatics": false,
+    "acrobatics": true,
     "animalHandling": false,
     "arcana": false,
-    "athletics": false,
+    "athletics": true,
     "deception": false,
     "history": false,
     "insight": false,
@@ -79,14 +79,17 @@
     "offHandWeapon": ""
   },
   "equipment": [
-    "explorer's pack",
-    "four javelins"
+    "chaimail",
+    "Chain mail",
+    "2 Martial weapons",
+    "Hand crossbow and 20 bolts",
+    "An explorer's pack"
   ],
   "money": {
-    "copper": 0,
+    "copper": 99999,
     "silver": 0,
     "electrum": 0,
-    "gold": 70,
+    "gold": 0,
     "platinum": 0
   },
   "personality": {
@@ -97,14 +100,11 @@
       ""
     ],
     "features": [
-      "rage",
-      "unarmored",
-      "defense",
-      "Darkvision",
-      "Dwarven resilience",
-      "Dwarven combat training",
-      "Tool proficiency",
-      "Stonecunning"
+      "fighting style",
+      "second wind",
+      "darkvision",
+      "tool proficiency",
+      "stonecunning"
     ],
     "traits": [
       ""
@@ -127,10 +127,10 @@
       ],
       "image": "default",
       "look": "",
-      "personalityTraits": "",
-      "ideals": "",
-      "bonds": "",
-      "flaws": ""
+      "personalityTraits": "I judge people by their actions, not their words.",
+      "ideals": "Might. If I become strong, I can take what I want \u0432\u0402\u201d what I deserve. (Evil)",
+      "bonds": "I wish my childhood sweetheart had come with me to pursue my destiny.",
+      "flaws": "I have trouble trusting in my allies."
     }
   }
 }
