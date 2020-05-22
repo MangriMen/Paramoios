@@ -32,7 +32,7 @@ class MainWindow(QMainWindow):
         self.initVariables()
         self.CGW = CharGenWindow()
         self.CGW.parent = self
-        with open('default_data/json_schemes/characterSchema.json', 'r') as f:
+        with open('default_data/json_schemes/characterSchema.json', 'r', encoding="utf-8") as f:
             self.charSchema = json.loads(f.read())
         self.newCharClicked()
 
@@ -140,7 +140,7 @@ class MainWindow(QMainWindow):
         try:
             self.bufPath = QFileDialog.getSaveFileName(
                 self, "Open Character", "./saves", "JSON (*.json)")[0]
-            with open(self.bufPath, 'w') as f:
+            with open(self.bufPath, 'w', encoding="utf-8") as f:
                 f.write(json.dumps(self.loadedCharacter,
                                    sort_keys=False, indent=2))
         except FileNotFoundError:

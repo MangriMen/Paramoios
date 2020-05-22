@@ -1,0 +1,10 @@
+attrs==19.3.0
+jsonschema==3.2.0
+linecache2==1.0.0
+PyQt5==5.14.2
+PyQt5-sip==12.7.2
+PyQt5-stubs==5.14.2.2
+pyrsistent==0.16.0
+six==1.14.0
+traceback2==1.4.0
+unittest2==1.1.0

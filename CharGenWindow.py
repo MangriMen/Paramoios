@@ -26,37 +26,37 @@ class CharGenWindow(QCharGenWindow):
         style.setupCharGen(self)
         self.initVariables()
 
-        with open('default_data/race.json', 'r') as f:
+        with open('default_data/race.json', 'r', encoding="utf-8") as f:
             self.loadedRaces = json.loads(f.read())
         # self.ui.raceCombo.addItem(self.defaultRace)
         for race_ in self.loadedRaces:
             self.ui.raceCombo.addItem(race_)
 
-        with open('default_data/class.json', 'r') as f:
+        with open('default_data/class.json', 'r', encoding="utf-8") as f:
             self.loadedClasses = json.loads(f.read())
         # self.ui.classCombo.addItem(self.defaultClass)
         for class_ in self.loadedClasses:
             self.ui.classCombo.addItem(class_)
 
-        with open('default_data/background.json', 'r') as f:
+        with open('default_data/background.json', 'r', encoding="utf-8") as f:
             self.loadedBackgrounds = json.loads(f.read())
         # self.ui.backgroundCombo.addItem(self.defaultBackground)
         for background_ in self.loadedBackgrounds:
             self.ui.backgroundCombo.addItem(background_)
 
-        with open('default_data/alignment.json', 'r') as f:
+        with open('default_data/alignment.json', 'r', encoding="utf-8") as f:
             self.loadedAlignments = json.loads(f.read())
         # self.ui.alignmentCombo.addItem(self.defaultAlignment)
         for alignment_ in self.loadedAlignments:
             self.ui.alignmentCombo.addItem(alignment_)
 
-        with open('default_data/json_schemes/raceSchema.json', 'r') as f:
+        with open('default_data/json_schemes/raceSchema.json', 'r', encoding="utf-8") as f:
             self.raceSchema = json.loads(f.read())
-        with open('default_data/json_schemes/classSchema.json', 'r') as f:
+        with open('default_data/json_schemes/classSchema.json', 'r', encoding="utf-8") as f:
             self.classSchema = json.loads(f.read())
-        with open('default_data/json_schemes/backgroundSchema.json', 'r') as f:
+        with open('default_data/json_schemes/backgroundSchema.json', 'r', encoding="utf-8") as f:
             self.backgroundSchema = json.loads(f.read())
-        with open('default_data/json_schemes/alignmentSchema.json', 'r') as f:
+        with open('default_data/json_schemes/alignmentSchema.json', 'r', encoding="utf-8") as f:
             self.alignmentSchema = json.loads(f.read())
 
         try:
@@ -99,7 +99,7 @@ class CharGenWindow(QCharGenWindow):
 
     def createCharacter(self):
         try:
-            with open("default_data/default_character.json", 'r') as f:
+            with open("default_data/default_character.json", 'r', encoding="utf-8") as f:
                 self.newCharacterGen = json.loads(f.read())
         except FileNotFoundError:
             character_IO.notFoundWarning(self, "[LOAD] Файл не найден.")
@@ -111,7 +111,7 @@ class CharGenWindow(QCharGenWindow):
     def btnDoneClicked(self):
         character_IO.saveGenerated(self)
         try:
-            with open("saves/CharGenTemp/your_new_character.json", 'w') as f:
+            with open("saves/CharGenTemp/your_new_character.json", 'w', encoding="utf-8") as f:
                 f.write(json.dumps(self.newCharacterGen, sort_keys=False, indent=2))
         except FileNotFoundError:
             character_IO.notFoundWarning(self, "[SAVE] Путь не выбран.")
