@@ -1,4 +1,4 @@
-RUNTEST=python -m unittest2 -v -b
+RUNTEST=python3 -m unittest2 -v -b
 
 ALLMODULES=$(patsubst %.py, %.py, $(wildcard test*.py))
 
