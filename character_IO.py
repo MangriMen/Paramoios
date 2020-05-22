@@ -29,7 +29,7 @@ def errorReadWarning(self, text, detailed=None):
 
 def loadCharacter(self, clear=False):
     try:
-        with open(self.pathToJson, 'r') as f:
+        with open(self.pathToJson, 'r', encoding="utf-8") as f:
             self.loadedCharacter = json.loads(f.read())
         self.backupCharacter = self.loadedCharacter
         validate(self.loadedCharacter, self.charSchema)
@@ -194,7 +194,7 @@ def saveCharacter(self):
     saveEquipmentBox(self)
     saveMoneyBox(self)
     try:
-        with open(self.pathToJson, 'w') as f:
+        with open(self.pathToJson, 'w', encoding="utf-8") as f:
             f.write(json.dumps(self.loadedCharacter,
                                sort_keys=False, indent=2))
     except FileNotFoundError:
@@ -330,7 +330,7 @@ def backupCharacter(self):
         backupLifeBox(self)
         backupEquipmentBox(self)
         backupMoneyBox(self)
-        with open(self.pathToJson.replace(".json", "_bck.json"), 'w') as f:
+        with open(self.pathToJson.replace(".json", "_bck.json"), 'w', encoding="utf-8") as f:
             f.write(json.dumps(self.backupCharacter,
                                sort_keys=False, indent=2))
 
