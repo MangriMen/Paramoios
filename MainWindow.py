@@ -32,7 +32,11 @@ class MainWindow(QMainWindow):
         self.initVariables()
         self.CGW = CharGenWindow()
         self.CGW.parent = self
+        with open('default_data/json_schemes/characterSchema.json', 'r') as f:
+            self.charSchema = json.loads(f.read())
         self.newCharClicked()
+
+
 
     def initVariables(self):
         self.previousPosition = QtCore.QPoint()
@@ -62,12 +66,12 @@ class MainWindow(QMainWindow):
             QtWidgets.QLineEdit, QtCore.QRegularExpression("^[a-z]{6,12}$"))
         for QLineEdit in self.setCharacteristicUpdate:
             QLineEdit.textEdited.connect(
-                functools.partial(self.modifireUpdate, QLineEdit))
+                functools.partial(self.modifierUpdate, QLineEdit))
         self.pathToJson = ""
         self.fileIsNew = False
         self.isAvailableToGenerate = True
 
-    def modifireUpdate(self, QLineEdit):
+    def modifierUpdate(self):
         characteristics = self.ui.characteristicBox.findChildren(QtWidgets.QLineEdit)
         for QLineEdit in characteristics:
             if (QLineEdit.accessibleDescription() == "base"):
@@ -113,7 +117,7 @@ class MainWindow(QMainWindow):
         character_IO.loadCharacter(self)
         self.fileIsNew = False
 
-    def fieldSaving(self, QLineEdit):
+    def fieldSaving(self):
         character_IO.backupCharacter(self)
 
     def loadGenerated(self):
@@ -146,12 +150,13 @@ class MainWindow(QMainWindow):
             notFoundWarning.setIconPixmap(QPixmap(
                 "images/messages/warning").scaled(24, 24, Qt.KeepAspectRatio, Qt.SmoothTransformation))
             notFoundWarning.exec()
-        except:
+        except Exception as e:
             notFoundWarning = QMessageBox()
             notFoundWarning.setWindowTitle(self.ui.label.text())
             notFoundWarning.setText("[ALL|SAVEAS]Ошибка")
             notFoundWarning.setIconPixmap(QPixmap(
                 "images/messages/warning").scaled(24, 24, Qt.KeepAspectRatio, Qt.SmoothTransformation))
+            notFoundWarning.setDetailedText(str(e))
             notFoundWarning.exec()
         else:
             self.pathToJson = self.bufPath
@@ -175,10 +180,10 @@ class MainWindow(QMainWindow):
             self.ui.mainLayout.setContentsMargins(12, 12, 12, 12)
             self.showNormal()
 
-    def previousPosition(self, previousPosition):
+    def previousPosition(self):
         return self.m_previousPosition
 
-    def setPreviousPosition(self, previousPosition):
+    def setPreviousPosition(self):
         if (self.m_previousPosition == self.previousPosition):
             return
         self.m_previousPosition = self.previousPosition
@@ -189,7 +194,7 @@ class MainWindow(QMainWindow):
             self.m_leftMouseButtonPressed = self.checkResizableField(event)
             self.mlb_isMenu = self.checkMenuButtonField(event)
             self.mlb_isTemper = self.checkTemperButtonField(event)
-            self.setPreviousPosition(event.pos())
+            self.setPreviousPosition()
         return QtWidgets.QWidget.mousePressEvent(self, event)
 
     def mouseReleaseEvent(self, event):
