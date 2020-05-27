@@ -29,10 +29,10 @@ class TestUM(unittest2.TestCase):
                 self.assertEqual(str(math.floor((self.w.loadedCharacter["characteristic"][QLineEdit.accessibleName().replace("Bonus", "")] - 10) / 2)), QLineEdit.text())
 
     def test_btnDoneUpdate(self):
-        self.selectedRace = "Dwarf"
-        self.selectedClass = "Barbarian"
-        self.selectedBackground = "Acolyte"
-        self.selectedAlignment = "Lawful Good"
+        self.w.CGW.ui.raceCombo.setCurrentIndex(1)
+        self.w.CGW.ui.classCombo.setCurrentIndex(1)
+        self.w.CGW.ui.backgroundCombo.setCurrentIndex(1)
+        self.w.CGW.ui.alignmentCombo.setCurrentIndex(1)
         self.w.CGW.ui.strength.setText("12")
         self.w.CGW.ui.dexterity.setText("12")
         self.w.CGW.ui.constitution.setText("12")
