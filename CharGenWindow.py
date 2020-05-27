@@ -28,25 +28,25 @@ class CharGenWindow(QCharGenWindow):
 
         with open('default_data/race.json', 'r', encoding="utf-8") as f:
             self.loadedRaces = json.loads(f.read())
-        # self.ui.raceCombo.addItem(self.defaultRace)
+        self.ui.raceCombo.addItem(self.defaultRace)
         for race_ in self.loadedRaces:
             self.ui.raceCombo.addItem(race_)
 
         with open('default_data/class.json', 'r', encoding="utf-8") as f:
             self.loadedClasses = json.loads(f.read())
-        # self.ui.classCombo.addItem(self.defaultClass)
+        self.ui.classCombo.addItem(self.defaultClass)
         for class_ in self.loadedClasses:
             self.ui.classCombo.addItem(class_)
 
         with open('default_data/background.json', 'r', encoding="utf-8") as f:
             self.loadedBackgrounds = json.loads(f.read())
-        # self.ui.backgroundCombo.addItem(self.defaultBackground)
+        self.ui.backgroundCombo.addItem(self.defaultBackground)
         for background_ in self.loadedBackgrounds:
             self.ui.backgroundCombo.addItem(background_)
 
         with open('default_data/alignment.json', 'r', encoding="utf-8") as f:
             self.loadedAlignments = json.loads(f.read())
-        # self.ui.alignmentCombo.addItem(self.defaultAlignment)
+        self.ui.alignmentCombo.addItem(self.defaultAlignment)
         for alignment_ in self.loadedAlignments:
             self.ui.alignmentCombo.addItem(alignment_)
 
