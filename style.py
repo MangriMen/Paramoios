@@ -282,6 +282,12 @@ def getWindowStyleSheet():
             "QPushButton#personalityRoll, QPushButton#idealsRoll, QPushButton#bondsRoll, QPushButton#flawsRoll {"
             "background: #00ffffff;"
             "image: url('images/buttons/D6_0.png');"
+            "}"
+            "QPushButton#temperButton {"
+            "image: url('images/buttons/traits.png');"
+            "background: #00ffffff;"
+            "border: 2px ridge #6e3320;"
+            "border-radius: 3px;"
             "}")
 
 
