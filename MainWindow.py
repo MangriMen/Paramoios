@@ -66,6 +66,7 @@ class MainWindow(QMainWindow):
             QtWidgets.QLineEdit, QtCore.QRegularExpression("^[a-z]{6,12}$"))
         for QLineEdit in self.setCharacteristicUpdate:
             QLineEdit.textEdited.connect(self.modifierUpdate)
+        self.ui.expField.textEdited.connect(self.levelUpdate)
         self.pathToJson = ""
         self.fileIsNew = False
         self.isAvailableToGenerate = True
@@ -85,6 +86,37 @@ class MainWindow(QMainWindow):
                     "characteristicBonus"][QLineEdit.accessibleName()]
                 QLineEdit.setText(
                     (("+" if tempBonus >= 0 else "") + str(tempBonus)))
+
+    def levelUpdate(self):
+        levelDependanceTable = {
+            1: 0,
+            2: 300,
+            3: 900,
+            4: 2700,
+            5: 6500,
+            6: 14000,
+            7: 23000,
+            8: 34000,
+            9: 48000,
+            10: 64000,
+            11: 85000,
+            12: 100000,
+            13: 120000,
+            14: 140000,
+            15: 165000,
+            16: 195000,
+            17: 225000,
+            18: 265000,
+            19: 305000,
+            20: 355000
+        }
+        expField = (int(self.ui.expField.text()) if (self.ui.expField.text() != "") else 1)
+        level = 1
+        while level < len(levelDependanceTable) and expField >= levelDependanceTable[level+1]:
+            level += 1
+        self.ui.levelField.setText(str(level))
+        self.loadedCharacter["level"] = (int(self.ui.levelField.text()) if (self.ui.levelField.text() != "") else 1)
+        self.loadedCharacter["experience"] = (int(self.ui.expField.text()) if (self.ui.expField.text() != "") else 1)
 
     def menuButtonClicked(self):
         if not self.isMenuButtonClicked:
