@@ -5,57 +5,13 @@ from PyQt5 import QtCore
 from PyQt5.QtCore import Qt
 
 
-def setupMain(self):
+def setupStyle(self, window):
     QtGui.QFontDatabase.addApplicationFont('fonts/BOOKMANIA-REGULAR.TTF')
     QtGui.QFontDatabase.addApplicationFont('fonts/EBERRON_RUS.TTF')
 
     self.setWindowFlags(QtCore.Qt.Widget | QtCore.Qt.FramelessWindowHint)
     self.setAttribute(Qt.WA_TranslucentBackground)
     self.setStyleSheet(getWindowStyleSheet())
-
-    self.ui.label.setStyleSheet(getLabelStyleSheet())
-
-    self.ui.menuButton.setIcon(QtGui.QIcon('images/buttons/bookmark_bottom.png'))
-    self.ui.menuButton.setIconSize(QtCore.QSize(128, 64))
-    self.ui.menuBox.hide()
-
-    self.ui.temperBox.hide()
-    CreateLineEditShadow(self, self.ui.temperBox)
-
-    self.ui.newChar.setStyleSheet(getMenuButtonStyleSheet())
-    self.ui.openFile.setStyleSheet(getMenuButtonStyleSheet())
-    self.ui.save.setStyleSheet(getMenuButtonStyleSheet())
-    self.ui.saveAs.setStyleSheet(getMenuButtonStyleSheet())
-    self.ui.exit.setStyleSheet(getMenuButtonStyleSheet())
-
-    self.ui.btnClose.setStyleSheet(getCloseStyleSheet())
-    self.ui.btnClose.setIcon(QtGui.QIcon('images/buttons/close.png'))
-    self.ui.btnClose.setIconSize(QtCore.QSize(10, 10))
-
-    self.ui.btnMaximize.setStyleSheet(getMaximizeStyleSheet())
-    self.ui.btnMaximize.setIcon(QtGui.QIcon('images/buttons/maximize.png'))
-    self.ui.btnMaximize.setIconSize(QtCore.QSize(10, 10))
-
-    self.ui.btnMinimize.setStyleSheet(getMinimizeStyleSheet())
-    self.ui.btnMinimize.setIcon(QtGui.QIcon('images/buttons/minimize.png'))
-    self.ui.btnMinimize.setIconSize(QtCore.QSize(10, 10))
-
-    self.ui.toolBar.setStyleSheet(getToolBarStyleSheet())
-
-    CreateWindowShadow(self)
-    ShadowLineEdit(self)
-    ShadowRadioButton(self)
-    ShadowLabel(self)
-
-
-def setupCharGen(self):
-    QtGui.QFontDatabase.addApplicationFont('fonts/BOOKMANIA-REGULAR.TTF')
-    QtGui.QFontDatabase.addApplicationFont('fonts/EBERRON_RUS.TTF')
-
-    self.setWindowFlags(QtCore.Qt.Widget | QtCore.Qt.FramelessWindowHint)
-    self.setAttribute(Qt.WA_TranslucentBackground)
-    self.setStyleSheet(getWindowStyleSheet())
-
     self.ui.label.setStyleSheet(getLabelStyleSheet())
 
     self.ui.btnClose.setStyleSheet(getCloseStyleSheet())
@@ -72,13 +28,27 @@ def setupCharGen(self):
 
     self.ui.toolBar.setStyleSheet(getToolBarStyleSheet())
 
-    self.ui.temperBox.setAttribute(Qt.WA_TranslucentBackground)
+    if window == "MainWindow":
+        self.ui.menuButton.setIcon(QtGui.QIcon('images/buttons/bookmark_bottom.png'))
+        self.ui.menuButton.setIconSize(QtCore.QSize(128, 64))
+        self.ui.menuBox.hide()
 
-    self.ui.classSkillsChoose.setStyleSheet(getChooseWidgetStyleSheet())
-    self.ui.backgroundSpecChoose.setStyleSheet(getChooseWidgetStyleSheet())
+        self.ui.temperBox.hide()
+        CreateLineEditShadow(self, self.ui.temperBox)
 
-    self.ui.raceAddLanguageCombo.hide()
-    self.ui.raceAddLanguageLabel.hide()
+        self.ui.newChar.setStyleSheet(getMenuButtonStyleSheet())
+        self.ui.openFile.setStyleSheet(getMenuButtonStyleSheet())
+        self.ui.save.setStyleSheet(getMenuButtonStyleSheet())
+        self.ui.saveAs.setStyleSheet(getMenuButtonStyleSheet())
+        self.ui.exit.setStyleSheet(getMenuButtonStyleSheet())
+    elif window == "CharGenWindow":
+        self.ui.temperBox.setAttribute(Qt.WA_TranslucentBackground)
+
+        self.ui.classSkillsChoose.setStyleSheet(getChooseWidgetStyleSheet())
+        self.ui.backgroundSpecChoose.setStyleSheet(getChooseWidgetStyleSheet())
+
+        self.ui.raceAddLanguageCombo.hide()
+        self.ui.raceAddLanguageLabel.hide()
 
     CreateWindowShadow(self)
     ShadowLineEdit(self)
@@ -279,15 +249,36 @@ def getWindowStyleSheet():
             "border: 3px solid #6e3320;"
             "border-radius: 4px;"
             "}"
-            "QPushButton#personalityRoll, QPushButton#idealsRoll, QPushButton#bondsRoll, QPushButton#flawsRoll {"
+            "QPushButton#idealsRoll, QPushButton#bondsRoll, QPushButton#flawsRoll {"
             "background: #00ffffff;"
             "image: url('images/buttons/D6_0.png');"
+            "}"
+            "QPushButton#personalityRoll {"
+            "background: #00ffffff;"
+            "image: url('images/buttons/D8_0.png');"
             "}"
             "QPushButton#temperButton {"
             "image: url('images/buttons/traits.png');"
             "background: #00ffffff;"
             "border: 2px ridge #6e3320;"
             "border-radius: 3px;"
+            "}"
+            "QTableWidget#weaponTable {"
+            "background: #00ffffff;"
+            "border: 2px ridge #6e3320;"
+            "border-radius: 3px;"
+            "}"
+            "QTableWidget#weaponTable QTableCornerButton::section {"
+            "background-color: #dcc48d;"
+            "border: 1px outset #49412f;" 
+            "}"
+            "QTableWidget#weaponTable QHeaderView::section{"
+            "font: 12pt \"Eberron\";"
+            "background-color: #dcc48d;"
+            "}"
+            "QTableWidget#weaponTable QScrollBar {"
+            "selection-background-color: #e5d297;"
+            "background-color: #dcc48d;"
             "}")
 
 
@@ -316,21 +307,6 @@ def getCloseStyleSheet():
 
 
 def getMaximizeStyleSheet():
-    return ("QPushButton { "
-            "width: 35px;"
-            "height: 25px;"
-            "background-color: #681e22;"
-            "border: none;"
-            "}"
-            "QPushButton:hover {"
-            "background-color: #19ffffff"
-            "}"
-            "QPushButton:pressed { "
-            "background-color: #de8e37; "
-            "}")
-
-
-def getRestoreStyleSheet():
     return ("QPushButton { "
             "width: 35px;"
             "height: 25px;"
@@ -408,4 +384,10 @@ def rollD6(roll):
     return ("QPushButton {"
             "background: #00ffffff;"
             "image: url('images/buttons/D6_" + str(roll + 1) + ".png');"
+            "}")
+
+def rollD8(roll):
+    return ("QPushButton {"
+            "background: #00ffffff;"
+            "image: url('images/buttons/D8_" + str(roll + 1) + ".png');"
             "}")
