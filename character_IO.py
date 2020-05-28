@@ -9,23 +9,14 @@ from PyQt5.QtWidgets import QFileDialog
 from jsonschema import validate, ValidationError
 
 
-def notFoundWarning(self, text):
-    notFoundWarning = QMessageBox()
-    notFoundWarning.setWindowTitle(self.ui.label.text())
-    notFoundWarning.setText(text)
-    notFoundWarning.setIconPixmap(QPixmap(
+def displayWarningMessage(self, text, detailed=None):
+    WarningMessage = QMessageBox()
+    WarningMessage.setWindowTitle(self.ui.label.text())
+    WarningMessage.setText(text)
+    WarningMessage.setIconPixmap(QPixmap(
         "images/messages/warning").scaled(24, 24, Qt.KeepAspectRatio, Qt.SmoothTransformation))
-    notFoundWarning.exec()
-
-
-def errorReadWarning(self, text, detailed=None):
-    errorReadingWarning = QMessageBox()
-    errorReadingWarning.setWindowTitle(self.ui.label.text())
-    errorReadingWarning.setText(text)
-    errorReadingWarning.setIconPixmap(QPixmap(
-        "images/messages/warning").scaled(24, 24, Qt.KeepAspectRatio, Qt.SmoothTransformation))
-    errorReadingWarning.setDetailedText(str(detailed))
-    errorReadingWarning.exec()
+    WarningMessage.setDetailedText(str(detailed))
+    WarningMessage.exec()
 
 def loadCharacter(self, clear=False):
     try:
@@ -34,11 +25,11 @@ def loadCharacter(self, clear=False):
         self.backupCharacter = self.loadedCharacter
         validate(self.loadedCharacter, self.charSchema)
     except FileNotFoundError:
-        notFoundWarning(self, "[LOAD] Файл не найден.")
+        displayWarningMessage(self, "[LOAD] Файл не найден.")
     except ValidationError:
-        notFoundWarning(self, "[LOAD] Файл не соответствует шаблону.")
+        displayWarningMessage(self, "[LOAD] Файл не соответствует шаблону.")
     except Exception as e:
-        errorReadWarning(self, "[LOAD] Ошибка загрузки, выбран неверный файл или он повреждён.", e)
+        displayWarningMessage(self, "[LOAD] Ошибка загрузки, выбран неверный файл или он повреждён.", e)
     else:
         needClear = self.loadedCharacter["default"]
         loadCharacteristicsAndBonus(self, needClear)
@@ -179,10 +170,10 @@ def saveCharacter(self):
             self.pathToJson = QFileDialog.getSaveFileName(
                 self, "Open Character", "./saves", "JSON (*.json)")[0]
         except FileNotFoundError:
-            notFoundWarning(self, "[SAVE] Путь не выбран.")
+            displayWarningMessage(self, "[SAVE] Путь не выбран.")
             self.fileIsNew = True
         except Exception as e:
-            errorReadWarning(self, "[SAVE] Ещё какая-то ошибка.", e)
+            displayWarningMessage(self, "[SAVE] Ещё какая-то ошибка.", e)
             self.fileIsNew = True
     saveCharacteristicsAndBonus(self)
     saveSavingThowsBonus(self)
@@ -198,9 +189,9 @@ def saveCharacter(self):
             f.write(json.dumps(self.loadedCharacter,
                                sort_keys=False, indent=2))
     except FileNotFoundError:
-        notFoundWarning(self, "[SAVE] Путь не выбран.")
+        displayWarningMessage(self, "[SAVE] Путь не выбран.")
     except Exception as e:
-        errorReadWarning(self, "[SAVE] Ещё какая-то ошибка.", e)
+        displayWarningMessage(self, "[SAVE] Ещё какая-то ошибка.", e)
     else:
         self.fileIsNew = False
 
