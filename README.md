@@ -3,6 +3,8 @@
 [![Build Status](https://travis-ci.org/MangriMen/DnD5CharlistI.svg?branch=master)](https://travis-ci.org/MangriMen/DnD5CharlistI)
 [![CodeFactor](https://www.codefactor.io/repository/github/mangrimen/dnd5charlisti/badge/master)](https://www.codefactor.io/repository/github/mangrimen/dnd5charlisti/overview/master)
 
+# [Wiki: Specification](https://github.com/MangriMen/DnD5CharlistI/wiki#specification)
+
 ## Используемые/необходимые для сборки библиотеки (requirements.txt):
 * **attrs 19.3.0**
 * **jsonschema 3.2.0**
