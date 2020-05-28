@@ -27,7 +27,7 @@ class TestUM(unittest2.TestCase):
         for QLineEdit in characteristics:
             formulaCalculatedBonus = str(math.floor((self.w.loadedCharacter["characteristic"][QLineEdit.accessibleName().replace("Bonus", "")] - 10) / 2))
             if QLineEdit.accessibleDescription() == "bonus":
-                self.assertEqual(formulaCalculatedBonus, QLineEdit.text())
+                self.assertEqual(formulaCalculatedBonus, QLineEdit.text().replace("+", ""))
 
     def testModifierUpdate2(self):
         partOfChar = self.w.loadedCharacter["characteristic"]
@@ -42,7 +42,7 @@ class TestUM(unittest2.TestCase):
         for QLineEdit in characteristics:
             formulaCalculatedBonus = str(math.floor((self.w.loadedCharacter["characteristic"][QLineEdit.accessibleName().replace("Bonus", "")] - 10) / 2))
             if QLineEdit.accessibleDescription() == "bonus":
-                self.assertEqual(formulaCalculatedBonus, QLineEdit.text())
+                self.assertEqual(formulaCalculatedBonus, QLineEdit.text().replace("+", ""))
 
     def testModifierUpdate3(self):
         partOfChar = self.w.loadedCharacter["characteristic"]
@@ -57,7 +57,7 @@ class TestUM(unittest2.TestCase):
         for QLineEdit in characteristics:
             formulaCalculatedBonus = str(math.floor((self.w.loadedCharacter["characteristic"][QLineEdit.accessibleName().replace("Bonus", "")] - 10) / 2))
             if QLineEdit.accessibleDescription() == "bonus":
-                self.assertEqual(formulaCalculatedBonus, QLineEdit.text())
+                self.assertEqual(formulaCalculatedBonus, QLineEdit.text().replace("+", ""))
 
     def testBtnDoneUpdate1(self):
         self.w.CGW.ui.raceCombo.setCurrentIndex(1)
@@ -104,6 +104,16 @@ class TestUM(unittest2.TestCase):
         self.w.CGW.characteristicUpdate()
         self.w.CGW.btnDoneUpdate()
         self.assertFalse(self.w.CGW.ui.btnDone.isEnabled())
+
+    def testNewCharClicked(self):
+        self.w.fileIsNew = False
+        self.w.newCharClicked()
+        self.assertTrue(self.w.fileIsNew)
+
+    def testLoadGenerated(self):
+        self.w.fileIsNew = False
+        self.w.loadGenerated()
+        self.assertTrue(self.w.fileIsNew)
 
 
 if __name__ == '__main__':
