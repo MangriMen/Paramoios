@@ -304,10 +304,8 @@ class CharGenWindow(QCharGenWindow):
         for num in nums:
             if num:
                 numsTrue += 1
-        if numsTrue == len(nums):
-            numstate = True
-        else:
-            numstate = False
+        numstate = (numsTrue == len(nums))
+
         if (self.selectedRace != self.defaultRace and self.selectedClass != self.defaultClass
                 and self.selectedBackground != self.defaultBackground
                 and self.selectedAlignment != self.defaultAlignment and self.characteristicSum == 27
@@ -425,6 +423,5 @@ class CharGenWindow(QCharGenWindow):
         if (self.rectInterface.contains(self.position)):
             QtWidgets.QWidget.setCursor(self, Qt.ClosedHandCursor)
             return self.Move
-        else:
-            QtWidgets.QWidget.setCursor(self, Qt.ArrowCursor)
-            return self.Nothing
+        QtWidgets.QWidget.setCursor(self, Qt.ArrowCursor)
+        return self.Nothing

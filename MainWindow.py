@@ -245,22 +245,21 @@ class MainWindow(QMainWindow):
         if(self.rectInterface.contains(self.position)):
             QtWidgets.QWidget.setCursor(self, Qt.ClosedHandCursor)
             return self.Move
-        else:
-            QtWidgets.QWidget.setCursor(self, Qt.ArrowCursor)
-            return self.Nothing
+        QtWidgets.QWidget.setCursor(self, Qt.ArrowCursor)
+        return self.Nothing
 
     def checkMenuButtonField(self, event):
         self.position = event.screenPos()
         self.rectMenu = QtCore.QRectF(
             0, 0, self.ui.menuButton.width(), self.ui.menuButton.height())
-        if not (self.rectMenu.contains(self.position)) and (self.isMenuButtonClicked == True):
+        if not (self.rectMenu.contains(self.position)) and self.isMenuButtonClicked:
             self.menuButtonClicked()
 
     def checkTemperButtonField(self, event):
         self.position = event.screenPos()
         self.rectTemper = QtCore.QRectF(
             self.ui.temperButton.x(), self.ui.temperButton.y(), self.ui.temperButton.width(), self.ui.temperButton.height())
-        if not (self.rectTemper.contains(self.position)) and (self.isTemperButtonClicked == True):
+        if not (self.rectTemper.contains(self.position)) and self.isTemperButtonClicked:
             self.temperButtonClicked()
 
     def closeEvent(self, event):
