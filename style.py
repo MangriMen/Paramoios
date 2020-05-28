@@ -262,6 +262,23 @@ def getWindowStyleSheet():
             "background: #00ffffff;"
             "border: 2px ridge #6e3320;"
             "border-radius: 3px;"
+            "}"
+            "QTableWidget#weaponTable {"
+            "background: #00ffffff;"
+            "border: 2px ridge #6e3320;"
+            "border-radius: 3px;"
+            "}"
+            "QTableWidget#weaponTable QTableCornerButton::section {"
+            "background-color: #dcc48d;"
+            "border: 1px outset #49412f;" 
+            "}"
+            "QTableWidget#weaponTable QHeaderView::section{"
+            "font: 12pt \"Eberron\";"
+            "background-color: #dcc48d;"
+            "}"
+            "QTableWidget#weaponTable QScrollBar {"
+            "selection-background-color: #e5d297;"
+            "background-color: #dcc48d;"
             "}")
 
 
