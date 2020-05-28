@@ -8,14 +8,17 @@ from PyQt5 import QtWidgets
 from MainWindow import MainWindow
 
 
-class Test(unittest2.TestCase):
+
+class TestUm(unittest2.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.app = QApplication(sys.argv)
         cls.w = MainWindow()
 
+    @classmethod
+    def tearDownClass(cls):
+        cls.w.close()
 
-class TestModifier(Test):
     def testModifierUpdate1(self):
         partOfChar = self.w.loadedCharacter["characteristic"]
         partOfChar["strength"] = 12
@@ -67,8 +70,6 @@ class TestModifier(Test):
             if QLineEdit.accessibleDescription() == "bonus":
                 self.assertEqual(formulaCalculatedBonus, QLineEdit.text().replace("+", ""))
 
-
-class testBtnDoneUpdate(Test):
     def testBtnDoneUpdate1(self):
         self.w.CGW.ui.raceCombo.setCurrentIndex(1)
         self.w.CGW.ui.classCombo.setCurrentIndex(1)
@@ -124,15 +125,11 @@ class testBtnDoneUpdate(Test):
         self.w.menuButtonClicked()
         self.assertTrue(self.w.isMenuButtonClicked)
 
-
-class testNewCharClicked(Test):
     def testNewCharClicked(self):
         self.w.fileIsNew = False
         self.w.newCharClicked()
         self.assertTrue(self.w.fileIsNew)
 
-
-class testLoadGenerated(Test):
     def testLoadGenerated(self):
         self.w.fileIsNew = False
         self.w.loadGenerated()
