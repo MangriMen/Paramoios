@@ -8,7 +8,7 @@ from PyQt5 import QtWidgets
 from MainWindow import MainWindow
 
 
-class TestUM(unittest2.TestCase):
+class TestModifier(unittest2.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.app = QApplication(sys.argv)
@@ -62,15 +62,12 @@ class TestUM(unittest2.TestCase):
             if QLineEdit.accessibleDescription() == "bonus":
                 self.assertEqual(formulaCalculatedBonus, QLineEdit.text().replace("+", ""))
 
-    def testNewCharClicked(self):
-        self.w.fileIsNew = False
-        self.w.newCharClicked()
-        self.assertTrue(self.w.fileIsNew)
 
-    def testLoadGenerated(self):
-        self.w.fileIsNew = False
-        self.w.loadGenerated()
-        self.assertTrue(self.w.fileIsNew)
+class testBtnDoneUpdate(unittest2.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.app = QApplication(sys.argv)
+        cls.w = MainWindow()
 
     def testBtnDoneUpdate1(self):
         self.w.CGW.ui.raceCombo.setCurrentIndex(1)
@@ -126,6 +123,30 @@ class TestUM(unittest2.TestCase):
         self.w.isMenuButtonClicked = False
         self.w.menuButtonClicked()
         self.assertTrue(self.w.isMenuButtonClicked)
+
+
+class testNewCharClicked(unittest2.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.app = QApplication(sys.argv)
+        cls.w = MainWindow()
+
+    def testNewCharClicked(self):
+        self.w.fileIsNew = False
+        self.w.newCharClicked()
+        self.assertTrue(self.w.fileIsNew)
+
+
+class testLoadGenerated(unittest2.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.app = QApplication(sys.argv)
+        cls.w = MainWindow()
+
+    def testLoadGenerated(self):
+        self.w.fileIsNew = False
+        self.w.loadGenerated()
+        self.assertTrue(self.w.fileIsNew)
 
 
 if __name__ == '__main__':
