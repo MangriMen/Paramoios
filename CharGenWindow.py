@@ -315,31 +315,35 @@ class CharGenWindow(QCharGenWindow):
             self.ui.btnDone.setEnabled(False)
 
     def personalityRollClicked(self):
-        personality = self.loadedBackgrounds[self.selectedBackground][
-            "personality"]["personalityTraits"]
-        personalityRoll = random.randint(0, len(personality) - 1)
-        self.ui.personalityEdit.setText(personality[personalityRoll])
+        if self.selectedBackground != self.defaultBackground:
+            personality = self.loadedBackgrounds[self.selectedBackground][
+                "personality"]["personalityTraits"]
+            personalityRoll = random.randint(0, len(personality) - 1)
+            self.ui.personalityEdit.setText(personality[personalityRoll])
 
     def idealsRollClicked(self):
-        ideals = self.loadedBackgrounds[self.selectedBackground][
-            "personality"]["ideals"]
-        idealsRoll = random.randint(0, len(ideals) - 1)
-        self.ui.idealsEdit.setText(ideals[idealsRoll])
-        self.ui.idealsRoll.setStyleSheet(style.rollD6(idealsRoll))
+        if self.selectedBackground != self.defaultBackground:
+            ideals = self.loadedBackgrounds[self.selectedBackground][
+                "personality"]["ideals"]
+            idealsRoll = random.randint(0, len(ideals) - 1)
+            self.ui.idealsEdit.setText(ideals[idealsRoll])
+            self.ui.idealsRoll.setStyleSheet(style.rollD6(idealsRoll))
 
     def bondsRollClicked(self):
-        bonds = self.loadedBackgrounds[self.selectedBackground][
-            "personality"]["bonds"]
-        bondsRoll = random.randint(0, len(bonds) - 1)
-        self.ui.bondsEdit.setText(bonds[bondsRoll])
-        self.ui.bondsRoll.setStyleSheet(style.rollD6(bondsRoll))
+        if self.selectedBackground != self.defaultBackground:
+            bonds = self.loadedBackgrounds[self.selectedBackground][
+                "personality"]["bonds"]
+            bondsRoll = random.randint(0, len(bonds) - 1)
+            self.ui.bondsEdit.setText(bonds[bondsRoll])
+            self.ui.bondsRoll.setStyleSheet(style.rollD6(bondsRoll))
 
     def flawsRollClicked(self):
-        flaws = self.loadedBackgrounds[self.selectedBackground][
-            "personality"]["flaws"]
-        flawsRoll = random.randint(0, len(flaws) - 1)
-        self.ui.flawsEdit.setText(flaws[flawsRoll])
-        self.ui.flawsRoll.setStyleSheet(style.rollD6(flawsRoll))
+        if self.selectedBackground != self.defaultBackground:
+            flaws = self.loadedBackgrounds[self.selectedBackground][
+                "personality"]["flaws"]
+            flawsRoll = random.randint(0, len(flaws) - 1)
+            self.ui.flawsEdit.setText(flaws[flawsRoll])
+            self.ui.flawsRoll.setStyleSheet(style.rollD6(flawsRoll))
 
     def changedMaximize(self):
         if not self.isMaximized():
