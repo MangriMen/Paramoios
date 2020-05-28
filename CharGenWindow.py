@@ -320,6 +320,7 @@ class CharGenWindow(QCharGenWindow):
                 "personality"]["personalityTraits"]
             personalityRoll = random.randint(0, len(personality) - 1)
             self.ui.personalityEdit.setText(personality[personalityRoll])
+            self.ui.personalityRoll.setStyleSheet(style.rollD8(personalityRoll))
 
     def idealsRollClicked(self):
         if self.selectedBackground != self.defaultBackground:
