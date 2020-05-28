@@ -5,57 +5,13 @@ from PyQt5 import QtCore
 from PyQt5.QtCore import Qt
 
 
-def setupMain(self):
+def setupStyle(self, window):
     QtGui.QFontDatabase.addApplicationFont('fonts/BOOKMANIA-REGULAR.TTF')
     QtGui.QFontDatabase.addApplicationFont('fonts/EBERRON_RUS.TTF')
 
     self.setWindowFlags(QtCore.Qt.Widget | QtCore.Qt.FramelessWindowHint)
     self.setAttribute(Qt.WA_TranslucentBackground)
     self.setStyleSheet(getWindowStyleSheet())
-
-    self.ui.label.setStyleSheet(getLabelStyleSheet())
-
-    self.ui.menuButton.setIcon(QtGui.QIcon('images/buttons/bookmark_bottom.png'))
-    self.ui.menuButton.setIconSize(QtCore.QSize(128, 64))
-    self.ui.menuBox.hide()
-
-    self.ui.temperBox.hide()
-    CreateLineEditShadow(self, self.ui.temperBox)
-
-    self.ui.newChar.setStyleSheet(getMenuButtonStyleSheet())
-    self.ui.openFile.setStyleSheet(getMenuButtonStyleSheet())
-    self.ui.save.setStyleSheet(getMenuButtonStyleSheet())
-    self.ui.saveAs.setStyleSheet(getMenuButtonStyleSheet())
-    self.ui.exit.setStyleSheet(getMenuButtonStyleSheet())
-
-    self.ui.btnClose.setStyleSheet(getCloseStyleSheet())
-    self.ui.btnClose.setIcon(QtGui.QIcon('images/buttons/close.png'))
-    self.ui.btnClose.setIconSize(QtCore.QSize(10, 10))
-
-    self.ui.btnMaximize.setStyleSheet(getMaximizeStyleSheet())
-    self.ui.btnMaximize.setIcon(QtGui.QIcon('images/buttons/maximize.png'))
-    self.ui.btnMaximize.setIconSize(QtCore.QSize(10, 10))
-
-    self.ui.btnMinimize.setStyleSheet(getMinimizeStyleSheet())
-    self.ui.btnMinimize.setIcon(QtGui.QIcon('images/buttons/minimize.png'))
-    self.ui.btnMinimize.setIconSize(QtCore.QSize(10, 10))
-
-    self.ui.toolBar.setStyleSheet(getToolBarStyleSheet())
-
-    CreateWindowShadow(self)
-    ShadowLineEdit(self)
-    ShadowRadioButton(self)
-    ShadowLabel(self)
-
-
-def setupCharGen(self):
-    QtGui.QFontDatabase.addApplicationFont('fonts/BOOKMANIA-REGULAR.TTF')
-    QtGui.QFontDatabase.addApplicationFont('fonts/EBERRON_RUS.TTF')
-
-    self.setWindowFlags(QtCore.Qt.Widget | QtCore.Qt.FramelessWindowHint)
-    self.setAttribute(Qt.WA_TranslucentBackground)
-    self.setStyleSheet(getWindowStyleSheet())
-
     self.ui.label.setStyleSheet(getLabelStyleSheet())
 
     self.ui.btnClose.setStyleSheet(getCloseStyleSheet())
@@ -72,13 +28,27 @@ def setupCharGen(self):
 
     self.ui.toolBar.setStyleSheet(getToolBarStyleSheet())
 
-    self.ui.temperBox.setAttribute(Qt.WA_TranslucentBackground)
+    if window == "MainWindow":
+        self.ui.menuButton.setIcon(QtGui.QIcon('images/buttons/bookmark_bottom.png'))
+        self.ui.menuButton.setIconSize(QtCore.QSize(128, 64))
+        self.ui.menuBox.hide()
 
-    self.ui.classSkillsChoose.setStyleSheet(getChooseWidgetStyleSheet())
-    self.ui.backgroundSpecChoose.setStyleSheet(getChooseWidgetStyleSheet())
+        self.ui.temperBox.hide()
+        CreateLineEditShadow(self, self.ui.temperBox)
 
-    self.ui.raceAddLanguageCombo.hide()
-    self.ui.raceAddLanguageLabel.hide()
+        self.ui.newChar.setStyleSheet(getMenuButtonStyleSheet())
+        self.ui.openFile.setStyleSheet(getMenuButtonStyleSheet())
+        self.ui.save.setStyleSheet(getMenuButtonStyleSheet())
+        self.ui.saveAs.setStyleSheet(getMenuButtonStyleSheet())
+        self.ui.exit.setStyleSheet(getMenuButtonStyleSheet())
+    elif window == "CharGenWindow":
+        self.ui.temperBox.setAttribute(Qt.WA_TranslucentBackground)
+
+        self.ui.classSkillsChoose.setStyleSheet(getChooseWidgetStyleSheet())
+        self.ui.backgroundSpecChoose.setStyleSheet(getChooseWidgetStyleSheet())
+
+        self.ui.raceAddLanguageCombo.hide()
+        self.ui.raceAddLanguageLabel.hide()
 
     CreateWindowShadow(self)
     ShadowLineEdit(self)
@@ -320,21 +290,6 @@ def getCloseStyleSheet():
 
 
 def getMaximizeStyleSheet():
-    return ("QPushButton { "
-            "width: 35px;"
-            "height: 25px;"
-            "background-color: #681e22;"
-            "border: none;"
-            "}"
-            "QPushButton:hover {"
-            "background-color: #19ffffff"
-            "}"
-            "QPushButton:pressed { "
-            "background-color: #de8e37; "
-            "}")
-
-
-def getRestoreStyleSheet():
     return ("QPushButton { "
             "width: 35px;"
             "height: 25px;"
