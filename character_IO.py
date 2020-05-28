@@ -18,6 +18,7 @@ def displayWarningMessage(self, text, detailed=None):
     WarningMessage.setDetailedText(str(detailed))
     WarningMessage.exec()
 
+
 def loadCharacter(self, clear=False):
     try:
         with open(self.pathToJson, 'r', encoding="utf-8") as f:
@@ -308,7 +309,8 @@ def saveEquipmentBox(self, clean=False):
 def saveMoneyBox(self, clean=False):
     moneyBoxValues = self.ui.moneyBox.findChildren(QtWidgets.QLineEdit)
     for QLineEdit in moneyBoxValues:
-        self.loadedCharacter["money"][QLineEdit.accessibleName()] = int(QLineEdit.text()) if (QLineEdit.text() != "") else 0
+        self.loadedCharacter["money"][QLineEdit.accessibleName()] = int(QLineEdit.text()) if (
+                    QLineEdit.text() != "") else 0
 
 
 def backupCharacter(self):
@@ -430,7 +432,8 @@ def backupEquipmentBox(self, clean=False):
 def backupMoneyBox(self, clean=False):
     moneyBoxValues = self.ui.moneyBox.findChildren(QtWidgets.QLineEdit)
     for QLineEdit in moneyBoxValues:
-        self.backupCharacter["money"][QLineEdit.accessibleName()] = int(QLineEdit.text()) if (QLineEdit.text() != "") else 0
+        self.backupCharacter["money"][QLineEdit.accessibleName()] = int(QLineEdit.text()) if (
+                    QLineEdit.text() != "") else 0
 
 
 def saveGenerated(self):
@@ -489,7 +492,8 @@ def saveGenerated(self):
                             self.newCharacterGen[sub][characteristic] += self.loadedRaces[self.selectedRace][
                                 "subraces"][self.ui.raceSubCombo.currentText()]["bonuses"][sub][characteristic]
                     elif sub == "skills":
-                        self.newCharacterGen["personality"]["features"] += self.loadedRaces[self.selectedRace]["subraces"][
+                        self.newCharacterGen["personality"]["features"] += \
+                        self.loadedRaces[self.selectedRace]["subraces"][
                             self.ui.raceSubCombo.currentText()]["bonuses"][sub]
                     else:
                         self.newCharacterGen[sub] += self.loadedRaces[self.selectedRace]["subraces"][
