@@ -8,11 +8,15 @@ from PyQt5 import QtWidgets
 from MainWindow import MainWindow
 
 
-class TestModifier(unittest2.TestCase):
+class TestUm(unittest2.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.app = QApplication(sys.argv)
         cls.w = MainWindow()
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.w.close()
 
     def testModifierUpdate1(self):
         partOfChar = self.w.loadedCharacter["characteristic"]
@@ -26,7 +30,8 @@ class TestModifier(unittest2.TestCase):
         self.w.modifierUpdate()
         for QLineEdit in characteristics:
             formulaCalculatedBonus = str(math.floor(
-                (self.w.loadedCharacter["characteristic"][QLineEdit.accessibleName().replace("Bonus", "")] - 10) / 2))
+                (self.w.loadedCharacter["characteristic"][
+                     QLineEdit.accessibleName().replace("Bonus", "")] - 10) / 2))
             if QLineEdit.accessibleDescription() == "bonus":
                 self.assertEqual(formulaCalculatedBonus, QLineEdit.text().replace("+", ""))
 
@@ -42,7 +47,8 @@ class TestModifier(unittest2.TestCase):
         self.w.modifierUpdate()
         for QLineEdit in characteristics:
             formulaCalculatedBonus = str(math.floor(
-                (self.w.loadedCharacter["characteristic"][QLineEdit.accessibleName().replace("Bonus", "")] - 10) / 2))
+                (self.w.loadedCharacter["characteristic"][
+                     QLineEdit.accessibleName().replace("Bonus", "")] - 10) / 2))
             if QLineEdit.accessibleDescription() == "bonus":
                 self.assertEqual(formulaCalculatedBonus, QLineEdit.text().replace("+", ""))
 
@@ -58,16 +64,10 @@ class TestModifier(unittest2.TestCase):
         self.w.modifierUpdate()
         for QLineEdit in characteristics:
             formulaCalculatedBonus = str(math.floor(
-                (self.w.loadedCharacter["characteristic"][QLineEdit.accessibleName().replace("Bonus", "")] - 10) / 2))
+                (self.w.loadedCharacter["characteristic"][
+                     QLineEdit.accessibleName().replace("Bonus", "")] - 10) / 2))
             if QLineEdit.accessibleDescription() == "bonus":
                 self.assertEqual(formulaCalculatedBonus, QLineEdit.text().replace("+", ""))
-
-
-class testBtnDoneUpdate(unittest2.TestCase):
-    @classmethod
-    def setUpClass(cls):
-        cls.app = QApplication(sys.argv)
-        cls.w = MainWindow()
 
     def testBtnDoneUpdate1(self):
         self.w.CGW.ui.raceCombo.setCurrentIndex(1)
@@ -124,24 +124,10 @@ class testBtnDoneUpdate(unittest2.TestCase):
         self.w.menuButtonClicked()
         self.assertTrue(self.w.isMenuButtonClicked)
 
-
-class testNewCharClicked(unittest2.TestCase):
-    @classmethod
-    def setUpClass(cls):
-        cls.app = QApplication(sys.argv)
-        cls.w = MainWindow()
-
     def testNewCharClicked(self):
         self.w.fileIsNew = False
         self.w.newCharClicked()
         self.assertTrue(self.w.fileIsNew)
-
-
-class testLoadGenerated(unittest2.TestCase):
-    @classmethod
-    def setUpClass(cls):
-        cls.app = QApplication(sys.argv)
-        cls.w = MainWindow()
 
     def testLoadGenerated(self):
         self.w.fileIsNew = False
