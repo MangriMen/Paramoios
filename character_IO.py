@@ -242,7 +242,10 @@ def saveSkillsBonus(self, clear=False):
 def saveCharacterInfo(self, clear=False):
     charInfos = self.ui.charInfoBox.findChildren(QtWidgets.QLineEdit)
     for QLineEdit in charInfos:
-        self.loadedCharacter[QLineEdit.accessibleName()] = QLineEdit.text()
+        if QLineEdit.accessibleDescription() == "int":
+            self.loadedCharacter[QLineEdit.accessibleName()] = int(QLineEdit.text()) if (QLineEdit.text() != "") else 0
+        else:
+            self.loadedCharacter[QLineEdit.accessibleName()] = QLineEdit.text()
 
 
 def saveCharacterPersonality(self, clear=False):
@@ -305,7 +308,7 @@ def saveEquipmentBox(self, clean=False):
 def saveMoneyBox(self, clean=False):
     moneyBoxValues = self.ui.moneyBox.findChildren(QtWidgets.QLineEdit)
     for QLineEdit in moneyBoxValues:
-        self.loadedCharacter["money"][QLineEdit.accessibleName()] = QLineEdit.text()
+        self.loadedCharacter["money"][QLineEdit.accessibleName()] = int(QLineEdit.text()) if (QLineEdit.text != "") else 0
 
 
 def backupCharacter(self):
@@ -370,7 +373,10 @@ def backupSkillsBonus(self, clear=False):
 def backupCharacterInfo(self, clear=False):
     charInfos = self.ui.charInfoBox.findChildren(QtWidgets.QLineEdit)
     for QLineEdit in charInfos:
-        self.backupCharacter[QLineEdit.accessibleName()] = QLineEdit.text()
+        if QLineEdit.accessibleDescription() == "int":
+            self.backupCharacter[QLineEdit.accessibleName()] = int(QLineEdit.text()) if (QLineEdit.text() != "") else 0
+        else:
+            self.backupCharacter[QLineEdit.accessibleName()] = QLineEdit.text()
 
 
 def backupCharacterPersonality(self, clear=False):
@@ -424,7 +430,7 @@ def backupEquipmentBox(self, clean=False):
 def backupMoneyBox(self, clean=False):
     moneyBoxValues = self.ui.moneyBox.findChildren(QtWidgets.QLineEdit)
     for QLineEdit in moneyBoxValues:
-        self.backupCharacter["money"][QLineEdit.accessibleName()] = QLineEdit.text()
+        self.backupCharacter["money"][QLineEdit.accessibleName()] = int(QLineEdit.text()) if (QLineEdit.text != "") else 0
 
 
 def saveGenerated(self):
