@@ -115,6 +115,17 @@ class TestUM(unittest2.TestCase):
         self.w.loadGenerated()
         self.assertTrue(self.w.fileIsNew)
 
+    def testTemperButtonClicked(self):
+        self.w.isTemperButtonClicked = False
+        self.w.temperButtonClicked()
+        self.assertTrue(self.w.isTemperButtonClicked)
+
+    def testMenuButtonClicked(self):
+        self.w.isMenuButtonClicked = False
+        self.w.menuButtonClicked()
+        self.assertTrue(self.w.isMenuButtonClicked)
+
+
 
 if __name__ == '__main__':
     unittest2.main()
