@@ -23,8 +23,33 @@ class CharGenWindow(QCharGenWindow):
         self.ui = Ui_CharGenWindow()
         self.ui.setupUi(self)
 
-        style.setupCharGen(self)
-        self.initVariables()
+        style.setupStyle(self, "CharGen")
+
+        self.previousPosition = QtCore.QPoint()
+        self.previousPositionChanged = QtGui.QMouseEvent
+        self.isButtonPressed = QtCore.QEvent.MouseButtonPress
+        QtCore.pyqtProperty(QtCore.QPoint, self.previousPosition, self.previousPosition,
+                            self.setPreviousPosition, self.previousPositionChanged)
+        self.Nothing = 0
+        self.Move = 5
+        self.m_previousPosition = QtCore.QPoint()
+        self.m_leftMouseButtonPressed = 0
+        self.moving = False
+        self.rectInterface = None
+        self.setCharacteristicUpdate = self.ui.characteristicBox.findChildren(
+            QtWidgets.QLineEdit, QtCore.QRegularExpression("^[a-z]{6,12}$"))
+        for QLineEdit in self.setCharacteristicUpdate:
+            QLineEdit.textEdited.connect(
+                functools.partial(self.characteristicUpdate))
+        self.defaultRace = "Choose race..."
+        self.defaultClass = "Choose class..."
+        self.defaultBackground = "Choose background..."
+        self.defaultAlignment = "Choose ..."
+        self.selectedRace = "dwarf"
+        self.selectedClass = "Barbarian"
+        self.selectedBackground = "acolyte"
+        self.selectedAlignment = "Lawful Good"
+        self.characteristicSum = 0
 
         with open('default_data/race.json', 'r', encoding="utf-8") as f:
             self.loadedRaces = json.loads(f.read())
@@ -69,33 +94,6 @@ class CharGenWindow(QCharGenWindow):
             character_IO.errorReadWarning(self, "Ошибка. Файл, возможно, повреждён.")
 
         self.createCharacter()
-
-    def initVariables(self):
-        self.previousPosition = QtCore.QPoint()
-        self.previousPositionChanged = QtGui.QMouseEvent
-        self.isButtonPressed = QtCore.QEvent.MouseButtonPress
-        QtCore.pyqtProperty(QtCore.QPoint, self.previousPosition, self.previousPosition,
-                            self.setPreviousPosition, self.previousPositionChanged)
-        self.Nothing = 0
-        self.Move = 5
-        self.m_previousPosition = QtCore.QPoint()
-        self.m_leftMouseButtonPressed = 0
-        self.moving = False
-        self.rectInterface = None
-        self.setCharacteristicUpdate = self.ui.characteristicBox.findChildren(
-            QtWidgets.QLineEdit, QtCore.QRegularExpression("^[a-z]{6,12}$"))
-        for QLineEdit in self.setCharacteristicUpdate:
-            QLineEdit.textEdited.connect(
-                functools.partial(self.characteristicUpdate))
-        self.defaultRace = "Choose race..."
-        self.defaultClass = "Choose class..."
-        self.defaultBackground = "Choose background..."
-        self.defaultAlignment = "Choose ..."
-        self.selectedRace = "dwarf"
-        self.selectedClass = "Barbarian"
-        self.selectedBackground = "acolyte"
-        self.selectedAlignment = "Lawful Good"
-        self.characteristicSum = 0
 
     def createCharacter(self):
         try:

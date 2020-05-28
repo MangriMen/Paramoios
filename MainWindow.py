@@ -24,21 +24,12 @@ class MainWindow(QMainWindow):
         QMainWindow.__init__(self, parent)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-        style.setupMain(self)
+
+        style.setupStyle(self, "MainWindow")
 
         self.setMouseTracking(True)
         self.ui.centralwidget.setMouseTracking(True)
 
-        self.initVariables()
-        self.CGW = CharGenWindow()
-        self.CGW.parent = self
-        with open('default_data/json_schemes/characterSchema.json', 'r', encoding="utf-8") as f:
-            self.charSchema = json.loads(f.read())
-        self.newCharClicked()
-
-
-
-    def initVariables(self):
         self.previousPosition = QtCore.QPoint()
         self.previousPositionChanged = QtGui.QMouseEvent
         self.isButtonPressed = QtCore.QEvent.MouseButtonPress
@@ -71,6 +62,12 @@ class MainWindow(QMainWindow):
         self.fileIsNew = False
         self.isAvailableToGenerate = True
 
+        self.CGW = CharGenWindow()
+        self.CGW.parent = self
+        with open('default_data/json_schemes/characterSchema.json', 'r', encoding="utf-8") as f:
+            self.charSchema = json.loads(f.read())
+        self.newCharClicked()
+
     def modifierUpdate(self):
         characteristics = self.ui.characteristicBox.findChildren(QtWidgets.QLineEdit)
         for QLineEdit in characteristics:
@@ -78,7 +75,8 @@ class MainWindow(QMainWindow):
                 self.loadedCharacter["characteristic"][QLineEdit.accessibleName()] = int(
                     QLineEdit.text().replace("+", "")) if (QLineEdit.text().replace("+", "") != "") else 0
                 self.loadedCharacter["characteristicBonus"][
-                    QLineEdit.accessibleName() + "Bonus"] = math.floor((self.loadedCharacter["characteristic"][QLineEdit.accessibleName()] - 10) / 2)
+                    QLineEdit.accessibleName() + "Bonus"] = math.floor(
+                    (self.loadedCharacter["characteristic"][QLineEdit.accessibleName()] - 10) / 2)
 
         for QLineEdit in characteristics:
             if (QLineEdit.accessibleDescription() == "bonus"):
@@ -112,7 +110,7 @@ class MainWindow(QMainWindow):
         }
         expField = (int(self.ui.expField.text()) if (self.ui.expField.text() != "") else 1)
         level = 1
-        while level < len(levelDependanceTable) and expField >= levelDependanceTable[level+1]:
+        while level < len(levelDependanceTable) and expField >= levelDependanceTable[level + 1]:
             level += 1
         self.ui.levelField.setText(str(level))
         self.loadedCharacter["level"] = (int(self.ui.levelField.text()) if (self.ui.levelField.text() != "") else 1)
@@ -273,7 +271,7 @@ class MainWindow(QMainWindow):
         self.rectInterface = QtCore.QRectF(self.x() + self.margin, self.y(
         ) + self.margin, self.width() - self.margin, self.ui.toolBar.maximumSize().height())
 
-        if(self.rectInterface.contains(self.position)):
+        if (self.rectInterface.contains(self.position)):
             QtWidgets.QWidget.setCursor(self, Qt.ClosedHandCursor)
             return self.Move
         QtWidgets.QWidget.setCursor(self, Qt.ArrowCursor)
@@ -289,7 +287,8 @@ class MainWindow(QMainWindow):
     def checkTemperButtonField(self, event):
         self.position = event.screenPos()
         self.rectTemper = QtCore.QRectF(
-            self.ui.temperButton.x(), self.ui.temperButton.y(), self.ui.temperButton.width(), self.ui.temperButton.height())
+            self.ui.temperButton.x(), self.ui.temperButton.y(), self.ui.temperButton.width(),
+            self.ui.temperButton.height())
         if not (self.rectTemper.contains(self.position)) and self.isTemperButtonClicked:
             self.temperButtonClicked()
 
