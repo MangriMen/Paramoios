@@ -59,7 +59,7 @@ class TestUM(unittest2.TestCase):
             if QLineEdit.accessibleDescription() == "bonus":
                 self.assertEqual(formulaCalculatedBonus, QLineEdit.text())
 
-    def testBtnDoneUpdate(self):
+    def testBtnDoneUpdate1(self):
         self.w.CGW.ui.raceCombo.setCurrentIndex(1)
         self.w.CGW.ui.classCombo.setCurrentIndex(1)
         self.w.CGW.ui.backgroundCombo.setCurrentIndex(1)
@@ -73,6 +73,37 @@ class TestUM(unittest2.TestCase):
         self.w.CGW.characteristicUpdate()
         self.w.CGW.btnDoneUpdate()
         self.assertTrue(self.w.CGW.ui.btnDone.isEnabled())
+
+
+    def testBtnDoneUpdate2(self):
+        self.w.CGW.ui.raceCombo.setCurrentIndex(1)
+        self.w.CGW.ui.classCombo.setCurrentIndex(1)
+        self.w.CGW.ui.backgroundCombo.setCurrentIndex(1)
+        self.w.CGW.ui.alignmentCombo.setCurrentIndex(1)
+        self.w.CGW.ui.strength.setText("15")
+        self.w.CGW.ui.dexterity.setText("15")
+        self.w.CGW.ui.constitution.setText("8")
+        self.w.CGW.ui.intelligence.setText("8")
+        self.w.CGW.ui.wisdom.setText("8")
+        self.w.CGW.ui.charisma.setText("15")
+        self.w.CGW.characteristicUpdate()
+        self.w.CGW.btnDoneUpdate()
+        self.assertTrue(self.w.CGW.ui.btnDone.isEnabled())
+
+    def testBtnDoneUpdate3(self):
+        self.w.CGW.ui.raceCombo.setCurrentIndex(1)
+        self.w.CGW.ui.classCombo.setCurrentIndex(1)
+        self.w.CGW.ui.backgroundCombo.setCurrentIndex(1)
+        self.w.CGW.ui.alignmentCombo.setCurrentIndex(1)
+        self.w.CGW.ui.strength.setText("15")
+        self.w.CGW.ui.dexterity.setText("13")
+        self.w.CGW.ui.constitution.setText("10")
+        self.w.CGW.ui.intelligence.setText("12")
+        self.w.CGW.ui.wisdom.setText("15")
+        self.w.CGW.ui.charisma.setText("14")
+        self.w.CGW.characteristicUpdate()
+        self.w.CGW.btnDoneUpdate()
+        self.assertFalse(self.w.CGW.ui.btnDone.isEnabled())
 
 
 if __name__ == '__main__':
