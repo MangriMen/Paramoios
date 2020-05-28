@@ -279,9 +279,13 @@ def getWindowStyleSheet():
             "border: 3px solid #6e3320;"
             "border-radius: 4px;"
             "}"
-            "QPushButton#personalityRoll, QPushButton#idealsRoll, QPushButton#bondsRoll, QPushButton#flawsRoll {"
+            "QPushButton#idealsRoll, QPushButton#bondsRoll, QPushButton#flawsRoll {"
             "background: #00ffffff;"
             "image: url('images/buttons/D6_0.png');"
+            "}"
+            "QPushButton#personalityRoll {"
+            "background: #00ffffff;"
+            "image: url('images/buttons/D8_0.png');"
             "}"
             "QPushButton#temperButton {"
             "image: url('images/buttons/traits.png');"
@@ -408,4 +412,10 @@ def rollD6(roll):
     return ("QPushButton {"
             "background: #00ffffff;"
             "image: url('images/buttons/D6_" + str(roll + 1) + ".png');"
+            "}")
+
+def rollD8(roll):
+    return ("QPushButton {"
+            "background: #00ffffff;"
+            "image: url('images/buttons/D8_" + str(roll + 1) + ".png');"
             "}")
