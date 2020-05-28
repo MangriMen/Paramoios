@@ -12,7 +12,7 @@
     "alignment",
     "background",
     "level",
-    "expirience",
+    "experience",
     "hpMax",
     "hp",
     "hpTemp",
@@ -110,10 +110,10 @@
       ],
       "minimum": 1
     },
-    "expirience": {
-      "$id": "#/properties/expirience",
+    "experience": {
+      "$id": "#/properties/experience",
       "type": "integer",
-      "title": "The Expirience Schema",
+      "title": "The experience Schema",
       "description": "Numerical interpretation of character's possibilities.",
       "default": 0,
       "examples": [

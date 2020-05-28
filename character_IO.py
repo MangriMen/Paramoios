@@ -9,23 +9,15 @@ from PyQt5.QtWidgets import QFileDialog
 from jsonschema import validate, ValidationError
 
 
-def notFoundWarning(self, text):
-    notFoundWarning = QMessageBox()
-    notFoundWarning.setWindowTitle(self.ui.label.text())
-    notFoundWarning.setText(text)
-    notFoundWarning.setIconPixmap(QPixmap(
+def displayWarningMessage(self, text, detailed=None):
+    WarningMessage = QMessageBox()
+    WarningMessage.setWindowTitle(self.ui.label.text())
+    WarningMessage.setText(text)
+    WarningMessage.setIconPixmap(QPixmap(
         "images/messages/warning").scaled(24, 24, Qt.KeepAspectRatio, Qt.SmoothTransformation))
-    notFoundWarning.exec()
+    WarningMessage.setDetailedText(str(detailed))
+    WarningMessage.exec()
 
-
-def errorReadWarning(self, text, detailed=None):
-    errorReadingWarning = QMessageBox()
-    errorReadingWarning.setWindowTitle(self.ui.label.text())
-    errorReadingWarning.setText(text)
-    errorReadingWarning.setIconPixmap(QPixmap(
-        "images/messages/warning").scaled(24, 24, Qt.KeepAspectRatio, Qt.SmoothTransformation))
-    errorReadingWarning.setDetailedText(str(detailed))
-    errorReadingWarning.exec()
 
 def loadCharacter(self, clear=False):
     try:
@@ -34,11 +26,11 @@ def loadCharacter(self, clear=False):
         self.backupCharacter = self.loadedCharacter
         validate(self.loadedCharacter, self.charSchema)
     except FileNotFoundError:
-        notFoundWarning(self, "[LOAD] Файл не найден.")
+        displayWarningMessage(self, "[LOAD] Файл не найден.")
     except ValidationError:
-        notFoundWarning(self, "[LOAD] Файл не соответствует шаблону.")
+        displayWarningMessage(self, "[LOAD] Файл не соответствует шаблону.")
     except Exception as e:
-        errorReadWarning(self, "[LOAD] Ошибка загрузки, выбран неверный файл или он повреждён.", e)
+        displayWarningMessage(self, "[LOAD] Ошибка загрузки, выбран неверный файл или он повреждён.", e)
     else:
         needClear = self.loadedCharacter["default"]
         loadCharacteristicsAndBonus(self, needClear)
@@ -179,10 +171,10 @@ def saveCharacter(self):
             self.pathToJson = QFileDialog.getSaveFileName(
                 self, "Open Character", "./saves", "JSON (*.json)")[0]
         except FileNotFoundError:
-            notFoundWarning(self, "[SAVE] Путь не выбран.")
+            displayWarningMessage(self, "[SAVE] Путь не выбран.")
             self.fileIsNew = True
         except Exception as e:
-            errorReadWarning(self, "[SAVE] Ещё какая-то ошибка.", e)
+            displayWarningMessage(self, "[SAVE] Ещё какая-то ошибка.", e)
             self.fileIsNew = True
     saveCharacteristicsAndBonus(self)
     saveSavingThowsBonus(self)
@@ -198,9 +190,9 @@ def saveCharacter(self):
             f.write(json.dumps(self.loadedCharacter,
                                sort_keys=False, indent=2))
     except FileNotFoundError:
-        notFoundWarning(self, "[SAVE] Путь не выбран.")
+        displayWarningMessage(self, "[SAVE] Путь не выбран.")
     except Exception as e:
-        errorReadWarning(self, "[SAVE] Ещё какая-то ошибка.", e)
+        displayWarningMessage(self, "[SAVE] Ещё какая-то ошибка.", e)
     else:
         self.fileIsNew = False
 
@@ -251,7 +243,10 @@ def saveSkillsBonus(self, clear=False):
 def saveCharacterInfo(self, clear=False):
     charInfos = self.ui.charInfoBox.findChildren(QtWidgets.QLineEdit)
     for QLineEdit in charInfos:
-        self.loadedCharacter[QLineEdit.accessibleName()] = QLineEdit.text()
+        if QLineEdit.accessibleDescription() == "int":
+            self.loadedCharacter[QLineEdit.accessibleName()] = int(QLineEdit.text()) if (QLineEdit.text() != "") else 0
+        else:
+            self.loadedCharacter[QLineEdit.accessibleName()] = QLineEdit.text()
 
 
 def saveCharacterPersonality(self, clear=False):
@@ -314,7 +309,8 @@ def saveEquipmentBox(self, clean=False):
 def saveMoneyBox(self, clean=False):
     moneyBoxValues = self.ui.moneyBox.findChildren(QtWidgets.QLineEdit)
     for QLineEdit in moneyBoxValues:
-        self.loadedCharacter["money"][QLineEdit.accessibleName()] = QLineEdit.text()
+        self.loadedCharacter["money"][QLineEdit.accessibleName()] = int(QLineEdit.text()) if (
+                    QLineEdit.text() != "") else 0
 
 
 def backupCharacter(self):
@@ -379,7 +375,10 @@ def backupSkillsBonus(self, clear=False):
 def backupCharacterInfo(self, clear=False):
     charInfos = self.ui.charInfoBox.findChildren(QtWidgets.QLineEdit)
     for QLineEdit in charInfos:
-        self.backupCharacter[QLineEdit.accessibleName()] = QLineEdit.text()
+        if QLineEdit.accessibleDescription() == "int":
+            self.backupCharacter[QLineEdit.accessibleName()] = int(QLineEdit.text()) if (QLineEdit.text() != "") else 0
+        else:
+            self.backupCharacter[QLineEdit.accessibleName()] = QLineEdit.text()
 
 
 def backupCharacterPersonality(self, clear=False):
@@ -433,7 +432,8 @@ def backupEquipmentBox(self, clean=False):
 def backupMoneyBox(self, clean=False):
     moneyBoxValues = self.ui.moneyBox.findChildren(QtWidgets.QLineEdit)
     for QLineEdit in moneyBoxValues:
-        self.backupCharacter["money"][QLineEdit.accessibleName()] = QLineEdit.text()
+        self.backupCharacter["money"][QLineEdit.accessibleName()] = int(QLineEdit.text()) if (
+                    QLineEdit.text() != "") else 0
 
 
 def saveGenerated(self):
@@ -492,7 +492,8 @@ def saveGenerated(self):
                             self.newCharacterGen[sub][characteristic] += self.loadedRaces[self.selectedRace][
                                 "subraces"][self.ui.raceSubCombo.currentText()]["bonuses"][sub][characteristic]
                     elif sub == "skills":
-                        self.newCharacterGen["personality"]["features"] += self.loadedRaces[self.selectedRace]["subraces"][
+                        self.newCharacterGen["personality"]["features"] += \
+                        self.loadedRaces[self.selectedRace]["subraces"][
                             self.ui.raceSubCombo.currentText()]["bonuses"][sub]
                     else:
                         self.newCharacterGen[sub] += self.loadedRaces[self.selectedRace]["subraces"][

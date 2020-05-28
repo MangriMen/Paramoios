@@ -23,8 +23,33 @@ class CharGenWindow(QCharGenWindow):
         self.ui = Ui_CharGenWindow()
         self.ui.setupUi(self)
 
-        style.setupCharGen(self)
-        self.initVariables()
+        style.setupStyle(self, "CharGen")
+
+        self.previousPosition = QtCore.QPoint()
+        self.previousPositionChanged = QtGui.QMouseEvent
+        self.isButtonPressed = QtCore.QEvent.MouseButtonPress
+        QtCore.pyqtProperty(QtCore.QPoint, self.previousPosition, self.previousPosition,
+                            self.setPreviousPosition, self.previousPositionChanged)
+        self.Nothing = 0
+        self.Move = 5
+        self.m_previousPosition = QtCore.QPoint()
+        self.m_leftMouseButtonPressed = 0
+        self.moving = False
+        self.rectInterface = None
+        self.setCharacteristicUpdate = self.ui.characteristicBox.findChildren(
+            QtWidgets.QLineEdit, QtCore.QRegularExpression("^[a-z]{6,12}$"))
+        for QLineEdit in self.setCharacteristicUpdate:
+            QLineEdit.textEdited.connect(
+                functools.partial(self.characteristicUpdate))
+        self.defaultRace = "Choose race..."
+        self.defaultClass = "Choose class..."
+        self.defaultBackground = "Choose background..."
+        self.defaultAlignment = "Choose ..."
+        self.selectedRace = "dwarf"
+        self.selectedClass = "Barbarian"
+        self.selectedBackground = "acolyte"
+        self.selectedAlignment = "Lawful Good"
+        self.characteristicSum = 0
 
         with open('default_data/race.json', 'r', encoding="utf-8") as f:
             self.loadedRaces = json.loads(f.read())
@@ -69,33 +94,6 @@ class CharGenWindow(QCharGenWindow):
             character_IO.errorReadWarning(self, "Ошибка. Файл, возможно, повреждён.")
 
         self.createCharacter()
-
-    def initVariables(self):
-        self.previousPosition = QtCore.QPoint()
-        self.previousPositionChanged = QtGui.QMouseEvent
-        self.isButtonPressed = QtCore.QEvent.MouseButtonPress
-        QtCore.pyqtProperty(QtCore.QPoint, self.previousPosition, self.previousPosition,
-                            self.setPreviousPosition, self.previousPositionChanged)
-        self.Nothing = 0
-        self.Move = 5
-        self.m_previousPosition = QtCore.QPoint()
-        self.m_leftMouseButtonPressed = 0
-        self.moving = False
-        self.rectInterface = None
-        self.setCharacteristicUpdate = self.ui.characteristicBox.findChildren(
-            QtWidgets.QLineEdit, QtCore.QRegularExpression("^[a-z]{6,12}$"))
-        for QLineEdit in self.setCharacteristicUpdate:
-            QLineEdit.textEdited.connect(
-                functools.partial(self.characteristicUpdate))
-        self.defaultRace = "Choose race..."
-        self.defaultClass = "Choose class..."
-        self.defaultBackground = "Choose background..."
-        self.defaultAlignment = "Choose ..."
-        self.selectedRace = "dwarf"
-        self.selectedClass = "Barbarian"
-        self.selectedBackground = "acolyte"
-        self.selectedAlignment = "Lawful Good"
-        self.characteristicSum = 0
 
     def createCharacter(self):
         try:
@@ -315,31 +313,36 @@ class CharGenWindow(QCharGenWindow):
             self.ui.btnDone.setEnabled(False)
 
     def personalityRollClicked(self):
-        personality = self.loadedBackgrounds[self.selectedBackground][
-            "personality"]["personalityTraits"]
-        personalityRoll = random.randint(0, len(personality) - 1)
-        self.ui.personalityEdit.setText(personality[personalityRoll])
+        if self.selectedBackground != self.defaultBackground:
+            personality = self.loadedBackgrounds[self.selectedBackground][
+                "personality"]["personalityTraits"]
+            personalityRoll = random.randint(0, len(personality) - 1)
+            self.ui.personalityEdit.setText(personality[personalityRoll])
+            self.ui.personalityRoll.setStyleSheet(style.rollD8(personalityRoll))
 
     def idealsRollClicked(self):
-        ideals = self.loadedBackgrounds[self.selectedBackground][
-            "personality"]["ideals"]
-        idealsRoll = random.randint(0, len(ideals) - 1)
-        self.ui.idealsEdit.setText(ideals[idealsRoll])
-        self.ui.idealsRoll.setStyleSheet(style.rollD6(idealsRoll))
+        if self.selectedBackground != self.defaultBackground:
+            ideals = self.loadedBackgrounds[self.selectedBackground][
+                "personality"]["ideals"]
+            idealsRoll = random.randint(0, len(ideals) - 1)
+            self.ui.idealsEdit.setText(ideals[idealsRoll])
+            self.ui.idealsRoll.setStyleSheet(style.rollD6(idealsRoll))
 
     def bondsRollClicked(self):
-        bonds = self.loadedBackgrounds[self.selectedBackground][
-            "personality"]["bonds"]
-        bondsRoll = random.randint(0, len(bonds) - 1)
-        self.ui.bondsEdit.setText(bonds[bondsRoll])
-        self.ui.bondsRoll.setStyleSheet(style.rollD6(bondsRoll))
+        if self.selectedBackground != self.defaultBackground:
+            bonds = self.loadedBackgrounds[self.selectedBackground][
+                "personality"]["bonds"]
+            bondsRoll = random.randint(0, len(bonds) - 1)
+            self.ui.bondsEdit.setText(bonds[bondsRoll])
+            self.ui.bondsRoll.setStyleSheet(style.rollD6(bondsRoll))
 
     def flawsRollClicked(self):
-        flaws = self.loadedBackgrounds[self.selectedBackground][
-            "personality"]["flaws"]
-        flawsRoll = random.randint(0, len(flaws) - 1)
-        self.ui.flawsEdit.setText(flaws[flawsRoll])
-        self.ui.flawsRoll.setStyleSheet(style.rollD6(flawsRoll))
+        if self.selectedBackground != self.defaultBackground:
+            flaws = self.loadedBackgrounds[self.selectedBackground][
+                "personality"]["flaws"]
+            flawsRoll = random.randint(0, len(flaws) - 1)
+            self.ui.flawsEdit.setText(flaws[flawsRoll])
+            self.ui.flawsRoll.setStyleSheet(style.rollD6(flawsRoll))
 
     def changedMaximize(self):
         if not self.isMaximized():

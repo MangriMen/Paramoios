@@ -504,6 +504,9 @@
           <property name="accessibleName">
            <string>level</string>
           </property>
+          <property name="accessibleDescription">
+           <string>int</string>
+          </property>
           <property name="styleSheet">
            <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
           </property>
@@ -592,7 +595,10 @@
            </rect>
           </property>
           <property name="accessibleName">
-           <string>expirience</string>
+           <string>experience</string>
+          </property>
+          <property name="accessibleDescription">
+           <string>int</string>
           </property>
           <property name="styleSheet">
            <string notr="true">font: 12pt &quot;Eberron&quot;;</string>
