@@ -308,7 +308,7 @@ def saveEquipmentBox(self, clean=False):
 def saveMoneyBox(self, clean=False):
     moneyBoxValues = self.ui.moneyBox.findChildren(QtWidgets.QLineEdit)
     for QLineEdit in moneyBoxValues:
-        self.loadedCharacter["money"][QLineEdit.accessibleName()] = int(QLineEdit.text()) if (QLineEdit.text != "") else 0
+        self.loadedCharacter["money"][QLineEdit.accessibleName()] = int(QLineEdit.text()) if (QLineEdit.text() != "") else 0
 
 
 def backupCharacter(self):
@@ -430,7 +430,7 @@ def backupEquipmentBox(self, clean=False):
 def backupMoneyBox(self, clean=False):
     moneyBoxValues = self.ui.moneyBox.findChildren(QtWidgets.QLineEdit)
     for QLineEdit in moneyBoxValues:
-        self.backupCharacter["money"][QLineEdit.accessibleName()] = int(QLineEdit.text()) if (QLineEdit.text != "") else 0
+        self.backupCharacter["money"][QLineEdit.accessibleName()] = int(QLineEdit.text()) if (QLineEdit.text() != "") else 0
 
 
 def saveGenerated(self):
