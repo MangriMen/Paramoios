@@ -317,8 +317,6 @@ def saveMoneyBox(self, clean=False):
         self.loadedCharacter["money"][QLineEdit.accessibleName()] = QLineEdit.text()
 
 
-# TODO Fix backup equipment and features
-
 def backupCharacter(self):
     if not self.fileIsNew:
         backupCharacteristicsAndBonus(self)
