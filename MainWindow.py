@@ -59,14 +59,13 @@ class MainWindow(QMainWindow):
         setEnteredSignalQLineEdit = self.findChildren(QtWidgets.QLineEdit)
         setEnteredSignalQTextEdit = self.findChildren(QtWidgets.QTextEdit)
         for QLineEdit in setEnteredSignalQLineEdit:
-            QLineEdit.textEdited.connect(functools.partial(self.fieldSaving, QLineEdit))
+            QLineEdit.textEdited.connect(self.fieldSaving)
         # for QTextEdit in setEnteredSignalQTextEdit:
         #     QTextEdit.textChanged.connect(functools.partial(self.fieldSaving, QLineEdit))
         self.setCharacteristicUpdate = self.ui.characteristicBox.findChildren(
             QtWidgets.QLineEdit, QtCore.QRegularExpression("^[a-z]{6,12}$"))
         for QLineEdit in self.setCharacteristicUpdate:
-            QLineEdit.textEdited.connect(
-                functools.partial(self.modifierUpdate, QLineEdit))
+            QLineEdit.textEdited.connect(self.modifierUpdate)
         self.pathToJson = ""
         self.fileIsNew = False
         self.isAvailableToGenerate = True
