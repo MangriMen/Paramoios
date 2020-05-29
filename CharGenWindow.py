@@ -131,7 +131,7 @@ class CharGenWindow(QCharGenWindow):
             15: 9
         }
         for num in self.setCharacteristicUpdate:
-            textToInt = int(num.text()) if num.text() != "" else 8
+            textToInt = int(num.text()) if num.text() != "" else 7
             if textToInt < 8 or textToInt > 15:
                 num.setStyleSheet("background-color: #e78181")
             else:
@@ -151,7 +151,7 @@ class CharGenWindow(QCharGenWindow):
 
         characteristics = self.ui.characteristicBox.findChildren(QtWidgets.QLineEdit)
         for QLineEdit in characteristics:
-            if (QLineEdit.accessibleDescription() == "base"):
+            if QLineEdit.accessibleDescription() == "base":
                 self.newCharacterGen["characteristic"][QLineEdit.accessibleName()] = int(
                     QLineEdit.text().replace("+", "")) if (QLineEdit.text().replace("+", "") != "") else 0
                 self.newCharacterGen["characteristicBonus"][
@@ -159,7 +159,7 @@ class CharGenWindow(QCharGenWindow):
                     (self.newCharacterGen["characteristic"][QLineEdit.accessibleName()] - 10) / 2)
 
         for QLineEdit in characteristics:
-            if (QLineEdit.accessibleDescription() == "bonus"):
+            if QLineEdit.accessibleDescription() == "bonus":
                 tempBonus = self.newCharacterGen[
                     "characteristicBonus"][QLineEdit.accessibleName()]
                 QLineEdit.setText(
@@ -293,7 +293,7 @@ class CharGenWindow(QCharGenWindow):
     def btnDoneUpdate(self):
         nums = []
         for num in self.setCharacteristicUpdate:
-            textToInt = int(num.text()) if num.text() != "" else 8
+            textToInt = int(num.text()) if num.text() != "" else 7
             if textToInt in range(8, 16):
                 nums.append(True)
             else:
@@ -367,19 +367,19 @@ class CharGenWindow(QCharGenWindow):
         return self.m_previousPosition
 
     def setPreviousPosition(self, previousPosition):
-        if (self.m_previousPosition == self.previousPosition):
+        if self.m_previousPosition == self.previousPosition:
             return
         self.m_previousPosition = self.previousPosition
         self.emit(self.previousPositionChanged(self.previousPosition))
 
     def mousePressEvent(self, event):
-        if (event.button() == Qt.LeftButton):
+        if event.button() == Qt.LeftButton:
             self.m_leftMouseButtonPressed = self.checkResizableField(event)
             self.setPreviousPosition(event.pos())
         return QtWidgets.QWidget.mousePressEvent(self, event)
 
     def mouseReleaseEvent(self, event):
-        if (event.button() == Qt.LeftButton):
+        if event.button() == Qt.LeftButton:
             self.m_leftMouseButtonPressed = 0
             QtWidgets.QWidget.setCursor(self, Qt.ArrowCursor)
             self.moving = False
@@ -423,7 +423,7 @@ class CharGenWindow(QCharGenWindow):
         self.rectInterface = QtCore.QRectF(self.x() + self.margin, self.y(
         ) + self.margin, self.width() - self.margin, self.ui.toolBar.maximumSize().height())
 
-        if (self.rectInterface.contains(self.position)):
+        if self.rectInterface.contains(self.position):
             QtWidgets.QWidget.setCursor(self, Qt.ClosedHandCursor)
             return self.Move
         QtWidgets.QWidget.setCursor(self, Qt.ArrowCursor)
