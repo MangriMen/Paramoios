@@ -19,16 +19,16 @@ def displayWarningMessage(self, text, detailed=None):
     WarningMessage.exec()
 
 
-def loadCharacter(self, clear=False):
+def loadCharacter(self):
     try:
         with open(self.pathToJson, 'r', encoding="utf-8") as f:
             self.loadedCharacter = json.loads(f.read())
         self.backupCharacter = self.loadedCharacter
         validate(self.loadedCharacter, self.charSchema)
-    except FileNotFoundError:
-        displayWarningMessage(self, "[LOAD] Файл не найден.")
-    except ValidationError:
-        displayWarningMessage(self, "[LOAD] Файл не соответствует шаблону.")
+    except FileNotFoundError as e:
+        displayWarningMessage(self, "[LOAD] Файл не найден.", e)
+    except ValidationError as e:
+        displayWarningMessage(self, "[LOAD] Файл не соответствует шаблону.", e)
     except Exception as e:
         displayWarningMessage(self, "[LOAD] Ошибка загрузки, выбран неверный файл или он повреждён.", e)
     else:
@@ -43,7 +43,6 @@ def loadCharacter(self, clear=False):
         loadEquipmentBox(self, needClear)
         loadMoneyBox(self, needClear)
         self.loadedCharacter["default"] = False
-        needClear = False
 
 
 def loadCharacteristicsAndBonus(self, clear=False):
@@ -170,8 +169,8 @@ def saveCharacter(self):
         try:
             self.pathToJson = QFileDialog.getSaveFileName(
                 self, "Open Character", "./saves", "JSON (*.json)")[0]
-        except FileNotFoundError:
-            displayWarningMessage(self, "[SAVE] Путь не выбран.")
+        except FileNotFoundError as e:
+            displayWarningMessage(self, "[SAVE] Путь не выбран.", e)
             self.fileIsNew = True
         except Exception as e:
             displayWarningMessage(self, "[SAVE] Ещё какая-то ошибка.", e)
@@ -189,8 +188,8 @@ def saveCharacter(self):
         with open(self.pathToJson, 'w', encoding="utf-8") as f:
             f.write(json.dumps(self.loadedCharacter,
                                sort_keys=False, indent=2))
-    except FileNotFoundError:
-        displayWarningMessage(self, "[SAVE] Путь не выбран.")
+    except FileNotFoundError as e:
+        displayWarningMessage(self, "[SAVE] Путь не выбран.", e)
     except Exception as e:
         displayWarningMessage(self, "[SAVE] Ещё какая-то ошибка.", e)
     else:
