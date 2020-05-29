@@ -86,7 +86,7 @@ class MainWindow(QMainWindow):
                     (("+" if tempBonus >= 0 else "") + str(tempBonus)))
 
     def levelUpdate(self):
-        levelDependanceTable = {
+        levelDependenceTable = {
             1: 0,
             2: 300,
             3: 900,
@@ -108,13 +108,38 @@ class MainWindow(QMainWindow):
             19: 305000,
             20: 355000
         }
+        proficiencyBonusDependenceTable = {
+            1: 2,
+            2: 2,
+            3: 2,
+            4: 2,
+            5: 3,
+            6: 3,
+            7: 3,
+            8: 3,
+            9: 4,
+            10: 4,
+            11: 4,
+            12: 4,
+            13: 5,
+            14: 5,
+            15: 5,
+            16: 5,
+            17: 6,
+            18: 6,
+            19: 6,
+            20: 6
+        }
         expField = (int(self.ui.expField.text()) if (self.ui.expField.text() != "") else 1)
         level = 1
-        while level < len(levelDependanceTable) and expField >= levelDependanceTable[level + 1]:
+        while level < len(levelDependenceTable) and expField >= levelDependenceTable[level + 1]:
             level += 1
         self.ui.levelField.setText(str(level))
         self.loadedCharacter["level"] = (int(self.ui.levelField.text()) if (self.ui.levelField.text() != "") else 1)
         self.loadedCharacter["experience"] = (int(self.ui.expField.text()) if (self.ui.expField.text() != "") else 1)
+
+        self.loadedCharacter["proficiencyBonus"] = proficiencyBonusDependenceTable[level]
+        self.ui.proficiencyField.setText(str(self.loadedCharacter["proficiencyBonus"]))
 
     def menuButtonClicked(self):
         if not self.isMenuButtonClicked:
