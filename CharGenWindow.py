@@ -44,11 +44,11 @@ class CharGenWindow(QCharGenWindow):
         self.defaultRace = "Choose race..."
         self.defaultClass = "Choose class..."
         self.defaultBackground = "Choose background..."
-        self.defaultAlignment = "Choose ..."
-        self.selectedRace = "dwarf"
-        self.selectedClass = "Barbarian"
-        self.selectedBackground = "acolyte"
-        self.selectedAlignment = "Lawful Good"
+        self.defaultAlignment = "Choose alignment..."
+        self.selectedRace = ""
+        self.selectedClass = ""
+        self.selectedBackground = ""
+        self.selectedAlignment = ""
         self.characteristicSum = 0
 
         with open('default_data/race.json', 'r', encoding="utf-8") as f:
@@ -99,10 +99,10 @@ class CharGenWindow(QCharGenWindow):
         try:
             with open("default_data/default_character.json", 'r', encoding="utf-8") as f:
                 self.newCharacterGen = json.loads(f.read())
-        except FileNotFoundError:
-            character_IO.notFoundWarning(self, "[LOAD] Файл не найден.")
-        except ValidationError:
-            character_IO.notFoundWarning(self, "[LOAD] Файл не соответствует шаблону.")
+        except FileNotFoundError as e:
+            character_IO.notFoundWarning(self, "[LOAD] Файл не найден.", e)
+        except ValidationError as e:
+            character_IO.notFoundWarning(self, "[LOAD] Файл не соответствует шаблону.", e)
         except Exception as e:
             character_IO.errorReadWarning(self, "[LOAD] Ошибка загрузки, выбран неверный файл или он повреждён.", e)
 
@@ -111,8 +111,8 @@ class CharGenWindow(QCharGenWindow):
         try:
             with open("saves/CharGenTemp/your_new_character.json", 'w', encoding="utf-8") as f:
                 f.write(json.dumps(self.newCharacterGen, sort_keys=False, indent=2))
-        except FileNotFoundError:
-            character_IO.notFoundWarning(self, "[SAVE] Путь не выбран.")
+        except FileNotFoundError as e:
+            character_IO.notFoundWarning(self, "[SAVE] Путь не выбран.", e)
         except Exception as e:
             character_IO.errorReadWarning(self, "[SAVE] Ещё какая-то ошибка.", e)
         self.close()

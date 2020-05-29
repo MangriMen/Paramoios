@@ -164,7 +164,7 @@ class MainWindow(QMainWindow):
 
     def openFileClicked(self):
         self.pathToJson = QtWidgets.QFileDialog.getOpenFileName(
-            self, "Open Character", "./save/characters", "JSON (*.json)")[0]
+            self, "Open Character", "./saves", "JSON (*.json)")[0]
         character_IO.loadCharacter(self)
         self.fileIsNew = False
 
@@ -194,21 +194,10 @@ class MainWindow(QMainWindow):
             with open(self.bufPath, 'w', encoding="utf-8") as f:
                 f.write(json.dumps(self.loadedCharacter,
                                    sort_keys=False, indent=2))
-        except FileNotFoundError:
-            notFoundWarning = QMessageBox()
-            notFoundWarning.setWindowTitle(self.ui.label.text())
-            notFoundWarning.setText("[ALL|SAVEAS]Файл не найден")
-            notFoundWarning.setIconPixmap(QPixmap(
-                "images/messages/warning").scaled(24, 24, Qt.KeepAspectRatio, Qt.SmoothTransformation))
-            notFoundWarning.exec()
+        except FileNotFoundError as e:
+            character_IO.displayWarningMessage(self, "[ALL|SAVEAS]Файл не найден", e)
         except Exception as e:
-            notFoundWarning = QMessageBox()
-            notFoundWarning.setWindowTitle(self.ui.label.text())
-            notFoundWarning.setText("[ALL|SAVEAS]Ошибка")
-            notFoundWarning.setIconPixmap(QPixmap(
-                "images/messages/warning").scaled(24, 24, Qt.KeepAspectRatio, Qt.SmoothTransformation))
-            notFoundWarning.setDetailedText(str(e))
-            notFoundWarning.exec()
+            character_IO.displayWarningMessage(self, "[ALL|SAVEAS]Ошибка", e)
         else:
             self.pathToJson = self.bufPath
 
