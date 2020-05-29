@@ -1,9 +1,9 @@
-RUNTEST=python3 -m unittest2 -v -b
+RUNTEST=-m unittest2 -v -b
 
 ALLMODULES=$(patsubst %.py, %.py, $(wildcard test*.py))
 
 all:
-	${RUNTEST} ${ALLMODULES}
+	python ${RUNTEST} ${ALLMODULES} || python3 ${RUNTEST} ${ALLMODULES}
 
 % : test%.py
-	${RUNTEST} test$@
+	python ${RUNTEST} test$@ || python3 ${RUNTEST} test$@
