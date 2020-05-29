@@ -71,7 +71,7 @@ class MainWindow(QMainWindow):
     def modifierUpdate(self):
         characteristics = self.ui.characteristicBox.findChildren(QtWidgets.QLineEdit)
         for QLineEdit in characteristics:
-            if (QLineEdit.accessibleDescription() == "base"):
+            if QLineEdit.accessibleDescription() == "base":
                 self.loadedCharacter["characteristic"][QLineEdit.accessibleName()] = int(
                     QLineEdit.text().replace("+", "")) if (QLineEdit.text().replace("+", "") != "") else 0
                 self.loadedCharacter["characteristicBonus"][
@@ -79,7 +79,7 @@ class MainWindow(QMainWindow):
                     (self.loadedCharacter["characteristic"][QLineEdit.accessibleName()] - 10) / 2)
 
         for QLineEdit in characteristics:
-            if (QLineEdit.accessibleDescription() == "bonus"):
+            if QLineEdit.accessibleDescription() == "bonus":
                 tempBonus = self.loadedCharacter[
                     "characteristicBonus"][QLineEdit.accessibleName()]
                 QLineEdit.setText(
@@ -238,21 +238,21 @@ class MainWindow(QMainWindow):
         return self.m_previousPosition
 
     def setPreviousPosition(self):
-        if (self.m_previousPosition == self.previousPosition):
+        if self.m_previousPosition == self.previousPosition:
             return
         self.m_previousPosition = self.previousPosition
         self.emit(self.previousPositionChanged(self.previousPosition))
 
     def mousePressEvent(self, event):
-        if (event.button() == Qt.LeftButton):
+        if event.button() == Qt.LeftButton:
             self.m_leftMouseButtonPressed = self.checkResizableField(event)
-            self.mlb_isMenu = self.checkMenuButtonField(event)
-            self.mlb_isTemper = self.checkTemperButtonField(event)
+            self.checkMenuButtonField(event)
+            self.checkTemperButtonField(event)
             self.setPreviousPosition()
         return QtWidgets.QWidget.mousePressEvent(self, event)
 
     def mouseReleaseEvent(self, event):
-        if (event.button() == Qt.LeftButton):
+        if event.button() == Qt.LeftButton:
             self.m_leftMouseButtonPressed = 0
             QtWidgets.QWidget.setCursor(self, Qt.ArrowCursor)
             self.moving = False
