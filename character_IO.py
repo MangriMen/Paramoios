@@ -106,14 +106,15 @@ def loadCharacterPersonality(self, clear=False):
         QLineEdit.setText(
             str(self.loadedCharacter[QLineEdit.accessibleName()]) if not clear else None)
 
-    four = self.ui.temperBox.findChildren(QtWidgets.QTextEdit)
-    for QTextEdit in four:
+    temper = self.ui.temperBox.findChildren(QtWidgets.QTextEdit)
+    for QTextEdit in temper:
         QTextEdit.setText(
             str(self.loadedCharacter["personality"]["appearance"][QTextEdit.accessibleName()]) if not clear else None)
 
     temp = ""
     for features in self.loadedCharacter["personality"]["features"]:
         temp += str(features) + ", "
+    temp = temp[:-2] if (temp[-2] == "," and temp[-1] == " ") else temp
     self.ui.featuresAndTraitsEdit.setText(temp if not clear else None)
 
 
@@ -154,7 +155,8 @@ def loadEquipmentBox(self, clear=False):
     temp = ""
     for equipment in self.loadedCharacter["equipment"]:
         temp += str(equipment) + ", "
-    self.ui.equipment.setText(temp)
+    temp = temp[:-2] if (temp[-2] == "," and temp[-1] == " ") else temp
+    self.ui.equipment.setText(temp) if not clear else self.ui.equipment.clear()
 
 
 def loadMoneyBox(self, clear=False):
@@ -196,7 +198,7 @@ def saveCharacter(self):
         self.fileIsNew = False
 
 
-def saveCharacteristicsAndBonus(self, clear=False):
+def saveCharacteristicsAndBonus(self):
     characteristics = self.ui.characteristicBox.findChildren(
         QtWidgets.QLineEdit)
     for QLineEdit in characteristics:
@@ -213,7 +215,7 @@ def saveCharacteristicsAndBonus(self, clear=False):
                 QLineEdit.text().replace("+", "")) if (QLineEdit.text().replace("+", "") != "") else 0
 
 
-def saveSavingThowsBonus(self, clear=False):
+def saveSavingThowsBonus(self):
     savingThrowsBool = self.ui.savingThrowsBox.findChildren(
         QtWidgets.QRadioButton)
     for QRadioButton in savingThrowsBool:
@@ -226,7 +228,7 @@ def saveSavingThowsBonus(self, clear=False):
             QLineEdit.text().replace("+", "")) if (QLineEdit.text().replace("+", "") != "") else 0
 
 
-def saveSkillsBonus(self, clear=False):
+def saveSkillsBonus(self):
     skillsBool = self.ui.skillsBox.findChildren(QtWidgets.QRadioButton)
     for QRadioButton in skillsBool:
         self.loadedCharacter["skillsBonus"][
@@ -239,7 +241,7 @@ def saveSkillsBonus(self, clear=False):
                 QLineEdit.text().replace("+", "") != "") else 0
 
 
-def saveCharacterInfo(self, clear=False):
+def saveCharacterInfo(self):
     charInfos = self.ui.charInfoBox.findChildren(QtWidgets.QLineEdit)
     for QLineEdit in charInfos:
         if QLineEdit.accessibleDescription() == "int":
@@ -248,13 +250,13 @@ def saveCharacterInfo(self, clear=False):
             self.loadedCharacter[QLineEdit.accessibleName()] = QLineEdit.text()
 
 
-def saveCharacterPersonality(self, clear=False):
+def saveCharacterPersonality(self):
     personalities = self.ui.characterBox.findChildren(QtWidgets.QLineEdit)
     for QLineEdit in personalities:
         self.loadedCharacter[QLineEdit.accessibleName()] = QLineEdit.text()
 
-    four = self.ui.temperBox.findChildren(QtWidgets.QLineEdit)
-    for QLineEdit in four:
+    temper = self.ui.temperBox.findChildren(QtWidgets.QLineEdit)
+    for QLineEdit in temper:
         self.loadedCharacter[QLineEdit.accessibleName()] = QLineEdit.text()
 
     features = self.ui.featuresAndTraitsEdit.toPlainText().split(", ")
@@ -263,7 +265,7 @@ def saveCharacterPersonality(self, clear=False):
     self.loadedCharacter["personality"]["features"] = features
 
 
-def saveD20BonusBox(self, clear=False):
+def saveD20BonusBox(self):
     self.loadedCharacter["characteristicBonus"][
         "wisdomBonus"] = self.loadedCharacter["passiveWisdom"]
 
@@ -273,7 +275,7 @@ def saveD20BonusBox(self, clear=False):
             "+", "")) if (QLineEdit.text().replace("+", "") != "") else 0
 
 
-def saveLifeBox(self, clear=False):
+def saveLifeBox(self):
     lifeBoxValues = self.ui.lifeBox.findChildren(QtWidgets.QLineEdit)
     for QLineEdit in lifeBoxValues:
         self.loadedCharacter[QLineEdit.accessibleName()] = int(QLineEdit.text().replace(
@@ -298,14 +300,13 @@ def saveLifeBox(self, clear=False):
     self.loadedCharacter["deathSaves"]["failures"] = howManyFailuresChecked
 
 
-def saveEquipmentBox(self, clean=False):
+def saveEquipmentBox(self):
     equipment = self.ui.equipment.toPlainText().split(", ")
-    if equipment[-1] == "":
-        del equipment[-1]
+    equipment = equipment[:-2] if (equipment[-2] == "," and equipment[-1] == " ") else equipment
     self.loadedCharacter["equipment"] = equipment
 
 
-def saveMoneyBox(self, clean=False):
+def saveMoneyBox(self):
     moneyBoxValues = self.ui.moneyBox.findChildren(QtWidgets.QLineEdit)
     for QLineEdit in moneyBoxValues:
         self.loadedCharacter["money"][QLineEdit.accessibleName()] = int(QLineEdit.text()) if (
@@ -328,7 +329,7 @@ def backupCharacter(self):
                                sort_keys=False, indent=2))
 
 
-def backupCharacteristicsAndBonus(self, clear=False):
+def backupCharacteristicsAndBonus(self):
     characteristics = self.ui.characteristicBox.findChildren(
         QtWidgets.QLineEdit)
     for QLineEdit in characteristics:
@@ -345,7 +346,7 @@ def backupCharacteristicsAndBonus(self, clear=False):
                 QLineEdit.text().replace("+", "")) if (QLineEdit.text().replace("+", "") != "") else 0
 
 
-def backupSavingThowsBonus(self, clear=False):
+def backupSavingThowsBonus(self):
     savingThrowsBool = self.ui.savingThrowsBox.findChildren(
         QtWidgets.QRadioButton)
     for QRadioButton in savingThrowsBool:
@@ -358,7 +359,7 @@ def backupSavingThowsBonus(self, clear=False):
             QLineEdit.text().replace("+", "")) if (QLineEdit.text().replace("+", "") != "") else 0
 
 
-def backupSkillsBonus(self, clear=False):
+def backupSkillsBonus(self):
     skillsBool = self.ui.skillsBox.findChildren(QtWidgets.QRadioButton)
     for QRadioButton in skillsBool:
         self.backupCharacter["skillsBonus"][
@@ -371,7 +372,7 @@ def backupSkillsBonus(self, clear=False):
                 QLineEdit.text().replace("+", "") != "") else 0
 
 
-def backupCharacterInfo(self, clear=False):
+def backupCharacterInfo(self):
     charInfos = self.ui.charInfoBox.findChildren(QtWidgets.QLineEdit)
     for QLineEdit in charInfos:
         if QLineEdit.accessibleDescription() == "int":
@@ -380,13 +381,13 @@ def backupCharacterInfo(self, clear=False):
             self.backupCharacter[QLineEdit.accessibleName()] = QLineEdit.text()
 
 
-def backupCharacterPersonality(self, clear=False):
+def backupCharacterPersonality(self):
     personalities = self.ui.characterBox.findChildren(QtWidgets.QLineEdit)
     for QLineEdit in personalities:
         self.backupCharacter[QLineEdit.accessibleName()] = QLineEdit.text()
 
 
-def backupD20BonusBox(self, clear=False):
+def backupD20BonusBox(self):
     self.backupCharacter["characteristicBonus"][
         "wisdomBonus"] = self.backupCharacter["passiveWisdom"]
 
@@ -396,7 +397,7 @@ def backupD20BonusBox(self, clear=False):
             "+", "")) if (QLineEdit.text().replace("+", "") != "") else 0
 
 
-def backupLifeBox(self, clear=False):
+def backupLifeBox(self):
     lifeBoxValues = self.ui.lifeBox.findChildren(QtWidgets.QLineEdit)
     for QLineEdit in lifeBoxValues:
         self.backupCharacter[QLineEdit.accessibleName()] = int(QLineEdit.text().replace(
@@ -421,14 +422,13 @@ def backupLifeBox(self, clear=False):
     self.backupCharacter["deathSaves"]["failures"] = howManyFailuresChecked
 
 
-def backupEquipmentBox(self, clean=False):
+def backupEquipmentBox(self):
     equipment = self.ui.equipment.toPlainText().split(", ")
-    if equipment[-1] == "":
-        del equipment[-1]
+    equipment = equipment[:-2] if (equipment[-2] == "," and equipment[-1] == " ") else equipment
     self.backupCharacter["equipment"] = equipment
 
 
-def backupMoneyBox(self, clean=False):
+def backupMoneyBox(self):
     moneyBoxValues = self.ui.moneyBox.findChildren(QtWidgets.QLineEdit)
     for QLineEdit in moneyBoxValues:
         self.backupCharacter["money"][QLineEdit.accessibleName()] = int(QLineEdit.text()) if (
