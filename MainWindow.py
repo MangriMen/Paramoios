@@ -48,11 +48,8 @@ class MainWindow(QMainWindow):
         self.loadedCharacter = None
         self.backupCharacter = None
         setEnteredSignalQLineEdit = self.findChildren(QtWidgets.QLineEdit)
-        setEnteredSignalQTextEdit = self.findChildren(QtWidgets.QTextEdit)
         for QLineEdit in setEnteredSignalQLineEdit:
             QLineEdit.textEdited.connect(self.fieldSaving)
-        # for QTextEdit in setEnteredSignalQTextEdit:
-        #     QTextEdit.textChanged.connect(functools.partial(self.fieldSaving, QLineEdit))
         self.setCharacteristicUpdate = self.ui.characteristicBox.findChildren(
             QtWidgets.QLineEdit, QtCore.QRegularExpression("^[a-z]{6,12}$"))
         for QLineEdit in self.setCharacteristicUpdate:
@@ -71,7 +68,7 @@ class MainWindow(QMainWindow):
     def modifierUpdate(self):
         characteristics = self.ui.characteristicBox.findChildren(QtWidgets.QLineEdit)
         for QLineEdit in characteristics:
-            if (QLineEdit.accessibleDescription() == "base"):
+            if QLineEdit.accessibleDescription() == "base":
                 self.loadedCharacter["characteristic"][QLineEdit.accessibleName()] = int(
                     QLineEdit.text().replace("+", "")) if (QLineEdit.text().replace("+", "") != "") else 0
                 self.loadedCharacter["characteristicBonus"][
@@ -79,14 +76,14 @@ class MainWindow(QMainWindow):
                     (self.loadedCharacter["characteristic"][QLineEdit.accessibleName()] - 10) / 2)
 
         for QLineEdit in characteristics:
-            if (QLineEdit.accessibleDescription() == "bonus"):
+            if QLineEdit.accessibleDescription() == "bonus":
                 tempBonus = self.loadedCharacter[
                     "characteristicBonus"][QLineEdit.accessibleName()]
                 QLineEdit.setText(
                     (("+" if tempBonus >= 0 else "") + str(tempBonus)))
 
     def levelUpdate(self):
-        levelDependanceTable = {
+        levelDependenceTable = {
             1: 0,
             2: 300,
             3: 900,
@@ -108,13 +105,38 @@ class MainWindow(QMainWindow):
             19: 305000,
             20: 355000
         }
+        proficiencyBonusDependenceTable = {
+            1: 2,
+            2: 2,
+            3: 2,
+            4: 2,
+            5: 3,
+            6: 3,
+            7: 3,
+            8: 3,
+            9: 4,
+            10: 4,
+            11: 4,
+            12: 4,
+            13: 5,
+            14: 5,
+            15: 5,
+            16: 5,
+            17: 6,
+            18: 6,
+            19: 6,
+            20: 6
+        }
         expField = (int(self.ui.expField.text()) if (self.ui.expField.text() != "") else 1)
         level = 1
-        while level < len(levelDependanceTable) and expField >= levelDependanceTable[level + 1]:
+        while level < len(levelDependenceTable) and expField >= levelDependenceTable[level + 1]:
             level += 1
         self.ui.levelField.setText(str(level))
         self.loadedCharacter["level"] = (int(self.ui.levelField.text()) if (self.ui.levelField.text() != "") else 1)
         self.loadedCharacter["experience"] = (int(self.ui.expField.text()) if (self.ui.expField.text() != "") else 1)
+
+        self.loadedCharacter["proficiencyBonus"] = proficiencyBonusDependenceTable[level]
+        self.ui.proficiencyField.setText(str(self.loadedCharacter["proficiencyBonus"]))
 
     def menuButtonClicked(self):
         if not self.isMenuButtonClicked:
@@ -142,7 +164,7 @@ class MainWindow(QMainWindow):
 
     def openFileClicked(self):
         self.pathToJson = QtWidgets.QFileDialog.getOpenFileName(
-            self, "Open Character", "./save/characters", "JSON (*.json)")[0]
+            self, "Open Character", "./saves", "JSON (*.json)")[0]
         character_IO.loadCharacter(self)
         self.fileIsNew = False
 
@@ -172,21 +194,10 @@ class MainWindow(QMainWindow):
             with open(self.bufPath, 'w', encoding="utf-8") as f:
                 f.write(json.dumps(self.loadedCharacter,
                                    sort_keys=False, indent=2))
-        except FileNotFoundError:
-            notFoundWarning = QMessageBox()
-            notFoundWarning.setWindowTitle(self.ui.label.text())
-            notFoundWarning.setText("[ALL|SAVEAS]Файл не найден")
-            notFoundWarning.setIconPixmap(QPixmap(
-                "images/messages/warning").scaled(24, 24, Qt.KeepAspectRatio, Qt.SmoothTransformation))
-            notFoundWarning.exec()
+        except FileNotFoundError as e:
+            character_IO.displayWarningMessage(self, "[ALL|SAVEAS]Файл не найден", e)
         except Exception as e:
-            notFoundWarning = QMessageBox()
-            notFoundWarning.setWindowTitle(self.ui.label.text())
-            notFoundWarning.setText("[ALL|SAVEAS]Ошибка")
-            notFoundWarning.setIconPixmap(QPixmap(
-                "images/messages/warning").scaled(24, 24, Qt.KeepAspectRatio, Qt.SmoothTransformation))
-            notFoundWarning.setDetailedText(str(e))
-            notFoundWarning.exec()
+            character_IO.displayWarningMessage(self, "[ALL|SAVEAS]Ошибка", e)
         else:
             self.pathToJson = self.bufPath
 
@@ -213,21 +224,21 @@ class MainWindow(QMainWindow):
         return self.m_previousPosition
 
     def setPreviousPosition(self):
-        if (self.m_previousPosition == self.previousPosition):
+        if self.m_previousPosition == self.previousPosition:
             return
         self.m_previousPosition = self.previousPosition
         self.emit(self.previousPositionChanged(self.previousPosition))
 
     def mousePressEvent(self, event):
-        if (event.button() == Qt.LeftButton):
+        if event.button() == Qt.LeftButton:
             self.m_leftMouseButtonPressed = self.checkResizableField(event)
-            self.mlb_isMenu = self.checkMenuButtonField(event)
-            self.mlb_isTemper = self.checkTemperButtonField(event)
+            self.checkMenuButtonField(event)
+            self.checkTemperButtonField(event)
             self.setPreviousPosition()
         return QtWidgets.QWidget.mousePressEvent(self, event)
 
     def mouseReleaseEvent(self, event):
-        if (event.button() == Qt.LeftButton):
+        if event.button() == Qt.LeftButton:
             self.m_leftMouseButtonPressed = 0
             QtWidgets.QWidget.setCursor(self, Qt.ArrowCursor)
             self.moving = False

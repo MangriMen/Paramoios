@@ -6,8 +6,7 @@ from PyQt5.QtCore import Qt
 
 
 def setupStyle(self, window):
-    QtGui.QFontDatabase.addApplicationFont('fonts/BOOKMANIA-REGULAR.TTF')
-    QtGui.QFontDatabase.addApplicationFont('fonts/EBERRON_RUS.TTF')
+    QtGui.QFontDatabase.addApplicationFont('fonts/EBERRON_RUS.OTF')
 
     self.setWindowFlags(QtCore.Qt.Widget | QtCore.Qt.FramelessWindowHint)
     self.setAttribute(Qt.WA_TranslucentBackground)
@@ -42,8 +41,6 @@ def setupStyle(self, window):
         self.ui.saveAs.setStyleSheet(getMenuButtonStyleSheet())
         self.ui.exit.setStyleSheet(getMenuButtonStyleSheet())
     elif window == "CharGenWindow":
-        self.ui.temperBox.setAttribute(Qt.WA_TranslucentBackground)
-
         self.ui.classSkillsChoose.setStyleSheet(getChooseWidgetStyleSheet())
         self.ui.backgroundSpecChoose.setStyleSheet(getChooseWidgetStyleSheet())
 

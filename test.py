@@ -8,11 +8,16 @@ from PyQt5 import QtWidgets
 from MainWindow import MainWindow
 
 
-class TestUM(unittest2.TestCase):
+
+class TestUm(unittest2.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.app = QApplication(sys.argv)
         cls.w = MainWindow()
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.w.close()
 
     def testModifierUpdate1(self):
         partOfChar = self.w.loadedCharacter["characteristic"]
@@ -25,7 +30,9 @@ class TestUM(unittest2.TestCase):
         characteristics = self.w.ui.characteristicBox.findChildren(QtWidgets.QLineEdit)
         self.w.modifierUpdate()
         for QLineEdit in characteristics:
-            formulaCalculatedBonus = str(math.floor((self.w.loadedCharacter["characteristic"][QLineEdit.accessibleName().replace("Bonus", "")] - 10) / 2))
+            formulaCalculatedBonus = str(math.floor(
+                (self.w.loadedCharacter["characteristic"][
+                     QLineEdit.accessibleName().replace("Bonus", "")] - 10) / 2))
             if QLineEdit.accessibleDescription() == "bonus":
                 self.assertEqual(formulaCalculatedBonus, QLineEdit.text().replace("+", ""))
 
@@ -40,7 +47,9 @@ class TestUM(unittest2.TestCase):
         characteristics = self.w.ui.characteristicBox.findChildren(QtWidgets.QLineEdit)
         self.w.modifierUpdate()
         for QLineEdit in characteristics:
-            formulaCalculatedBonus = str(math.floor((self.w.loadedCharacter["characteristic"][QLineEdit.accessibleName().replace("Bonus", "")] - 10) / 2))
+            formulaCalculatedBonus = str(math.floor(
+                (self.w.loadedCharacter["characteristic"][
+                     QLineEdit.accessibleName().replace("Bonus", "")] - 10) / 2))
             if QLineEdit.accessibleDescription() == "bonus":
                 self.assertEqual(formulaCalculatedBonus, QLineEdit.text().replace("+", ""))
 
@@ -55,7 +64,9 @@ class TestUM(unittest2.TestCase):
         characteristics = self.w.ui.characteristicBox.findChildren(QtWidgets.QLineEdit)
         self.w.modifierUpdate()
         for QLineEdit in characteristics:
-            formulaCalculatedBonus = str(math.floor((self.w.loadedCharacter["characteristic"][QLineEdit.accessibleName().replace("Bonus", "")] - 10) / 2))
+            formulaCalculatedBonus = str(math.floor(
+                (self.w.loadedCharacter["characteristic"][
+                     QLineEdit.accessibleName().replace("Bonus", "")] - 10) / 2))
             if QLineEdit.accessibleDescription() == "bonus":
                 self.assertEqual(formulaCalculatedBonus, QLineEdit.text().replace("+", ""))
 
@@ -73,7 +84,6 @@ class TestUM(unittest2.TestCase):
         self.w.CGW.characteristicUpdate()
         self.w.CGW.btnDoneUpdate()
         self.assertTrue(self.w.CGW.ui.btnDone.isEnabled())
-
 
     def testBtnDoneUpdate2(self):
         self.w.CGW.ui.raceCombo.setCurrentIndex(1)
@@ -105,16 +115,6 @@ class TestUM(unittest2.TestCase):
         self.w.CGW.btnDoneUpdate()
         self.assertFalse(self.w.CGW.ui.btnDone.isEnabled())
 
-    def testNewCharClicked(self):
-        self.w.fileIsNew = False
-        self.w.newCharClicked()
-        self.assertTrue(self.w.fileIsNew)
-
-    def testLoadGenerated(self):
-        self.w.fileIsNew = False
-        self.w.loadGenerated()
-        self.assertTrue(self.w.fileIsNew)
-
     def testTemperButtonClicked(self):
         self.w.isTemperButtonClicked = False
         self.w.temperButtonClicked()
@@ -125,6 +125,15 @@ class TestUM(unittest2.TestCase):
         self.w.menuButtonClicked()
         self.assertTrue(self.w.isMenuButtonClicked)
 
+    def testNewCharClicked(self):
+        self.w.fileIsNew = False
+        self.w.newCharClicked()
+        self.assertTrue(self.w.fileIsNew)
+
+    def testLoadGenerated(self):
+        self.w.fileIsNew = False
+        self.w.loadGenerated()
+        self.assertTrue(self.w.fileIsNew)
 
 
 if __name__ == '__main__':
