@@ -2107,7 +2107,7 @@
               <string/>
              </property>
              <property name="maxLength">
-              <number>2</number>
+              <number>4</number>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -2195,7 +2195,7 @@
               <string/>
              </property>
              <property name="maxLength">
-              <number>2</number>
+              <number>4</number>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -2283,7 +2283,7 @@
               <string/>
              </property>
              <property name="maxLength">
-              <number>2</number>
+              <number>4</number>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -2371,7 +2371,7 @@
               <string/>
              </property>
              <property name="maxLength">
-              <number>2</number>
+              <number>4</number>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -2459,7 +2459,7 @@
               <string/>
              </property>
              <property name="maxLength">
-              <number>2</number>
+              <number>4</number>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -2547,7 +2547,7 @@
               <string/>
              </property>
              <property name="maxLength">
-              <number>2</number>
+              <number>4</number>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
