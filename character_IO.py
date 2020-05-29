@@ -310,7 +310,7 @@ def saveMoneyBox(self, clean=False):
     moneyBoxValues = self.ui.moneyBox.findChildren(QtWidgets.QLineEdit)
     for QLineEdit in moneyBoxValues:
         self.loadedCharacter["money"][QLineEdit.accessibleName()] = int(QLineEdit.text()) if (
-                    QLineEdit.text() != "") else 0
+                QLineEdit.text() != "") else 0
 
 
 def backupCharacter(self):
@@ -433,7 +433,7 @@ def backupMoneyBox(self, clean=False):
     moneyBoxValues = self.ui.moneyBox.findChildren(QtWidgets.QLineEdit)
     for QLineEdit in moneyBoxValues:
         self.backupCharacter["money"][QLineEdit.accessibleName()] = int(QLineEdit.text()) if (
-                    QLineEdit.text() != "") else 0
+                QLineEdit.text() != "") else 0
 
 
 def saveGenerated(self):
@@ -473,6 +473,8 @@ def saveGenerated(self):
         for eq in additionalEquipment:
             self.newCharacterGen["equipment"].append(eq.text())
     for skillTrue in self.classSkillsChecked:
+        skillTrue.setText(skillTrue.text().replace("animal handling", "animalHandling"))
+        skillTrue.setText(skillTrue.text().replace("sleight of hand", "sleightOfHand"))
         if skillTrue.text() in self.newCharacterGen["skillsBonus"]:
             self.newCharacterGen["skillsBonus"][skillTrue.text()] = True
 
@@ -493,8 +495,8 @@ def saveGenerated(self):
                                 "subraces"][self.ui.raceSubCombo.currentText()]["bonuses"][sub][characteristic]
                     elif sub == "skills":
                         self.newCharacterGen["personality"]["features"] += \
-                        self.loadedRaces[self.selectedRace]["subraces"][
-                            self.ui.raceSubCombo.currentText()]["bonuses"][sub]
+                            self.loadedRaces[self.selectedRace]["subraces"][
+                                self.ui.raceSubCombo.currentText()]["bonuses"][sub]
                     else:
                         self.newCharacterGen[sub] += self.loadedRaces[self.selectedRace]["subraces"][
                             self.ui.raceSubCombo.currentText()]["bonuses"][sub]
