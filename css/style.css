@@ -1,0 +1,61 @@
+html {
+  font-family: "Eberron";
+  src: url("fonts/EBERRON_RUS.otf");
+  font-size: 20px;
+}
+body {
+  margin: 0;
+  background-image: url(/images/background/backmenu.png)
+}
+header {
+  line-height: 36px;
+  background-color: #681e22;
+}
+main {
+  display: flex;
+  max-width: 960px;
+  justify-content: center;
+  margin: 0.5em auto;
+}
+.border-style {
+  border: 3px solid #681e22;
+  border-radius: 3px;
+}
+.gray-text {
+  color: #606060;
+}
+#header-title {
+  color: #fff;
+  font-size: 1.2em;
+  margin-left: 0.4em;
+  text-shadow: 0 0 5px #fff;
+}
+#naming {
+  display: flex;
+  width: 960px;
+}
+#naming-text {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  width: inherit;
+}
+#avatar {
+  width: 96px;
+  height: 96px;
+  margin: 0.8em 0.5em 0.8em 0.8em;
+}
+#player-name {
+  margin-top: 0.6em;
+  font-size: 1.3em;
+  font-weight: bold;
+}
+#known-as {
+  font-size: 1.2em;
+}
+#character-name {
+  font-size: 3.6em;
+  position: absolute;
+  margin-top: 0.7em;
+  right: 0.2em;
+}
