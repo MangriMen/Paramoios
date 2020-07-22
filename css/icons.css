@@ -1,0 +1,48 @@
+.armor-svg .cls-1{ /*фон*/
+  fill: red;
+}
+.armor-svg .cls-2{ /*внешний контур*/
+  fill: green;
+}
+.armor-svg .cls-3{ /*внутренний контур*/
+  stroke: yellow;
+}
+.armor-svg .cls-4{ /*фон внутреннего контура*/
+  fill: white;
+}
+.initiative-svg .cls-1{ /*фон*/
+  fill: red;
+}
+.initiative-svg .cls-2{ /*внешний контур*/
+  fill: green;
+}
+.initiative-svg .cls-3{ /*внутренний контур*/
+  stroke: yellow;
+}
+.initiative-svg .cls-4{ /*фон внутреннего контура*/
+  fill: white;
+}
+.inspiration-svg .cls-1{ /*фон*/
+  fill: red;
+}
+.inspiration-svg .cls-2{ /*внешний контур*/
+  fill: green;
+}
+.inspiration-svg .cls-3{ /*внутренний контур*/
+  stroke: yellow;
+}
+.inspiration-svg .cls-4{ /*фон внутреннего контура*/
+  fill: white;
+}
+.speed-svg .cls-1{ /*фон*/
+  fill: red;
+}
+.speed-svg .cls-2{ /*внешний контур*/
+  fill: green;
+}
+.speed-svg .cls-3{ /*внутренний контур*/
+  stroke: yellow;
+}
+.speed-svg .cls-4{ /*фон внутреннего контура*/
+  fill: white;
+}
