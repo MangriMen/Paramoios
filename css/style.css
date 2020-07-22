@@ -247,3 +247,20 @@ main {
   grid-row: 2;
   color: red;
 }
+.health-animation-bar {
+  position: absolute;
+  z-index: 1;
+  height: 25px;
+  width: 150px;
+  background-color: #840705;
+  transition: width 1s cubic-bezier(0,0,1,1) 50ms;
+}
+.health-animation-bar:hover {
+  width: 200px;
+  z-index: 1;
+}
+#hp{
+  margin: auto;
+  z-index: 100;
+  position: relative;
+}

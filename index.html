@@ -340,12 +340,12 @@
             </div>
             <div id="health">
                 <div id="health-bar" class="border-style">
+                    <div class="health-animation-bar"></div>
                     <span id="hp">9/10</span>
                 </div>
-                <div id="heal" class="border-style default-background">
+                <input onclick="healhp()" id="heal" class="border-style default-background" type="button">
                     <span>Heal</span>
-                </div>
-                <div id="damage" class="border-style default-background">
+                <input onclick="damagehp()" id="damage" class="border-style default-background" type="button">
                     <span>Damage</span>
                 </div>
             </div>
@@ -354,5 +354,6 @@
     <footer>
     </footer>
 </body>
-<script type="text/javascript" src="../javascript/svg_fix.js"></script>
+<script type="text/javascript" src="javascript/svg_fix.js"></script>
+<script type="text/javascript" src="javascript/onclick.js"></script>
 </html>
