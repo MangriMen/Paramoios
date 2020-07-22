@@ -264,3 +264,8 @@ main {
   z-index: 100;
   position: relative;
 }
+#heal, #damage{
+  position: relative;
+  font-family: Eberron;
+  font-size: 20px;
+}
