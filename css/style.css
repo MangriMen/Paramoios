@@ -1,11 +1,11 @@
 @font-face {
-    font-family: "Eberron";
-    src: url("../fonts/EBERRON_RUS.otf") format("truetype");
-    font-style: normal;
-    font-weight: normal;
+  font-family: "Eberron";
+  src: url("../fonts/EBERRON_RUS.otf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
 }
 html {
-    font-family: Eberron;
+  font-family: Eberron;
   font-size: 20px;
 }
 body {
@@ -19,7 +19,7 @@ header {
 main {
   display: grid;
   max-width: 960px;
-  margin: 0.5em auto;
+  margin: 0.25em auto;
   /*height: calc(100vh - 3.8em);*/
 }
 .btest {
@@ -40,7 +40,7 @@ main {
 }
 #naming {
   display: flex;
-  width: 960px;
+  max-width: 960px;
   height: 8.5em;
 }
 #naming-text {
@@ -82,12 +82,11 @@ main {
   justify-content: space-between;
   align-items: flex-end;
   padding: 0 15px;
-  margin: 30px 0;
+  margin: 10px 0 10px 0;
 }
 .characteristic {
   width: 120px;
   height: 64px;
-  /*text-align: center;   */
 }
 .characteristic-text {
   font-size: 0.9em;
@@ -163,6 +162,9 @@ main {
 #main-dice-img {
   width: inherit;
 }
+#skills {
+  width: 14.5em;
+}
 .skill-box {
   line-height: 24px;
   display: flex;
@@ -176,7 +178,7 @@ main {
   width: 40px;
   height: 20px;
   text-align: center;
-  font-size: 0.9em;  
+  font-size: 0.9em;
 }
 .skill-text {
   line-height: 20px;
@@ -184,9 +186,64 @@ main {
   height: 20px;
   text-align: center;
   font-size: 0.8em;
-  text-transform: capitalize;  
+  text-transform: capitalize;
 }
 .skill-origin{
   font-size: 0.8em;
-  text-transform: uppercase;  
+  text-transform: uppercase;
+}
+.img-svg {
+  width: 64px;
+  height: 64px;
+}
+#central {
+  display: grid;
+  grid-template-columns:
+  auto
+  auto
+  auto;
+  grid-template-rows:
+  auto
+  auto
+  auto;
+  justify-content: space-between;
+}
+#health {
+  margin: 0 44px;
+  display: grid;
+  grid-template-columns:
+  auto
+  auto;
+  grid-template-rows:
+  auto
+  auto;
+  height: 64px;
+  justify-content: center;
+}
+#health-bar {
+  width: 200px;
+  height: 25px;
+  text-align: center;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row: 1;
+}
+#heal, #damage {
+  margin: 5px 0;
+  text-align: center;
+  display: inline-block;
+  width: 80px;
+  height: 32px;
+  line-height: 32px;
+}
+#heal {
+  grid-column: 1;
+  grid-row: 2;
+  color: green;
+}
+#damage {
+  justify-self: end;
+  grid-column: 2;
+  grid-row: 2;
+  color: red;
 }
