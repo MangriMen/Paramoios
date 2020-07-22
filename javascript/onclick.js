@@ -9,7 +9,7 @@ function healhp(){
 		newhp=Number(hp[0])+1;
 	}
 	else {
-		newhp=Number(hp[0]);
+		newhp=Number(hp[0]);w
 	}
 	final=newhp+"/"+hp[1];
 	document.getElementById("hp").textContent=final;
