@@ -26,7 +26,7 @@ main {
     border: 1px solid red;
 }
 .border-style {
-  border: 3px solid #681e22;
+  border: 2px solid #681e22;
   border-radius: 3px;
 }
 .gray-text {
@@ -162,4 +162,31 @@ main {
 }
 #main-dice-img {
   width: inherit;
+}
+.skill-box {
+  line-height: 24px;
+  display: flex;
+  width: 250px;
+  height: 20px;
+  margin: 20px;
+  justify-content: space-between;
+}
+.skill-bonus {
+  line-height: 20px;
+  width: 40px;
+  height: 20px;
+  text-align: center;
+  font-size: 0.9em;  
+}
+.skill-text {
+  line-height: 20px;
+  width: 160px;
+  height: 20px;
+  text-align: center;
+  font-size: 0.8em;
+  text-transform: capitalize;  
+}
+.skill-origin{
+  font-size: 0.8em;
+  text-transform: uppercase;  
 }
