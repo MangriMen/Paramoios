@@ -1,11 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/icons.css">
+    <meta name="description" content="DnD5CharlistI - простой способ создать персонажа для DnD">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=5">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <title>Лучший чарлист</title>
+    <script src="../javascript/svg_fix.js"></script>
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#681e22">
+    <!-- ios support -->
+    <link rel="apple-touch-icon" href="/icons/icon-96x96.png">
+    <meta name="apple-moblie-web-app-status-bar" content="#681e22">
+    <style>img[alt="www.000webhost.com"]{display: none};</style>
+    <title>DnD5CharlistI</title>
 </head>
 <body>
     <header>
@@ -17,7 +26,7 @@
     </nav> -->
     <main class="border-style">
         <section id="naming">
-            <img id="avatar" class="border-style" src="images/buttons/profile.png">
+            <img id="avatar" alt="User avatar" class="border-style" src="images/buttons/profile.webp">
             <div id="naming-text">
                 <span id="player-name">
                     KRAKEN[5X]ZEUS_MR.REALLEOPRAIM
@@ -107,7 +116,7 @@
             	</div>
             </div>
             <div id="main-dice" class="dice">
-            	<img id="main-dice-img" src="images/buttons/dice_main.svg">
+            	<img id="main-dice-img" alt="Main dice button" src="images/buttons/dice_main.svg">
             </div>
             <div id="intelligence" class="characteristic">
             	<span id="intelligence-text" class="characteristic-text">Интеллект</span>
@@ -333,10 +342,10 @@
                 </div>
             </div>
             <div>
-                <img class="armor-svg img-svg" src="images/icons/armor.svg">
-                <img class="initiative-svg img-svg" src="images/icons/initiative.svg">
-                <img class="inspiration-svg img-svg" src="images/icons/inspiration.svg">
-                <img class="speed-svg img-svg" src="images/icons/speed.svg">
+                <img class="armor-svg img-svg" alt="Armor icon" src="images/icons/armor.svg">
+                <img class="initiative-svg img-svg" alt="Initiative icon" src="images/icons/initiative.svg">
+                <img class="inspiration-svg img-svg" alt="Inspiration icon" src="images/icons/inspiration.svg">
+                <img class="speed-svg img-svg" alt="Speed icon" src="images/icons/speed.svg">
             </div>
             <div id="health">
                 <div id="health-bar" class="border-style">
@@ -354,4 +363,5 @@
 </body>
 <script type="text/javascript" src="javascript/svg_fix.js"></script>
 <script type="text/javascript" src="javascript/onclick.js"></script>
+<script src="../javascript/app.js"></script>
 </html>

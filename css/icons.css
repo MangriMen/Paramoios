@@ -1,48 +1,42 @@
-.armor-svg .cls-1{ /*фон*/
-  fill: red;
-}
-.armor-svg .cls-2{ /*внешний контур*/
-  fill: green;
-}
-.armor-svg .cls-3{ /*внутренний контур*/
-  stroke: yellow;
-}
-.armor-svg .cls-4{ /*фон внутреннего контура*/
-  fill: white;
-}
-.initiative-svg .cls-1{ /*фон*/
-  fill: red;
-}
-.initiative-svg .cls-2{ /*внешний контур*/
-  fill: green;
-}
-.initiative-svg .cls-3{ /*внутренний контур*/
-  stroke: yellow;
-}
-.initiative-svg .cls-4{ /*фон внутреннего контура*/
-  fill: white;
-}
-.inspiration-svg .cls-1{ /*фон*/
-  fill: red;
-}
-.inspiration-svg .cls-2{ /*внешний контур*/
-  fill: green;
-}
-.inspiration-svg .cls-3{ /*внутренний контур*/
-  stroke: yellow;
-}
-.inspiration-svg .cls-4{ /*фон внутреннего контура*/
-  fill: white;
-}
-.speed-svg .cls-1{ /*фон*/
-  fill: red;
-}
-.speed-svg .cls-2{ /*внешний контур*/
-  fill: green;
-}
-.speed-svg .cls-3{ /*внутренний контур*/
-  stroke: yellow;
-}
-.speed-svg .cls-4{ /*фон внутреннего контура*/
-  fill: white;
+.armor-svg .cls-1{ /*фон*/
+  fill: #c3c3c3;
+}
+.armor-svg .cls-2{ /*внешний контур*/
+  fill: #681e22;
+}
+.armor-svg .cls-3{ /*внутренний контур*/
+  stroke: #681e22;
+}
+.armor-svg .cls-4{ /*фон внутреннего контура*/
+  fill: #7f7f7f;
+}
+.initiative-svg .cls-1{ /*фон*/
+  fill: #d2b5d2;
+}
+.initiative-svg .cls-2{ /*внешний контур*/
+  fill: #681e22;
+}
+.initiative-svg .cls-3{ /*внутренний контур*/
+  stroke: #681e22;
+}
+.inspiration-svg .cls-1{ /*фон*/
+  fill: #a6c4b6;
+}
+.inspiration-svg .cls-2{ /*внешний контур*/
+  fill: #681e22;
+}
+.inspiration-svg .cls-3{ /*внутренний контур*/
+  stroke: #681e22;
+}
+.speed-svg .cls-1{ /*фон*/
+  fill: #99d9ea;
+}
+.speed-svg .cls-2{ /*внешний контур*/
+  fill: #681e22;
+}
+.speed-svg .cls-3{ /*внутренний контур*/
+  stroke: #681e22;
+}
+.speed-svg .cls-4{ /*фон внутреннего контура*/
+  fill: #2495b0;
 }

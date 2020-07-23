@@ -10,10 +10,11 @@ html {
 }
 body {
   margin: 0;
-  background-image: url("../images/background/backmenu.png")
+  background-image: url("../images/background/backmenu.webp");
+  background-image: url("../images/background/backmenu.jpg");
 }
 header {
-  line-height: 1.8em;
+  line-height: 1.6em;
   background-color: #681e22;
 }
 main {
