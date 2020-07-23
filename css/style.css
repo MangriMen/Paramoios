@@ -240,13 +240,11 @@ main {
 #heal {
   grid-column: 1;
   grid-row: 2;
-  color: green;
 }
 #damage {
   justify-self: end;
   grid-column: 2;
   grid-row: 2;
-  color: red;
 }
 .health-animation-bar {
   position: absolute;
@@ -256,7 +254,7 @@ main {
   background-color: #840705;
   transition: width 1s cubic-bezier(0,0,1,1) 50ms;
 }
-.health-animation-bar:hover {
+#health-bar:hover .health-animation-bar{
   width: 200px;
   z-index: 1;
 }
