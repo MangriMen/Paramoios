@@ -1,28 +1,18 @@
 "use strict"
 
-function healhp(){
-	let hp=document.getElementById("hp").textContent;
-	let newhp=0;
-	let final="";
-	hp=hp.split("/");
-	if(Number(hp[0])<Number(hp[1])){
-		newhp=Number(hp[0])+1;
-	}
-	else {
-		newhp=Number(hp[0]);w
-	}
-	final=newhp+"/"+hp[1];
-	document.getElementById("hp").textContent=final;
-}
+function changeHp(isHealed) {
+	let oldHp = (document.getElementById("hp").textContent).split("/");
+	let actualHp = Number(oldHp[0]);
+	let maxHp = Number(oldHp[1]);
+    let newHp = 0;
+    let final = "";
 
-function damagehp(){
-	let hp=document.getElementById("hp").textContent;
-	let newhp=0;
-	let final="";
-	hp=hp.split("/");
-	if(Number(hp[0])>0){
-		newhp=Number(hp[0])-1;
-	}
-	final=newhp+"/"+hp[1];
-	document.getElementById("hp").textContent=final;
+    if (isHealed) {
+		newHp = actualHp + (actualHp < maxHp);
+    } else {
+		newHp = actualHp - (actualHp > 0);
+    }
+    
+    final = newHp + "/" + maxHp;
+    document.getElementById("hp").textContent = final;
 }

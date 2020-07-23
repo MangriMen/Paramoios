@@ -260,13 +260,14 @@ main {
   width: 200px;
   z-index: 1;
 }
-#hp{
+#hp {
   margin: auto;
   z-index: 100;
   position: relative;
 }
-#heal, #damage{
+#heal, #damage {
   position: relative;
+  line-height: inherit;
   font-family: Eberron;
-  font-size: 20px;
+  font-size: 1em;
 }
