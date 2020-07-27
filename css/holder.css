@@ -3,6 +3,7 @@
   src: url("../fonts/EBERRON_RUS.otf") format("truetype");
   font-style: normal;
   font-weight: normal;
+  font-display: swap;
 }
 html {
   font-family: Eberron;
@@ -15,6 +16,7 @@ body{
   background-image: url("../images/background/backmenu_hires.webp");
   background-image: url("../images/background/backmenu_hires.jpg");
   background-color: #681e22;
+  background-repeat: repeat;
 }
 main {
   display: flex;
