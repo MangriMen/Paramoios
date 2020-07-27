@@ -15,7 +15,6 @@ body{
   background-image: url("../images/background/backmenu_hires.webp");
   background-image: url("../images/background/backmenu_hires.jpg");
   background-color: #681e22;
-  background-blend-mode: multiply;
 }
 main {
   display: flex;
