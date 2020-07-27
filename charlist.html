@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/icons.css">
+    <meta name="description" content="DnD5CharlistI - простой способ создать персонажа для DnD">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=5">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="javascript/svg_fix.js"></script>
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#681e22">
+    <!-- ios support -->
+    <link rel="apple-touch-icon" href="images/icons/app_icon/96x96.png">
+    <meta name="apple-moblie-web-app-status-bar" content="#681e22">
+    <link rel="shortcut icon" href="/images/icons/app_icon/16x16.png" type="image/png">
+    <style>img[alt="www.000webhost.com"]{display: none};</style>
+    <title>DnD5CharlistI</title>
+</head>
+<body>
+    <header>
+        <span id="header-title">
+            DnD5CharlistI
+        </span>
+    </header>
+<!--     <nav>
+    </nav> -->
+    <main class="border-style">
+        <section id="naming">
+            <img id="avatar" alt="User avatar" class="border-style" src="images/buttons/profile/profile.webp">
+            <div id="naming-text">
+                <span id="player-name">
+                    KRAKEN[5X]ZEUS_MR.REALLEOPRAIM
+                </span>
+                <span id="known-as" class="gray-text">
+                    известный как...
+                </span>
+                <span id="character-name" class="align-to-right">
+                    Элис Мириэль (Тиа)
+                </span>
+                <div id="character-origin" class="align-to-right gray-text">
+                    <span id="character-race">
+                        Человек
+                    </span>
+                    <span>-</span>
+                    <span id="character-class">
+                        Бард
+                    </span>
+                    <span>.</span>
+                    <div id="character-level-box">
+                        <span id="character-level-text">
+                            Уровень
+                        </span>
+                        <span id="character-level">
+                            4
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="character-stats">
+            <div id="strength" class="characteristic">
+            	<span id="strength-text" class="characteristic-text">Сила</span>
+            	<div id="strength-box" class="characteristic-box">
+            		<div id="strength-bonus" class="characteristic-bonus default-background">
+            			
+            		</div>
+            		<div class="second-box">
+            			<div id="strength-value" class="characteristic-value default-background">
+            				
+            			</div>
+            			<div id="strength-deatsave" class="characteristic-deathsave default-background">
+            				
+            			</div>
+            		</div>
+            		<div id="strength-deatsave-checkbox" class="characteristic-deathsave-checkbox default-background">
+            			
+            		</div>
+            	</div>
+            </div>
+            <div id="dexterity" class="characteristic">
+            	<span id="dexterity-text" class="characteristic-text">Ловкость</span>
+            	<div id="dexterity-box" class="characteristic-box">
+            		<div id="dexterity-bonus" class="characteristic-bonus default-background">
+            			
+            		</div>
+            		<div class="second-box">
+            			<div id="dexterity-value" class="characteristic-value default-background">
+            				
+            			</div>
+            			<div id="dexterity-deatsave" class="characteristic-deathsave default-background">
+            				
+            			</div>
+            		</div>
+            		<div id="dexterity-deatsave-checkbox" class="characteristic-deathsave-checkbox default-background">
+            			
+            		</div>
+            	</div>
+            </div>
+            <div id="constitution" class="characteristic">
+            	<span id="constitution-text" class="characteristic-text">Телосложение</span>
+            	<div id="constitution-box" class="characteristic-box">
+            		<div id="constitution-bonus" class="characteristic-bonus default-background">
+            			
+            		</div>
+            		<div class="second-box">
+            			<div id="constitution-value" class="characteristic-value default-background">
+            				
+            			</div>
+            			<div id="constitution-deatsave" class="characteristic-deathsave default-background">
+            				
+            			</div>
+            		</div>
+            		<div id="constitution-deatsave-checkbox" class="characteristic-deathsave-checkbox default-background">
+            			
+            		</div>
+            	</div>
+            </div>
+            <div id="main-dice" class="dice">
+            	<img id="main-dice-img" alt="Main dice button" src="images/buttons/dices/dice_main.svg">
+            </div>
+            <div id="intelligence" class="characteristic">
+            	<span id="intelligence-text" class="characteristic-text">Интеллект</span>
+            	<div id="intelligence-box" class="characteristic-box">
+            		<div id="intelligence-bonus" class="characteristic-bonus default-background">
+            			
+            		</div>
+            		<div class="second-box">
+            			<div id="intelligence-value" class="characteristic-value default-background">
+            				
+            			</div>
+            			<div id="intelligence-deatsave" class="characteristic-deathsave default-background">
+            				
+            			</div>
+            		</div>
+            		<div id="intelligence-deatsave-checkbox" class="characteristic-deathsave-checkbox default-background">
+            			
+            		</div>
+            	</div>
+            </div>
+            <div id="wisdom" class="characteristic">
+            	<span id="wisdom-text" class="characteristic-text">Мудрость</span>
+            	<div id="wisdom-box" class="characteristic-box">
+            		<div id="wisdom-bonus" class="characteristic-bonus default-background">
+            			
+            		</div>
+            		<div class="second-box">
+            			<div id="wisdom-value" class="characteristic-value default-background">
+            				
+            			</div>
+            			<div id="wisdom-deatsave" class="characteristic-deathsave default-background">
+            				
+            			</div>
+            		</div>
+            		<div id="wisdom-deatsave-checkbox" class="characteristic-deathsave-checkbox default-background">
+            			
+            		</div>
+            	</div>
+            </div>
+            <div id="charisma" class="characteristic">
+            	<span id="charisma-text" class="characteristic-text">Харизма</span>
+            	<div id="charisma-box" class="characteristic-box">
+            		<div id="charisma-bonus" class="characteristic-bonus default-background">
+            			
+            		</div>
+            		<div class="second-box">
+            			<div id="charisma-value" class="characteristic-value default-background">
+            				
+            			</div>
+            			<div id="charisma-deatsave" class="characteristic-deathsave default-background">
+            				
+            			</div>
+            		</div>
+            		<div id="charisma-deatsave-checkbox" class="characteristic-deathsave-checkbox default-background">
+            			
+            		</div>
+            	</div>
+            </div>
+        </section>
+        <section id="central">
+            <div id="skills">
+                <div id="acrobatics" class="skill-box">
+                    <div class="border-style skill-bonus default-background">
+                        <span id="acrobatics-bonus">-1</span>
+                    </div>
+                    <span id="acrobatics-origin" class="skill-origin gray-text">DEX</span>
+                    <div class="border-style skill-text default-background">
+                        <span id="acrobatics-text">Акробатика</span>
+                    </div>
+                </div>
+                <div id="investigation" class="skill-box">
+                    <div class="border-style skill-bonus default-background">
+                        <span id="investigation-bonus">-1</span>
+                    </div>
+                    <span id="investigation-origin" class="skill-origin gray-text">INT</span>
+                    <div class="border-style skill-text default-background">
+                        <span id="investigation-text">Анализ</span>
+                    </div>
+                </div>
+                <div id="athletics" class="skill-box">
+                    <div class="border-style skill-bonus default-background">
+                        <span id="athletics-bonus">-1</span>
+                    </div>
+                    <span id="athletics-origin" class="skill-origin gray-text">STR</span>
+                    <div class="border-style skill-text default-background">
+                        <span id="athletics-text">Атлетика</span>
+                    </div>
+                </div>
+                <div id="perception" class="skill-box">
+                    <div class="border-style skill-bonus default-background">
+                        <span id="perception-bonus">-1</span>
+                    </div>
+                    <span id="perception-origin" class="skill-origin gray-text">WIS</span>
+                    <div class="border-style skill-text default-background">
+                        <span id="perception-text">Внимательность</span>
+                    </div>
+                </div>
+                <div id="survival" class="skill-box">
+                    <div class="border-style skill-bonus default-background">
+                        <span id="survival-bonus">-1</span>
+                    </div>
+                    <span id="survival-origin" class="skill-origin gray-text">WIS</span>
+                    <div class="border-style skill-text default-background">
+                        <span id="survival-text">Выживание</span>
+                    </div>
+                </div>
+                <div id="performance" class="skill-box">
+                    <div class="border-style skill-bonus default-background">
+                        <span id="performance-bonus">-1</span>
+                    </div>
+                    <span id="performance-origin" class="skill-origin gray-text">CHA</span>
+                    <div class="border-style skill-text default-background">
+                        <span id="performance-text">Выступление</span>
+                    </div>
+                </div>
+                <div id="intimidation" class="skill-box">
+                    <div class="border-style skill-bonus default-background">
+                        <span id="intimidation-bonus">-1</span>
+                    </div>
+                    <span id="intimidation-origin" class="skill-origin gray-text">CHA</span>
+                    <div class="border-style skill-text default-background">
+                        <span id="intimidation-text">Запугивание</span>
+                    </div>
+                </div>
+                <div id="history" class="skill-box">
+                    <div class="border-style skill-bonus default-background">
+                        <span id="history-bonus">-1</span>
+                    </div>
+                    <span id="history-origin" class="skill-origin gray-text">INT</span>
+                    <div class="border-style skill-text default-background">
+                        <span id="history-text">История</span>
+                    </div>
+                </div>
+                <div id="sleight-of-hand" class="skill-box">
+                    <div class="border-style skill-bonus default-background">
+                        <span id="sleight-of-hand-bonus">-1</span>
+                    </div>
+                    <span id="sleight-of-hand-origin" class="skill-origin gray-text">DEX</span>
+                    <div class="border-style skill-text default-background">
+                        <span id="sleight-of-hand-text">Ловкость рук</span>
+                    </div>
+                </div>
+                <div id="arcana" class="skill-box">
+                    <div class="border-style skill-bonus default-background">
+                        <span id="arcana-bonus">-1</span>
+                    </div>
+                    <span id="arcana-origin" class="skill-origin gray-text">INT</span>
+                    <div class="border-style skill-text default-background">
+                        <span id="arcana-text">Магия</span>
+                    </div>
+                </div>
+                <div id="medicine" class="skill-box">
+                    <div class="border-style skill-bonus default-background">
+                        <span id="medicine-bonus">-1</span>
+                    </div>
+                    <span id="medicine-origin" class="skill-origin gray-text">WIS</span>
+                    <div class="border-style skill-text default-background">
+                        <span id="medicine-text">Медицина</span>
+                    </div>
+                </div>
+                <div id="deception" class="skill-box">
+                    <div class="border-style skill-bonus default-background">
+                        <span id="deception-bonus">-1</span>
+                    </div>
+                    <span id="deception-origin" class="skill-origin gray-text">CHA</span>
+                    <div class="border-style skill-text default-background">
+                        <span id="deception-text">Обман</span>
+                    </div>
+                </div>
+                <div id="nature" class="skill-box">
+                    <div class="border-style skill-bonus default-background">
+                        <span id="nature-bonus">-1</span>
+                    </div>
+                    <span id="nature-origin" class="skill-origin gray-text">INT</span>
+                    <div class="border-style skill-text default-background">
+                        <span id="nature-text">Природа</span>
+                    </div>
+                </div>
+                <div id="insight" class="skill-box">
+                    <div class="border-style skill-bonus default-background">
+                        <span id="insight-bonus">-1</span>
+                    </div>
+                    <span id="insight-origin" class="skill-origin gray-text">WIS</span>
+                    <div class="border-style skill-text default-background">
+                        <span id="insight-text">Проницательность</span>
+                    </div>
+                </div>
+                <div id="religion" class="skill-box">
+                    <div class="border-style skill-bonus default-background">
+                        <span id="religion-bonus">-1</span>
+                    </div>
+                    <span id="religion-origin" class="skill-origin gray-text">INT</span>
+                    <div class="border-style skill-text default-background">
+                        <span id="religion-text">Религия</span>
+                    </div>
+                </div>
+                <div id="stealth" class="skill-box">
+                    <div class="border-style skill-bonus default-background">
+                        <span id="stealth-bonus">-1</span>
+                    </div>
+                    <span id="stealth-origin" class="skill-origin gray-text">DEX</span>
+                    <div class="border-style skill-text default-background">
+                        <span id="stealth-text">Скрытность</span>
+                    </div>
+                </div>
+                <div id="persuasion" class="skill-box">
+                    <div class="border-style skill-bonus default-background">
+                        <span id="persuasion-bonus">-1</span>
+                    </div>
+                    <span id="persuasion-origin" class="skill-origin gray-text">CHA</span>
+                    <div class="border-style skill-text default-background">
+                        <span id="persuasion-text">Убеждение</span>
+                    </div>
+                </div>
+                <div id="animal-handling" class="skill-box">
+                    <div class="border-style skill-bonus default-background">
+                        <span id="animal-handling-bonus">-1</span>
+                    </div>
+                    <span id="animal-handling-origin" class="skill-origin gray-text">WIS</span>
+                    <div class="border-style skill-text default-background">
+                        <span id="animal-handling-text">Уход за животными</span>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <img class="armor-svg img-svg" alt="Armor icon" src="images/icons/armor.svg">
+                <img class="initiative-svg img-svg" alt="Initiative icon" src="images/icons/initiative.svg">
+                <img class="inspiration-svg img-svg" alt="Inspiration icon" src="images/icons/inspiration.svg">
+                <img class="speed-svg img-svg" alt="Speed icon" src="images/icons/speed.svg">
+            </div>
+            <div id="health">
+                <div id="health-bar" class="border-style">
+                    <div class="health-animation-bar"></div>
+                    <span id="hp">9/10</span>
+                </div>
+                <input type="button" onclick="changeHp(1)" id="heal" class="border-style default-background" value="Heal">
+                <input type="button" onclick="changeHp(0)" id="damage" class="border-style default-background" value="Damage">
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+    </footer>
+</body>
+<script src="javascript/app.js"></script>
+<script src="javascript/svg_fix.js"></script>
+<script src="javascript/onclick.js"></script>
+</html>
