@@ -1,0 +1,78 @@
+@font-face {
+  font-family: "Eberron";
+  src: url("../fonts/EBERRON_RUS.otf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+html {
+  font-family: Eberron;
+  font-size: 20px;
+}
+body{
+  margin: 0;
+  height: 100vh;
+  background-size: 100vw;
+  background-image: url("../images/background/backmenu_hires.webp");
+  background-image: url("../images/background/backmenu_hires.jpg");
+  background-color: #681e22;
+  background-blend-mode: multiply;
+}
+main {
+  display: flex;
+  padding: 0 80px;
+}
+#message {
+  color: white;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 1.2em 0 1.2em 50%;
+}
+#stand-by {
+  font-size: 12em;
+  color: white;
+  text-align: center;
+  border: 10px solid #e9c996;
+  background-color: #681e22;
+  box-shadow: 0 0 60px 2px #212121;
+  z-index: 100;
+  height: calc(100vh + 0.30em);
+  border-bottom: none;
+  border-top: none;
+  position: fixed;
+  width: 40vw;
+  display: flex;
+  align-items: center;
+}
+.main-text {
+  font-size: 1.3em;
+}
+.things-list {
+  text-align: left;
+}
+.absolutely-nothing {
+  font-weight: bold;
+  font-style: italic;
+}
+.hello {
+  font-size: 1.5em;
+  margin: 10px;
+}
+.donations {
+  display: flex;
+  justify-content: center;
+  width: 10em;
+  margin: auto;
+}
+.logo {
+  width: 40px;
+}
+.text-black-shadow {
+  text-shadow: 1px 1px 5px black;
+}
+.russian {
+  color: #e9c996;
+}
+.russian-right {
+  text-align: right;
+}
