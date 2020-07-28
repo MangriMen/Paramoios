@@ -18,7 +18,7 @@
     <style>img[alt="www.000webhost.com"]{display: none};</style>
     <title>DnD5CharlistI</title>
 </head>
-<body onload="onloadWidth()">
+<body onload="onloadBarWidth('xp'); onloadBarWidth('hp'); adjustLevel();">
     <header>
         <span id="header-title">
             DnD5CharlistI
@@ -28,7 +28,20 @@
     </nav> -->
     <main class="border-style">
         <section id="naming">
-            <img id="avatar" alt="User avatar" class="border-style" src="images/buttons/profile/profile.webp">
+            <div id="profile-and-level">
+                <img id="avatar" alt="User avatar" class="border-style" src="images/buttons/profile/profile.webp">
+                <div id="xp-bar" class="border-style default-background">
+                    <div class="bar-animation">
+                        <div id="xp-bar-fill" class="bar-fill xp-color">
+                            <div class="wave-main wave-level xp-color"></div>
+                        </div>
+                    </div>
+                    <span data-level="900" id="xp" class="bar-text">640</span>
+                </div>
+                <div id="level-text" class="border-style default-background">
+                    <span>Уровень <span id="level"></span></span>
+                </div>
+            </div>
             <div id="naming-text">
                 <span id="player-name">
                     KRAKEN[5X]ZEUS_MR.REALLEOPRAIM
@@ -36,10 +49,12 @@
                 <span id="known-as" class="gray-text">
                     известный как...
                 </span>
-                <span id="character-name" class="align-to-right">
+                <span id="character-name" class="align-to-right text-to-right">
                     Элис Мириэль (Тиа)
                 </span>
-                <div id="character-origin" class="align-to-right gray-text">
+                <div id="character-origin" class="align-to-right gray-text text-to-right">
+                    <span id="character-alignment">Хаотично-Нейтральный</span>
+                    <br>
                     <span id="character-race">
                         Человек
                     </span>
@@ -51,14 +66,6 @@
                     <span id="character-background">
                         Мудрец
                     </span>
-                    <!-- <div id="character-level-box">
-                        <span id="character-level-text">
-                            Уровень
-                        </span>
-                        <span id="character-level">
-                            4
-                        </span>
-                    </div> -->
                 </div>
             </div>
         </section>
@@ -353,11 +360,13 @@
                 <img class="speed-svg img-svg" alt="Speed icon" src="images/icons/speed.svg">
             </div>
             <div id="health">
-                <div id="health-bar" class="border-style">
-                    <div id="health-bar-fill" class="health-animation-bar">
-                        <div class="wave-main"></div>
+                <div id="hp-bar" class="border-style default-background">
+                    <div class="bar-animation">
+                        <div id="hp-bar-fill" class="bar-fill hp-color">
+                            <div class="wave-main wave-hp hp-color"></div>
+                        </div>
                     </div>
-                    <span id="hp">2/10</span>
+                    <span id="hp" class="bar-text">2/10</span>
                 </div>
                 <input type="button" onclick="changeHp(0)" id="damage" class="border-style default-background" value="Damage">
                 <input type="button" onclick="changeHp(1)" id="heal" class="border-style default-background" value="Heal">
