@@ -1,15 +1,4 @@
-@font-face {
-  font-family: "Eberron";
-  src: url("../fonts/EBERRON_RUS.otf") format("truetype");
-  font-style: normal;
-  font-weight: normal;
-}
-html {
-  font-family: Eberron;
-  font-size: 20px;
-}
 body {
-  margin: 0;
   background-image: url("../images/background/backmenu.webp");
   background-image: url("../images/background/backmenu.jpg");
 }
