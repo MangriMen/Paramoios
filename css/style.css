@@ -217,6 +217,23 @@ main {
   grid-column-start: 1;
   grid-column-end: 3;
   grid-row: 1;
+  position: relative;
+  overflow: hidden;
+}
+.wave-main{
+  position: absolute;
+  right: -2%;
+  top: -180%;
+  width: 6em;
+  height: 6em;
+  background-color: #b70f0a;
+  border-radius: 40%;
+  animation: wave 8s linear infinite;
+}
+@keyframes wave {
+  100% {
+     transform: rotate(360deg);
+  }
 }
 #heal, #damage {
   margin: 5px 0;
@@ -226,31 +243,37 @@ main {
   height: 32px;
   line-height: 32px;
 }
-#heal {
-  grid-column: 1;
-  grid-row: 2;
+#heal:hover, #damage:hover {
+  background-color: #edd6ad;
 }
-#damage {
+#heal:active, #damage:active {
+  background-color: #baa888;
+}
+#heal {
   justify-self: end;
   grid-column: 2;
   grid-row: 2;
 }
+#damage {
+  grid-column: 1;
+  grid-row: 2;
+}
 .health-animation-bar {
-  position: absolute;
+  position: relative;
   z-index: 1;
   height: 25px;
-  width: 150px;
-  background-color: #840705;
-  transition: width 1s cubic-bezier(0,0,1,1) 50ms;
-}
-#health-bar:hover .health-animation-bar{
-  width: 200px;
-  z-index: 1;
+  background-color: #b70f0a;
+  /* transition: width 1s cubic-bezier(0,0,1,1) 50ms; */
+  transition: width 0.5s ease-out;
 }
 #hp {
-  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  color: white;
+  text-shadow: 0 0 10px 20px black;
   z-index: 100;
-  position: relative;
 }
 #heal, #damage {
   position: relative;

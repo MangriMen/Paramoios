@@ -18,7 +18,7 @@
     <style>img[alt="www.000webhost.com"]{display: none};</style>
     <title>DnD5CharlistI</title>
 </head>
-<body>
+<body onload="onloadWidth()">
     <header>
         <span id="header-title">
             DnD5CharlistI
@@ -354,11 +354,13 @@
             </div>
             <div id="health">
                 <div id="health-bar" class="border-style">
-                    <div class="health-animation-bar"></div>
-                    <span id="hp">9/10</span>
+                    <div id="health-bar-fill" class="health-animation-bar">
+                        <div class="wave-main"></div>
+                    </div>
+                    <span id="hp">2/10</span>
                 </div>
-                <input type="button" onclick="changeHp(1)" id="heal" class="border-style default-background" value="Heal">
                 <input type="button" onclick="changeHp(0)" id="damage" class="border-style default-background" value="Damage">
+                <input type="button" onclick="changeHp(1)" id="heal" class="border-style default-background" value="Heal">
                 </div>
             </div>
         </section>
