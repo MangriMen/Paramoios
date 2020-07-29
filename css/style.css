@@ -304,17 +304,23 @@ main {
 }
 #heal, #damage {
   margin: 5px 0;
-  text-align: center;
   display: inline-block;
   width: 80px;
   height: 32px;
   line-height: 32px;
 }
-#heal:hover, #damage:hover {
+.default-focus-active:hover {
   background-color: #edd6ad;
 }
-#heal:active, #damage:active {
+.default-focus-active:active {
   background-color: #baa888;
+}
+.default-button {
+  text-align: center;
+  outline: none;
+}
+.default-button:focus {
+  border-color: #b5353b;
 }
 #heal {
   justify-self: end;
