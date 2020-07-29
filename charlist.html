@@ -383,9 +383,16 @@
                             <span id="platinum" class="default-background border-style border-radius currency-value">100000</span>
                         </div>
                     </div>
-                    <button type="button" id="new-item" class="default-background border-style border-radius default-hover-active default-button"><img id="new-item-img" src="https://cdn.pixabay.com/photo/2012/04/13/00/21/plus-31216_1280.png"></button>
+                    <button type="button" name="Add new item to inventory" onclick="displayNewItemDialog()"id="new-item" class="default-background border-style border-radius default-hover-active default-button"><img id="new-item-img" src="https://cdn.pixabay.com/photo/2012/04/13/00/21/plus-31216_1280.png" alt="New item cross"></button>
                     <div id="equipment" class="default-background border-style border-radius">
-                        
+                    </div>
+                    <div id="new-item-dialog" class="default-background border-style border-radius">
+                        <input type="text" id="item-name" class="border-style border-radius default-background default-hover-active default-button input-font-style">
+                        <div id="image-select"></div>
+                        <div id="dialog-buttons">
+                            <button id="cancel-item" name="Cancel creating item" onclick="addNewItemToInventory(0)" class="border-style border-radius default-background default-hover-active default-button input-font-style">Отменить</button>
+                            <button id="confirm-item" name="Confirm creating item" onclick="addNewItemToInventory(1)" class="border-style border-radius default-background default-hover-active default-button input-font-style">Принять</button>
+                        </div>
                     </div>
                 </div>
             </div>
