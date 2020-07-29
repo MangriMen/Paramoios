@@ -340,7 +340,7 @@ main {
   grid-column: 1;
   grid-row: 2;
 }
-#heal, #damage, #temp, #health-dice-board {
+#heal, #damage, #temp, #health-dice-board, #death-saves {
   line-height: inherit;
   font-family: Eberron;
   font-size: 1em;
@@ -364,4 +364,11 @@ main {
   text-align: left;
 }
 #death-saves{
+  margin-top: 5px;
+  height: 32px;
+  width: 100%;
+  grid-column-start: 1;
+  grid-column-end: 4;
+  font-size: 0.65em;
+  text-align: left;
 }
