@@ -16,7 +16,7 @@ main {
 #naming {
   display: flex;
   max-width: 960px;
-  margin-bottom: 1em;
+  margin-bottom: 1.5em;
 }
 #naming-text {
   display: flex;
@@ -27,7 +27,7 @@ main {
 #profile-and-level {
   display: flex;
   flex-direction: column;
-  margin: 0.8em 0.5em 0.8em 0.8em;
+  margin: 0.8em 1em;
 }
 #avatar {
   width: 4.8em;
@@ -112,8 +112,8 @@ main {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  padding: 0 15px;
-  margin: 10px 0 10px 0;
+  padding: 0 1em;
+  margin: 0.5em 0;
 }
 .characteristic {
   width: 120px;
@@ -188,7 +188,7 @@ main {
   display: flex;
   width: 250px;
   height: 20px;
-  margin: 20px;
+  margin: 0 20px 20px 20px;
   justify-content: space-between;
 }
 .skill-bonus {
@@ -225,6 +225,7 @@ main {
   auto
   auto;
   justify-content: space-between;
+  margin-top: 1em;
 }
 #health {
   margin: 0 44px;
@@ -268,7 +269,7 @@ main {
   display: inline-block;
   width: 80px;
   height: 32px;
-  line-height: 32px;
+  line-height: 26px;
 }
 .default-button {
   text-align: center;
