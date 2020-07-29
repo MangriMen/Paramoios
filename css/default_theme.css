@@ -50,3 +50,14 @@ header {
 #equipment-box {
   box-shadow: 0px 0px 10px 0px rgba(66,66,66,0.75);
 }
+#new-item-dialog {
+  box-shadow: 0 0 20px 2px black;
+}
+.image-selected {
+  border: 2px solid blue;
+}
+#item-additional {
+  background-color: #85615a;
+  border: 2px solid #681e22;
+  box-shadow: 0 0 10px 2px #424242;
+}
