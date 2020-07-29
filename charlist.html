@@ -361,13 +361,13 @@
                 <div id="hp-bar" class="border-style default-background">
                     <div class="bar-animation">
                         <div id="hp-bar-fill" class="bar-fill hp-color">
-                            <div class="wave-main wave-hp hp-color"></div>
+                            <div id="hp-liquid" class="wave-main wave-hp hp-color"></div>
                         </div>
                     </div>
                     <span id="hp" class="bar-text">2/10</span>
                 </div>
                 <input type="button" onclick="changeHp(0)" id="damage" class="border-style default-background default-focus-active default-button" value="Damage">
-                <input type="button" onclick="" id="temp" class="border-style default-background default-focus-active default-button" value="TMP">
+                <input type="button" onclick="temporaryChange()" id="temp" class="border-style default-background default-focus-active default-button" value="TMP">
                 <input type="button" onclick="changeHp(1)" id="heal" class="border-style default-background default-focus-active default-button" value="Heal">
                 <input type="button" id="health-dice-board" class="border-style default-background default-focus-active default-button" value="Оставшиеся кубы здоровья">
                 <input type="button" id="death-saves" class="border-style default-background default-focus-active default-button" value="Спасброски от смерти">
