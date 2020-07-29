@@ -291,7 +291,7 @@ main {
   grid-column: 1;
   grid-row: 2;
 }
-#heal, #damage, #temp, #health-dice-board, #death-saves {
+.input-font-style {
   line-height: inherit;
   font-family: Eberron;
   font-size: 1em;
