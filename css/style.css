@@ -286,6 +286,12 @@ main {
 .hp-color {
   background-color: #b70f0a;
 }
+.max-hp-temp-color {
+  background-color: #860ab7;
+}
+.hp-temp-color {
+  background-color: #b7940a;
+}
 .wave-main {
   position: absolute;
   border-radius: 40%;
