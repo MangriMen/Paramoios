@@ -69,7 +69,7 @@ main {
   text-shadow: 0 0 5px black;
 }
 .xp-color {
-  background-color: #629c44;
+  background-color: #529c2d;
 }
 .bar-animation {
   height: inherit;
@@ -284,7 +284,7 @@ main {
   position: relative;
 }
 .hp-color {
-  background-color: #b70f0a;
+  background-color: #b5353b;
 }
 .max-hp-temp-color {
   background-color: #860ab7;
@@ -370,6 +370,7 @@ main {
   text-align: left;
 }
 #death-saves{
+  display: none;
   margin-top: 5px;
   height: 32px;
   width: 100%;
