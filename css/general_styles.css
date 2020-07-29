@@ -12,7 +12,8 @@ html {
   font-family: Eberron;
   font-size: 20px;
   scrollbar-width: thin;
-  scrollbar-color: #4f171a transparent;
+  scrollbar-color: #dbb57b transparent;
+  scrollbar-highlight-color: #ffd28f;
 }
 body {
   margin: 0;
@@ -24,26 +25,25 @@ input {
 ::-webkit-scrollbar-button {
   background-image:url('');
   background-repeat:no-repeat;
-  width: 5px;
-  height: 0px
-}
-::-webkit-scrollbar-track {
-  background-color: #9c2d33;
+  display: none;
 }
 ::-webkit-scrollbar-thumb {
   -webkit-border-radius: 200px;
   border-radius: 200px;
-  background-color:#4f171a;
+  background-color: #dbb57b;
 }
 ::-webkit-scrollbar-thumb:active {
-  background-color:#82262b;
+  background-color:#ffd28f;
 }
-::-webkit-resizer{
+::-webkit-resizer {
   background-image:url('');
   background-repeat: no-repeat;
-  width: 14px;
-  height: 0px;
+  background: #dbb57b;
+}
+::-webkit-scrollbar-corner {
+  background-color:#681e22;
 }
 ::-webkit-scrollbar{
   width: 7px;
+  height: 7px;
 }
