@@ -25,18 +25,6 @@ header {
   border: 1.5px solid #681e22;
   background-color: #edd6ad;
 }
-.characteristic-bonus {
-  border: 2px solid #681e22;
-}
-.characteristic-value {
-  border: 2px solid #681e22;;
-}
-.characteristic-deathsave {
-  border: 2px solid #681e22;;
-}
-.characteristic-deathsave-checkbox {
-  border: 2px solid #681e22;;
-}
 .characteristic-bonus::after, .characteristic-value::after, .characteristic-deathsave::after, .characteristic-deathsave-checkbox::after
 {
   box-shadow: 0px 0px 10px 0px rgba(66,66,66,0.75);
@@ -58,4 +46,7 @@ header {
 }
 .default-button:focus {
   border-color: #b5353b;
+}
+#equipment-box {
+  box-shadow: 0px 0px 10px 0px rgba(66,66,66,0.75);
 }
