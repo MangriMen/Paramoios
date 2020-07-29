@@ -6,7 +6,7 @@ main {
   max-width: 960px;
   margin: 0.25em auto;
 }
-.border-style {
+.border-radius {
   border-radius: 3px;
 }
 #header-title {
@@ -130,8 +130,7 @@ main {
   box-sizing: border-box;
   width: 60px;
   height: 40px;
-  border-top-left-radius: 3px;
-  border-bottom-left-radius: 3px;
+  border-radius: 3px 0 0 3px;
 }
 .second-box {
   width: 40px;
@@ -143,7 +142,7 @@ main {
   height: 20px;
   border-left: none;
   border-bottom: none;
-  border-top-right-radius: 3px;
+  border-radius: 0 3px 0 0;
 }
 .characteristic-deathsave {
   box-sizing: border-box;
@@ -156,8 +155,7 @@ main {
   width: 20px;
   height: 20px;
   border-left: none;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
+  border-radius: 0 10px 10px 0 ;
 }
 .characteristic-bonus, .characteristic-value, .characteristic-deathsave, .characteristic-deathsave-checkbox {
  position: relative;
@@ -325,4 +323,54 @@ main {
   grid-column-end: 4;
   font-size: 0.65em;
   text-align: left;
+}
+#equipment-box {
+  padding: 0.5em;
+  margin-left: 32px;
+  display: flex;
+  position: relative;
+}
+#money-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 10em;
+  position: absolute;
+  top: 0.5em;
+  left: -1.6em;
+}
+.currency-box {
+  height: 32px;
+  display: flex;
+  flex-direction: row;
+}
+.currency-img {
+  height: 32px;
+  width: 32px;
+  box-sizing: border-box;
+  padding: 0.2em;
+  border-radius: 3px 0 0 3px;
+}
+.currency-value {
+  max-height: 32px;
+  padding: 0 0.2em 0 0.2em;
+  line-height: 28px;
+  border-left: none;
+  border-radius: 0 3px 3px 0;
+  font-size: 0.7em;
+}
+#new-item {
+  width: 47px;
+  height: 32px;
+  margin: auto 0.5em 0 0;
+}
+#new-item-img {
+  width: 18px;
+  height: 18px;
+  margin: 0.3em 0 auto 0;
+}
+#equipment {
+  min-height: 12em;
+  width: 8em;
+  display: inline-block;
 }
