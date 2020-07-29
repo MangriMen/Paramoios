@@ -55,6 +55,7 @@ main {
   border-top: none;
   border-radius: 0px;
   position: relative;
+  width: 4.8em;
 }
 #xp {
   font-size: 0.9em;
