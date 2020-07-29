@@ -279,7 +279,7 @@ main {
   height: 25px;
   text-align: center;
   grid-column-start: 1;
-  grid-column-end: 3;
+  grid-column-end: 4;
   grid-row: 1;
   position: relative;
 }
@@ -302,7 +302,7 @@ main {
      transform: rotate(360deg);
   }
 }
-#heal, #damage {
+#heal, #damage, #temp {
   margin: 5px 0;
   display: inline-block;
   width: 80px;
@@ -322,15 +322,6 @@ main {
 .default-button:focus {
   border-color: #b5353b;
 }
-#heal {
-  justify-self: end;
-  grid-column: 2;
-  grid-row: 2;
-}
-#damage {
-  grid-column: 1;
-  grid-row: 2;
-}
 #hp {
   position: absolute;
   top: 0;
@@ -339,9 +330,38 @@ main {
   color: white;
   z-index: 100;
 }
-#heal, #damage {
-  position: relative;
+#heal {
+  justify-self: end;
+  grid-column: 3;
+  grid-row: 2;
+}
+#damage {
+  justify-self: start;
+  grid-column: 1;
+  grid-row: 2;
+}
+#heal, #damage, #temp, #health-dice-board {
   line-height: inherit;
   font-family: Eberron;
   font-size: 1em;
+}
+#temp{
+  justify-self: center;
+  padding: 0;
+  text-align: center;
+  grid-column: 2;
+  grid-row: 2;
+  font-size: 0.6em;
+  height: 32px;
+  width: 32px;
+}
+#health-dice-board{
+  height: 32px;
+  width: 100%;
+  grid-column-start: 1;
+  grid-column-end: 4;
+  font-size: 0.65em;
+  text-align: left;
+}
+#death-saves{
 }
