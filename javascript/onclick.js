@@ -2,10 +2,11 @@
 
 let hpFillEl = document.getElementById('hp-bar-fill').classList;
 let hpWaveEl = document.getElementById('hp-liquid').classList;
-let inventory = document.getElementById('equipment');
+let equipment = document.getElementById('equipment');
 let newItemDialog = document.getElementById('new-item-dialog');
 let hpDialog = document.getElementById('hp-dialog');
 let selectedImageForItem = null;
+let selectedItemInfo = null;
 let tempFlag = 0;
 let tempHp = 0;
 let bufferMaxHp = 0;
@@ -15,6 +16,8 @@ document.getElementById('confirm-hp').addEventListener('click', changeHp);
 document.getElementById('cancel-hp').addEventListener('click', displayHpDialog);
 document.getElementById('heal').addEventListener('click', displayHpDialog);
 document.getElementById('damage').addEventListener('click', displayHpDialog);
+let x = 0;
+let y = 0;
 
 function displayHpDialog() {
   if (getComputedStyle(hpDialog).display == 'none') {
@@ -159,16 +162,19 @@ function displayNewItemDialog() {
   } else {
     return;
   }
+  document.getElementById('item-name').value = null;
   let pts = "images/items/"
   let itemsImgSrcs = [pts+"axe.svg", pts+"rope.svg", pts+"shield.svg", pts+"sword.svg"];
-  while (document.getElementById('image-select').firstChild) {
-    document.getElementById('image-select').removeChild(element.firstChild);
+  let imageSelect = document.getElementById('image-select');
+  while (imageSelect.firstChild) {
+    imageSelect.removeChild(imageSelect.firstChild);
   }
   for (let i = 0; i < itemsImgSrcs.length; i++) {
     let itemImg = document.createElement("img");
     itemImg.src = itemsImgSrcs[i];
     itemImg.classList.add("image-select-button", "border-style", "border-radius", "default-background");
     itemImg.addEventListener("click", selectImageToItem);
+    if (i == 0) { selectedImageForItem = itemImg; selectedImageForItem.classList.add("image-selected"); };
     document.getElementById('image-select').appendChild(itemImg);
   }
 }
@@ -183,7 +189,7 @@ function addNewItemToInventory(isConfirm) {
     newItem.classList.add("item", "default-background", "border-style", "border-radius");
     newItem.addEventListener("click", openItemAdditionalInfo);
     newItem.value = document.getElementById('item-name').value;
-    inventory.appendChild(newItem);
+    equipment.appendChild(newItem);
     newItemDialog.style.display = 'none';
   }
 }
@@ -198,41 +204,68 @@ function selectImageToItem() {
   }
 }
 
+function getCoords(elem) {
+  var box = elem.getBoundingClientRect();
+  return {
+    top: box.top + pageYOffset,
+    left: box.left + pageXOffset
+  };
+}
+
+equipment.onmousedown = getMouseCoord;
+function getMouseCoord(e) {
+  var m = getCoords(this);
+  x = e.pageX - m.left;
+  y = e.pageY - m.top;
+}
+
 function openItemAdditionalInfo() {
   let isItemAdditional = document.getElementById("item-additional");
-  if(isItemAdditional == null) {
-    let itemAdditional = document.createElement("div");
-    let itemDisplayName = document.createElement("input");
-    let itemAdditionalClose = document.createElement("button");
-    let itemAdditionalCloseImg = document.createElement("img");
-  
-    itemAdditional.id = "item-additional";
-    
-    itemDisplayName.classList.add("border-style", "border-radius", "default-background", "default-hover-active", "default-button", "input-font-style");
-    itemDisplayName.id = "item-display-name";
-    itemDisplayName.type = "text";
-    itemDisplayName.value = this.value;
-    itemDisplayName.readOnly = true;
-  
-    itemAdditionalClose.id = "item-additional-close";
-    itemAdditionalClose.classList = "border-style border-radius default-background default-hover-active default-button input-font-style";
-    itemAdditionalClose.addEventListener("click", closeAdditionalInfo);
-  
-    itemAdditionalCloseImg.id = "item-additional-close-img";
-    itemAdditionalCloseImg.src = "images/icons/control_icon/close.svg";
-  
-    itemAdditionalClose.appendChild(itemAdditionalCloseImg);
-  
-    itemAdditional.appendChild(itemDisplayName);
-    itemAdditional.appendChild(itemAdditionalClose);
-  
-    inventory.appendChild(itemAdditional);
+  if (selectedItemInfo != this) {
+    if(isItemAdditional != null) {
+      closeAdditionalInfo();
+    }
+    createAdditionalInfo(this);
+  } else {
+    isItemAdditional != null ? closeAdditionalInfo() : createAdditionalInfo(this);
   }
+  selectedItemInfo = this;
+}
+
+function createAdditionalInfo(item) {
+  let itemAdditional = document.createElement("div");
+  let itemDisplayName = document.createElement("input");
+  let itemAdditionalClose = document.createElement("button");
+  let itemAdditionalCloseImg = document.createElement("img");
+
+  itemAdditional.id = "item-additional";
+  
+  itemDisplayName.classList.add("border-style", "border-radius", "default-background", "default-hover-active", "default-button", "input-font-style");
+  itemDisplayName.id = "item-display-name";
+  itemDisplayName.type = "text";
+  itemDisplayName.value = item.value;
+  itemDisplayName.readOnly = true;
+
+  itemAdditionalClose.id = "item-additional-close";
+  itemAdditionalClose.classList = "border-style border-radius default-background default-hover-active default-button input-font-style";
+  itemAdditionalClose.addEventListener("click", closeAdditionalInfo);
+
+  itemAdditionalCloseImg.id = "item-additional-close-img";
+  itemAdditionalCloseImg.src = "images/icons/control_icon/close.svg";
+
+  itemAdditionalClose.appendChild(itemAdditionalCloseImg);
+
+  itemAdditional.appendChild(itemDisplayName);
+  itemAdditional.appendChild(itemAdditionalClose);
+
+  equipment.appendChild(itemAdditional);
+  itemAdditional.style.left = x + "px";
+  itemAdditional.style.top = y + "px";
 }
 
 function closeAdditionalInfo() {
   let itemAdditional = document.getElementById("item-additional");
   if (itemAdditional != null) {
-    inventory.removeChild(itemAdditional);
+    equipment.removeChild(itemAdditional);
   }
 }
