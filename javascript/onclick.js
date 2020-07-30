@@ -199,8 +199,8 @@ function selectImageToItem() {
 }
 
 function openItemAdditionalInfo() {
-  let check = document.getElementById("item-additional");
-  if(check == null) {
+  let isItemAdditional = document.getElementById("item-additional");
+  if(isItemAdditional == null) {
     let itemAdditional = document.createElement("div");
     let itemDisplayName = document.createElement("input");
     let itemAdditionalClose = document.createElement("button");
