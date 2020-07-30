@@ -47,7 +47,7 @@ header {
 .default-button:focus {
   border-color: #b5353b;
 }
-#equipment-box {
+.default-shadow {
   box-shadow: 0px 0px 10px 0px rgba(66,66,66,0.75);
 }
 #new-item-dialog {
