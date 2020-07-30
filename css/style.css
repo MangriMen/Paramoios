@@ -361,6 +361,7 @@ main {
   height: 32px;
   width: 32px;
   box-sizing: border-box;
+  border-right: none;
   padding: 0.2em;
   border-radius: 3px 0 0 3px;
 }
@@ -401,10 +402,7 @@ main {
   position: absolute;
   height: 200px;
   width: 150px;
-  top: 1.5em;
-  left: 1.5em;
   border-radius: 3px;
-  border-width: 3px;
   text-align: center;
 }
 #item-display-name {
@@ -414,22 +412,22 @@ main {
   font-size: 0.8em;
 }
 #item-additional-close {
-  width: 18px;
-  height: 18px;
+  width: 14px;
+  height: 14px;
   position: absolute;
-  top: -0.4em;
-  right: -0.5em;
+  top: -0.3em;
+  right: -0.4em;
   padding: 0;
 }
 #item-additional-close-img {
-  width: 10px;
-  height: 10px;
-  margin: 0 0 0.3em 0;
+  width: 80%;
+  height: 80%;
+  margin: 0 0 0.45em 0;
 }
 #new-item-dialog {
   display: none;
   width: 180px;
-  height: 180px;
+  height: 220px;
   border-width: 4px;
   position: absolute;
   left: 0;
@@ -459,23 +457,28 @@ main {
   width: 5.5em;
 }
 .dialog-buttons {
+  position: absolute;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
+  left: 0;
+  right: 0;
+  bottom: -0.6em;
 }
 #image-select {
   display: flex;
   flex-wrap: wrap;
-  height: calc(100% - 4em);
+  min-height: calc(100% - 4em);
   width: calc(100% - 1em);
   box-sizing: border-box;
   margin: 0 auto 1em auto;
   justify-content: space-between;
+  align-content: space-evenly;
 }
 .image-select-button {
-  width: 32px;
-  height: 32px;
+  width: 48px;
+  height: 48px;
   box-sizing: border-box;
-  padding: 2px;
   cursor: pointer;
+  padding: 1px;
 }
