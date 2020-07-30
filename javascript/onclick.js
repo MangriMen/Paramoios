@@ -4,17 +4,39 @@ let hpFillEl = document.getElementById('hp-bar-fill').classList;
 let hpWaveEl = document.getElementById('hp-liquid').classList;
 let inventory = document.getElementById('equipment');
 let newItemDialog = document.getElementById('new-item-dialog');
+let hpDialog = document.getElementById('hp-dialog');
 let selectedImageForItem = null;
 let tempFlag = 0;
 let tempHp = 0;
 let bufferMaxHp = 0;
 let bufferHp = 0;
+let isHealed = false;
+document.getElementById('confirm-hp').addEventListener('click', changeHp);
+document.getElementById('cancel-hp').addEventListener('click', displayHpDialog);
+document.getElementById('heal').addEventListener('click', displayHpDialog);
+document.getElementById('damage').addEventListener('click', displayHpDialog);
 
-function changeHp(isHealed) {
+function displayHpDialog() {
+  if (getComputedStyle(hpDialog).display == 'none') {
+    if (this.id == 'heal') {
+      document.getElementById('hp-header').textContent = 'Восстановить:';
+      isHealed = 1;
+    } else {
+      document.getElementById('hp-header').textContent = 'Нанести урон:';
+      isHealed = 0;
+    }
+    document.getElementById('hp-value').value = 1;
+    hpDialog.style.display = 'block';
+  } else {
+    hpDialog.style.display = 'none';
+  }
+}
+
+function changeHp() {
   let oldHp = (document.getElementById('hp').textContent).split('/');
   let actualHp = Number(oldHp[0]);
   let maxHp = Number(oldHp[1]);
-  let offsetHp = Math.abs(Number(prompt('Введите необходимое количество:','0')));
+  let offsetHp = Math.abs(Number(document.getElementById('hp-value').value));// Math.abs(Number(prompt('Введите необходимое количество:','0')));
   let newHp = 0;
   let final = '';
 
