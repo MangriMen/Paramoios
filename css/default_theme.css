@@ -61,3 +61,6 @@ header {
   border: 3px solid #681e22;
   box-shadow: 0 0 10px 2px #424242;
 }
+.input-font-style {
+  color: black;
+}
