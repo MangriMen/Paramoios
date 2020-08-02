@@ -110,8 +110,10 @@ main {
 }
 #character-stats {
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   align-items: flex-end;
+  position: relative;
   padding: 0 1em;
   margin: 0.5em 0;
 }
@@ -173,12 +175,23 @@ main {
 .characteristic-deathsave-checkbox::after {
   border-radius: 10px;
 }
-.dice {
-  width: 40px;
-  height: 40px;
+#main-dice {
+  width: 54px;
+  height: 54px;
 }
-#main-dice-img {
-  width: inherit;
+#dice-list {
+  display: none;
+  position: absolute;
+  flex-direction: column;
+  align-content: space-between;
+  left: 47.2%;
+  top: 105%;
+  z-index: 50;
+}
+.dice-in-list {
+  margin: 0.2em 0;
+  width: 54px;
+  height: 54px;
 }
 #skills {
   width: 14.5em;
@@ -210,7 +223,7 @@ main {
   font-size: 0.8em;
   text-transform: uppercase;
 }
-.img-svg {
+.aiis-svg {
   width: 64px;
   height: 64px;
   border-radius: 3px;
