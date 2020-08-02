@@ -18,6 +18,9 @@ document.getElementById('heal').addEventListener('click', displayHpDialog);
 document.getElementById('damage').addEventListener('click', displayHpDialog);
 let x = 0;
 let y = 0;
+document.getElementById('main-dice').addEventListener('click', toggleDiceList);
+let mainDiceImg = document.getElementById('main-dice-img');
+let diceList = document.getElementById('dice-list');
 
 function displayHpDialog() {
   if (getComputedStyle(hpDialog).display == 'none') {
@@ -267,5 +270,15 @@ function closeAdditionalInfo() {
   let itemAdditional = document.getElementById("item-additional");
   if (itemAdditional != null) {
     equipment.removeChild(itemAdditional);
+  }
+}
+
+function toggleDiceList() {
+  if (getComputedStyle(diceList).display == "none") {
+    diceList.style.display = "flex";
+    mainDiceImg.src = "images/icons/control_icon/close.svg";
+  } else {
+    diceList.style.display = "none";
+    mainDiceImg.src = "images/buttons/dices/D20.svg";
   }
 }
