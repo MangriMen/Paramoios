@@ -26,6 +26,11 @@ let numberFields = document.getElementsByClassName('number-input');
 for (let item of numberFields) {
   item.addEventListener('keydown', numberCheck);
 }
+let textsAutoWidth = document.getElementsByClassName('text-auto-width');
+for (let item of textsAutoWidth) {
+  item.addEventListener('keydown', autoWidth);
+  item.dispatchEvent(new Event('keydown'));
+}
 
 function displayHpDialog() {
   if (getComputedStyle(hpDialog).display == 'none') {
@@ -150,6 +155,12 @@ function numberCheck() {
       el.value = '0';
     }
   }, 500);
+}
+
+let timerAutoWidth = null;
+function autoWidth() {
+  let fontSize = parseInt(getComputedStyle(this).fontSize) / 2;
+  this.style.width = ((this.value.length + 1) * fontSize + 'px');
 }
 
 function adjustLevel() {
