@@ -187,7 +187,7 @@ function numberCheck() {
 let timerAutoWidth = null;
 function autoWidth() {
   let fontSize = parseInt(getComputedStyle(this).fontSize) / 2;
-  this.style.width = ((this.value.length + 1) * fontSize + 'px');
+  this.style.width = ((this.value.length + 2) * fontSize + 'px');
 }
 
 function adjustLevel() {
