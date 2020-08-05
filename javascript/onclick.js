@@ -32,6 +32,29 @@ for (let item of textsAutoWidth) {
   item.dispatchEvent(new Event('keydown'));
 }
 
+const levelDependenceTable = {
+  1: 0,
+  2: 300,
+  3: 900,
+  4: 2700,
+  5: 6500,
+  6: 14000,
+  7: 23000,
+  8: 34000,
+  9: 48000,
+  10: 64000,
+  11: 85000,
+  12: 100000,
+  13: 120000,
+  14: 140000,
+  15: 165000,
+  16: 195000,
+  17: 225000,
+  18: 265000,
+  19: 305000,
+  20: 355000
+}
+
 function displayHpDialog() {
   if (getComputedStyle(hpDialog).display == 'none') {
     if (this.id == 'heal') {
@@ -112,7 +135,6 @@ function hpValidation(actual, maximum) {
   } else if (actual < 0) {
     actual = 0;
   }
-
   return actual;
 }
 
@@ -125,8 +147,12 @@ function onloadBarWidth(spanId) {
     maxValue = Number(value[1]);
   }
   if (spanId == 'xp') {
-    actualValue = Number(document.getElementById('xp').textContent);
-    maxValue = Number(document.getElementById('xp').getAttribute('data-level'));
+    actualValue = Number(document.getElementById('xp').value);
+    let nextLevel = Number(document.getElementById('level').textContent);
+    let minValue = levelDependenceTable[nextLevel < Object.keys(levelDependenceTable).length ? nextLevel : 20];
+    maxValue = levelDependenceTable[nextLevel + 1 < Object.keys(levelDependenceTable).length ? nextLevel + 1 : 20];
+    actualValue -= minValue;
+    maxValue -= minValue;
   }
 
   changeBarWidth(actualValue, maxValue, spanId);
@@ -135,6 +161,7 @@ function onloadBarWidth(spanId) {
 function changeBarWidth(newValue, maxValue, spanId) {
   let maxWidth = document.getElementById(spanId + '-bar').offsetWidth;
   let newWidth = (newValue / maxValue) * maxWidth;
+  console.log(newWidth);
   document.getElementById(spanId + '-bar-fill').style.width = !newWidth ? 0 : (newWidth - 6) + 'px';
 }
 
@@ -143,6 +170,7 @@ xpField.onkeydown = function() {
   clearTimeout(timerXp);
   timerXp = setTimeout(function() {
     adjustLevel();
+    onloadBarWidth('xp');
   }, 500);
 }
 
@@ -164,28 +192,6 @@ function autoWidth() {
 }
 
 function adjustLevel() {
-  let levelDependenceTable = {
-    1: 0,
-    2: 300,
-    3: 900,
-    4: 2700,
-    5: 6500,
-    6: 14000,
-    7: 23000,
-    8: 34000,
-    9: 48000,
-    10: 64000,
-    11: 85000,
-    12: 100000,
-    13: 120000,
-    14: 140000,
-    15: 165000,
-    16: 195000,
-    17: 225000,
-    18: 265000,
-    19: 305000,
-    20: 355000
-  }
   let level = 0;
   let xp = Number(document.getElementById('xp').value);
   while ((level < Object.keys(levelDependenceTable).length) && (xp >= levelDependenceTable[level + 1])) {
