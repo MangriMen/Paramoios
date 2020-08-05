@@ -21,6 +21,7 @@ let y = 0;
 document.getElementById('main-dice').addEventListener('click', toggleDiceList);
 let mainDiceImg = document.getElementById('main-dice-img');
 let diceList = document.getElementById('dice-list');
+let xpField = document.getElementById('xp');
 
 function displayHpDialog() {
   if (getComputedStyle(hpDialog).display == 'none') {
@@ -128,6 +129,15 @@ function changeBarWidth(newValue, maxValue, spanId) {
   document.getElementById(spanId + '-bar-fill').style.width = !newWidth ? 0 : (newWidth - 6) + 'px';
 }
 
+let timerXp = null;
+xpField.onkeydown = function() {
+    clearTimeout(timerId);
+    timerId = setTimeout(function() {
+        adjustLevel();
+    }, 500);
+}
+
+
 function adjustLevel() {
   let levelDependenceTable = {
     1: 0,
@@ -151,8 +161,8 @@ function adjustLevel() {
     19: 305000,
     20: 355000
   }
-  let level = Number(document.getElementById('level').textContent);
-  let xp = Number(document.getElementById('xp').textContent);
+  let level = 0;
+  let xp = Number(document.getElementById('xp').value);
   while ((level < Object.keys(levelDependenceTable).length) && (xp >= levelDependenceTable[level + 1])) {
     level += 1;
   }
