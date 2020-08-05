@@ -101,10 +101,12 @@ main {
 }
 #character-name {
   font-size: 3.6em;
-  margin-top: 0.8em;
+  margin-top: 0.9em;
+  box-sizing: border-box;
+  max-width: 810px;
 }
 #character-origin {
-  margin-top: 4.5em;
+  margin-top: 4.6em;
   right: 0.6em;
   font-size: 1.5em;
 }
