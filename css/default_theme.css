@@ -89,5 +89,6 @@ header {
   background: none;
 }
 .bar-text:focus {
-  border: 3px solid #cf3a42;
+  /* border: 1px solid #cf3a42; */
+  outline: 2px solid #cf3a42;
 }

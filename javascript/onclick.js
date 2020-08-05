@@ -22,6 +22,10 @@ document.getElementById('main-dice').addEventListener('click', toggleDiceList);
 let mainDiceImg = document.getElementById('main-dice-img');
 let diceList = document.getElementById('dice-list');
 let xpField = document.getElementById('xp');
+let numberFields = document.getElementsByClassName('number-input');
+for (let item of numberFields) {
+  item.addEventListener('keydown', numberCheck);
+}
 
 function displayHpDialog() {
   if (getComputedStyle(hpDialog).display == 'none') {
@@ -131,12 +135,22 @@ function changeBarWidth(newValue, maxValue, spanId) {
 
 let timerXp = null;
 xpField.onkeydown = function() {
-    clearTimeout(timerId);
-    timerId = setTimeout(function() {
-        adjustLevel();
-    }, 500);
+  clearTimeout(timerXp);
+  timerXp = setTimeout(function() {
+    adjustLevel();
+  }, 500);
 }
 
+let timerNumberFields = null;
+function numberCheck() {
+  let el = this;
+  clearTimeout(timerNumberFields);
+  timerNumberFields = setTimeout(function() {
+    if (el.value == '') {
+      el.value = '0';
+    }
+  }, 500);
+}
 
 function adjustLevel() {
   let levelDependenceTable = {
