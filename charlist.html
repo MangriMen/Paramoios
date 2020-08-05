@@ -38,7 +38,7 @@
                             <div class="wave-main wave-level xp-color"></div>
                         </div>
                     </div>
-                    <span data-level="900" id="xp" class="bar-text">640</span>
+                    <input type="tel" data-level="900" id="xp" onKeyPress="adjustLevel();" class="border-style input-font-style bar-text" value="640">
                 </div>
                 <div id="level-text" class="border-style border-radius default-background">
                     <span>Уровень <span id="level"></span></span>
@@ -391,19 +391,19 @@
                         </div>
                         <div id="silver-box" class="currency-box default-background border-style border-radius">
                             <img src="images/money/silver.svg" class="currency-img" alt="">
-                            <input type="tel" onKeyPress="if(this.value.length==6) return false;"  id="silver" class="currency-value border-style border-radius default-hover-active input-font-style" value="10">
+                            <input type="tel" onKeyPress="if(this.value.length==6) return false;" id="silver" class="currency-value border-style border-radius default-hover-active input-font-style" value="10">
                         </div>
                         <div id="electrum-box" class="currency-box default-background border-style border-radius">
                             <img src="images/money/electrum.svg" class="currency-img" alt="">
-                            <input type="tel" onKeyPress="if(this.value.length==6) return false;"  id="electrum" class="currency-value border-style border-radius default-hover-active input-font-style" value="0">
+                            <input type="tel" onKeyPress="if(this.value.length==6) return false;" id="electrum" class="currency-value border-style border-radius default-hover-active input-font-style" value="0">
                         </div>
                         <div id="gold-box" class="currency-box default-background border-style border-radius">
                             <img src="images/money/gold.svg" class="currency-img" alt="">
-                            <input type="tel" onKeyPress="if(this.value.length==6) return false;"  id="gold" class="currency-value border-style border-radius default-hover-active input-font-style" value="5">
+                            <input type="tel" onKeyPress="if(this.value.length==6) return false;" id="gold" class="currency-value border-style border-radius default-hover-active input-font-style" value="5">
                         </div>
                         <div id="platinum-box" class="currency-box default-background border-style border-radius">
                             <img src="images/money/platinum.svg" class="currency-img" alt="">
-                            <input type="tel" onKeyPress="if(this.value.length==6) return false;"  id="platinum" class="currency-value border-style border-radius default-hover-active input-font-style" value="0">
+                            <input type="tel" onKeyPress="if(this.value.length==6) return false;" id="platinum" class="currency-value border-style border-radius default-hover-active input-font-style" value="0">
                         </div>
                     </div>
                     <button type="button" name="Add new item to inventory" onclick="displayNewItemDialog()"id="new-item" class="default-background border-style border-radius default-hover-active default-button"><img id="new-item-img" src="https://cdn.pixabay.com/photo/2012/04/13/00/21/plus-31216_1280.png" alt="New item cross"></button>

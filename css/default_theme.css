@@ -14,10 +14,6 @@ header {
   color: #fff;
   text-shadow: 0 0 5px #fff;
 }
-.bar-text {
-  color: white;
-  text-shadow: 0 0 5px black;
-}
 .xp-color {
   background-color: #529c2d;
 }
@@ -82,5 +78,16 @@ header {
   background: none;
 }
 .currency-value:focus {
-  border: 2px solid #681E22;
+  border: 2px solid #b5353b;
+}
+.bar-text {
+  color: white;
+  text-shadow: 0 0 5px black;
+}
+.bar-text {
+  border: none;
+  background: none;
+}
+.bar-text:focus {
+  border: 3px solid #cf3a42;
 }
