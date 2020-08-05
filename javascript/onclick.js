@@ -161,7 +161,6 @@ function onloadBarWidth(spanId) {
 function changeBarWidth(newValue, maxValue, spanId) {
   let maxWidth = document.getElementById(spanId + '-bar').offsetWidth;
   let newWidth = (newValue / maxValue) * maxWidth;
-  console.log(newWidth);
   document.getElementById(spanId + '-bar-fill').style.width = !newWidth ? 0 : (newWidth - 6) + 'px';
 }
 
