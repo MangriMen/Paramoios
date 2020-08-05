@@ -387,30 +387,30 @@
                     <div id="money-box">
                         <div id="copper-box" class="currency-box default-background border-style border-radius">
                             <img src="images/money/copper.svg" class="currency-img" alt="">
-                            <span id="copper" class="currency-value">100000</span>
+                            <input type="tel" onKeyPress="if(this.value.length==6) return false;" id="copper" class="currency-value border-style border-radius default-hover-active input-font-style" value="200">
                         </div>
                         <div id="silver-box" class="currency-box default-background border-style border-radius">
                             <img src="images/money/silver.svg" class="currency-img" alt="">
-                            <span id="silver" class="currency-value">100000</span>
+                            <input type="tel" onKeyPress="if(this.value.length==6) return false;"  id="silver" class="currency-value border-style border-radius default-hover-active input-font-style" value="10">
                         </div>
                         <div id="electrum-box" class="currency-box default-background border-style border-radius">
                             <img src="images/money/electrum.svg" class="currency-img" alt="">
-                            <span id="electrum" class="currency-value">100000</span>
+                            <input type="tel" onKeyPress="if(this.value.length==6) return false;"  id="electrum" class="currency-value border-style border-radius default-hover-active input-font-style" value="0">
                         </div>
                         <div id="gold-box" class="currency-box default-background border-style border-radius">
                             <img src="images/money/gold.svg" class="currency-img" alt="">
-                            <span id="gold" class="currency-value">100000</span>
+                            <input type="tel" onKeyPress="if(this.value.length==6) return false;"  id="gold" class="currency-value border-style border-radius default-hover-active input-font-style" value="5">
                         </div>
                         <div id="platinum-box" class="currency-box default-background border-style border-radius">
                             <img src="images/money/platinum.svg" class="currency-img" alt="">
-                            <span id="platinum" class="currency-value">100000</span>
+                            <input type="tel" onKeyPress="if(this.value.length==6) return false;"  id="platinum" class="currency-value border-style border-radius default-hover-active input-font-style" value="0">
                         </div>
                     </div>
                     <button type="button" name="Add new item to inventory" onclick="displayNewItemDialog()"id="new-item" class="default-background border-style border-radius default-hover-active default-button"><img id="new-item-img" src="https://cdn.pixabay.com/photo/2012/04/13/00/21/plus-31216_1280.png" alt="New item cross"></button>
                     <div id="equipment" class="default-background border-style border-radius">
                     </div>
                     <div id="new-item-dialog" class="default-background border-style border-radius">
-                        <input type="text" id="item-name" class="border-style border-radius default-background default-hover-active default-button input-font-style">
+                        <input type="tel" onKeyPress="if(this.value.length==6) return false;"  id="item-name" class="border-style border-radius default-background default-hover-active default-button input-font-style">
                         <div id="image-select"></div>
                         <div class="dialog-buttons">
                             <button id="cancel-item" name="Cancel creating item" onclick="addNewItemToInventory(0)" class="border-style border-radius default-background default-hover-active default-button input-font-style">Отменить</button>
@@ -429,7 +429,7 @@
                     <span id="hp" class="bar-text">2/10</span>
                     <div id="hp-dialog" class="default-background border-style border-radius">
                             <span id="hp-header"></span>
-                            <input type="text" id="hp-value" class="border-style border-radius default-background default-hover-active default-button input-font-style">
+                            <input type="tel" onKeyPress="if(this.value.length==6) return false;"  id="hp-value" class="border-style border-radius default-background default-hover-active default-button input-font-style">
                             <div class="dialog-buttons">
                                 <button id="cancel-hp" name="Cancel adjusting hp" class="border-style border-radius default-background default-hover-active default-button input-font-style">Отменить</button>
                                 <button id="confirm-hp" name="Confirm adjusting hp" class="border-style border-radius default-background default-hover-active default-button input-font-style">Принять</button>

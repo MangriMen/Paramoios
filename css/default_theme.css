@@ -77,3 +77,10 @@ header {
 #main-dice:active, .dice-in-list:active {
   background-color: #4f171a;
 }
+.currency-value {
+  border: none;
+  background: none;
+}
+.currency-value:focus {
+  border: 2px solid #681E22;
+}
