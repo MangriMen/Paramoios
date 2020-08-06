@@ -78,7 +78,7 @@ header {
   background: none;
 }
 .currency-value:focus {
-  border: 2px solid #b5353b;
+  outline: 2px solid #cf3a42;
 }
 .bar-text {
   color: white;
