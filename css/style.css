@@ -378,6 +378,13 @@ input[type=number] {
   grid-column-end: 4;
   margin-top: 20px;
   text-align: left;
+  resize: none;
+  outline: none;
+  /* font-size: 22px;
+  line-height: 44px;
+  background-image: linear-gradient(to bottom, transparent 38px, #bfac8c 0);
+  background-size: 100% 44px;
+  background-repeat: repeat-y; */
 }
 #traits-text {
   width: 80px;
