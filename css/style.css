@@ -370,6 +370,42 @@ input[type=number] {
   font-size: 0.65em;
   text-align: left;
 }
+#traits {
+  position: absolute;
+  width: 200px;
+  height: 120px;
+  grid-column-start: 1;
+  grid-column-end: 4;
+  margin-top: 20px;
+  text-align: left;
+}
+#traits-text {
+  width: 80px;
+  height: 24px;
+  text-align: center;
+  position: absolute;
+  border-radius: 3px;
+  margin: 0.5em 0 0 3em;
+}
+#ideals {
+  display: none;
+  position: absolute;
+  width: 200px;
+  height: 120px;
+  grid-column-start: 1;
+  grid-column-end: 4;
+  margin-top: 20px;
+  text-align: left;
+}
+#ideals-text {
+  display: none;
+  width: 80px;
+  height: 24px;
+  text-align: center;
+  position: absolute;
+  border-radius: 3px;
+  margin: 0.5em 0 0 3em;
+}
 #equipment-box {
   padding: 0.5em;
   margin: 0.53em 0 0.53em 30px;
