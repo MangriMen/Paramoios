@@ -55,6 +55,11 @@ header {
 .image-selected {
   border: 4px solid #82262a;
 }
+#beautiful-alert {
+  color: white;
+  background-color: #681e22;
+  border: 10px solid #4f181a;
+}
 #item-additional {
   background-color: #85615a;
   border: 3px solid #681e22;
