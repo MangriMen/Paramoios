@@ -14,8 +14,9 @@ let bufferHp = 0;
 let isHealed = false;
 document.getElementById('confirm-hp').addEventListener('click', changeHp);
 document.getElementById('cancel-hp').addEventListener('click', displayHpDialog);
-document.getElementById('heal').addEventListener('click', displayHpDialog);
 document.getElementById('damage').addEventListener('click', displayHpDialog);
+document.getElementById('temp').addEventListener('click', displayHpDialog);
+document.getElementById('heal').addEventListener('click', displayHpDialog);
 let x = 0;
 let y = 0;
 document.getElementById('main-dice').addEventListener('click', toggleDiceList);
@@ -60,9 +61,11 @@ function displayHpDialog() {
     if (this.id == 'heal') {
       document.getElementById('hp-header').textContent = 'Восстановить:';
       isHealed = 1;
-    } else {
+    } else if (this.id == 'damage'){
       document.getElementById('hp-header').textContent = 'Нанести урон:';
       isHealed = 0;
+    } else {
+      document.getElementById('hp-header').textContent = 'Изменить здоровье';
     }
     document.getElementById('hp-value').value = 1;
     hpDialog.style.display = 'block';
@@ -75,11 +78,11 @@ function changeHp() {
   let oldHp = (document.getElementById('hp').textContent).split('/');
   let actualHp = Number(oldHp[0]);
   let maxHp = Number(oldHp[1]);
-  let offsetHp = Math.abs(Number(document.getElementById('hp-value').value));// Math.abs(Number(prompt('Введите необходимое количество:','0')));
+  let offsetHp = Math.abs(Number(document.getElementById('hp-value').value));
   let newHp = 0;
   let final = '';
 
-  if (!Number(offsetHp)) { return; }
+  if (isNaN(offsetHp)) { return; }
 
   offsetHp = !isHealed ? -offsetHp : offsetHp;
   newHp = actualHp + offsetHp;
