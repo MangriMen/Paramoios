@@ -69,7 +69,7 @@ function displayHpDialog() {
     if (this.id == 'heal') {
       document.getElementById('hp-header').textContent = 'Восстановить:';
       isHealed = 1;
-    } else if (this.id == 'damage'){
+    } else if (this.id == 'damage') {
       document.getElementById('hp-header').textContent = 'Нанести урон:';
       isHealed = 0;
     } else {
@@ -94,7 +94,7 @@ function changeHp() {
 
   offsetHp = !isHealed ? -offsetHp : offsetHp;
   newHp = actualHp + offsetHp;
-  
+
   newHp = hpValidation(newHp, maxHp);
 
   final = newHp + '/' + maxHp;
@@ -111,7 +111,7 @@ function temporaryChange() {
   if (!tempFlag) {
     bufferHp = hpField[0];
     bufferMaxHp = hpField[1];
-    tempFlag = prompt('Введите 1 для изменения текущего здоровья, 2 - для максимального:','0');
+    tempFlag = prompt('Введите 1 для изменения текущего здоровья, 2 - для максимального:', '0');
     tempHp = Number(prompt('Введите количество:'));
 
     if (tempFlag == 1) {
@@ -176,9 +176,9 @@ function changeBarWidth(newValue, maxValue, spanId) {
 }
 
 let timerXp = null;
-xpField.onkeydown = function() {
+xpField.onkeydown = function () {
   clearTimeout(timerXp);
-  timerXp = setTimeout(function() {
+  timerXp = setTimeout(function () {
     adjustLevel();
     onloadBarWidth('xp');
   }, 500);
@@ -188,7 +188,7 @@ let timerNumberFields = null;
 function numberCheck() {
   let el = this;
   clearTimeout(timerNumberFields);
-  timerNumberFields = setTimeout(function() {
+  timerNumberFields = setTimeout(function () {
     if (el.value == '') {
       el.value = '0';
     }
@@ -223,7 +223,7 @@ function displayNewItemDialog() {
   }
   document.getElementById('item-name').value = null;
   let pts = "images/items/"
-  let itemsImgSrcs = [pts+"axe.svg", pts+"rope.svg", pts+"shield.svg", pts+"sword.svg", pts+"traveler_pack.svg"];
+  let itemsImgSrcs = [pts + "axe.svg", pts + "rope.svg", pts + "shield.svg", pts + "sword.svg", pts + "traveler_pack.svg"];
   let imageSelect = document.getElementById('image-select');
   while (imageSelect.firstChild) {
     imageSelect.removeChild(imageSelect.firstChild);
@@ -239,7 +239,7 @@ function displayNewItemDialog() {
 }
 
 function addNewItemToInventory(isConfirm) {
-  if(!isConfirm) {
+  if (!isConfirm) {
     newItemDialog.style.display = 'none';
     return;
   } else {
@@ -281,7 +281,7 @@ function getMouseCoord(e) {
 function openItemAdditionalInfo() {
   let isItemAdditional = document.getElementById("item-additional");
   if (selectedItemInfo != this) {
-    if(isItemAdditional != null) {
+    if (isItemAdditional != null) {
       closeAdditionalInfo();
     }
     createAdditionalInfo(this);
@@ -298,7 +298,7 @@ function createAdditionalInfo(item) {
   let itemAdditionalCloseImg = document.createElement("img");
 
   itemAdditional.id = "item-additional";
-  
+
   itemDisplayName.classList.add("border-style", "border-radius", "default-background", "default-hover-active", "default-button", "input-font-style");
   itemDisplayName.id = "item-display-name";
   itemDisplayName.type = "text";
