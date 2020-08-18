@@ -199,14 +199,16 @@ main {
   height: 54px;
 }
 #skills {
-  width: 14.5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 37.5em;
 }
 .skill-box {
   line-height: 24px;
   display: flex;
   width: 250px;
   height: 20px;
-  margin: 0 20px 20px 20px;
   justify-content: space-between;
 }
 .skill-bonus {
@@ -239,28 +241,22 @@ main {
   auto
   auto
   auto;
-  grid-template-rows:
-  auto
+  grid-template-rows: 
   auto
   auto;
+  grid-row-gap: 1.5em;
   justify-content: space-between;
   margin-top: 1em;
+  padding: 0 1em 1em 1em;
 }
 #health {
-  margin: 0 44px;
+  margin: auto;
   display: grid;
   position: relative;
-  grid-template-columns:
-  auto
-  auto;
-  grid-template-rows:
-  auto
-  auto;
-  height: 64px;
   justify-content: center;
 }
 #hp-bar {
-  width: 200px;
+  width: 11.5em;
   height: 25px;
   text-align: center;
   grid-column-start: 1;
@@ -357,10 +353,12 @@ input[type=number] {
   width: 100%;
   grid-column-start: 1;
   grid-column-end: 4;
+  grid-row: 3;
   font-size: 0.65em;
   text-align: left;
 }
 #death-saves{
+  position: relative;
   display: none;
   margin-top: 5px;
   height: 32px;
@@ -370,45 +368,34 @@ input[type=number] {
   font-size: 0.65em;
   text-align: left;
 }
-#traits {
-  position: absolute;
-  width: 200px;
-  height: 120px;
-  grid-column-start: 1;
-  grid-column-end: 4;
-  margin-top: 20px;
-  text-align: left;
+#tibf {
+  margin-top: 1.5em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 30.3em;
+}
+.tibf-board {
+  position: relative;
+}
+.tibf-element-area {
   resize: none;
   outline: none;
-  /* font-size: 22px;
-  line-height: 44px;
-  background-image: linear-gradient(to bottom, transparent 38px, #bfac8c 0);
-  background-size: 100% 44px;
-  background-repeat: repeat-y; */
+  padding: 0.9em 0.4em 0.4em 0.4em;
+  font-size: 0.9em;
+  line-height: 0.9em;
+  width: 100%;
+  height: 7em;
+  box-sizing: border-box;
 }
-#traits-text {
+.tibf-element-label {
   position: absolute;
-  border-radius: 3px;
-  margin: 0.5em 0 0 3em;
-}
-#ideals {
-  display: none;
-  position: absolute;
-  width: 200px;
-  height: 120px;
-  grid-column-start: 1;
-  grid-column-end: 4;
-  margin-top: 20px;
-  text-align: left;
-}
-#ideals-text {
-  display: none;
-  width: 80px;
-  height: 24px;
   text-align: center;
-  position: absolute;
-  border-radius: 3px;
-  margin: 0.5em 0 0 3em;
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: -0.6em;
 }
 #equipment-box {
   padding: 1.2em 0.5em 0.5em 0.5em;
@@ -418,8 +405,11 @@ input[type=number] {
 }
 #equipment-label {
   position: absolute;
+  text-align: center;
+  margin: auto;
+  left: 0;
+  right: 0;
   top: -0.7em;
-  left: 3.5em;
 }
 #money-box {
   display: flex;
@@ -456,10 +446,11 @@ input[type=number] {
   margin: 0.3em 0 auto 0;
 }
 #equipment {
-  min-height: 12em;
-  max-width: 8em;
+  height: 12em;
+  width: 8.5em;
   position: relative;
   flex-grow: 1;
+  overflow-y: auto;
 }
 .item {
   width: 32px;
@@ -554,23 +545,27 @@ input[type=number] {
   padding: 1px;
 }
 #attacks-and-spellcasting {
-  padding: 1em 0.25em 0.25em 0.25em;
+  padding: 1em 0em 0em 0em;
   margin: 1em 0 0 0;
   position: relative;
 }
 #ans-label {
   position: absolute;
-  top: -0.6em;
-  left: 1.8em;
+  text-align: center;
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: -0.7em;
 }
 #ans-items {
   width: 100%;
-  min-height: 7em;
   border-spacing: 0.4em;
 }
 #ans-items th {
   font-size: 0.8em;
-  outline: 1px solid red;
+}
+#ans-items td {
+  height: 1em;
 }
 #ans-item-bonus {
   max-width: 1em;
@@ -578,6 +573,39 @@ input[type=number] {
 #ans-item-dmg {
   max-width: 2em;
 }
-.block-label {
-  padding: 0.1em 0.2em;
+#spellcasting {
+  min-height: 8em;
+  margin: 0.4em;
+  position: relative;
+  flex-grow: 1;
+}
+#features-and-traits {
+  grid-column-start: 1;
+  grid-column-end: 1;
+  grid-row: 2;
+  height: 10em;
+  position: relative;
+}
+#features-and-traits-label {
+  position: absolute;
+  text-align: center;
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: -0.7em;
+}
+#other-profincies-and-languages {
+  grid-column-start: 2;
+  grid-column-end: 4;
+  grid-row: 2;
+  height: 10em;
+  position: relative;
+}
+#other-profincies-and-languages-label {
+  position: absolute;
+  text-align: center;
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: -0.7em;
 }
