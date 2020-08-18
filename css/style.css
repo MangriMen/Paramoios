@@ -533,7 +533,7 @@ input[type=number] {
   min-height: calc(100% - 4em);
   width: calc(100% - 1em);
   box-sizing: border-box;
-  margin: 0 auto 1em auto;
+  margin: 0 auto 1em;
   justify-content: space-between;
   align-content: space-evenly;
 }
