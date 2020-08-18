@@ -247,6 +247,10 @@ function addNewItemToInventory(isConfirm) {
     newItem.classList.add("item", "default-background", "border-style", "border-radius");
     newItem.addEventListener("click", openItemAdditionalInfo);
     newItem.value = document.getElementById('item-name').value;
+    if (newItem.value == "") {
+      alert("Введите название предмета");
+      newItem.style.display='none';
+    }
     equipment.appendChild(newItem);
     newItemDialog.style.display = 'none';
   }
