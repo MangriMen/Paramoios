@@ -389,6 +389,10 @@ input[type=number] {
   height: 7em;
   box-sizing: border-box;
 }
+.tibf-element-area::-webkit-scrollbar{
+  width: 6px;
+  height: 6px;
+}
 .tibf-element-label {
   position: absolute;
   text-align: center;
