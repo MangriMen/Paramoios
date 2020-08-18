@@ -241,13 +241,13 @@ main {
   auto
   auto
   auto;
-  grid-template-rows: 
+  grid-template-rows:
   auto
   auto;
   grid-row-gap: 1.5em;
   justify-content: space-between;
   margin-top: 1em;
-  padding: 0 1em 1em 1em;
+  padding: 0 1em 1em;
 }
 #health {
   margin: auto;
@@ -382,7 +382,7 @@ input[type=number] {
 .tibf-element-area {
   resize: none;
   outline: none;
-  padding: 0.9em 0.4em 0.4em 0.4em;
+  padding: 0.9em 0.4em 0.4em;
   font-size: 0.9em;
   line-height: 0.9em;
   width: 100%;
@@ -398,7 +398,7 @@ input[type=number] {
   top: -0.6em;
 }
 #equipment-box {
-  padding: 1.2em 0.5em 0.5em 0.5em;
+  padding: 1.2em 0.5em 0.5em;
   margin: 1.5em 0 0.5em 30px;
   display: flex;
   position: relative;
@@ -443,7 +443,7 @@ input[type=number] {
 #new-item-img {
   width: 18px;
   height: 18px;
-  margin: 0.3em 0 auto 0;
+  margin: 0.3em 0 auto;
 }
 #equipment {
   height: 12em;
@@ -484,7 +484,7 @@ input[type=number] {
 #item-additional-close-img {
   width: 80%;
   height: 80%;
-  margin: 0 0 0.45em 0;
+  margin: 0 0 0.45em;
 }
 #new-item-dialog {
   display: none;
@@ -507,7 +507,7 @@ input[type=number] {
 #hp-value {
   width: calc(100% - 1em);
   box-sizing: border-box;
-  margin: 0.2em 0 0.5em 0;
+  margin: 0.2em 0 0.5em;
 }
 #confirm-item, #cancel-item {
   font-size: 0.7em;
@@ -545,8 +545,8 @@ input[type=number] {
   padding: 1px;
 }
 #attacks-and-spellcasting {
-  padding: 1em 0em 0em 0em;
-  margin: 1em 0 0 0;
+  padding: 1em 0 0;
+  margin: 1em 0 0;
   position: relative;
 }
 #ans-label {
