@@ -3,6 +3,7 @@
 let hpFillEl = document.getElementById('hp-bar-fill').classList;
 let hpWaveEl = document.getElementById('hp-liquid').classList;
 let equipment = document.getElementById('equipment');
+let equipmentBox = document.getElementById('equipment-box');
 let newItemDialog = document.getElementById('new-item-dialog');
 let hpDialog = document.getElementById('hp-dialog');
 let selectedImageForItem = null;
@@ -31,6 +32,10 @@ let textsAutoWidth = document.getElementsByClassName('text-auto-width');
 for (let item of textsAutoWidth) {
   item.addEventListener('keydown', autoWidth);
   item.dispatchEvent(new Event('keydown'));
+}
+let labelsAutoWidth = document.getElementsByClassName('label-auto-width');
+for (let item of labelsAutoWidth) {
+  labelAutoWidth(item);
 }
 
 const levelDependenceTable = {
@@ -193,6 +198,11 @@ function autoWidth() {
   this.style.width = ((this.value.length + 2) * fontSize + 'px');
 }
 
+function labelAutoWidth(element) {
+  let fontSize = parseInt(getComputedStyle(element).fontSize) / 2;
+  element.style.width = ((element.textContent.length + 1) * fontSize + 'px');
+}
+
 function adjustLevel() {
   let level = 0;
   let xp = Number(document.getElementById('xp').value);
@@ -258,7 +268,7 @@ function getCoords(elem) {
   };
 }
 
-equipment.onmousedown = getMouseCoord;
+equipmentBox.onmousedown = getMouseCoord;
 function getMouseCoord(e) {
   var m = getCoords(this);
   x = e.pageX - m.left;
@@ -304,7 +314,7 @@ function createAdditionalInfo(item) {
   itemAdditional.appendChild(itemDisplayName);
   itemAdditional.appendChild(itemAdditionalClose);
 
-  equipment.appendChild(itemAdditional);
+  equipmentBox.appendChild(itemAdditional);
   itemAdditional.style.left = x + "px";
   itemAdditional.style.top = y + "px";
 }
@@ -312,7 +322,7 @@ function createAdditionalInfo(item) {
 function closeAdditionalInfo() {
   let itemAdditional = document.getElementById("item-additional");
   if (itemAdditional != null) {
-    equipment.removeChild(itemAdditional);
+    equipmentBox.removeChild(itemAdditional);
   }
 }
 

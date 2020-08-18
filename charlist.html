@@ -376,53 +376,55 @@
                     </div>
                 </div>
             </div>
-            <div>
+            <div id="central-2">
                 <img class="armor-svg default-shadow aiis-svg img-svg" alt="Armor icon" src="images/icons/armor.svg">
                 <img class="initiative-svg default-shadow aiis-svg img-svg" alt="Initiative icon" src="images/icons/initiative.svg">
                 <img class="inspiration-svg default-shadow aiis-svg img-svg" alt="Inspiration icon" src="images/icons/inspiration.svg">
                 <img class="speed-svg default-shadow aiis-svg img-svg" alt="Speed icon" src="images/icons/speed.svg">
-                <div id="attacks-and-spellcasting" class="default-background border-style border-radius">
-                    <span id="ans-label" class="block-label default-background border-style border-radius default-shadow">Атаки и заклинания</span>
+                <div id="attacks-and-spellcasting" class="default-background border-style border-radius default-shadow">
+                    <span id="ans-label" class="block-label default-background border-style border-radius default-shadow label-auto-width">Атаки и заклинания</span>
                     <table id="ans-items">
                         <tr>
                             <th id="ans-item-name">Name</th>
                             <th id="ans-item-bonus">Bonus</th>
                             <th id="ans-item-dmg">DMG/Type</th>
                         </tr>
-                        <tr><td></td><td></td><td></td></tr>
-                        <tr><td></td><td></td><td></td></tr>
-                        <tr><td></td><td></td><td></td></tr>
+                        <tr><td id="attack-name-1" class="default-inner-shadow"></td><td id="attack-bonus-1" class="default-inner-shadow"></td><td id="attack-dmg-1" class="default-inner-shadow"></td></tr>
+                        <tr><td id="attack-name-2" class="default-inner-shadow"></td><td id="attack-bonus-2" class="default-inner-shadow"></td><td id="attack-dmg-2" class="default-inner-shadow"></td></tr>
+                        <tr><td id="attack-name-3" class="default-inner-shadow"></td><td id="attack-bonus-3" class="default-inner-shadow"></td><td id="attack-dmg-3" class="default-inner-shadow"></td></tr>
                     </table>
+                    <div id="spellcasting" class="default-background border-style border-radius default-inner-shadow">
+                    </div>
                 </div>
                 <div id="equipment-box" class="default-background border-style border-radius default-shadow">
-                    <span id="equipment-label" class="block-label default-background border-style border-radius default-shadow">Снаряжение</span>
+                    <span id="equipment-label" class="block-label default-background border-style border-radius default-shadow label-auto-width">Снаряжение</span>
                     <div id="money-box">
-                        <div id="copper-box" class="currency-box default-background border-style border-radius default-shadow">
+                        <div id="copper-box" class="currency-box default-background border-style border-radius default-inner-shadow">
                             <img src="images/money/copper.svg" class="currency-img" alt="">
-                            <input type="tel" onKeyPress="if(this.value.length==6) return false;" id="copper" class="number-input currency-value border-style border-radius default-hover-active input-font-style" value="200">
+                            <input type="number" onKeyPress="if(this.value.length==6) return false;" id="copper" class="number-input currency-value border-style border-radius default-hover-active input-font-style" value="200">
                         </div>
-                        <div id="silver-box" class="currency-box default-background border-style border-radius default-shadow">
+                        <div id="silver-box" class="currency-box default-background border-style border-radius default-inner-shadow">
                             <img src="images/money/silver.svg" class="currency-img" alt="">
-                            <input type="tel" onKeyPress="if(this.value.length==6) return false;" id="silver" class="number-input currency-value border-style border-radius default-hover-active input-font-style" value="10">
+                            <input type="number" onKeyPress="if(this.value.length==6) return false;" id="silver" class="number-input currency-value border-style border-radius default-hover-active input-font-style" value="10">
                         </div>
-                        <div id="electrum-box" class="currency-box default-background border-style border-radius default-shadow">
+                        <div id="electrum-box" class="currency-box default-background border-style border-radius default-inner-shadow">
                             <img src="images/money/electrum.svg" class="currency-img" alt="">
-                            <input type="tel" onKeyPress="if(this.value.length==6) return false;" id="electrum" class="number-input currency-value border-style border-radius default-hover-active input-font-style" value="0">
+                            <input type="number" onKeyPress="if(this.value.length==6) return false;" id="electrum" class="number-input currency-value border-style border-radius default-hover-active input-font-style" value="0">
                         </div>
-                        <div id="gold-box" class="currency-box default-background border-style border-radius default-shadow">
+                        <div id="gold-box" class="currency-box default-background border-style border-radius default-inner-shadow">
                             <img src="images/money/gold.svg" class="currency-img" alt="">
-                            <input type="tel" onKeyPress="if(this.value.length==6) return false;" id="gold" class="number-input currency-value border-style border-radius default-hover-active input-font-style" value="5">
+                            <input type="number" onKeyPress="if(this.value.length==6) return false;" id="gold" class="number-input currency-value border-style border-radius default-hover-active input-font-style" value="5">
                         </div>
-                        <div id="platinum-box" class="currency-box default-background border-style border-radius default-shadow">
+                        <div id="platinum-box" class="currency-box default-background border-style border-radius default-inner-shadow">
                             <img src="images/money/platinum.svg" class="currency-img" alt="">
-                            <input type="tel" onKeyPress="if(this.value.length==6) return false;" id="platinum" class="number-input currency-value border-style border-radius default-hover-active input-font-style" value="0">
+                            <input type="number" onKeyPress="if(this.value.length==6) return false;" id="platinum" class="number-input currency-value border-style border-radius default-hover-active input-font-style" value="0">
                         </div>
                     </div>
                     <button type="button" name="Add new item to inventory" onclick="displayNewItemDialog()" id="new-item" class="img-svg default-background border-style border-radius default-hover-active default-button default-shadow"><img id="new-item-img" src="images/icons/control_icon/new_item.svg" alt="New item cross"></button>
-                    <div id="equipment" class="default-background border-style border-radius default-shadow">
+                    <div id="equipment" class="default-background border-style border-radius default-inner-shadow">
                     </div>
                     <div id="new-item-dialog" class="default-background border-style border-radius">
-                        <input type="tel" onKeyPress="if(this.value.length==6) return false;"  id="item-name" class="border-style border-radius default-background default-hover-active default-button input-font-style">
+                        <input type="tel" onKeyPress="if(this.value.length==32) return false;"  id="item-name" class="border-style border-radius default-background default-hover-active default-button input-font-style">
                         <div id="image-select"></div>
                         <div class="dialog-buttons">
                             <button id="cancel-item" name="Cancel creating item" onclick="addNewItemToInventory(0)" class="border-style border-radius default-background default-hover-active default-button input-font-style">Отменить</button>
@@ -431,38 +433,54 @@
                     </div>
                 </div>
             </div>
-            <div id="health">
-                <div id="hp-bar" class="border-style border-radius default-background default-shadow">
-                    <div class="bar-animation">
-                        <div id="hp-bar-fill" class="bar-fill hp-color">
-                            <div id="hp-liquid" class="wave-main wave-hp hp-color"></div>
+            <div id="central-3">
+                <div id="health">
+                    <div id="hp-bar" class="border-style border-radius default-background default-shadow">
+                        <div class="bar-animation">
+                            <div id="hp-bar-fill" class="bar-fill hp-color">
+                                <div id="hp-liquid" class="wave-main wave-hp hp-color"></div>
+                            </div>
+                        </div>
+                        <span id="hp" class="bar-text">2/10</span>
+                        <div id="hp-dialog" class="default-background border-style border-radius">
+                                <span id="hp-header"></span>
+                                <input type="tel" onKeyPress="if(this.value.length==6) return false;"  id="hp-value" class="border-style border-radius default-background default-hover-active default-button input-font-style">
+                                <div class="dialog-buttons">
+                                    <button id="cancel-hp" name="Cancel adjusting hp" class="border-style border-radius default-background default-hover-active default-button input-font-style">Отменить</button>
+                                    <button id="confirm-hp" name="Confirm adjusting hp" class="border-style border-radius default-background default-hover-active default-button input-font-style">Принять</button>
+                                </div>
                         </div>
                     </div>
-                    <span id="hp" class="bar-text">2/10</span>
-                    <div id="hp-dialog" class="default-background border-style border-radius">
-                            <span id="hp-header"></span>
-                            <input type="tel" onKeyPress="if(this.value.length==6) return false;"  id="hp-value" class="border-style border-radius default-background default-hover-active default-button input-font-style">
-                            <div class="dialog-buttons">
-                                <button id="cancel-hp" name="Cancel adjusting hp" class="border-style border-radius default-background default-hover-active default-button input-font-style">Отменить</button>
-                                <button id="confirm-hp" name="Confirm adjusting hp" class="border-style border-radius default-background default-hover-active default-button input-font-style">Принять</button>
-                            </div>
+                    <input type="button" id="damage" class="border-style border-radius default-shadow default-background default-hover-active default-button input-font-style" value="Damage">
+                    <input type="button" id="temp" class="border-style border-radius default-shadow default-background default-hover-active default-button input-font-style" value="TMP">
+                    <input type="button" id="heal" class="border-style border-radius default-shadow default-background default-hover-active default-button input-font-style" value="Heal">
+                    <input type="button" id="hit-dice" class="border-style border-radius default-shadow default-background default-hover-active default-button input-font-style" value="Оставшиеся кубы здоровья">
+                    <input type="button" id="death-saves" class="border-style border-radius default-shadow default-background default-hover-active default-button input-font-style" value="Спасброски от смерти">
+                </div>
+                <div id="tibf">
+                    <div id="traits-board" class="tibf-board">
+                        <span id="traits-label" class="tibf-element-label border-style border-radius default-shadow default-background label-auto-width">Черты</span>
+                        <textarea cols="20" maxlenght="2048" wrap="hard" id="traits" class="tibf-element-area border-style border-radius default-shadow default-background input-font-style"></textarea>
+                    </div>
+                    <div id="ideals-board" class="tibf-board">
+                        <span id="ideals-label" class="tibf-element-label border-style border-radius default-shadow default-background label-auto-width">Идеалы</span>
+                        <textarea cols="20" wrap="hard" id="ideals" class="tibf-element-area border-style border-radius default-shadow default-background input-font-style"></textarea>
+                    </div>
+                    <div id="bonds-board" class="tibf-board">
+                        <span id="bonds-label" class="tibf-element-label border-style border-radius default-shadow default-background label-auto-width">Привязанности</span>
+                        <textarea cols="20" wrap="hard" id="bonds" class="tibf-element-area border-style border-radius default-shadow default-background input-font-style"></textarea>
+                    </div>
+                    <div id="flaws-board" class="tibf-board">
+                        <span id="flaws-label" class="tibf-element-label border-style border-radius default-shadow default-background label-auto-width">Пороки</span>
+                        <textarea cols="20" wrap="hard" id="flaws" class="tibf-element-area border-style border-radius default-shadow default-background input-font-style"></textarea>
                     </div>
                 </div>
-                <input type="button" id="damage" class="border-style border-radius default-shadow default-background default-hover-active default-button input-font-style" value="Damage">
-                <input type="button" id="temp" class="border-style border-radius default-shadow default-background default-hover-active default-button input-font-style" value="TMP">
-                <input type="button" id="heal" class="border-style border-radius default-shadow default-background default-hover-active default-button input-font-style" value="Heal">
-                <input type="button" id="hit-dice" class="border-style border-radius default-shadow default-background default-hover-active default-button input-font-style" value="Оставшиеся кубы здоровья">
-                <input type="button" id="death-saves" class="border-style border-radius default-shadow default-background default-hover-active default-button input-font-style" value="Спасброски от смерти">
             </div>
-            <div id="tibf">
-                <div id="traits-board">
-                    <textarea rows="5" cols="25" wrap="hard" id="traits" class="border-style border-radius default-shadow default-background input-font-style"></textarea>
-                    <span id="traits-text" class=".block-label border-style border-radius default-shadow default-background">Черты</span>
-                </div>
-                <div id="ideals-board">
-                    <input type="text" id="ideals" class="border-style border-radius default-shadow default-background input-font-style">
-                    <span id="ideals-text" class=".block-label border-style border-radius default-shadow default-background">Идеалы</span>
-                </div>
+            <div id="features-and-traits" class="default-background border-style border-radius default-shadow">
+                <span id="other-profincies-and-languages-label" class="block-label default-background border-style border-radius default-shadow label-auto-width">Другие умения и языки</span>
+            </div>
+            <div id="other-profincies-and-languages" class="default-background border-style border-radius default-shadow">
+                <span id="features-and-traits-label" class="block-label default-background border-style border-radius default-shadow label-auto-width">Особенности и способности</span>
             </div>
         </section>
     </main>
