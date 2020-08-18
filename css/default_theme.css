@@ -104,3 +104,14 @@ header {
   border: 2px solid #681e22;
   border-radius: 3px;
 }
+.tibf-element-area {
+  scrollbar-width: thin;
+  scrollbar-color: #82262b transparent;
+  scrollbar-highlight-color: #9c2d33;
+}
+.tibf-element-area::-webkit-scrollbar-thumb {
+  background-color: #82262b;
+}
+.tibf-element-area::-webkit-scrollbar-thumb:active {
+  background-color:#9c2d33;
+}
