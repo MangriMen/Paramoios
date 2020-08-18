@@ -39,7 +39,7 @@ main {
   text-align: center;
   border-bottom: none;
   border-top: none;
-  border-radius: 0px;
+  border-radius: 0;
   position: relative;
   width: 4.8em;
 }
