@@ -207,7 +207,7 @@ function displayNewItemDialog() {
   }
   document.getElementById('item-name').value = null;
   let pts = "images/items/"
-  let itemsImgSrcs = [pts+"axe.svg", pts+"rope.svg", pts+"shield.svg", pts+"sword.svg"];
+  let itemsImgSrcs = [pts+"axe.svg", pts+"rope.svg", pts+"shield.svg", pts+"sword.svg", pts+"traveler_pack.svg"];
   let imageSelect = document.getElementById('image-select');
   while (imageSelect.firstChild) {
     imageSelect.removeChild(imageSelect.firstChild);

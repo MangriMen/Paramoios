@@ -97,3 +97,7 @@ header {
   outline: 3px solid #cf3a42;
   outline-offset: -0.12em;
 }
+#ans-items td{
+  border: 2px solid #681e22;
+  border-radius: 3px;
+}

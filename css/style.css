@@ -387,9 +387,6 @@ input[type=number] {
   background-repeat: repeat-y; */
 }
 #traits-text {
-  width: 80px;
-  height: 24px;
-  text-align: center;
   position: absolute;
   border-radius: 3px;
   margin: 0.5em 0 0 3em;
@@ -414,10 +411,15 @@ input[type=number] {
   margin: 0.5em 0 0 3em;
 }
 #equipment-box {
-  padding: 0.5em;
-  margin: 0.53em 0 0.53em 30px;
+  padding: 1.2em 0.5em 0.5em 0.5em;
+  margin: 1.5em 0 0.5em 30px;
   display: flex;
   position: relative;
+}
+#equipment-label {
+  position: absolute;
+  top: -0.7em;
+  left: 3.5em;
 }
 #money-box {
   display: flex;
@@ -550,4 +552,32 @@ input[type=number] {
   box-sizing: border-box;
   cursor: pointer;
   padding: 1px;
+}
+#attacks-and-spellcasting {
+  padding: 1em 0.25em 0.25em 0.25em;
+  margin: 1em 0 0 0;
+  position: relative;
+}
+#ans-label {
+  position: absolute;
+  top: -0.6em;
+  left: 1.8em;
+}
+#ans-items {
+  width: 100%;
+  min-height: 7em;
+  border-spacing: 0.4em;
+}
+#ans-items th {
+  font-size: 0.8em;
+  outline: 1px solid red;
+}
+#ans-item-bonus {
+  max-width: 1em;
+}
+#ans-item-dmg {
+  max-width: 2em;
+}
+.block-label {
+  padding: 0.1em 0.2em;
 }
