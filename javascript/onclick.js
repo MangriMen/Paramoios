@@ -19,8 +19,8 @@ document.getElementById('damage').addEventListener('click', displayHpDialog);
 document.getElementById('temp').addEventListener('click', displayHpDialog);
 document.getElementById('heal').addEventListener('click', displayHpDialog);
 document.getElementById('new-item').addEventListener('click', displayNewItemDialog);
-document.getElementById('cancel-item').addEventListener('click', addNewItemToInventory.bind(0));
-document.getElementById('confirm-item').addEventListener('click', addNewItemToInventory.bind(1));
+document.getElementById('cancel-item').addEventListener('click', addNewItemToInventory);
+document.getElementById('confirm-item').addEventListener('click', addNewItemToInventory);
 let x = 0;
 let y = 0;
 document.getElementById('main-dice').addEventListener('click', toggleDiceList);
@@ -39,6 +39,22 @@ for (let item of textsAutoWidth) {
 let labelsAutoWidth = document.getElementsByClassName('label-auto-width');
 for (let item of labelsAutoWidth) {
   labelAutoWidth(item);
+}
+
+let beautifulAlert = document.createElement('span');
+beautifulAlert.id = 'beautiful-alert';
+document.body.appendChild(beautifulAlert);
+
+function bAlert(text) {
+  beautifulAlert.style.visibility = 'visible';
+  beautifulAlert.style.top = 0 + 'rem';
+  beautifulAlert.textContent = text;
+  setTimeout(bAlertHide, 3000);  
+}
+
+function bAlertHide() {
+  beautifulAlert.style.top = -10 + 'rem';
+  beautifulAlert.textContent = '';
 }
 
 const levelDependenceTable = {
@@ -237,22 +253,24 @@ function displayNewItemDialog() {
   }
 }
 
-function addNewItemToInventory(isConfirm) {
-  if (!isConfirm) {
-    newItemDialog.style.display = 'none';
-    return;
-  } else {
+function addNewItemToInventory() {
+  if (this.id == 'confirm-item') {
     let newItem = document.createElement("img");
     newItem.src = selectedImageForItem.src;
     newItem.classList.add("item", "default-background", "border-style", "border-radius");
     newItem.addEventListener("click", openItemAdditionalInfo);
     newItem.value = document.getElementById('item-name').value;
-    if (newItem.value == "") {
-      alert("Введите название предмета");
+    if (newItem.value == '') {
+      bAlert('Введите название предмета!');
       newItem.style.display='none';
+      newItem = null;
+      return;
     }
     equipment.appendChild(newItem);
     newItemDialog.style.display = 'none';
+  } else {
+    newItemDialog.style.display = 'none';
+    return;
   }
 }
 

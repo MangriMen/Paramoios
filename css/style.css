@@ -1,5 +1,5 @@
 header {
-  line-height: 1.6em;
+  line-height: 1.6rem;
 }
 main {
   display: grid;
@@ -10,13 +10,13 @@ main {
   border-radius: 3px;
 }
 #header-title {
-  font-size: 1.2em;
-  margin-left: 0.4em;
+  font-size: 1.2rem;
+  margin-left: 0.4rem;
 }
 #naming {
   display: flex;
   max-width: 960px;
-  margin-bottom: 1.5em;
+  margin-bottom: 1.5rem;
 }
 #naming-text {
   display: flex;
@@ -27,10 +27,10 @@ main {
 #profile-and-level {
   display: flex;
   flex-direction: column;
-  margin: 0.8em 1em;
+  margin: 0.8em 1rem;
 }
 #avatar {
-  width: 4.8em;
+  width: 4.8rem;
   border-radius: 6px 6px 0 0;
 }
 #xp-bar {
@@ -41,10 +41,10 @@ main {
   border-top: none;
   border-radius: 0;
   position: relative;
-  width: 4.8em;
+  width: 4.8rem;
 }
 #xp {
-  font-size: 0.9em;
+  font-size: 0.9rem;
   position: absolute;
   top: 0;
   left: 0;
@@ -67,8 +67,8 @@ main {
 .wave-level {
   right: -2%;
   top: -250%;
-  width: 6em;
-  height: 6em;
+  width: 6rem;
+  height: 6rem;
 }
 #xp-next-level {
   position: absolute;
@@ -86,29 +86,30 @@ main {
   text-align: center;
   line-height: 25px;
   height: 25px;
-  font-size: 0.9em;
+  font-size: 0.9rem;
 }
 #player-name {
-  margin-top: 0.6em;
-  font-size: 1.3em;
+  margin-top: 0.6rem;
+  font-size: 1.3rem;
 }
 #known-as {
-  font-size: 1.2em;
+  font-size: 1.2rem;
 }
 .align-to-right {
   position: absolute;
-  right: 0.2em;
+  right: 0.2rem;
 }
 #character-name {
-  font-size: 3.6em;
-  margin-top: 0.9em;
+  font-size: 3.6rem;
+  margin-top: 3rem;
+  margin-right: 0.5rem;
   box-sizing: border-box;
   max-width: 810px;
 }
 #character-origin {
-  margin-top: 4.6em;
-  right: 0.6em;
-  font-size: 1.5em;
+  margin-top: 7rem;
+  right: 1rem;
+  font-size: 1.5rem;
 }
 .text-to-right {
   text-align: right;
@@ -119,7 +120,7 @@ main {
   justify-content: space-between;
   align-items: flex-end;
   position: relative;
-  padding: 0 1em;
+  padding: 0 1rem;
   margin: 0.5em 0;
 }
 .characteristic {
@@ -127,7 +128,7 @@ main {
   height: 64px;
 }
 .characteristic-text {
-  font-size: 0.9em;
+  font-size: 0.9rem;
 }
 .characteristic-box {
   display: flex;
@@ -202,7 +203,7 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 37.5em;
+  height: 37.5rem;
 }
 .skill-box {
   line-height: 24px;
@@ -216,18 +217,18 @@ main {
   width: 40px;
   height: 20px;
   text-align: center;
-  font-size: 0.9em;
+  font-size: 0.9rem;
 }
 .skill-text {
   line-height: 20px;
   width: 160px;
   height: 20px;
   text-align: center;
-  font-size: 0.8em;
+  font-size: 0.8rem;
   text-transform: capitalize;
 }
 .skill-origin{
-  font-size: 0.8em;
+  font-size: 0.8rem;
   text-transform: uppercase;
 }
 .aiis-svg {
@@ -244,10 +245,10 @@ main {
   grid-template-rows:
   auto
   auto;
-  grid-row-gap: 1.5em;
+  grid-row-gap: 1.5rem;
   justify-content: space-between;
-  margin-top: 1em;
-  padding: 0 1em 1em;
+  margin-top: 1rem;
+  padding: 0 1em 1rem;
 }
 #health {
   margin: auto;
@@ -256,7 +257,7 @@ main {
   justify-content: center;
 }
 #hp-bar {
-  width: 11.5em;
+  width: 11.5rem;
   height: 25px;
   text-align: center;
   grid-column-start: 1;
@@ -266,11 +267,11 @@ main {
 }
 #hp-dialog {
   display: none;
-  width: 10em;
+  width: 10rem;
   height: 80px;
   position: absolute;
-  right: -0.1em;
-  top: 1.85em;
+  right: -0.1rem;
+  top: 1.85rem;
   margin: auto;
   text-align: center;
 }
@@ -282,8 +283,8 @@ main {
 .wave-hp {
   right: -4%;
   top: -190%;
-  width: 6em;
-  height: 6em;
+  width: 6rem;
+  height: 6rem;
 }
 @keyframes wave {
   100% {
@@ -306,7 +307,7 @@ main {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 100;
+  z-index: 2;
 }
 #heal {
   justify-self: end;
@@ -336,7 +337,7 @@ input[type=number] {
 .input-font-style {
   line-height: inherit;
   font-family: Eberron;
-  font-size: 1em;
+  font-size: 1rem;
 }
 #temp{
   justify-self: center;
@@ -344,7 +345,7 @@ input[type=number] {
   text-align: center;
   grid-column: 2;
   grid-row: 2;
-  font-size: 0.6em;
+  font-size: 0.6rem;
   height: 32px;
   width: 32px;
 }
@@ -354,7 +355,7 @@ input[type=number] {
   grid-column-start: 1;
   grid-column-end: 4;
   grid-row: 3;
-  font-size: 0.65em;
+  font-size: 0.65rem;
   text-align: left;
 }
 #death-saves{
@@ -365,16 +366,16 @@ input[type=number] {
   width: 100%;
   grid-column-start: 1;
   grid-column-end: 4;
-  font-size: 0.65em;
+  font-size: 0.65rem;
   text-align: left;
 }
 #tibf {
-  margin-top: 1.5em;
+  margin-top: 1.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  height: 30.3em;
+  height: 30.3rem;
 }
 .tibf-board {
   position: relative;
@@ -382,11 +383,11 @@ input[type=number] {
 .tibf-element-area {
   resize: none;
   outline: none;
-  padding: 0.9em 0.4em 0.4em;
-  font-size: 0.9em;
-  line-height: 0.9em;
+  padding: 0.9em 0.4em 0.4rem;
+  font-size: 0.9rem;
+  line-height: 0.9rem;
   width: 100%;
-  height: 7em;
+  height: 6rem;
   box-sizing: border-box;
 }
 .tibf-element-area::-webkit-scrollbar{
@@ -399,10 +400,10 @@ input[type=number] {
   margin: auto;
   left: 0;
   right: 0;
-  top: -0.6em;
+  top: -0.6rem;
 }
 #equipment-box {
-  padding: 1.2em 0.5em 0.5em;
+  padding: 1.2em 0.5em 0.5rem;
   margin: 1.5em 0 0.5em 30px;
   display: flex;
   position: relative;
@@ -413,22 +414,22 @@ input[type=number] {
   margin: auto;
   left: 0;
   right: 0;
-  top: -0.7em;
+  top: -0.7rem;
 }
 #money-box {
   display: flex;
   flex-direction: column;
   align-content: space-between;
   position: absolute;
-  left: -1.8em;
+  left: -1.8rem;
 }
 .currency-box {
   display: flex;
   flex-direction: row;
   align-items: center;
   width: 95px;
-  margin: 0.1em;
-  padding: 0.2em;
+  margin: 0.1rem;
+  padding: 0.2rem;
 }
 .currency-img {
   height: 24px;
@@ -436,7 +437,7 @@ input[type=number] {
   margin: 0 0.4em 0 0;
 }
 .currency-value {
-  font-size: 0.7em;
+  font-size: 0.7rem;
   width: 100%;
 }
 #new-item {
@@ -444,14 +445,14 @@ input[type=number] {
   height: 32px;
   margin: auto 2em 0 0;
 }
-#new-item-img {
+.new-item-img {
   width: 18px;
   height: 18px;
   margin: 0.3em 0 auto;
 }
 #equipment {
-  height: 12em;
-  width: 8.5em;
+  height: 12rem;
+  width: 8.5rem;
   position: relative;
   flex-grow: 1;
   overflow-y: auto;
@@ -475,20 +476,20 @@ input[type=number] {
   width: calc(100% - 1em);
   box-sizing: border-box;
   margin: 0.5em 0;
-  font-size: 0.8em;
+  font-size: 0.8rem;
 }
 #item-additional-close {
   width: 14px;
   height: 14px;
   position: absolute;
-  top: -0.3em;
-  right: -0.4em;
+  top: -0.3rem;
+  right: -0.4rem;
   padding: 0;
 }
 #item-additional-close-img {
   width: 80%;
   height: 80%;
-  margin: 0 0 0.45em;
+  margin: 0 0 0.45rem;
 }
 #new-item-dialog {
   display: none;
@@ -511,16 +512,16 @@ input[type=number] {
 #hp-value {
   width: calc(100% - 1em);
   box-sizing: border-box;
-  margin: 0.2em 0 0.5em;
+  margin: 0.2em 0 0.5rem;
 }
 #confirm-item, #cancel-item {
-  font-size: 0.7em;
-  width: 5.5em;
+  font-size: 0.75rem;
+  width: 4rem;
   border-width: 4px;
 }
 #confirm-hp, #cancel-hp {
-  font-size: 0.7em;
-  width: 5.5em;
+  font-size: 0.7rem;
+  width: 5.5rem;
 }
 .dialog-buttons {
   position: absolute;
@@ -529,7 +530,7 @@ input[type=number] {
   justify-content: space-evenly;
   left: 0;
   right: 0;
-  bottom: -0.6em;
+  bottom: -0.6rem;
 }
 #image-select {
   display: flex;
@@ -537,7 +538,7 @@ input[type=number] {
   min-height: calc(100% - 4em);
   width: calc(100% - 1em);
   box-sizing: border-box;
-  margin: 0 auto 1em;
+  margin: 0 auto 1rem;
   justify-content: space-between;
   align-content: space-evenly;
 }
@@ -559,27 +560,27 @@ input[type=number] {
   margin: auto;
   left: 0;
   right: 0;
-  top: -0.7em;
+  top: -0.7rem;
 }
 #ans-items {
   width: 100%;
-  border-spacing: 0.4em;
+  border-spacing: 0.4rem;
 }
 #ans-items th {
-  font-size: 0.8em;
+  font-size: 0.8rem;
 }
 #ans-items td {
-  height: 1em;
+  height: 1rem;
 }
 #ans-item-bonus {
-  max-width: 1em;
+  max-width: 1rem;
 }
 #ans-item-dmg {
-  max-width: 2em;
+  max-width: 2rem;
 }
 #spellcasting {
-  min-height: 8em;
-  margin: 0.4em;
+  min-height: 8rem;
+  margin: 0.4rem;
   position: relative;
   flex-grow: 1;
 }
@@ -587,7 +588,7 @@ input[type=number] {
   grid-column-start: 1;
   grid-column-end: 1;
   grid-row: 2;
-  height: 10em;
+  height: 10rem;
   position: relative;
 }
 #features-and-traits-label {
@@ -596,13 +597,13 @@ input[type=number] {
   margin: auto;
   left: 0;
   right: 0;
-  top: -0.7em;
+  top: -0.7rem;
 }
 #other-profincies-and-languages {
   grid-column-start: 2;
   grid-column-end: 4;
   grid-row: 2;
-  height: 10em;
+  height: 10rem;
   position: relative;
 }
 #other-profincies-and-languages-label {
@@ -611,5 +612,21 @@ input[type=number] {
   margin: auto;
   left: 0;
   right: 0;
-  top: -0.7em;
+  top: -0.7rem;
+}
+#beautiful-alert {
+  visibility: hidden;
+  display: flex;
+  position: fixed;
+  height: 4rem;
+  left: 0;
+  right: 0;
+  top: -10rem;
+  margin: auto;
+  border-top: none;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  z-index: 100;
+  transition: top 0.6s ease-in-out;
 }
