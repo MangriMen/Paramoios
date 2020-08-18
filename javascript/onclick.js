@@ -195,7 +195,6 @@ function numberCheck() {
   }, 500);
 }
 
-let timerAutoWidth = null;
 function autoWidth() {
   let fontSize = parseInt(getComputedStyle(this).fontSize) / 2;
   this.style.width = ((this.value.length + 2) * fontSize + 'px');
@@ -233,7 +232,7 @@ function displayNewItemDialog() {
     itemImg.src = itemsImgSrcs[i];
     itemImg.classList.add("image-select-button", "border-style", "border-radius", "default-background");
     itemImg.addEventListener("click", selectImageToItem);
-    if (i == 0) { selectedImageForItem = itemImg; selectedImageForItem.classList.add("image-selected"); };
+    if (i == 0) { selectedImageForItem = itemImg; selectedImageForItem.classList.add("image-selected"); }
     document.getElementById('image-select').appendChild(itemImg);
   }
 }
