@@ -42,8 +42,6 @@ a, a:link, a:visited, a:focus, a:hover, a:active {
   background-color:#ffd28f;
 }
 ::-webkit-resizer {
-  background-image:url('');
-  background-repeat: no-repeat;
   background: #dbb57b;
 }
 ::-webkit-scrollbar-corner {
