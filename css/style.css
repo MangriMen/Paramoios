@@ -6,6 +6,11 @@ main {
   max-width: 960px;
   margin: 0.25em auto;
 }
+.input-font-style {
+  line-height: inherit;
+  font-family: Eberron;
+  font-size: 1rem;
+}
 .border-radius {
   border-radius: 3px;
 }
@@ -126,25 +131,28 @@ main {
 .characteristic {
   width: 120px;
   height: 64px;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: auto auto auto;
 }
 .characteristic-text {
   font-size: 0.9rem;
-}
-.characteristic-box {
-  display: flex;
-  align-items: flex-end;
+  grid-column-start: 1;
+  grid-column-end: 4;
 }
 .characteristic-bonus {
   box-sizing: border-box;
   width: 60px;
   height: 40px;
   border-radius: 3px 0 0 3px;
-}
-.second-box {
-  width: 40px;
-  height: 40px;
+  grid-column: 1;
+  grid-row-start: 2;
+  grid-row-end: 4;
 }
 .characteristic-value {
+  grid-column: 2;
+  grid-row: 2;
+  font-size: 0.6rem;
   box-sizing: border-box;
   width: 40px;
   height: 20px;
@@ -153,12 +161,16 @@ main {
   border-radius: 0 3px 0 0;
 }
 .characteristic-death-save {
+  grid-column: 2;
+  grid-row: 3;
   box-sizing: border-box;
   width: 40px;
   height: 20px;
   border-left: none;
 }
 .characteristic-death-save-checkbox {
+  grid-column: 3;
+  grid-row: 3;
   box-sizing: border-box;
   width: 20px;
   height: 20px;
@@ -333,11 +345,6 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type=number] {
   -moz-appearance: textfield;
-}
-.input-font-style {
-  line-height: inherit;
-  font-family: Eberron;
-  font-size: 1rem;
 }
 #temp{
   justify-self: center;
