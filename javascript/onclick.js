@@ -6,6 +6,9 @@ let equipment = document.getElementById('equipment');
 let equipmentBox = document.getElementById('equipment-box');
 let newItemDialog = document.getElementById('new-item-dialog');
 let hpDialog = document.getElementById('hp-dialog');
+let deathSavesOverlay = document.getElementById('death-saves-overlay');
+let successMarks = [document.getElementById('success-mark-1'), document.getElementById('success-mark-2'), document.getElementById('success-mark-3')];
+let failuresMarks = [document.getElementById('fail-mark-1'), document.getElementById('fail-mark-2'), document.getElementById('fail-mark-3')];
 let selectedImageForItem = null;
 let selectedItemInfo = null;
 let tempFlag = 0;
@@ -42,9 +45,11 @@ for (let item of labelsAutoWidth) {
   labelAutoWidth(item);
 }
 
-let beautifulAlert = document.createElement('span');
-beautifulAlert.id = 'beautiful-alert';
-document.body.appendChild(beautifulAlert);
+let beautifulAlertContainer = document.createElement('div');
+beautifulAlertContainer.id = 'beautiful-container';
+document.body.appendChild(beautifulAlertContainer);
+let beautifulAlertList = [];
+
 let rollAlertContainer = document.createElement('div');
 rollAlertContainer.id = 'roll-alert';
 document.body.appendChild(rollAlertContainer);
@@ -68,7 +73,6 @@ function rollAlert(rollNum = 17, text = 'На кубике выпало:') {
   rollAlertList.push(rollAlertMsg);
   setTimeout(rollAlertErase, 2400);
   rollAlertContainer.appendChild(rollAlertMsg);
-
 }
 
 function rollAlertErase() {
@@ -76,19 +80,30 @@ function rollAlertErase() {
 
   tempRollMsg.classList.add('roll-alert-erase-translate');
   
-  setTimeout("rollAlertContainer.removeChild(rollAlertContainer.firstChild);", 1000);
+  setTimeout(function() { rollAlertContainer.removeChild(rollAlertContainer.firstChild); }, 1000);
 }
 
-function bAlert(text) {
-  beautifulAlert.style.visibility = 'visible';
-  beautifulAlert.style.top = 0 + 'rem';
+function createBAlert(text, delay) {
+  let beautifulAlert = document.createElement('span');
+  beautifulAlert.classList.add('beautiful-alert');
   beautifulAlert.textContent = text;
-  setTimeout(bAlertHide, 3000);  
+  beautifulAlert.dataset.delay = delay;
+  beautifulAlertList.push(beautifulAlert);
+  return beautifulAlert;
 }
 
-function bAlertHide() {
-  beautifulAlert.style.top = -10 + 'rem';
-  beautifulAlert.textContent = '';
+function bAlert(text, delay = 3000) {
+  beautifulAlertContainer.appendChild(createBAlert(text, delay));
+  if (beautifulAlertContainer.childElementCount > 1) { return; }
+  let beautifulTimer = setTimeout(function bAlertHide() {
+    if (beautifulAlertContainer.childElementCount == 0) {
+      return;
+    } else {
+      setTimeout(function () { beautifulAlertContainer.removeChild(beautifulAlertContainer.lastChild) }, 1000);
+      beautifulAlertContainer.lastChild.classList.add('beautiful-alert-erase-translate');
+      beautifulTimer = setTimeout(bAlertHide, beautifulAlertContainer.lastChild.dataset.delay);
+    }
+  }, delay);
 }
 
 const levelDependenceTable = {
@@ -147,6 +162,8 @@ function changeHp() {
 
   newHp = hpValidation(newHp, maxHp);
 
+  if (newHp == 0) { deathSavesOverlay.style.display = 'flex'; }
+
   final = newHp + '/' + maxHp;
 
   document.getElementById('hp').textContent = final;
@@ -201,26 +218,47 @@ function hpValidation(actual, maximum) {
 
 let successMarkCount = 1;
 let failsMarkCount = 1;
-let dicesLeft = 5;
 
 function rollDeathSave() {
-  if (failsMarkCount > 3 || successMarkCount > 3) { return; }
+  if (failsMarkCount >= 3 || successMarkCount >= 3) {
+    rollDeathSaveClear();
+    return;
+  }
   
-  dicesLeft -= 1;
   let rollResult = Math.floor(Math.random() * 20 + 1);
 
-  rollAlert(rollResult);
+  rollAlert(rollResult, 'На D20 выпало:');
 
   if (rollResult  < 10) {
     document.getElementById(`fail-mark-${failsMarkCount}`).src = 'images/icons/failures_mark_checked.svg';
     failsMarkCount += 1;
+  } else if (rollResult >= 20) {
+    rollDeathSaveClear(true);
+    isHealed = true;
+    changeHp();
+    isHealed = false;
+    return;
   } else {
     document.getElementById(`success-mark-${successMarkCount}`).src = 'images/icons/success_mark_checked.svg';
     successMarkCount += 1;
   }
 
   document.getElementById('death-saves-heart').style.backgroundColor = 'hsl(357,' + (successMarkCount - failsMarkCount + 2) / 4 * 100 + '%, 40%)';
+}
 
+function rollDeathSaveClear(isTwenty) {
+  if (failsMarkCount >= 3) {
+    bAlert('Вы умерли.', 5000);
+  } else if (successMarkCount >= 3) {
+    bAlert('Вы живы!', 5000);
+  } else if (isTwenty) {
+    bAlert('Да вы счастливчик! На D20 выпало: 20!', 8000);
+  }
+  successMarkCount = 1;
+  failsMarkCount = 1;
+  successMarks.forEach(mark => mark.src = 'images/icons/success_mark.svg');
+  failuresMarks.forEach(mark => mark.src = 'images/icons/failures_mark.svg');
+  deathSavesOverlay.style.display = 'none';
 }
 
 function onloadBarWidth(spanId) {
@@ -319,7 +357,7 @@ function addNewItemToInventory() {
     newItem.addEventListener("click", openItemAdditionalInfo);
     newItem.value = document.getElementById('item-name').value;
     if (newItem.value == '') {
-      bAlert('Введите название предмета!');
+      bAlert('Введите название предмета!' + Math.random(), 3000);
       newItem.style.display='none';
       newItem = null;
       return;
