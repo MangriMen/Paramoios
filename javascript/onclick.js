@@ -76,8 +76,7 @@ function rollAlertErase() {
 
   tempRollMsg.classList.add('roll-alert-erase-translate');
   
-  // setTimeout('rollAlertContainer.removeChild(tempRollMsg)', 1000);
-
+  setTimeout("rollAlertContainer.removeChild(rollAlertContainer.firstChild);", 1000);
 }
 
 function bAlert(text) {
