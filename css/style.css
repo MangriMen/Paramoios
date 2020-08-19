@@ -366,8 +366,7 @@ input[type=number] {
   text-align: left;
 }
 #death-saves-overlay {
-  display: flex;
-  /*display: none;*/
+  display: none;
   align-items: center;
   justify-content: center;
   position: fixed;
@@ -704,14 +703,13 @@ input[type=number] {
   right: 0;
   top: -0.7rem;
 }
-#beautiful-alert {
-  visibility: hidden;
+.beautiful-alert {
   display: flex;
   position: fixed;
   height: 4rem;
   left: 0;
   right: 0;
-  top: -10rem;
+  top: 0rem;
   margin: auto;
   border-top: none;
   align-items: center;
@@ -719,6 +717,9 @@ input[type=number] {
   font-size: 2rem;
   z-index: 100;
   transition: top 0.6s ease-in-out;
+}
+.beautiful-alert-erase-translate {
+  top: -10rem !important;
 }
 #roll-alert {
   display: flex;
@@ -741,16 +742,16 @@ input[type=number] {
   border-width: 6px;
   border-radius: 18px;
   font-size: 1.5rem;
+  -webkit-transition: 1s;
+  -moz-transition: 1s;
+  -ms-transition: 1s;
+  -o-transition: 1s;
+  transition: 1s ease-in;
 }
 .roll-alert-msg-number {
   line-height: 3.5rem;
   font-size: 4rem;
 }
 .roll-alert-erase-translate {
-  -webkit-transition: 1s;
-  -moz-transition: 1s;
-  -ms-transition: 1s;
-  -o-transition: 1s;
-  transition: 1s ease-in;
   margin-left: -200% !important;
 }
