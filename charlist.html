@@ -383,7 +383,35 @@
                     <input type="button" id="temp" class="border-style border-radius default-shadow default-background default-hover-active default-button input-font-style" value="TMP">
                     <input type="button" id="heal" class="border-style border-radius default-shadow default-background default-hover-active default-button input-font-style" value="Heal">
                     <input type="button" id="hit-dice" class="border-style border-radius default-shadow default-background default-hover-active default-button input-font-style" value="Оставшиеся кубы здоровья">
-                    <input type="button" id="death-saves" class="border-style border-radius default-shadow default-background default-hover-active default-button input-font-style" value="Спасброски от смерти">
+                    <div id='death-saves-overlay'>
+                        <div id="death-saves-window" class="border-style border-radius default-background" value="Спасброски от смерти">
+                            <span id="death-saves-label" class="block-label default-background border-style border-radius default-shadow label-auto-width">Спасброски от смерти</span>
+                            <div id='success' class="death-saves-state default-background border-style border-radius default-inner-shadow">
+                                <span id='successes-text'>Успехи</span>
+                                <div class="death-saves-marks">
+                                    <img id='success-mark-1' class='death-saves-mark' alt="Success mark unchecked" src="images/icons/success_mark.svg">
+                                    <img id='success-mark-2' class='death-saves-mark' alt="Success mark unchecked" src="images/icons/success_mark.svg">
+                                    <img id='success-mark-3' class='death-saves-mark' alt="Success mark unchecked" src="images/icons/success_mark.svg">
+                                </div>
+                            </div>
+                            <div id='fails' class="death-saves-state default-background border-style border-radius default-inner-shadow">
+                                <span id='fails-text'>Провалы</span>
+                                <div class="death-saves-marks">
+                                    <img id='fail-mark-1' class='death-saves-mark' alt="Failure mark unchecked" src="images/icons/failures_mark.svg">
+                                    <img id='fail-mark-2' class='death-saves-mark' alt="Failure mark unchecked" src="images/icons/failures_mark.svg">
+                                    <img id='fail-mark-3' class='death-saves-mark' alt="Failure mark unchecked" src="images/icons/failures_mark.svg">
+                                </div>
+                            </div>
+                            <div id='death-saves-interactive'>
+                                <div id='death-saves-heart' class='heart'>
+
+                                </div>
+                                <button id="death-saves-dice" class="default-button dice-in-list death-saves-dice-svg">
+                                    <img alt="Main dice button" src="images/buttons/dices/D20.svg">
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div id="tibf">
                     <div id="traits-board" class="tibf-board">
