@@ -21,6 +21,7 @@ document.getElementById('heal').addEventListener('click', displayHpDialog);
 document.getElementById('new-item').addEventListener('click', displayNewItemDialog);
 document.getElementById('cancel-item').addEventListener('click', addNewItemToInventory);
 document.getElementById('confirm-item').addEventListener('click', addNewItemToInventory);
+document.getElementById('death-saves-dice').addEventListener('click', rollDeathSave);
 let x = 0;
 let y = 0;
 document.getElementById('main-dice').addEventListener('click', toggleDiceList);
@@ -44,6 +45,40 @@ for (let item of labelsAutoWidth) {
 let beautifulAlert = document.createElement('span');
 beautifulAlert.id = 'beautiful-alert';
 document.body.appendChild(beautifulAlert);
+let rollAlertContainer = document.createElement('div');
+rollAlertContainer.id = 'roll-alert';
+document.body.appendChild(rollAlertContainer);
+let rollAlertList = [];
+
+function rollAlert(rollNum = 17, text = 'На кубике выпало:') {
+  let rollAlertMsg = document.createElement('div');
+  rollAlertMsg.classList = 'roll-alert-msg default-background border-style border-radius default-shadow';
+
+  let rollAlertText = document.createElement('span');
+  rollAlertText.classList = 'roll-alert-msg-text';
+  rollAlertText.textContent = text;
+
+  let rollAlertNumber = document.createElement('span');
+  rollAlertNumber.classList = 'roll-alert-msg-number';
+  rollAlertNumber.textContent = rollNum;
+
+  rollAlertMsg.appendChild(rollAlertText);
+  rollAlertMsg.appendChild(rollAlertNumber);
+
+  rollAlertList.push(rollAlertMsg);
+  setTimeout(rollAlertErase, 2400);
+  rollAlertContainer.appendChild(rollAlertMsg);
+
+}
+
+function rollAlertErase() {
+  let tempRollMsg = rollAlertList.shift();
+
+  tempRollMsg.classList.add('roll-alert-erase-translate');
+  
+  // setTimeout('rollAlertContainer.removeChild(tempRollMsg)', 1000);
+
+}
 
 function bAlert(text) {
   beautifulAlert.style.visibility = 'visible';
@@ -163,6 +198,30 @@ function hpValidation(actual, maximum) {
     actual = 0;
   }
   return actual;
+}
+
+let successMarkCount = 1;
+let failsMarkCount = 1;
+let dicesLeft = 5;
+
+function rollDeathSave() {
+  if (failsMarkCount > 3 || successMarkCount > 3) { return; }
+  
+  dicesLeft -= 1;
+  let rollResult = Math.floor(Math.random() * 20 + 1);
+
+  rollAlert(rollResult);
+
+  if (rollResult  < 10) {
+    document.getElementById(`fail-mark-${failsMarkCount}`).src = 'images/icons/failures_mark_checked.svg';
+    failsMarkCount += 1;
+  } else {
+    document.getElementById(`success-mark-${successMarkCount}`).src = 'images/icons/success_mark_checked.svg';
+    successMarkCount += 1;
+  }
+
+  document.getElementById('death-saves-heart').style.backgroundColor = 'hsl(357,' + (successMarkCount - failsMarkCount + 2) / 4 * 100 + '%, 40%)';
+
 }
 
 function onloadBarWidth(spanId) {
