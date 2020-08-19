@@ -152,23 +152,23 @@ main {
   border-bottom: none;
   border-radius: 0 3px 0 0;
 }
-.characteristic-deathsave {
+.characteristic-death-save {
   box-sizing: border-box;
   width: 40px;
   height: 20px;
   border-left: none;
 }
-.characteristic-deathsave-checkbox {
+.characteristic-death-save-checkbox {
   box-sizing: border-box;
   width: 20px;
   height: 20px;
   border-left: none;
   border-radius: 0 10px 10px 0 ;
 }
-.characteristic-bonus, .characteristic-value, .characteristic-deathsave, .characteristic-deathsave-checkbox {
+.characteristic-bonus, .characteristic-value, .characteristic-death-save, .characteristic-death-save-checkbox {
  position: relative;
 }
-.characteristic-bonus::after, .characteristic-value::after, .characteristic-deathsave::after, .characteristic-deathsave-checkbox::after
+.characteristic-bonus::after, .characteristic-value::after, .characteristic-death-save::after, .characteristic-death-save-checkbox::after
 {
   content: ''; /* Добавляем пустое содержание для тени */
   display: block; /* Блочный элемент */
@@ -178,7 +178,7 @@ main {
   left: -1px; right: -1px; /* Тень чуть больше ширины и высоты заголовка */
   z-index: -1; /* Тень под блоком текста */
 }
-.characteristic-deathsave-checkbox::after {
+.characteristic-death-save-checkbox::after {
   border-radius: 10px;
 }
 #main-dice {
