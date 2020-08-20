@@ -57,6 +57,11 @@ document.getElementById('d8-dice').addEventListener('click', () => {let rolled =
 document.getElementById('d6-dice').addEventListener('click', () => {let rolled = rollDice(6); rollAlert(rolled.value, `На D${rolled.type} выпало:`)} );
 document.getElementById('d4-dice').addEventListener('click', () => {let rolled = rollDice(4); rollAlert(rolled.value, `На D${rolled.type} выпало:`)} );
 document.getElementById('strength-death-save-checkbox').addEventListener('click', characteristicCheckBoxDropDown);
+document.getElementById('dexterity-death-save-checkbox').addEventListener('click', characteristicCheckBoxDropDown);
+document.getElementById('constitution-death-save-checkbox').addEventListener('click', characteristicCheckBoxDropDown);
+document.getElementById('intelligence-death-save-checkbox').addEventListener('click', characteristicCheckBoxDropDown);
+document.getElementById('wisdom-death-save-checkbox').addEventListener('click', characteristicCheckBoxDropDown);
+document.getElementById('charisma-death-save-checkbox').addEventListener('click', characteristicCheckBoxDropDown);
 let x = 0;
 let y = 0;
 document.getElementById('main-dice').addEventListener('click', toggleDiceList);
