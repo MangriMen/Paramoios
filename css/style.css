@@ -196,20 +196,76 @@ main {
 #main-dice {
   width: 54px;
   height: 54px;
+  z-index: 22;
 }
 #dice-list {
-  display: none;
   position: absolute;
-  flex-direction: column;
-  align-content: space-between;
-  left: 47.2%;
-  top: 105%;
-  z-index: 50;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 54px;
+  top: 50%;
 }
-.dice-in-list {
-  margin: 0.2em 0;
+#dice-list-checkbox:checked ~ .dice-in-list:nth-child(n) {
   width: 54px;
   height: 54px;
+  z-index: 21;
+}
+#d20-dice {
+  transition: 0.3s ease-out 0;
+}
+#dice-list-checkbox:checked ~ #d20-dice {
+  top: 2rem;
+}
+#d12-dice {
+  transition: 0.3s ease-out 0.05s;
+}
+#dice-list-checkbox:checked ~ #d12-dice {
+  top: 5rem;
+}
+#d100-dice {
+  transition: 0.3s ease-out 0.1s;
+}
+#dice-list-checkbox:checked ~ #d100-dice {
+  top: 8rem;
+}
+#d10-dice {
+  transition: 0.3s ease-out 0.15s;
+}
+#dice-list-checkbox:checked ~ #d10-dice {
+  top: 11rem;
+}
+#d8-dice {
+  transition: 0.3s ease-out 0.20s;
+}
+#dice-list-checkbox:checked ~ #d8-dice {
+  top: 14rem;
+}
+#d6-dice {
+  transition: 0.3s ease-out 0.25s;
+}
+#dice-list-checkbox:checked ~ #d6-dice {
+  top: 17rem;
+}
+#d4-dice {
+  transition: 0.3s ease-out 0.3s;
+}
+#dice-list-checkbox:checked ~ #d4-dice {
+  top: 20rem;
+}
+#dice-list-checkbox {
+  position: absolute;
+  visibility: hidden;
+}
+.dice-in-list {
+  position: absolute;
+  top: 0;
+  z-index: 20;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 10px;
+  height: 10px;
 }
 #skills {
   display: flex;
