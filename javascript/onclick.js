@@ -25,6 +25,13 @@ document.getElementById('new-item').addEventListener('click', displayNewItemDial
 document.getElementById('cancel-item').addEventListener('click', addNewItemToInventory);
 document.getElementById('confirm-item').addEventListener('click', addNewItemToInventory);
 document.getElementById('death-saves-dice').addEventListener('click', rollDeathSave);
+document.getElementById('d20-dice').addEventListener('click', () => {let rolled = rollDice(20); rollAlert(rolled.value, `На D${rolled.type} выпало:`)} );
+document.getElementById('d12-dice').addEventListener('click', () => {let rolled = rollDice(12); rollAlert(rolled.value, `На D${rolled.type} выпало:`)} );
+document.getElementById('d100-dice').addEventListener('click', () => {let rolled = rollDice(100); rollAlert(rolled.value, `На D${rolled.type} выпало:`)} );
+document.getElementById('d10-dice').addEventListener('click', () => {let rolled = rollDice(10); rollAlert(rolled.value, `На D${rolled.type} выпало:`)} );
+document.getElementById('d8-dice').addEventListener('click', () => {let rolled = rollDice(8); rollAlert(rolled.value, `На D${rolled.type} выпало:`)} );
+document.getElementById('d6-dice').addEventListener('click', () => {let rolled = rollDice(6); rollAlert(rolled.value, `На D${rolled.type} выпало:`)} );
+document.getElementById('d4-dice').addEventListener('click', () => {let rolled = rollDice(4); rollAlert(rolled.value, `На D${rolled.type} выпало:`)} );
 let x = 0;
 let y = 0;
 document.getElementById('main-dice').addEventListener('click', toggleDiceList);
@@ -71,7 +78,7 @@ function rollAlert(rollNum = 17, text = 'На кубике выпало:') {
   rollAlertMsg.appendChild(rollAlertNumber);
 
   rollAlertList.push(rollAlertMsg);
-  setTimeout(rollAlertErase, 2400);
+  setTimeout(rollAlertErase, 3400);
   rollAlertContainer.appendChild(rollAlertMsg);
 }
 
@@ -216,21 +223,25 @@ function hpValidation(actual, maximum) {
   return actual;
 }
 
-let successMarkCount = 1;
-let failsMarkCount = 1;
+let successMarkCount = 0;
+let failsMarkCount = 0;
+
+function rollDice(diceType){
+  return {
+    value: Math.floor(Math.random() * diceType + 1),
+    type: diceType
+  }
+}
 
 function rollDeathSave() {
-  if (failsMarkCount >= 3 || successMarkCount >= 3) {
-    rollDeathSaveClear();
-    return;
-  }
-  
-  let rollResult = Math.floor(Math.random() * 20 + 1);
+  let rollResult = rollDice(20).value;
 
   rollAlert(rollResult, 'На D20 выпало:');
 
+  console.log('At start | Fails: ' + failsMarkCount + '  Success: ' + successMarkCount);
+
   if (rollResult  < 10) {
-    document.getElementById(`fail-mark-${failsMarkCount}`).src = 'images/icons/failures_mark_checked.svg';
+    document.getElementById(`fail-mark-${failsMarkCount + 1}`).src = 'images/icons/failures_mark_checked.svg';
     failsMarkCount += 1;
   } else if (rollResult >= 20) {
     rollDeathSaveClear(true);
@@ -239,23 +250,29 @@ function rollDeathSave() {
     isHealed = false;
     return;
   } else {
-    document.getElementById(`success-mark-${successMarkCount}`).src = 'images/icons/success_mark_checked.svg';
+    document.getElementById(`success-mark-${successMarkCount + 1}`).src = 'images/icons/success_mark_checked.svg';
     successMarkCount += 1;
   }
 
+  if (failsMarkCount == 3 || successMarkCount == 3) {
+    rollDeathSaveClear();
+  }
+
   document.getElementById('death-saves-heart').style.backgroundColor = 'hsl(357,' + (successMarkCount - failsMarkCount + 2) / 4 * 100 + '%, 40%)';
+
+  console.log('At finish | Fails: ' + failsMarkCount + '  Success: ' + successMarkCount);
 }
 
-function rollDeathSaveClear(isTwenty) {
-  if (failsMarkCount >= 3) {
+function rollDeathSaveClear(isTwenty = false) {
+  if (failsMarkCount == 3) {
     bAlert('Вы умерли.', 5000);
-  } else if (successMarkCount >= 3) {
+  } else if (successMarkCount == 3) {
     bAlert('Вы живы!', 5000);
   } else if (isTwenty) {
     bAlert('Да вы счастливчик! На D20 выпало: 20!', 8000);
   }
-  successMarkCount = 1;
-  failsMarkCount = 1;
+  successMarkCount = 0;
+  failsMarkCount = 0;
   successMarks.forEach(mark => mark.src = 'images/icons/success_mark.svg');
   failuresMarks.forEach(mark => mark.src = 'images/icons/failures_mark.svg');
   deathSavesOverlay.style.display = 'none';
