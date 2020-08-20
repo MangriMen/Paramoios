@@ -28,7 +28,6 @@ for (let svgItem in svgArr) {
   let imgId = img.id;
   let imgClass = img.className;
   let imgURL = img.src;
-  console.log(img);
 
   client.get(imgURL, function(data) {
     let svg = htmlToElement(data);

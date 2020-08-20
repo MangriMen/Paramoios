@@ -1,5 +1,7 @@
 'use strict'
 
+let language = 'ru';
+
 const levelDependenceTable = {
   1: 0,
   2: 300,
@@ -22,6 +24,9 @@ const levelDependenceTable = {
   19: 305000,
   20: 355000
 }
+
+let character = null;
+let characterInput = document.getElementById('character-input')
 
 let hpFillEl = document.getElementById('hp-bar-fill').classList;
 let hpWaveEl = document.getElementById('hp-liquid').classList;
@@ -63,6 +68,7 @@ document.getElementById('constitution-death-save-checkbox').addEventListener('cl
 document.getElementById('intelligence-death-save-checkbox').addEventListener('click', characteristicCheckBoxDropDown);
 document.getElementById('wisdom-death-save-checkbox').addEventListener('click', characteristicCheckBoxDropDown);
 document.getElementById('charisma-death-save-checkbox').addEventListener('click', characteristicCheckBoxDropDown);
+document.getElementById('open-character').addEventListener('click', openCharacter);
 let x = 0;
 let y = 0;
 document.getElementById('main-dice').addEventListener('click', toggleDiceList);
@@ -548,4 +554,190 @@ function characteristicCheckBoxDropDown() {
       this.dispatchEvent(new Event('click'));
     }
   }
+}
+
+document.getElementById('test').addEventListener('click', () => {console.log(character)});
+
+function openCharacter() {
+  characterInput.click();
+  characterInput.onchange = function(e) {
+    loadCharacterJSON();
+    loadCharacter();
+  }
+}
+
+function loadCharacterJSON() {
+  var input, file, fr;
+
+  if (typeof window.FileReader !== 'function') {
+    alert("The file API isn't supported on this browser yet.");
+    return;
+  }
+
+  input = characterInput;
+
+  if (!input) {
+    alert("Um, couldn't find the fileinput element.");
+  }
+  else if (!input.files) {
+    alert("This browser doesn't seem to support the `files` property of file inputs.");
+  }
+  else if (!input.files[0]) {
+    alert("Please select a file before clicking 'Load'");
+  }
+  else {
+    file = input.files[0];
+    fr = new FileReader();
+    fr.onload = receivedText;
+    fr.readAsText(file);
+  }
+
+  function receivedText(e) {
+    let lines = e.target.result;
+    character = JSON.parse(lines); 
+  }
+}
+
+let playerName = document.getElementById('player-name');
+let characterName = document.getElementById('character-name');
+let characterAlignment = document.getElementById('character-alignment');
+let characterRace = document.getElementById('character-race');
+let characterClass = document.getElementById('character-class');
+let characterBackground = document.getElementById('character-background');
+let characterStats = document.getElementById('character-stats');
+let characterSkills = document.getElementById('skills');
+
+let russianVocabulary = {
+  "Alignment": "Мировоззрение",
+  "Lawful Good": "Законопослушный Добрый",
+  "Lawful Neutral": "Законопослушный Нейтральный",
+  "Lawful Evil": "Законопослушный Злой",
+  "Neutral Good": "Нейтральный Добрый",
+  "True Neutral": "Истинно Нейтральный",
+  "Neutral Evil": "Нейтральный Злой",
+  "Chaotic Good": "Хаотичный Добрый",
+  "Chaotic Neutral": "Хаточино Нейтральный",
+  "Chaotic Evil": "Хаотично Злой",
+  "Class": "Класс",
+  "Barbarian": "Варвар",
+  "Bard": "Бард",
+  "Cleric": "Жрец",
+  "Druid": "Друид",
+  "Fighter": "Воин",
+  "Monk": "Монах",
+  "Paladin": "Паладин",
+  "Ranger": "Следопыт",
+  "Rogue": "Плут",
+  "Sorcerer": "Чародей",
+  "Warlock": "Колдун",
+  "Wizard": "Волшебник",
+  "Race": "Раса",
+  "Dwarf": "Дварф",
+  "Elf": "Эльф",
+  "Hafling": "Полурослик",
+  "Human": "Человек",
+  "Dragonborn": "Драконорожденный",
+  "Gnome": "Гном",
+  "Half-Elf": "Полуэльф",
+  "Half-Orc": "Полуорк",
+  "Tiefling": "Тифлинг",
+  "Background": "Предыстория",
+  "Acolyte": "Прислужник",
+  "Charlatan": "Шарлатан",
+  "Criminal": "Преступник",
+  "Entertainer": "Артист",
+  "Folk Hero": "Народный Герой",
+  "Guild Artisan": "Гилдейский Ремесленник",
+  "Hermit": "Отшельник",
+  "Noble": "Благородный",
+  "Outlander": "Чужеземец",
+  "Sage": "Мудрец",
+  "Sailor": "Моряк",
+  "Soldier": "Солдат",
+  "Urchin": "Беспризорник",
+}
+
+function capitalize(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+function capitalizeAllFirstOfWord(str)
+{
+    var pieces = str.split(" ");
+    for ( var i = 0; i < pieces.length; i++ )
+    {
+        var j = pieces[i].charAt(0).toUpperCase();
+        pieces[i] = j + pieces[i].substr(1);
+    }
+    return pieces.join(" ");
+}
+
+function translateToLanguage(language, str) {
+  let selectedVocabulary = null;
+  if (language = 'ru') {
+    selectedVocabulary = russianVocabulary;
+  } else {
+    return;
+  }
+  let translatedWord = selectedVocabulary[fillStringIfEmpty(capitalizeAllFirstOfWord(str))];
+  return translatedWord != null ? translatedWord : String(undefined);
+}
+
+function fillStringIfEmpty(str) {
+  return str != '' ? str : String(undefined);
+}
+
+function calculateBonus(value) {
+  return Math.floor((value - 10) / 2);
+}
+
+function addSignToNumber(value) {
+  return value < 0 ? '-' + value : '+' + value;
+}
+
+function loadCharacter() {
+  loadPlayerName();
+  loadCharacterName();
+  loadCharacterOrigin();
+  loadCharacteristics();
+  loadHpAndXp();
+}
+
+function loadPlayerName() {
+  playerName.textContent = fillStringIfEmpty(character.playerName);
+}
+
+function loadCharacterName() {
+  characterName.value = fillStringIfEmpty(character.charName);
+  characterName.dispatchEvent(new Event('keydown'));
+}
+
+function loadCharacterOrigin() {
+  characterAlignment.textContent = translateToLanguage(language, character.alignment);
+  characterRace.textContent = translateToLanguage(language, character.race);
+  characterClass.textContent = translateToLanguage(language, character.class);
+  characterBackground.textContent = translateToLanguage(language, character.background);
+}
+
+function loadCharacteristics() {
+  characterStats.querySelectorAll('div.characteristic').forEach(
+    statsBox => {
+      var characteristicValue = statsBox.querySelector('#' + statsBox.id + '-value');
+      var characteristicBonus = statsBox.querySelector('#' + statsBox.id + '-bonus');
+      characteristicValue.value = character.characteristic[statsBox.id];
+      characteristicBonus.textContent = addSignToNumber(calculateBonus(parseInt(character.characteristic[statsBox.id])));
+    });
+  
+  characterSkills.querySelectorAll('span.skill-bonus').forEach(
+    skillBonus => {
+      skillBonus.textContent = addSignToNumber(character.characteristic[skillBonus.dataset.modifier]);
+    });
+}
+
+function loadHpAndXp() {
+  document.getElementById('hp').textContent = '' + character.hp + '/' + character.hpMax;
+  onloadBarWidth('hp');
+  document.getElementById('xp').value = '' + character.experience;
+  adjustLevel();
+  onloadBarWidth('xp');
 }
