@@ -464,11 +464,11 @@ function closeAdditionalInfo() {
 }
 
 function toggleDiceList() {
-  if (getComputedStyle(diceList).display == "none") {
-    diceList.style.display = "flex";
+  document.getElementById('dice-list-checkbox').checked = !document.getElementById('dice-list-checkbox').checked;
+  
+  if (document.getElementById('dice-list-checkbox').checked) {
     mainDiceImg.src = "images/icons/control_icon/close.svg";
   } else {
-    diceList.style.display = "none";
     mainDiceImg.src = "images/buttons/dices/D20.svg";
   }
 }

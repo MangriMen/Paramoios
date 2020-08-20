@@ -68,17 +68,17 @@ header {
 .input-font-style {
   color: black;
 }
-#main-dice, .dice-in-list{
+#main-dice, .dice-in-list, #death-saves-dice{
   background-color: #82262b;
   box-shadow: 0 0 10px 0 rgba(66,66,66,0.75);
   border-radius: 50%;
   padding: 0.6em;
   border: none;
 }
-#main-dice:hover, .dice-in-list:hover {
+#main-dice:hover, .dice-in-list:hover, #death-saves-dice:hover {
   background-color: #9c2d33;
 }
-#main-dice:active, .dice-in-list:active {
+#main-dice:active, .dice-in-list:active, #death-saves-dice:active {
   background-color: #4f171a;
 }
 .currency-value {
