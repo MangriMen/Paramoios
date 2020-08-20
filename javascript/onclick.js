@@ -357,7 +357,7 @@ function addNewItemToInventory() {
     newItem.addEventListener("click", openItemAdditionalInfo);
     newItem.value = document.getElementById('item-name').value;
     if (newItem.value == '') {
-      bAlert('Введите название предмета!' + Math.random(), 3000);
+      bAlert('Введите название предмета!');
       newItem.style.display='none';
       newItem = null;
       return;
