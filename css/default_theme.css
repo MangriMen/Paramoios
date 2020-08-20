@@ -120,3 +120,16 @@ header {
 .tibf-element-area::-webkit-scrollbar-thumb:active, #equimpment::-webkit-scrollbar-thumb:active {
   background-color:#9c2d33;
 }
+.characteristic-not-proficient {
+  background-color: #998a70;
+}
+.characteristic-half-proficient {
+  background: rgb(212,191,155);
+  background: linear-gradient(0deg, rgba(212,191,155,1) 0%, rgba(153,138,112,1) 100%);
+}
+.characteristic-proficient {
+  background-color: #d4bf9b;
+}
+.characteristic-expertise {
+  background-color: #ffa834;
+}
