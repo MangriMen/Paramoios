@@ -818,9 +818,9 @@ input[type=number] {
   justify-content: space-between;
   padding: 0.4rem;
   z-index: 50;
-  margin: 0.4rem 0 0 0.4rem;
-  font-size: 0.8rem;
-  height: 8rem;
+  margin: 1rem 0 0 -6rem;
+  font-size: 0.7rem;
+  height: 7rem;
   cursor: default;
 }
 .drop-list-text {
@@ -828,7 +828,7 @@ input[type=number] {
   flex-direction: row;  
   justify-content: space-between;
   align-items: center;
-  width: 7rem;
+  width: 6rem;
   cursor: pointer;
   padding: 0.2rem 0.3rem;
   border-radius: 3px;

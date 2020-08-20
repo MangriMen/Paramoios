@@ -34,6 +34,7 @@ let successMarks = [document.getElementById('success-mark-1'), document.getEleme
 let failuresMarks = [document.getElementById('fail-mark-1'), document.getElementById('fail-mark-2'), document.getElementById('fail-mark-3')];
 let selectedImageForItem = null;
 let selectedItemInfo = null;
+let profinciesParent = null;
 let tempFlag = 0;
 let tempHp = 0;
 let bufferMaxHp = 0;
@@ -486,8 +487,8 @@ function characteristicProfinciesSelect(characteristic, proficient) {
 }
 
 function characteristicCheckBoxDropDown() {
-  let checkbox = this;
   let dropList = document.getElementById('drop-list');
+
   if (dropList == null) {
     dropList = document.createElement('div');
     dropList.id = 'drop-list';
@@ -529,10 +530,10 @@ function characteristicCheckBoxDropDown() {
     expertiseBonus.textContent = '+4';
     expertise.appendChild(expertiseBonus);
   
-    notProficient.addEventListener('click', function() {characteristicProfinciesSelect(checkbox, this)});
-    halfProficient.addEventListener('click',function() { characteristicProfinciesSelect(checkbox, this)});
-    proficient.addEventListener('click', function() { characteristicProfinciesSelect(checkbox, this)});
-    expertise.addEventListener('click', function() { characteristicProfinciesSelect(checkbox, this)});
+    notProficient.addEventListener('click', function() {characteristicProfinciesSelect(profinciesParent, this)});
+    halfProficient.addEventListener('click',function() { characteristicProfinciesSelect(profinciesParent, this)});
+    proficient.addEventListener('click', function() { characteristicProfinciesSelect(profinciesParent, this)});
+    expertise.addEventListener('click', function() { characteristicProfinciesSelect(profinciesParent, this)});
 
     dropList.appendChild(notProficient);
     dropList.appendChild(halfProficient);
@@ -540,7 +541,11 @@ function characteristicCheckBoxDropDown() {
     dropList.appendChild(expertise);
   
     this.appendChild(dropList);
+    profinciesParent = this;
   } else {
-    this.removeChild(dropList);
+    profinciesParent.removeChild(dropList);
+    if(profinciesParent != this) {
+      this.dispatchEvent(new Event('click'));
+    }
   }
 }
