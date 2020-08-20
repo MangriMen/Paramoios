@@ -556,13 +556,12 @@ function characteristicCheckBoxDropDown() {
   }
 }
 
-document.getElementById('test').addEventListener('click', () => {console.log(character)});
+document.getElementById('test').addEventListener('click', () => {console.log(character); loadCharacter();});
 
 function openCharacter() {
   characterInput.click();
   characterInput.onchange = function(e) {
     loadCharacterJSON();
-    loadCharacter();
   }
 }
 
