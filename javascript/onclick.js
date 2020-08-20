@@ -1,5 +1,28 @@
 'use strict'
 
+const levelDependenceTable = {
+  1: 0,
+  2: 300,
+  3: 900,
+  4: 2700,
+  5: 6500,
+  6: 14000,
+  7: 23000,
+  8: 34000,
+  9: 48000,
+  10: 64000,
+  11: 85000,
+  12: 100000,
+  13: 120000,
+  14: 140000,
+  15: 165000,
+  16: 195000,
+  17: 225000,
+  18: 265000,
+  19: 305000,
+  20: 355000
+}
+
 let hpFillEl = document.getElementById('hp-bar-fill').classList;
 let hpWaveEl = document.getElementById('hp-liquid').classList;
 let equipment = document.getElementById('equipment');
@@ -16,6 +39,7 @@ let tempHp = 0;
 let bufferMaxHp = 0;
 let bufferHp = 0;
 let isHealed = false;
+let defaultCharacteristicCheckboxClasses = 'characteristic-death-save-checkbox border-style';
 document.getElementById('confirm-hp').addEventListener('click', changeHp);
 document.getElementById('cancel-hp').addEventListener('click', displayHpDialog);
 document.getElementById('damage').addEventListener('click', displayHpDialog);
@@ -32,6 +56,7 @@ document.getElementById('d10-dice').addEventListener('click', () => {let rolled 
 document.getElementById('d8-dice').addEventListener('click', () => {let rolled = rollDice(8); rollAlert(rolled.value, `На D${rolled.type} выпало:`)} );
 document.getElementById('d6-dice').addEventListener('click', () => {let rolled = rollDice(6); rollAlert(rolled.value, `На D${rolled.type} выпало:`)} );
 document.getElementById('d4-dice').addEventListener('click', () => {let rolled = rollDice(4); rollAlert(rolled.value, `На D${rolled.type} выпало:`)} );
+document.getElementById('strength-death-save-checkbox').addEventListener('click', characteristicCheckBoxDropDown);
 let x = 0;
 let y = 0;
 document.getElementById('main-dice').addEventListener('click', toggleDiceList);
@@ -111,29 +136,6 @@ function bAlert(text, delay = 3000) {
       beautifulTimer = setTimeout(bAlertHide, beautifulAlertContainer.lastChild.dataset.delay);
     }
   }, delay);
-}
-
-const levelDependenceTable = {
-  1: 0,
-  2: 300,
-  3: 900,
-  4: 2700,
-  5: 6500,
-  6: 14000,
-  7: 23000,
-  8: 34000,
-  9: 48000,
-  10: 64000,
-  11: 85000,
-  12: 100000,
-  13: 120000,
-  14: 140000,
-  15: 165000,
-  16: 195000,
-  17: 225000,
-  18: 265000,
-  19: 305000,
-  20: 355000
 }
 
 function displayHpDialog() {
@@ -470,5 +472,70 @@ function toggleDiceList() {
     mainDiceImg.src = "images/icons/control_icon/close.svg";
   } else {
     mainDiceImg.src = "images/buttons/dices/D20.svg";
+  }
+}
+
+function characteristicProfinciesSelect(characteristic, proficient) {
+  characteristic.classList.remove(characteristic.classList.item(0));
+  characteristic.classList = defaultCharacteristicCheckboxClasses + ' characteristic-' + proficient.id;
+}
+
+function characteristicCheckBoxDropDown() {
+  let checkbox = this;
+  let dropList = document.getElementById('drop-list');
+  if (dropList == null) {
+    dropList = document.createElement('div');
+    dropList.id = 'drop-list';
+    dropList.classList = 'default-background border-style border-radius';
+
+    let notProficient = document.createElement('span');
+    notProficient.id = 'not-proficient';
+    notProficient.classList = 'default-hover-active drop-list-text';
+    notProficient.textContent = "Not Proficient";
+    let notProficientBonus = document.createElement('span');
+    notProficientBonus.classList = 'border-style border-radius characteristic-not-proficient drop-list-bonus';
+    notProficientBonus.textContent = '+0';
+    notProficient.appendChild(notProficientBonus);
+
+    let halfProficient = document.createElement('span');
+    halfProficient.id = 'half-proficient';
+    halfProficient.classList = 'default-hover-active drop-list-text';
+    halfProficient.textContent = "Half Proficient";
+    let halfProficientBonus = document.createElement('span');
+    halfProficientBonus.classList = 'border-style border-radius characteristic-half-proficient drop-list-bonus';
+    halfProficientBonus.textContent = '+1';
+    halfProficient.appendChild(halfProficientBonus);
+
+    let proficient = document.createElement('span');
+    proficient.id = 'proficient';
+    proficient.classList = 'default-hover-active drop-list-text';
+    proficient.textContent = "Proficient";
+    let proficientBonus = document.createElement('span');
+    proficientBonus.classList = 'border-style border-radius characteristic-proficient drop-list-bonus';
+    proficientBonus.textContent = '+2';
+    proficient.appendChild(proficientBonus);
+
+    let expertise = document.createElement('span');
+    expertise.id = 'expertise';
+    expertise.classList = 'default-hover-active drop-list-text';
+    expertise.textContent = "Expertise";
+    let expertiseBonus = document.createElement('span');
+    expertiseBonus.classList = 'border-style border-radius characteristic-expertise drop-list-bonus';
+    expertiseBonus.textContent = '+4';
+    expertise.appendChild(expertiseBonus);
+  
+    notProficient.addEventListener('click', function() {characteristicProfinciesSelect(checkbox, this)});
+    halfProficient.addEventListener('click',function() { characteristicProfinciesSelect(checkbox, this)});
+    proficient.addEventListener('click', function() { characteristicProfinciesSelect(checkbox, this)});
+    expertise.addEventListener('click', function() { characteristicProfinciesSelect(checkbox, this)});
+
+    dropList.appendChild(notProficient);
+    dropList.appendChild(halfProficient);
+    dropList.appendChild(proficient);
+    dropList.appendChild(expertise);
+  
+    this.appendChild(dropList);
+  } else {
+    this.removeChild(dropList);
   }
 }

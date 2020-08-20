@@ -152,7 +152,6 @@ main {
 .characteristic-value {
   grid-column: 2;
   grid-row: 2;
-  font-size: 0.6rem;
   box-sizing: border-box;
   width: 40px;
   height: 20px;
@@ -176,6 +175,7 @@ main {
   height: 20px;
   border-left: none;
   border-radius: 0 10px 10px 0 ;
+  cursor: pointer;
 }
 .characteristic-bonus, .characteristic-value, .characteristic-death-save, .characteristic-death-save-checkbox {
  position: relative;
@@ -810,4 +810,33 @@ input[type=number] {
 }
 .roll-alert-erase-translate {
   margin-left: -200% !important;
+}
+#drop-list {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  justify-content: space-between;
+  padding: 0.4rem;
+  z-index: 50;
+  margin: 0.4rem 0 0 0.4rem;
+  font-size: 0.8rem;
+  height: 8rem;
+  cursor: default;
+}
+.drop-list-text {
+  display: flex;
+  flex-direction: row;  
+  justify-content: space-between;
+  align-items: center;
+  width: 7rem;
+  cursor: pointer;
+  padding: 0.2rem 0.3rem;
+  border-radius: 3px;
+}
+.drop-list-bonus {
+  width: 1.2rem;
+  height: 1.2rem;
+  line-height: 1.1rem;
+  text-align: center;
+  box-sizing: border-box;
 }
