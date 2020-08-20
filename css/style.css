@@ -1,4 +1,5 @@
 header {
+  height: 1.6rem;
   line-height: 1.6rem;
 }
 main {
@@ -13,6 +14,22 @@ main {
 }
 .border-radius {
   border-radius: 3px;
+}
+#header-center {
+  max-width: 960px;
+  height: 1.6rem;
+  display: grid;
+  grid-template-columns: 10rem 10rem 10rem auto;
+  grid-template-rows: 1.6rem;
+  align-items: center;
+  margin: auto;
+}
+.header-buttons {
+  outline: none;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
 }
 #header-title {
   font-size: 1.2rem;
@@ -142,6 +159,9 @@ main {
 }
 .characteristic-bonus {
   box-sizing: border-box;
+  text-align: center;
+  line-height: 32px;
+  font-size: 2rem;
   width: 60px;
   height: 40px;
   border-radius: 3px 0 0 3px;

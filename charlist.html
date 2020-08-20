@@ -22,9 +22,21 @@
 </head>
 <body onload="adjustLevel(); onloadBarWidth('xp'); onloadBarWidth('hp');">
     <header>
-        <a id="header-title" href="index.html">
-            DnD5CharlistI
-        </a>
+        <div id="header-center">
+            <a id="header-title" href="index.html">
+                DnD5CharlistI
+            </a>
+            <button id="open-character" class="header-buttons input-font-style" href="">
+                Open character
+            </button>
+            <input type='file' id='character-input' style="display: none;">
+            <button id="save-character" class="header-buttons input-font-style" href="">
+                Save character
+            </button>
+            <button id="test" class="header-buttons input-font-style" href="">
+                JSON => CONSOLE
+            </button>
+        </div>
     </header>
 <!--     <nav>
     </nav> -->
@@ -143,166 +155,94 @@
         <section id="central">
             <div id="skills">
                 <div id="acrobatics" class="skill-box">
-                    <div class="border-style border-radius skill-bonus default-background default-shadow">
-                        <span id="acrobatics-bonus">-1</span>
-                    </div>
+                    <span class="border-style border-radius skill-bonus default-background default-shadow" data-modifier="dexterity" id="acrobatics-bonus">-1</span>
                     <span id="acrobatics-origin" class="skill-origin gray-text">DEX</span>
-                    <div class="border-style border-radius skill-text default-background default-shadow">
-                        <span id="acrobatics-text">Акробатика</span>
-                    </div>
+                    <span class="border-style border-radius skill-text default-background default-shadow" id="acrobatics-text">Акробатика</span>
                 </div>
                 <div id="investigation" class="skill-box">
-                    <div class="border-style border-radius skill-bonus default-background default-shadow" >
-                        <span id="investigation-bonus">-1</span>
-                    </div>
+                    <span class="border-style border-radius skill-bonus default-background default-shadow" data-modifier="intelligence" id="investigation-bonus">-1</span>
                     <span id="investigation-origin" class="skill-origin gray-text">INT</span>
-                    <div class="border-style border-radius skill-text default-background default-shadow">
-                        <span id="investigation-text">Анализ</span>
-                    </div>
+                    <span class="border-style border-radius skill-text default-background default-shadow" id="investigation-text">Анализ</span>
                 </div>
                 <div id="athletics" class="skill-box">
-                    <div class="border-style border-radius skill-bonus default-background default-shadow" >
-                        <span id="athletics-bonus">-1</span>
-                    </div>
+                    <span class="border-style border-radius skill-bonus default-background default-shadow" data-modifier="strength" id="athletics-bonus">-1</span>
                     <span id="athletics-origin" class="skill-origin gray-text">STR</span>
-                    <div class="border-style border-radius skill-text default-background default-shadow">
-                        <span id="athletics-text">Атлетика</span>
-                    </div>
+                    <span class="border-style border-radius skill-text default-background default-shadow" id="athletics-text">Атлетика</span>
                 </div>
                 <div id="perception" class="skill-box">
-                    <div class="border-style border-radius skill-bonus default-background default-shadow" >
-                        <span id="perception-bonus">-1</span>
-                    </div>
+                    <span class="border-style border-radius skill-bonus default-background default-shadow" data-modifier="wisdom" id="perception-bonus">-1</span>
                     <span id="perception-origin" class="skill-origin gray-text">WIS</span>
-                    <div class="border-style border-radius skill-text default-background default-shadow">
-                        <span id="perception-text">Внимательность</span>
-                    </div>
+                    <span class="border-style border-radius skill-text default-background default-shadow" id="perception-text">Внимательность</span>
                 </div>
                 <div id="survival" class="skill-box">
-                    <div class="border-style border-radius skill-bonus default-background default-shadow" >
-                        <span id="survival-bonus">-1</span>
-                    </div>
+                    <span class="border-style border-radius skill-bonus default-background default-shadow" data-modifier="wisdom" id="survival-bonus">-1</span>
                     <span id="survival-origin" class="skill-origin gray-text">WIS</span>
-                    <div class="border-style border-radius skill-text default-background default-shadow">
-                        <span id="survival-text">Выживание</span>
-                    </div>
+                    <span class="border-style border-radius skill-text default-background default-shadow" id="survival-text">Выживание</span>
                 </div>
                 <div id="performance" class="skill-box">
-                    <div class="border-style border-radius skill-bonus default-background default-shadow" >
-                        <span id="performance-bonus">-1</span>
-                    </div>
+                    <span class="border-style border-radius skill-bonus default-background default-shadow" data-modifier="charisma" id="performance-bonus">-1</span>
                     <span id="performance-origin" class="skill-origin gray-text">CHA</span>
-                    <div class="border-style border-radius skill-text default-background default-shadow">
-                        <span id="performance-text">Выступление</span>
-                    </div>
+                    <span class="border-style border-radius skill-text default-background default-shadow" id="performance-text">Выступление</span>
                 </div>
                 <div id="intimidation" class="skill-box">
-                    <div class="border-style border-radius skill-bonus default-background default-shadow" >
-                        <span id="intimidation-bonus">-1</span>
-                    </div>
+                    <span class="border-style border-radius skill-bonus default-background default-shadow" data-modifier="charisma" id="intimidation-bonus">-1</span>
                     <span id="intimidation-origin" class="skill-origin gray-text">CHA</span>
-                    <div class="border-style border-radius skill-text default-background default-shadow">
-                        <span id="intimidation-text">Запугивание</span>
-                    </div>
+                    <span class="border-style border-radius skill-text default-background default-shadow" id="intimidation-text">Запугивание</span>
                 </div>
                 <div id="history" class="skill-box">
-                    <div class="border-style border-radius skill-bonus default-background default-shadow" >
-                        <span id="history-bonus">-1</span>
-                    </div>
+                    <span class="border-style border-radius skill-bonus default-background default-shadow" data-modifier="intelligence" id="history-bonus">-1</span>
                     <span id="history-origin" class="skill-origin gray-text">INT</span>
-                    <div class="border-style border-radius skill-text default-background default-shadow">
-                        <span id="history-text">История</span>
-                    </div>
+                    <span class="border-style border-radius skill-text default-background default-shadow" id="history-text">История</span>
                 </div>
                 <div id="sleight-of-hand" class="skill-box">
-                    <div class="border-style border-radius skill-bonus default-background default-shadow" >
-                        <span id="sleight-of-hand-bonus">-1</span>
-                    </div>
+                    <span class="border-style border-radius skill-bonus default-background default-shadow" data-modifier="dexterity" id="sleight-of-hand-bonus">-1</span>
                     <span id="sleight-of-hand-origin" class="skill-origin gray-text">DEX</span>
-                    <div class="border-style border-radius skill-text default-background default-shadow">
-                        <span id="sleight-of-hand-text">Ловкость рук</span>
-                    </div>
+                    <span class="border-style border-radius skill-text default-background default-shadow" id="sleight-of-hand-text">Ловкость рук</span>
                 </div>
                 <div id="arcana" class="skill-box">
-                    <div class="border-style border-radius skill-bonus default-background default-shadow" >
-                        <span id="arcana-bonus">-1</span>
-                    </div>
+                    <span class="border-style border-radius skill-bonus default-background default-shadow" data-modifier="intelligence" id="arcana-bonus">-1</span>
                     <span id="arcana-origin" class="skill-origin gray-text">INT</span>
-                    <div class="border-style border-radius skill-text default-background default-shadow">
-                        <span id="arcana-text">Магия</span>
-                    </div>
+                    <span class="border-style border-radius skill-text default-background default-shadow" id="arcana-text">Магия</span>
                 </div>
                 <div id="medicine" class="skill-box">
-                    <div class="border-style border-radius skill-bonus default-background default-shadow" >
-                        <span id="medicine-bonus">-1</span>
-                    </div>
+                    <span class="border-style border-radius skill-bonus default-background default-shadow" data-modifier="wisdom" id="medicine-bonus">-1</span>
                     <span id="medicine-origin" class="skill-origin gray-text">WIS</span>
-                    <div class="border-style border-radius skill-text default-background default-shadow">
-                        <span id="medicine-text">Медицина</span>
-                    </div>
+                    <span class="border-style border-radius skill-text default-background default-shadow" id="medicine-text">Медицина</span>
                 </div>
                 <div id="deception" class="skill-box">
-                    <div class="border-style border-radius skill-bonus default-background default-shadow" >
-                        <span id="deception-bonus">-1</span>
-                    </div>
+                    <span class="border-style border-radius skill-bonus default-background default-shadow" data-modifier="charisma" id="deception-bonus">-1</span>
                     <span id="deception-origin" class="skill-origin gray-text">CHA</span>
-                    <div class="border-style border-radius skill-text default-background default-shadow">
-                        <span id="deception-text">Обман</span>
-                    </div>
+                    <span class="border-style border-radius skill-text default-background default-shadow" id="deception-text">Обман</span>
                 </div>
                 <div id="nature" class="skill-box">
-                    <div class="border-style border-radius skill-bonus default-background default-shadow" >
-                        <span id="nature-bonus">-1</span>
-                    </div>
+                    <span class="border-style border-radius skill-bonus default-background default-shadow" data-modifier="intelligence" id="nature-bonus">-1</span>
                     <span id="nature-origin" class="skill-origin gray-text">INT</span>
-                    <div class="border-style border-radius skill-text default-background default-shadow">
-                        <span id="nature-text">Природа</span>
-                    </div>
+                    <span class="border-style border-radius skill-text default-background default-shadow" id="nature-text">Природа</span>
                 </div>
                 <div id="insight" class="skill-box">
-                    <div class="border-style border-radius skill-bonus default-background default-shadow" >
-                        <span id="insight-bonus">-1</span>
-                    </div>
+                    <span class="border-style border-radius skill-bonus default-background default-shadow" data-modifier="wisdom" id="insight-bonus">-1</span>
                     <span id="insight-origin" class="skill-origin gray-text">WIS</span>
-                    <div class="border-style border-radius skill-text default-background default-shadow">
-                        <span id="insight-text">Проницательность</span>
-                    </div>
+                    <span class="border-style border-radius skill-text default-background default-shadow" id="insight-text">Проницательность</span>
                 </div>
                 <div id="religion" class="skill-box">
-                    <div class="border-style border-radius skill-bonus default-background default-shadow" >
-                        <span id="religion-bonus">-1</span>
-                    </div>
+                    <span class="border-style border-radius skill-bonus default-background default-shadow" data-modifier="intelligence" id="religion-bonus">-1</span>
                     <span id="religion-origin" class="skill-origin gray-text">INT</span>
-                    <div class="border-style border-radius skill-text default-background default-shadow">
-                        <span id="religion-text">Религия</span>
-                    </div>
+                    <span class="border-style border-radius skill-text default-background default-shadow" id="religion-text">Религия</span>
                 </div>
                 <div id="stealth" class="skill-box">
-                    <div class="border-style border-radius skill-bonus default-background default-shadow" >
-                        <span id="stealth-bonus">-1</span>
-                    </div>
+                    <span class="border-style border-radius skill-bonus default-background default-shadow" data-modifier="dexterity" id="stealth-bonus">-1</span>
                     <span id="stealth-origin" class="skill-origin gray-text">DEX</span>
-                    <div class="border-style border-radius skill-text default-background default-shadow">
-                        <span id="stealth-text">Скрытность</span>
-                    </div>
+                    <span class="border-style border-radius skill-text default-background default-shadow" id="stealth-text">Скрытность</span>
                 </div>
                 <div id="persuasion" class="skill-box">
-                    <div class="border-style border-radius skill-bonus default-background default-shadow" >
-                        <span id="persuasion-bonus">-1</span>
-                    </div>
+                    <span class="border-style border-radius skill-bonus default-background default-shadow" data-modifier="charisma" id="persuasion-bonus">-1</span>
                     <span id="persuasion-origin" class="skill-origin gray-text">CHA</span>
-                    <div class="border-style border-radius skill-text default-background default-shadow">
-                        <span id="persuasion-text">Убеждение</span>
-                    </div>
+                    <span class="border-style border-radius skill-text default-background default-shadow" id="persuasion-text">Убеждение</span>
                 </div>
                 <div id="animal-handling" class="skill-box">
-                    <div class="border-style border-radius skill-bonus default-background default-shadow" >
-                        <span id="animal-handling-bonus">-1</span>
-                    </div>
+                    <span class="border-style border-radius skill-bonus default-background default-shadow" data-modifier="wisdom" id="animal-handling-bonus">-1</span>
                     <span id="animal-handling-origin" class="skill-origin gray-text">WIS</span>
-                    <div class="border-style border-radius skill-text default-background default-shadow">
-                        <span id="animal-handling-text">Уход за животными</span>
-                    </div>
+                    <span class="border-style border-radius skill-text default-background default-shadow" id="animal-handling-text">Уход за животными</span>
                 </div>
             </div>
             <div id="central-2">
