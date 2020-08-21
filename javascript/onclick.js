@@ -85,6 +85,21 @@ document.getElementById('wisdom-death-save-checkbox').addEventListener('click', 
 document.getElementById('charisma-death-save-checkbox').addEventListener('click', characteristicCheckBoxDropDown);
 document.getElementById('open-character').addEventListener('click', openCharacter);
 document.getElementById('save-character').addEventListener('click', saveAndDownloadCharacter);
+characterStats.querySelectorAll('div.characteristic').forEach(
+  statsBox => {
+    let timerCharacteristics = null;
+    statsBox.querySelector('#' + statsBox.id + '-value').onkeydown = function () {
+        let el = this;
+        clearTimeout(timerCharacteristics);
+        timerCharacteristics = setTimeout(function () {
+        if (el.value == '') {
+          el.value = '0';
+        }
+        updateBonus();
+        }, 500);
+      }
+  });
+
 let x = 0;
 let y = 0;
 document.getElementById('main-dice').addEventListener('click', toggleDiceList);
@@ -714,8 +729,24 @@ function calculateBonus(value) {
   return Math.floor((value - 10) / 2);
 }
 
+function updateBonus() {
+  characterStats.querySelectorAll('div.characteristic').forEach(
+    statsBox => {
+      var characteristicValue = statsBox.querySelector('#' + statsBox.id + '-value');
+      var characteristicBonus = statsBox.querySelector('#' + statsBox.id + '-bonus');
+      characteristicBonus.textContent = addSignToNumber(calculateBonus(parseInt(characteristicValue.value)));
+    });
+
+    saveCharacteristics();
+
+    characterSkills.querySelectorAll('span.skill-bonus').forEach(
+      skillBonus => {
+        skillBonus.textContent = addSignToNumber(character.characteristicBonus[skillBonus.dataset.modifier+'Bonus']);
+      });
+}
+
 function addSignToNumber(value) {
-  return value < 0 ? '-' + value : '+' + value;
+  return value < 0 ? value : '+' + value;
 }
 
 function loadCharacter() {
@@ -753,7 +784,7 @@ function loadCharacteristics() {
   
   characterSkills.querySelectorAll('span.skill-bonus').forEach(
     skillBonus => {
-      skillBonus.textContent = addSignToNumber(character.characteristic[skillBonus.dataset.modifier]);
+      skillBonus.textContent = addSignToNumber(character.characteristicBonus[skillBonus.dataset.modifier+'Bonus']);
     });
 }
 
