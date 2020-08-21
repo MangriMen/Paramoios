@@ -1,6 +1,7 @@
 'use strict'
 
 let language = 'ru';
+let selectedVocabulary = null;
 
 const levelDependenceTable = {
   1: 0,
@@ -28,6 +29,15 @@ const levelDependenceTable = {
 let character = null;
 let characterInput = document.getElementById('character-input')
 
+let playerName = document.getElementById('player-name');
+let characterName = document.getElementById('character-name');
+let characterAlignment = document.getElementById('character-alignment');
+let characterRace = document.getElementById('character-race');
+let characterClass = document.getElementById('character-class');
+let characterBackground = document.getElementById('character-background');
+let characterStats = document.getElementById('character-stats');
+let characterSkills = document.getElementById('skills');
+
 let hpFillEl = document.getElementById('hp-bar-fill').classList;
 let hpWaveEl = document.getElementById('hp-liquid').classList;
 let equipment = document.getElementById('equipment');
@@ -37,6 +47,11 @@ let hpDialog = document.getElementById('hp-dialog');
 let deathSavesOverlay = document.getElementById('death-saves-overlay');
 let successMarks = [document.getElementById('success-mark-1'), document.getElementById('success-mark-2'), document.getElementById('success-mark-3')];
 let failuresMarks = [document.getElementById('fail-mark-1'), document.getElementById('fail-mark-2'), document.getElementById('fail-mark-3')];
+
+let oldHp = (document.getElementById('hp').textContent).split('/');
+let actualHp = Number(oldHp[0]);
+let maxHp = Number(oldHp[1]);
+
 let selectedImageForItem = null;
 let selectedItemInfo = null;
 let profinciesParent = null;
@@ -69,6 +84,7 @@ document.getElementById('intelligence-death-save-checkbox').addEventListener('cl
 document.getElementById('wisdom-death-save-checkbox').addEventListener('click', characteristicCheckBoxDropDown);
 document.getElementById('charisma-death-save-checkbox').addEventListener('click', characteristicCheckBoxDropDown);
 document.getElementById('open-character').addEventListener('click', openCharacter);
+document.getElementById('save-character').addEventListener('click', saveAndDownloadCharacter);
 let x = 0;
 let y = 0;
 document.getElementById('main-dice').addEventListener('click', toggleDiceList);
@@ -168,10 +184,14 @@ function displayHpDialog() {
   }
 }
 
+function getHp() {
+  oldHp = (document.getElementById('hp').textContent).split('/');
+  actualHp = Number(oldHp[0]);
+  maxHp = Number(oldHp[1]);
+}
+
 function changeHp() {
-  let oldHp = (document.getElementById('hp').textContent).split('/');
-  let actualHp = Number(oldHp[0]);
-  let maxHp = Number(oldHp[1]);
+  getHp();
   let offsetHp = Math.abs(Number(document.getElementById('hp-value').value));
   let newHp = 0;
   let final = '';
@@ -597,15 +617,6 @@ function loadCharacterJSON() {
   }
 }
 
-let playerName = document.getElementById('player-name');
-let characterName = document.getElementById('character-name');
-let characterAlignment = document.getElementById('character-alignment');
-let characterRace = document.getElementById('character-race');
-let characterClass = document.getElementById('character-class');
-let characterBackground = document.getElementById('character-background');
-let characterStats = document.getElementById('character-stats');
-let characterSkills = document.getElementById('skills');
-
 let russianVocabulary = {
   "Alignment": "Мировоззрение",
   "Lawful Good": "Законопослушный Добрый",
@@ -656,7 +667,7 @@ let russianVocabulary = {
   "Urchin": "Беспризорник",
 }
 
-function capitalize(str) {
+function capitalizeFirstLetter(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
@@ -671,8 +682,21 @@ function capitalizeAllFirstOfWord(str)
     return pieces.join(" ");
 }
 
-function translateToLanguage(language, str) {
-  let selectedVocabulary = null;
+function getKeyByValue(object, value) {
+  return Object.keys(object).find(key => object[key] === value);
+}
+
+function translateToSave(str) {
+  if (language = 'ru') {
+    selectedVocabulary = russianVocabulary;
+  } else {
+    return;
+  }
+  let translatedWord = getKeyByValue(selectedVocabulary, str);
+  return translatedWord != null ? translatedWord : String(undefined);
+}
+
+function translateToLanguage(str) {
   if (language = 'ru') {
     selectedVocabulary = russianVocabulary;
   } else {
@@ -712,10 +736,10 @@ function loadCharacterName() {
 }
 
 function loadCharacterOrigin() {
-  characterAlignment.textContent = translateToLanguage(language, character.alignment);
-  characterRace.textContent = translateToLanguage(language, character.race);
-  characterClass.textContent = translateToLanguage(language, character.class);
-  characterBackground.textContent = translateToLanguage(language, character.background);
+  characterAlignment.textContent = translateToLanguage(character.alignment);
+  characterRace.textContent = translateToLanguage(character.race);
+  characterClass.textContent = translateToLanguage(character.class);
+  characterBackground.textContent = translateToLanguage(character.background);
 }
 
 function loadCharacteristics() {
@@ -739,4 +763,65 @@ function loadHpAndXp() {
   document.getElementById('xp').value = '' + character.experience;
   adjustLevel();
   onloadBarWidth('xp');
+}
+
+function saveFile(filename, data) {
+  var blob = new Blob([data], {type: 'text/csv'});
+  if(window.navigator.msSaveOrOpenBlob) {
+      window.navigator.msSaveBlob(blob, filename);
+  }
+  else{
+      var elem = window.document.createElement('a');
+      elem.href = window.URL.createObjectURL(blob);
+      elem.download = filename;        
+      document.body.appendChild(elem);
+      elem.click();        
+      document.body.removeChild(elem);
+  }
+}
+
+function saveAndDownloadCharacter() {
+  saveCharacter();
+  let data = JSON.stringify(character, null, 2); 
+  saveFile(character.charName + '.json', data);
+}
+
+function saveCharacter() {
+  savePlayerName();
+  saveCharacterName();
+  saveCharacterOrigin();
+  saveCharacteristics();
+  saveHpAndXp();
+}
+
+function savePlayerName() {
+  character.playerName = playerName.textContent;
+}
+
+function saveCharacterName() {
+  character.charName = characterName.value;
+}
+
+function saveCharacterOrigin() {
+  character.alignment = translateToSave(characterAlignment.textContent);
+  character.race = translateToSave(characterRace.textContent);
+  character.class = translateToSave(characterClass.textContent);
+  character.background = translateToSave(characterBackground.textContent);
+}
+
+function saveCharacteristics() {
+  characterStats.querySelectorAll('div.characteristic').forEach(
+    statsBox => {
+      var characteristicValue = statsBox.querySelector('#' + statsBox.id + '-value');
+      var characteristicBonus = statsBox.querySelector('#' + statsBox.id + '-bonus');
+      character.characteristic[statsBox.id] = parseInt(characteristicValue.value);
+      character.characteristicBonus[statsBox.id + 'Bonus'] = parseInt(characteristicBonus.textContent);
+    });
+}
+
+function saveHpAndXp() {
+  character.experience = document.getElementById('xp').value;
+  getHp();
+  character.hp = actualHp;
+  character.hpMax = maxHp;
 }
