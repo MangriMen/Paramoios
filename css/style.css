@@ -22,6 +22,7 @@ main {
   grid-template-columns: 10rem 10rem 10rem auto;
   grid-template-rows: 1.6rem;
   align-items: center;
+  justify-items: center;
   margin: auto;
 }
 .header-buttons {
