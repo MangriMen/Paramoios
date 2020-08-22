@@ -470,7 +470,7 @@ input[type=number] {
   font-size: 1.5rem;
   left: 0;
   right: 0;
-  top: -0.7rem; 
+  top: -0.7rem;
 }
 .death-saves-state {
   padding: 0 0.5rem;
@@ -518,7 +518,7 @@ input[type=number] {
   top: 0;
 }
 #death-saves-dice-remaining {
- font-size: 4rem; 
+ font-size: 4rem;
 }
 #death-saves-dice {
   width: 72px;
@@ -785,7 +785,7 @@ input[type=number] {
   height: 4rem;
   left: 0;
   right: 0;
-  top: 0rem;
+  top: 0;
   margin: auto;
   border-top: none;
   align-items: center;
@@ -805,7 +805,7 @@ input[type=number] {
   left: 0;
   width: 14rem;
   z-index: 95;
-  padding: 1rem; 
+  padding: 1rem;
 }
 .roll-alert-msg {
   display: flex;
@@ -845,7 +845,7 @@ input[type=number] {
 }
 .drop-list-text {
   display: flex;
-  flex-direction: row;  
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
   width: 6rem;
