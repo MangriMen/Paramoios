@@ -21,7 +21,7 @@
   "hitDiceLeft": 0,
   "maxWeight": 0,
   "specialization": "",
-  "deathSaves": {
+  "death-saves": {
     "successes": 0,
     "failures": 0
   },
