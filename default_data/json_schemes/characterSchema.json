@@ -22,7 +22,7 @@
     "passiveWisdom",
     "inspiration",
     "maxWeight",
-    "deathSaves",
+    "death-saves",
     "characteristic",
     "characteristicBonus",
     "savingThrowsBonus",
@@ -230,10 +230,10 @@
       "minimum": 0,
       "maximum": 2147483647
     },
-    "deathSaves": {
-      "$id": "#/properties/deathSaves",
+    "death-saves": {
+      "$id": "#/properties/death-saves",
       "type": "object",
-      "title": "The Deathsaves Schema",
+      "title": "The death-saves Schema",
       "description": "Random check with a chance of avoiding death.",
       "default": [
         {
@@ -253,7 +253,7 @@
       ],
       "properties": {
         "successes": {
-          "$id": "#/properties/deathSaves/properties/successes",
+          "$id": "#/properties/death-saves/properties/successes",
           "type": "integer",
           "title": "The Successes Schema",
           "description": "Amount of successful rolls.",
@@ -265,7 +265,7 @@
           "maximum": 3
         },
         "failures": {
-          "$id": "#/properties/deathSaves/properties/failures",
+          "$id": "#/properties/death-saves/properties/failures",
           "type": "integer",
           "title": "The Failures Schema",
           "description": "Amount of failed rolls.",

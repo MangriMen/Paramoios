@@ -21,7 +21,7 @@
   "hitDiceLeft": 1,
   "maxWeight": 255,
   "specialization": "I led a militia to fight off an invading army.",
-  "deathSaves": {
+  "death-saves": {
     "successes": 0,
     "failures": 0
   },
