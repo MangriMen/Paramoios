@@ -1,8 +1,8 @@
 body{
   height: 100vh;
   background-size: 100vw;
-  background-image: url("../images/background/backmenu_hires.webp");
-  background-image: url("../images/background/backmenu_hires.jpg");
+  background-image: url("../images/background/backmenu_red.jpg");
+  background-image: url("../images/background/backmenu_red.webp");
   background-repeat: repeat;
 }
 main {
