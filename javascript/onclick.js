@@ -70,13 +70,13 @@ document.getElementById('new-item').addEventListener('click', displayNewItemDial
 document.getElementById('cancel-item').addEventListener('click', addNewItemToInventory);
 document.getElementById('confirm-item').addEventListener('click', addNewItemToInventory);
 document.getElementById('death-saves-dice').addEventListener('click', rollDeathSave);
-document.getElementById('d20-dice').addEventListener('click', () => {let rolled = rollDice(20); rollAlert(rolled.value, `На D${rolled.type} выпало:`)} );
-document.getElementById('d12-dice').addEventListener('click', () => {let rolled = rollDice(12); rollAlert(rolled.value, `На D${rolled.type} выпало:`)} );
-document.getElementById('d100-dice').addEventListener('click', () => {let rolled = rollDice(100); rollAlert(rolled.value, `На D${rolled.type} выпало:`)} );
-document.getElementById('d10-dice').addEventListener('click', () => {let rolled = rollDice(10); rollAlert(rolled.value, `На D${rolled.type} выпало:`)} );
-document.getElementById('d8-dice').addEventListener('click', () => {let rolled = rollDice(8); rollAlert(rolled.value, `На D${rolled.type} выпало:`)} );
-document.getElementById('d6-dice').addEventListener('click', () => {let rolled = rollDice(6); rollAlert(rolled.value, `На D${rolled.type} выпало:`)} );
-document.getElementById('d4-dice').addEventListener('click', () => {let rolled = rollDice(4); rollAlert(rolled.value, `На D${rolled.type} выпало:`)} );
+document.getElementById('d20-dice').addEventListener('click', () => { let rolled = rollDice(20); rollAlert(rolled.value, `На D${rolled.type} выпало:`) });
+document.getElementById('d12-dice').addEventListener('click', () => { let rolled = rollDice(12); rollAlert(rolled.value, `На D${rolled.type} выпало:`) });
+document.getElementById('d100-dice').addEventListener('click', () => { let rolled = rollDice(100); rollAlert(rolled.value, `На D${rolled.type} выпало:`) });
+document.getElementById('d10-dice').addEventListener('click', () => { let rolled = rollDice(10); rollAlert(rolled.value, `На D${rolled.type} выпало:`) });
+document.getElementById('d8-dice').addEventListener('click', () => { let rolled = rollDice(8); rollAlert(rolled.value, `На D${rolled.type} выпало:`) });
+document.getElementById('d6-dice').addEventListener('click', () => { let rolled = rollDice(6); rollAlert(rolled.value, `На D${rolled.type} выпало:`) });
+document.getElementById('d4-dice').addEventListener('click', () => { let rolled = rollDice(4); rollAlert(rolled.value, `На D${rolled.type} выпало:`) });
 document.getElementById('strength-death-save-checkbox').addEventListener('click', characteristicCheckBoxDropDown);
 document.getElementById('dexterity-death-save-checkbox').addEventListener('click', characteristicCheckBoxDropDown);
 document.getElementById('constitution-death-save-checkbox').addEventListener('click', characteristicCheckBoxDropDown);
@@ -89,22 +89,21 @@ characterStats.querySelectorAll('div.characteristic').forEach(
   statsBox => {
     let timerCharacteristics = null;
     statsBox.querySelector('#' + statsBox.id + '-value').onkeydown = function () {
-        let el = this;
-        clearTimeout(timerCharacteristics);
-        timerCharacteristics = setTimeout(function () {
+      let el = this;
+      clearTimeout(timerCharacteristics);
+      timerCharacteristics = setTimeout(function () {
         if (el.value == '') {
           el.value = '0';
         }
         updateBonus();
-        }, 500);
-      }
+      }, 500);
+    }
   });
 
 let x = 0;
 let y = 0;
 document.getElementById('main-dice').addEventListener('click', toggleDiceList);
 let mainDiceImg = document.getElementById('main-dice-img');
-let diceList = document.getElementById('dice-list');
 let xpField = document.getElementById('xp');
 let numberFields = document.getElementsByClassName('number-input');
 for (let item of numberFields) {
@@ -154,8 +153,8 @@ function rollAlertErase() {
   let tempRollMsg = rollAlertList.shift();
 
   tempRollMsg.classList.add('roll-alert-erase-translate');
-  
-  setTimeout(function() { rollAlertContainer.removeChild(rollAlertContainer.firstChild); }, 1000);
+
+  setTimeout(function () { rollAlertContainer.removeChild(rollAlertContainer.firstChild); }, 1000);
 }
 
 function createBAlert(text, delay) {
@@ -275,7 +274,7 @@ function hpValidation(actual, maximum) {
 let successMarkCount = 0;
 let failsMarkCount = 0;
 
-function rollDice(diceType){
+function rollDice(diceType) {
   return {
     value: Math.floor(Math.random() * diceType + 1),
     type: diceType
@@ -289,7 +288,7 @@ function rollDeathSave() {
 
   console.log('At start | Fails: ' + failsMarkCount + '  Success: ' + successMarkCount);
 
-  if (rollResult  < 10) {
+  if (rollResult < 10) {
     document.getElementById(`fail-mark-${failsMarkCount + 1}`).src = 'images/icons/failures_mark_checked.svg';
     failsMarkCount += 1;
   } else if (rollResult >= 20) {
@@ -424,7 +423,7 @@ function addNewItemToInventory() {
     newItem.value = document.getElementById('item-name').value;
     if (newItem.value == '') {
       bAlert('Введите название предмета!');
-      newItem.style.display='none';
+      newItem.style.display = 'none';
       newItem = null;
       return;
     }
@@ -514,7 +513,7 @@ function closeAdditionalInfo() {
 
 function toggleDiceList() {
   document.getElementById('dice-list-checkbox').checked = !document.getElementById('dice-list-checkbox').checked;
-  
+
   if (document.getElementById('dice-list-checkbox').checked) {
     mainDiceImg.src = "images/icons/control_icon/close.svg";
   } else {
@@ -570,32 +569,32 @@ function characteristicCheckBoxDropDown() {
     expertiseBonus.classList = 'border-style border-radius characteristic-expertise drop-list-bonus';
     expertiseBonus.textContent = '+4';
     expertise.appendChild(expertiseBonus);
-  
-    notProficient.addEventListener('click', function() {characteristicProfinciesSelect(profinciesParent, this)});
-    halfProficient.addEventListener('click',function() { characteristicProfinciesSelect(profinciesParent, this)});
-    proficient.addEventListener('click', function() { characteristicProfinciesSelect(profinciesParent, this)});
-    expertise.addEventListener('click', function() { characteristicProfinciesSelect(profinciesParent, this)});
+
+    notProficient.addEventListener('click', function () { characteristicProfinciesSelect(profinciesParent, this) });
+    halfProficient.addEventListener('click', function () { characteristicProfinciesSelect(profinciesParent, this) });
+    proficient.addEventListener('click', function () { characteristicProfinciesSelect(profinciesParent, this) });
+    expertise.addEventListener('click', function () { characteristicProfinciesSelect(profinciesParent, this) });
 
     dropList.appendChild(notProficient);
     dropList.appendChild(halfProficient);
     dropList.appendChild(proficient);
     dropList.appendChild(expertise);
-  
+
     this.appendChild(dropList);
     profinciesParent = this;
   } else {
     profinciesParent.removeChild(dropList);
-    if(profinciesParent != this) {
+    if (profinciesParent != this) {
       this.dispatchEvent(new Event('click'));
     }
   }
 }
 
-document.getElementById('test').addEventListener('click', () => {console.log(character); loadCharacter();});
+document.getElementById('test').addEventListener('click', () => { console.log(character); loadCharacter(); });
 
 function openCharacter() {
   characterInput.click();
-  characterInput.onchange = function(e) {
+  characterInput.onchange = function (e) {
     loadCharacterJSON();
   }
 }
@@ -628,7 +627,7 @@ function loadCharacterJSON() {
 
   function receivedText(e) {
     let lines = e.target.result;
-    character = JSON.parse(lines); 
+    character = JSON.parse(lines);
   }
 }
 
@@ -682,42 +681,36 @@ let russianVocabulary = {
   "Urchin": "Беспризорник",
 }
 
-function capitalizeFirstLetter(str) {
-  return str.charAt(0).toUpperCase() + str.slice(1);
-}
-
-function capitalizeAllFirstOfWord(str)
-{
+function capitalize(option, str) {
+  if (option == 'firstOfWord') {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  } else if (option == 'firstOfAllWord') {
     var pieces = str.split(" ");
-    for ( var i = 0; i < pieces.length; i++ )
-    {
-        var j = pieces[i].charAt(0).toUpperCase();
-        pieces[i] = j + pieces[i].substr(1);
+    for (var i = 0; i < pieces.length; i++) {
+      var j = pieces[i].charAt(0).toUpperCase();
+      pieces[i] = j + pieces[i].substr(1);
     }
     return pieces.join(" ");
+  }
 }
 
 function getKeyByValue(object, value) {
   return Object.keys(object).find(key => object[key] === value);
 }
 
-function translateToSave(str) {
-  if (language = 'ru') {
+function translateTo(option, str) {
+  if (language == 'ru') {
     selectedVocabulary = russianVocabulary;
   } else {
     return;
   }
-  let translatedWord = getKeyByValue(selectedVocabulary, str);
-  return translatedWord != null ? translatedWord : String(undefined);
-}
 
-function translateToLanguage(str) {
-  if (language = 'ru') {
-    selectedVocabulary = russianVocabulary;
-  } else {
-    return;
+  if (option == 'language') {
+    var translatedWord = selectedVocabulary[fillStringIfEmpty(capitalize('firstOfAllWord', str))];
+  } else if (option == 'save') {
+    var translatedWord = getKeyByValue(selectedVocabulary, str);
   }
-  let translatedWord = selectedVocabulary[fillStringIfEmpty(capitalizeAllFirstOfWord(str))];
+
   return translatedWord != null ? translatedWord : String(undefined);
 }
 
@@ -737,12 +730,12 @@ function updateBonus() {
       characteristicBonus.textContent = addSignToNumber(calculateBonus(parseInt(characteristicValue.value)));
     });
 
-    saveCharacteristics();
+  saveCharacteristics();
 
-    characterSkills.querySelectorAll('span.skill-bonus').forEach(
-      skillBonus => {
-        skillBonus.textContent = addSignToNumber(character.characteristicBonus[skillBonus.dataset.modifier+'Bonus']);
-      });
+  characterSkills.querySelectorAll('span.skill-bonus').forEach(
+    skillBonus => {
+      skillBonus.textContent = addSignToNumber(character.characteristicBonus[skillBonus.dataset.modifier + 'Bonus']);
+    });
 }
 
 function addSignToNumber(value) {
@@ -767,10 +760,10 @@ function loadCharacterName() {
 }
 
 function loadCharacterOrigin() {
-  characterAlignment.textContent = translateToLanguage(character.alignment);
-  characterRace.textContent = translateToLanguage(character.race);
-  characterClass.textContent = translateToLanguage(character.class);
-  characterBackground.textContent = translateToLanguage(character.background);
+  characterAlignment.textContent = translateTo('language', character.alignment);
+  characterRace.textContent = translateTo('language', character.race);
+  characterClass.textContent = translateTo('language', character.class);
+  characterBackground.textContent = translateTo('language', character.background);
 }
 
 function loadCharacteristics() {
@@ -781,10 +774,10 @@ function loadCharacteristics() {
       characteristicValue.value = character.characteristic[statsBox.id];
       characteristicBonus.textContent = addSignToNumber(calculateBonus(parseInt(character.characteristic[statsBox.id])));
     });
-  
+
   characterSkills.querySelectorAll('span.skill-bonus').forEach(
     skillBonus => {
-      skillBonus.textContent = addSignToNumber(character.characteristicBonus[skillBonus.dataset.modifier+'Bonus']);
+      skillBonus.textContent = addSignToNumber(character.characteristicBonus[skillBonus.dataset.modifier + 'Bonus']);
     });
 }
 
@@ -797,23 +790,23 @@ function loadHpAndXp() {
 }
 
 function saveFile(filename, data) {
-  var blob = new Blob([data], {type: 'text/csv'});
-  if(window.navigator.msSaveOrOpenBlob) {
-      window.navigator.msSaveBlob(blob, filename);
+  var blob = new Blob([data], { type: 'text/csv' });
+  if (window.navigator.msSaveOrOpenBlob) {
+    window.navigator.msSaveBlob(blob, filename);
   }
-  else{
-      var elem = window.document.createElement('a');
-      elem.href = window.URL.createObjectURL(blob);
-      elem.download = filename;        
-      document.body.appendChild(elem);
-      elem.click();        
-      document.body.removeChild(elem);
+  else {
+    var elem = window.document.createElement('a');
+    elem.href = window.URL.createObjectURL(blob);
+    elem.download = filename;
+    document.body.appendChild(elem);
+    elem.click();
+    document.body.removeChild(elem);
   }
 }
 
 function saveAndDownloadCharacter() {
   saveCharacter();
-  let data = JSON.stringify(character, null, 2); 
+  let data = JSON.stringify(character, null, 2);
   saveFile(character.charName + '.json', data);
 }
 
@@ -834,10 +827,10 @@ function saveCharacterName() {
 }
 
 function saveCharacterOrigin() {
-  character.alignment = translateToSave(characterAlignment.textContent);
-  character.race = translateToSave(characterRace.textContent);
-  character.class = translateToSave(characterClass.textContent);
-  character.background = translateToSave(characterBackground.textContent);
+  character.alignment = translateTo('save', characterAlignment.textContent);
+  character.race = translateTo('save', characterRace.textContent);
+  character.class = translateTo('save', characterClass.textContent);
+  character.background = translateTo('save', characterBackground.textContent);
 }
 
 function saveCharacteristics() {

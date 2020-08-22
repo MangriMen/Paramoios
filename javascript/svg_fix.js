@@ -25,11 +25,10 @@ let svgArr = Array.from(document.getElementsByClassName('img-svg'));
 
 for (let svgItem in svgArr) {
   let img = svgArr[svgItem];
-  let imgId = img.id;
   let imgClass = img.className;
   let imgURL = img.src;
 
-  client.get(imgURL, function(data) {
+  client.get(imgURL, function (data) {
     let svg = htmlToElement(data);
     img.parentElement.replaceChild(svg, img);
     if (typeof imgClass !== 'undefined') {
