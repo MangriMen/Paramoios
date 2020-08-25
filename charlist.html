@@ -244,10 +244,25 @@
                 </div>
             </div>
             <div id="central-2">
-                <img class="armor-svg default-shadow aiis-svg img-svg" alt="Armor icon" src="images/icons/armor.svg">
-                <img class="initiative-svg default-shadow aiis-svg img-svg" alt="Initiative icon" src="images/icons/initiative.svg">
-                <img class="inspiration-svg default-shadow aiis-svg img-svg" alt="Inspiration icon" src="images/icons/inspiration.svg">
-                <img class="speed-svg default-shadow aiis-svg img-svg" alt="Speed icon" src="images/icons/speed.svg">
+                <div id='fight-bonuses'>
+                    <div id='fight-bonuses-armor'>
+                        <input class='fight-bonuses-value input-font-style' type="number" onKeyPress="if(this.value.length==2) return false;">
+                        <img class="armor-svg default-shadow aiis-svg img-svg" alt="Armor icon" src="images/icons/armor.svg">
+                    </div>
+                    <div id='fight-bonuses-initiative'>
+                        <input class='fight-bonuses-value input-font-style' type="number" onKeyPress="if(this.value.length==2) return false;">
+                        <img class="initiative-svg default-shadow aiis-svg img-svg" alt="Initiative icon" src="images/icons/initiative.svg">
+                    </div>
+                    <div id='fight-bonuses-inspiration'>                        
+                        <input id='fight-bonuses-checkbox' type="checkbox" onKeyPress="if(this.value.length==2) return false;">
+                        <label id='fight-bonuses-checkbox-lable' for='fight-bonuses-checkbox' class='death-saves-mark' alt="Success mark unchecked" src="images/icons/success_mark.svg"></label>
+                        <img class="inspiration-svg default-shadow aiis-svg img-svg" alt="Inspiration icon" src="images/icons/inspiration.svg">
+                    </div>
+                    <div id='fight-bonuses-speed'>                        
+                        <input class='fight-bonuses-value input-font-style' type="number" onKeyPress="if(this.value.length==2) return false;">
+                        <img class="speed-svg default-shadow aiis-svg img-svg" alt="Speed icon" src="images/icons/speed.svg">
+                    </div>
+                </div>
                 <div id="attacks-and-spellcasting" class="default-background border-style border-radius default-shadow">
                     <span id="ans-label" class="block-label default-background border-style border-radius default-shadow label-auto-width">Атаки и заклинания</span>
                     <table id="ans-items">
