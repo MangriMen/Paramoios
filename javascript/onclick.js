@@ -61,6 +61,7 @@ let bufferMaxHp = 0;
 let bufferHp = 0;
 let isHealed = false;
 let defaultCharacteristicCheckboxClasses = 'characteristic-death-save-checkbox border-style';
+document.getElementById('user-btn').addEventListener('click', toggleUserMenu);
 document.getElementById('confirm-hp').addEventListener('click', changeHp);
 document.getElementById('cancel-hp').addEventListener('click', displayHpDialog);
 document.getElementById('damage').addEventListener('click', displayHpDialog);
@@ -849,3 +850,28 @@ function saveHpAndXp() {
   character.hp = actualHp;
   character.hpMax = maxHp;
 }
+
+
+function toggleUserMenu() {
+  let menu = document.getElementById('user-menu');
+  if (menu == null) {
+    menu = document.createElement('div');
+    menu.id = 'user-menu';
+    menu.classList = 'border-style border-radius';
+    let userCircle = document.createElement('div');
+    userCircle.id = 'user-circle';
+    userCircle.classList = 'border-style border-radius';
+    let logout = document.createElement('a');
+    logout.id = 'link-logout';
+    logout.href = '/logout.php';
+    logout.classList = 'border-style border-radius input-font-style';
+    logout.textContent = 'Выход';
+    menu.appendChild(userCircle);
+    menu.appendChild(logout);
+    document.getElementById('user-btn').appendChild(menu);
+  } else {
+    menu.parentElement.removeChild(menu);
+  }
+}
+
+
