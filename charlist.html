@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="css/general_styles.css">
+    <link rel="stylesheet" type="text/css" href="css/background_theme.css">
+    <link rel="stylesheet" type="text/css" href="css/default_theme.css">
+    <link rel="stylesheet" type="text/css" href="css/icons.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <!-- PWA -->
+    <meta name="description" content="DnD5CharlistI - простой способ создать персонажа для DnD">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#681e22">
+    <!-- ios support -->
+    <link rel="apple-touch-icon" href="images/icons/app_icon/96x96.png">
+    <meta name="apple-moblie-web-app-status-bar" content="#681e22">
+    <link rel="shortcut icon" href="/images/icons/app_icon/16x16.png" type="image/png">
+    <!-- technical -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=5, user-scalable=no">
+    <style>
+        img[alt="www.000webhost.com"] {
+            display: none
+        }
+    </style>
+    <title>DnD5CharlistI</title>
+</head>
+
+<body onload="adjustLevel(); onloadBarWidth('xp'); onloadBarWidth('hp');">
+    <header>
+        <div id="header-center">
+            <a id="header-title" href="index.html">DnD5CharlistI</a>
+            <input type='file' id='character-input' style="display: none;">
+            <button id="test" class="header-buttons input-font-style" href="">JSON => CONSOLE</button>
+            <button id="user-btn" class="default-button">
+                <input type="checkbox" id='user-checkbox'>
+                <span id='open-character' class='header-buttons user-menu-buttons input-font-style'>Open character</span>
+                <span id='save-character' class='header-buttons user-menu-buttons input-font-style'>Save character</span>
+                <img id="user-btn-img" src="images/buttons/profile/profile.jpg">
+            </button>
+        </div>
+    </header>
+    <!--     <nav>
+    </nav> -->
+    <main class="border-style border-radius">
+        <section id="naming">
+            <div id="profile-and-level">
+                <img id="avatar" alt="User avatar" class="border-style border-radius" src="images/buttons/profile/profile.jpg">
+                <div id="xp-bar" class="border-style border-radius default-background">
+                    <div class="bar-animation">
+                        <div id="xp-bar-fill" class="bar-fill xp-color">
+                            <div class="wave-main wave-level xp-color"></div>
+                        </div>
+                    </div>
+                    <input type="number" id="xp" onKeyPress="adjustLevel();" class="border-style input-font-style bar-text" value="640">
+                </div>
+                <div id="level-text" class="border-style border-radius default-background">
+                    <span>Уровень <span id="level"></span></span>
+                </div>
+            </div>
+            <div id="naming-text">
+                <span id="player-name">
+                    KRAKEN[5X]ZEUS_MR.REALLEOPRAIM
+                </span>
+                <span id="known-as" class="gray-text">
+                    известный как...
+                </span>
+                <input type="text" id="character-name" class="text-auto-width align-to-right text-to-right input-font-style" value="Элис Мириэль (Тиа)">
+                <div id="character-origin" class="align-to-right gray-text text-to-right">
+                    <span id="character-alignment">Хаотично-Нейтральный</span>
+                    <br>
+                    <span id="character-race">
+                        Человек
+                    </span>
+                    <span>-</span>
+                    <span id="character-class">
+                        Бард
+                    </span>
+                    <span>-</span>
+                    <span id="character-background">
+                        Мудрец
+                    </span>
+                </div>
+            </div>
+        </section>
+        <section id="character-stats">
+            <div id="strength" class="characteristic">
+                <span id="strength-text" class="characteristic-text">Сила</span>
+                <div id="strength-bonus" class="characteristic-bonus default-background border-style number-input"></div>
+                <input type='number' onKeyPress="if(this.value.length==2) return false;" id="strength-value" class="characteristic-value default-background border-style default-hover-active default-button input-font-style">
+                <div id="strength-death-save" class="characteristic-death-save default-background border-style"></div>
+                <div id="strength-death-save-checkbox" class="characteristic-not-proficient characteristic-death-save-checkbox border-style"></div>
+            </div>
+            <div id="dexterity" class="characteristic">
+                <span id="dexterity-text" class="characteristic-text">Ловкость</span>
+                <div id="dexterity-bonus" class="characteristic-bonus default-background border-style number-input"></div>
+                <input type='number' onKeyPress="if(this.value.length==2) return false;" id="dexterity-value" class="characteristic-value default-background border-style default-hover-active default-button input-font-style">
+                <div id="dexterity-death-save" class="characteristic-death-save default-background border-style"></div>
+                <div id="dexterity-death-save-checkbox" class="characteristic-not-proficient characteristic-death-save-checkbox border-style"></div>
+            </div>
+            <div id="constitution" class="characteristic">
+                <span id="constitution-text" class="characteristic-text">Телосложение</span>
+                <div id="constitution-bonus" class="characteristic-bonus default-background border-style number-input"></div>
+                <input type='number' onKeyPress="if(this.value.length==2) return false;" id="constitution-value" class="characteristic-value default-background border-style default-hover-active default-button input-font-style">
+                <div id="constitution-death-save" class="characteristic-death-save default-background border-style"></div>
+                <div id="constitution-death-save-checkbox" class="characteristic-not-proficient characteristic-death-save-checkbox border-style"></div>
+            </div>
+            <button id="main-dice" class="default-button">
+                <img id="main-dice-img" class="d20-svg" alt="Main dice button" src="images/buttons/dices/D20.svg">
+            </button>
+            <div id="dice-list">
+                <input type="checkbox" id='dice-list-checkbox'>
+                <button id="d20-dice" class="default-button dice-in-list">
+                    <img class="dice-in-list-svg" alt="Main dice button" src="images/buttons/dices/D20.svg">
+                </button>
+                <button id="d12-dice" class="default-button dice-in-list">
+                    <img class="dice-in-list-svg" alt="Main dice button" src="images/buttons/dices/D12.svg">
+                </button>
+                <button id="d100-dice" class="default-button dice-in-list">
+                    <img class="dice-in-list-svg" alt="Main dice button" src="images/buttons/dices/D100.svg">
+                </button>
+                <button id="d10-dice" class="default-button dice-in-list">
+                    <img class="dice-in-list-svg" alt="Main dice button" src="images/buttons/dices/D10.svg">
+                </button>
+                <button id="d8-dice" class="default-button dice-in-list">
+                    <img class="dice-in-list-svg" alt="Main dice button" src="images/buttons/dices/D8.svg">
+                </button>
+                <button id="d6-dice" class="default-button dice-in-list">
+                    <img class="dice-in-list-svg" alt="Main dice button" src="images/buttons/dices/D6.svg">
+                </button>
+                <button id="d4-dice" class="default-button dice-in-list">
+                    <img class="dice-in-list-svg" alt="Main dice button" src="images/buttons/dices/D4.svg">
+                </button>
+            </div>
+            <div id="intelligence" class="characteristic">
+                <span id="intelligence-text" class="characteristic-text">Интеллект</span>
+                <div id="intelligence-bonus" class="characteristic-bonus default-background border-style number-input"></div>
+                <input type='number' onKeyPress="if(this.value.length==2) return false;" id="intelligence-value" class="characteristic-value default-background border-style default-hover-active default-button input-font-style">
+                <div id="intelligence-death-save" class="characteristic-death-save default-background border-style"></div>
+                <div id="intelligence-death-save-checkbox" class="characteristic-not-proficient characteristic-death-save-checkbox border-style"></div>
+            </div>
+            <div id="wisdom" class="characteristic">
+                <span id="wisdom-text" class="characteristic-text">Мудрость</span>
+                <div id="wisdom-bonus" class="characteristic-bonus default-background border-style number-input"></div>
+                <input type='number' onKeyPress="if(this.value.length==2) return false;" id="wisdom-value" class="characteristic-value default-background border-style default-hover-active default-button input-font-style">
+                <div id="wisdom-death-save" class="characteristic-death-save default-background border-style"></div>
+                <div id="wisdom-death-save-checkbox" class="characteristic-not-proficient characteristic-death-save-checkbox border-style"></div>
+            </div>
+            <div id="charisma" class="characteristic">
+                <span id="charisma-text" class="characteristic-text">Харизма</span>
+                <div id="charisma-bonus" class="characteristic-bonus default-background border-style number-input"></div>
+                <input type='number' onKeyPress="if(this.value.length==2) return false;" id="charisma-value" class="characteristic-value default-background border-style default-hover-active default-button input-font-style">
+                <div id="charisma-death-save" class="characteristic-death-save default-background border-style"></div>
+                <div id="charisma-death-save-checkbox" class="characteristic-not-proficient characteristic-death-save-checkbox border-style"></div>
+            </div>
+        </section>
+        <section id="central">
+            <div id="skills">
+                <div id="acrobatics" class="skill-box">
+                    <span class="border-style border-radius skill-bonus default-background default-shadow" data-modifier="dexterity" id="acrobatics-bonus">-1</span>
+                    <span id="acrobatics-origin" class="skill-origin gray-text">DEX</span>
+                    <span class="border-style border-radius skill-text default-background default-shadow" id="acrobatics-text">Акробатика</span>
+                </div>
+                <div id="investigation" class="skill-box">
+                    <span class="border-style border-radius skill-bonus default-background default-shadow" data-modifier="intelligence" id="investigation-bonus">-1</span>
+                    <span id="investigation-origin" class="skill-origin gray-text">INT</span>
+                    <span class="border-style border-radius skill-text default-background default-shadow" id="investigation-text">Анализ</span>
+                </div>
+                <div id="athletics" class="skill-box">
+                    <span class="border-style border-radius skill-bonus default-background default-shadow" data-modifier="strength" id="athletics-bonus">-1</span>
+                    <span id="athletics-origin" class="skill-origin gray-text">STR</span>
+                    <span class="border-style border-radius skill-text default-background default-shadow" id="athletics-text">Атлетика</span>
+                </div>
+                <div id="perception" class="skill-box">
+                    <span class="border-style border-radius skill-bonus default-background default-shadow" data-modifier="wisdom" id="perception-bonus">-1</span>
+                    <span id="perception-origin" class="skill-origin gray-text">WIS</span>
+                    <span class="border-style border-radius skill-text default-background default-shadow" id="perception-text">Внимательность</span>
+                </div>
+                <div id="survival" class="skill-box">
+                    <span class="border-style border-radius skill-bonus default-background default-shadow" data-modifier="wisdom" id="survival-bonus">-1</span>
+                    <span id="survival-origin" class="skill-origin gray-text">WIS</span>
+                    <span class="border-style border-radius skill-text default-background default-shadow" id="survival-text">Выживание</span>
+                </div>
+                <div id="performance" class="skill-box">
+                    <span class="border-style border-radius skill-bonus default-background default-shadow" data-modifier="charisma" id="performance-bonus">-1</span>
+                    <span id="performance-origin" class="skill-origin gray-text">CHA</span>
+                    <span class="border-style border-radius skill-text default-background default-shadow" id="performance-text">Выступление</span>
+                </div>
+                <div id="intimidation" class="skill-box">
+                    <span class="border-style border-radius skill-bonus default-background default-shadow" data-modifier="charisma" id="intimidation-bonus">-1</span>
+                    <span id="intimidation-origin" class="skill-origin gray-text">CHA</span>
+                    <span class="border-style border-radius skill-text default-background default-shadow" id="intimidation-text">Запугивание</span>
+                </div>
+                <div id="history" class="skill-box">
+                    <span class="border-style border-radius skill-bonus default-background default-shadow" data-modifier="intelligence" id="history-bonus">-1</span>
+                    <span id="history-origin" class="skill-origin gray-text">INT</span>
+                    <span class="border-style border-radius skill-text default-background default-shadow" id="history-text">История</span>
+                </div>
+                <div id="sleight-of-hand" class="skill-box">
+                    <span class="border-style border-radius skill-bonus default-background default-shadow" data-modifier="dexterity" id="sleight-of-hand-bonus">-1</span>
+                    <span id="sleight-of-hand-origin" class="skill-origin gray-text">DEX</span>
+                    <span class="border-style border-radius skill-text default-background default-shadow" id="sleight-of-hand-text">Ловкость рук</span>
+                </div>
+                <div id="arcana" class="skill-box">
+                    <span class="border-style border-radius skill-bonus default-background default-shadow" data-modifier="intelligence" id="arcana-bonus">-1</span>
+                    <span id="arcana-origin" class="skill-origin gray-text">INT</span>
+                    <span class="border-style border-radius skill-text default-background default-shadow" id="arcana-text">Магия</span>
+                </div>
+                <div id="medicine" class="skill-box">
+                    <span class="border-style border-radius skill-bonus default-background default-shadow" data-modifier="wisdom" id="medicine-bonus">-1</span>
+                    <span id="medicine-origin" class="skill-origin gray-text">WIS</span>
+                    <span class="border-style border-radius skill-text default-background default-shadow" id="medicine-text">Медицина</span>
+                </div>
+                <div id="deception" class="skill-box">
+                    <span class="border-style border-radius skill-bonus default-background default-shadow" data-modifier="charisma" id="deception-bonus">-1</span>
+                    <span id="deception-origin" class="skill-origin gray-text">CHA</span>
+                    <span class="border-style border-radius skill-text default-background default-shadow" id="deception-text">Обман</span>
+                </div>
+                <div id="nature" class="skill-box">
+                    <span class="border-style border-radius skill-bonus default-background default-shadow" data-modifier="intelligence" id="nature-bonus">-1</span>
+                    <span id="nature-origin" class="skill-origin gray-text">INT</span>
+                    <span class="border-style border-radius skill-text default-background default-shadow" id="nature-text">Природа</span>
+                </div>
+                <div id="insight" class="skill-box">
+                    <span class="border-style border-radius skill-bonus default-background default-shadow" data-modifier="wisdom" id="insight-bonus">-1</span>
+                    <span id="insight-origin" class="skill-origin gray-text">WIS</span>
+                    <span class="border-style border-radius skill-text default-background default-shadow" id="insight-text">Проницательность</span>
+                </div>
+                <div id="religion" class="skill-box">
+                    <span class="border-style border-radius skill-bonus default-background default-shadow" data-modifier="intelligence" id="religion-bonus">-1</span>
+                    <span id="religion-origin" class="skill-origin gray-text">INT</span>
+                    <span class="border-style border-radius skill-text default-background default-shadow" id="religion-text">Религия</span>
+                </div>
+                <div id="stealth" class="skill-box">
+                    <span class="border-style border-radius skill-bonus default-background default-shadow" data-modifier="dexterity" id="stealth-bonus">-1</span>
+                    <span id="stealth-origin" class="skill-origin gray-text">DEX</span>
+                    <span class="border-style border-radius skill-text default-background default-shadow" id="stealth-text">Скрытность</span>
+                </div>
+                <div id="persuasion" class="skill-box">
+                    <span class="border-style border-radius skill-bonus default-background default-shadow" data-modifier="charisma" id="persuasion-bonus">-1</span>
+                    <span id="persuasion-origin" class="skill-origin gray-text">CHA</span>
+                    <span class="border-style border-radius skill-text default-background default-shadow" id="persuasion-text">Убеждение</span>
+                </div>
+                <div id="animal-handling" class="skill-box">
+                    <span class="border-style border-radius skill-bonus default-background default-shadow" data-modifier="wisdom" id="animal-handling-bonus">-1</span>
+                    <span id="animal-handling-origin" class="skill-origin gray-text">WIS</span>
+                    <span class="border-style border-radius skill-text default-background default-shadow" id="animal-handling-text">Уход за животными</span>
+                </div>
+            </div>
+            <div id="central-2">
+                <div id='fight-bonuses'>
+                    <div id='fight-bonuses-armor'>
+                        <input class='fight-bonuses-value input-font-style' type="number" onKeyPress="if(this.value.length==2) return false;">
+                        <img class="armor-svg default-shadow aiis-svg img-svg" alt="Armor icon" src="images/icons/armor.svg">
+                    </div>
+                    <div id='fight-bonuses-initiative'>
+                        <input class='fight-bonuses-value input-font-style' type="number" onKeyPress="if(this.value.length==2) return false;">
+                        <img class="initiative-svg default-shadow aiis-svg img-svg" alt="Initiative icon" src="images/icons/initiative.svg">
+                    </div>
+                    <div id='fight-bonuses-inspiration'>
+                        <input id='fight-bonuses-checkbox' type="checkbox" onKeyPress="if(this.value.length==2) return false;">
+                        <label id='fight-bonuses-checkbox-lable' for='fight-bonuses-checkbox' class='death-saves-mark' alt="Success mark unchecked" src="images/icons/success_mark.svg"></label>
+                        <img class="inspiration-svg default-shadow aiis-svg img-svg" alt="Inspiration icon" src="images/icons/inspiration.svg">
+                    </div>
+                    <div id='fight-bonuses-speed'>
+                        <input class='fight-bonuses-value input-font-style' type="number" onKeyPress="if(this.value.length==2) return false;">
+                        <img class="speed-svg default-shadow aiis-svg img-svg" alt="Speed icon" src="images/icons/speed.svg">
+                    </div>
+                </div>
+                <div id="attacks-and-spellcasting" class="default-background border-style border-radius default-shadow">
+                    <span id="ans-label" class="block-label default-background border-style border-radius default-shadow label-auto-width">Атаки и заклинания</span>
+                    <table id="ans-items">
+                        <tr>
+                            <th id="ans-item-name">Name</th>
+                            <th id="ans-item-bonus">Bonus</th>
+                            <th id="ans-item-dmg">DMG/Type</th>
+                        </tr>
+                        <tr>
+                            <td id="attack-name-1" class="default-inner-shadow border-radius border-style"></td>
+                            <td id="attack-bonus-1" class="default-inner-shadow border-radius border-style"></td>
+                            <td id="attack-dmg-1" class="default-inner-shadow border-radius border-style"></td>
+                        </tr>
+                        <tr>
+                            <td id="attack-name-2" class="default-inner-shadow border-radius border-style"></td>
+                            <td id="attack-bonus-2" class="default-inner-shadow border-radius border-style"></td>
+                            <td id="attack-dmg-2" class="default-inner-shadow border-radius border-style"></td>
+                        </tr>
+                        <tr>
+                            <td id="attack-name-3" class="default-inner-shadow border-radius border-style"></td>
+                            <td id="attack-bonus-3" class="default-inner-shadow border-radius border-style"></td>
+                            <td id="attack-dmg-3" class="default-inner-shadow border-radius border-style"></td>
+                        </tr>
+                    </table>
+                    <div id="spellcasting" class="default-background border-style border-radius default-inner-shadow">
+                    </div>
+                </div>
+                <div id="equipment-box" class="default-background border-style border-radius default-shadow">
+                    <span id="equipment-label" class="block-label default-background border-style border-radius default-shadow label-auto-width">Снаряжение</span>
+                    <div id="money-box">
+                        <div id="copper-box" class="currency-box default-background border-style border-radius default-inner-shadow">
+                            <img src="images/money/copper.svg" class="currency-img" alt="">
+                            <input type="number" onKeyPress="if(this.value.length==6) return false;" id="copper" class="number-input currency-value border-style border-radius default-hover-active input-font-style" value="200">
+                        </div>
+                        <div id="silver-box" class="currency-box default-background border-style border-radius default-inner-shadow">
+                            <img src="images/money/silver.svg" class="currency-img" alt="">
+                            <input type="number" onKeyPress="if(this.value.length==6) return false;" id="silver" class="number-input currency-value border-style border-radius default-hover-active input-font-style" value="10">
+                        </div>
+                        <div id="electrum-box" class="currency-box default-background border-style border-radius default-inner-shadow">
+                            <img src="images/money/electrum.svg" class="currency-img" alt="">
+                            <input type="number" onKeyPress="if(this.value.length==6) return false;" id="electrum" class="number-input currency-value border-style border-radius default-hover-active input-font-style" value="0">
+                        </div>
+                        <div id="gold-box" class="currency-box default-background border-style border-radius default-inner-shadow">
+                            <img src="images/money/gold.svg" class="currency-img" alt="">
+                            <input type="number" onKeyPress="if(this.value.length==6) return false;" id="gold" class="number-input currency-value border-style border-radius default-hover-active input-font-style" value="5">
+                        </div>
+                        <div id="platinum-box" class="currency-box default-background border-style border-radius default-inner-shadow">
+                            <img src="images/money/platinum.svg" class="currency-img" alt="">
+                            <input type="number" onKeyPress="if(this.value.length==6) return false;" id="platinum" class="number-input currency-value border-style border-radius default-hover-active input-font-style" value="0">
+                        </div>
+                    </div>
+                    <button type="button" name="Add new item to inventory" id="new-item" class="default-background border-style border-radius default-hover-active default-button default-shadow"><img class="new-item-img" src="images/icons/control_icon/new_item.svg" alt="New item cross"></button>
+                    <div id="equipment" class="default-background border-style border-radius default-shadow">
+                    </div>
+                    <div id="new-item-dialog" class="default-background border-style border-radius">
+                        <input type="tel" onKeyPress="if(this.value.length==32) return false;" id="item-name" class="border-style border-radius default-background default-hover-active default-button input-font-style">
+                        <div id="image-select"></div>
+                        <div class="dialog-buttons">
+                            <button id="cancel-item" name="Cancel creating item" class="border-style border-radius default-background default-hover-active default-button input-font-style">Отменить</button>
+                            <button id="confirm-item" name="Confirm creating item" class="border-style border-radius default-background default-hover-active default-button input-font-style">Принять</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="central-3">
+                <div id="health">
+                    <div id="hp-bar" class="border-style border-radius default-background default-shadow">
+                        <div class="bar-animation">
+                            <div id="hp-bar-fill" class="bar-fill hp-color">
+                                <div id="hp-liquid" class="wave-main wave-hp hp-color"></div>
+                            </div>
+                        </div>
+                        <span id="hp" class="bar-text">2/10</span>
+                        <div id="hp-dialog" class="default-background border-style border-radius">
+                            <span id="hp-header"></span>
+                            <input type="tel" onKeyPress="if(this.value.length==6) return false;" id="hp-value" class="border-style border-radius default-background default-hover-active default-button input-font-style">
+                            <div class="dialog-buttons">
+                                <button id="cancel-hp" name="Cancel adjusting hp" class="border-style border-radius default-background default-hover-active default-button input-font-style">Отменить</button>
+                                <button id="confirm-hp" name="Confirm adjusting hp" class="border-style border-radius default-background default-hover-active default-button input-font-style">Принять</button>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="button" id="damage" class="border-style border-radius default-shadow default-background default-hover-active default-button input-font-style" value="Damage">
+                    <input type="button" id="temp" class="border-style border-radius default-shadow default-background default-hover-active default-button input-font-style" value="TMP">
+                    <input type="button" id="heal" class="border-style border-radius default-shadow default-background default-hover-active default-button input-font-style" value="Heal">
+                    <input type="button" id="hit-dice" class="border-style border-radius default-shadow default-background default-hover-active default-button input-font-style" value="Оставшиеся кубы здоровья">
+                    <div id='death-saves-overlay'>
+                        <div id="death-saves-window" class="border-style border-radius default-background" value="Спасброски от смерти">
+                            <span id="death-saves-label" class="block-label default-background border-style border-radius default-shadow label-auto-width">Спасброски от смерти</span>
+                            <div id='success' class="death-saves-state default-background border-style border-radius default-inner-shadow">
+                                <span id='successes-text'>Успехи</span>
+                                <div class="death-saves-marks">
+                                    <img id='success-mark-1' class='death-saves-mark' alt="Success mark unchecked" src="images/icons/success_mark.svg">
+                                    <img id='success-mark-2' class='death-saves-mark' alt="Success mark unchecked" src="images/icons/success_mark.svg">
+                                    <img id='success-mark-3' class='death-saves-mark' alt="Success mark unchecked" src="images/icons/success_mark.svg">
+                                </div>
+                            </div>
+                            <div id='fails' class="death-saves-state default-background border-style border-radius default-inner-shadow">
+                                <span id='fails-text'>Провалы</span>
+                                <div class="death-saves-marks">
+                                    <img id='fail-mark-1' class='death-saves-mark' alt="Failure mark unchecked" src="images/icons/failures_mark.svg">
+                                    <img id='fail-mark-2' class='death-saves-mark' alt="Failure mark unchecked" src="images/icons/failures_mark.svg">
+                                    <img id='fail-mark-3' class='death-saves-mark' alt="Failure mark unchecked" src="images/icons/failures_mark.svg">
+                                </div>
+                            </div>
+                            <div id='death-saves-interactive'>
+                                <div id='death-saves-heart' class='heart'>
+
+                                </div>
+                                <button id="death-saves-dice" class="default-button death-saves-dice-svg">
+                                    <img alt="Main dice button" src="images/buttons/dices/D20.svg">
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="tibf">
+                    <div id="traits-board" class="tibf-board">
+                        <span id="traits-label" class="tibf-element-label border-style border-radius default-shadow default-background label-auto-width">Черты</span>
+                        <textarea cols="20" maxlenght="2048" wrap="hard" id="traits" class="tibf-element-area border-style border-radius default-shadow default-background input-font-style"></textarea>
+                    </div>
+                    <div id="ideals-board" class="tibf-board">
+                        <span id="ideals-label" class="tibf-element-label border-style border-radius default-shadow default-background label-auto-width">Идеалы</span>
+                        <textarea cols="20" wrap="hard" id="ideals" class="tibf-element-area border-style border-radius default-shadow default-background input-font-style"></textarea>
+                    </div>
+                    <div id="bonds-board" class="tibf-board">
+                        <span id="bonds-label" class="tibf-element-label border-style border-radius default-shadow default-background label-auto-width">Привязанности</span>
+                        <textarea cols="20" wrap="hard" id="bonds" class="tibf-element-area border-style border-radius default-shadow default-background input-font-style"></textarea>
+                    </div>
+                    <div id="flaws-board" class="tibf-board">
+                        <span id="flaws-label" class="tibf-element-label border-style border-radius default-shadow default-background label-auto-width">Пороки</span>
+                        <textarea cols="20" wrap="hard" id="flaws" class="tibf-element-area border-style border-radius default-shadow default-background input-font-style"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div id="features-and-traits" class="default-background border-style border-radius default-shadow">
+                <span id="other-profincies-and-languages-label" class="block-label default-background border-style border-radius default-shadow label-auto-width">Другие умения и языки</span>
+            </div>
+            <div id="other-profincies-and-languages" class="default-background border-style border-radius default-shadow">
+                <span id="features-and-traits-label" class="block-label default-background border-style border-radius default-shadow label-auto-width">Особенности и способности</span>
+            </div>
+        </section>
+    </main>
+    <footer>
+    </footer>
+    <script src="javascript/app.js"></script>
+    <script src="javascript/auth.js"></script>
+    <script src="javascript/onclick.js"></script>
+    <script src="javascript/svg_fix.js"></script>
+</body>
+
+</html>

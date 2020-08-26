@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="css/general_styles.css">
+    <link rel="stylesheet" type="text/css" href="css/background_theme.css">
+    <link rel="stylesheet" type="text/css" href="css/default_theme.css">
+    <link rel="stylesheet" type="text/css" href="css/icons.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <!-- PWA -->
+    <meta name="description" content="DnD5CharlistI - простой способ создать персонажа для DnD">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#681e22">
+    <!-- ios support -->
+    <link rel="apple-touch-icon" href="images/icons/app_icon/96x96.png">
+    <meta name="apple-moblie-web-app-status-bar" content="#681e22">
+    <link rel="shortcut icon" href="/images/icons/app_icon/16x16.png" type="image/png">
+    <!-- technical -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=5, user-scalable=no">
+    <style>
+        img[alt="www.000webhost.com"] {
+            display: none
+        }
+    </style>
+    <title>DnD5CharlistI</title>
+</head>
+
+<body>
+    <header>
+        <div id="header-center">
+            <a id="header-title" href="index.html">DnD5CharlistI</a>
+            <input type='file' id='character-input' style="display: none;">
+            <button id="test" class="header-buttons input-font-style" href="">JSON => CONSOLE</button>
+            <button id="user-btn" class="default-button">
+                <input type="checkbox" id='user-checkbox'>
+                <span id='open-character' class='header-buttons user-menu-buttons input-font-style'>Open character</span>
+                <span id='save-character' class='header-buttons user-menu-buttons input-font-style'>Save character</span>
+                <img id="user-btn-img" src="images/buttons/profile/profile.jpg">
+            </button>
+        </div>
+    </header>
+    <!--     <nav>
+    </nav> -->
+    <main class="border-style border-radius">
+
+    </main>
+    <footer>
+    </footer>
+    <script src="javascript/app.js"></script>
+    <script src="javascript/auth.js"></script>
+    <script src="javascript/svg_fix.js"></script>
+</body>
+
+</html>
