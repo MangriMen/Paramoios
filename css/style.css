@@ -19,7 +19,7 @@ main {
   max-width: 960px;
   height: 1.6rem;
   display: grid;
-  grid-template-columns: 10rem 10rem 10rem auto;
+  grid-template-columns: 10rem 10rem 10rem auto 3.2rem;
   grid-template-rows: 1.6rem;
   align-items: center;
   justify-items: center;
@@ -891,4 +891,44 @@ input[type=number] {
   line-height: 1.1rem;
   text-align: center;
   box-sizing: border-box;
+}
+#user-btn {
+  grid-column: 5;
+  padding: 0;
+  background: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  align-self: flex-start;
+  position: relative;
+  z-index: 3;
+}
+#user-btn-img {
+  width: 44px;
+  border-radius: inherit;
+}
+#user-menu {
+  background-color: lightgray;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  border-top-right-radius: 0;
+  width: 8rem;
+  top: 99%;
+  left: -7.8rem;
+  z-index: -1;
+  padding: 1rem 1rem;
+}
+#user-circle {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  background-color: lightgray;
+  border-bottom-style: none;
+  border-radius: 50% 50% 0 0;
+  top: -2.5rem;
+  right: -1%;
+}
+#link-logout {
+  color: black;
 }
