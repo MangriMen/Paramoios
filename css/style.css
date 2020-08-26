@@ -19,7 +19,7 @@ main {
   max-width: 960px;
   height: 1.6rem;
   display: grid;
-  grid-template-columns: 10rem 10rem 10rem auto 3.2rem;
+  grid-template-columns: 10rem 10rem auto auto 3.2rem;
   grid-template-rows: 1.6rem;
   align-items: center;
   justify-items: center;
@@ -892,6 +892,10 @@ input[type=number] {
   text-align: center;
   box-sizing: border-box;
 }
+#user-checkbox {
+  position: absolute;
+  visibility: hidden;
+}
 #user-btn {
   grid-column: 5;
   padding: 0;
@@ -899,36 +903,109 @@ input[type=number] {
   border-radius: 50%;
   width: 48px;
   height: 48px;
+  box-sizing: border-box;
   align-self: flex-start;
   position: relative;
-  z-index: 3;
+  z-index: 20;
 }
 #user-btn-img {
   width: 44px;
   border-radius: inherit;
 }
-#user-menu {
-  background-color: lightgray;
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  border-top-right-radius: 0;
-  width: 8rem;
-  top: 99%;
-  left: -7.8rem;
-  z-index: -1;
-  padding: 1rem 1rem;
+#open-character {
+  grid-column: 1;
 }
-#user-circle {
+#save-character {
+  grid-column: 2;
+}
+#open-character, #save-character {
+  white-space: nowrap;
+}
+.user-menu-buttons {
   position: absolute;
-  width: 48px;
-  height: 48px;
-  background-color: lightgray;
-  border-bottom-style: none;
-  border-radius: 50% 50% 0 0;
-  top: -2.5rem;
-  right: -1%;
+  display: inline-block;
+  right: 0;
+  opacity: 0;
+  visibility: hidden;
+  z-index: -1;
+  height: 1.4rem;
+  top: 0.1rem;
+}
+#user-checkbox:checked ~ .user-menu-buttons {
+  visibility: visible;
+  opacity: 1;
+}
+#open-character {
+  transition: 0.4s ease-out 0s;
+}
+#save-character {
+  transition: 0.2s ease-out 0.2s;
+}
+
+#user-checkbox:checked ~ #open-character {
+  right: 10.5rem;
+}
+#user-checkbox:checked ~ #save-character {
+  right: 3rem;
+}
+
+.user-menu-buttons-down {
+  position: absolute;
+  visibility: hidden;
+  left: 5%;
+  top: 0;
+  border-radius: 50%;
+  width: 1.7rem;
+  height: 1.7rem;
+  z-index: -1;
+}
+.user-menu-buttons-down-img {
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+#user-settings {
+  transition: 0.1s ease-out 0s;
 }
 #link-logout {
-  color: black;
+  transition: 0.2s ease-out 0s;
+}
+#link-login {
+  transition: 0.1s ease-out 0s;
+}
+#link-register {
+  transition: 0.2s ease-out 0s;
+}
+
+#user-checkbox:not(:checked) ~ #user-settings {
+  transition: 0.1s ease-in 0.1s;
+}
+#user-checkbox:not(:checked) ~ #link-logout {
+  transition: 0.2s ease-in 0s;
+}
+#user-checkbox:not(:checked) ~ #link-login {
+  transition: 0.1s ease-in 0.1s;
+}
+#user-checkbox:not(:checked) ~ #link-register {
+  transition: 0.2s ease-in 0s;
+}
+
+#user-checkbox:checked ~ .user-menu-buttons-down {
+  top: 2.5rem;
+  visibility: visible;
+}
+#user-checkbox:checked ~ #link-logout {
+  top: 4.6rem;
+}
+#user-checkbox:checked ~ #link-login {
+  top: 2.5rem;
+}
+#user-checkbox:checked ~ #link-register {
+  top: 4.6rem;
 }
