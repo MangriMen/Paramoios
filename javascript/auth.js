@@ -7,7 +7,7 @@ $(document).ready(function () {
 
     jsonStream.then(data => {
         let img = document.createElement('img');
-        img.src = "data:image/jpeg;base64," + data;
+        img.src = data;
         img.id = 'user-btn-img';
         document.getElementById('user-btn').appendChild(img);
     });
