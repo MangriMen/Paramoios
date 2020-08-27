@@ -233,7 +233,7 @@ main {
   z-index: 21;
 }
 #d20-dice {
-  transition: 0.3s ease-out 0;
+  transition: 0.3s ease-out 0s;
 }
 #dice-list-checkbox:checked ~ #d20-dice {
   top: 2rem;
