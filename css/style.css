@@ -334,7 +334,7 @@ main {
   grid-template-rows:
   auto
   auto;
-  grid-row-gap: 1.5rem;
+  row-gap: 1.5rem;
   justify-content: space-between;
   margin-top: 1rem;
   padding: 0 1em 1rem;
@@ -355,6 +355,16 @@ main {
   position: relative;
 }
 #hp-dialog {
+  display: none;
+  width: inherit;
+  height: 80px;
+  position: absolute;
+  right: -0.1rem;
+  top: 1.85rem;
+  margin: auto;
+  text-align: center;
+}
+#temp-hp-dialog {
   display: none;
   width: inherit;
   height: 80px;
@@ -697,6 +707,37 @@ input[type=number] {
   left: 0;
   right: 0;
   bottom: -0.6rem;
+}
+#temp-hp-dialog-buttons {
+  position: absolute;
+  display: grid;
+  row-gap: 0.5rem;
+  column-gap: 0.5rem;
+  justify-content: center;
+  font-size: 0.8rem;
+  left: 0;
+  right: 0;
+  bottom: -0.6rem;
+}
+#current-hp{
+  width: 5rem;
+  font-size: inherit;
+  grid-row: 1;
+  grid-column: 1;
+}
+#max-hp{
+  width: 5rem;
+  font-size: inherit;
+  grid-row: 1;
+  grid-column: 2;
+}
+#cancel-temp-hp{
+  grid-row: 2;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  width: 5rem;
+  justify-self: center;
+  font-size: inherit;
 }
 #image-select {
   display: flex;
