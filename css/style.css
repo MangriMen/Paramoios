@@ -7,11 +7,6 @@ main {
   max-width: 960px;
   margin: 0.25em auto;
 }
-.input-font-style {
-  line-height: inherit;
-  font-family: Eberron;
-  font-size: 1rem;
-}
 .border-radius {
   border-radius: 3px;
 }
@@ -231,6 +226,7 @@ main {
   width: 54px;
   height: 54px;
   z-index: 21;
+  transition: hover 0s;
 }
 #d20-dice {
   transition: 0.3s ease-out 0s;
@@ -397,10 +393,6 @@ main {
   height: 32px;
   line-height: 26px;
 }
-.default-button {
-  text-align: center;
-  outline: none;
-}
 #hp {
   position: absolute;
   top: 0;
@@ -417,21 +409,6 @@ main {
   justify-self: start;
   grid-column: 1;
   grid-row: 2;
-}
-input {
-  outline: none;
-  text-align: center;
-}
-/* Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-/* Firefox */
-input[type=number] {
-  -moz-appearance: textfield;
 }
 #temp{
   justify-self: center;
