@@ -1,0 +1,259 @@
+header {
+  height: 1.6rem;
+  line-height: 1.6rem;
+}
+main {
+  display: grid;
+  max-width: 960px;
+  margin: 0.25em auto;
+}
+.border-radius {
+  border-radius: 3px;
+}
+#header-center {
+  max-width: 960px;
+  height: 1.6rem;
+  display: grid;
+  grid-template-columns: 10rem 10rem auto auto 3.2rem;
+  grid-template-rows: 1.6rem;
+  align-items: center;
+  justify-items: center;
+  margin: auto;
+}
+.header-buttons {
+  outline: none;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+}
+#header-title {
+  font-size: 1.2rem;
+  margin-left: 0.4rem;
+}
+#user-checkbox {
+  position: absolute;
+  visibility: hidden;
+}
+#user-btn {
+  grid-column: 5;
+  padding: 0;
+  background: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  box-sizing: border-box;
+  align-self: flex-start;
+  position: relative;
+  z-index: 20;
+}
+#user-btn-img {
+  width: 44px;
+  border-radius: inherit;
+}
+#open-character {
+  grid-column: 1;
+}
+#save-character {
+  grid-column: 2;
+}
+#open-character, #save-character {
+  white-space: nowrap;
+}
+.user-menu-buttons {
+  position: absolute;
+  display: inline-block;
+  right: 0;
+  opacity: 0;
+  visibility: hidden;
+  z-index: -1;
+  height: 1.4rem;
+  top: 0.1rem;
+}
+#user-checkbox:checked ~ .user-menu-buttons {
+  visibility: visible;
+  opacity: 1;
+}
+#open-character {
+  transition: 0.4s ease-out 0s;
+}
+#save-character {
+  transition: 0.2s ease-out 0.2s;
+}
+
+#user-checkbox:checked ~ #open-character {
+  right: 10.5rem;
+}
+#user-checkbox:checked ~ #save-character {
+  right: 3rem;
+}
+.user-menu-buttons-down {
+  position: absolute;
+  visibility: hidden;
+  left: 5%;
+  top: 0;
+  border-radius: 50%;
+  width: 1.7rem;
+  height: 1.7rem;
+  z-index: -1;
+}
+.user-menu-buttons-down-img {
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+#user-settings {
+  transition: 0.1s ease-out 0s;
+}
+#link-logout {
+  transition: 0.2s ease-out 0s;
+}
+#link-login {
+  transition: 0.1s ease-out 0s;
+}
+#link-register {
+  transition: 0.2s ease-out 0s;
+}
+
+#user-checkbox:not(:checked) ~ #user-settings {
+  transition: 0.1s ease-in 0.1s;
+}
+#user-checkbox:not(:checked) ~ #link-logout {
+  transition: 0.2s ease-in 0s;
+}
+#user-checkbox:not(:checked) ~ #link-login {
+  transition: 0.1s ease-in 0.1s;
+}
+#user-checkbox:not(:checked) ~ #link-register {
+  transition: 0.2s ease-in 0s;
+}
+
+#user-checkbox:checked ~ .user-menu-buttons-down {
+  top: 2.5rem;
+  visibility: visible;
+}
+#user-checkbox:checked ~ #link-logout {
+  top: 4.6rem;
+}
+#user-checkbox:checked ~ #link-login {
+  top: 2.5rem;
+}
+#user-checkbox:checked ~ #link-register {
+  top: 4.6rem;
+}
+nav {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+}
+#tabs {
+  display: flex;
+  flex-direction: row;
+  padding-left: 1rem;
+}
+.navigation-tab {
+  height: 1.8rem;
+  width: 6rem;
+  margin: 0 0.5rem 0 0;
+  border-radius: 5px 5px 0 0;
+  text-align: center;
+  line-height: 1.8rem;
+  border-bottom: none;
+  cursor: pointer;
+}
+#content-page {
+  max-width: 920px;
+  height: 40rem;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+#avatar-box {
+  display: flex;
+  flex-direction: column;
+  width: 256px;
+  height: 360px;
+  justify-content: space-between;
+}
+#avatar-img {
+  width: inherit;
+  height: auto;
+  box-sizing: border-box;
+  border-width: 0.25rem;
+}
+.file {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  height: 2rem;
+}
+.file input {
+  min-width: 8rem;
+  margin: 0;
+  filter: alpha(opacity=0);
+  opacity: 0;
+}
+.file-custom {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 5;
+  height: 2rem;
+  padding: 0.3rem 0.5rem;
+  box-sizing: border-box;
+  color: #555;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+.file-custom:after {
+  content: attr(data-choose);
+}
+.file-custom:before {
+  position: absolute;
+  top: -0.1rem;
+  right: -0.1rem;
+  bottom: -0.1rem;
+  z-index: 6;
+  display: block;
+  content: attr(data-browse);
+  height: 2rem;
+  padding: inherit;
+  color: #000;
+  border: inherit;
+  box-sizing: inherit;
+  border-radius: inherit;
+}
+.file input:focus ~ .file-custom {
+  border-color: #b5353b;
+}
+#profile-settings-page {
+  max-width: inherit;
+  display: none;
+  grid-template-columns: 256px auto;
+  column-gap: 1rem;
+}
+#avatar-box {
+  grid-row: 1;
+  grid-column: 1;
+}
+#information-box {
+  grid-row: 1;
+  grid-column: 2;
+  font-size: 2rem;
+  line-height: 1.5rem;
+  display: grid;
+  grid-template-rows: 2rem 2rem auto;
+  row-gap: 1rem;
+  align-items: center;
+}
+#player-email {
+  font-size: 1.5rem;
+}

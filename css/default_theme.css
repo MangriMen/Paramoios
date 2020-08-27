@@ -1,6 +1,26 @@
 header {
   background-color: #681e22;
 }
+input {
+  outline: none;
+  text-align: center;
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+.default-button {
+  text-align: center;
+  outline: none;
+  cursor: pointer;
+}
 .default-background {
   background-color: #d4bf9b;
 }
@@ -69,6 +89,9 @@ header {
   box-shadow: 0 0 10px 2px #424242;
 }
 .input-font-style {
+  line-height: inherit;
+  font-family: Eberron;
+  font-size: 1rem;
   color: black;
 }
 #main-dice, .dice-in-list, #death-saves-dice{
@@ -131,4 +154,10 @@ header {
 }
 .characteristic-expertise {
   background-color: #ffa834;
+}
+.file-custom::before {
+  background-color: #edd6ad;
+}
+.non-active-tab {
+  background-color: #a19175;
 }

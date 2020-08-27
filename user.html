@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="css/background_theme.css">
     <link rel="stylesheet" type="text/css" href="css/default_theme.css">
     <link rel="stylesheet" type="text/css" href="css/icons.css">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/user.css">
     <!-- PWA -->
     <meta name="description" content="DnD5CharlistI - простой способ создать персонажа для DnD">
     <link rel="manifest" href="/manifest.json">
@@ -40,15 +40,39 @@
             </button>
         </div>
     </header>
-    <!--     <nav>
-    </nav> -->
     <main class="border-style border-radius">
-
+        <nav>
+            <div id='tabs'>
+                <span id='characters' class="navigation-tab default-background border-style border-radius">
+                    Персонажи
+                </span>
+                <span id='profile-settings' class="navigation-tab default-background border-style border-radius">
+                    Настройки
+                </span>
+            </div>
+            <div id='content-page' class="default-background border-style border-radius">
+                <div id='profile-settings-page' data-type='page'>
+                    <form id='avatar-box' action='avatar.php' method='post' enctype='multipart/form-data'>
+                        <img id="avatar-img" src="images/buttons/profile/profile.jpg" class="border-style border-radius default-background default-shadow">
+                        <label class="file">
+                            <input type="file" id="file" name='avatar' aria-label="File browser" required>
+                            <span data-choose="Выбрать файл..." data-browse="Обзор" class="file-custom default-background border-style border-radius default-shadow"></span>
+                        </label>
+                        <input type="submit" id='submit-avatar' class="default-button border-style border-radius default-background input-font-style default-shadow" value='Установить'>
+                    </form>
+                    <div id='information-box'>
+                        <span id='player-name'></span>
+                        <span id='player-email'></span>
+                    </div>
+                </div>
+            </div>
+        </nav>
     </main>
     <footer>
     </footer>
     <script src="javascript/app.js"></script>
     <script src="javascript/auth.js"></script>
+    <script src="javascript/user.js"></script>
     <script src="javascript/svg_fix.js"></script>
 </body>
 

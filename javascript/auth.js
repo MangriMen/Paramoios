@@ -52,6 +52,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
             document.getElementById('user-checkbox').after(userSettings);
             document.getElementById('user-checkbox').after(logout);
+            document.getElementById('player-name').textContent = 'Имя: ' + data.name;
+            document.getElementById('player-email').textContent = 'Email: ' + data.email;
         } else {
             document.getElementById('user-checkbox').after(login);
             document.getElementById('user-checkbox').after(register);

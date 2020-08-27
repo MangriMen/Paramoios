@@ -9,13 +9,6 @@ main {
   display: flex;
   padding: 0 80px;
 }
-#message {
-  color: white;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  margin: 1.2em 0 1.2em 55%;
-}
 #auth-menu {
   color: white;
   border: 10px solid #e9c996;
@@ -28,8 +21,48 @@ main {
   position: fixed;
   width: 40vw;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+#form_auth, #form_register {
+  font-size: 2rem;
+  text-align: center;
+}
+.mesage_error {
+  display: block;
+  font-size: 1rem !important;
+  width: 10rem;
+  margin: auto;
+}
+.auth-input {
+  height: inherit;
+  background-color: #e9c996;
+  border-radius: 5px;
+  border: 4px solid whitesmoke;
+}
+.auth-text {
+  padding-top: 0.25rem;
+}
+#captcha {
+  text-align: center;
+}
+#captcha img {
+  margin: 1rem 0 0.5rem;
+}
+#captcha div{
+  margin: 1rem 0;
+}
+#submit-btn {
+  width: 100%;
+  height: 2rem;
+}
+#message {
+  color: white;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 1.2em 0 1.2em 55%;
 }
 .main-text {
   font-size: 1.3em;
