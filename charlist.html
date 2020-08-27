@@ -15,7 +15,7 @@
     <!-- ios support -->
     <link rel="apple-touch-icon" href="images/icons/app_icon/96x96.png">
     <meta name="apple-moblie-web-app-status-bar" content="#681e22">
-    <link rel="shortcut icon" href="/images/icons/app_icon/16x16.png" type="image/png">
+    <link rel="shortcut icon" href="images/icons/app_icon/16x16.png" type="image/png">
     <!-- technical -->
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=5, user-scalable=no">
     <style>
@@ -342,10 +342,18 @@
                         <span id="hp" class="bar-text">2/10</span>
                         <div id="hp-dialog" class="default-background border-style border-radius">
                             <span id="hp-header"></span>
-                            <input type="tel" onKeyPress="if(this.value.length==6) return false;" id="hp-value" class="border-style border-radius default-background default-hover-active default-button input-font-style">
+                            <input type="number" onKeyPress="if(this.value.length==6) return false;" id="hp-value" class="border-style border-radius default-background default-hover-active default-button input-font-style">
                             <div class="dialog-buttons">
                                 <button id="cancel-hp" name="Cancel adjusting hp" class="border-style border-radius default-background default-hover-active default-button input-font-style">Отменить</button>
                                 <button id="confirm-hp" name="Confirm adjusting hp" class="border-style border-radius default-background default-hover-active default-button input-font-style">Принять</button>
+                            </div>
+                        </div>
+                        <div id="temp-hp-dialog" class="default-background border-style border-radius">
+                            <span id="temp-hp-header"></span>
+                            <div id="temp-hp-dialog-buttons">
+                                <button id="current-hp" name="Adjust current hp" class="border-style border-radius default-background default-hover-active default-button input-font-style">Текущее</button>
+                                <button id="max-hp" name="Adjust maximum hp" class="border-style border-radius default-background default-hover-active default-button input-font-style">Макс.</button>
+                                <button id="cancel-temp-hp" name="Cancel adjusting hp" class="border-style border-radius default-background default-hover-active default-button input-font-style">Отменить</button>
                             </div>
                         </div>
                     </div>
