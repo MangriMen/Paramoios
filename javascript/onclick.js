@@ -44,6 +44,7 @@ let equipment = document.getElementById('equipment');
 let equipmentBox = document.getElementById('equipment-box');
 let newItemDialog = document.getElementById('new-item-dialog');
 let hpDialog = document.getElementById('hp-dialog');
+let tempHpDialog = document.getElementById('temp-hp-dialog');
 let deathSavesOverlay = document.getElementById('death-saves-overlay');
 let successMarks = [document.getElementById('success-mark-1'), document.getElementById('success-mark-2'), document.getElementById('success-mark-3')];
 let failuresMarks = [document.getElementById('fail-mark-1'), document.getElementById('fail-mark-2'), document.getElementById('fail-mark-3')];
@@ -56,6 +57,8 @@ let selectedImageForItem = null;
 let selectedItemInfo = null;
 let profinciesParent = null;
 let tempFlag = 0;
+let tempType = '';
+let isTemp = 0;
 let tempHp = 0;
 let bufferMaxHp = 0;
 let bufferHp = 0;
@@ -64,7 +67,7 @@ let defaultCharacteristicCheckboxClasses = 'characteristic-death-save-checkbox b
 document.getElementById('confirm-hp').addEventListener('click', changeHp);
 document.getElementById('cancel-hp').addEventListener('click', displayHpDialog);
 document.getElementById('damage').addEventListener('click', displayHpDialog);
-document.getElementById('temp').addEventListener('click', displayHpDialog);
+document.getElementById('temp').addEventListener('click', displayTempHpDialog);
 document.getElementById('heal').addEventListener('click', displayHpDialog);
 document.getElementById('new-item').addEventListener('click', displayNewItemDialog);
 document.getElementById('cancel-item').addEventListener('click', addNewItemToInventory);
@@ -85,6 +88,8 @@ document.getElementById('wisdom-death-save-checkbox').addEventListener('click', 
 document.getElementById('charisma-death-save-checkbox').addEventListener('click', characteristicCheckBoxDropDown);
 document.getElementById('open-character').addEventListener('click', openCharacter);
 document.getElementById('save-character').addEventListener('click', saveAndDownloadCharacter);
+document.getElementById('current-hp').addEventListener('click', displayHpDialog);
+document.getElementById('max-hp').addEventListener('click', displayHpDialog);
 characterStats.querySelectorAll('div.characteristic').forEach(
   statsBox => {
     let timerCharacteristics = null;
@@ -185,16 +190,34 @@ function displayHpDialog() {
     if (this.id == 'heal') {
       document.getElementById('hp-header').textContent = 'Восстановить:';
       isHealed = 1;
+      isTemp = 0;
     } else if (this.id == 'damage') {
       document.getElementById('hp-header').textContent = 'Нанести урон:';
       isHealed = 0;
+      isTemp = 0;
     } else {
+      tempHpDialog.style.display = 'none';
       document.getElementById('hp-header').textContent = 'Изменить здоровье';
+      isTemp = 1;
+      tempType = this.id;
     }
     document.getElementById('hp-value').value = 1;
     hpDialog.style.display = 'block';
   } else {
     hpDialog.style.display = 'none';
+  }
+}
+
+function displayTempHpDialog() {
+  if (tempFlag) {
+    temporaryChange();
+    return;
+  }
+  if (getComputedStyle(tempHpDialog).display == 'none') {
+    document.getElementById('temp-hp-header').textContent = 'Тип здоровья:';
+    tempHpDialog.style.display = 'block';
+  } else {
+    tempHpDialog.style.display = 'none';
   }
 }
 
@@ -207,10 +230,17 @@ function getHp() {
 function changeHp() {
   getHp();
   let offsetHp = Math.abs(Number(document.getElementById('hp-value').value));
+  if (isTemp) {
+    tempFlag = 0;
+    temporaryChange(offsetHp);
+    displayHpDialog();
+    return;
+  }
   let newHp = 0;
   let final = '';
 
   if (isNaN(offsetHp)) { return; }
+
 
   offsetHp = !isHealed ? -offsetHp : offsetHp;
   newHp = actualHp + offsetHp;
@@ -225,32 +255,25 @@ function changeHp() {
   changeBarWidth(newHp, maxHp, 'hp');
 }
 
-function temporaryChange() {
-  let hpField = (document.getElementById('hp').textContent).split('/');
-  hpField[0] = Number(hpField[0]);
-  hpField[1] = Number(hpField[1]);
-
+function temporaryChange(tempHp) {
   if (!tempFlag) {
-    bufferHp = hpField[0];
-    bufferMaxHp = hpField[1];
-    tempFlag = prompt('Введите 1 для изменения текущего здоровья, 2 - для максимального:', '0');
-    tempHp = Number(prompt('Введите количество:'));
+    bufferHp = actualHp;
+    bufferMaxHp = maxHp;
 
-    if (tempFlag == 1) {
-      hpField[0] = tempHp;
+    if (tempType == 'current-hp') {
+      actualHp = tempHp;
       hpFillEl.add('hp-temp-color');
       hpWaveEl.add('hp-temp-color');
-    } else if (tempFlag == 2) {
-      hpField[1] = tempHp;
+    } else {
+      maxHp = tempHp;
       hpFillEl.add('max-hp-temp-color');
       hpWaveEl.add('max-hp-temp-color');
-    } else {
-      return;
     }
-    hpField[0] = hpValidation(hpField[0], hpField[1]);
+    actualHp = hpValidation(actualHp, maxHp);
+    tempFlag = 1;
   } else {
-    hpField[1] = bufferMaxHp;
-    hpField[0] = hpValidation((tempFlag != 2 ? bufferHp : hpField[0]), hpField[1]);
+    maxHp = bufferMaxHp;
+    actualHp = hpValidation((tempType != 'max-hp' ? bufferHp : actualHp), maxHp);
     hpFillEl.remove('max-hp-temp-color');
     hpWaveEl.remove('max-hp-temp-color');
     hpFillEl.remove('hp-temp-color');
@@ -258,8 +281,8 @@ function temporaryChange() {
     tempFlag = 0;
   }
 
-  document.getElementById('hp').textContent = hpField[0] + '/' + hpField[1];
-  changeBarWidth(hpField[0], hpField[1], 'hp');
+  document.getElementById('hp').textContent = actualHp + '/' + maxHp;
+  changeBarWidth(actualHp, maxHp, 'hp');
 }
 
 function hpValidation(actual, maximum) {
@@ -739,6 +762,7 @@ function updateBonus() {
 }
 
 function addSignToNumber(value) {
+  if (isNaN(value)) return '';
   return value < 0 ? value : '+' + value;
 }
 
