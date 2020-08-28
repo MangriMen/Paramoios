@@ -18,8 +18,6 @@ characterTab.addEventListener('click', selectPage);
 document.getElementById('profile-settings').addEventListener('click', selectPage);
 document.getElementById('profile-settings').dispatchEvent(new Event('click'));
 
-document.getElementById('submit-avatar').addEventListener('click', setAvatar);
-
 function selectPage() {
     activeTab = this;
     document.getElementById('tabs').querySelectorAll('span').forEach(tab => {
@@ -35,22 +33,4 @@ function selectPage() {
     } else if (activeTab.id = 'profile-settings') {
         document.getElementById('profile-settings-page').style.display = 'grid';
     }
-}
-
-function setAvatar() {
-    const request = fetch('../logged.php')
-
-    const jsonStream = request.then(text => { return text.json() });
-
-    jsonStream.then(data => {
-        if (data.logged) {
-            img.src = data.avatar;
-
-            document.getElementById('user-checkbox').after(userSettings);
-            document.getElementById('user-checkbox').after(logout);
-        } else {
-            document.getElementById('user-checkbox').after(login);
-            document.getElementById('user-checkbox').after(register);
-        }
-    });
 }
