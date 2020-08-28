@@ -41,25 +41,30 @@ registerImg.src = 'images/buttons/profile/register.svg';
 registerImg.classList = 'link-auth-img user-menu-buttons-down-img';
 register.appendChild(registerImg);
 
-document.addEventListener("DOMContentLoaded", function () {
-    const request = fetch('../logged.php')
+document.addEventListener("DOMContentLoaded", async function () {
+    const request = await fetch('../logged.php', {
+        method: 'POST',
+        body: 'get-user'
+    });
 
-    const jsonStream = request.then(text => { return text.json() });
-
-    jsonStream.then(data => {
+    if (request.ok) {
+        const data = await request.json();
         if (data.logged) {
             img.src = data.avatar;
 
             document.getElementById('user-checkbox').after(userSettings);
             document.getElementById('user-checkbox').after(logout);
-            document.getElementById('player-name').textContent = 'Имя: ' + data.name;
-            document.getElementById('player-email').textContent = 'Email: ' + data.email;
+            if (window.location.pathname == '/user.html') {
+                document.getElementById('player-name').textContent = 'Имя: ' + data.name;
+                document.getElementById('player-email').textContent = 'Email: ' + data.email;
+            }
         } else {
             document.getElementById('user-checkbox').after(login);
             document.getElementById('user-checkbox').after(register);
         }
-    });
-
+    } else {
+        alert("Ошибка загрузки пользователя, код ошибки HTTP: " + request.status);
+    }
 })
 
 function toggleUserMenu(e) {
