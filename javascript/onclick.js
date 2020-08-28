@@ -38,8 +38,6 @@ let characterBackground = document.getElementById('character-background');
 let characterStats = document.getElementById('character-stats');
 let characterSkills = document.getElementById('skills');
 
-let hpFillEl = document.getElementById('hp-bar-fill').classList;
-let hpWaveEl = document.getElementById('hp-liquid').classList;
 let equipment = document.getElementById('equipment');
 let equipmentBox = document.getElementById('equipment-box');
 let newItemDialog = document.getElementById('new-item-dialog');
@@ -49,29 +47,36 @@ let deathSavesOverlay = document.getElementById('death-saves-overlay');
 let successMarks = [document.getElementById('success-mark-1'), document.getElementById('success-mark-2'), document.getElementById('success-mark-3')];
 let failuresMarks = [document.getElementById('fail-mark-1'), document.getElementById('fail-mark-2'), document.getElementById('fail-mark-3')];
 
-let oldHp = (document.getElementById('hp').textContent).split('/');
-let actualHp = Number(oldHp[0]);
-let maxHp = Number(oldHp[1]);
-
 let selectedImageForItem = null;
 let selectedItemInfo = null;
 let profinciesParent = null;
-let tempFlag = 0;
+let defaultCharacteristicCheckboxClasses = 'characteristic-death-save-checkbox border-style';
+
+let hpFillEl = document.getElementById('hp-bar-fill').classList;
+let hpWaveEl = document.getElementById('hp-liquid').classList;
+let oldHp = (document.getElementById('hp').textContent).split('/');
+let currentHp = Number(oldHp[0]);
+let maxHp = Number(oldHp[1]);
+let isHealed = false;
+let isTemp = false;
+let tempSwitch = false;
 let tempType = '';
-let isTemp = 0;
-let tempHp = 0;
 let bufferMaxHp = 0;
 let bufferHp = 0;
-let isHealed = false;
-let defaultCharacteristicCheckboxClasses = 'characteristic-death-save-checkbox border-style';
-document.getElementById('confirm-hp').addEventListener('click', changeHp);
-document.getElementById('cancel-hp').addEventListener('click', displayHpDialog);
+
 document.getElementById('damage').addEventListener('click', displayHpDialog);
-document.getElementById('temp').addEventListener('click', displayTempHpDialog);
 document.getElementById('heal').addEventListener('click', displayHpDialog);
+document.getElementById('cancel-hp').addEventListener('click', displayHpDialog);
+document.getElementById('current-hp').addEventListener('click', displayHpDialog);
+document.getElementById('max-hp').addEventListener('click', displayHpDialog);
+document.getElementById('cancel-temp-hp').addEventListener('click', displayTempHpDialog);
+document.getElementById('temp').addEventListener('click', changeTempHp);
+document.getElementById('confirm-hp').addEventListener('click', () => { if (isTemp) { tempSwitch = !tempSwitch; } changeHp(); });
+
 document.getElementById('new-item').addEventListener('click', displayNewItemDialog);
 document.getElementById('cancel-item').addEventListener('click', addNewItemToInventory);
 document.getElementById('confirm-item').addEventListener('click', addNewItemToInventory);
+
 document.getElementById('death-saves-dice').addEventListener('click', rollDeathSave);
 document.getElementById('d20-dice').addEventListener('click', () => { let rolled = rollDice(20); rollAlert(rolled.value, `На D${rolled.type} выпало:`) });
 document.getElementById('d12-dice').addEventListener('click', () => { let rolled = rollDice(12); rollAlert(rolled.value, `На D${rolled.type} выпало:`) });
@@ -80,16 +85,17 @@ document.getElementById('d10-dice').addEventListener('click', () => { let rolled
 document.getElementById('d8-dice').addEventListener('click', () => { let rolled = rollDice(8); rollAlert(rolled.value, `На D${rolled.type} выпало:`) });
 document.getElementById('d6-dice').addEventListener('click', () => { let rolled = rollDice(6); rollAlert(rolled.value, `На D${rolled.type} выпало:`) });
 document.getElementById('d4-dice').addEventListener('click', () => { let rolled = rollDice(4); rollAlert(rolled.value, `На D${rolled.type} выпало:`) });
+
 document.getElementById('strength-death-save-checkbox').addEventListener('click', characteristicCheckBoxDropDown);
 document.getElementById('dexterity-death-save-checkbox').addEventListener('click', characteristicCheckBoxDropDown);
 document.getElementById('constitution-death-save-checkbox').addEventListener('click', characteristicCheckBoxDropDown);
 document.getElementById('intelligence-death-save-checkbox').addEventListener('click', characteristicCheckBoxDropDown);
 document.getElementById('wisdom-death-save-checkbox').addEventListener('click', characteristicCheckBoxDropDown);
 document.getElementById('charisma-death-save-checkbox').addEventListener('click', characteristicCheckBoxDropDown);
+
 document.getElementById('open-character').addEventListener('click', openCharacter);
 document.getElementById('save-character').addEventListener('click', saveAndDownloadCharacter);
-document.getElementById('current-hp').addEventListener('click', displayHpDialog);
-document.getElementById('max-hp').addEventListener('click', displayHpDialog);
+
 characterStats.querySelectorAll('div.characteristic').forEach(
   statsBox => {
     let timerCharacteristics = null;
@@ -189,17 +195,16 @@ function displayHpDialog() {
   if (getComputedStyle(hpDialog).display == 'none') {
     if (this.id == 'heal') {
       document.getElementById('hp-header').textContent = 'Восстановить:';
-      isHealed = 1;
-      isTemp = 0;
+      isHealed = true;
+      isTemp = false;
     } else if (this.id == 'damage') {
       document.getElementById('hp-header').textContent = 'Нанести урон:';
-      isHealed = 0;
-      isTemp = 0;
+      isHealed = false;
+      isTemp = false;
     } else {
-      tempHpDialog.style.display = 'none';
-      document.getElementById('hp-header').textContent = 'Изменить здоровье';
-      isTemp = 1;
       tempType = this.id;
+      displayTempHpDialog();
+      document.getElementById('hp-header').textContent = 'Изменить здоровье';
     }
     document.getElementById('hp-value').value = 1;
     hpDialog.style.display = 'block';
@@ -209,12 +214,7 @@ function displayHpDialog() {
 }
 
 function displayTempHpDialog() {
-  if (tempFlag) {
-    temporaryChange();
-    return;
-  }
   if (getComputedStyle(tempHpDialog).display == 'none') {
-    document.getElementById('temp-hp-header').textContent = 'Тип здоровья:';
     tempHpDialog.style.display = 'block';
   } else {
     tempHpDialog.style.display = 'none';
@@ -223,70 +223,80 @@ function displayTempHpDialog() {
 
 function getHp() {
   oldHp = (document.getElementById('hp').textContent).split('/');
-  actualHp = Number(oldHp[0]);
+  currentHp = Number(oldHp[0]);
   maxHp = Number(oldHp[1]);
 }
 
 function changeHp() {
   getHp();
   let offsetHp = Math.abs(Number(document.getElementById('hp-value').value));
-  if (isTemp) {
-    tempFlag = 0;
-    temporaryChange(offsetHp);
-    displayHpDialog();
-    return;
-  }
   let newHp = 0;
-  let final = '';
 
   if (isNaN(offsetHp)) { return; }
 
+  if (isTemp) {
+    if (tempType == 'current-hp') {
+      newHp = hpValidation(offsetHp, maxHp);
+    } else {
+      maxHp = offsetHp;
+      newHp = hpValidation(currentHp, maxHp);
+      bufferHp = newHp;
+    }
+    tempHpColorChange();
+  } else {
+    offsetHp = !isHealed ? -offsetHp : offsetHp;
+    newHp = currentHp + offsetHp;
+    newHp = hpValidation(newHp, maxHp);
+  }
 
-  offsetHp = !isHealed ? -offsetHp : offsetHp;
-  newHp = actualHp + offsetHp;
+  if (newHp == 0) {
+    hpDialog.style.display = 'none';
+    deathSavesOverlay.style.display = 'flex';
+  }
 
-  newHp = hpValidation(newHp, maxHp);
-
-  if (newHp == 0) { deathSavesOverlay.style.display = 'flex'; }
-
-  final = newHp + '/' + maxHp;
-
-  document.getElementById('hp').textContent = final;
+  document.getElementById('hp').textContent = newHp + '/' + maxHp;
   changeBarWidth(newHp, maxHp, 'hp');
 }
 
-function temporaryChange(tempHp) {
-  if (!tempFlag) {
-    bufferHp = actualHp;
+function changeTempHp() {
+  getHp();
+  if (!tempSwitch) {
+    isTemp = true;
+    bufferHp = currentHp;
     bufferMaxHp = maxHp;
+    displayTempHpDialog();
+  } else {
+    isTemp = false;
+    currentHp = tempType == 'current-hp' ? bufferHp : currentHp;
+    maxHp = bufferMaxHp;
+    currentHp = hpValidation(currentHp, maxHp);
+    tempHpColorChange();
+  }
+  document.getElementById('hp').textContent = currentHp + '/' + maxHp;
+  changeBarWidth(currentHp, maxHp, 'hp');
+  tempSwitch = false;
+}
 
+function tempHpColorChange() {
+  if (isTemp) {
     if (tempType == 'current-hp') {
-      actualHp = tempHp;
       hpFillEl.add('hp-temp-color');
       hpWaveEl.add('hp-temp-color');
-    } else {
-      maxHp = tempHp;
+    } else if (tempType == 'max-hp') {
       hpFillEl.add('max-hp-temp-color');
       hpWaveEl.add('max-hp-temp-color');
     }
-    actualHp = hpValidation(actualHp, maxHp);
-    tempFlag = 1;
+    return;
   } else {
-    maxHp = bufferMaxHp;
-    actualHp = hpValidation((tempType != 'max-hp' ? bufferHp : actualHp), maxHp);
     hpFillEl.remove('max-hp-temp-color');
     hpWaveEl.remove('max-hp-temp-color');
     hpFillEl.remove('hp-temp-color');
     hpWaveEl.remove('hp-temp-color');
-    tempFlag = 0;
   }
-
-  document.getElementById('hp').textContent = actualHp + '/' + maxHp;
-  changeBarWidth(actualHp, maxHp, 'hp');
 }
 
 function hpValidation(actual, maximum) {
-  if ((tempFlag != 1) && (actual > maximum)) {
+  if (actual > maximum) {
     actual = maximum;
   } else if (actual < 0) {
     actual = 0;
@@ -318,7 +328,6 @@ function rollDeathSave() {
     rollDeathSaveClear(true);
     isHealed = true;
     changeHp();
-    isHealed = false;
     return;
   } else {
     document.getElementById(`success-mark-${successMarkCount + 1}`).src = 'images/icons/success_mark_checked.svg';
@@ -870,7 +879,7 @@ function saveCharacteristics() {
 function saveHpAndXp() {
   character.experience = document.getElementById('xp').value;
   getHp();
-  character.hp = actualHp;
+  character.hp = currentHp;
   character.hpMax = maxHp;
 }
 
