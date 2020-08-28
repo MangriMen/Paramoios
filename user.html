@@ -32,11 +32,11 @@
             <a id="header-title" href="index.html">DnD5CharlistI</a>
             <input type='file' id='character-input' style="display: none;">
             <button id="test" class="header-buttons input-font-style" href="">JSON => CONSOLE</button>
-            <button id="user-btn" class="default-button">
+            <button id="user-btn" name="user-btn" class="default-button">
                 <input type="checkbox" id='user-checkbox'>
                 <span id='open-character' class='header-buttons user-menu-buttons input-font-style'>Open character</span>
                 <span id='save-character' class='header-buttons user-menu-buttons input-font-style'>Save character</span>
-                <img id="user-btn-img" src="images/buttons/profile/profile.jpg">
+                <img id="user-btn-img" alt="User avatar image" src="images/buttons/profile/profile.jpg">
             </button>
         </div>
     </header>
@@ -53,7 +53,7 @@
             <div id='content-page' class="default-background border-style border-radius">
                 <div id='profile-settings-page' data-type='page'>
                     <form id='avatar-box' action='avatar.php' method='post' enctype='multipart/form-data'>
-                        <img id="avatar-img" src="images/buttons/profile/profile.jpg" class="border-style border-radius default-background default-shadow">
+                        <img id="avatar-img" alt="Big user avatar image" src="images/buttons/profile/profile.jpg" class="border-style border-radius default-background default-shadow">
                         <label class="file">
                             <input type="file" id="file" name='avatar' aria-label="File browser" required>
                             <span data-choose="Выбрать файл..." data-browse="Обзор" class="file-custom default-background border-style border-radius default-shadow"></span>
