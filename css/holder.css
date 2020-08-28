@@ -62,6 +62,7 @@ main {
   color: #e9c996;
 }
 .russian-right {
+  display: block;
   text-align: right;
 }
 @media (max-width: 1750px) {
