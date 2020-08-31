@@ -603,7 +603,7 @@ main {
   height: 18px;
   margin: 0.3em 0 auto;
 }
-#equipment {
+#equipment-flexible {
   height: 12rem;
   width: 8.5rem;
   position: relative;
@@ -644,7 +644,7 @@ main {
   height: 80%;
   margin: 0 0 0.45rem;
 }
-#new-item-dialog {
+.new-item-dialog {
   display: none;
   width: 180px;
   height: 220px;
@@ -657,7 +657,7 @@ main {
   margin: auto;
   text-align: center;
 }
-#item-name {
+.item-name {
   width: calc(100% - 1em);
   box-sizing: border-box;
   margin: 0.5em 0;
@@ -667,7 +667,7 @@ main {
   box-sizing: border-box;
   margin: 0.2em 0 0.5rem;
 }
-#confirm-item, #cancel-item {
+.choosing-state {
   font-size: 0.75rem;
   width: 4rem;
   border-width: 4px;
@@ -716,7 +716,7 @@ main {
   justify-self: center;
   font-size: inherit;
 }
-#image-select {
+.item-select {
   display: flex;
   flex-wrap: wrap;
   min-height: calc(100% - 4em);
@@ -800,28 +800,65 @@ main {
   flex-grow: 1;
 }
 #features-and-traits {
+  position: relative;
+  grid-column-start: 2;
+  grid-column-end: 4;
+  grid-row: 2;
+  padding: 1.2rem 0.5rem 0.5rem 0.5rem;
+  height: 10rem;
+}
+#features-and-traits-box {
+  display: grid;
+  grid-template-columns: 30% auto;
+  grid-template-rows: 8rem auto;
+  column-gap: 0.5rem;
+  row-gap: 0.5rem;
+  height: inherit;
+}
+#features-fixed {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+  min-width: 30%;
+  grid-row-start: 1;
+  grid-row-end: 3;
+}
+#features-and-traits-flexible {
+  max-width: 19.75rem;
+  box-sizing: border-box;
+  flex-grow: 1;
+  overflow-y: auto;
+}
+#new-feature {
+  grid-column: 2;
+  grid-row: 2;
+}
+.fundamental-features {
+  height: 25%;
+  justify-content: space-between;
+}
+#other-proficiencies-and-languages {
+  padding: 1.2rem 0.5rem 0.5rem 0.5rem;
   grid-column-start: 1;
   grid-column-end: 1;
   grid-row: 2;
   height: 10rem;
   position: relative;
 }
-#features-and-traits-label {
-  position: absolute;
-  text-align: center;
-  margin: auto;
-  left: 0;
-  right: 0;
-  top: -0.7rem;
+#other-proficiencies-and-languages-box {
+  display: grid;
+  grid-template-rows: 8rem auto;
+  column-gap: 0.5rem;
+  row-gap: 0.5rem;
 }
-#other-profincies-and-languages {
-  grid-column-start: 2;
-  grid-column-end: 4;
-  grid-row: 2;
-  height: 10rem;
-  position: relative;
+#other-proficiencies-and-languages-flexible {
+  box-sizing: border-box;
+  width: 11.3rem;
+  height: 100%;
+  overflow-y: auto;
 }
-#other-profincies-and-languages-label {
+#other-proficiencies-and-languages-label, #features-and-traits-label  {
   position: absolute;
   text-align: center;
   margin: auto;
