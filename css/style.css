@@ -786,7 +786,7 @@ input[type=number] {
   grid-column-start: 2;
   grid-column-end: 4;
   grid-row: 2;
-  padding: 1.2rem 0.5rem 0.5rem 0.5rem;
+  padding: 1.2rem 0.5rem 0.5rem;
   height: 10rem;
 }
 #features-and-traits-box {
@@ -821,7 +821,7 @@ input[type=number] {
   justify-content: space-between;
 }
 #other-proficiencies-and-languages {
-  padding: 1.2rem 0.5rem 0.5rem 0.5rem;
+  padding: 1.2rem 0.5rem 0.5rem;
   grid-column-start: 1;
   grid-column-end: 1;
   grid-row: 2;
