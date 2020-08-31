@@ -18,7 +18,6 @@ let characterSkills = document.getElementById('skills');
 
 let hpFillEl = document.getElementById('hp-bar-fill').classList;
 let hpWaveEl = document.getElementById('hp-liquid').classList;
-let equipment = document.getElementById('equipment-flexible');
 let equipmentBox = document.getElementById('equipment-box');
 let addItemDialog = document.getElementById('add-item-dialog');
 let hpDialog = document.getElementById('hp-dialog');
