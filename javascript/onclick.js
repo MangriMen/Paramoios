@@ -40,9 +40,9 @@ let characterSkills = document.getElementById('skills');
 
 let hpFillEl = document.getElementById('hp-bar-fill').classList;
 let hpWaveEl = document.getElementById('hp-liquid').classList;
-let equipment = document.getElementById('equipment');
+let equipment = document.getElementById('equipment-flexible');
 let equipmentBox = document.getElementById('equipment-box');
-let newItemDialog = document.getElementById('new-item-dialog');
+let addItemDialog = document.getElementById('add-item-dialog');
 let hpDialog = document.getElementById('hp-dialog');
 let deathSavesOverlay = document.getElementById('death-saves-overlay');
 let successMarks = [document.getElementById('success-mark-1'), document.getElementById('success-mark-2'), document.getElementById('success-mark-3')];
@@ -54,7 +54,9 @@ let maxHp = Number(oldHp[1]);
 
 let selectedImageForItem = null;
 let selectedItemInfo = null;
-let profinciesParent = null;
+let inventoryType = null;
+
+let proficienciesParent = null;
 let tempFlag = 0;
 let tempHp = 0;
 let bufferMaxHp = 0;
@@ -66,9 +68,13 @@ document.getElementById('cancel-hp').addEventListener('click', displayHpDialog);
 document.getElementById('damage').addEventListener('click', displayHpDialog);
 document.getElementById('temp').addEventListener('click', displayHpDialog);
 document.getElementById('heal').addEventListener('click', displayHpDialog);
-document.getElementById('new-item').addEventListener('click', displayNewItemDialog);
+
+document.getElementById('new-item').addEventListener('click', displayItemDialog);
+document.getElementById('new-feature').addEventListener('click', displayItemDialog);
+document.getElementById('new-proficiency').addEventListener('click', displayItemDialog);
 document.getElementById('cancel-item').addEventListener('click', addNewItemToInventory);
 document.getElementById('confirm-item').addEventListener('click', addNewItemToInventory);
+
 document.getElementById('death-saves-dice').addEventListener('click', rollDeathSave);
 document.getElementById('d20-dice').addEventListener('click', () => { let rolled = rollDice(20); rollAlert(rolled.value, `На D${rolled.type} выпало:`) });
 document.getElementById('d12-dice').addEventListener('click', () => { let rolled = rollDice(12); rollAlert(rolled.value, `На D${rolled.type} выпало:`) });
@@ -77,12 +83,14 @@ document.getElementById('d10-dice').addEventListener('click', () => { let rolled
 document.getElementById('d8-dice').addEventListener('click', () => { let rolled = rollDice(8); rollAlert(rolled.value, `На D${rolled.type} выпало:`) });
 document.getElementById('d6-dice').addEventListener('click', () => { let rolled = rollDice(6); rollAlert(rolled.value, `На D${rolled.type} выпало:`) });
 document.getElementById('d4-dice').addEventListener('click', () => { let rolled = rollDice(4); rollAlert(rolled.value, `На D${rolled.type} выпало:`) });
+
 document.getElementById('strength-death-save-checkbox').addEventListener('click', characteristicCheckBoxDropDown);
 document.getElementById('dexterity-death-save-checkbox').addEventListener('click', characteristicCheckBoxDropDown);
 document.getElementById('constitution-death-save-checkbox').addEventListener('click', characteristicCheckBoxDropDown);
 document.getElementById('intelligence-death-save-checkbox').addEventListener('click', characteristicCheckBoxDropDown);
 document.getElementById('wisdom-death-save-checkbox').addEventListener('click', characteristicCheckBoxDropDown);
 document.getElementById('charisma-death-save-checkbox').addEventListener('click', characteristicCheckBoxDropDown);
+
 document.getElementById('open-character').addEventListener('click', openCharacter);
 document.getElementById('save-character').addEventListener('click', saveAndDownloadCharacter);
 characterStats.querySelectorAll('div.characteristic').forEach(
@@ -391,14 +399,17 @@ function adjustLevel() {
   document.getElementById('level').textContent = level;
 }
 
-function displayNewItemDialog() {
-  if (getComputedStyle(newItemDialog).display == 'none') {
-    newItemDialog.style.display = 'block';
+function displayItemDialog() {
+  inventoryType = this.parentElement.id;
+
+  if (getComputedStyle(addItemDialog).display == 'none') {
+    document.getElementById(inventoryType).appendChild(addItemDialog);
+    addItemDialog.style.display = 'block';
   } else {
     return;
   }
-  document.getElementById('item-name').value = null;
-  let pts = "images/items/"
+  document.getElementById('addition-name').value = null;
+  let pts = "images/items/";
   let itemsImgSrcs = [pts + "axe.svg", pts + "rope.svg", pts + "shield.svg", pts + "sword.svg", pts + "traveler_pack.svg"];
   let imageSelect = document.getElementById('image-select');
   while (imageSelect.firstChild) {
@@ -420,17 +431,17 @@ function addNewItemToInventory() {
     newItem.src = selectedImageForItem.src;
     newItem.classList.add("item", "default-background", "border-style", "border-radius");
     newItem.addEventListener("click", openItemAdditionalInfo);
-    newItem.value = document.getElementById('item-name').value;
+    newItem.value = document.getElementById('addition-name').value;
     if (newItem.value == '') {
-      bAlert('Введите название предмета!');
+      bAlert('Введите название!');
       newItem.style.display = 'none';
       newItem = null;
       return;
     }
-    equipment.appendChild(newItem);
-    newItemDialog.style.display = 'none';
+    document.getElementById(inventoryType.replace('box', 'flexible')).appendChild(newItem);
+    addItemDialog.style.display = 'none';
   } else {
-    newItemDialog.style.display = 'none';
+    addItemDialog.style.display = 'none';
     return;
   }
 }
@@ -521,7 +532,7 @@ function toggleDiceList() {
   }
 }
 
-function characteristicProfinciesSelect(characteristic, proficient) {
+function characteristicproficienciesSelect(characteristic, proficient) {
   characteristic.classList.remove(characteristic.classList.item(0));
   characteristic.classList = defaultCharacteristicCheckboxClasses + ' characteristic-' + proficient.id;
 }
@@ -570,10 +581,10 @@ function characteristicCheckBoxDropDown() {
     expertiseBonus.textContent = '+4';
     expertise.appendChild(expertiseBonus);
 
-    notProficient.addEventListener('click', function () { characteristicProfinciesSelect(profinciesParent, this) });
-    halfProficient.addEventListener('click', function () { characteristicProfinciesSelect(profinciesParent, this) });
-    proficient.addEventListener('click', function () { characteristicProfinciesSelect(profinciesParent, this) });
-    expertise.addEventListener('click', function () { characteristicProfinciesSelect(profinciesParent, this) });
+    notProficient.addEventListener('click', function () { characteristicproficienciesSelect(proficienciesParent, this) });
+    halfProficient.addEventListener('click', function () { characteristicproficienciesSelect(proficienciesParent, this) });
+    proficient.addEventListener('click', function () { characteristicproficienciesSelect(proficienciesParent, this) });
+    expertise.addEventListener('click', function () { characteristicproficienciesSelect(proficienciesParent, this) });
 
     dropList.appendChild(notProficient);
     dropList.appendChild(halfProficient);
@@ -581,10 +592,10 @@ function characteristicCheckBoxDropDown() {
     dropList.appendChild(expertise);
 
     this.appendChild(dropList);
-    profinciesParent = this;
+    proficienciesParent = this;
   } else {
-    profinciesParent.removeChild(dropList);
-    if (profinciesParent != this) {
+    proficienciesParent.removeChild(dropList);
+    if (proficienciesParent != this) {
       this.dispatchEvent(new Event('click'));
     }
   }

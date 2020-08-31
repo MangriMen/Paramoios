@@ -315,15 +315,15 @@
                         </div>
                     </div>
                     <button type="button" name="Add new item to inventory" id="new-item" class="default-background border-style border-radius default-hover-active default-button default-shadow"><img class="new-item-img" src="images/icons/control_icon/new_item.svg" alt="New item cross"></button>
-                    <div id="equipment" class="default-background border-style border-radius default-shadow">
+                    <div id='equipment-flexible' class="default-textarea-scrollbar default-background border-style border-radius default-shadow">
                     </div>
-                    <div id="new-item-dialog" class="default-background border-style border-radius">
-                        <input type="tel" onKeyPress="if(this.value.length==32) return false;" id="item-name" class="border-style border-radius default-background default-hover-active default-button input-font-style">
-                        <div id="image-select"></div>
-                        <div class="dialog-buttons">
-                            <button id="cancel-item" name="Cancel creating item" class="border-style border-radius default-background default-hover-active default-button input-font-style">Отменить</button>
-                            <button id="confirm-item" name="Confirm creating item" class="border-style border-radius default-background default-hover-active default-button input-font-style">Принять</button>
-                        </div>
+                </div>
+                <div id="add-item-dialog" class="new-item-dialog default-background border-style border-radius">
+                    <input type="text" onKeyPress="if(this.value.length==32) return false;" id="addition-name" class="item-name border-style border-radius default-background default-hover-active default-button input-font-style">
+                    <div id="image-select" class='item-select'></div>
+                    <div class="dialog-buttons">
+                        <button id="cancel-item" name="Cancel creating item" class="choosing-state border-style border-radius default-background default-hover-active default-button input-font-style">Отменить</button>
+                        <button id="confirm-item" name="Confirm creating item" class="choosing-state border-style border-radius default-background default-hover-active default-button input-font-style">Принять</button>
                     </div>
                 </div>
             </div>
@@ -382,27 +382,40 @@
                 <div id="tibf">
                     <div id="traits-board" class="tibf-board">
                         <span id="traits-label" class="tibf-element-label border-style border-radius default-shadow default-background label-auto-width">Черты</span>
-                        <textarea cols="20" maxlenght="2048" wrap="hard" id="traits" class="tibf-element-area border-style border-radius default-shadow default-background input-font-style"></textarea>
+                        <textarea cols="20" maxlenght="2048" wrap="hard" id="traits" class="tibf-element-area default-textarea-scrollbar border-style border-radius default-shadow default-background input-font-style"></textarea>
                     </div>
                     <div id="ideals-board" class="tibf-board">
                         <span id="ideals-label" class="tibf-element-label border-style border-radius default-shadow default-background label-auto-width">Идеалы</span>
-                        <textarea cols="20" wrap="hard" id="ideals" class="tibf-element-area border-style border-radius default-shadow default-background input-font-style"></textarea>
+                        <textarea cols="20" wrap="hard" id="ideals" class="tibf-element-area default-textarea-scrollbar border-style border-radius default-shadow default-background input-font-style"></textarea>
                     </div>
                     <div id="bonds-board" class="tibf-board">
                         <span id="bonds-label" class="tibf-element-label border-style border-radius default-shadow default-background label-auto-width">Привязанности</span>
-                        <textarea cols="20" wrap="hard" id="bonds" class="tibf-element-area border-style border-radius default-shadow default-background input-font-style"></textarea>
+                        <textarea cols="20" wrap="hard" id="bonds" class="tibf-element-area default-textarea-scrollbar border-style border-radius default-shadow default-background input-font-style"></textarea>
                     </div>
                     <div id="flaws-board" class="tibf-board">
                         <span id="flaws-label" class="tibf-element-label border-style border-radius default-shadow default-background label-auto-width">Пороки</span>
-                        <textarea cols="20" wrap="hard" id="flaws" class="tibf-element-area border-style border-radius default-shadow default-background input-font-style"></textarea>
+                        <textarea cols="20" wrap="hard" id="flaws" class="tibf-element-area default-textarea-scrollbar border-style border-radius default-shadow default-background input-font-style"></textarea>
                     </div>
                 </div>
             </div>
-            <div id="features-and-traits" class="default-background border-style border-radius default-shadow">
-                <span id="other-profincies-and-languages-label" class="block-label default-background border-style border-radius default-shadow label-auto-width">Другие умения и языки</span>
+            <div id="other-proficiencies-and-languages" class="default-background border-style border-radius default-shadow">
+                <span id="other-proficiencies-and-languages-label" class="block-label default-background border-style border-radius default-shadow label-auto-width">Другие умения и языки</span>
+                <div id="other-proficiencies-and-languages-box">
+                    <div id='other-proficiencies-and-languages-flexible' class="default-textarea-scrollbar default-inner-shadow border-style border-radius default-shadow"></div>
+                    <button type="button" name="Add new proficiency or language to list" id="new-proficiency" class="default-background border-style border-radius default-hover-active default-button default-shadow"><img class="new-item-img" src="images/icons/control_icon/new_item.svg" alt="New feature cross"></button>
+                </div>
             </div>
-            <div id="other-profincies-and-languages" class="default-background border-style border-radius default-shadow">
+            <div id="features-and-traits" class="default-background border-style border-radius default-shadow">
                 <span id="features-and-traits-label" class="block-label default-background border-style border-radius default-shadow label-auto-width">Особенности и способности</span>
+                <div id="features-and-traits-box">
+                    <div id='features-fixed'>
+                        <div id='fundamental-feature-path' class='fundamental-features border-style border-radius default-inner-shadow'></div>
+                        <div id='fundamental-feature-1' class='fundamental-features border-style border-radius default-inner-shadow'></div>
+                        <div id='fundamental-feature-2' class='fundamental-features border-style border-radius default-inner-shadow'></div>
+                    </div>
+                    <div id='features-and-traits-flexible' class="default-textarea-scrollbar default-inner-shadow border-style border-radius default-shadow"></div>
+                    <button type="button" name="Add new feature to list" id="new-feature" class="default-background border-style border-radius default-hover-active default-button default-shadow"><img class="new-item-img" src="images/icons/control_icon/new_item.svg" alt="New feature cross"></button>
+                </div>
             </div>
         </section>
     </main>
