@@ -52,7 +52,7 @@ header {
 .default-inner-shadow {
   box-shadow: 0 0 10px 0 rgba(99,99,99,0.75);
 }
-#new-item-dialog {
+.new-item-dialog {
   box-shadow: 0 0 20px 2px black;
 }
 .image-selected {
@@ -108,15 +108,15 @@ header {
   outline: 3px solid #cf3a42;
   outline-offset: -0.12em;
 }
-.tibf-element-area, #equipment {
+.default-textarea-scrollbar {
   scrollbar-width: thin;
   scrollbar-color: #82262b transparent;
   scrollbar-highlight-color: #9c2d33;
 }
-.tibf-element-area::-webkit-scrollbar-thumb, #equipment::-webkit-scrollbar-thumb {
+.default-textarea-scrollbar::-webkit-scrollbar-thumb {
   background-color: #82262b;
 }
-.tibf-element-area::-webkit-scrollbar-thumb:active, #equimpment::-webkit-scrollbar-thumb:active {
+.default-textarea-scrollbar::-webkit-scrollbar-thumb:active {
   background-color:#9c2d33;
 }
 .characteristic-not-proficient {
