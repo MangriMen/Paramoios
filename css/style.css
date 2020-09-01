@@ -51,7 +51,7 @@ main {
   width: 4.8rem;
   border-radius: 6px 6px 0 0;
 }
-#xp-bar {
+#xp-bar1 {
   height: 20px;
   line-height: 20px;
   text-align: center;
@@ -96,7 +96,7 @@ main {
   border-radius: 3px;
   padding: 2px 4px;
 }
-#level:hover #xp-next-level {
+#level1:hover #xp-next-level {
   display: block;
 }
 #level-text {
@@ -341,7 +341,7 @@ main {
   position: relative;
   justify-content: center;
 }
-#hp-bar {
+#hp-bar1 {
   width: 11.5rem;
   height: 25px;
   text-align: center;

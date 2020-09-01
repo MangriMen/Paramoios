@@ -123,11 +123,11 @@ input[type=number] {
 .bar-text:focus {
   outline: 2px solid #cf3a42;
 }
-#character-name {
+.character-name {
   background: none;
   border: none;
 }
-#character-name:focus {
+.character-name:focus {
   outline: 3px solid #cf3a42;
   outline-offset: -0.12em;
 }
