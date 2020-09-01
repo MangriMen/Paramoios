@@ -48,6 +48,9 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     if (localStorage.loggedUser) {
         user = JSON.parse(localStorage[localStorage.loggedUser]);
+        user.character1.json = JSON.parse(user.character1.json);
+        user.character2.json = JSON.parse(user.character2.json);
+        user.character3.json = JSON.parse(user.character3.json);
 
         img.src = user.avatar;
         if (window.location.pathname == '/user.html') {
@@ -94,6 +97,18 @@ async function getLogged() {
         } else {
             localStorage.removeItem('loggedUser');
         }
+    } else {
+        alert("Ошибка загрузки пользователя, код ошибки HTTP: " + request.status);
+    }
+}
+
+async function fetchUser() {
+    const request = await fetch('../fetch.php', {
+        method: 'POST',
+        body: 'fetch-user'
+    });
+
+    if (request.ok) {
     } else {
         alert("Ошибка загрузки пользователя, код ошибки HTTP: " + request.status);
     }

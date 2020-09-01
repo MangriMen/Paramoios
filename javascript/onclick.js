@@ -3,29 +3,6 @@
 let language = 'ru';
 let selectedVocabulary = null;
 
-const levelDependenceTable = {
-  1: 0,
-  2: 300,
-  3: 900,
-  4: 2700,
-  5: 6500,
-  6: 14000,
-  7: 23000,
-  8: 34000,
-  9: 48000,
-  10: 64000,
-  11: 85000,
-  12: 100000,
-  13: 120000,
-  14: 140000,
-  15: 165000,
-  16: 195000,
-  17: 225000,
-  18: 265000,
-  19: 305000,
-  20: 355000
-}
-
 let character = null;
 let characterInput = document.getElementById('character-input')
 
@@ -52,7 +29,7 @@ let selectedItemInfo = null;
 let profinciesParent = null;
 let defaultCharacteristicCheckboxClasses = 'characteristic-death-save-checkbox border-style';
 
-let hpFillEl = document.getElementById('hp-bar-fill').classList;
+let hpFillEl = document.getElementById('hp-bar-fill1').classList;
 let hpWaveEl = document.getElementById('hp-liquid').classList;
 let oldHp = (document.getElementById('hp').textContent).split('/');
 let currentHp = Number(oldHp[0]);
@@ -116,19 +93,6 @@ let y = 0;
 document.getElementById('main-dice').addEventListener('click', toggleDiceList);
 let mainDiceImg = document.getElementById('main-dice-img');
 let xpField = document.getElementById('xp');
-let numberFields = document.getElementsByClassName('number-input');
-for (let item of numberFields) {
-  item.addEventListener('keydown', numberCheck);
-}
-let textsAutoWidth = document.getElementsByClassName('text-auto-width');
-for (let item of textsAutoWidth) {
-  item.addEventListener('keydown', autoWidth);
-  item.dispatchEvent(new Event('keydown'));
-}
-let labelsAutoWidth = document.getElementsByClassName('label-auto-width');
-for (let item of labelsAutoWidth) {
-  labelAutoWidth(item);
-}
 
 let beautifulAlertContainer = document.createElement('div');
 beautifulAlertContainer.id = 'beautiful-container';
@@ -243,6 +207,7 @@ function changeHp() {
       bufferHp = newHp;
     }
     tempHpColorChange();
+    hpDialog.style.display = 'none';
   } else {
     offsetHp = !isHealed ? -offsetHp : offsetHp;
     newHp = currentHp + offsetHp;
@@ -358,32 +323,6 @@ function rollDeathSaveClear(isTwenty = false) {
   deathSavesOverlay.style.display = 'none';
 }
 
-function onloadBarWidth(spanId) {
-  let actualValue = 0;
-  let maxValue = 0;
-  if (spanId == 'hp') {
-    let value = (document.getElementById('hp').textContent).split('/');
-    actualValue = Number(value[0]);
-    maxValue = Number(value[1]);
-  }
-  if (spanId == 'xp') {
-    actualValue = Number(document.getElementById('xp').value);
-    let nextLevel = Number(document.getElementById('level').textContent);
-    let minValue = levelDependenceTable[nextLevel < Object.keys(levelDependenceTable).length ? nextLevel : 20];
-    maxValue = levelDependenceTable[nextLevel + 1 < Object.keys(levelDependenceTable).length ? nextLevel + 1 : 20];
-    actualValue -= minValue;
-    maxValue -= minValue;
-  }
-
-  changeBarWidth(actualValue, maxValue, spanId);
-}
-
-function changeBarWidth(newValue, maxValue, spanId) {
-  let maxWidth = document.getElementById(spanId + '-bar').offsetWidth;
-  let newWidth = (newValue / maxValue) * maxWidth;
-  document.getElementById(spanId + '-bar-fill').style.width = !newWidth ? 0 : (newWidth - 6) + 'px';
-}
-
 let timerXp = null;
 xpField.onkeydown = function () {
   clearTimeout(timerXp);
@@ -391,36 +330,6 @@ xpField.onkeydown = function () {
     adjustLevel();
     onloadBarWidth('xp');
   }, 500);
-}
-
-let timerNumberFields = null;
-function numberCheck() {
-  let el = this;
-  clearTimeout(timerNumberFields);
-  timerNumberFields = setTimeout(function () {
-    if (el.value == '') {
-      el.value = '0';
-    }
-  }, 500);
-}
-
-function autoWidth() {
-  let fontSize = parseInt(getComputedStyle(this).fontSize) / 2;
-  this.style.width = ((this.value.length + 2) * fontSize + 'px');
-}
-
-function labelAutoWidth(element) {
-  let fontSize = parseInt(getComputedStyle(element).fontSize) / 2;
-  element.style.width = ((element.textContent.length + 1) * fontSize + 'px');
-}
-
-function adjustLevel() {
-  let level = 0;
-  let xp = Number(document.getElementById('xp').value);
-  while ((level < Object.keys(levelDependenceTable).length) && (xp >= levelDependenceTable[level + 1])) {
-    level += 1;
-  }
-  document.getElementById('level').textContent = level;
 }
 
 function displayNewItemDialog() {
