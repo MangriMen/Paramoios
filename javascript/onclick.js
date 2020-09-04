@@ -27,7 +27,7 @@ let failuresMarks = [document.getElementById('fail-mark-1'), document.getElement
 
 let selectedImageForItem = null;
 let selectedItemInfo = null;
-let profinciesParent = null;
+let proficienciesParent = null;
 let defaultCharacteristicCheckboxClasses = 'characteristic-death-save-checkbox border-style';
 
 let oldHp = (document.getElementById('hp1').textContent).split('/');
