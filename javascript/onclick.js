@@ -98,11 +98,6 @@ document.getElementById('main-dice').addEventListener('click', toggleDiceList);
 let mainDiceImg = document.getElementById('main-dice-img');
 let xpField = document.getElementById('xp');
 
-let beautifulAlertContainer = document.createElement('div');
-beautifulAlertContainer.id = 'beautiful-container';
-document.body.appendChild(beautifulAlertContainer);
-let beautifulAlertList = [];
-
 let rollAlertContainer = document.createElement('div');
 rollAlertContainer.id = 'roll-alert';
 document.body.appendChild(rollAlertContainer);
@@ -134,29 +129,6 @@ function rollAlertErase() {
   tempRollMsg.classList.add('roll-alert-erase-translate');
 
   setTimeout(function () { rollAlertContainer.removeChild(rollAlertContainer.firstChild); }, 1000);
-}
-
-function createBAlert(text, delay) {
-  let beautifulAlert = document.createElement('span');
-  beautifulAlert.classList.add('beautiful-alert');
-  beautifulAlert.textContent = text;
-  beautifulAlert.dataset.delay = delay;
-  beautifulAlertList.push(beautifulAlert);
-  return beautifulAlert;
-}
-
-function bAlert(text, delay = 3000) {
-  beautifulAlertContainer.appendChild(createBAlert(text, delay));
-  if (beautifulAlertContainer.childElementCount > 1) { return; }
-  let beautifulTimer = setTimeout(function bAlertHide() {
-    if (beautifulAlertContainer.childElementCount == 0) {
-      return;
-    } else {
-      setTimeout(function () { beautifulAlertContainer.removeChild(beautifulAlertContainer.lastChild) }, 1000);
-      beautifulAlertContainer.lastChild.classList.add('beautiful-alert-erase-translate');
-      beautifulTimer = setTimeout(bAlertHide, beautifulAlertContainer.lastChild.dataset.delay);
-    }
-  }, delay);
 }
 
 function displayHpDialog() {

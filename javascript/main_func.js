@@ -138,3 +138,31 @@ function numberCheck() {
         }
     }, 500);
 }
+
+let beautifulAlertContainer = document.createElement('div');
+beautifulAlertContainer.id = 'beautiful-container';
+document.body.appendChild(beautifulAlertContainer);
+let beautifulAlertList = [];
+
+function createBAlert(text, delay) {
+    let beautifulAlert = document.createElement('span');
+    beautifulAlert.classList.add('beautiful-alert');
+    beautifulAlert.textContent = text;
+    beautifulAlert.dataset.delay = delay;
+    beautifulAlertList.push(beautifulAlert);
+    return beautifulAlert;
+}
+
+function bAlert(text, delay = 3000) {
+    beautifulAlertContainer.appendChild(createBAlert(text, delay));
+    if (beautifulAlertContainer.childElementCount > 1) { return; }
+    let beautifulTimer = setTimeout(function bAlertHide() {
+        if (beautifulAlertContainer.childElementCount == 0) {
+            return;
+        } else {
+            setTimeout(function () { beautifulAlertContainer.removeChild(beautifulAlertContainer.lastChild) }, 1000);
+            beautifulAlertContainer.lastChild.classList.add('beautiful-alert-erase-translate');
+            beautifulTimer = setTimeout(bAlertHide, beautifulAlertContainer.lastChild.dataset.delay);
+        }
+    }, delay);
+}

@@ -30,7 +30,12 @@ function selectPage() {
     })
 }
 
-loadCharacters();
+document.addEventListener("DOMContentLoaded", function () {
+    setTimeout(async function () {
+        await loadCharacters();
+        document.getElementById('characters-loading-overlay').style.display = 'none';
+    }, 100)
+});
 
 async function loadCharacters() {
     await fetchUser();

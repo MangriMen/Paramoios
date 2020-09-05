@@ -48,9 +48,9 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     if (localStorage.loggedUser) {
         user = JSON.parse(localStorage[localStorage.loggedUser]);
-        user.character1.json = JSON.parse(user.character1.json);
-        user.character2.json = JSON.parse(user.character2.json);
-        user.character3.json = JSON.parse(user.character3.json);
+        user.character1.json ? user.character1.json = JSON.parse(user.character1.json) : null;
+        user.character2.json ? user.character2.json = JSON.parse(user.character2.json) : null;
+        user.character3.json ? user.character3.json = JSON.parse(user.character3.json) : null;
 
         img.src = user.avatar;
         if (window.location.pathname == '/user.html') {

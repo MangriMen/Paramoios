@@ -264,6 +264,7 @@ nav {
   grid-template-columns: auto;
   grid-template-rows: auto auto auto;
   row-gap: 1rem;
+  position: relative;
 }
 .character-box {
   display: grid;
@@ -466,4 +467,47 @@ nav {
   border-top: none;
   box-sizing: border-box;
   font-size: 0.9rem;
+}
+.loading-overlay {
+  position: absolute;
+  width: 100%;
+  height: 34.1rem;
+  z-index: 100;
+}
+.loading-animation {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  background-color: #681e22;
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50% 0;
+  z-index: 101;
+  animation: round 8s linear infinite;
+}
+.loading-animation-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: white;
+  border-radius: 0 50%;
+  animation: roundReverse 4s linear infinite;
+}
+@keyframes round {
+  100% {
+     transform: rotate(360deg);
+  }
+}
+@keyframes roundReverse {
+  100% {
+     transform: rotate(-360deg);
+  }
 }
