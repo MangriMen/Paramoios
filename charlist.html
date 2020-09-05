@@ -26,7 +26,7 @@
     <title>DnD5CharlistI</title>
 </head>
 
-<body onload="adjustLevel(); onloadBarWidth('xp'); onloadBarWidth('hp'); beautifyText();">
+<body onload="adjustLevel(); adjustBarWidth(); beautifyText();">
     <header>
         <div id="header-center">
             <a id="header-title" href="index.html">DnD5CharlistI</a>
@@ -46,16 +46,16 @@
         <section id="naming">
             <div id="profile-and-level">
                 <img id="avatar" alt="User avatar" class="border-style border-radius" src="images/buttons/profile/profile.jpg">
-                <div id="xp-bar1" class="border-style border-radius default-background">
+                <div id="xp-bar" class="border-style border-radius default-background">
                     <div class="bar-animation">
-                        <div id="xp-bar-fill1" class="bar-fill xp-color">
+                        <div id="xp-bar-fill" class="bar-fill xp-color">
                             <div class="wave-main wave-level xp-color"></div>
                         </div>
                     </div>
                     <input type="number" id="xp" onKeyPress="adjustLevel();" class="xp border-style input-font-style bar-text" value="640">
                 </div>
                 <div id="level-text" class="border-style border-radius default-background">
-                    <span>Уровень <span id="level1"></span></span>
+                    <span>Уровень <span id="level"></span></span>
                 </div>
             </div>
             <div id="naming-text">
@@ -333,13 +333,13 @@
             </div>
             <div id="central-3">
                 <div id="health">
-                    <div id="hp-bar1" class="border-style border-radius default-background default-shadow">
+                    <div id="hp-bar" class="border-style border-radius default-background default-shadow">
                         <div class="bar-animation">
-                            <div id="hp-bar-fill1" class="bar-fill hp-color">
+                            <div id="hp-bar-fill" class="bar-fill hp-color">
                                 <div id="hp-liquid" class="wave-main wave-hp hp-color"></div>
                             </div>
                         </div>
-                        <span id="hp1" class="hp bar-text">2/10</span>
+                        <span id="hp" class="hp bar-text">2/10</span>
                         <div id="hp-dialog" class="default-background border-style border-radius">
                             <span id="hp-header"></span>
                             <input type="number" onKeyPress="if(this.value.length==6) return false;" id="hp-value" class="border-style border-radius default-background default-hover-active default-button input-font-style">

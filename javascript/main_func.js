@@ -37,48 +37,81 @@ const levelDependenceTable = {
     20: 355000
 }
 
-function adjustLevel() {
-    let i = 1;
-    Array.from(document.getElementsByClassName('xp')).forEach(element => {
-        let level = 0;
-        let xp = Number(element.value);
-        while ((level < Object.keys(levelDependenceTable).length) && (xp >= levelDependenceTable[level + 1])) {
-            level += 1;
-        }
-        document.getElementById('level' + i).textContent = level;
-        i++;
-    });
+/**
+ * @param {Number} xp The pure number
+ */
 
+function getLevelFromXp(xp) {
+    let newLevel = 0;
+    while ((newLevel < Object.keys(levelDependenceTable).length) && (xp >= levelDependenceTable[newLevel + 1])) {
+        newLevel += 1;
+    }
+    return newLevel;
 }
 
-function onloadBarWidth(spanId) {
+function adjustLevelProto(xp, level) {
+    xp = Number(xp.value);
+    level.textContent = getLevelFromXp(xp);
+}
+
+function adjustLevel() {
+    adjustLevelProto(document.getElementById('xp'), document.getElementById('level'));
+}
+
+function adjustAllLevels() {
+    for (character in charactersList) {
+        adjustLevelProto(charactersList[character].xp, charactersList[character].level);
+    }
+}
+
+/**
+ * @param {Element} hp The hp text
+ * @param {Element} hpBar The hp bar object
+ * @param {Element} hpBarFill The hp bar fill object
+ * @param {Element} xp The xp text
+ * @param {Element} xpBar The xp bar object
+ * @param {Element} xpBarFill The xp bar fill object
+ * @param {String} barType The type of bar to adjust
+ */
+
+function adjustBarWidthProto(value, bar, barFill, barType) {
     let actualValue = 0;
     let maxValue = 0;
-    if (spanId == 'hp') {
-        let i = 1;
-        Array.from(document.getElementsByClassName('hp')).forEach(element => {
-            let value = (element.textContent).split('/');
-            actualValue = Number(value[0]);
-            maxValue = Number(value[1]);
-            changeBarWidth(actualValue, maxValue, spanId, i);
-            i++;
-        });
+    if (barType == 'hp') {
+        let hp = (value.textContent).split('/');
+        actualValue = Number(hp[0]);
+        maxValue = Number(hp[1]);
+    } else if (barType == 'xp') {
+        actualValue = Number(value.value);
+        let actualLevel = getLevelFromXp(actualValue);
+        let xpMinValue = levelDependenceTable[actualLevel < Object.keys(levelDependenceTable).length ? actualLevel : 20];
+        maxValue = levelDependenceTable[actualLevel + 1 < Object.keys(levelDependenceTable).length ? actualLevel + 1 : 20];
+        actualValue -= xpMinValue;
+        maxValue -= xpMinValue;
     }
-    if (spanId == 'xp') {
-        let i = 1;
-        Array.from(document.getElementsByClassName('xp')).forEach(element => {
-            actualValue = Number(element.value);
-            let nextLevel = Number(document.getElementById('level' + i).textContent);
-            let minValue = levelDependenceTable[nextLevel < Object.keys(levelDependenceTable).length ? nextLevel : 20];
-            maxValue = levelDependenceTable[nextLevel + 1 < Object.keys(levelDependenceTable).length ? nextLevel + 1 : 20];
-            actualValue -= minValue;
-            maxValue -= minValue;
-            changeBarWidth(actualValue, maxValue, spanId, i);
-            i++;
-        });
-    }
-
+    changeBarWidth(actualValue, maxValue, bar, barFill);
 }
+
+function adjustBarWidth() {
+    adjustBarWidthProto(document.getElementById('hp'),
+        document.getElementById('hp-bar'),
+        document.getElementById('hp-bar-fill'), 'hp');
+    adjustBarWidthProto(document.getElementById('xp'),
+        document.getElementById('xp-bar'),
+        document.getElementById('xp-bar-fill'), 'xp');
+}
+
+function adjustAllBarWidth() {
+    for (character in charactersList) {
+        adjustBarWidthProto(charactersList[character].hp,
+            charactersList[character].hpBar,
+            charactersList[character].hpBarFill, 'hp');
+        adjustBarWidthProto(charactersList[character].xp,
+            charactersList[character].xpBar,
+            charactersList[character].xpBarFill, 'xp');
+    }
+}
+
 function autoWidth() {
     let fontSize = parseInt(getComputedStyle(this).fontSize) / 2;
     this.style.width = ((this.value.length + 2) * fontSize + 'px');
@@ -89,10 +122,10 @@ function labelAutoWidth(element) {
     element.style.width = ((element.textContent.length + 1) * fontSize + 'px');
 }
 
-function changeBarWidth(newValue, maxValue, spanId, i = 1) {
-    let maxWidth = document.getElementById(spanId + '-bar' + i).offsetWidth;
+function changeBarWidth(newValue, maxValue, bar, barFill) {
+    let maxWidth = bar.offsetWidth;
     let newWidth = (newValue / maxValue) * maxWidth;
-    document.getElementById(spanId + '-bar-fill' + i).style.width = !newWidth ? 0 : (newWidth - 6) + 'px';
+    barFill.style.width = !newWidth ? 0 : (newWidth - 6) + 'px';
 }
 
 let timerNumberFields = null;

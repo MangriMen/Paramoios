@@ -15,7 +15,7 @@ let characterBackground = document.getElementById('character-background');
 let characterStats = document.getElementById('character-stats');
 let characterSkills = document.getElementById('skills');
 
-let hpFillEl = document.getElementById('hp-bar-fill1').classList;
+let hpFillEl = document.getElementById('hp-bar-fill').classList;
 let hpWaveEl = document.getElementById('hp-liquid').classList;
 let equipmentBox = document.getElementById('equipment-box');
 let addItemDialog = document.getElementById('add-item-dialog');
@@ -30,7 +30,7 @@ let selectedItemInfo = null;
 let proficienciesParent = null;
 let defaultCharacteristicCheckboxClasses = 'characteristic-death-save-checkbox border-style';
 
-let oldHp = (document.getElementById('hp1').textContent).split('/');
+let oldHp = (document.getElementById('hp').textContent).split('/');
 let currentHp = Number(oldHp[0]);
 let maxHp = Number(oldHp[1]);
 let isHealed = false;

@@ -169,7 +169,7 @@ nav {
 }
 #content-page {
   max-width: 920px;
-  height: 40rem;
+  height: 36.3rem;
   padding: 1rem;
   box-sizing: border-box;
 }
@@ -276,6 +276,15 @@ nav {
   padding: 0.4rem;
   box-sizing: border-box;
   border-radius: 6px;
+  text-align:center;
+}
+.new-character-title {
+  align-self: center;
+  grid-column-start: 1;
+  grid-column-end: 4;
+  grid-row-start: 1;
+  grid-row-end: 4;
+  font-size: 4rem;
 }
 .avatar {
   grid-column: 1;
@@ -289,6 +298,7 @@ nav {
   position: relative;
   flex-direction: column;
   align-items: flex-end;
+  min-width: 408px;
 }
 .profile-and-level {
   display: flex;

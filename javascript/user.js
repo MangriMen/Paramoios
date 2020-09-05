@@ -1,5 +1,7 @@
 'use strict'
 
+let charactersList = {};
+
 var observer = new MutationObserver(function (mutations) {
     mutations.forEach(function () {
         document.getElementById('avatar-img').src = document.getElementById('user-btn-img').src;
@@ -42,7 +44,9 @@ async function loadCharacters() {
     for (let i = 1; i <= 3; i++) {
         if (user['character' + i].json) {
             let characterBoxDefault = document.createElement('button');
+            characterBoxDefault.dataset.characterNumber = i;
             characterBoxDefault.classList = 'character-box default-background default-hover-active default-button border-style input-font-style';
+            characterBoxDefault.addEventListener('click', loadCharacterFromProfile);
 
             let avatar = document.createElement('img');
             avatar.alt = 'User avatar';
@@ -53,14 +57,12 @@ async function loadCharacters() {
             profileAndLevel.classList = 'profile-and-level';
 
             let hpBar = document.createElement('div');
-            hpBar.id = 'hp-bar' + i;
             hpBar.classList = 'hp-bar border-style border-radius default-background default-shadow';
 
             let hpBarAnimation = document.createElement('div');
             hpBarAnimation.classList = 'bar-animation';
 
             let hpBarFill = document.createElement('div');
-            hpBarFill.id = 'hp-bar-fill' + i;
             hpBarFill.classList = 'bar-fill hp-color';
 
             let hpLiquid = document.createElement('div');
@@ -77,14 +79,12 @@ async function loadCharacters() {
             hpBar.appendChild(hp);
 
             let xpBar = document.createElement('div');
-            xpBar.id = 'xp-bar' + i;
             xpBar.classList = 'xp-bar border-style border-radius default-background default-shadow';
 
             let xpBarAnimation = document.createElement('div');
             xpBarAnimation.classList = 'bar-animation';
 
             let xpBarFill = document.createElement('div');
-            xpBarFill.id = 'xp-bar-fill' + i;
             xpBarFill.classList = 'bar-fill xp-color';
 
             let xpLiquid = document.createElement('div');
@@ -109,7 +109,6 @@ async function loadCharacters() {
             levelLabel.textContent = 'Уровень ';
 
             let level = document.createElement('span');
-            level.id = 'level' + i;
             level.value = user['character' + i].json.level;
 
             levelLabel.appendChild(level);
@@ -398,10 +397,40 @@ async function loadCharacters() {
             characterBoxDefault.appendChild(characterStats);
 
             document.getElementById('characters-page').appendChild(characterBoxDefault);
+
+            charactersList['character' + i] = {
+                "hp": hp,
+                "hpBar": hpBar,
+                "hpBarFill": hpBarFill,
+                "xp": xp,
+                "xpBar": xpBar,
+                "xpBarFill": xpBarFill,
+                "level": level,
+            };
+        } else {
+            let characterBoxDefault = document.createElement('button');
+            characterBoxDefault.classList = 'character-box default-background default-hover-active default-button border-style input-font-style';
+            characterBoxDefault.dataset.characterNumber = i;
+            characterBoxDefault.addEventListener('click', newCharacter);
+
+            let newCharacterTitle = document.createElement('span');
+            newCharacterTitle.classList = 'new-character-title gray-text';
+            newCharacterTitle.textContent = 'Новый персонаж';
+
+            characterBoxDefault.appendChild(newCharacterTitle);
+
+            document.getElementById('characters-page').appendChild(characterBoxDefault);
         }
     }
-    adjustLevel();
-    onloadBarWidth('xp');
-    onloadBarWidth('hp');
+    adjustAllLevels();
+    adjustAllBarWidth();
     beautifyText();
+}
+
+function newCharacter() {
+    alert("Новый персонаж redirect");
+}
+
+function loadCharacterFromProfile() {
+    alert("Загрузить персонажа redirect");
 }
