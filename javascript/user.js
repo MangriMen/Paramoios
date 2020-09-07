@@ -5,6 +5,10 @@ let charactersList = {};
 var observer = new MutationObserver(function (mutations) {
     mutations.forEach(function () {
         document.getElementById('avatar-img').src = document.getElementById('user-btn-img').src;
+        setTimeout(async function () {
+            await loadCharacters();
+            document.getElementById('characters-loading-overlay').style.display = 'none';
+        }, 0)
     });
 });
 var config = { attributes: true, childList: false, characterData: false };
@@ -30,13 +34,6 @@ function selectPage() {
     })
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-    setTimeout(async function () {
-        await loadCharacters();
-        document.getElementById('characters-loading-overlay').style.display = 'none';
-    }, 100)
-});
-
 async function loadCharacters() {
     await fetchUser();
     await getLogged();
@@ -56,7 +53,7 @@ async function loadCharacters() {
             let avatar = document.createElement('img');
             avatar.alt = 'User avatar';
             avatar.classList = 'avatar border-style border-radius';
-            avatar.src = 'images/buttons/profile/profile.jpg';
+            avatar.src = 'images/buttons/profile/profile_placeholder.png';
 
             let profileAndLevel = document.createElement('div');
             profileAndLevel.classList = 'profile-and-level';
