@@ -7,9 +7,6 @@ main {
   max-width: 960px;
   margin: 0.25em auto;
 }
-.border-radius {
-  border-radius: 3px;
-}
 #header-center {
   max-width: 960px;
   height: 1.6rem;
@@ -443,7 +440,7 @@ nav {
   grid-row-end: 3;
   height: 2rem;
   box-sizing: border-box;
-  border-radius: 3px 0 0 3px;
+  border-radius: 6px 0 0 6px;
   text-align: center;
   line-height: 1.8rem;
 }
@@ -454,7 +451,7 @@ nav {
   height: 1rem;
   line-height: 0.8rem;
   border-left: none;
-  border-radius: 0 3px 0 0;
+  border-radius: 0 6px 0 0;
   box-sizing: border-box;
   font-size: 0.9rem;
 }
@@ -463,7 +460,7 @@ nav {
   grid-row: 2;
   height: 1rem;
   border-left: none;
-  border-radius: 0 0 3px 0;
+  border-radius: 0 0 6px 0;
   border-top: none;
   box-sizing: border-box;
   font-size: 0.9rem;

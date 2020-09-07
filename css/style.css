@@ -7,9 +7,6 @@ main {
   max-width: 960px;
   margin: 0.25em auto;
 }
-.border-radius {
-  border-radius: 3px;
-}
 #header-center {
   max-width: 960px;
   height: 1.6rem;
@@ -160,7 +157,7 @@ main {
   font-size: 2rem;
   width: 60px;
   height: 40px;
-  border-radius: 3px 0 0 3px;
+  border-radius: 6px 0 0 6px;
   grid-column: 1;
   grid-row-start: 2;
   grid-row-end: 4;
@@ -173,7 +170,7 @@ main {
   height: 20px;
   border-left: none;
   border-bottom: none;
-  border-radius: 0 3px 0 0;
+  border-radius: 0 6px 0 0;
 }
 .characteristic-death-save {
   grid-column: 2;
@@ -200,7 +197,7 @@ main {
  {
   content: ''; /* Добавляем пустое содержание для тени */
   display: block; /* Блочный элемент */
-  border-radius: 3px;
+  border-radius: 6px;
   position: absolute; /* Абсолютное позиционирование */
   top: -1px; bottom: 0;
   left: -1px; right: -1px; /* Тень чуть больше ширины и высоты заголовка */
