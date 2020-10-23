@@ -28,7 +28,7 @@ userSettings.appendChild(userSettingsImg);
 let login = document.createElement('a');
 login.id = 'link-login';
 login.classList = 'user-menu-buttons-down input-font-style default-background border-style';
-login.href = 'form_auth.php';
+login.href = 'login.php';
 let loginImg = document.createElement('img');
 loginImg.src = 'images/buttons/profile/login.svg';
 loginImg.classList = 'link-auth-img user-menu-buttons-down-img';

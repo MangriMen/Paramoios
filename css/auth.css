@@ -23,8 +23,33 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  /* justify-content: center; */
 }
+#welcome {
+  text-align: center;
+  font-size: 6rem;
+  word-wrap: break-word;
+  margin: 2rem 0;
+  transition: 0.5s ease-out;
+}
+.welcome-reg {
+  font-size: 4rem !important;
+  margin: 1rem !important;
+}
+.auth-title {
+  margin-bottom: 0;
+}
+.or {
+  cursor: pointer;
+  width: 11.5rem;
+  margin: auto;
+  margin-bottom: 2rem;
+  color: #e9c996;
+}
+.or:hover {
+  color: #ffdca3;
+}
+
 #form_auth, #form_register {
   font-size: 2rem;
   text-align: center;
