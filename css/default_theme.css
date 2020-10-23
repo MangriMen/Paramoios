@@ -16,6 +16,9 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+select {
+  outline: none;
+}
 .default-button {
   text-align: center;
   outline: none;
