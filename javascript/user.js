@@ -42,6 +42,7 @@ async function loadCharacters() {
     user.character1.json ? user.character1.json = JSON.parse(user.character1.json) : null;
     user.character2.json ? user.character2.json = JSON.parse(user.character2.json) : null;
     user.character3.json ? user.character3.json = JSON.parse(user.character3.json) : null;
+    user.defaultCharacter ? user.defaultCharacter = JSON.parse(user.defaultCharacter) : null;
 
     for (let i = 1; i <= 3; i++) {
         if (user['character' + i].json) {
@@ -430,7 +431,10 @@ async function loadCharacters() {
 }
 
 function newCharacter() {
-    alert("Новый персонаж redirect");
+    choosedCharacter = user["character" + this.dataset.characterNumber];
+    choosedCharacter.json = user.defaultCharacter;
+
+    document.location.href = "builder.html";
 }
 
 function loadCharacterFromProfile() {

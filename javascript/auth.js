@@ -1,5 +1,4 @@
 'use strict'
-let user = null;
 
 document.getElementById('user-btn').addEventListener('click', function (e) { toggleUserMenu(e); });
 
@@ -51,6 +50,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         user.character1.json ? user.character1.json = JSON.parse(user.character1.json) : null;
         user.character2.json ? user.character2.json = JSON.parse(user.character2.json) : null;
         user.character3.json ? user.character3.json = JSON.parse(user.character3.json) : null;
+        user.defaultCharacter = JSON.parse(user.defaultCharacter);
 
         img.src = user.avatar;
         if (window.location.pathname == '/user.html') {

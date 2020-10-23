@@ -529,6 +529,7 @@ function loadCharacterJSON() {
 
   input = characterInput;
 
+  console.log(input.files[0]);
   if (!input) {
     alert("Um, couldn't find the fileinput element.");
   }
