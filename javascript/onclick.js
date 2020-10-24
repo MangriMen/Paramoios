@@ -1,7 +1,7 @@
 'use strict'
 
-let language = 'ru';
-let selectedVocabulary = null;
+// let language = 'ru';
+// let selectedVocabulary = null;
 
 let character = null;
 let characterInput = document.getElementById('character-input')
@@ -552,97 +552,6 @@ function loadCharacterJSON() {
   }
 }
 
-let russianVocabulary = {
-  "Alignment": "Мировоззрение",
-  "Lawful Good": "Законопослушный Добрый",
-  "Lawful Neutral": "Законопослушный Нейтральный",
-  "Lawful Evil": "Законопослушный Злой",
-  "Neutral Good": "Нейтральный Добрый",
-  "True Neutral": "Истинно Нейтральный",
-  "Neutral Evil": "Нейтральный Злой",
-  "Chaotic Good": "Хаотичный Добрый",
-  "Chaotic Neutral": "Хаточино Нейтральный",
-  "Chaotic Evil": "Хаотично Злой",
-  "Class": "Класс",
-  "Barbarian": "Варвар",
-  "Bard": "Бард",
-  "Cleric": "Жрец",
-  "Druid": "Друид",
-  "Fighter": "Воин",
-  "Monk": "Монах",
-  "Paladin": "Паладин",
-  "Ranger": "Следопыт",
-  "Rogue": "Плут",
-  "Sorcerer": "Чародей",
-  "Warlock": "Колдун",
-  "Wizard": "Волшебник",
-  "Race": "Раса",
-  "Dwarf": "Дварф",
-  "Elf": "Эльф",
-  "Hafling": "Полурослик",
-  "Human": "Человек",
-  "Dragonborn": "Драконорожденный",
-  "Gnome": "Гном",
-  "Half-Elf": "Полуэльф",
-  "Half-Orc": "Полуорк",
-  "Tiefling": "Тифлинг",
-  "Background": "Предыстория",
-  "Acolyte": "Прислужник",
-  "Charlatan": "Шарлатан",
-  "Criminal": "Преступник",
-  "Entertainer": "Артист",
-  "Folk Hero": "Народный Герой",
-  "Guild Artisan": "Гилдейский Ремесленник",
-  "Hermit": "Отшельник",
-  "Noble": "Благородный",
-  "Outlander": "Чужеземец",
-  "Sage": "Мудрец",
-  "Sailor": "Моряк",
-  "Soldier": "Солдат",
-  "Urchin": "Беспризорник",
-}
-
-function capitalize(option, str) {
-  if (option == 'firstOfWord') {
-    return str.charAt(0).toUpperCase() + str.slice(1);
-  } else if (option == 'firstOfAllWord') {
-    var pieces = str.split(" ");
-    for (var i = 0; i < pieces.length; i++) {
-      var j = pieces[i].charAt(0).toUpperCase();
-      pieces[i] = j + pieces[i].substr(1);
-    }
-    return pieces.join(" ");
-  }
-}
-
-function getKeyByValue(object, value) {
-  return Object.keys(object).find(key => object[key] === value);
-}
-
-function translateTo(option, str) {
-  if (language == 'ru') {
-    selectedVocabulary = russianVocabulary;
-  } else {
-    return;
-  }
-
-  if (option == 'language') {
-    var translatedWord = selectedVocabulary[fillStringIfEmpty(capitalize('firstOfAllWord', str))];
-  } else if (option == 'save') {
-    var translatedWord = getKeyByValue(selectedVocabulary, str);
-  }
-
-  return translatedWord != null ? translatedWord : String(undefined);
-}
-
-function fillStringIfEmpty(str) {
-  return str != '' ? str : String(undefined);
-}
-
-function calculateBonus(value) {
-  return Math.floor((value - 10) / 2);
-}
-
 function updateBonus() {
   characterStats.querySelectorAll('div.characteristic').forEach(
     statsBox => {
@@ -659,10 +568,6 @@ function updateBonus() {
     });
 }
 
-function addSignToNumber(value) {
-  if (isNaN(value)) return '';
-  return value < 0 ? value : '+' + value;
-}
 
 function loadCharacter() {
   loadPlayerName();
@@ -705,10 +610,9 @@ function loadCharacteristics() {
 
 function loadHpAndXp() {
   document.getElementById('hp').textContent = '' + character.hp + '/' + character.hpMax;
-  onloadBarWidth('hp');
   document.getElementById('xp').value = '' + character.experience;
   adjustLevel();
-  onloadBarWidth('xp');
+  adjustBarWidth();
 }
 
 function saveFile(filename, data) {

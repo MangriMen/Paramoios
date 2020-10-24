@@ -1,3 +1,6 @@
+a {
+  outline: none;
+}
 header {
   background-color: #681e22;
 }
@@ -19,6 +22,7 @@ input[type=number] {
 select {
   outline: none;
 }
+
 .default-button {
   text-align: center;
   outline: none;
@@ -71,6 +75,9 @@ select {
 }
 .default-button:focus {
   border-color: #b5353b;
+}
+.default-text-shadow {
+  text-shadow: 0 0 1px rgba(66,66,66,0.75);
 }
 .default-shadow {
   box-shadow: 0 0 10px 0 rgba(66,66,66,0.75);

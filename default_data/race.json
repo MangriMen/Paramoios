@@ -144,8 +144,7 @@
     "languages": [
       "extra"
     ],
-    "subraces": {
-    }
+    "subraces": {}
   },
   "Dragonborn": {
     "bonuses": {
@@ -165,8 +164,7 @@
     "languages": [
       "dwarvish"
     ],
-    "subraces": {
-    }
+    "subraces": {}
   },
   "Gnome": {
     "bonuses": {
@@ -210,7 +208,9 @@
   "Half-Elf": {
     "bonuses": {
       "characteristic": {
-        "charisma": 2
+        "charisma": 2,
+        "any1": 1,
+        "any2": 1
       }
     },
     "speed": 30,
@@ -223,8 +223,7 @@
       "Elvish",
       "extra"
     ],
-    "subraces": {
-    }
+    "subraces": {}
   },
   "Half-Orc": {
     "bonuses": {
@@ -243,8 +242,7 @@
     "languages": [
       "Orc"
     ],
-    "subraces": {
-    }
+    "subraces": {}
   },
   "Tiefling": {
     "bonuses": {
@@ -262,7 +260,6 @@
     "languages": [
       "Infernal"
     ],
-    "subraces": {
-    }
+    "subraces": {}
   }
 }

@@ -2,6 +2,47 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    align-content: space-between;
     justify-content: space-between;
-    width: 10rem;
+    min-width: 16rem;
+    height: 1.5rem;
+    margin-bottom: 1rem;
+}
+#race-box, #subrace-box {
+    width: 16rem;
+}
+.builder-select {
+    min-width: 10rem;
+    width: auto;
+}
+#race-traits-box {
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 25rem;
+}
+#race-traits-text {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+#characteristics-increase-box {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    height: auto;
+}
+#characteristics-increase-elements {
+    display: grid;
+    row-gap: 0.5rem;
+    padding: 0.5rem 0.5rem;
+    margin-left: 1rem;
+    box-sizing: border-box;
+    min-width: 9.5rem;
+}
+.characteristic-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.characteristic-box *:first-child {
+    margin-right: 1rem;
 }

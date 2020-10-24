@@ -1,18 +1,5 @@
-function beautifyText() {
-    let numberFields = document.getElementsByClassName('number-input');
-    for (let item of numberFields) {
-        item.addEventListener('keydown', numberCheck);
-    }
-    let textsAutoWidth = document.getElementsByClassName('text-auto-width');
-    for (let item of textsAutoWidth) {
-        item.addEventListener('keydown', autoWidth);
-        item.dispatchEvent(new Event('keydown'));
-    }
-    let labelsAutoWidth = document.getElementsByClassName('label-auto-width');
-    for (let item of labelsAutoWidth) {
-        labelAutoWidth(item);
-    }
-}
+let language = 'ru';
+let selectedVocabulary = null;
 
 const levelDependenceTable = {
     1: 0,
@@ -35,6 +22,99 @@ const levelDependenceTable = {
     18: 265000,
     19: 305000,
     20: 355000
+}
+
+let russianVocabulary = {
+    "Select Item": "Выберите пункт",
+
+    "Strength": "Сила",
+    "Dexterity": "Ловкость",
+    "Constitution": "Телосложение",
+    "Intelligence": "Интеллект",
+    "Wisdom": "Мудрость",
+    "Charisma": "Харизма",
+
+    "Alignment": "Мировоззрение",
+    "Lawful Good": "Законопослушный Добрый",
+    "Lawful Neutral": "Законопослушный Нейтральный",
+    "Lawful Evil": "Законопослушный Злой",
+    "Neutral Good": "Нейтральный Добрый",
+    "True Neutral": "Истинно Нейтральный",
+    "Neutral Evil": "Нейтральный Злой",
+    "Chaotic Good": "Хаотичный Добрый",
+    "Chaotic Neutral": "Хаточино Нейтральный",
+    "Chaotic Evil": "Хаотично Злой",
+
+    "Class": "Класс",
+    "Barbarian": "Варвар",
+    "Bard": "Бард",
+    "Cleric": "Жрец",
+    "Druid": "Друид",
+    "Fighter": "Воин",
+    "Monk": "Монах",
+    "Paladin": "Паладин",
+    "Ranger": "Следопыт",
+    "Rogue": "Плут",
+    "Sorcerer": "Чародей",
+    "Warlock": "Колдун",
+    "Wizard": "Волшебник",
+
+    "Race": "Раса",
+    "Dwarf": "Дварф",
+    "Elf": "Эльф",
+    "Hafling": "Полурослик",
+    "Human": "Человек",
+    "Dragonborn": "Драконорожденный",
+    "Gnome": "Гном",
+    "Half-Elf": "Полуэльф",
+    "Half-Orc": "Полуорк",
+    "Tiefling": "Тифлинг",
+
+    "Subrace": "Подраса",
+    "Hill": "Холмовой",
+    "Mountain": "Горный",
+    "High Elf": "Высший",
+    "Wood Elf": "Лесной",
+    "Dark Elf(Drow)": "Тёмный",
+    "Lightfoot": "Легконогий",
+    "Stout": "Коренастый",
+    "Forest Gnome": "Лесной",
+    "Rock Gnome": "Скальный",
+
+    "Background": "Предыстория",
+    "Acolyte": "Прислужник",
+    "Charlatan": "Шарлатан",
+    "Criminal": "Преступник",
+    "Entertainer": "Артист",
+    "Folk Hero": "Народный Герой",
+    "Guild Artisan": "Гилдейский Ремесленник",
+    "Hermit": "Отшельник",
+    "Noble": "Благородный",
+    "Outlander": "Чужеземец",
+    "Sage": "Мудрец",
+    "Sailor": "Моряк",
+    "Soldier": "Солдат",
+    "Urchin": "Беспризорник",
+}
+
+function beautifyText() {
+    let numberFields = document.getElementsByClassName('number-input');
+    for (let item of numberFields) {
+        item.addEventListener('keydown', numberCheck);
+    }
+    let textsAutoWidth = document.getElementsByClassName('text-auto-width');
+    for (let item of textsAutoWidth) {
+        item.addEventListener('keydown', autoWidth);
+        item.dispatchEvent(new Event('keydown'));
+    }
+    let labelsAutoWidth = document.getElementsByClassName('label-auto-width');
+    for (let item of labelsAutoWidth) {
+        labelAutoWidth(item);
+    }
+}
+
+function clearElement(object) {
+    while (object.firstChild) object.removeChild(object.firstChild);
 }
 
 /**
@@ -165,4 +245,50 @@ function bAlert(text, delay = 3000) {
             beautifulTimer = setTimeout(bAlertHide, beautifulAlertContainer.lastChild.dataset.delay);
         }
     }, delay);
+}
+
+function translateTo(option, str) {
+    if (language == 'ru') {
+        selectedVocabulary = russianVocabulary;
+    } else {
+        return;
+    }
+
+    if (option == 'language') {
+        var translatedWord = selectedVocabulary[fillStringIfEmpty(capitalize('firstOfAllWord', str))];
+    } else if (option == 'save') {
+        var translatedWord = getKeyByValue(selectedVocabulary, str);
+    }
+
+    return translatedWord != null ? translatedWord : String(undefined);
+}
+
+function capitalize(option, str) {
+    if (option == 'firstOfWord') {
+        return str.charAt(0).toUpperCase() + str.slice(1);
+    } else if (option == 'firstOfAllWord') {
+        var pieces = str.split(" ");
+        for (var i = 0; i < pieces.length; i++) {
+            var j = pieces[i].charAt(0).toUpperCase();
+            pieces[i] = j + pieces[i].substr(1);
+        }
+        return pieces.join(" ");
+    }
+}
+
+function getKeyByValue(object, value) {
+    return Object.keys(object).find(key => object[key] === value);
+}
+
+function fillStringIfEmpty(str) {
+    return str != '' ? str : String(undefined);
+}
+
+function calculateBonus(value) {
+    return Math.floor((value - 10) / 2);
+}
+
+function addSignToNumber(value) {
+    if (isNaN(value)) return '';
+    return value < 0 ? value : '+' + value;
 }
