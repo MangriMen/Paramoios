@@ -94,7 +94,7 @@ function createInfoCardFromFeature(feature, place) {
 
     let cardDescription = document.createElement('span');
     cardDescription.classList = 'card-description';
-    cardDescription.textContent = place[feature].description[language];
+    cardDescription.innerText = place[feature].description[language];
 
     card.appendChild(cardTitle);
     card.appendChild(cardDescription);
@@ -223,13 +223,29 @@ function raceSelected() {
     if (subraceSelect.firstChild)
         subraceSelect.dispatchEvent(new Event('change'));
 }
-
+let raceFeatures = [];
 function subraceSelected() {
+    raceFeatures = [];
     characteristicsIncreaseElements.childNodes.forEach(node => {
         if (node.dataset.origin == "subrace") {
             characteristicsIncreaseElements.removeChild(node);
         }
     });
+    raceTraitsFeaturesElements.childNodes.forEach(node => {
+        if (node.dataset.origin == "subrace") {
+            raceTraitsFeaturesElements.removeChild(node);
+        }
+        else {
+            raceFeatures.push(node.id);
+        }
+    });
+    for (let feature in user.race[raceSelect.value].subraces[subraceSelect.value].bonuses.skills) {
+        // if (!(feature in raceFeatures)) {
+        let featuresBox = createFeaturesBox(feature, user.race[raceSelect.value].subraces[subraceSelect.value].bonuses.skills);
+        featuresBox.dataset.origin = "subrace";
+        raceTraitsFeaturesElements.appendChild(featuresBox);
+        // }
+    }
     for (let characteristic in user.race[raceSelect.value].subraces[subraceSelect.value].bonuses.characteristic) {
         let characteristicBox = createCharacteristicBox(characteristic, user.race[raceSelect.value].subraces[subraceSelect.value].bonuses.characteristic);
         characteristicBox.dataset.origin = "subrace";
