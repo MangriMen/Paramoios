@@ -94,7 +94,7 @@ function createInfoCardFromFeature(feature, place) {
 
     let cardDescription = document.createElement('span');
     cardDescription.classList = 'card-description';
-    cardDescription.textContent = place[feature].description;
+    cardDescription.textContent = place[feature].description[language];
 
     card.appendChild(cardTitle);
     card.appendChild(cardDescription);
@@ -122,16 +122,29 @@ function switchCard(element) {
     }, 1000);
 }
 
+function additionalSelect(element) {
+    if (selectedAdditionalInfo != null) {
+        selectedAdditionalInfo.classList.toggle('item-pressed');
+    }
+    selectedAdditionalInfo = element;
+    selectedAdditionalInfo.classList.toggle('item-pressed');
+}
+
+function additionalUnselect() {
+    selectedAdditionalInfo.classList.toggle('item-pressed');
+    selectedAdditionalInfo = null;
+}
+
 function displayAdditionalInfo() {
     if (!isSwitching) {
         isSwitching = true;
         if (selectedAdditionalInfo != this) {
+            additionalSelect(this);
             switchCard(this);
-            selectedAdditionalInfo = this;
         }
         else {
+            additionalUnselect();
             switchCard("race");
-            selectedAdditionalInfo = null;
         }
     }
 }
