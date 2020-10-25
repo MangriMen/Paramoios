@@ -275,6 +275,10 @@ nav {
   box-sizing: border-box;
   border-radius: 6px;
   text-align:center;
+  cursor: pointer;
+}
+.character-box input {
+  cursor: pointer;
 }
 .new-character-title {
   align-self: center;

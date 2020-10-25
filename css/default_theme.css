@@ -22,7 +22,18 @@ input[type=number] {
 select {
   outline: none;
 }
+.clear-select {
+  outline: none;
+  background: none;
+  border: none;
+}
 
+.paused{
+  -webkit-animation-play-state: paused !important;
+  -moz-animation-play-state: paused !important;
+  -o-animation-play-state: paused !important; 
+  animation-play-state: paused !important;
+}
 .default-button {
   text-align: center;
   outline: none;

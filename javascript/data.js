@@ -11,5 +11,6 @@ function userJSONFix() {
         user.background ? user.background = JSON.parse(user.background) : null;
         user.class ? user.class = JSON.parse(user.class) : null;
         user.race ? user.race = JSON.parse(user.race) : null;
+        user.feature ? user.feature = JSON.parse(user.feature) : null;
     }
 }

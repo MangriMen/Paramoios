@@ -1,48 +1,214 @@
+#content-page {
+    height: auto;
+}
 .builder-box {
     display: flex;
     flex-direction: row;
     align-items: center;
     align-content: space-between;
     justify-content: space-between;
-    min-width: 16rem;
-    height: 1.5rem;
+}
+.builder-margin {
+    margin-bottom: 1.5rem;
+}
+#add-info-box {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 0.8rem;
+    transition: transform 1s ease-in-out;
+}
+#add-info-race-img {
+    width: 100%;
+    height: auto;
+    margin-top: auto;
     margin-bottom: 1rem;
+}
+#add-info-text {
+    display: block;
+    box-sizing: border-box;
+    min-height: 15%;
+    overflow-y: scroll;
+    text-align: justify;
+    margin-top: auto;
+    margin-bottom: 1rem;
+}
+#race-choosing-box {
+    display: grid;
+    text-align: center;
+    row-gap: 1rem;
+}
+#race-choosing-text {
+    font-size: 1.8rem;
 }
 #race-box, #subrace-box {
     width: 16rem;
 }
+#race-box *:first-child, #subrace-box *:first-child {
+    font-size: 1.2rem;
+}
 .builder-select {
-    min-width: 10rem;
-    width: auto;
+    width: 10rem;
+}
+#base1-page {
+    display: grid;
+    grid-template-columns: 48% auto;
+    grid-template-rows: auto;
+    height: 100%;
+    column-gap: 1.5rem;
+}
+#info-box {
+    display: grid;
+    grid-template-rows: auto auto auto;
+    row-gap: 1rem;
 }
 #race-traits-box {
-    flex-direction: column;
-    align-items: flex-start;
-    max-width: 25rem;
+    text-align: center;
+    display: grid;
+    row-gap: 0.5rem;
 }
 #race-traits-text {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
+    font-size: 1.8rem;
 }
 #characteristics-increase-box {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: flex-start;
-    height: auto;
+}
+#characteristics-increase-text {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
 }
 #characteristics-increase-elements {
-    display: grid;
-    row-gap: 0.5rem;
-    padding: 0.5rem 0.5rem;
-    margin-left: 1rem;
+    display: flex;
+    flex-flow: column wrap;
+    flex-direction: column;
     box-sizing: border-box;
-    min-width: 9.5rem;
+    max-height: 5rem;
+}
+#characteristics-increase-elements .characteristic-box:nth-child(odd) {
+    margin-bottom: 0.5rem;
 }
 .characteristic-box {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    padding: 0.1rem 0.2rem;
+    margin-right: 0.2rem;
 }
 .characteristic-box *:first-child {
-    margin-right: 1rem;
+    margin-right: 0.5rem;
+}
+#race-traits-features-box {
+    display: grid;
+    text-align: center;
+    row-gap: 1rem;
+}
+#race-traits-features-text {
+    font-size: 1.8rem;
+}
+#race-traits-features-elements {
+    display: flex;
+    flex-direction: column;
+}
+#race-traits-features-elements *:last-child {
+    margin-bottom: 0;
+}
+.feature-box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 1.5rem 0.25rem;
+    height: 2.8rem;
+    margin-bottom: 1rem;
+}
+.feature-box span {
+    margin: 0 auto;
+}
+.feature-box img {
+    width: 48px;
+    height: 48px;
+}
+.card-bottom-animation-box {
+    display: block;
+    position: relative;
+    height: 3.5rem;
+}
+.card-bottom-animation-box::before {
+    content: "";
+    position: absolute;
+    width: 6rem;
+    height: 0;
+    border: 0.12rem solid #681e22;
+    border-radius: 0.12rem;
+    background-color: #681e22;
+    left: 0;
+    right: 60%;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+}
+.card-bottom-animation-box::after {
+    content: "";
+    position: absolute;
+    width: 6rem;
+    height: 0;
+    border: 0.12rem solid #681e22;
+    border-radius: 0.12rem;
+    background-color: #681e22;
+    right: 0;
+    left: 60%;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+}
+.card-bottom-animation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    background-color: #681e22;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 50% 0;
+    z-index: 101;
+    transform: rotate(45deg);
+    animation: round 8s linear infinite;
+}
+.card-bottom-animation-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 0.96rem;
+    height: 0.96rem;
+    background-color: white;
+    border-radius: 0 50%;
+    transform: rotate(90deg);
+    animation: roundReverse 4s linear infinite;
+}
+@keyframes round {
+    100% {
+    transform: rotate(360deg);
+    }
+}
+@keyframes roundReverse {
+    100% {
+    transform: rotate(-360deg);
+    }
+}
+.card-box {
+    text-align: justify;
+}
+.card-title {
+    text-align: center;
+    display: block;
+    font-size: 2rem;
+    width: 100%;
+    margin-bottom: 2rem;
 }

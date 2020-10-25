@@ -98,6 +98,7 @@ async function loadCharacters() {
             xp.readOnly = 'readonly'
             xp.classList = 'xp border-style input-font-style bar-text';
             xp.value = user['character' + i].json.experience;
+            xp.disabled = true;
 
             xpBar.appendChild(xpBarAnimation);
             xpBar.appendChild(xp);
@@ -126,6 +127,7 @@ async function loadCharacters() {
             characterName.type = 'text';
             characterName.classList = 'character-name text-auto-width align-to-right text-to-right input-font-style';
             characterName.value = user['character' + i].json.charName;
+            characterName.disabled = true;
 
             let characterOrigin = document.createElement('div');
             characterOrigin.classList = 'character-origin align-to-right gray-text text-to-right';
@@ -177,6 +179,7 @@ async function loadCharacters() {
             copper.readOnly = 'readonly';
             copper.classList = 'currency-value border-style border-radius input-font-style';
             copper.value = user['character' + i].json.money.copper;
+            copper.disabled = true;
 
             copperBox.appendChild(copperImg);
             copperBox.appendChild(copper);
@@ -194,6 +197,7 @@ async function loadCharacters() {
             silver.readOnly = 'readonly';
             silver.classList = 'currency-value border-style border-radius input-font-style';
             silver.value = user['character' + i].json.money.silver;
+            silver.disabled = true;
 
             silverBox.appendChild(silverImg);
             silverBox.appendChild(silver);
@@ -211,6 +215,7 @@ async function loadCharacters() {
             electrum.readOnly = 'readonly';
             electrum.classList = 'currency-value border-style border-radius input-font-style';
             electrum.value = user['character' + i].json.money.electrum;
+            electrum.disabled = true;
 
             electrumBox.appendChild(electrumImg);
             electrumBox.appendChild(electrum);
@@ -228,6 +233,7 @@ async function loadCharacters() {
             gold.readOnly = 'readonly';
             gold.classList = 'currency-value border-style border-radius input-font-style';
             gold.value = user['character' + i].json.money.gold;
+            gold.disabled = true;
 
             goldBox.appendChild(goldImg);
             goldBox.appendChild(gold);
@@ -245,6 +251,7 @@ async function loadCharacters() {
             platinum.readOnly = 'readonly';
             platinum.classList = 'currency-value border-style border-radius input-font-style';
             platinum.value = user['character' + i].json.money.platinum;
+            platinum.disabled = true;
 
             platinumBox.appendChild(platinumImg);
             platinumBox.appendChild(platinum);
@@ -274,6 +281,7 @@ async function loadCharacters() {
             strengthValue.readOnly = 'readonly';
             strengthValue.value = user['character' + i].json.characteristic.strength;
             strengthValue.classList = 'characteristic-value default-background border-style border-radius default-button input-font-style';
+            strengthValue.disabled = true;
 
             strength.appendChild(strengthText);
             strength.appendChild(strengthBonus);
@@ -296,6 +304,7 @@ async function loadCharacters() {
             dexterityValue.readOnly = 'readonly';
             dexterityValue.value = user['character' + i].json.characteristic.dexterity;
             dexterityValue.classList = 'characteristic-value default-background border-style border-radius default-button input-font-style';
+            dexterityValue.disabled = true;
 
             dexterity.appendChild(dexterityText);
             dexterity.appendChild(dexterityBonus);
@@ -318,6 +327,7 @@ async function loadCharacters() {
             constitutionValue.readOnly = 'readonly';
             constitutionValue.value = user['character' + i].json.characteristic.constitution;
             constitutionValue.classList = 'characteristic-value default-background border-style border-radius default-button input-font-style';
+            constitutionValue.disabled = true;
 
             constitution.appendChild(constitutionText);
             constitution.appendChild(constitutionBonus);
@@ -340,6 +350,7 @@ async function loadCharacters() {
             intelligenceValue.readOnly = 'readonly';
             intelligenceValue.value = user['character' + i].json.characteristic.intelligence;
             intelligenceValue.classList = 'characteristic-value default-background border-style border-radius default-button input-font-style';
+            intelligence.disabled = true;
 
             intelligence.appendChild(intelligenceText);
             intelligence.appendChild(intelligenceBonus);
@@ -362,6 +373,7 @@ async function loadCharacters() {
             wisdomValue.readOnly = 'readonly';
             wisdomValue.value = user['character' + i].json.characteristic.wisdom;
             wisdomValue.classList = 'characteristic-value default-background border-style border-radius default-button input-font-style';
+            wisdomValue.disabled = true;
 
             wisdom.appendChild(wisdomText);
             wisdom.appendChild(wisdomBonus);
@@ -384,6 +396,7 @@ async function loadCharacters() {
             charismaValue.readOnly = 'readonly';
             charismaValue.value = user['character' + i].json.characteristic.charisma;
             charismaValue.classList = 'characteristic-value default-background border-style border-radius default-button input-font-style';
+            charismaValue.disabled = true;
 
             charisma.appendChild(charismaText);
             charisma.appendChild(charismaBonus);

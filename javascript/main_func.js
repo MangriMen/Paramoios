@@ -27,6 +27,12 @@ const levelDependenceTable = {
 let russianVocabulary = {
     "Select Item": "Выберите пункт",
 
+    "Darkvision": "Тёмное Зрение",
+    "Dwarven Resilience": "Дварфская Устойчивость",
+    "Tool Proficiency": "Владение Инструментами",
+    "Dwarven Combat Training": "Дварфская Боевая Тренировка",
+    "Stonecunning": "Знание Камня",
+
     "Strength": "Сила",
     "Dexterity": "Ловкость",
     "Constitution": "Телосложение",
@@ -95,6 +101,29 @@ let russianVocabulary = {
     "Sailor": "Моряк",
     "Soldier": "Солдат",
     "Urchin": "Беспризорник",
+}
+
+window.addEventListener('load', function () {
+    if (!("isAnimation" in localStorage)) {
+        localStorage.isAnimation = "running";
+    }
+    applyAnimation();
+});
+
+function toggleAnimations() {
+    (localStorage.isAnimation == "running" ? localStorage.isAnimation = "paused" : localStorage.isAnimation = "running");
+    applyAnimation();
+}
+
+function applyAnimation() {
+    document.querySelectorAll('*[data-animation]').forEach(element => {
+        element.style.animationPlayState = localStorage.isAnimation;
+        if (element.style.animationPlayState == "running") {
+            element.style.transform = "rotate(0deg)";
+        } else {
+            element.style.transform = "";
+        }
+    });
 }
 
 function beautifyText() {
