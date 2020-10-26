@@ -27,13 +27,6 @@ select {
   background: none;
   border: none;
 }
-
-.paused{
-  -webkit-animation-play-state: paused !important;
-  -moz-animation-play-state: paused !important;
-  -o-animation-play-state: paused !important; 
-  animation-play-state: paused !important;
-}
 .default-button {
   text-align: center;
   outline: none;
@@ -41,6 +34,9 @@ select {
 }
 .default-background {
   background-color: #d4bf9b;
+}
+.default-background-disabled {
+  background-color: #a19175;
 }
 .border-style {
   border: 2px solid #681e22;
@@ -182,8 +178,18 @@ select {
 .file-custom::before {
   background-color: #edd6ad;
 }
-.non-active-tab {
-  background-color: #a19175;
+.active-tab {
+  position: relative;
+  background-color: #d4bf9b;
+}
+.active-tab::before {
+  content: "";
+  position: absolute;
+  width: inherit;
+  height: 0.1rem;
+  background-color: inherit;
+  left: 0;
+  bottom: -0.1rem;
 }
 
 @media(max-width: 980px) {

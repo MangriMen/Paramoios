@@ -10,8 +10,8 @@ tabs[0].dispatchEvent(new Event('click'));
 function selectPage() {
     activeTab = this;
     document.getElementById('tabs').querySelectorAll('span').forEach(tab => {
-        tab.classList.remove('non-active-tab');
-        if (tab.id != activeTab.id) { tab.classList.add('non-active-tab'); }
+        tab.classList.remove('active-tab');
+        if (tab.id == activeTab.id) { tab.classList.add('active-tab'); }
     })
 
     document.getElementById('content-page').querySelectorAll('div').forEach(page => {

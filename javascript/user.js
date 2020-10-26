@@ -16,17 +16,16 @@ observer.observe(document.getElementById('user-btn-img'), config);
 
 let activeTab = null;
 
-let characterTab = document.getElementById('characters');
-characterTab.addEventListener('click', selectPage);
-characterTab.dispatchEvent(new Event('click'));
+let tabs = Array.from(document.getElementsByClassName("navigation-tab"));
 
-document.getElementById('profile-settings').addEventListener('click', selectPage);
+tabs.forEach(tab => tab.addEventListener('click', selectPage));
+tabs[0].dispatchEvent(new Event('click'));
 
 function selectPage() {
     activeTab = this;
     document.getElementById('tabs').querySelectorAll('span').forEach(tab => {
-        tab.classList.remove('non-active-tab');
-        if (tab.id != activeTab.id) { tab.classList.add('non-active-tab'); }
+        tab.classList.remove('active-tab');
+        if (tab.id == activeTab.id) { tab.classList.add('active-tab'); }
     })
 
     document.getElementById('content-page').querySelectorAll('div').forEach(page => {
