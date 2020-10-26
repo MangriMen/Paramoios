@@ -92,7 +92,7 @@ let russianVocabulary = {
     "Race": "Раса",
     "Dwarf": "Дварф",
     "Elf": "Эльф",
-    "Hafling": "Полурослик",
+    "Halfling": "Полурослик",
     "Human": "Человек",
     "Dragonborn": "Драконорожденный",
     "Gnome": "Гном",

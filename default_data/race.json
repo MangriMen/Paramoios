@@ -84,7 +84,7 @@
       }
     }
   },
-  "Hafling": {
+  "Halfling": {
     "bonuses": {
       "characteristic": {
         "dexterity": 2
@@ -94,7 +94,7 @@
     "skills": [
       "Lucky",
       "Brave",
-      "Hafling Nimbleness"
+      "Halfling Nimbleness"
     ],
     "languages": [
       "dwarvish"
