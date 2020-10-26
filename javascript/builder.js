@@ -83,6 +83,11 @@ let raceCard = document.getElementById('race-card');
 let selectedAdditionalInfo = null;
 let isSwitching = false;
 
+function changeRaceCard() {
+    raceCard.querySelector('#add-info-race-img').src = 'Images/creatures/humanoids/races/' + raceSelect.value + '.png'
+    raceCard.querySelector('#add-info-text').textContent = "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum magni quasi dolores non molestiae quae quia quod, ab eaque dignissimos";
+}
+
 function createInfoCardFromFeature(feature, place) {
     let card = document.createElement('div');
     card.id = feature + '-card';
@@ -155,7 +160,7 @@ function createFeaturesBox(feature, place) {
     featuresBox.classList = 'feature-box default-background border-style border-radius default-inner-shadow default-button input-font-style';
 
     let featuresImg = document.createElement('img');
-    // feautresImg.src = 'images/icons/features/' + feature;
+    // feautresImg.src = 'images/icons/features/' + place[feature];
     featuresImg.src = 'images/buttons/profile/img_placeholder.jpg';
 
     let featuresText = document.createElement('span');
@@ -203,6 +208,7 @@ function raceSelected() {
     clearElement(subraceSelect);
     clearElement(characteristicsIncreaseElements);
     clearElement(raceTraitsFeaturesElements);
+    changeRaceCard();
     for (let feature in user.race[raceSelect.value].skills) {
         let featuresBox = createFeaturesBox(feature, user.race[raceSelect.value].skills);
         featuresBox.dataset.origin = "race";
