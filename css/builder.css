@@ -47,7 +47,7 @@
 .builder-select {
     width: 10rem;
 }
-#base1-page {
+#race-page {
     display: grid;
     grid-template-columns: 48% auto;
     grid-template-rows: auto;
