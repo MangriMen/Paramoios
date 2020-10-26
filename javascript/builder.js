@@ -226,12 +226,12 @@ function raceSelected() {
 let raceFeatures = [];
 function subraceSelected() {
     raceFeatures = [];
-    characteristicsIncreaseElements.childNodes.forEach(node => {
+    Array.from(characteristicsIncreaseElements.childNodes).forEach(node => {
         if (node.dataset.origin == "subrace") {
             characteristicsIncreaseElements.removeChild(node);
         }
     });
-    raceTraitsFeaturesElements.childNodes.forEach(node => {
+    Array.from(raceTraitsFeaturesElements.childNodes).forEach(node => {
         if (node.dataset.origin == "subrace") {
             raceTraitsFeaturesElements.removeChild(node);
         }
@@ -240,11 +240,11 @@ function subraceSelected() {
         }
     });
     for (let feature in user.race[raceSelect.value].subraces[subraceSelect.value].bonuses.skills) {
-        // if (!(feature in raceFeatures)) {
-        let featuresBox = createFeaturesBox(feature, user.race[raceSelect.value].subraces[subraceSelect.value].bonuses.skills);
-        featuresBox.dataset.origin = "subrace";
-        raceTraitsFeaturesElements.appendChild(featuresBox);
-        // }
+        if (!(user.race[raceSelect.value].subraces[subraceSelect.value].bonuses.skills[feature] in raceFeatures)) {
+            let featuresBox = createFeaturesBox(feature, user.race[raceSelect.value].subraces[subraceSelect.value].bonuses.skills);
+            featuresBox.dataset.origin = "subrace";
+            raceTraitsFeaturesElements.appendChild(featuresBox);
+        }
     }
     for (let characteristic in user.race[raceSelect.value].subraces[subraceSelect.value].bonuses.characteristic) {
         let characteristicBox = createCharacteristicBox(characteristic, user.race[raceSelect.value].subraces[subraceSelect.value].bonuses.characteristic);

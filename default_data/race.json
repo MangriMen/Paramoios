@@ -8,9 +8,9 @@
     "speed": 25,
     "skills": [
       "Darkvision",
-      "Dwarven resilience",
-      "Dwarven combat training",
-      "Tool proficiency",
+      "Dwarven Resilience",
+      "Dwarven Combat training",
+      "Tool Proficiency",
       "Stonecunning"
     ],
     "languages": [
@@ -22,6 +22,10 @@
           "characteristic": {
             "wisdom": 1
           },
+          "skills": [
+            "Dwarf Armor Mastery",
+            "Dwarven Endurance"
+          ],
           "hpMax": 10
         }
       },
@@ -55,7 +59,10 @@
         "bonuses": {
           "characteristic": {
             "intelligence": 1
-          }
+          },
+          "skills": [
+            "Elven Weapon Mastery"
+          ]
         }
       },
       "Wood Elf": {
@@ -65,7 +72,9 @@
           },
           "speed": 5,
           "skills": [
-            "Mask of the Wild"
+            "Elven Weapon Mastery",
+            "Quick Legs",
+            "Mask Of The Wild"
           ]
         }
       },
@@ -134,13 +143,7 @@
       }
     },
     "speed": 30,
-    "skills": [
-      "darkvision",
-      "dwarven resilience",
-      "dwarven combat training",
-      "tool proficiency",
-      "stonecunning"
-    ],
+    "skills": [],
     "languages": [
       "extra"
     ],
@@ -155,11 +158,9 @@
     },
     "speed": 30,
     "skills": [
-      "darkvision",
-      "dwarven resilience",
-      "dwarven combat training",
-      "tool proficiency",
-      "stonecunning"
+      "Legacy Of Dragons",
+      "Breath Weapon",
+      "Resistance To Damage"
     ],
     "languages": [
       "dwarvish"
