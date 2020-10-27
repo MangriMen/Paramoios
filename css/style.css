@@ -603,7 +603,6 @@ main {
 #equipment-flexible {
   height: 12rem;
   width: 8.5rem;
-  position: relative;
   flex-grow: 1;
   overflow-y: auto;
 }

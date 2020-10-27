@@ -18,6 +18,8 @@ let characterSkills = document.getElementById('skills');
 let hpFillEl = document.getElementById('hp-bar-fill').classList;
 let hpWaveEl = document.getElementById('hp-liquid').classList;
 let equipmentBox = document.getElementById('equipment-box');
+let profAndLangBox = document.getElementById('other-proficiencies-and-languages');
+let featAndTraitBox = document.getElementById('features-and-traits');
 let addItemDialog = document.getElementById('add-item-dialog');
 let hpDialog = document.getElementById('hp-dialog');
 let tempHpDialog = document.getElementById('temp-hp-dialog');
@@ -42,6 +44,8 @@ let inventoryType = null;
 let bufferMaxHp = 0;
 let bufferHp = 0;
 
+document.getElementById('xp').addEventListener('keydown', adjustLevel);
+document.getElementById('xp').addEventListener('keyup', xpValueValidation);
 document.getElementById('damage').addEventListener('click', displayHpDialog);
 document.getElementById('heal').addEventListener('click', displayHpDialog);
 document.getElementById('cancel-hp').addEventListener('click', displayHpDialog);
@@ -72,7 +76,7 @@ document.getElementById('dexterity-death-save-checkbox').addEventListener('click
 document.getElementById('constitution-death-save-checkbox').addEventListener('click', characteristicCheckBoxDropDown);
 document.getElementById('intelligence-death-save-checkbox').addEventListener('click', characteristicCheckBoxDropDown);
 document.getElementById('wisdom-death-save-checkbox').addEventListener('click', characteristicCheckBoxDropDown);
-document.getElementById('charisma-death-save-checkbox').addEventListener('click', characteristicCheckBoxDropDown);
+document.getElementById('charisma-death-save-checkbox').addEventListener('click', characteristicCheckBoxDropDown); document.getElementById('strength-death-save-checkbox').addEventListener('click', characteristicCheckBoxDropDown);
 
 document.getElementById('open-character').addEventListener('click', openCharacter);
 document.getElementById('save-character').addEventListener('click', saveAndDownloadCharacter);
@@ -196,7 +200,7 @@ function changeHp() {
   }
 
   document.getElementById('hp').textContent = newHp + '/' + maxHp;
-  changeBarWidth(newHp, maxHp, 'hp');
+  adjustBarWidth();
 }
 
 function changeTempHp() {
@@ -214,7 +218,7 @@ function changeTempHp() {
     tempHpColorChange();
   }
   document.getElementById('hp').textContent = currentHp + '/' + maxHp;
-  changeBarWidth(currentHp, maxHp, 'hp');
+  adjustBarWidth();
   tempSwitch = false;
 }
 
@@ -304,8 +308,14 @@ xpField.onkeydown = function () {
   clearTimeout(timerXp);
   timerXp = setTimeout(function () {
     adjustLevel();
-    onloadBarWidth('xp');
+    adjustBarWidth();
   }, 500);
+}
+
+function xpValueValidation() {
+  if (this.value > 355000) this.value = 355000;
+  if (this.value < 0 || this.value == '') this.value = 0;
+  if (this.value.length > 6) this.value = this.value.slice(0, 6);
 }
 
 function displayItemDialog() {
@@ -374,6 +384,8 @@ function getCoords(elem) {
 }
 
 equipmentBox.onmousedown = getMouseCoord;
+featAndTraitBox.onmousedown = getMouseCoord;
+profAndLangBox.onmousedown = getMouseCoord;
 function getMouseCoord(e) {
   var m = getCoords(this);
   x = e.pageX - m.left;
@@ -419,15 +431,15 @@ function createAdditionalInfo(item) {
   itemAdditional.appendChild(itemDisplayName);
   itemAdditional.appendChild(itemAdditionalClose);
 
-  equipmentBox.appendChild(itemAdditional);
+  item.parentElement.appendChild(itemAdditional);
   itemAdditional.style.left = x + "px";
-  itemAdditional.style.top = y + "px";
+  itemAdditional.style.top = y - (parseInt(getComputedStyle(itemAdditional).height) + 2 * parseInt(getComputedStyle(itemAdditional).borderWidth)) + "px";
 }
 
 function closeAdditionalInfo() {
   let itemAdditional = document.getElementById("item-additional");
   if (itemAdditional != null) {
-    equipmentBox.removeChild(itemAdditional);
+    itemAdditional.parentElement.removeChild(itemAdditional);
   }
 }
 
@@ -520,7 +532,7 @@ function openCharacter() {
 }
 
 function loadCharacterJSON() {
-  var input, file, fr;
+  let input, file, fr;
 
   if (typeof window.FileReader !== 'function') {
     alert("The file API isn't supported on this browser yet.");
@@ -704,18 +716,16 @@ function loadCharacteristics() {
 
 function loadHpAndXp() {
   document.getElementById('hp').textContent = '' + character.hp + '/' + character.hpMax;
-  onloadBarWidth('hp');
   document.getElementById('xp').value = '' + character.experience;
   adjustLevel();
-  onloadBarWidth('xp');
+  adjustBarWidth();
 }
 
 function saveFile(filename, data) {
   var blob = new Blob([data], { type: 'text/csv' });
   if (window.navigator.msSaveOrOpenBlob) {
     window.navigator.msSaveBlob(blob, filename);
-  }
-  else {
+  } else {
     var elem = window.document.createElement('a');
     elem.href = window.URL.createObjectURL(blob);
     elem.download = filename;
