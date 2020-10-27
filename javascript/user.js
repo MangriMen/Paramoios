@@ -448,3 +448,75 @@ function newCharacter() {
 function loadCharacterFromProfile() {
     alert("Загрузить персонажа redirect");
 }
+
+document.getElementById('avatar-change-overlay').addEventListener('click', displayCropAvatar);
+
+let avatarInput = document.getElementById('file');
+let avatarFullImage = document.getElementById('avatar-full-image');
+let avatarCropLayout = document.getElementById('avatar-crop-layout');
+let avatarCropBox = document.getElementById('avatar-crop-box');
+let chooseAvatar = document.getElementById('choose-avatar');
+
+avatarInput.addEventListener('change', cropAvatar);
+avatarCropLayout.addEventListener('click', closeCrop);
+
+let croppr = null;
+
+function displayCropAvatar() {
+    avatarCropLayout.style.display = 'block';
+    avatarCropBox.style.display = 'grid';
+}
+
+function cropAvatar(e) {
+    let file = avatarInput.files[0];
+    let fr = new FileReader();
+    fr.onload = receivedImage;
+    fr.readAsDataURL(file);
+
+    async function receivedImage(e) {
+        if (!croppr) {
+            let promise = new Promise((resolve, reject) => {
+                avatarFullImage.src = e.target.result;
+                if (avatarFullImage.src) {
+                    resolve("done");
+                }
+            });
+            await promise;
+            if (parseInt(getComputedStyle(avatarFullImage).height) > 600) {
+                document.getElementById('avatar-crop-field').style.width = parseInt(getComputedStyle(avatarFullImage).width) / (parseInt(getComputedStyle(avatarFullImage).height) / 600) + 'px  ';
+            }
+            else {
+                document.getElementById('avatar-crop-field').style.width = "";
+            }
+            croppr = new Croppr('#avatar-full-image', {
+                startSize: [100, 100, '%'],
+                aspectRatio: 1,
+                minSize: [100, 100, 'px'],
+                onInitialize: (instance) => { document.getElementById('avatar-rect').value = JSON.stringify(instance.getValue()); },
+                onCropEnd: (data) => { document.getElementById('avatar-rect').value = JSON.stringify(data); },
+            });
+            chooseAvatar.style.display = 'none';
+        }
+    }
+}
+
+function resetCrop() {
+    croppr.containerEl.parentElement.insertBefore(croppr._restore.element, croppr.containerEl);
+    croppr.containerEl.parentElement.removeChild(croppr.containerEl);
+    avatarFullImage.src = "";
+    croppr = null;
+}
+
+function acceptCrop() {
+    avatarCropLayout.style.display = 'none';
+    avatarCropBox.style.display = 'none';
+}
+
+function closeCrop() {
+    acceptCrop();
+    if (croppr) {
+        resetCrop();
+    }
+    chooseAvatar.style.display = 'block';
+    avatarInput.value = "";
+}
