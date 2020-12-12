@@ -1,11 +1,12 @@
 'use strict'
 
+
 let activeTab = null;
 
 let tabs = Array.from(document.getElementsByClassName("navigation-tab"));
 
 tabs.forEach(tab => tab.addEventListener('click', selectPage));
-tabs[0].dispatchEvent(new Event('click'));
+tabs[2].dispatchEvent(new Event('click'));
 
 function selectPage() {
     activeTab = this;
@@ -38,6 +39,225 @@ const allCharacteristics = [
     "Wisdom",
     "Charisma"
 ]
+
+const growthWeightTable = {
+    "Human": {
+        "baseGrowth": 56,
+        "growthCube": [2, 10],
+        "baseWeight": 110,
+        "weightCube": [2, 4]
+    },
+    "Dwarf mountain": {
+        "baseGrowth": 48,
+        "growthCube": [2, 4],
+        "baseWeight": 130,
+        "weightCube": [2, 6]
+    },
+    "Dwarf hill": {
+        "baseGrowth": 44,
+        "growthCube": [2, 4],
+        "baseWeight": 115,
+        "weightCube": [2, 6]
+    },
+    "Elf High Elf": {
+        "baseGrowth": 54,
+        "growthCube": [2, 10],
+        "baseWeight": 90,
+        "weightCube": [1, 4]
+    },
+    "Elf Wood Elf": {
+        "baseGrowth": 54,
+        "growthCube": [1, 4],
+        "baseWeight": 100,
+        "weightCube": [1, 4]
+    },
+    "Elf Dark Elf(Drow)": {
+        "baseGrowth": 53,
+        "growthCube": [2, 6],
+        "baseWeight": 75,
+        "weightCube": [1, 6]
+    },
+    "Halfling Lightfoot": {
+        "baseGrowth": 31,
+        "growthCube": [2, 4],
+        "baseWeight": 35,
+        "weightCube": [1, 1]
+    },
+    "Halfling Stout": {
+        "baseGrowth": 31,
+        "growthCube": [2, 4],
+        "baseWeight": 35,
+        "weightCube": [1, 1]
+    },
+    "Dragonborn": {
+        "baseGrowth": 66,
+        "growthCube": [2, 8],
+        "baseWeight": 175,
+        "weightCube": [2, 6]
+    },
+    "Gnome Forest Gnome": {
+        "baseGrowth": 35,
+        "growthCube": [2, 4],
+        "baseWeight": 35,
+        "weightCube": [1, 1]
+    },
+    "Gnome Rock Gnome": {
+        "baseGrowth": 35,
+        "growthCube": [2, 4],
+        "baseWeight": 35,
+        "weightCube": [1, 1]
+    },
+    "Half-Elf": {
+        "baseGrowth": 57,
+        "growthCube": [2, 8],
+        "baseWeight": 110,
+        "weightCube": [2, 4]
+    },
+    "Half-Orc": {
+        "baseGrowth": 58,
+        "growthCube": [2, 10],
+        "baseWeight": 140,
+        "weightCube": [2, 6]
+    },
+    "Tiefling": {
+        "baseGrowth": 57,
+        "growthCube": [2, 8],
+        "baseWeight": 110,
+        "weightCube": [2, 4]
+    },
+}
+
+function setPointsLeft() {
+    let pointsLeft = 27;
+    for (let card in characteristicCards)
+        pointsLeft -= (characteristicCards[card].baseTr.lastChild.firstChild.value - (characteristicCards[card].baseTr.lastChild.firstChild.value == 15 ? 6 : characteristicCards[card].baseTr.lastChild.firstChild.value == 14 ? 7 : 8));
+    document.getElementById("characteristics-left-value").textContent = pointsLeft;
+    if (pointsLeft < 0) {
+        document.getElementById("characteristics-left-value").style.color = "red";
+    }
+    else if (pointsLeft == 0) {
+        document.getElementById("characteristics-left-value").style.color = "green";
+    }
+    else {
+        document.getElementById("characteristics-left-value").style.color = "";
+    }
+}
+
+class CharacteristicsCard {
+    constructor(characteristic) {
+        let object = this;
+        this.characteristic = characteristic;
+
+        function createCardTr(modifierType, type = "default") {
+            let value = document.createElement('td');
+            value.id = "" + characteristic + "-base";
+
+            if (type == "select") {
+                value.classList = "characteristics-select ";
+                let select = document.createElement('select');
+                select.classList = "input-font-style default-background";
+
+                for (let i = 8; i <= 15; i++) {
+                    let option = document.createElement('option');
+                    option.value = i;
+                    option.textContent = i;
+                    select.append(option);
+                }
+                select.addEventListener('change', function () {
+                    object.modifierTr.lastChild.textContent = addSignToNumber(calculateBonus(this.value));
+                    CharacteristicsCard.calcSum(object);
+                    setPointsLeft();
+                });
+                value.appendChild(select);
+            } else if (type == "input") {
+                value.classList = "override-score ";
+                let input = document.createElement('input');
+                input.type = "number";
+                input.placeholder = "--";
+                input.classList = "input-font-style";
+                value.appendChild(input);
+            }
+
+            value.classList += "characteristics-modifier-value";
+
+            let text = document.createElement('td');
+            text.classList = "characteristics-modifier-text";
+            text.textContent = modifierType;
+
+            let tr = document.createElement('tr');
+            tr.appendChild(text);
+            tr.appendChild(value);
+
+            return tr;
+        }
+
+
+        this.modifierTr = createCardTr("Модификатор");
+        this.raceTr = createCardTr("Расовый Бонус");
+        this.increaseTr = createCardTr("Увеличение хар.");
+        this.otherTr = createCardTr("Остальное");
+        this.overrideTr = createCardTr("Переопределить", "input");
+        this.sumTr = createCardTr("Итого");
+        this.baseTr = createCardTr("Базовое", "select");
+
+        let table = document.createElement('table');
+        table.id = this.characteristic + '-table';
+        table.classList = 'characteristics-table';
+        table.appendChild(this.baseTr);
+        table.appendChild(this.modifierTr);
+        table.appendChild(this.raceTr);
+        table.appendChild(this.increaseTr);
+        table.appendChild(this.otherTr);
+        table.appendChild(this.overrideTr);
+        table.appendChild(this.sumTr);
+
+        let tableRoundWrapper = document.createElement('div');
+        tableRoundWrapper.classList = 'table-round-wrapper default-inner-shadow';
+        tableRoundWrapper.appendChild(table);
+
+        let label = document.createElement('span');
+        label.id = this.characteristic + '-label';
+        label.classList = 'characteristics-table-label border-radius default-inner-shadow';
+        label.textContent = translateTo('language', capitalize('firstOfAllWord', this.characteristic));
+
+        this.card = document.createElement('div');
+        this.card.id = this.characteristic + '-box';
+        this.card.classList = 'characteristics-box';
+        this.card.appendChild(label);
+        this.card.appendChild(tableRoundWrapper);
+
+
+        this.overrideTr.lastChild.addEventListener('keyup', function () { CharacteristicsCard.calcSum(object) });
+    }
+
+    static calcSum(object) {
+        let overrideM = object.overrideTr.lastChild.firstChild.valueAsNumber;
+        let sum = (Number.isNaN(overrideM) ? (removeSignFromNumber(object.modifierTr.lastChild.textContent) + removeSignFromNumber(object.raceTr.lastChild.textContent) + removeSignFromNumber(object.increaseTr.lastChild.textContent) + removeSignFromNumber(object.otherTr.lastChild.textContent)) : overrideM);
+        object.sumTr.lastChild.textContent = addSignToNumber((Number.isNaN(sum) ? 0 : sum));
+    }
+
+    calcModifiers() {
+        this.raceTr.lastChild.textContent = "+" + zeroIfUndefined(user.race[raceSelect.value].bonuses.characteristic[this.characteristic]);
+        if (subraceSelect.firstChild)
+            this.raceTr.lastChild.textContent = "+" + zeroIfUndefined(user.race[raceSelect.value].subraces[subraceSelect.value].bonuses.characteristic[this.characteristic]);
+        this.increaseTr.lastChild.textContent = "+" + 0;
+        this.otherTr.lastChild.textContent = "+" + 0;
+    }
+
+    getCard() {
+        return this.card;
+    }
+
+}
+
+let characteristicCards = {
+    "strengthCard": new CharacteristicsCard("strength"),
+    "dexterityCard": new CharacteristicsCard("dexterity"),
+    "constitutionCard": new CharacteristicsCard("constitution"),
+    "intelligenceCard": new CharacteristicsCard("intelligence"),
+    "wisdomCard": new CharacteristicsCard("wisdom"),
+    "charismaCard": new CharacteristicsCard("charisma")
+}
 
 function additionalCharacteristicSelected() {
     let that = this;
@@ -228,6 +448,10 @@ function raceSelected() {
     !subraceSelect.firstChild ? subraceSelect.parentElement.style.display = "none" : subraceSelect.parentElement.style.display = "flex";
     if (subraceSelect.firstChild)
         subraceSelect.dispatchEvent(new Event('change'));
+    else {
+        for (let card in characteristicCards)
+            CharacteristicsCard.calcSum(characteristicCards[card]);
+    }
 }
 let raceFeatures = [];
 function subraceSelected() {
@@ -257,6 +481,9 @@ function subraceSelected() {
         characteristicBox.dataset.origin = "subrace";
         characteristicsIncreaseElements.appendChild(characteristicBox);
     }
+
+    for (let card in characteristicCards)
+        CharacteristicsCard.calcSum(characteristicCards[card]);
 }
 
 function optionSelected() {
@@ -268,12 +495,20 @@ window.addEventListener("load", function () {
     userJSONFix();
     choosedCharacter = user["character" + localStorage.numOfChoosedChar];
     choosedCharacter.json = user.defaultCharacter;
+
     for (let race in user.race) {
         let option = document.createElement('option');
         option.value = race;
         option.textContent = translateTo('language', race);
         raceSelect.appendChild(option);
     }
+
+    for (let card in characteristicCards) {
+        document.getElementById('characteristics-page').append(characteristicCards[card].getCard());
+        characteristicCards[card].baseTr.lastChild.firstChild.dispatchEvent(new Event('change'));
+        characteristicCards[card].calcModifiers();
+    }
+
+
     raceSelect.dispatchEvent(new Event('change'));
 });
-

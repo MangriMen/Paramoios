@@ -156,7 +156,8 @@ nav {
 }
 .navigation-tab {
   height: 1.8rem;
-  width: 6rem;
+  min-width: 6rem;
+  padding: 0 0.3rem;
   margin: 0 0.5rem 0 0;
   border-radius: 5px 5px 0 0;
   text-align: center;

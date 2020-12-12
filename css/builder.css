@@ -221,3 +221,132 @@
     border-width: 4px;
     border-color: #82262a;
 }
+#characteristics-page {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto;
+    height: 100%;
+    row-gap: 1rem;
+    column-gap: 1rem;
+}
+#characteristics-left-text {
+    font-size: 1.5rem;
+    text-align: center;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row: 1;
+}
+.characteristics-box {
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-template-columns: auto;
+    row-gap: 0.5rem;
+    max-width: 14rem;
+}
+.table-round-wrapper {
+    border: 3px solid #681e22;
+    border-radius: 0.6rem;
+    max-width: inherit;
+}
+.characteristics-table {
+    border-spacing: 0;
+}
+.characteristics-table tr td:last-child {
+    border-left: 3px solid #681e22;
+    max-width: 4.15rem;
+}
+.characteristics-table tr:first-child td:first-child {
+    border-top-left-radius: 0.5rem;
+}
+.characteristics-table tr:first-child td:nth-child(2) {
+    border-top-right-radius: 0.5rem;
+}
+.characteristics-table tr:last-child td:first-child {
+    border-bottom-left-radius: 0.5rem;
+    border-bottom: none;
+}
+.characteristics-table tr:last-child td:nth-child(2) {
+    border-bottom-right-radius: 0.5rem;
+    border-bottom: none;
+}
+.characteristics-table td {
+    border: 3px solid #681e22;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+}
+.characteristics-table, .characteristics-header,
+.characteristics-modifier-text, .characteristics-modifier-value {
+    border-width: 1px;
+}
+.characteristics-modifier-text {
+    font-size: 1.1rem;
+    padding: 0.2rem 1rem 0.1rem;
+    background-color: #dbc6a0;
+    border-left: none;
+}
+.characteristics-modifier-value {
+    font-size: 1.5rem;
+    padding: 0.1rem 0.8rem;
+    box-sizing: border-box;
+    height: 2rem;
+    text-align: center;
+    background-color: #c7b391;
+    border-right: none;
+}
+.characteristics-header td {
+    padding: 0.1rem 0.2rem;
+}
+.characteristics-select, .override-score {
+    padding: 0;
+}
+.override-score {
+    background-color: #d4c09b;
+}
+.override-score input {
+    font-size: 1.5rem;
+    width: 4rem;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+}
+.characteristics-select select {
+    font-size: 1.5rem;
+    width: 4rem;
+    border: none;
+    border-top-right-radius: 10px;
+    text-align-last: center;
+}
+.characteristics-table-label {
+    display: block;
+    width: auto;
+    color: white;
+    text-align: center;
+    background-color: #681e22;
+    font-size: 1.2rem;
+    height: 1.6rem;
+}
+#strength-box {
+    grid-column: 1;
+    grid-row: 2;
+}
+#dexterity-box {
+    grid-column: 2;
+    grid-row: 2;
+}
+#constitution-box {
+    grid-column: 3;
+    grid-row: 2;
+}
+#intelligence-box {
+    grid-column: 1;
+    grid-row: 3;
+}
+#wisdom-box {
+    grid-column: 2;
+    grid-row: 3;
+}
+#charisma-box {
+    grid-column: 3;
+    grid-row: 3;
+}

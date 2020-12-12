@@ -59,13 +59,13 @@ document.getElementById('cancel-item').addEventListener('click', addNewItemToInv
 document.getElementById('confirm-item').addEventListener('click', addNewItemToInventory);
 
 document.getElementById('death-saves-dice').addEventListener('click', rollDeathSave);
-document.getElementById('d20-dice').addEventListener('click', () => { let rolled = rollDice(20); rollAlert(rolled.value, `На D${rolled.type} выпало:`) });
-document.getElementById('d12-dice').addEventListener('click', () => { let rolled = rollDice(12); rollAlert(rolled.value, `На D${rolled.type} выпало:`) });
-document.getElementById('d100-dice').addEventListener('click', () => { let rolled = rollDice(100); rollAlert(rolled.value, `На D${rolled.type} выпало:`) });
-document.getElementById('d10-dice').addEventListener('click', () => { let rolled = rollDice(10); rollAlert(rolled.value, `На D${rolled.type} выпало:`) });
-document.getElementById('d8-dice').addEventListener('click', () => { let rolled = rollDice(8); rollAlert(rolled.value, `На D${rolled.type} выпало:`) });
-document.getElementById('d6-dice').addEventListener('click', () => { let rolled = rollDice(6); rollAlert(rolled.value, `На D${rolled.type} выпало:`) });
-document.getElementById('d4-dice').addEventListener('click', () => { let rolled = rollDice(4); rollAlert(rolled.value, `На D${rolled.type} выпало:`) });
+document.getElementById('d20-dice').addEventListener('click', () => { let rolled = rollDice(1, 20); rollAlert(rolled.value, `На D${rolled.type} выпало:`) });
+document.getElementById('d12-dice').addEventListener('click', () => { let rolled = rollDice(1, 12); rollAlert(rolled.value, `На D${rolled.type} выпало:`) });
+document.getElementById('d100-dice').addEventListener('click', () => { let rolled = rollDice(1, 100); rollAlert(rolled.value, `На D${rolled.type} выпало:`) });
+document.getElementById('d10-dice').addEventListener('click', () => { let rolled = rollDice(1, 10); rollAlert(rolled.value, `На D${rolled.type} выпало:`) });
+document.getElementById('d8-dice').addEventListener('click', () => { let rolled = rollDice(1, 8); rollAlert(rolled.value, `На D${rolled.type} выпало:`) });
+document.getElementById('d6-dice').addEventListener('click', () => { let rolled = rollDice(1, 6); rollAlert(rolled.value, `На D${rolled.type} выпало:`) });
+document.getElementById('d4-dice').addEventListener('click', () => { let rolled = rollDice(1, 4); rollAlert(rolled.value, `На D${rolled.type} выпало:`) });
 
 document.getElementById('strength-death-save-checkbox').addEventListener('click', characteristicCheckBoxDropDown);
 document.getElementById('dexterity-death-save-checkbox').addEventListener('click', characteristicCheckBoxDropDown);
@@ -248,15 +248,8 @@ function hpValidation(actual, maximum) {
 let successMarkCount = 0;
 let failsMarkCount = 0;
 
-function rollDice(diceType) {
-  return {
-    value: Math.floor(Math.random() * diceType + 1),
-    type: diceType
-  }
-}
-
 function rollDeathSave() {
-  let rollResult = rollDice(20).value;
+  let rollResult = rollDice(1, 20).value;
 
   rollAlert(rollResult, 'На D20 выпало:');
 

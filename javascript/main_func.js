@@ -135,6 +135,17 @@ let russianVocabulary = {
     "Urchin": "Беспризорник",
 }
 
+function rollDice(count, diceType) {
+    let sum = 0;
+    for (let i = 0; i < count; i++)
+        sum += Math.floor(Math.random() * diceType + 1);
+    return {
+        value: sum,
+        count: count,
+        type: diceType
+    }
+}
+
 window.addEventListener('load', function () {
     if (!("isAnimation" in localStorage)) {
         localStorage.isAnimation = "running";
@@ -352,4 +363,12 @@ function calculateBonus(value) {
 function addSignToNumber(value) {
     if (isNaN(value)) return '';
     return value < 0 ? value : '+' + value;
+}
+
+function removeSignFromNumber(value) {
+    return (Number.isNaN(parseInt(value)) ? 0 : parseInt(value));
+}
+
+function zeroIfUndefined(value) {
+    return (value == undefined ? 0 : value);
 }
