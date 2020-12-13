@@ -1,5 +1,9 @@
 'use strict'
 
+if (getCookie('isMetric') == undefined) {
+    setCookie('isMetric', true, getExpires());
+}
+
 document.getElementById('user-btn').addEventListener('click', function (e) { toggleUserMenu(e); });
 
 let img = document.getElementById('user-btn-img');

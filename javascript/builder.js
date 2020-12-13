@@ -6,7 +6,7 @@ let activeTab = null;
 let tabs = Array.from(document.getElementsByClassName("navigation-tab"));
 
 tabs.forEach(tab => tab.addEventListener('click', selectPage));
-tabs[2].dispatchEvent(new Event('click'));
+tabs[3].dispatchEvent(new Event('click'));
 
 function selectPage() {
     activeTab = this;
@@ -18,6 +18,26 @@ function selectPage() {
     document.getElementById('content-page').querySelectorAll('div').forEach(page => {
         if (page.id != activeTab.id + "-page" && page.dataset.type == 'page') { page.style.display = 'none' } else if (page.dataset.type == 'page') { page.style.display = 'grid' };
     })
+}
+
+const allAlignments = [
+    "Lawful Good",
+    "Lawful Neutral",
+    "Lawful Evil",
+    "Neutral Good",
+    "True Neutral",
+    "Neutral Evil",
+    "Chaotic Good",
+    "Chaotic Neutral",
+    "Chaotic Evil",
+]
+
+let alignmentSelect = document.getElementById('alignment');
+for (let alignment of allAlignments) {
+    let option = document.createElement('option');
+    option.value = alignment;
+    option.textContent = translateTo('language', capitalize('firstOfAllWord', alignment));
+    alignmentSelect.append(option);
 }
 
 let raceSelect = document.getElementById('race-select');
@@ -232,7 +252,15 @@ class CharacteristicsCard {
 
     static calcSum(object) {
         let overrideM = object.overrideTr.lastChild.firstChild.valueAsNumber;
-        let sum = (Number.isNaN(overrideM) ? (removeSignFromNumber(object.modifierTr.lastChild.textContent) + removeSignFromNumber(object.raceTr.lastChild.textContent) + removeSignFromNumber(object.increaseTr.lastChild.textContent) + removeSignFromNumber(object.otherTr.lastChild.textContent)) : overrideM);
+        let sum = (Number.isNaN(overrideM) ?
+            (
+                removeSignFromNumber(object.modifierTr.lastChild.textContent) +
+                removeSignFromNumber(object.raceTr.lastChild.textContent) +
+                removeSignFromNumber(object.increaseTr.lastChild.textContent) +
+                removeSignFromNumber(object.otherTr.lastChild.textContent)
+            ) :
+            overrideM
+        );
         object.sumTr.lastChild.textContent = addSignToNumber((Number.isNaN(sum) ? 0 : sum));
     }
 
@@ -490,6 +518,57 @@ function optionSelected() {
     choosedCharacter.json[this.id.split('-')[0]] = this.value;
 }
 
+document.getElementById('roll-growth-button').addEventListener('click', rollGrowth);
+document.getElementById('roll-weight-button').addEventListener('click', rollWeight);
+
+function rollGrowth() {
+    let growthCube = growthWeightTable[raceSelect.value + " " + subraceSelect.value].growthCube;
+    let rollResult = rollDice(growthCube[0], growthCube[1]).value;
+
+    let isMetric = (getCookie("isMetric") == "true");
+
+    let multiplier = (isMetric ? 2.54 : 1);
+    let divider = (isMetric ? 100 : 12);
+    let measure = (isMetric ? ["м", "см"] : ["'", "\""]);
+
+    let baseG = [
+        Math.floor((growthWeightTable[raceSelect.value + " " + subraceSelect.value].baseGrowth * multiplier) / divider),
+        ((growthWeightTable[raceSelect.value + " " + subraceSelect.value].baseGrowth * multiplier) % divider)
+    ];
+
+    let rollG = [
+        Math.floor((rollResult * multiplier) / divider),
+        ((rollResult * multiplier) % divider)
+    ];
+
+    let resultG = [
+        Math.floor((baseG[0] + rollG[0]) + (baseG[1] + rollG[1]) / divider),
+        ((baseG[1] + rollG[1]) % divider)
+    ];
+
+    document.getElementById('growth-base').textContent = "" + baseG[0] + measure[0] + (isMetric ? " " : "") + Number(baseG[1].toFixed(2 * isMetric)).toString() + measure[1] + " + ";
+    document.getElementById('growth-roll').textContent = "" + rollG[0] + measure[0] + (isMetric ? " " : "") + Number(rollG[1].toFixed(2 * isMetric)).toString() + measure[1] + " = ";
+    document.getElementById('growth-result').textContent = "" + resultG[0] + measure[0] + (isMetric ? " " : "") + Number(resultG[1].toFixed(2 * isMetric)).toString() + measure[1];
+}
+
+function rollWeight() {
+    let weightCube = growthWeightTable[raceSelect.value + " " + subraceSelect.value].weightCube;
+    let rollResult = rollDice(weightCube[0], weightCube[1]).value;
+
+    let isMetric = (getCookie("isMetric") == "true");
+
+    let divider = (isMetric ? 2.205 : 1);
+    let measure = (isMetric ? "кг" : "фнт");
+
+    let baseW = Math.round((growthWeightTable[raceSelect.value + " " + subraceSelect.value].baseWeight) / divider);
+    let rollW = Math.round((rollResult) / divider);
+    let resultW = (baseW + rollW);
+
+    document.getElementById('weight-base').textContent = "" + baseW + " " + measure + " + ";
+    document.getElementById('weight-roll').textContent = "" + rollW + " " + measure + " = ";
+    document.getElementById('weight-result').textContent = "" + resultW + " " + measure;
+}
+
 window.addEventListener("load", function () {
     user = JSON.parse(localStorage[localStorage.loggedUser]);
     userJSONFix();
@@ -511,4 +590,7 @@ window.addEventListener("load", function () {
 
 
     raceSelect.dispatchEvent(new Event('change'));
+
+    rollGrowth();
+    rollWeight();
 });

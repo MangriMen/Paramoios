@@ -53,8 +53,8 @@
                 <span id='characteristics' class="navigation-tab default-background-disabled border-style border-radius">
                     Характеристики
                 </span>
-                <span id='base4' class="navigation-tab default-background-disabled border-style border-radius">
-                    Что-то ещё
+                <span id='personality' class="navigation-tab default-background-disabled border-style border-radius">
+                    Личность
                 </span>
                 <span id='base5' class="navigation-tab default-background-disabled border-style border-radius">
                     Что-то ещё
@@ -103,8 +103,35 @@
                 <div id='characteristics-page' data-type='page'>
                     <span id='characteristics-left-text'>Осталось распределить <span id='characteristics-left-value'>27</span>/27 очков</span>
                 </div>
-                <div id='base4-page' data-type='page'>
-
+                <div id='personality-page' data-type='page'>
+                    <div id='name-sex-box' class='default-background default-inner-shadow border-style border-radius'>
+                        <label id='name-lable' for='name'>Имя персонажа:</label><input id='name' type='text' maxlength="20" class='input-font-style default-background border-style border-radius'>
+                        <label id='sex-label' for='sex'>Пол:</label><input id='sex' type='text' maxlength="18" class='input-font-style default-background border-style border-radius'>
+                        <label id='alignment-label' for='alignment'>Мировоззрение:</label>
+                        <select id='alignment' class='input-font-style default-background border-style border-radius'></select>
+                    </div>
+                    <div id='growth-weight-box' class='default-background default-inner-shadow border-style border-radius'>
+                        <div id='growth-box'>
+                            <label id='growth-label' for='growth'>Рост: </label>
+                            <div id='table-growth'>
+                                <div id='growth-container'>
+                                    <span id='growth-base'></span><span id='growth-roll'></span><span id='growth-result'></span>
+                                </div>
+                                <button id='roll-growth-button' class='default-button border-radius'></button>
+                            </div>
+                            <input id='growth' type='number' class='input-font-style default-background border-style border-radius'>
+                        </div>
+                        <div id='weight-box'>
+                            <label id='weight-label' for='weight'>Вес: </label>
+                            <div id='table-weight'>
+                                <div id='weight-container'>
+                                    <span id='weight-base'></span><span id='weight-roll'></span><span id='weight-result'></span>
+                                </div>
+                                <button id='roll-weight-button' class='default-button border-radius'></button>
+                            </div>
+                            <input id='weight' type='number' class='input-font-style default-background border-style border-radius'>
+                        </div>
+                    </div>
                 </div>
                 <div id='base5-page' data-type='page'>
 
@@ -116,8 +143,8 @@
     </footer>
     <script src="javascript/app.js"></script>
     <script src="javascript/data.js"></script>
-    <script src="javascript/auth.js"></script>
     <script src="javascript/main_func.js"></script>
+    <script src="javascript/auth.js"></script>
     <script src="javascript/builder.js"></script>
     <script src="javascript/svg_fix.js"></script>
 </body>

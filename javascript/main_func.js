@@ -73,15 +73,15 @@ let russianVocabulary = {
     "Charisma": "Харизма",
 
     "Alignment": "Мировоззрение",
-    "Lawful Good": "Законопослушный Добрый",
-    "Lawful Neutral": "Законопослушный Нейтральный",
-    "Lawful Evil": "Законопослушный Злой",
-    "Neutral Good": "Нейтральный Добрый",
-    "True Neutral": "Истинно Нейтральный",
-    "Neutral Evil": "Нейтральный Злой",
-    "Chaotic Good": "Хаотичный Добрый",
-    "Chaotic Neutral": "Хаточино Нейтральный",
-    "Chaotic Evil": "Хаотично Злой",
+    "Lawful Good": "Законно-добрый",
+    "Lawful Neutral": "Законно-нейтральный",
+    "Lawful Evil": "Законно-злой",
+    "Neutral Good": "Нейтрально-добрый",
+    "True Neutral": "Нейтральный",
+    "Neutral Evil": "Нейтрально-злой",
+    "Chaotic Good": "Хаотично-добрый",
+    "Chaotic Neutral": "Хаотично-нейтральный",
+    "Chaotic Evil": "Хаотично-злой",
 
     "Class": "Класс",
     "Barbarian": "Варвар",
@@ -135,14 +135,58 @@ let russianVocabulary = {
     "Urchin": "Беспризорник",
 }
 
+function getRandomFloat(min, max) {
+    return Math.random() * (max - min) + min;
+}
+
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+}
+
+function getRandomInRange(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 function rollDice(count, diceType) {
     let sum = 0;
     for (let i = 0; i < count; i++)
-        sum += Math.floor(Math.random() * diceType + 1);
+        sum += getRandomInRange(1, diceType);
     return {
         value: sum,
         count: count,
         type: diceType
+    }
+}
+
+function getExpires() {
+    let today = new Date();
+    let expires = new Date();
+    expires.setTime(today.getTime() + 1000 * 60 * 60 * 24 * 365);
+    return expires;
+}
+
+function setCookie(name, value, expire) {
+    document.cookie = name + "=" + escape(value) +
+        //В строку дописывается имя устанавливаемой cookie
+        ((expire == null) ? "" : ("; expires=" + expire.toGMTString()))
+    //Устанавливается время действия
+}
+
+function getCookie(Name) {
+    var search = Name + "="
+    //Создается строка для поиска в document.cookie
+    if (document.cookie.length > 0) {
+        offset = document.cookie.indexOf(search)
+        //Поиск cookie по ее имени
+        if (offset != -1) {
+            offset += search.length
+            end = document.cookie.indexOf(";", offset)
+            //Определили положение нужной cookie, и по индексам вырежем ее
+            if (end == -1)
+                end = document.cookie.length
+            return unescape(document.cookie.substring(offset, end))
+            //Вернули подстроку, содержащюю нужное значение cookie
+        }
     }
 }
 
