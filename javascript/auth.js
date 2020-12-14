@@ -1,5 +1,17 @@
 'use strict'
 
+checkLogin();
+
+async function checkLogin() {
+    await getLogged();
+
+    if (localStorage.loggedUser) {
+    }
+    else {
+        location.href = "/login.php";
+    }
+}
+
 if (getCookie('isMetric') == undefined) {
     setCookie('isMetric', true, getExpires());
 }
