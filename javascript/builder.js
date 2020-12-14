@@ -32,25 +32,6 @@ const allAlignments = [
     "Chaotic Evil",
 ]
 
-let alignmentSelect = document.getElementById('alignment');
-for (let alignment of allAlignments) {
-    let option = document.createElement('option');
-    option.value = alignment;
-    option.textContent = translateTo('language', capitalize('firstOfAllWord', alignment));
-    alignmentSelect.append(option);
-}
-
-let raceSelect = document.getElementById('race-select');
-let subraceSelect = document.getElementById('subrace-select');
-let characteristicsIncreaseElements = document.getElementById('characteristics-increase-elements');
-let raceTraitsFeaturesElements = document.getElementById('race-traits-features-elements');
-
-raceSelect.addEventListener('change', raceSelected);
-subraceSelect.addEventListener('change', subraceSelected);
-raceSelect.addEventListener('change', optionSelected);
-subraceSelect.addEventListener('change', optionSelected);
-subraceSelect.parentElement.style.display = "none";
-
 const allCharacteristics = [
     "Strength",
     "Dexterity",
@@ -146,6 +127,26 @@ const growthWeightTable = {
         "weightCube": [2, 4]
     },
 }
+
+let alignmentSelect = document.getElementById('alignment');
+for (let alignment of allAlignments) {
+    let option = document.createElement('option');
+    option.value = alignment;
+    option.textContent = translateTo('language', capitalize('firstOfAllWord', alignment));
+    alignmentSelect.append(option);
+}
+
+let raceSelect = document.getElementById('race-select');
+let subraceSelect = document.getElementById('subrace-select');
+let characteristicsIncreaseElements = document.getElementById('characteristics-increase-elements');
+let raceTraitsFeaturesElements = document.getElementById('race-traits-features-elements');
+
+raceSelect.addEventListener('change', raceSelected);
+subraceSelect.addEventListener('change', subraceSelected);
+raceSelect.addEventListener('change', optionSelected);
+subraceSelect.addEventListener('change', optionSelected);
+raceSelect.addEventListener('change', rollGrowthWeight);
+subraceSelect.parentElement.style.display = "none";
 
 function setPointsLeft() {
     let pointsLeft = 27;
@@ -518,55 +519,54 @@ function optionSelected() {
     choosedCharacter.json[this.id.split('-')[0]] = this.value;
 }
 
-document.getElementById('roll-growth-button').addEventListener('click', rollGrowth);
-document.getElementById('roll-weight-button').addEventListener('click', rollWeight);
+document.getElementById('roll-growth-weight-button').addEventListener('click', rollGrowthWeight);
 
-function rollGrowth() {
-    let growthCube = growthWeightTable[raceSelect.value + " " + subraceSelect.value].growthCube;
-    let rollResult = rollDice(growthCube[0], growthCube[1]).value;
+function rollGrowthWeight() {
+    let growthCube = growthWeightTable[raceSelect.value + (subraceSelect.value ? (" " + subraceSelect.value) : "")].growthCube;
+    let gRollResult = rollDice(growthCube[0], growthCube[1]).value;
 
     let isMetric = (getCookie("isMetric") == "true");
 
     let multiplier = (isMetric ? 2.54 : 1);
-    let divider = (isMetric ? 100 : 12);
-    let measure = (isMetric ? ["м", "см"] : ["'", "\""]);
+    let gDivider = (isMetric ? 100 : 12);
+    let gMeasure = (isMetric ? ["м", "см"] : ["'", "\""]);
 
     let baseG = [
-        Math.floor((growthWeightTable[raceSelect.value + " " + subraceSelect.value].baseGrowth * multiplier) / divider),
-        ((growthWeightTable[raceSelect.value + " " + subraceSelect.value].baseGrowth * multiplier) % divider)
+        Math.floor((growthWeightTable[raceSelect.value + (subraceSelect.value ? (" " + subraceSelect.value) : "")].baseGrowth * multiplier) / gDivider),
+        ((growthWeightTable[raceSelect.value + (subraceSelect.value ? (" " + subraceSelect.value) : "")].baseGrowth * multiplier) % gDivider)
     ];
 
     let rollG = [
-        Math.floor((rollResult * multiplier) / divider),
-        ((rollResult * multiplier) % divider)
+        Math.floor((gRollResult * multiplier) / gDivider),
+        ((gRollResult * multiplier) % gDivider)
     ];
 
     let resultG = [
-        Math.floor((baseG[0] + rollG[0]) + (baseG[1] + rollG[1]) / divider),
-        ((baseG[1] + rollG[1]) % divider)
+        Math.floor((baseG[0] + rollG[0]) + (baseG[1] + rollG[1]) / gDivider),
+        ((baseG[1] + rollG[1]) % gDivider)
     ];
 
-    document.getElementById('growth-base').textContent = "" + baseG[0] + measure[0] + (isMetric ? " " : "") + Number(baseG[1].toFixed(2 * isMetric)).toString() + measure[1] + " + ";
-    document.getElementById('growth-roll').textContent = "" + rollG[0] + measure[0] + (isMetric ? " " : "") + Number(rollG[1].toFixed(2 * isMetric)).toString() + measure[1] + " = ";
-    document.getElementById('growth-result').textContent = "" + resultG[0] + measure[0] + (isMetric ? " " : "") + Number(resultG[1].toFixed(2 * isMetric)).toString() + measure[1];
-}
+    document.getElementById('growth-base').textContent = "" + baseG[0] + gMeasure[0] + (isMetric ? " " : "") + Number(baseG[1].toFixed(2 * isMetric)).toString() + gMeasure[1] + " + ";
+    document.getElementById('growth-roll').textContent = "" + rollG[0] + gMeasure[0] + (isMetric ? " " : "") + Number(rollG[1].toFixed(2 * isMetric)).toString() + gMeasure[1] + " = ";
+    document.getElementById('growth-result').textContent = "" + resultG[0] + gMeasure[0] + (isMetric ? " " : "") + Number(resultG[1].toFixed(2 * isMetric)).toString() + gMeasure[1];
 
-function rollWeight() {
-    let weightCube = growthWeightTable[raceSelect.value + " " + subraceSelect.value].weightCube;
-    let rollResult = rollDice(weightCube[0], weightCube[1]).value;
+    let weightCube = growthWeightTable[raceSelect.value + (subraceSelect.value ? (" " + subraceSelect.value) : "")].weightCube;
+    let wRollResult = rollDice(weightCube[0], weightCube[1]).value;
 
-    let isMetric = (getCookie("isMetric") == "true");
+    let wDivider = (isMetric ? 2.205 : 1);
+    let wMeasure = (isMetric ? "кг" : "фнт");
 
-    let divider = (isMetric ? 2.205 : 1);
-    let measure = (isMetric ? "кг" : "фнт");
-
-    let baseW = Math.round((growthWeightTable[raceSelect.value + " " + subraceSelect.value].baseWeight) / divider);
-    let rollW = Math.round((rollResult) / divider);
+    let baseW = growthWeightTable[raceSelect.value + (subraceSelect.value ? (" " + subraceSelect.value) : "")].baseWeight;
+    let rollW = wRollResult * gRollResult;
     let resultW = (baseW + rollW);
 
-    document.getElementById('weight-base').textContent = "" + baseW + " " + measure + " + ";
-    document.getElementById('weight-roll').textContent = "" + rollW + " " + measure + " = ";
-    document.getElementById('weight-result').textContent = "" + resultW + " " + measure;
+    baseW /= wDivider;
+    rollW /= wDivider;
+    resultW /= wDivider;
+
+    document.getElementById('weight-base').textContent = "" + baseW.toFixed(0) + " " + wMeasure + " + ";
+    document.getElementById('weight-roll').textContent = "" + rollW.toFixed(0) + " " + wMeasure + " = ";
+    document.getElementById('weight-result').textContent = "" + resultW.toFixed(0) + " " + wMeasure;
 }
 
 window.addEventListener("load", function () {
@@ -591,6 +591,5 @@ window.addEventListener("load", function () {
 
     raceSelect.dispatchEvent(new Event('change'));
 
-    rollGrowth();
-    rollWeight();
+    rollGrowthWeight();
 });
