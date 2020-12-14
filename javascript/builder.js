@@ -6,7 +6,7 @@ let activeTab = null;
 let tabs = Array.from(document.getElementsByClassName("navigation-tab"));
 
 tabs.forEach(tab => tab.addEventListener('click', selectPage));
-tabs[3].dispatchEvent(new Event('click'));
+tabs[2].dispatchEvent(new Event('click'));
 
 function selectPage() {
     activeTab = this;
