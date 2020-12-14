@@ -546,9 +546,9 @@ function rollGrowthWeight() {
         ((baseG[1] + rollG[1]) % gDivider)
     ];
 
-    document.getElementById('growth-base').textContent = "" + baseG[0] + gMeasure[0] + (isMetric ? " " : "") + Number(baseG[1].toFixed(2 * isMetric)).toString() + gMeasure[1] + " + ";
-    document.getElementById('growth-roll').textContent = "" + rollG[0] + gMeasure[0] + (isMetric ? " " : "") + Number(rollG[1].toFixed(2 * isMetric)).toString() + gMeasure[1] + " = ";
-    document.getElementById('growth-result').textContent = "" + resultG[0] + gMeasure[0] + (isMetric ? " " : "") + Number(resultG[1].toFixed(2 * isMetric)).toString() + gMeasure[1];
+    document.getElementById('growth-base').textContent = "" + baseG[0] + gMeasure[0] + (isMetric ? " " : "") + Math.round(baseG[1]) + gMeasure[1] + " + ";
+    document.getElementById('growth-roll').textContent = "" + rollG[0] + gMeasure[0] + (isMetric ? " " : "") + Math.round(rollG[1]) + gMeasure[1] + " = ";
+    document.getElementById('growth-result').textContent = "" + resultG[0] + gMeasure[0] + (isMetric ? " " : "") + Math.round(resultG[1]) + gMeasure[1];
 
     let weightCube = growthWeightTable[raceSelect.value + (subraceSelect.value ? (" " + subraceSelect.value) : "")].weightCube;
     let wRollResult = rollDice(weightCube[0], weightCube[1]).value;
