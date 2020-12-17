@@ -6,7 +6,7 @@ let activeTab = null;
 let tabs = Array.from(document.getElementsByClassName("navigation-tab"));
 
 tabs.forEach(tab => tab.addEventListener('click', selectPage));
-tabs[2].dispatchEvent(new Event('click'));
+tabs[3].dispatchEvent(new Event('click'));
 
 function selectPage() {
     activeTab = this;
@@ -147,6 +147,31 @@ raceSelect.addEventListener('change', optionSelected);
 subraceSelect.addEventListener('change', optionSelected);
 raceSelect.addEventListener('change', rollGrowthWeight);
 subraceSelect.parentElement.style.display = "none";
+
+let manuallyCheckbox = document.getElementById('manually-checkbox');
+manuallyCheckbox.addEventListener('change', displayManuallyGrowthWeight);
+manuallyCheckbox.dispatchEvent(new Event('change'));
+
+function displayManuallyGrowthWeight() {
+    if (manuallyCheckbox.checked) {
+        document.getElementById('table-growth').style.display = 'none';
+        document.getElementById('table-weight').style.display = 'none';
+        document.getElementById('roll-growth-weight-button').style.display = 'none';
+
+        document.getElementById('growth').style.display = '';
+        document.getElementById('growth').style.display = '';
+        document.getElementById('weight').style.display = '';
+        document.getElementById('weight-measure').style.display = '';
+    } else {
+        document.getElementById('table-growth').style.display = '';
+        document.getElementById('table-weight').style.display = '';
+        document.getElementById('roll-growth-weight-button').style.display = '';
+
+        document.getElementById('growth').style.display = 'none';
+        document.getElementById('weight').style.display = 'none';
+        document.getElementById('weight-measure').style.display = 'none';
+    }
+}
 
 function setPointsLeft() {
     let pointsLeft = 27;
