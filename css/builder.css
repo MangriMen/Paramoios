@@ -624,9 +624,9 @@ input:focus+.slider {
 }
 
 input:checked+.slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
+  -webkit-transform: translateX(1.3rem);
+  -ms-transform: translateX(1.3rem);
+  transform: translateX(1.3rem);
   background-color: white;
 }
 
@@ -638,4 +638,54 @@ input:checked+.slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+#background-box {
+  display: grid;
+  box-sizing: border-box;
+  row-gap: 1rem;
+  padding: 0.8rem;
+}
+
+#background-label {
+  grid-row: 1;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+#background-select {
+  grid-row: 2;
+  text-align-last: center;
+}
+
+.d6-roll-button {
+  height: 1.5rem;
+  width: 1.5rem;
+  background-color: #82262b;
+  background-image: url("../images/buttons/dices/D6_Top.svg");
+}
+
+.personality-box {
+  display: grid;
+  grid-template-columns: 1.5rem auto;
+}
+
+.personality-roll-button {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.personality-label {
+  margin-left: 0.5rem;
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: left;
+  align-self: center;
+}
+
+.personality-text {
+  grid-row: 4;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  text-indent: 1rem;
 }

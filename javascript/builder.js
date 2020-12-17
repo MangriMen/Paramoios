@@ -138,15 +138,20 @@ for (let alignment of allAlignments) {
 
 let raceSelect = document.getElementById('race-select');
 let subraceSelect = document.getElementById('subrace-select');
+let backgroundSelect = document.getElementById('background-select');
 let characteristicsIncreaseElements = document.getElementById('characteristics-increase-elements');
 let raceTraitsFeaturesElements = document.getElementById('race-traits-features-elements');
 
 raceSelect.addEventListener('change', raceSelected);
-subraceSelect.addEventListener('change', subraceSelected);
 raceSelect.addEventListener('change', optionSelected);
-subraceSelect.addEventListener('change', optionSelected);
 raceSelect.addEventListener('change', rollGrowthWeight);
+
+subraceSelect.addEventListener('change', subraceSelected);
+subraceSelect.addEventListener('change', optionSelected);
 subraceSelect.parentElement.style.display = "none";
+
+backgroundSelect.addEventListener('change', backgroundSelected);
+backgroundSelect.addEventListener('change', optionSelected);
 
 let manuallyCheckbox = document.getElementById('manually-checkbox');
 manuallyCheckbox.addEventListener('change', displayManuallyGrowthWeight);
@@ -599,6 +604,44 @@ function rollGrowthWeight() {
     document.getElementById('weight-result').textContent = "" + resultW.toFixed(0) + " " + wMeasure;
 }
 
+document.getElementById('traits-roll-button').addEventListener('click', function () { rollPersonalityField("traits") });
+const traitsText = document.getElementById('traits-text');
+
+document.getElementById('ideals-roll-button').addEventListener('click', function () { rollPersonalityField("ideals") });
+const idealsText = document.getElementById('ideals-text');
+
+document.getElementById('bonds-roll-button').addEventListener('click', function () { rollPersonalityField("bonds") });
+const bondsText = document.getElementById('bonds-text');
+
+document.getElementById('flaws-roll-button').addEventListener('click', function () { rollPersonalityField("flaws") });
+const flawsText = document.getElementById('flaws-text');
+
+function rollPersonalityField(personality) {
+    if (personality == "traits")
+        traitsText.textContent = user.background[backgroundSelect.value].personality.personalityTraits[
+            getRandomInRange(0, user.background[backgroundSelect.value].personality.personalityTraits.length - 1)
+        ];
+    else if (personality == "ideals")
+        idealsText.textContent = user.background[backgroundSelect.value].personality.ideals[
+            getRandomInRange(0, user.background[backgroundSelect.value].personality.ideals.length - 1)
+        ];
+    else if (personality == "bonds")
+        bondsText.textContent = user.background[backgroundSelect.value].personality.bonds[
+            getRandomInRange(0, user.background[backgroundSelect.value].personality.bonds.length - 1)
+        ];
+    else if (personality == "flaws")
+        flawsText.textContent = user.background[backgroundSelect.value].personality.flaws[
+            getRandomInRange(0, user.background[backgroundSelect.value].personality.flaws.length - 1)
+        ];
+}
+
+function backgroundSelected() {
+    rollPersonalityField("traits");
+    rollPersonalityField("ideals");
+    rollPersonalityField("bonds");
+    rollPersonalityField("flaws");
+}
+
 window.addEventListener("load", function () {
     user = JSON.parse(localStorage[localStorage.loggedUser]);
     userJSONFix();
@@ -618,8 +661,15 @@ window.addEventListener("load", function () {
         characteristicCards[card].calcModifiers();
     }
 
+    for (let background in user.background) {
+        let option = document.createElement('option');
+        option.value = background;
+        option.textContent = translateTo('language', background);
+        backgroundSelect.append(option);
+    }
 
     raceSelect.dispatchEvent(new Event('change'));
 
     rollGrowthWeight();
+    backgroundSelected();
 });
