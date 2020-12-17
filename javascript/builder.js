@@ -546,6 +546,11 @@ function optionSelected() {
 
 document.getElementById('roll-growth-weight-button').addEventListener('click', rollGrowthWeight);
 
+let isMetric = (getCookie("isMetric") == "true");
+document.getElementById('growth-primary-measure').textContent = measureSystem[isMetric | 0][0];
+document.getElementById('growth-secondary-measure').textContent = measureSystem[isMetric | 0][1];
+document.getElementById('weight-measure').textContent = weightSystem[isMetric | 0];
+
 function rollGrowthWeight() {
     let growthCube = growthWeightTable[raceSelect.value + (subraceSelect.value ? (" " + subraceSelect.value) : "")].growthCube;
     let gRollResult = rollDice(growthCube[0], growthCube[1]).value;
@@ -554,7 +559,7 @@ function rollGrowthWeight() {
 
     let multiplier = (isMetric ? 2.54 : 1);
     let gDivider = (isMetric ? 100 : 12);
-    let gMeasure = (isMetric ? ["м", "см"] : ["'", "\""]);
+    let gMeasure = measureSystem[isMetric | 0];
 
     let baseG = [
         Math.floor((growthWeightTable[raceSelect.value + (subraceSelect.value ? (" " + subraceSelect.value) : "")].baseGrowth * multiplier) / gDivider),
@@ -579,7 +584,7 @@ function rollGrowthWeight() {
     let wRollResult = rollDice(weightCube[0], weightCube[1]).value;
 
     let wDivider = (isMetric ? 2.205 : 1);
-    let wMeasure = (isMetric ? "кг" : "фнт");
+    let wMeasure = weightSystem[isMetric | 0];
 
     let baseW = growthWeightTable[raceSelect.value + (subraceSelect.value ? (" " + subraceSelect.value) : "")].baseWeight;
     let rollW = wRollResult * gRollResult;

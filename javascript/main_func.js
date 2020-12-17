@@ -135,6 +135,16 @@ let russianVocabulary = {
     "Urchin": "Беспризорник",
 }
 
+const measureSystem = [
+    ["'", "\""],
+    ["м", "см"]
+]
+
+const weightSystem = [
+    "фут.",
+    "кг"
+]
+
 function getRandomFloat(min, max) {
     return Math.random() * (max - min) + min;
 }
