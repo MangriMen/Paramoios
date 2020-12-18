@@ -42,6 +42,7 @@ select {
   appearance: none;
   text-indent: 0.01px;
   outline: none;
+  border: none;
 }
 
 /*IE*/
@@ -58,10 +59,9 @@ select::-ms-expand {
   }
 }
 
-.clear-select {
-  outline: none;
-  background: none;
-  border: none;
+.select-padding {
+  background-position: 100% 55%;
+  padding-right: 1rem;
 }
 
 .default-button {

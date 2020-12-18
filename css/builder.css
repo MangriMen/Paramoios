@@ -66,6 +66,10 @@
   column-gap: 1.5rem;
 }
 
+#race-select, #subrace-select {
+  text-align-last: center;
+}
+
 #info-box {
   display: grid;
   grid-template-rows: auto auto auto;
@@ -82,27 +86,23 @@
   font-size: 1.8rem;
 }
 
-#characteristics-increase-box {
+.characteristics-flex-box {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
 
-#characteristics-increase-text {
+.characteristics-flex-text {
   font-size: 1.2rem;
   margin-bottom: 0.5rem;
 }
 
-#characteristics-increase-elements {
+.characteristics-flex-elements {
   display: flex;
   flex-flow: column wrap;
   flex-direction: column;
   box-sizing: border-box;
   max-height: 5rem;
-}
-
-#characteristics-increase-elements .characteristic-box:nth-child(odd) {
-  margin-bottom: 0.5rem;
 }
 
 .characteristic-box {
@@ -111,10 +111,17 @@
   justify-content: space-between;
   padding: 0.1rem 0.2rem;
   margin-right: 0.4rem;
+  margin-bottom: 0.4rem;
+  text-align: justify;
+  text-align: justify;
 }
 
 .characteristic-box *:first-child {
-  margin-right: 0.5rem;
+  margin-right: 0.1rem;
+}
+
+.characteristic-box *:last-child {
+  margin-left: 0.4rem;
 }
 
 #race-traits-features-box {
@@ -688,4 +695,13 @@ input:checked+.slider:before {
   grid-column-start: 1;
   grid-column-end: 3;
   text-indent: 1rem;
+}
+
+#skills-box {
+  flex-direction: row;
+}
+
+#equipment-box {
+  flex-direction: row;
+  max-height: none;
 }

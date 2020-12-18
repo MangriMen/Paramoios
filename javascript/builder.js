@@ -38,8 +38,39 @@ const allCharacteristics = [
     "Constitution",
     "Intelligence",
     "Wisdom",
-    "Charisma"
+    "Charisma",
 ]
+
+const allLanguages = {
+    "CommonLang": {
+        "Typical Speakers": ["Humans"],
+        "Script": "CommonScript"
+    },
+    "DwarvishLang": {
+        "Typical Speakers": ["Dwarves"],
+        "Script": "DwarvishScript"
+    },
+    "ElvishLang": {
+        "Typical Speakers": ["Elves"],
+        "Script": "ElvishScript"
+    },
+    "GiantLang": {
+        "Typical Speakers": ["Ogres", "Giants"],
+        "Script": "DwarvishScript"
+    },
+    "GnomishLang": {
+        "Typical Speakers": ["Gnomes"],
+        "Script": "DwarvishScript"
+    },
+    "HalflingLang": {
+        "Typical Speakers": ["Haflings"],
+        "Script": "CommonScript"
+    },
+    "OrcLang": {
+        "Typical Speakers": ["Orcs"],
+        "Script": "DwarvishScript"
+    },
+}
 
 const growthWeightTable = {
     "Human": {
@@ -318,26 +349,36 @@ let characteristicCards = {
     "charismaCard": new CharacteristicsCard("charisma")
 }
 
-function additionalCharacteristicSelected() {
-    let that = this;
-    this.parentElement.parentElement.childNodes.forEach(node => {
+function additionalCharacteristicSelected(element, array) {
+    let that = element;
+    element.parentElement.parentElement.childNodes.forEach(node => {
         if (node.id.substring(0, node.id.length - 1) == 'any') {
             if (node.id != that.parentElement.id) {
                 let temp = node.firstChild.value;
                 clearElement(node.firstChild);
 
-                node.firstChild.appendChild(createOptionForChooseCharacteristic("Select item"));
-                for (let defchar of allCharacteristics) {
-                    node.firstChild.appendChild(createOptionForChooseCharacteristic(defchar));
-                    if (temp == defchar) {
-                        node.firstChild.value = temp;
+                // node.firstChild.appendChild(createOptionForChooseCharacteristic("Select item"));
+                if (Array.isArray(array)) {
+                    for (let defchar of array) {
+                        node.firstChild.appendChild(createOptionForChooseCharacteristic(defchar));
+                        if (temp == defchar) {
+                            node.firstChild.value = temp;
+                        }
+                    }
+                }
+                else {
+                    for (let defchar in array) {
+                        node.firstChild.appendChild(createOptionForChooseCharacteristic(defchar));
+                        if (temp == defchar) {
+                            node.firstChild.value = temp;
+                        }
                     }
                 }
             }
         }
     });
 
-    this.parentElement.parentElement.childNodes.forEach(node => {
+    element.parentElement.parentElement.childNodes.forEach(node => {
         if (node.id.substring(0, node.id.length - 1) == 'any') {
             if (node.id != that.parentElement.id) {
                 node.firstChild.childNodes.forEach(option => {
@@ -453,32 +494,42 @@ function createFeaturesBox(feature, place) {
     return featuresBox;
 }
 
-function createCharacteristicBox(characteristic, place) {
+function createCharacteristicBox(characteristic, place, selectArray = null) {
     let characteristicBox = document.createElement('div');
     characteristicBox.id = characteristic;
     characteristicBox.classList = 'characteristic-box default-background border-style border-radius default-inner-shadow';
     let characteristicText;
 
-    if (characteristic.substring(0, characteristic.length - 1) == "any") {
+    if ((selectArray != null) && (characteristic.substring(0, characteristic.length - 1) == "any")) {
         characteristicText = document.createElement('select');
-        characteristicText.classList = 'clear-select default-background input-font-style';
-        characteristicText.addEventListener('change', additionalCharacteristicSelected);
+        characteristicText.classList = 'select-padding default-background input-font-style';
+        characteristicText.addEventListener('change', function () { additionalCharacteristicSelected(this, selectArray) });
 
-        characteristicText.appendChild(createOptionForChooseCharacteristic("Select item"));
-        for (let defchar of allCharacteristics) {
-            characteristicText.appendChild(createOptionForChooseCharacteristic(defchar));
+        // characteristicText.appendChild(createOptionForChooseCharacteristic("Select item"));
+        if (Array.isArray(selectArray)) {
+            for (let defchar of selectArray) {
+                characteristicText.appendChild(createOptionForChooseCharacteristic(defchar));
+            }
+        }
+        else {
+            for (let defchar in selectArray) {
+                characteristicText.appendChild(createOptionForChooseCharacteristic(defchar));
+            }
         }
     }
     else {
+        console.log(characteristic);
         characteristicText = document.createElement('span');
         characteristicText.textContent = translateTo('language', characteristic);
     }
 
-    let characteristicValue = document.createElement('span');
-    characteristicValue.textContent = addSignToNumber(place[characteristic]);
-
     characteristicBox.appendChild(characteristicText);
-    characteristicBox.appendChild(characteristicValue);
+
+    if (place[characteristic]) {
+        let characteristicValue = document.createElement('span');
+        characteristicValue.textContent = addSignToNumber(place[characteristic]);
+        characteristicBox.appendChild(characteristicValue);
+    }
 
     return characteristicBox;
 }
@@ -494,10 +545,11 @@ function raceSelected() {
         raceTraitsFeaturesElements.appendChild(featuresBox);
     }
     for (let characteristic in user.race[raceSelect.value].bonuses.characteristic) {
-        let characteristicBox = createCharacteristicBox(characteristic, user.race[raceSelect.value].bonuses.characteristic);
+        let characteristicBox = createCharacteristicBox(characteristic, user.race[raceSelect.value].bonuses.characteristic, allCharacteristics);
         characteristicBox.dataset.origin = "race";
         characteristicsIncreaseElements.appendChild(characteristicBox);
     }
+    dispacthAllSelect(characteristicsIncreaseElements);
     for (let subrace in user.race[raceSelect.value].subraces) {
         let option = document.createElement('option');
         option.value = subrace;
@@ -536,10 +588,11 @@ function subraceSelected() {
         }
     }
     for (let characteristic in user.race[raceSelect.value].subraces[subraceSelect.value].bonuses.characteristic) {
-        let characteristicBox = createCharacteristicBox(characteristic, user.race[raceSelect.value].subraces[subraceSelect.value].bonuses.characteristic);
+        let characteristicBox = createCharacteristicBox(characteristic, user.race[raceSelect.value].subraces[subraceSelect.value].bonuses.characteristic, allCharacteristics);
         characteristicBox.dataset.origin = "subrace";
         characteristicsIncreaseElements.appendChild(characteristicBox);
     }
+    dispacthAllSelect(characteristicsIncreaseElements);
 
     for (let card in characteristicCards)
         CharacteristicsCard.calcSum(characteristicCards[card]);
@@ -635,11 +688,64 @@ function rollPersonalityField(personality) {
         ];
 }
 
+const skillsBox = document.getElementById('skills-box');
+const languagesBox = document.getElementById('languages-box');
+
+function dispacthAllSelect(box) {
+    Array.from(box.getElementsByTagName('select')).forEach(element => {
+        element.dispatchEvent(new Event('change'));
+        console.log(element);
+    });
+}
+
+function loadSkills() {
+    clearElement(skillsBox);
+    for (let skill of user.background[backgroundSelect.value].skillProfencies) {
+        let skillsBoxElement = createCharacteristicBox(skill, user.background[backgroundSelect.value].skillProfencies);
+        skillsBox.appendChild(skillsBoxElement);
+    }
+    dispacthAllSelect(skillsBox);
+}
+
+
+
+function loadLanguages() {
+    clearElement(languagesBox);
+    if (user.background[backgroundSelect.value].languages <= 0) {
+        languagesBox.display = 'none';
+    }
+    else {
+        for (let language = 0; language < user.background[backgroundSelect.value].languages; language++) {
+            let languagesBoxElement = createCharacteristicBox(`any${language}`, user.background[backgroundSelect.value].languages, allLanguages);
+            languagesBox.appendChild(languagesBoxElement);
+        }
+        dispacthAllSelect(languagesBox);
+    }
+}
+
+const equipmentBox = document.getElementById('equipment-box');
+
+function loadEquipment() {
+    clearElement(equipmentBox);
+    for (let thing of user.background[backgroundSelect.value].equipment) {
+        let equipmentBoxElement = createCharacteristicBox(thing, user.background[backgroundSelect.value].equipment);
+        equipmentBox.appendChild(equipmentBoxElement);
+    }
+    for (let choice = 0; choice < user.background[backgroundSelect.value].equipmentToChoice; choice++) {
+        let equipmentBoxElement = createCharacteristicBox(`any${choice}`, user.background[backgroundSelect.value].equipmentToChoice, user.background[backgroundSelect.value].equipmentToChooseFrom[choice]);
+        equipmentBox.appendChild(equipmentBoxElement);
+    }
+    dispacthAllSelect(equipmentBox);
+}
+
 function backgroundSelected() {
     rollPersonalityField("traits");
     rollPersonalityField("ideals");
     rollPersonalityField("bonds");
     rollPersonalityField("flaws");
+    loadSkills();
+    loadLanguages();
+    loadEquipment();
 }
 
 window.addEventListener("load", function () {

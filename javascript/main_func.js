@@ -27,6 +27,11 @@ const levelDependenceTable = {
 let russianVocabulary = {
     "Select Item": "Выберите пункт",
 
+    "M": "м",
+    "Cm": "см",
+    "Ft": "фут.",
+    "Kg": "кг",
+
     "Darkvision": "Тёмное Зрение",
     "Dwarven Resilience": "Дварфская Устойчивость",
     "Tool Proficiency": "Владение Инструментами",
@@ -133,16 +138,52 @@ let russianVocabulary = {
     "Sailor": "Моряк",
     "Soldier": "Солдат",
     "Urchin": "Беспризорник",
+
+    "Skill": "Навык",
+    "Acrobatics": "Акробатика",
+    "Animal Handling": "Уход за животными",
+    "Arcana": "Магия",
+    "Athletics": "Атлетика",
+    "Deception": "Обман",
+    "History": "История",
+    "Insight": "Проницательность",
+    "Intimidation": "Запугивание",
+    "Investigation": "Расследование",
+    "Medicine": "Медицина",
+    "Nature": "Природа",
+    "Perception": "Восприятие",
+    "Performance": "Навык",
+    "Persuasion": "Убеждение",
+    "Religion": "Религия",
+    "Sleight Of Hand": "Ловкость рук",
+    "Stealth": "Скрытность",
+    "Survival": "Выживание",
+
+    "Language": "Язык",
+    "GiantLang": "Великаний",
+    "GnomishLang": "Гномий",
+    "GoblinLang": "Гоблинский",
+    "DwarvishLang": "Дварфийский",
+    "CommonLang": "Общий",
+    "OrcLang": "Орочий",
+    "HalflingLang": "Полуросликов",
+    "ElvishLang": "Эльфийский",
+
+    // "Scipt": "Письменность",
+    // "test": "Великанья",
+    // "test": "Дварфская",
+    // "test": "Общая",
+    // "test": "Эльфийская",
 }
 
 const measureSystem = [
     ["'", "\""],
-    ["м", "см"]
+    [translateTo('language', "m"), translateTo('language', "cm")]
 ]
 
 const weightSystem = [
-    "фут.",
-    "кг"
+    translateTo('language', "ft"),
+    translateTo('language', "kg")
 ]
 
 function getRandomFloat(min, max) {
@@ -386,7 +427,7 @@ function translateTo(option, str) {
         var translatedWord = getKeyByValue(selectedVocabulary, str);
     }
 
-    return translatedWord != null ? translatedWord : String(undefined);
+    return translatedWord != null ? translatedWord : str;
 }
 
 function capitalize(option, str) {
