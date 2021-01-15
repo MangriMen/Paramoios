@@ -3,8 +3,8 @@
     "short_name": "DnD5CharlistI",
     "start_url": "/index.html",
     "display": "standalone",
-    "background_color": "#d4bf9b",
-    "theme_color": "#681e22",
+    "background_color": "var(--bg-n-color)",
+    "theme_color": "var(--accent-n-color)",
     "orientation": "portrait-primary",
     "icons": [
         {

@@ -1,52 +1,80 @@
-.armor-svg .cls-1{ /*фон*/
+.armor-svg .cls-1 {
+  /*фон*/
   fill: #c3c3c3;
   stroke: none;
 }
-.armor-svg .cls-2{ /*внешний контур*/
-  fill: #681e22;
+
+.armor-svg .cls-2 {
+  /*внешний контур*/
+  fill: var(--accent-n-color);
 }
-.armor-svg .cls-3{ /*внутренний контур*/
-  stroke: #681e22;
+
+.armor-svg .cls-3 {
+  /*внутренний контур*/
+  stroke: var(--accent-n-color);
 }
-.armor-svg .cls-4{ /*фон внутреннего контура*/
+
+.armor-svg .cls-4 {
+  /*фон внутреннего контура*/
   fill: #7f7f7f;
   stroke: none;
 }
-.initiative-svg .cls-1{ /*фон*/
+
+.initiative-svg .cls-1 {
+  /*фон*/
   fill: #d2b5d2;
   stroke: none;
 }
-.initiative-svg .cls-2{ /*внешний контур*/
-  fill: #681e22;
+
+.initiative-svg .cls-2 {
+  /*внешний контур*/
+  fill: var(--accent-n-color);
 }
-.initiative-svg .cls-3{ /*внутренний контур*/
-  stroke: #681e22;
+
+.initiative-svg .cls-3 {
+  /*внутренний контур*/
+  stroke: var(--accent-n-color);
 }
-.inspiration-svg .cls-1{ /*фон*/
+
+.inspiration-svg .cls-1 {
+  /*фон*/
   fill: #a6c4b6;
   stroke: none;
 }
-.inspiration-svg .cls-2{ /*внешний контур*/
-  fill: #681e22;
+
+.inspiration-svg .cls-2 {
+  /*внешний контур*/
+  fill: var(--accent-n-color);
 }
-.inspiration-svg .cls-3{ /*внутренний контур*/
-  stroke: #681e22;
+
+.inspiration-svg .cls-3 {
+  /*внутренний контур*/
+  stroke: var(--accent-n-color);
 }
-.speed-svg .cls-1{ /*фон*/
+
+.speed-svg .cls-1 {
+  /*фон*/
   fill: #99d9ea;
   stroke: none;
 }
-.speed-svg .cls-2{ /*внешний контур*/
-  fill: #681e22;
+
+.speed-svg .cls-2 {
+  /*внешний контур*/
+  fill: var(--accent-n-color);
 }
-.speed-svg .cls-3{ /*внутренний контур*/
-  stroke: #681e22;
+
+.speed-svg .cls-3 {
+  /*внутренний контур*/
+  stroke: var(--accent-n-color);
 }
-.speed-svg .cls-4{ /*фон внутреннего контура*/
+
+.speed-svg .cls-4 {
+  /*фон внутреннего контура*/
   fill: #2495b0;
   stroke: none;
 }
+
 .d20-svg .cls-1 {
-  fill: #681e22;
-  stroke: #fff;
+  fill: var(--accent-n-color);
+  stroke: var(--white);
 }

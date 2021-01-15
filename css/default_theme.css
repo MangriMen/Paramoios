@@ -1,9 +1,19 @@
+:root {
+  --white: #ffffff;
+  --black: #000000;
+  --bg-d-color: #a19175;
+  --bg-n-color: #d4bf9b;
+  --bg-l-color: #edd6ad;
+  --accent-n-color: #681e22;
+  --accent-l-color: #b5353b;
+}
+
 a {
   outline: none;
 }
 
 header {
-  background-color: #681e22;
+  background-color: var(--accent-n-color);
 }
 
 input {
@@ -71,15 +81,15 @@ select::-ms-expand {
 }
 
 .default-background {
-  background-color: #d4bf9b;
+  background-color: var(--bg-n-color);
 }
 
 .default-background-disabled {
-  background-color: #a19175;
+  background-color: var(--bg-d-color);
 }
 
 .border-style {
-  border: 2px solid #681e22;
+  border: 2px solid var(--accent-n-color);
 }
 
 .border-radius {
@@ -91,12 +101,12 @@ select::-ms-expand {
 }
 
 #header-title {
-  color: #fff;
-  text-shadow: 0 0 5px #fff;
+  color: var(--white);
+  text-shadow: 0 0 5px var(--white);
 }
 
 .header-buttons {
-  color: #fff;
+  color: var(--white);
 }
 
 .xp-color {
@@ -104,8 +114,8 @@ select::-ms-expand {
 }
 
 #xp-next-level {
-  border: 1.5px solid #681e22;
-  background-color: #edd6ad;
+  border: 1.5px solid var(--accent-n-color);
+  background-color: var(--bg-l-color);
 }
 
 .characteristic-bonus::after, .characteristic-value::after, .characteristic-death-save::after, .characteristic-death-save-checkbox::after {
@@ -113,7 +123,7 @@ select::-ms-expand {
 }
 
 .hp-color {
-  background-color: #b5353b;
+  background-color: var(--accent-l-color);
 }
 
 .max-hp-temp-color {
@@ -125,24 +135,24 @@ select::-ms-expand {
 }
 
 .select-hover-active:hover {
-  background-color: #e0caa2;
-  border: 2px solid #A83137;
+  background-color: var(--bg-l-color);
+  border: 2px solid var(--accent-l-color);
 }
 
 .select-hover-focus:focus {
-  border: 2px solid #A83137;
+  border: 2px solid var(--accent-l-color);
 }
 
 .default-hover-active:hover {
-  background-color: #edd6ad;
+  background-color: var(--bg-l-color);
 }
 
 .default-hover-active:active {
-  background-color: #baa888;
+  background-color: var(--bg-l-color);
 }
 
 .default-button:focus {
-  border-color: #b5353b;
+  border-color: var(--accent-l-color);
 }
 
 .default-text-shadow {
@@ -167,13 +177,13 @@ select::-ms-expand {
 
 .beautiful-alert {
   color: white;
-  background-color: #681e22;
+  background-color: var(--accent-n-color);
   border: 10px solid #4f181a;
 }
 
 #item-additional {
   background-color: #85615a;
-  border: 3px solid #681e22;
+  border: 3px solid var(--accent-n-color);
   box-shadow: 0 0 10px 2px #424242;
 }
 
@@ -193,7 +203,7 @@ select::-ms-expand {
 }
 
 #main-dice:hover, .dice-in-list:hover, #death-saves-dice:hover {
-  background-color: #9c2d33;
+  background-color: var(--accent-l-color);
 }
 
 #main-dice:active, .dice-in-list:active, #death-saves-dice:active {
@@ -206,7 +216,7 @@ select::-ms-expand {
 }
 
 .currency-value:focus {
-  outline: 2px solid #cf3a42;
+  outline: 2px solid var(--accent-l-color);
 }
 
 .bar-text {
@@ -217,7 +227,7 @@ select::-ms-expand {
 }
 
 .bar-text:focus {
-  outline: 2px solid #cf3a42;
+  outline: 2px solid var(--accent-l-color);
 }
 
 .character-name {
@@ -226,14 +236,14 @@ select::-ms-expand {
 }
 
 .character-name:focus {
-  outline: 3px solid #cf3a42;
+  outline: 3px solid var(--accent-l-color);
   outline-offset: -0.12em;
 }
 
 .default-textarea-scrollbar {
   scrollbar-width: thin;
   scrollbar-color: #82262b transparent;
-  scrollbar-highlight-color: #9c2d33;
+  scrollbar-highlight-color: var(--accent-l-color);
 }
 
 .default-textarea-scrollbar::-webkit-scrollbar-thumb {
@@ -241,7 +251,7 @@ select::-ms-expand {
 }
 
 .default-textarea-scrollbar::-webkit-scrollbar-thumb:active {
-  background-color: #9c2d33;
+  background-color: var(--accent-l-color);
 }
 
 .characteristic-not-proficient {
@@ -254,7 +264,7 @@ select::-ms-expand {
 }
 
 .characteristic-proficient {
-  background-color: #d4bf9b;
+  background-color: var(--bg-n-color);
 }
 
 .characteristic-expertise {
@@ -262,12 +272,12 @@ select::-ms-expand {
 }
 
 .file-custom::before {
-  background-color: #edd6ad;
+  background-color: var(--bg-l-color);
 }
 
 .active-tab {
   position: relative;
-  background-color: #d4bf9b;
+  background-color: var(--bg-n-color);
 }
 
 .active-tab::before {

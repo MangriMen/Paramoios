@@ -14,19 +14,19 @@
   margin-bottom: 1.5rem;
 }
 
-#add-info-box {
+#add-info-box, .add-info-box {
   padding: 0.8rem;
   transition: transform 1s ease-in-out;
 }
 
-#add-info-race-img {
+#add-info-race-img, .add-info-img {
   width: 100%;
   height: auto;
   margin-top: auto;
   margin-bottom: 1rem;
 }
 
-#add-info-text {
+#add-info-text, .add-info-text {
   display: block;
   box-sizing: border-box;
   min-height: 15%;
@@ -120,7 +120,7 @@
   margin-right: 0.1rem;
 }
 
-.characteristic-box *:last-child {
+.characteristic-box *:nth-child(2) {
   margin-left: 0.4rem;
 }
 
@@ -173,9 +173,9 @@
   position: absolute;
   width: 6rem;
   height: 0;
-  border: 0.12rem solid #681e22;
+  border: 0.12rem solid var(--accent-n-color);
   border-radius: 0.12rem;
-  background-color: #681e22;
+  background-color: var(--accent-n-color);
   left: 0;
   right: 60%;
   top: 0;
@@ -188,9 +188,9 @@
   position: absolute;
   width: 6rem;
   height: 0;
-  border: 0.12rem solid #681e22;
+  border: 0.12rem solid var(--accent-n-color);
   border-radius: 0.12rem;
-  background-color: #681e22;
+  background-color: var(--accent-n-color);
   right: 0;
   left: 60%;
   top: 0;
@@ -205,7 +205,7 @@
   right: 0;
   bottom: 0;
   margin: auto;
-  background-color: #681e22;
+  background-color: var(--accent-n-color);
   width: 2.25rem;
   height: 2.25rem;
   border-radius: 50% 0;
@@ -293,7 +293,7 @@
 }
 
 .table-round-wrapper {
-  border: 3px solid #681e22;
+  border: 3px solid var(--accent-n-color);
   box-sizing: border-box;
   border-radius: 0.6rem;
 }
@@ -303,7 +303,7 @@
 }
 
 .characteristics-table tr td:last-child {
-  border-left: 3px solid #681e22;
+  border-left: 3px solid var(--accent-n-color);
 }
 
 .characteristics-table tr:first-child td:first-child {
@@ -325,7 +325,7 @@
 }
 
 .characteristics-table td {
-  border: 3px solid #681e22;
+  border: 3px solid var(--accent-n-color);
   border-top: none;
   border-right: none;
   border-left: none;
@@ -388,7 +388,7 @@
   width: auto;
   color: white;
   text-align: center;
-  background-color: #681e22;
+  background-color: var(--accent-n-color);
   font-size: 1.2rem;
   height: 1.6rem;
 }
@@ -619,11 +619,11 @@
 }
 
 input:checked+.slider {
-  background-color: #681e22;
+  background-color: var(--accent-n-color);
 }
 
 input+.slider {
-  box-shadow: 0 0 0px 0.1rem #681e22;
+  box-shadow: 0 0 0px 0.1rem var(--accent-n-color);
 }
 
 input:focus+.slider {

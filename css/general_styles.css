@@ -1,6 +1,7 @@
 ::selection {
   background: #ccc;
 }
+
 @font-face {
   font-family: "Eberron";
   src: url("../fonts/EBERRON_RUS.otf") format("truetype");
@@ -8,6 +9,7 @@
   font-weight: normal;
   font-display: swap;
 }
+
 html {
   font-family: Eberron;
   font-size: 20px;
@@ -15,39 +17,49 @@ html {
   scrollbar-color: #dbb57b transparent;
   scrollbar-highlight-color: #ffd28f;
 }
+
 body {
   margin: 0;
-  background-color: #681e22;
+  background-color: var(--accent-n-color);
 }
+
 input {
   outline: none;
 }
+
 :-webkit-any-link {
   text-decoration: none;
 }
+
 a, a:link, a:visited, a:focus, a:hover, a:active {
   text-decoration: none;
 }
+
 ::-webkit-scrollbar-button {
   background-image: none !important;
-  background-repeat:no-repeat;
+  background-repeat: no-repeat;
   display: none;
 }
+
 ::-webkit-scrollbar-thumb {
   -webkit-border-radius: 200px;
   border-radius: 200px;
   background-color: #dbb57b;
 }
+
 ::-webkit-scrollbar-thumb:active {
-  background-color:#ffd28f;
+  background-color: #ffd28f;
 }
+
 ::-webkit-resizer {
   background: #dbb57b;
 }
+
 ::-webkit-scrollbar-corner {
-  background-color:#681e22;
+  background-color: var(--accent-n-color);
 }
-::-webkit-scrollbar{
+
+::-webkit-scrollbar {
   width: 7px;
   height: 7px;
 }

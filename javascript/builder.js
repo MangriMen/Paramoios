@@ -400,8 +400,12 @@ function createOptionForChooseCharacteristic(defchar) {
 
 let addInfoBox = document.getElementById('add-info-box');
 let raceCard = document.getElementById('race-card');
+let addInfoBoxBackground = document.getElementById('add-info-box-background');
+let backgroundCard = document.getElementById('background-card');
 let selectedAdditionalInfo = null;
+let selectedAdditionalInfoBackground = null;
 let isSwitching = false;
+let isSwitchingBackground = false;
 
 function changeRaceCard() {
     raceCard.querySelector('#add-info-race-img').src = 'Images/creatures/humanoids/races/' + raceSelect.value + '.png'
@@ -518,7 +522,6 @@ function createCharacteristicBox(characteristic, place, selectArray = null) {
         }
     }
     else {
-        console.log(characteristic);
         characteristicText = document.createElement('span');
         characteristicText.textContent = translateTo('language', characteristic);
     }
@@ -694,7 +697,6 @@ const languagesBox = document.getElementById('languages-box');
 function dispacthAllSelect(box) {
     Array.from(box.getElementsByTagName('select')).forEach(element => {
         element.dispatchEvent(new Event('change'));
-        console.log(element);
     });
 }
 

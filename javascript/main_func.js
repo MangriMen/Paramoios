@@ -152,7 +152,7 @@ let russianVocabulary = {
     "Medicine": "Медицина",
     "Nature": "Природа",
     "Perception": "Восприятие",
-    "Performance": "Навык",
+    "Performance": "Выступление",
     "Persuasion": "Убеждение",
     "Religion": "Религия",
     "Sleight Of Hand": "Ловкость рук",

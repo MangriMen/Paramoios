@@ -2,11 +2,13 @@ header {
   height: 1.6rem;
   line-height: 1.6rem;
 }
+
 main {
   display: grid;
   max-width: 960px;
   margin: 0.25em auto;
 }
+
 #header-center {
   max-width: 960px;
   height: 1.6rem;
@@ -17,21 +19,25 @@ main {
   justify-items: center;
   margin: auto;
 }
+
 .header-buttons {
   outline: none;
   background: none;
   border: none;
-  color: #fff;
+  color: var(--white);
   cursor: pointer;
 }
+
 #header-title {
   font-size: 1.2rem;
   margin-left: 0.4rem;
 }
+
 #user-checkbox {
   position: absolute;
   visibility: hidden;
 }
+
 #user-btn {
   grid-column: 5;
   padding: 0;
@@ -44,19 +50,24 @@ main {
   position: relative;
   z-index: 20;
 }
+
 #user-btn-img {
   width: 44px;
   border-radius: inherit;
 }
+
 #open-character {
   grid-column: 1;
 }
+
 #save-character {
   grid-column: 2;
 }
+
 #open-character, #save-character {
   white-space: nowrap;
 }
+
 .user-menu-buttons {
   position: absolute;
   display: inline-block;
@@ -67,23 +78,28 @@ main {
   height: 1.4rem;
   top: 0.1rem;
 }
-#user-checkbox:checked ~ .user-menu-buttons {
+
+#user-checkbox:checked~.user-menu-buttons {
   visibility: visible;
   opacity: 1;
 }
+
 #open-character {
   transition: 0.4s ease-out 0s;
 }
+
 #save-character {
   transition: 0.2s ease-out 0.2s;
 }
 
-#user-checkbox:checked ~ #open-character {
+#user-checkbox:checked~#open-character {
   right: 10.5rem;
 }
-#user-checkbox:checked ~ #save-character {
+
+#user-checkbox:checked~#save-character {
   right: 3rem;
 }
+
 .user-menu-buttons-down {
   position: absolute;
   visibility: hidden;
@@ -94,6 +110,7 @@ main {
   height: 1.7rem;
   z-index: -1;
 }
+
 .user-menu-buttons-down-img {
   position: absolute;
   width: 1rem;
@@ -108,52 +125,64 @@ main {
 #user-settings {
   transition: 0.1s ease-out 0s;
 }
+
 #link-logout {
   transition: 0.2s ease-out 0s;
 }
+
 #link-login {
   transition: 0.1s ease-out 0s;
 }
+
 #link-register {
   transition: 0.2s ease-out 0s;
 }
 
-#user-checkbox:not(:checked) ~ #user-settings {
+#user-checkbox:not(:checked)~#user-settings {
   transition: 0.1s ease-in 0.1s;
 }
-#user-checkbox:not(:checked) ~ #link-logout {
-  transition: 0.2s ease-in 0s;
-}
-#user-checkbox:not(:checked) ~ #link-login {
-  transition: 0.1s ease-in 0.1s;
-}
-#user-checkbox:not(:checked) ~ #link-register {
+
+#user-checkbox:not(:checked)~#link-logout {
   transition: 0.2s ease-in 0s;
 }
 
-#user-checkbox:checked ~ .user-menu-buttons-down {
+#user-checkbox:not(:checked)~#link-login {
+  transition: 0.1s ease-in 0.1s;
+}
+
+#user-checkbox:not(:checked)~#link-register {
+  transition: 0.2s ease-in 0s;
+}
+
+#user-checkbox:checked~.user-menu-buttons-down {
   top: 2.5rem;
   visibility: visible;
 }
-#user-checkbox:checked ~ #link-logout {
+
+#user-checkbox:checked~#link-logout {
   top: 4.6rem;
 }
-#user-checkbox:checked ~ #link-login {
+
+#user-checkbox:checked~#link-login {
   top: 2.5rem;
 }
-#user-checkbox:checked ~ #link-register {
+
+#user-checkbox:checked~#link-register {
   top: 4.6rem;
 }
+
 nav {
   display: flex;
   flex-direction: column;
   margin: 1rem;
 }
+
 #tabs {
   display: flex;
   flex-direction: row;
   padding-left: 1rem;
 }
+
 .navigation-tab {
   height: 1.8rem;
   min-width: 6rem;
@@ -165,12 +194,14 @@ nav {
   border-bottom: none;
   cursor: pointer;
 }
+
 #content-page {
   max-width: 920px;
   height: 36.3rem;
   padding: 1rem;
   box-sizing: border-box;
 }
+
 #avatar-box {
   grid-row: 2;
   display: flex;
@@ -178,19 +209,23 @@ nav {
   max-height: 5rem;
   justify-content: space-between;
 }
+
 #choose-avatar {
   margin-bottom: 1rem;
 }
+
 #submit-avatar {
   margin-bottom: 0;
   margin-top: auto;
 }
+
 #avatar-change-overlay {
   width: 100%;
   height: auto;
   display: block;
   position: relative;
 }
+
 #avatar-change-overlay::before {
   content: '';
   position: absolute;
@@ -200,17 +235,20 @@ nav {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.5);
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
   border-radius: 0.25rem;
 }
+
 #avatar-change-overlay:hover:before {
-  opacity: 1; 
+  opacity: 1;
 }
+
 #avatar-change-overlay:hover #avatar-change-text {
   opacity: 1;
 }
+
 #avatar-change-text {
   box-sizing: border-box;
   text-align: center;
@@ -228,24 +266,28 @@ nav {
   font-size: 2rem;
   transition: opacity 0.3s ease-in-out;
 }
+
 #avatar-img {
   width: inherit;
   height: auto;
   box-sizing: border-box;
   border-width: 0.25rem;
 }
+
 .file {
   position: relative;
   display: inline-block;
   cursor: pointer;
   height: 2rem;
 }
+
 .file input {
   min-width: 8rem;
   margin: 0;
   filter: alpha(opacity=0);
   opacity: 0;
 }
+
 .file-custom {
   position: absolute;
   top: 0;
@@ -257,13 +299,15 @@ nav {
   box-sizing: border-box;
   color: #555;
   -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
+
 .file-custom:after {
   content: attr(data-choose);
 }
+
 .file-custom:before {
   position: absolute;
   top: -0.1rem;
@@ -274,20 +318,23 @@ nav {
   content: attr(data-browse);
   height: 2rem;
   padding: inherit;
-  color: #000;
+  color: var(--black);
   border: inherit;
   box-sizing: inherit;
   border-radius: inherit;
 }
-.file input:focus ~ .file-custom {
-  border-color: #b5353b;
+
+.file input:focus~.file-custom {
+  border-color: var(--accent-l-color);
 }
+
 #profile-settings-page {
   max-width: inherit;
   display: none;
   grid-template-columns: 256px auto;
   column-gap: 1rem;
 }
+
 #information-box {
   grid-row: 1;
   grid-column: 2;
@@ -298,9 +345,11 @@ nav {
   row-gap: 1rem;
   align-items: center;
 }
+
 #player-email {
   font-size: 1.5rem;
 }
+
 #characters-page {
   max-width: inherit;
   width: 100%;
@@ -310,6 +359,7 @@ nav {
   row-gap: 1rem;
   position: relative;
 }
+
 .character-box {
   display: grid;
   grid-template-columns: auto 11.5rem auto;
@@ -321,12 +371,14 @@ nav {
   padding: 0.4rem;
   box-sizing: border-box;
   border-radius: 6px;
-  text-align:center;
+  text-align: center;
   cursor: pointer;
 }
+
 .character-box input {
   cursor: pointer;
 }
+
 .new-character-title {
   align-self: center;
   grid-column-start: 1;
@@ -335,6 +387,7 @@ nav {
   grid-row-end: 4;
   font-size: 4rem;
 }
+
 .avatar {
   grid-column: 1;
   grid-row-start: 1;
@@ -342,6 +395,7 @@ nav {
   height: 100%;
   box-sizing: border-box;
 }
+
 .naming-text {
   display: flex;
   position: relative;
@@ -349,21 +403,26 @@ nav {
   align-items: flex-end;
   min-width: 408px;
 }
+
 .profile-and-level {
   display: flex;
   flex-direction: column;
 }
+
 .character-name {
   font-size: 2rem;
   max-width: 20rem;
 }
+
 .character-origin {
   font-size: 1.2rem;
   line-height: 1.15rem;
 }
+
 .text-to-right {
   text-align: right;
 }
+
 .xp-bar {
   height: 25px;
   line-height: 20px;
@@ -374,6 +433,7 @@ nav {
   position: relative;
   width: 11.5rem;
 }
+
 .xp {
   font-size: 0.9rem;
   position: absolute;
@@ -384,6 +444,7 @@ nav {
   box-sizing: border-box;
   height: 100%;
 }
+
 .level-text {
   border-radius: 0 0 6px 6px;
   text-align: center;
@@ -392,29 +453,34 @@ nav {
   font-size: 0.9rem;
   width: 11.5rem;
 }
+
 .bar-animation {
   height: inherit;
   width: inherit;
   position: relative;
   overflow: hidden;
 }
+
 .bar-fill {
   height: inherit;
   transition: width 0.5s ease-out;
   position: relative;
 }
+
 .wave-level {
   right: -4%;
   top: -190%;
   width: 6rem;
   height: 6rem;
 }
+
 #health {
   margin: auto;
   display: grid;
   position: relative;
   justify-content: center;
 }
+
 .hp-bar {
   width: 11.5rem;
   height: 25px;
@@ -425,22 +491,26 @@ nav {
   position: relative;
   border-radius: 6px 6px 0 0;
 }
+
 .wave-main {
   position: absolute;
   border-radius: 40%;
   animation: wave 8s linear infinite;
 }
+
 .wave-hp {
   right: -4%;
   top: -190%;
   width: 6rem;
   height: 6rem;
 }
+
 @keyframes wave {
   100% {
-     transform: rotate(360deg);
+    transform: rotate(360deg);
   }
 }
+
 .hp {
   position: absolute;
   top: 0;
@@ -448,6 +518,7 @@ nav {
   right: 0;
   z-index: 2;
 }
+
 .money-box {
   display: flex;
   flex-direction: row;
@@ -456,6 +527,7 @@ nav {
   grid-row: 2;
   justify-content: space-between;
 }
+
 .currency-box {
   display: flex;
   flex-direction: row;
@@ -463,15 +535,18 @@ nav {
   padding: 0.2rem 0.4rem;
   width: 5rem;
 }
+
 .currency-img {
   height: 1.2rem;
   width: 1.2rem;
   margin-right: 0.5rem;
 }
+
 .currency-value {
   width: 100%;
   font-size: 0.8rem;
 }
+
 .character-stats {
   display: flex;
   flex-direction: row;
@@ -480,11 +555,13 @@ nav {
   grid-column-end: 4;
   grid-row: 3;
 }
+
 .characteristic {
   display: grid;
   grid-template-columns: 3rem 2rem;
   grid-template-rows: 1rem 1rem;
 }
+
 .characteristic-text {
   grid-column: 1;
   grid-row-start: 1;
@@ -495,6 +572,7 @@ nav {
   text-align: center;
   line-height: 1.8rem;
 }
+
 .characteristic-bonus {
   grid-column: 2;
   grid-row: 1;
@@ -506,6 +584,7 @@ nav {
   box-sizing: border-box;
   font-size: 0.9rem;
 }
+
 .characteristic-value {
   grid-column: 2;
   grid-row: 2;
@@ -516,12 +595,14 @@ nav {
   box-sizing: border-box;
   font-size: 0.9rem;
 }
+
 .loading-overlay {
   position: absolute;
   width: 100%;
   height: 34.1rem;
   z-index: 100;
 }
+
 .loading-animation {
   position: absolute;
   top: 0;
@@ -529,13 +610,14 @@ nav {
   right: 0;
   bottom: 0;
   margin: auto;
-  background-color: #681e22;
+  background-color: var(--accent-n-color);
   width: 6rem;
   height: 6rem;
   border-radius: 50% 0;
   z-index: 101;
   animation: round 8s linear infinite;
 }
+
 .loading-animation-inner {
   position: absolute;
   top: 0;
@@ -549,23 +631,27 @@ nav {
   border-radius: 0 50%;
   animation: roundReverse 4s linear infinite;
 }
+
 @keyframes round {
   100% {
-     transform: rotate(360deg);
+    transform: rotate(360deg);
   }
 }
+
 @keyframes roundReverse {
   100% {
-     transform: rotate(-360deg);
+    transform: rotate(-360deg);
   }
 }
+
 #avatar-crop-layout {
   position: fixed;
-  background-color: rgba(0,0,0, 0.7);
+  background-color: rgba(0, 0, 0, 0.7);
   width: 100vw;
   height: 100vh;
   z-index: 200;
 }
+
 #avatar-crop-box {
   position: absolute;
   top: 0;
@@ -583,10 +669,12 @@ nav {
   z-index: 201;
   align-items: center;
 }
+
 #avatar-crop-field {
   grid-row: 1;
   align-self: flex-start;
 }
+
 #avatar-crop-field img {
   max-width: 100%;
 }

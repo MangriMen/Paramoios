@@ -2,11 +2,13 @@ header {
   height: 1.6rem;
   line-height: 1.6rem;
 }
+
 main {
   display: grid;
   max-width: 960px;
   margin: 0.25em auto;
 }
+
 #header-center {
   max-width: 960px;
   height: 1.6rem;
@@ -17,37 +19,44 @@ main {
   justify-items: center;
   margin: auto;
 }
+
 .header-buttons {
   outline: none;
   background: none;
   border: none;
-  color: #fff;
+  color: var(--white);
   cursor: pointer;
 }
+
 #header-title {
   font-size: 1.2rem;
   margin-left: 0.4rem;
 }
+
 #naming {
   display: flex;
   max-width: 960px;
   margin-bottom: 1.5rem;
 }
+
 #naming-text {
   display: flex;
   position: relative;
   flex-direction: column;
   width: calc(100vw - 7em);
 }
+
 #profile-and-level {
   display: flex;
   flex-direction: column;
   margin: 0.8em 1rem;
 }
+
 #avatar {
   width: 4.8rem;
   border-radius: 6px 6px 0 0;
 }
+
 #xp-bar {
   height: 20px;
   line-height: 20px;
@@ -58,6 +67,7 @@ main {
   position: relative;
   width: 4.8rem;
 }
+
 #xp {
   font-size: 0.9rem;
   position: absolute;
@@ -68,23 +78,27 @@ main {
   box-sizing: border-box;
   height: 100%;
 }
+
 .bar-animation {
   height: inherit;
   width: inherit;
   position: relative;
   overflow: hidden;
 }
+
 .bar-fill {
   height: inherit;
   transition: width 0.5s ease-out;
   position: relative;
 }
+
 .wave-level {
   right: -2%;
   top: -250%;
   width: 6rem;
   height: 6rem;
 }
+
 #xp-next-level {
   position: absolute;
   left: 70%;
@@ -93,9 +107,11 @@ main {
   border-radius: 3px;
   padding: 2px 4px;
 }
+
 #level1:hover #xp-next-level {
   display: block;
 }
+
 #level-text {
   border-radius: 0 0 6px 6px;
   text-align: center;
@@ -103,17 +119,21 @@ main {
   height: 25px;
   font-size: 0.9rem;
 }
+
 #player-name {
   margin-top: 0.6rem;
   font-size: 1.3rem;
 }
+
 #known-as {
   font-size: 1.2rem;
 }
+
 .align-to-right {
   position: absolute;
   right: 0.2rem;
 }
+
 #character-name {
   font-size: 3.6rem;
   margin-top: 3rem;
@@ -121,14 +141,17 @@ main {
   box-sizing: border-box;
   max-width: 810px;
 }
+
 #character-origin {
   margin-top: 7rem;
   right: 1rem;
   font-size: 1.5rem;
 }
+
 .text-to-right {
   text-align: right;
 }
+
 #character-stats {
   display: flex;
   flex-direction: row;
@@ -138,6 +161,7 @@ main {
   padding: 0 1rem;
   margin: 0.5em 0;
 }
+
 .characteristic {
   width: 120px;
   height: 64px;
@@ -145,11 +169,13 @@ main {
   grid-template-columns: 60px 40px 20px;
   grid-template-rows: auto 20px 20px;
 }
+
 .characteristic-text {
   font-size: 0.9rem;
   grid-column-start: 1;
   grid-column-end: 4;
 }
+
 .characteristic-bonus {
   box-sizing: border-box;
   text-align: center;
@@ -162,6 +188,7 @@ main {
   grid-row-start: 2;
   grid-row-end: 4;
 }
+
 .characteristic-value {
   grid-column: 2;
   grid-row: 2;
@@ -172,6 +199,7 @@ main {
   border-bottom: none;
   border-radius: 0 6px 0 0;
 }
+
 .characteristic-death-save {
   grid-column: 2;
   grid-row: 3;
@@ -180,6 +208,7 @@ main {
   height: 20px;
   border-left: none;
 }
+
 .characteristic-death-save-checkbox {
   grid-column: 3;
   grid-row: 3;
@@ -187,30 +216,41 @@ main {
   width: 20px;
   height: 20px;
   border-left: none;
-  border-radius: 0 10px 10px 0 ;
+  border-radius: 0 10px 10px 0;
   cursor: pointer;
 }
+
 .characteristic-bonus, .characteristic-value, .characteristic-death-save, .characteristic-death-save-checkbox {
- position: relative;
+  position: relative;
 }
-.characteristic-bonus::after, .characteristic-value::after, .characteristic-death-save::after, .characteristic-death-save-checkbox::after
- {
-  content: ''; /* Добавляем пустое содержание для тени */
-  display: block; /* Блочный элемент */
+
+.characteristic-bonus::after, .characteristic-value::after, .characteristic-death-save::after, .characteristic-death-save-checkbox::after {
+  content: '';
+  /* Добавляем пустое содержание для тени */
+  display: block;
+  /* Блочный элемент */
   border-radius: 6px;
-  position: absolute; /* Абсолютное позиционирование */
-  top: -1px; bottom: 0;
-  left: -1px; right: -1px; /* Тень чуть больше ширины и высоты заголовка */
-  z-index: -1; /* Тень под блоком текста */
+  position: absolute;
+  /* Абсолютное позиционирование */
+  top: -1px;
+  bottom: 0;
+  left: -1px;
+  right: -1px;
+  /* Тень чуть больше ширины и высоты заголовка */
+  z-index: -1;
+  /* Тень под блоком текста */
 }
+
 .characteristic-death-save-checkbox::after {
   border-radius: 10px;
 }
+
 #main-dice {
   width: 54px;
   height: 54px;
   z-index: 22;
 }
+
 #dice-list {
   position: absolute;
   left: 0;
@@ -219,58 +259,75 @@ main {
   width: 54px;
   top: 50%;
 }
-#dice-list-checkbox:checked ~ .dice-in-list:nth-child(n) {
+
+#dice-list-checkbox:checked~.dice-in-list:nth-child(n) {
   width: 54px;
   height: 54px;
   z-index: 21;
   transition: hover 0s;
 }
+
 #d20-dice {
   transition: 0.3s ease-out 0s;
 }
-#dice-list-checkbox:checked ~ #d20-dice {
+
+#dice-list-checkbox:checked~#d20-dice {
   top: 2rem;
 }
+
 #d12-dice {
   transition: 0.3s ease-out 0.05s;
 }
-#dice-list-checkbox:checked ~ #d12-dice {
+
+#dice-list-checkbox:checked~#d12-dice {
   top: 5rem;
 }
+
 #d100-dice {
   transition: 0.3s ease-out 0.1s;
 }
-#dice-list-checkbox:checked ~ #d100-dice {
+
+#dice-list-checkbox:checked~#d100-dice {
   top: 8rem;
 }
+
 #d10-dice {
   transition: 0.3s ease-out 0.15s;
 }
-#dice-list-checkbox:checked ~ #d10-dice {
+
+#dice-list-checkbox:checked~#d10-dice {
   top: 11rem;
 }
+
 #d8-dice {
   transition: 0.3s ease-out 0.20s;
 }
-#dice-list-checkbox:checked ~ #d8-dice {
+
+#dice-list-checkbox:checked~#d8-dice {
   top: 14rem;
 }
+
 #d6-dice {
   transition: 0.3s ease-out 0.25s;
 }
-#dice-list-checkbox:checked ~ #d6-dice {
+
+#dice-list-checkbox:checked~#d6-dice {
   top: 17rem;
 }
+
 #d4-dice {
   transition: 0.3s ease-out 0.3s;
 }
-#dice-list-checkbox:checked ~ #d4-dice {
+
+#dice-list-checkbox:checked~#d4-dice {
   top: 20rem;
 }
+
 #dice-list-checkbox {
   position: absolute;
   visibility: hidden;
 }
+
 .dice-in-list {
   position: absolute;
   top: 0;
@@ -281,12 +338,14 @@ main {
   width: 10px;
   height: 10px;
 }
+
 #skills {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 37.5rem;
 }
+
 .skill-box {
   line-height: 24px;
   display: flex;
@@ -294,6 +353,7 @@ main {
   height: 20px;
   justify-content: space-between;
 }
+
 .skill-bonus {
   line-height: 20px;
   width: 40px;
@@ -301,6 +361,7 @@ main {
   text-align: center;
   font-size: 0.9rem;
 }
+
 .skill-text {
   line-height: 20px;
   width: 160px;
@@ -309,35 +370,35 @@ main {
   font-size: 0.8rem;
   text-transform: capitalize;
 }
+
 .skill-origin {
   font-size: 0.8rem;
   text-transform: uppercase;
 }
+
 .aiis-svg {
   width: 64px;
   height: 64px;
   border-radius: 3px;
 }
+
 #central {
   display: grid;
-  grid-template-columns:
-  auto
-  auto
-  auto;
-  grid-template-rows:
-  auto
-  auto;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: auto auto;
   row-gap: 1.5rem;
   justify-content: space-between;
   margin-top: 1rem;
   padding: 0 1em 1rem;
 }
+
 #health {
   margin: auto;
   display: grid;
   position: relative;
   justify-content: center;
 }
+
 #hp-bar {
   width: 11.5rem;
   height: 25px;
@@ -347,6 +408,7 @@ main {
   grid-row: 1;
   position: relative;
 }
+
 #hp-dialog {
   display: none;
   width: inherit;
@@ -357,6 +419,7 @@ main {
   margin: auto;
   text-align: center;
 }
+
 #temp-hp-dialog {
   display: none;
   width: inherit;
@@ -367,22 +430,26 @@ main {
   margin: auto;
   text-align: center;
 }
+
 .wave-main {
   position: absolute;
   border-radius: 40%;
   animation: wave 8s linear infinite;
 }
+
 .wave-hp {
   right: -4%;
   top: -190%;
   width: 6rem;
   height: 6rem;
 }
+
 @keyframes wave {
   100% {
-     transform: rotate(360deg);
+    transform: rotate(360deg);
   }
 }
+
 #heal, #damage, #temp {
   margin: 10px 0;
   display: inline-block;
@@ -390,6 +457,7 @@ main {
   height: 32px;
   line-height: 26px;
 }
+
 #hp {
   position: absolute;
   top: 0;
@@ -397,17 +465,20 @@ main {
   right: 0;
   z-index: 2;
 }
+
 #heal {
   justify-self: end;
   grid-column: 3;
   grid-row: 2;
 }
+
 #damage {
   justify-self: start;
   grid-column: 1;
   grid-row: 2;
 }
-#temp{
+
+#temp {
   justify-self: center;
   padding: 0;
   text-align: center;
@@ -417,6 +488,7 @@ main {
   height: 32px;
   width: 32px;
 }
+
 #hit-dice {
   height: 42px;
   width: 100%;
@@ -426,6 +498,7 @@ main {
   font-size: 0.65rem;
   text-align: left;
 }
+
 #death-saves-overlay {
   display: none;
   align-items: center;
@@ -436,8 +509,9 @@ main {
   width: 100vw;
   height: 100vh;
   z-index: 90;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0, 0, 0, 0.5);
 }
+
 #death-saves-window {
   display: flex;
   flex-direction: column;
@@ -448,6 +522,7 @@ main {
   height: 15.5rem;
   width: 20rem;
 }
+
 #death-saves-label {
   position: absolute;
   text-align: center;
@@ -457,6 +532,7 @@ main {
   right: 0;
   top: -0.7rem;
 }
+
 .death-saves-state {
   padding: 0 0.5rem;
   display: flex;
@@ -469,12 +545,14 @@ main {
   width: auto;
   line-height: 2rem;
 }
+
 #death-saves-interactive {
   display: flex;
   flex-direction: row;
   align-items: flex-end;
   justify-content: space-between;
 }
+
 .heart {
   position: relative;
   display: inline-block;
@@ -485,8 +563,8 @@ main {
   margin: 0 10px 10px 21px;
   top: 0;
 }
-.heart:before,
-.heart:after {
+
+.heart:before, .heart:after {
   content: "";
   background-color: inherit;
   border-radius: 50%;
@@ -494,31 +572,38 @@ main {
   position: absolute;
   width: 44px;
 }
+
 .heart:before {
   top: -22px;
   left: 0;
 }
+
 .heart:after {
   left: 22px;
   top: 0;
 }
+
 #death-saves-dice-remaining {
- font-size: 4rem;
+  font-size: 4rem;
 }
+
 #death-saves-dice {
   width: 72px;
   height: 72px;
 }
+
 .death-saves-mark {
   width: 32px;
   height: 32px;
 }
+
 .death-saves-marks {
   width: 6.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+
 #tibf {
   margin-top: 1.5rem;
   display: flex;
@@ -527,9 +612,11 @@ main {
   justify-content: space-between;
   height: 30.3rem;
 }
+
 .tibf-board {
   position: relative;
 }
+
 .tibf-element-area {
   resize: none;
   outline: none;
@@ -540,10 +627,12 @@ main {
   height: 6rem;
   box-sizing: border-box;
 }
+
 .tibf-element-area::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
+
 .tibf-element-label {
   position: absolute;
   text-align: center;
@@ -552,12 +641,14 @@ main {
   right: 0;
   top: -0.6rem;
 }
+
 #equipment-box {
   padding: 1.2em 0.5em 0.5rem;
   margin: 1.5em 0 0.5em 30px;
   display: flex;
   position: relative;
 }
+
 #equipment-label {
   position: absolute;
   text-align: center;
@@ -566,6 +657,7 @@ main {
   right: 0;
   top: -0.7rem;
 }
+
 #money-box {
   display: flex;
   flex-direction: column;
@@ -573,6 +665,7 @@ main {
   position: absolute;
   left: -1.8rem;
 }
+
 .currency-box {
   display: flex;
   flex-direction: row;
@@ -581,25 +674,30 @@ main {
   margin: 0.1rem;
   padding: 0.2rem;
 }
+
 .currency-img {
   height: 24px;
   width: 24px;
   margin: 0 0.4em 0 0;
 }
+
 .currency-value {
   font-size: 0.7rem;
   width: 100%;
 }
+
 #new-item {
   width: 47px;
   height: 32px;
   margin: auto 2em 0 0;
 }
+
 .new-item-img {
   width: 18px;
   height: 18px;
   margin: 0.3em 0 auto;
 }
+
 #equipment-flexible {
   height: 12rem;
   width: 8.5rem;
@@ -607,6 +705,7 @@ main {
   flex-grow: 1;
   overflow-y: auto;
 }
+
 .item {
   width: 32px;
   height: 32px;
@@ -614,6 +713,7 @@ main {
   cursor: pointer;
   position: relative;
 }
+
 #item-additional {
   position: absolute;
   height: 200px;
@@ -622,12 +722,14 @@ main {
   border-radius: 3px;
   text-align: center;
 }
+
 #item-display-name {
   width: calc(100% - 1em);
   box-sizing: border-box;
   margin: 0.5em 0;
   font-size: 0.8rem;
 }
+
 #item-additional-close {
   width: 14px;
   height: 14px;
@@ -636,11 +738,13 @@ main {
   right: -0.4rem;
   padding: 0;
 }
+
 #item-additional-close-img {
   width: 80%;
   height: 80%;
   margin: 0 0 0.45rem;
 }
+
 .new-item-dialog {
   display: none;
   width: 180px;
@@ -654,25 +758,30 @@ main {
   margin: auto;
   text-align: center;
 }
+
 .item-name {
   width: calc(100% - 1em);
   box-sizing: border-box;
   margin: 0.5em 0;
 }
+
 #hp-value {
   width: calc(100% - 1em);
   box-sizing: border-box;
   margin: 0.2em 0 0.5rem;
 }
+
 .choosing-state {
   font-size: 0.75rem;
   width: 4rem;
   border-width: 4px;
 }
+
 #confirm-hp, #cancel-hp {
   font-size: 0.7rem;
   width: 4.5rem;
 }
+
 .dialog-buttons {
   position: absolute;
   display: flex;
@@ -682,6 +791,7 @@ main {
   right: 0;
   bottom: -0.6rem;
 }
+
 #temp-hp-dialog-buttons {
   position: absolute;
   display: grid;
@@ -693,19 +803,22 @@ main {
   right: 0;
   bottom: -0.6rem;
 }
-#current-hp{
+
+#current-hp {
   width: 5rem;
   font-size: inherit;
   grid-row: 1;
   grid-column: 1;
 }
-#max-hp{
+
+#max-hp {
   width: 5rem;
   font-size: inherit;
   grid-row: 1;
   grid-column: 2;
 }
-#cancel-temp-hp{
+
+#cancel-temp-hp {
   grid-row: 2;
   grid-column-start: 1;
   grid-column-end: 3;
@@ -713,6 +826,7 @@ main {
   justify-self: center;
   font-size: inherit;
 }
+
 .item-select {
   display: flex;
   flex-wrap: wrap;
@@ -723,6 +837,7 @@ main {
   justify-content: space-between;
   align-content: space-evenly;
 }
+
 .image-select-button {
   width: 48px;
   height: 48px;
@@ -730,11 +845,13 @@ main {
   cursor: pointer;
   padding: 1px;
 }
+
 #fight-bonuses {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
+
 .fight-bonuses-value {
   position: absolute;
   margin: 0.5rem;
@@ -744,10 +861,12 @@ main {
   background: transparent;
   font-size: 1.5rem;
 }
+
 #fight-bonuses-checkbox {
   z-index: -1;
   position: absolute;
 }
+
 #fight-bonuses-checkbox-lable {
   background-image: url('../images/icons/success_mark.svg');
   position: absolute;
@@ -755,17 +874,21 @@ main {
   height: 1rem;
   width: 1rem;
 }
+
 #fight-bonuses-checkbox:unchecked+label {
   background-image: url('../images/icons/success_mark.svg');
 }
+
 #fight-bonuses-checkbox:checked+label {
   background-image: url('../images/icons/success_mark_checked.svg');
 }
+
 #attacks-and-spellcasting {
   padding: 1em 0 0;
   margin: 1em 0 0;
   position: relative;
 }
+
 #ans-label {
   position: absolute;
   text-align: center;
@@ -774,28 +897,35 @@ main {
   right: 0;
   top: -0.7rem;
 }
+
 #ans-items {
   width: 100%;
   border-spacing: 0.4rem;
 }
+
 #ans-items th {
   font-size: 0.8rem;
 }
+
 #ans-items td {
   height: 1rem;
 }
+
 #ans-item-bonus {
   max-width: 1rem;
 }
+
 #ans-item-dmg {
   max-width: 2rem;
 }
+
 #spellcasting {
   min-height: 8rem;
   margin: 0.4rem;
   position: relative;
   flex-grow: 1;
 }
+
 #features-and-traits {
   position: relative;
   grid-column-start: 2;
@@ -804,6 +934,7 @@ main {
   padding: 1.2rem 0.5rem 0.5rem;
   height: 10rem;
 }
+
 #features-and-traits-box {
   display: grid;
   grid-template-columns: 30% auto;
@@ -812,6 +943,7 @@ main {
   row-gap: 0.5rem;
   height: inherit;
 }
+
 #features-fixed {
   display: flex;
   flex-direction: column;
@@ -821,20 +953,24 @@ main {
   grid-row-start: 1;
   grid-row-end: 3;
 }
+
 #features-and-traits-flexible {
   max-width: 19.75rem;
   box-sizing: border-box;
   flex-grow: 1;
   overflow-y: auto;
 }
+
 #new-feature {
   grid-column: 2;
   grid-row: 2;
 }
+
 .fundamental-features {
   height: 25%;
   justify-content: space-between;
 }
+
 #other-proficiencies-and-languages {
   padding: 1.2rem 0.5rem 0.5rem;
   grid-column-start: 1;
@@ -843,19 +979,22 @@ main {
   height: 10rem;
   position: relative;
 }
+
 #other-proficiencies-and-languages-box {
   display: grid;
   grid-template-rows: 8rem auto;
   column-gap: 0.5rem;
   row-gap: 0.5rem;
 }
+
 #other-proficiencies-and-languages-flexible {
   box-sizing: border-box;
   width: 11.3rem;
   height: 100%;
   overflow-y: auto;
 }
-#other-proficiencies-and-languages-label, #features-and-traits-label  {
+
+#other-proficiencies-and-languages-label, #features-and-traits-label {
   position: absolute;
   text-align: center;
   margin: auto;
@@ -863,6 +1002,7 @@ main {
   right: 0;
   top: -0.7rem;
 }
+
 .beautiful-alert {
   display: flex;
   position: fixed;
@@ -878,9 +1018,11 @@ main {
   z-index: 100;
   transition: top 0.6s ease-in-out;
 }
+
 .beautiful-alert-erase-translate {
   top: -10rem !important;
 }
+
 #roll-alert {
   display: flex;
   flex-direction: column;
@@ -891,6 +1033,7 @@ main {
   z-index: 95;
   padding: 1rem;
 }
+
 .roll-alert-msg {
   display: flex;
   flex-direction: column;
@@ -908,13 +1051,16 @@ main {
   -o-transition: 1s;
   transition: 1s ease-in;
 }
+
 .roll-alert-msg-number {
   line-height: 3.5rem;
   font-size: 4rem;
 }
+
 .roll-alert-erase-translate {
   margin-left: -200% !important;
 }
+
 #drop-list {
   display: flex;
   flex-direction: column;
@@ -927,6 +1073,7 @@ main {
   height: 7rem;
   cursor: default;
 }
+
 .drop-list-text {
   display: flex;
   flex-direction: row;
@@ -937,6 +1084,7 @@ main {
   padding: 0.2rem 0.3rem;
   border-radius: 3px;
 }
+
 .drop-list-bonus {
   width: 1.2rem;
   height: 1.2rem;
@@ -944,10 +1092,12 @@ main {
   text-align: center;
   box-sizing: border-box;
 }
+
 #user-checkbox {
   position: absolute;
   visibility: hidden;
 }
+
 #user-btn {
   grid-column: 5;
   padding: 0;
@@ -960,19 +1110,24 @@ main {
   position: relative;
   z-index: 20;
 }
+
 #user-btn-img {
   width: 44px;
   border-radius: inherit;
 }
+
 #open-character {
   grid-column: 1;
 }
+
 #save-character {
   grid-column: 2;
 }
+
 #open-character, #save-character {
   white-space: nowrap;
 }
+
 .user-menu-buttons {
   position: absolute;
   display: inline-block;
@@ -983,21 +1138,25 @@ main {
   height: 1.4rem;
   top: 0.1rem;
 }
-#user-checkbox:checked ~ .user-menu-buttons {
+
+#user-checkbox:checked~.user-menu-buttons {
   visibility: visible;
   opacity: 1;
 }
+
 #open-character {
   transition: 0.4s ease-out 0s;
 }
+
 #save-character {
   transition: 0.2s ease-out 0.2s;
 }
 
-#user-checkbox:checked ~ #open-character {
+#user-checkbox:checked~#open-character {
   right: 10.5rem;
 }
-#user-checkbox:checked ~ #save-character {
+
+#user-checkbox:checked~#save-character {
   right: 3rem;
 }
 
@@ -1011,6 +1170,7 @@ main {
   height: 1.7rem;
   z-index: -1;
 }
+
 .user-menu-buttons-down-img {
   position: absolute;
   width: 1rem;
@@ -1025,39 +1185,48 @@ main {
 #user-settings {
   transition: 0.1s ease-out 0s;
 }
+
 #link-logout {
   transition: 0.2s ease-out 0s;
 }
+
 #link-login {
   transition: 0.1s ease-out 0s;
 }
+
 #link-register {
   transition: 0.2s ease-out 0s;
 }
 
-#user-checkbox:not(:checked) ~ #user-settings {
+#user-checkbox:not(:checked)~#user-settings {
   transition: 0.1s ease-in 0.1s;
 }
-#user-checkbox:not(:checked) ~ #link-logout {
-  transition: 0.2s ease-in 0s;
-}
-#user-checkbox:not(:checked) ~ #link-login {
-  transition: 0.1s ease-in 0.1s;
-}
-#user-checkbox:not(:checked) ~ #link-register {
+
+#user-checkbox:not(:checked)~#link-logout {
   transition: 0.2s ease-in 0s;
 }
 
-#user-checkbox:checked ~ .user-menu-buttons-down {
+#user-checkbox:not(:checked)~#link-login {
+  transition: 0.1s ease-in 0.1s;
+}
+
+#user-checkbox:not(:checked)~#link-register {
+  transition: 0.2s ease-in 0s;
+}
+
+#user-checkbox:checked~.user-menu-buttons-down {
   top: 2.5rem;
   visibility: visible;
 }
-#user-checkbox:checked ~ #link-logout {
+
+#user-checkbox:checked~#link-logout {
   top: 4.6rem;
 }
-#user-checkbox:checked ~ #link-login {
+
+#user-checkbox:checked~#link-login {
   top: 2.5rem;
 }
-#user-checkbox:checked ~ #link-register {
+
+#user-checkbox:checked~#link-register {
   top: 4.6rem;
 }
