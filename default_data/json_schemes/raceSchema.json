@@ -1,44 +1,42 @@
 {
-  "$schema":"http://json-schema.org/draft-07/schema",
-  "$id":"http://example.com/example.json",
-  "type":"object",
-  "title":"The root schema",
-  "description":"The root schema comprises the entire JSON document.",
-  "default":{
-
-  },
-  "examples":[
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "http://example.com/example.json",
+  "type": "object",
+  "title": "The root schema",
+  "description": "The root schema comprises the entire JSON document.",
+  "default": {},
+  "examples": [
     {
-      "Dwarf":{
-        "bonuses":{
-          "characteristic":{
-            "constitution":2
+      "Dwarf": {
+        "bonuses": {
+          "characteristic": {
+            "constitution": 2
           }
         },
-        "speed":25,
-        "skills":[
+        "speed": 25,
+        "skill": [
           "Darkvision",
           "Dwarven resilience",
           "Dwarven combat training",
           "Tool proficiency",
           "Stonecunning"
         ],
-        "languages":[
+        "languages": [
           "Dwarvish"
         ],
-        "subraces":{
-          "hill":{
-            "bonuses":{
-              "characteristic":{
-                "wisdom":1
+        "subraces": {
+          "hill": {
+            "bonuses": {
+              "characteristic": {
+                "wisdom": 1
               },
-              "hpMax":10
+              "hpMax": 10
             }
           },
-          "mountain":{
-            "bonuses":{
-              "characteristic":{
-                "strength":2
+          "mountain": {
+            "bonuses": {
+              "characteristic": {
+                "strength": 2
               }
             }
           }
@@ -46,109 +44,99 @@
       }
     }
   ],
-  "required":[
-
-  ],
-  "additionalProperties":true,
-  "properties":{
-    "Dwarf":{
-      "$id":"#/properties/Dwarf",
-      "type":"object",
-      "title":"The Dwarf schema",
-      "description":"An explanation about the purpose of this instance.",
-      "default":{
-
-      },
-      "examples":[
+  "required": [],
+  "additionalProperties": true,
+  "properties": {
+    "Dwarf": {
+      "$id": "#/properties/Dwarf",
+      "type": "object",
+      "title": "The Dwarf schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": {},
+      "examples": [
         {
-          "bonuses":{
-            "characteristic":{
-              "constitution":2
+          "bonuses": {
+            "characteristic": {
+              "constitution": 2
             }
           },
-          "speed":25,
-          "skills":[
+          "speed": 25,
+          "skill": [
             "Darkvision",
             "Dwarven resilience",
             "Dwarven combat training",
             "Tool proficiency",
             "Stonecunning"
           ],
-          "languages":[
+          "languages": [
             "Dwarvish"
           ],
-          "subraces":{
-            "hill":{
-              "bonuses":{
-                "characteristic":{
-                  "wisdom":1
+          "subraces": {
+            "hill": {
+              "bonuses": {
+                "characteristic": {
+                  "wisdom": 1
                 },
-                "hpMax":10
+                "hpMax": 10
               }
             },
-            "mountain":{
-              "bonuses":{
-                "characteristic":{
-                  "strength":2
+            "mountain": {
+              "bonuses": {
+                "characteristic": {
+                  "strength": 2
                 }
               }
             }
           }
         }
       ],
-      "required":[
+      "required": [
         "bonuses",
         "speed",
-        "skills",
+        "skill",
         "languages"
       ],
-      "additionalProperties":true,
-      "properties":{
-        "bonuses":{
-          "$id":"#/properties/Dwarf/properties/bonuses",
-          "type":"object",
-          "title":"The bonuses schema",
-          "description":"An explanation about the purpose of this instance.",
-          "default":{
-
-          },
-          "examples":[
+      "additionalProperties": true,
+      "properties": {
+        "bonuses": {
+          "$id": "#/properties/Dwarf/properties/bonuses",
+          "type": "object",
+          "title": "The bonuses schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": {},
+          "examples": [
             {
-              "characteristic":{
-                "constitution":2
+              "characteristic": {
+                "constitution": 2
               }
             }
           ],
-          "required":[
+          "required": [
             "characteristic"
           ],
-          "additionalProperties":true,
-          "properties":{
-            "characteristic":{
-              "$id":"#/properties/Dwarf/properties/bonuses/properties/characteristic",
-              "type":"object",
-              "title":"The characteristic schema",
-              "description":"An explanation about the purpose of this instance.",
-              "default":{
-
-              },
-              "examples":[
+          "additionalProperties": true,
+          "properties": {
+            "characteristic": {
+              "$id": "#/properties/Dwarf/properties/bonuses/properties/characteristic",
+              "type": "object",
+              "title": "The characteristic schema",
+              "description": "An explanation about the purpose of this instance.",
+              "default": {},
+              "examples": [
                 {
-                  "constitution":2
+                  "constitution": 2
                 }
               ],
-              "required":[
-
-              ],
-              "additionalProperties":true,
-              "properties":{
-                "constitution":{
-                  "$id":"#/properties/Dwarf/properties/bonuses/properties/characteristic/properties/constitution",
-                  "type":"integer",
-                  "title":"The constitution schema",
-                  "description":"An explanation about the purpose of this instance.",
-                  "default":0,
-                  "examples":[
+              "required": [],
+              "additionalProperties": true,
+              "properties": {
+                "constitution": {
+                  "$id": "#/properties/Dwarf/properties/bonuses/properties/characteristic/properties/constitution",
+                  "type": "integer",
+                  "title": "The constitution schema",
+                  "description": "An explanation about the purpose of this instance.",
+                  "default": 0,
+                  "examples": [
                     2
                   ]
                 }
@@ -156,196 +144,178 @@
             }
           }
         },
-        "speed":{
-          "$id":"#/properties/Dwarf/properties/speed",
-          "type":"integer",
-          "title":"The speed schema",
-          "description":"An explanation about the purpose of this instance.",
-          "default":0,
-          "examples":[
+        "speed": {
+          "$id": "#/properties/Dwarf/properties/speed",
+          "type": "integer",
+          "title": "The speed schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": 0,
+          "examples": [
             25
           ],
-          "maximum":100,
-          "minimum":0,
-          "maxLength":2
+          "maximum": 100,
+          "minimum": 0,
+          "maxLength": 2
         },
-        "skills":{
-          "$id":"#/properties/Dwarf/properties/skills",
-          "type":"array",
-          "title":"The skills schema",
-          "description":"An explanation about the purpose of this instance.",
-          "default":[
-
-          ],
-          "examples":[
+        "skill": {
+          "$id": "#/properties/Dwarf/properties/skill",
+          "type": "array",
+          "title": "The skill schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": [],
+          "examples": [
             [
               "Darkvision",
               "Dwarven resilience"
             ]
           ],
-          "additionalItems":true,
-          "items":{
-            "anyOf":[
+          "additionalItems": true,
+          "items": {
+            "anyOf": [
               {
-                "$id":"#/properties/Dwarf/properties/skills/items/anyOf/0",
-                "type":"string",
-                "title":"The first anyOf schema",
-                "description":"An explanation about the purpose of this instance.",
-                "default":"",
-                "examples":[
+                "$id": "#/properties/Dwarf/properties/skill/items/anyOf/0",
+                "type": "string",
+                "title": "The first anyOf schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": "",
+                "examples": [
                   "Darkvision",
                   "Dwarven resilience"
                 ]
               }
             ],
-            "$id":"#/properties/Dwarf/properties/skills/items",
-            "type":"string"
+            "$id": "#/properties/Dwarf/properties/skill/items",
+            "type": "string"
           }
         },
-        "languages":{
-          "$id":"#/properties/Dwarf/properties/languages",
-          "type":"array",
-          "title":"The languages schema",
-          "description":"An explanation about the purpose of this instance.",
-          "default":[
-
-          ],
-          "examples":[
+        "languages": {
+          "$id": "#/properties/Dwarf/properties/languages",
+          "type": "array",
+          "title": "The languages schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": [],
+          "examples": [
             [
               "Dwarvish"
             ]
           ],
-          "additionalItems":true,
-          "items":{
-            "anyOf":[
+          "additionalItems": true,
+          "items": {
+            "anyOf": [
               {
-                "$id":"#/properties/Dwarf/properties/languages/items/anyOf/0",
-                "type":"string",
-                "title":"The first anyOf schema",
-                "description":"An explanation about the purpose of this instance.",
-                "default":"",
-                "examples":[
+                "$id": "#/properties/Dwarf/properties/languages/items/anyOf/0",
+                "type": "string",
+                "title": "The first anyOf schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": "",
+                "examples": [
                   "Dwarvish"
                 ]
               }
             ],
-            "$id":"#/properties/Dwarf/properties/languages/items",
-            "type":"string"
+            "$id": "#/properties/Dwarf/properties/languages/items",
+            "type": "string"
           }
         },
-        "subraces":{
-          "$id":"#/properties/Dwarf/properties/subraces",
-          "type":"object",
-          "title":"The subraces schema",
-          "description":"An explanation about the purpose of this instance.",
-          "default":{
-
-          },
-          "examples":[
+        "subraces": {
+          "$id": "#/properties/Dwarf/properties/subraces",
+          "type": "object",
+          "title": "The subraces schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": {},
+          "examples": [
             {
-              "hill":{
-                "bonuses":{
-                  "characteristic":{
-                    "wisdom":1
+              "hill": {
+                "bonuses": {
+                  "characteristic": {
+                    "wisdom": 1
                   },
-                  "hpMax":10
+                  "hpMax": 10
                 }
               },
-              "mountain":{
-                "bonuses":{
-                  "characteristic":{
-                    "strength":2
+              "mountain": {
+                "bonuses": {
+                  "characteristic": {
+                    "strength": 2
                   }
                 }
               }
             }
           ],
-          "required":[
-
-          ],
-          "additionalProperties":true,
-          "properties":{
-            "hill":{
-              "$id":"#/properties/Dwarf/properties/subraces/properties/hill",
-              "type":"object",
-              "title":"The hill schema",
-              "description":"An explanation about the purpose of this instance.",
-              "default":{
-
-              },
-              "examples":[
+          "required": [],
+          "additionalProperties": true,
+          "properties": {
+            "hill": {
+              "$id": "#/properties/Dwarf/properties/subraces/properties/hill",
+              "type": "object",
+              "title": "The hill schema",
+              "description": "An explanation about the purpose of this instance.",
+              "default": {},
+              "examples": [
                 {
-                  "bonuses":{
-                    "characteristic":{
-                      "wisdom":1
+                  "bonuses": {
+                    "characteristic": {
+                      "wisdom": 1
                     },
-                    "hpMax":10
+                    "hpMax": 10
                   }
                 }
               ],
-              "required":[
-
-              ],
-              "additionalProperties":true,
-              "properties":{
-                "bonuses":{
-                  "$id":"#/properties/Dwarf/properties/subraces/properties/hill/properties/bonuses",
-                  "type":"object",
-                  "title":"The bonuses schema",
-                  "description":"An explanation about the purpose of this instance.",
-                  "default":{
-
-                  },
-                  "examples":[
+              "required": [],
+              "additionalProperties": true,
+              "properties": {
+                "bonuses": {
+                  "$id": "#/properties/Dwarf/properties/subraces/properties/hill/properties/bonuses",
+                  "type": "object",
+                  "title": "The bonuses schema",
+                  "description": "An explanation about the purpose of this instance.",
+                  "default": {},
+                  "examples": [
                     {
-                      "characteristic":{
-                        "wisdom":1
+                      "characteristic": {
+                        "wisdom": 1
                       },
-                      "hpMax":10
+                      "hpMax": 10
                     }
                   ],
-                  "required":[
+                  "required": [
                     "characteristic"
                   ],
-                  "additionalProperties":true,
-                  "properties":{
-                    "characteristic":{
-                      "$id":"#/properties/Dwarf/properties/subraces/properties/hill/properties/bonuses/properties/characteristic",
-                      "type":"object",
-                      "title":"The characteristic schema",
-                      "description":"An explanation about the purpose of this instance.",
-                      "default":{
-
-                      },
-                      "examples":[
+                  "additionalProperties": true,
+                  "properties": {
+                    "characteristic": {
+                      "$id": "#/properties/Dwarf/properties/subraces/properties/hill/properties/bonuses/properties/characteristic",
+                      "type": "object",
+                      "title": "The characteristic schema",
+                      "description": "An explanation about the purpose of this instance.",
+                      "default": {},
+                      "examples": [
                         {
-                          "wisdom":1
+                          "wisdom": 1
                         }
                       ],
-                      "required":[
-
-                      ],
-                      "additionalProperties":true,
-                      "properties":{
-                        "wisdom":{
-                          "$id":"#/properties/Dwarf/properties/subraces/properties/hill/properties/bonuses/properties/characteristic/properties/wisdom",
-                          "type":"integer",
-                          "title":"The wisdom schema",
-                          "description":"An explanation about the purpose of this instance.",
-                          "default":0,
-                          "examples":[
+                      "required": [],
+                      "additionalProperties": true,
+                      "properties": {
+                        "wisdom": {
+                          "$id": "#/properties/Dwarf/properties/subraces/properties/hill/properties/bonuses/properties/characteristic/properties/wisdom",
+                          "type": "integer",
+                          "title": "The wisdom schema",
+                          "description": "An explanation about the purpose of this instance.",
+                          "default": 0,
+                          "examples": [
                             1
                           ]
                         }
                       }
                     },
-                    "hpMax":{
-                      "$id":"#/properties/Dwarf/properties/subraces/properties/hill/properties/bonuses/properties/hpMax",
-                      "type":"integer",
-                      "title":"The hpMax schema",
-                      "description":"An explanation about the purpose of this instance.",
-                      "default":0,
-                      "examples":[
+                    "hpMax": {
+                      "$id": "#/properties/Dwarf/properties/subraces/properties/hill/properties/bonuses/properties/hpMax",
+                      "type": "integer",
+                      "title": "The hpMax schema",
+                      "description": "An explanation about the purpose of this instance.",
+                      "default": 0,
+                      "examples": [
                         10
                       ]
                     }
@@ -353,73 +323,65 @@
                 }
               }
             },
-            "mountain":{
-              "$id":"#/properties/Dwarf/properties/subraces/properties/mountain",
-              "type":"object",
-              "title":"The mountain schema",
-              "description":"An explanation about the purpose of this instance.",
-              "default":{
-
-              },
-              "examples":[
+            "mountain": {
+              "$id": "#/properties/Dwarf/properties/subraces/properties/mountain",
+              "type": "object",
+              "title": "The mountain schema",
+              "description": "An explanation about the purpose of this instance.",
+              "default": {},
+              "examples": [
                 {
-                  "bonuses":{
-                    "characteristic":{
-                      "strength":2
+                  "bonuses": {
+                    "characteristic": {
+                      "strength": 2
                     }
                   }
                 }
               ],
-              "required":[
+              "required": [
                 "bonuses"
               ],
-              "additionalProperties":true,
-              "properties":{
-                "bonuses":{
-                  "$id":"#/properties/Dwarf/properties/subraces/properties/mountain/properties/bonuses",
-                  "type":"object",
-                  "title":"The bonuses schema",
-                  "description":"An explanation about the purpose of this instance.",
-                  "default":{
-
-                  },
-                  "examples":[
+              "additionalProperties": true,
+              "properties": {
+                "bonuses": {
+                  "$id": "#/properties/Dwarf/properties/subraces/properties/mountain/properties/bonuses",
+                  "type": "object",
+                  "title": "The bonuses schema",
+                  "description": "An explanation about the purpose of this instance.",
+                  "default": {},
+                  "examples": [
                     {
-                      "characteristic":{
-                        "strength":2
+                      "characteristic": {
+                        "strength": 2
                       }
                     }
                   ],
-                  "required":[
+                  "required": [
                     "characteristic"
                   ],
-                  "additionalProperties":true,
-                  "properties":{
-                    "characteristic":{
-                      "$id":"#/properties/Dwarf/properties/subraces/properties/mountain/properties/bonuses/properties/characteristic",
-                      "type":"object",
-                      "title":"The characteristic schema",
-                      "description":"An explanation about the purpose of this instance.",
-                      "default":{
-
-                      },
-                      "examples":[
+                  "additionalProperties": true,
+                  "properties": {
+                    "characteristic": {
+                      "$id": "#/properties/Dwarf/properties/subraces/properties/mountain/properties/bonuses/properties/characteristic",
+                      "type": "object",
+                      "title": "The characteristic schema",
+                      "description": "An explanation about the purpose of this instance.",
+                      "default": {},
+                      "examples": [
                         {
-                          "strength":2
+                          "strength": 2
                         }
                       ],
-                      "required":[
-
-                      ],
-                      "additionalProperties":true,
-                      "properties":{
-                        "strength":{
-                          "$id":"#/properties/Dwarf/properties/subraces/properties/mountain/properties/bonuses/properties/characteristic/properties/strength",
-                          "type":"integer",
-                          "title":"The strength schema",
-                          "description":"An explanation about the purpose of this instance.",
-                          "default":0,
-                          "examples":[
+                      "required": [],
+                      "additionalProperties": true,
+                      "properties": {
+                        "strength": {
+                          "$id": "#/properties/Dwarf/properties/subraces/properties/mountain/properties/bonuses/properties/characteristic/properties/strength",
+                          "type": "integer",
+                          "title": "The strength schema",
+                          "description": "An explanation about the purpose of this instance.",
+                          "default": 0,
+                          "examples": [
                             2
                           ]
                         }
@@ -432,8 +394,8 @@
           }
         }
       },
-      "maxLength":28,
-      "minLength":0
+      "maxLength": 28,
+      "minLength": 0
     }
   }
 }

@@ -1,5 +1,195 @@
+'use strict';
+
+// Замыкание
+(function () {
+    /**
+     * Корректировка округления десятичных дробей.
+     *
+     * @param {String}  type  Тип корректировки.
+     * @param {Number}  value Число.
+     * @param {Integer} exp   Показатель степени (десятичный логарифм основания корректировки).
+     * @returns {Number} Скорректированное значение.
+     */
+    function decimalAdjust(type, value, exp) {
+        // Если степень не определена, либо равна нулю...
+        if (typeof exp === 'undefined' || +exp === 0) {
+            return Math[type](value);
+        }
+        value = +value;
+        exp = +exp;
+        // Если значение не является числом, либо степень не является целым числом...
+        if (isNaN(value) || !(typeof exp === 'number' && exp % 1 === 0)) {
+            return NaN;
+        }
+        // Сдвиг разрядов
+        value = value.toString().split('e');
+        value = Math[type](+(value[0] + 'e' + (value[1] ? (+value[1] - exp) : -exp)));
+        // Обратный сдвиг
+        value = value.toString().split('e');
+        return +(value[0] + 'e' + (value[1] ? (+value[1] + exp) : exp));
+    }
+
+    // Десятичное округление к ближайшему
+    if (!Math.round10) {
+        Math.round10 = function (value, exp) {
+            return decimalAdjust('round', value, exp);
+        };
+    }
+    // Десятичное округление вниз
+    if (!Math.floor10) {
+        Math.floor10 = function (value, exp) {
+            return decimalAdjust('floor', value, exp);
+        };
+    }
+    // Десятичное округление вверх
+    if (!Math.ceil10) {
+        Math.ceil10 = function (value, exp) {
+            return decimalAdjust('ceil', value, exp);
+        };
+    }
+})();
+
 let language = 'ru';
 let selectedVocabulary = null;
+
+class Character {
+    constructor(parsedJSON = "default") {
+        if (typeof (parsedJSON) == Object) {
+            for (let field in parsedJSON) {
+                this[field] = parsedJSON[field];
+            }
+        } else {
+            if (parsedJSON != "default") {
+                console.log("Error loading character, created default");
+                bAlert("Error loading character, created default", 5000);
+                return;
+            }
+            this.playerName = "";
+            this.charName = "";
+            this.class = "";
+            this.race = "";
+            this.alignment = "";
+            this.background = "";
+            this.level = 1;
+            this.experience = 0;
+            this.armorClass = 0;
+            this.initiative = 0;
+            this.speed = 0;
+            this.inspiration = false;
+            this.proficiencyBonus = 0;
+            this.hpMax = 0;
+            this.hpNext = 0;
+            this.hp = 0;
+            this.hpTemp = 0;
+            this.hitDiceCoeffiecient = 0;
+            this.hitDiceLeft = 0;
+            this.deathSaves = {
+                "successes": 0,
+                "failures": 0
+            };
+            this.abilityScore = {
+                "strength": 0,
+                "dexterity": 0,
+                "constitution": 0,
+                "intelligence": 0,
+                "wisdom": 0,
+                "charisma": 0
+            };
+            this.abilityScoreBonus = {
+                "strengthBonus": -5,
+                "dexterityBonus": -5,
+                "constitutionBonus": -5,
+                "intelligenceBonus": -5,
+                "wisdomBonus": -5,
+                "charismaBonus": -5
+            };
+            this.savingThrowProf = {
+                "strength": false,
+                "dexterity": false,
+                "constitution": false,
+                "intelligence": false,
+                "wisdom": false,
+                "charisma": false
+            };
+            this.skillProf = {
+                "acrobatics": false,
+                "animalHandling": false,
+                "arcana": false,
+                "athletics": false,
+                "deception": false,
+                "history": false,
+                "insight": false,
+                "intimidation": false,
+                "investigation": false,
+                "medicine": false,
+                "nature": false,
+                "perception": false,
+                "perfomance": false,
+                "persuasion": false,
+                "religion": false,
+                "sleightOfHand": false,
+                "stealth": false,
+                "survival": false
+            };
+            this.passiveWisdom = -5;
+            this.armorProf = {};
+            this.weaponProf = {};
+            this.toolProf = {};
+            this.proficiencies = {
+                "armor": new Set(),
+                "weapon": new Set()
+            };
+            this.armament = {
+                "weapon": [
+                    "fists"
+                ],
+                "armor": [],
+                "offHandWeapon": ""
+            };
+            this.equipment = [];
+            this.money = {
+                "copper": 0,
+                "silver": 0,
+                "electrum": 0,
+                "gold": 0,
+                "platinum": 0
+            };
+            this.languages = new Set([
+                "common"
+            ]);
+            this.maxWeight = 0;
+            this.specialization = "";
+            this.otherProfincies = [];
+            this.features = [];
+            this.age = 0;
+            this.height = 0;
+            this.weight = 0;
+            this.eyes = "";
+            this.skin = "";
+            this.hair = "";
+            this.backstory = "";
+            this.additionalFeaturesAndTraits = "";
+            this.treasure = [];
+            this.image = "default";
+            this.traits = "";
+            this.ideals = "";
+            this.bonds = "";
+            this.flaws = "";
+        }
+    }
+
+    loadCharacter(parsedJSON) {
+        if (typeof (parsedJSON) == Object) {
+            for (let field in parsedJSON) {
+                this[field] = parsedJSON[field];
+            }
+        } else {
+            console.log("Error loading character");
+            bAlert("Error loading character", 5000);
+            return;
+        }
+    }
+}
 
 const levelDependenceTable = {
     1: 0,
@@ -25,7 +215,16 @@ const levelDependenceTable = {
 }
 
 let russianVocabulary = {
-    "Select Item": "Выберите пункт",
+    "Select Item": "Выберите Пункт",
+    "Missing Description": "Отсутствует Описание",
+    "Or": "или",
+    "Constitution Modifier": "модификатор Телосложения",
+    "Light": "Лёгкие доспехи",
+    "Medium": "Средние доспехи",
+    "Shield": "Щиты",
+    "Simple": "Простое оружие",
+    "Martial": "Воинское оружие",
+    "None": "Нет",
 
     "M": "м",
     "Cm": "см",
@@ -109,20 +308,27 @@ let russianVocabulary = {
     "Human": "Человек",
     "Dragonborn": "Драконорожденный",
     "Gnome": "Гном",
-    "Half-Elf": "Полуэльф",
-    "Half-Orc": "Полуорк",
+    "Half-elf": "Полуэльф",
+    "Half-orc": "Полуорк",
     "Tiefling": "Тифлинг",
 
     "Subrace": "Подраса",
     "Hill": "Холмовой",
     "Mountain": "Горный",
-    "High Elf": "Высший",
-    "Wood Elf": "Лесной",
-    "Dark Elf(Drow)": "Тёмный",
+    "High": "Высший",
+    "Wood": "Лесной",
+    "Drow": "Тёмный",
     "Lightfoot": "Легконогий",
     "Stout": "Коренастый",
-    "Forest Gnome": "Лесной",
-    "Rock Gnome": "Скальный",
+    "Forest": "Лесной",
+    "Rock": "Скальный",
+
+    "Class": "Класс",
+    "Barbarian": "Варвар",
+    "Bard": "Бард",
+    "Cleric": "Жрец",
+    "Druid": "Друид",
+    "Fighter": "Воин",
 
     "Background": "Предыстория",
     "Acolyte": "Прислужник",
@@ -169,11 +375,54 @@ let russianVocabulary = {
     "HalflingLang": "Полуросликов",
     "ElvishLang": "Эльфийский",
 
+    "Gold": "Золото",
+
+    "Coins": "Монет"
+
     // "Scipt": "Письменность",
     // "test": "Великанья",
     // "test": "Дварфская",
     // "test": "Общая",
     // "test": "Эльфийская",
+}
+
+const LBTOKGCOSNT = 0.45359243;
+const KGTOLBCONST = 2.2046223302272;
+const FTTOMCONST = 0.3048;
+const MTOFTCONST = 3.280839895;
+const INCHTOCMCONST = 2.54;
+const CMTOINCHCONST = 0.3937007874;
+
+function fromToMultiplyProto(number, constant) {
+    if (typeof (number) === "number") {
+        return Math.round10(number * constant, -5);
+    } else {
+        return NaN;
+    }
+}
+
+function lbToKg(number) {
+    return fromToMultiplyProto(number, LBTOKGCOSNT);
+}
+
+function kgToLb(number) {
+    return fromToMultiplyProto(number, KGTOLBCONST);
+}
+
+function ftToM(number) {
+    return fromToMultiplyProto(number, FTTOMCONST);
+}
+
+function mToFt(number) {
+    return fromToMultiplyProto(number, MTOFTCONST);
+}
+
+function inchToCm(number) {
+    return fromToMultiplyProto(number, INCHTOCMCONST);
+}
+
+function cmToInch(number) {
+    return fromToMultiplyProto(number, CMTOINCHCONST);
 }
 
 const measureSystem = [
@@ -216,46 +465,60 @@ function getExpires() {
     return expires;
 }
 
-function setCookie(name, value, expire) {
-    document.cookie = name + "=" + escape(value) +
-        //В строку дописывается имя устанавливаемой cookie
-        ((expire == null) ? "" : ("; expires=" + expire.toGMTString()))
-    //Устанавливается время действия
+function getCookie(name) {
+    let matches = document.cookie.match(new RegExp(
+        "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+    ));
+    return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 
-function getCookie(Name) {
-    var search = Name + "="
-    //Создается строка для поиска в document.cookie
-    if (document.cookie.length > 0) {
-        offset = document.cookie.indexOf(search)
-        //Поиск cookie по ее имени
-        if (offset != -1) {
-            offset += search.length
-            end = document.cookie.indexOf(";", offset)
-            //Определили положение нужной cookie, и по индексам вырежем ее
-            if (end == -1)
-                end = document.cookie.length
-            return unescape(document.cookie.substring(offset, end))
-            //Вернули подстроку, содержащюю нужное значение cookie
+function setCookie(name, value, options = {}) {
+
+    options = {
+        path: '/',
+        // add other defaults here if necessary
+        ...options
+    };
+
+    if (options.expires instanceof Date) {
+        options.expires = options.expires.toUTCString();
+    }
+
+    let updatedCookie = encodeURIComponent(name) + "=" + encodeURIComponent(value);
+
+    for (let optionKey in options) {
+        updatedCookie += "; " + optionKey;
+        let optionValue = options[optionKey];
+        if (optionValue !== true) {
+            updatedCookie += "=" + optionValue;
         }
     }
+
+    document.cookie = updatedCookie;
+}
+
+
+function deleteCookie(name) {
+    setCookie(name, "", {
+        'max-age': -1
+    })
 }
 
 window.addEventListener('load', function () {
-    if (!("isAnimation" in localStorage)) {
-        localStorage.isAnimation = "running";
+    if (getCookie('isAnimation') == undefined) {
+        setCookie('isAnimation', "running", { expires: getExpires() });
     }
     applyAnimation();
 });
 
 function toggleAnimations() {
-    (localStorage.isAnimation == "running" ? localStorage.isAnimation = "paused" : localStorage.isAnimation = "running");
+    setCookie('isAnimation', (getCookie('isAnimation') == "running" ? "paused" : "running"), { expires: getExpires() });
     applyAnimation();
 }
 
 function applyAnimation() {
     document.querySelectorAll('*[data-animation]').forEach(element => {
-        element.style.animationPlayState = localStorage.isAnimation;
+        element.style.animationPlayState = getCookie('isAnimation');
         if (element.style.animationPlayState == "running") {
             element.style.transform = "rotate(0deg)";
         } else {
@@ -306,7 +569,7 @@ function adjustLevel() {
 }
 
 function adjustAllLevels() {
-    for (character in charactersList) {
+    for (let character in charactersList) {
         adjustLevelProto(charactersList[character].xp, charactersList[character].level);
     }
 }
@@ -349,7 +612,7 @@ function adjustBarWidth() {
 }
 
 function adjustAllBarWidth() {
-    for (character in charactersList) {
+    for (let character in charactersList) {
         adjustBarWidthProto(charactersList[character].hp,
             charactersList[character].hpBar,
             charactersList[character].hpBarFill, 'hp');

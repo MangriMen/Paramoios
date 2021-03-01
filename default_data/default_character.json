@@ -1,6 +1,4 @@
 {
-  "default": true,
-  "initiative": 0,
   "playerName": "",
   "charName": "",
   "class": "",
@@ -9,19 +7,17 @@
   "background": "",
   "level": 1,
   "experience": 0,
+  "armorClass": 0,
+  "initiative": 0,
+  "speed": 0,
+  "inspiration": 0,
+  "proficiencyBonus": 0,
   "hpMax": 0,
   "hp": 0,
   "hpTemp": 0,
-  "armorClass": 0,
-  "speed": 0,
-  "proficiencyBonus": 0,
-  "passiveWisdom": -5,
-  "inspiration": 0,
   "hitDiceCoeffiecient": 0,
   "hitDiceLeft": 0,
-  "maxWeight": 0,
-  "specialization": "",
-  "death-saves": {
+  "deathSaves": {
     "successes": 0,
     "failures": 0
   },
@@ -41,7 +37,7 @@
     "wisdomBonus": -5,
     "charismaBonus": -5
   },
-  "savingThrowsBonus": {
+  "savingThrowProf": {
     "strength": false,
     "dexterity": false,
     "constitution": false,
@@ -49,7 +45,7 @@
     "wisdom": false,
     "charisma": false
   },
-  "skillsBonus": {
+  "skillProf": {
     "acrobatics": false,
     "animalHandling": false,
     "arcana": false,
@@ -69,6 +65,10 @@
     "stealth": false,
     "survival": false
   },
+  "passiveWisdom": -5,
+  "armorProf": {},
+  "weaponProf": {},
+  "toolProf": {},
   "armament": {
     "weapons": [
       "fists"
@@ -88,41 +88,35 @@
     "gold": 0,
     "platinum": 0
   },
-  "personality": {
-    "languages": [
-      "default"
-    ],
-    "otherProfincies": [
-      ""
-    ],
-    "features": [
-      ""
-    ],
-    "traits": [
-      ""
-    ],
-    "appearance": {
-      "age": 0,
-      "height": 0,
-      "weight": 0,
-      "eyes": "",
-      "skin": "",
-      "hair": "",
-      "backstory": "",
-      "additionalFeaturesAndTraits": "",
-      "treasure": [
-        {
-          "name": "",
-          "description": "",
-          "else": ""
-        }
-      ],
-      "image": "default",
-      "look": "",
-      "personalityTraits": "",
-      "ideals": "",
-      "bonds": "",
-      "flaws": ""
+  "languages": [
+    "default"
+  ],
+  "maxWeight": 0,
+  "specialization": "",
+  "otherProfincies": [
+    ""
+  ],
+  "features": [
+    ""
+  ],
+  "age": 0,
+  "height": 0,
+  "weight": 0,
+  "eyes": "",
+  "skin": "",
+  "hair": "",
+  "backstory": "",
+  "additionalFeaturesAndTraits": "",
+  "treasure": [
+    {
+      "name": "",
+      "description": "",
+      "else": ""
     }
-  }
+  ],
+  "image": "default",
+  "traits": "",
+  "ideals": "",
+  "bonds": "",
+  "flaws": ""
 }

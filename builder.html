@@ -44,28 +44,28 @@
     <main class="border-style border-radius">
         <nav>
             <div id='tabs'>
-                <span id='race' class="navigation-tab default-background-disabled border-style border-radius">
+                <span id='race' class="navigation-tab unselectable default-background-disabled border-style border-radius">
                     Раса
                 </span>
-                <span id='class' class="navigation-tab default-background-disabled border-style border-radius">
+                <span id='class' class="navigation-tab unselectable default-background-disabled border-style border-radius">
                     Класс
                 </span>
-                <span id='characteristics' class="navigation-tab default-background-disabled border-style border-radius">
+                <span id='characteristics' class="navigation-tab unselectable default-background-disabled border-style border-radius">
                     Характеристики
                 </span>
-                <span id='personality' class="navigation-tab default-background-disabled border-style border-radius">
+                <span id='personality' class="navigation-tab unselectable default-background-disabled border-style border-radius">
                     Личность
                 </span>
-                <span id='base5' class="navigation-tab default-background-disabled border-style border-radius">
+                <span id='base5' class="navigation-tab unselectable default-background-disabled border-style border-radius">
                     Что-то ещё
                 </span>
             </div>
             <div id='content-page' class="default-background border-style border-radius">
                 <div id='race-page' data-type='page'>
-                    <div id='add-info-box' class='default-background border-style border-radius default-shadow'>
+                    <div id='race-add-info-box' class='add-info-box default-background border-style border-radius default-shadow'>
                         <div id='race-card' class='card-box'>
-                            <img id='add-info-race-img' src="Images/creatures/humanoids/races/Dwarf.png" class="border-radius">
-                            <span id='add-info-text'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum magni quasi dolores non molestiae quae quia quod, ab eaque dignissimos.</span>
+                            <img id='add-info-race-img' class="add-info-img" src="Images/creatures/humanoids/races/Dwarf.png" class="border-radius">
+                            <span id='add-info-race-text'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum magni quasi dolores non molestiae quae quia quod, ab eaque dignissimos.</span>
                             <div class='card-bottom-animation-box'>
                                 <div class='card-bottom-animation' data-animation="true">
                                     <div class='card-bottom-animation-inner' data-animation="true"></div>
@@ -73,8 +73,8 @@
                             </div>
                         </div>
                     </div>
-                    <div id='info-box'>
-                        <div id='race-choosing-box'>
+                    <div id='race-info-box' class='info-box'>
+                        <div id='race-choosing-box' class="choosing-box">
                             <span id='race-choosing-text'>Выбор Расы</span>
                             <div id='race-box' class='builder-box'>
                                 <span id='race-text' class='builder-text'>Раса</span>
@@ -85,7 +85,7 @@
                                 <select id='subrace-select' class='builder-select default-background border-style border-radius input-font-style default-inner-shadow'></select>
                             </div>
                         </div>
-                        <div id='race-traits-box'>
+                        <div id='race-traits-box' class="grid-box">
                             <span id='race-traits-text' class='builder-text'>Расовые черты</span>
                             <div id='characteristics-increase-box' class='characteristics-flex-box builder-box'>
                                 <span id='characteristics-increase-text' class='characteristics-flex-text builder-text'>Увеличение Характеристик</span>
@@ -99,13 +99,68 @@
                     </div>
                 </div>
                 <div id='class-page' data-type='page'>
+                    <div id='class-info-box' class='info-box'>
+                        <div id='class-choosing-box' class="choosing-box">
+                            <span id='class-choosing-text'>Выбор Класса</span>
+                            <div id='class-box' class='builder-box'>
+                                <span id='class-text' class='builder-text'>Класс</span>
+                                <select id='class-select' class='builder-select default-background border-style border-radius input-font-style default-inner-shadow'></select>
+                            </div>
+                        </div>
+                        <div id='class-features-box' class="grid-box">
+                            <span id='class-features-text' class='builder-text text-to-center'>Классовые умения</span>
+                            <div id='class-features-hit-box' class="grid-box">
+                                <span id='class-features-hit-text' class="class-features-second-text text-to-left">Хиты</span>
+                                <div class="builder-box">
+                                    <span id='hit-dice-text' class="text-style-big">Кость хитов: <span id=hit-dice-value>1dKek</span><span>
+                                </div>
+                                <div class="builder-box">
+                                    <span id='hit-dice-start-text' class="text-style-big">Хиты на 1 уровне: <span id=hit-dice-start-value>1dKek</span><span>
+                                </div>
+                                <div class="builder-box">
+                                    <span id='hit-dice-next-text' class="text-style-big">Хиты на следующих уровнях: <span id=hit-dice-next-value>1dKek</span><span>
+                                </div>
+                            </div>
+                            <div id='class-features-proficiency-box' class="grid-box">
+                                <span id='class-features-proficiency-text' class="class-features-second-text text-to-left">Владение</span>
+                                <div class="builder-box">
+                                    <span id='armor-text' class="text-style-big">Доспехи: <span id='armor-value'></span></span>
+                                </div>
+                                <div class="builder-box">
+                                    <span id='weapon-text' class="text-style-big">Оружие: <span id='weapon-value'></span><span>
+                                </div>
+                                <div class="builder-box">
+                                    <span id='tools-text' class="text-style-big">Инструменты: <span id='tools-value'></span><span>
+                                </div>
+                                <div class="builder-box">
+                                    <span id='saving-throws-text' class="text-style-big">Спасброски: <span id='saving-throws-value'></span><span>
+                                </div>
+                                <div class="characteristics-flex-box builder-box">
+                                    <span id='skill-text' class="characteristics-flex-text builder-text text-style-big">Навыки: </span>
+                                    <div id='skill-value' class="characteristics-flex-elements"></div>
+                                </div>
+                            </div>
+                            <div id='class-features-equipment-box'>
+                                <span id='class-features-equipment-text' class="class-features-second-text text-to-left">Снаряжение</span>
+                                <div id='class-equipment' class="characteristics-flex-elements"></div>
+                            </div>
+                            <div id="class-money-box">
+                                <span id="class-money-text">Деньги</span>
+                                <div id="class-money" class="characteristics-flex-elements"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div id='characteristics-page' data-type='page'>
                     <span id='characteristics-left-text'>Осталось распределить <span id='characteristics-left-value'>27</span>/27 очков</span>
                 </div>
                 <div id='personality-page' data-type='page'>
                     <div id='name-sex-box' class='default-background default-inner-shadow border-style border-radius'>
-                        <label id='name-lable' for='name'>Имя персонажа:</label><input id='name' placeholder=" " type='text' maxlength="20" required class='input-font-style select-hover-focus default-background border-style border-radius'>
+                        <label id='name-lable' for='name'>Имя персонажа:</label><input id='name' list="name-list" placeholder=" " type='text' autocomplete="off" maxlength="20" required class='input-font-style select-hover-focus default-background border-style border-radius'>
+                        <datalist id="name-list">
+                            <!-- <option>testName1</option>
+                            <option>testName2</option> -->
+                        </datalist>
                         <label id='sex-label' for='sex'>Пол:</label><input id='sex' type='text' placeholder=" " maxlength="18" required class='input-font-style select-hover-focus default-background border-style border-radius'>
                         <label id='alignment-label' for='alignment'>Мировоззрение:</label>
                         <select id='alignment' class='input-font-style select-hover-focus default-background border-style border-radius'></select>
@@ -141,7 +196,7 @@
                         <select id='background-select' class='input-font-style select-hover-focus default-background border-style border-radius'></select>
                         <div class='characteristics-flex-box builder-box'>
                             <span class='characteristics-flex-text builder-text'>Владение навыками</span>
-                            <div id='skills-box' class='characteristics-flex-elements'></div>
+                            <div id='skill-box' class='characteristics-flex-elements'></div>
                         </div>
                         <div class='characteristics-flex-box builder-box'>
                             <span class='characteristics-flex-text builder-text'>Языки</span>

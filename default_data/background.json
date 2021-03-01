@@ -1,5 +1,5 @@
 {
-  "Acolyte": {
+  "acolyte": {
     "description": "",
     "skillProfencies": [
       "insight",
@@ -72,7 +72,7 @@
       ]
     }
   },
-  "Charlatan": {
+  "charlatan": {
     "description": "",
     "skillProfencies": [
       "Deception",
@@ -108,9 +108,7 @@
       "falseIdentity"
     ],
     "specializationChoice": 1,
-    "specialization": [
-    
-    ],
+    "specialization": [],
     "additionalFeature": [],
     "personality": {
       "personalityTraits": [
@@ -149,7 +147,7 @@
       ]
     }
   },
-  "Entertainer": {
+  "entertainer": {
     "description": "",
     "skillProfencies": [
       "Acrobatics",
@@ -236,7 +234,7 @@
       ]
     }
   },
-  "Folk Hero": {
+  "folk hero": {
     "description": "",
     "skillProfencies": [
       "Animal Handling",
@@ -256,8 +254,7 @@
     ],
     "equipmentToChoice": 0,
     "equipmentToChooseFrom": [
-      [
-      ]
+      []
     ],
     "money": {
       "copper": 0,
@@ -320,7 +317,7 @@
       ]
     }
   },
-  "Guild Artisan": {
+  "guild artisan": {
     "description": "",
     "skillProfencies": [
       "Insight",
@@ -338,8 +335,7 @@
     ],
     "equipmentToChoice": 0,
     "equipmentToChooseFrom": [
-      [
-      ]
+      []
     ],
     "money": {
       "copper": 0,
@@ -412,7 +408,7 @@
       ]
     }
   },
-  "Hermit": {
+  "hermit": {
     "description": "",
     "skillProfencies": [
       "Medicine",
@@ -430,8 +426,7 @@
     ],
     "equipmentToChoice": 0,
     "equipmentToChooseFrom": [
-      [
-      ]
+      []
     ],
     "money": {
       "copper": 0,
@@ -492,7 +487,7 @@
       ]
     }
   },
-  "Noble": {
+  "noble": {
     "description": "",
     "skillProfencies": [
       "History",
@@ -510,8 +505,7 @@
     ],
     "equipmentToChoice": 0,
     "equipmentToChooseFrom": [
-      [
-      ]
+      []
     ],
     "money": {
       "copper": 0,
@@ -563,7 +557,7 @@
       ]
     }
   },
-  "Outlander": {
+  "outlander": {
     "description": "",
     "skillProfencies": [
       "Athletics",
@@ -582,8 +576,7 @@
     ],
     "equipmentToChoice": 0,
     "equipmentToChooseFrom": [
-      [
-      ]
+      []
     ],
     "money": {
       "copper": 0,
@@ -647,7 +640,7 @@
       ]
     }
   },
-  "Sage": {
+  "sage": {
     "description": "",
     "skillProfencies": [
       "Arcana",
@@ -665,8 +658,7 @@
     ],
     "equipmentToChoice": 0,
     "equipmentToChooseFrom": [
-      [
-      ]
+      []
     ],
     "money": {
       "copper": 0,
@@ -728,7 +720,7 @@
       ]
     }
   },
-  "Sailor": {
+  "sailor": {
     "description": "",
     "skillProfencies": [
       "Athletics",
@@ -748,8 +740,7 @@
     ],
     "equipmentToChoice": 0,
     "equipmentToChooseFrom": [
-      [
-      ]
+      []
     ],
     "money": {
       "copper": 0,
@@ -810,7 +801,7 @@
       ]
     }
   },
-  "Soldier": {
+  "soldier": {
     "description": "",
     "skillProfencies": [
       "Athletics",
@@ -830,8 +821,7 @@
     ],
     "equipmentToChoice": 0,
     "equipmentToChooseFrom": [
-      [
-      ]
+      []
     ],
     "money": {
       "copper": 0,
@@ -892,7 +882,7 @@
       ]
     }
   },
-  "Urchin": {
+  "urchin": {
     "description": "",
     "skillProfencies": [
       "Sleight of Hand",
@@ -913,8 +903,7 @@
     ],
     "equipmentToChoice": 0,
     "equipmentToChooseFrom": [
-      [
-      ]
+      []
     ],
     "money": {
       "copper": 0,

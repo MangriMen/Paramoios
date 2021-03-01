@@ -13,7 +13,7 @@ let characterRace = document.getElementById('character-race');
 let characterClass = document.getElementById('character-class');
 let characterBackground = document.getElementById('character-background');
 let characterStats = document.getElementById('character-stats');
-let characterSkills = document.getElementById('skills');
+let characterSkills = document.getElementById('skill');
 
 let hpFillEl = document.getElementById('hp-bar-fill').classList;
 let hpWaveEl = document.getElementById('hp-liquid').classList;
@@ -297,7 +297,7 @@ xpField.onkeydown = function () {
   clearTimeout(timerXp);
   timerXp = setTimeout(function () {
     adjustLevel();
-    onloadBarWidth('xp');
+    adjustBarWidth();
   }, 500);
 }
 

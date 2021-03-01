@@ -339,7 +339,7 @@ main {
   height: 10px;
 }
 
-#skills {
+#skill {
   display: flex;
   flex-direction: column;
   justify-content: space-between;

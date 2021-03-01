@@ -10,16 +10,21 @@
   justify-content: space-between;
 }
 
+.builder-text {
+  grid-row: 1;
+  grid-column: 1;
+}
+
 .builder-margin {
   margin-bottom: 1.5rem;
 }
 
-#add-info-box, .add-info-box {
+.add-info-box {
   padding: 0.8rem;
   transition: transform 1s ease-in-out;
 }
 
-#add-info-race-img, .add-info-img {
+.add-info-img {
   width: 100%;
   height: auto;
   margin-top: auto;
@@ -36,21 +41,26 @@
   margin-bottom: 1rem;
 }
 
-#race-choosing-box {
-  display: grid;
+.choosing-box {
+  display: flex;
+  flex-direction: column;
   text-align: center;
-  row-gap: 1rem;
+  margin-bottom: 1rem;
 }
 
-#race-choosing-text {
+.choosing-box>*:not(:last-child) {
+  margin-bottom: 1rem;
+}
+
+#race-choosing-text, #class-choosing-text {
   font-size: 1.8rem;
 }
 
-#race-box, #subrace-box {
+#race-box, #subrace-box, #class-box {
   width: 16rem;
 }
 
-#race-box *:first-child, #subrace-box *:first-child {
+#race-box *:first-child, #subrace-box *:first-child, #class-box *:first-child {
   font-size: 1.2rem;
 }
 
@@ -58,7 +68,7 @@
   width: 10rem;
 }
 
-#race-page {
+#race-page, #class-page {
   display: grid;
   grid-template-columns: 46% auto;
   grid-template-rows: auto;
@@ -66,24 +76,27 @@
   column-gap: 1.5rem;
 }
 
-#race-select, #subrace-select {
+#race-select, #subrace-select, #class-select {
   text-align-last: center;
 }
 
-#info-box {
-  display: grid;
-  grid-template-rows: auto auto auto;
-  row-gap: 1rem;
+.info-box {
+  display: flex;
+  flex-direction: column;
 }
 
-#race-traits-box {
-  text-align: center;
+.grid-box {
   display: grid;
   row-gap: 0.5rem;
+  margin-bottom: 1rem;
 }
 
-#race-traits-text {
+#race-traits-text, #class-features-text, #class-money-text {
   font-size: 1.8rem;
+}
+
+.class-features-second-text {
+  font-size: 1.4rem;
 }
 
 .characteristics-flex-box {
@@ -697,7 +710,7 @@ input:checked+.slider:before {
   text-indent: 1rem;
 }
 
-#skills-box {
+#skill-box {
   flex-direction: row;
 }
 

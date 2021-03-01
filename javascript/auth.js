@@ -13,7 +13,7 @@ async function checkLogin() {
 }
 
 if (getCookie('isMetric') == undefined) {
-    setCookie('isMetric', true, getExpires());
+    setCookie('isMetric', true, { expires: getExpires() });
 }
 
 document.getElementById('user-btn').addEventListener('click', function (e) { toggleUserMenu(e); });

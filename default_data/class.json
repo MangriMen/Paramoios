@@ -1,17 +1,13 @@
 {
-  "Barbarian": {
+  "barbarian": {
     "init": {
       "description": "A fierce warrior of primitive background who can enter a battle rage",
       "hitDiceCoeffiecient": 12,
       "primaryAblitiy": "strength",
-      "savingThrowsBonus": {
-        "strength": true,
-        "dexterity": false,
-        "constitution": true,
-        "intelligence": false,
-        "wisdom": false,
-        "charisma": false
-      },
+      "savingThrowsBonus": [
+        "strength",
+        "constitution"
+      ],
       "proficiencies": {
         "armor": [
           "light",
@@ -21,10 +17,11 @@
         "weapon": [
           "simple",
           "martial"
-        ]
+        ],
+        "tools": []
       },
       "skillsChoice": 2,
-      "skills": [
+      "skill": [
         "athletics",
         "intimidation",
         "nature",
@@ -46,7 +43,11 @@
           "Any simple weapon"
         ]
       ],
-      "money": 2
+      "money": {
+        "diceCount": 2,
+        "diceType": 4,
+        "multiplyBy": 10
+      }
     },
     "table": [
       {
@@ -215,21 +216,23 @@
       }
     ],
     "hpStart": 12,
-    "hpNext": 7
+    "hpNext": {
+      "const": 7,
+      "roll": [
+        1,
+        12
+      ]
+    }
   },
-  "Bard": {
+  "bard": {
     "init": {
       "description": "An inspiring magician whose power echoes the music of creation",
       "hitDiceCoeffiecient": 8,
       "primaryAblitiy": "charisma",
-      "savingThrowsBonus": {
-        "strength": false,
-        "dexterity": true,
-        "constitution": false,
-        "intelligence": false,
-        "wisdom": false,
-        "charisma": true
-      },
+      "savingThrowsBonus": [
+        "dexterity",
+        "charisma"
+      ],
       "proficiencies": {
         "armor": [
           "light"
@@ -240,10 +243,11 @@
           "longsword",
           "rapier",
           "shortsword"
-        ]
+        ],
+        "tools": []
       },
       "skillsChoice": 3,
-      "skills": [
+      "skill": [
         "acrobatics",
         "athletics",
         "arcana",
@@ -279,7 +283,7 @@
         "songOfRestDiceCoeffiecient": 0,
         "cantripsKnown": 2,
         "spellsKnown": 4,
-        "spellSlotPerSpellLvl":[
+        "spellSlotPerSpellLvl": [
           2,
           0,
           0,
@@ -301,7 +305,7 @@
         "songOfRestDiceCoeffiecient": 6,
         "cantripsKnown": 2,
         "spellsKnown": 5,
-        "spellSlotPerSpellLvl":[
+        "spellSlotPerSpellLvl": [
           3,
           0,
           0,
@@ -323,7 +327,7 @@
         "songOfRestDiceCoeffiecient": 6,
         "cantripsKnown": 2,
         "spellsKnown": 6,
-        "spellSlotPerSpellLvl":[
+        "spellSlotPerSpellLvl": [
           4,
           2,
           0,
@@ -344,7 +348,7 @@
         "songOfRestDiceCoeffiecient": 6,
         "cantripsKnown": 3,
         "spellsKnown": 7,
-        "spellSlotPerSpellLvl":[
+        "spellSlotPerSpellLvl": [
           4,
           3,
           0,
@@ -366,7 +370,7 @@
         "songOfRestDiceCoeffiecient": 6,
         "cantripsKnown": 3,
         "spellsKnown": 8,
-        "spellSlotPerSpellLvl":[
+        "spellSlotPerSpellLvl": [
           4,
           3,
           2,
@@ -388,7 +392,7 @@
         "songOfRestDiceCoeffiecient": 6,
         "cantripsKnown": 3,
         "spellsKnown": 9,
-        "spellSlotPerSpellLvl":[
+        "spellSlotPerSpellLvl": [
           4,
           3,
           3,
@@ -402,13 +406,12 @@
       },
       {
         "proficiencyBonus": 3,
-        "features": [
-        ],
+        "features": [],
         "bardicInspirationDiceCoeffiecient": 8,
         "songOfRestDiceCoeffiecient": 6,
         "cantripsKnown": 3,
         "spellsKnown": 10,
-        "spellSlotPerSpellLvl":[
+        "spellSlotPerSpellLvl": [
           4,
           3,
           3,
@@ -429,7 +432,7 @@
         "songOfRestDiceCoeffiecient": 6,
         "cantripsKnown": 3,
         "spellsKnown": 11,
-        "spellSlotPerSpellLvl":[
+        "spellSlotPerSpellLvl": [
           4,
           3,
           3,
@@ -450,7 +453,7 @@
         "songOfRestDiceCoeffiecient": 8,
         "cantripsKnown": 3,
         "spellsKnown": 12,
-        "spellSlotPerSpellLvl":[
+        "spellSlotPerSpellLvl": [
           4,
           3,
           3,
@@ -473,7 +476,7 @@
         "songOfRestDiceCoeffiecient": 8,
         "cantripsKnown": 4,
         "spellsKnown": 14,
-        "spellSlotPerSpellLvl":[
+        "spellSlotPerSpellLvl": [
           4,
           3,
           3,
@@ -492,7 +495,7 @@
         "songOfRestDiceCoeffiecient": 8,
         "cantripsKnown": 4,
         "spellsKnown": 15,
-        "spellSlotPerSpellLvl":[
+        "spellSlotPerSpellLvl": [
           4,
           3,
           3,
@@ -513,7 +516,7 @@
         "songOfRestDiceCoeffiecient": 8,
         "cantripsKnown": 4,
         "spellsKnown": 15,
-        "spellSlotPerSpellLvl":[
+        "spellSlotPerSpellLvl": [
           4,
           3,
           3,
@@ -534,7 +537,7 @@
         "songOfRestDiceCoeffiecient": 10,
         "cantripsKnown": 4,
         "spellsKnown": 16,
-        "spellSlotPerSpellLvl":[
+        "spellSlotPerSpellLvl": [
           4,
           3,
           3,
@@ -556,7 +559,7 @@
         "songOfRestDiceCoeffiecient": 10,
         "cantripsKnown": 4,
         "spellsKnown": 18,
-        "spellSlotPerSpellLvl":[
+        "spellSlotPerSpellLvl": [
           4,
           3,
           3,
@@ -577,7 +580,7 @@
         "songOfRestDiceCoeffiecient": 10,
         "cantripsKnown": 4,
         "spellsKnown": 19,
-        "spellSlotPerSpellLvl":[
+        "spellSlotPerSpellLvl": [
           4,
           3,
           3,
@@ -598,7 +601,7 @@
         "songOfRestDiceCoeffiecient": 10,
         "cantripsKnown": 4,
         "spellsKnown": 19,
-        "spellSlotPerSpellLvl":[
+        "spellSlotPerSpellLvl": [
           4,
           3,
           3,
@@ -619,7 +622,7 @@
         "songOfRestDiceCoeffiecient": 12,
         "cantripsKnown": 4,
         "spellsKnown": 20,
-        "spellSlotPerSpellLvl":[
+        "spellSlotPerSpellLvl": [
           4,
           3,
           3,
@@ -640,7 +643,7 @@
         "songOfRestDiceCoeffiecient": 12,
         "cantripsKnown": 4,
         "spellsKnown": 22,
-        "spellSlotPerSpellLvl":[
+        "spellSlotPerSpellLvl": [
           4,
           3,
           3,
@@ -661,7 +664,7 @@
         "songOfRestDiceCoeffiecient": 12,
         "cantripsKnown": 4,
         "spellsKnown": 22,
-        "spellSlotPerSpellLvl":[
+        "spellSlotPerSpellLvl": [
           4,
           3,
           3,
@@ -682,7 +685,7 @@
         "songOfRestDiceCoeffiecient": 12,
         "cantripsKnown": 4,
         "spellsKnown": 22,
-        "spellSlotPerSpellLvl":[
+        "spellSlotPerSpellLvl": [
           4,
           3,
           3,
@@ -696,21 +699,23 @@
       }
     ],
     "hpStart": 8,
-    "hpNext": 5
+    "hpNext": {
+      "const": 5,
+      "roll": [
+        1,
+        12
+      ]
+    }
   },
-  "Cleric": {
+  "cleric": {
     "init": {
       "description": "A priestly champion who wields divine magic in service of a higher power",
       "hitDiceCoeffiecient": 8,
       "primaryAblitiy": "wisdom",
-      "savingThrowsBonus": {
-        "strength": false,
-        "dexterity": false,
-        "constitution": false,
-        "intelligence": false,
-        "wisdom": true,
-        "charisma": true
-      },
+      "savingThrowsBonus": [
+        "wisdom",
+        "charisma"
+      ],
       "proficiencies": {
         "armor": [
           "light",
@@ -719,10 +724,11 @@
         ],
         "weapon": [
           "simple"
-        ]
+        ],
+        "tools": []
       },
       "skillsChoice": 2,
-      "skills": [
+      "skill": [
         "history",
         "insight",
         "medicine",
@@ -765,7 +771,7 @@
         "destroyUndead": 0,
         "channelDivinity": 0,
         "cantripsKnown": 3,
-        "spellSlotPerSpellLvl":[
+        "spellSlotPerSpellLvl": [
           2,
           0,
           0,
@@ -786,7 +792,7 @@
         "destroyUndead": 0,
         "channelDivinity": 1,
         "cantripsKnown": 3,
-        "spellSlotPerSpellLvl":[
+        "spellSlotPerSpellLvl": [
           3,
           0,
           0,
@@ -804,7 +810,7 @@
         "destroyUndead": 0,
         "channelDivinity": 1,
         "cantripsKnown": 3,
-        "spellSlotPerSpellLvl":[
+        "spellSlotPerSpellLvl": [
           4,
           2,
           0,
@@ -824,7 +830,7 @@
         "destroyUndead": 0,
         "channelDivinity": 1,
         "cantripsKnown": 4,
-        "spellSlotPerSpellLvl":[
+        "spellSlotPerSpellLvl": [
           4,
           3,
           0,
@@ -844,7 +850,7 @@
         "destroyUndead": 0.5,
         "channelDivinity": 1,
         "cantripsKnown": 4,
-        "spellSlotPerSpellLvl":[
+        "spellSlotPerSpellLvl": [
           4,
           3,
           2,
@@ -865,7 +871,7 @@
         "destroyUndead": 0.5,
         "channelDivinity": 2,
         "cantripsKnown": 4,
-        "spellSlotPerSpellLvl":[
+        "spellSlotPerSpellLvl": [
           4,
           3,
           3,
@@ -883,7 +889,7 @@
         "destroyUndead": 0.5,
         "channelDivinity": 2,
         "cantripsKnown": 4,
-        "spellSlotPerSpellLvl":[
+        "spellSlotPerSpellLvl": [
           4,
           3,
           3,
@@ -905,7 +911,7 @@
         "destroyUndead": 1,
         "channelDivinity": 2,
         "cantripsKnown": 4,
-        "spellSlotPerSpellLvl":[
+        "spellSlotPerSpellLvl": [
           4,
           3,
           3,
@@ -923,7 +929,7 @@
         "destroyUndead": 1,
         "channelDivinity": 2,
         "cantripsKnown": 4,
-        "spellSlotPerSpellLvl":[
+        "spellSlotPerSpellLvl": [
           4,
           3,
           3,
@@ -943,7 +949,7 @@
         "destroyUndead": 1,
         "channelDivinity": 2,
         "cantripsKnown": 5,
-        "spellSlotPerSpellLvl":[
+        "spellSlotPerSpellLvl": [
           4,
           3,
           3,
@@ -963,7 +969,7 @@
         "destroyUndead": 2,
         "channelDivinity": 2,
         "cantripsKnown": 5,
-        "spellSlotPerSpellLvl":[
+        "spellSlotPerSpellLvl": [
           4,
           3,
           3,
@@ -983,7 +989,7 @@
         "destroyUndead": 2,
         "channelDivinity": 2,
         "cantripsKnown": 5,
-        "spellSlotPerSpellLvl":[
+        "spellSlotPerSpellLvl": [
           4,
           3,
           3,
@@ -1001,7 +1007,7 @@
         "destroyUndead": 2,
         "channelDivinity": 2,
         "cantripsKnown": 5,
-        "spellSlotPerSpellLvl":[
+        "spellSlotPerSpellLvl": [
           4,
           3,
           3,
@@ -1021,7 +1027,7 @@
         "destroyUndead": 3,
         "channelDivinity": 2,
         "cantripsKnown": 5,
-        "spellSlotPerSpellLvl":[
+        "spellSlotPerSpellLvl": [
           4,
           3,
           3,
@@ -1039,7 +1045,7 @@
         "destroyUndead": 3,
         "channelDivinity": 2,
         "cantripsKnown": 5,
-        "spellSlotPerSpellLvl":[
+        "spellSlotPerSpellLvl": [
           4,
           3,
           3,
@@ -1060,7 +1066,7 @@
         "destroyUndead": 4,
         "channelDivinity": 2,
         "cantripsKnown": 5,
-        "spellSlotPerSpellLvl":[
+        "spellSlotPerSpellLvl": [
           4,
           3,
           3,
@@ -1080,7 +1086,7 @@
         "destroyUndead": 4,
         "channelDivinity": 3,
         "cantripsKnown": 5,
-        "spellSlotPerSpellLvl":[
+        "spellSlotPerSpellLvl": [
           4,
           3,
           3,
@@ -1100,7 +1106,7 @@
         "destroyUndead": 4,
         "channelDivinity": 3,
         "cantripsKnown": 5,
-        "spellSlotPerSpellLvl":[
+        "spellSlotPerSpellLvl": [
           4,
           3,
           3,
@@ -1120,7 +1126,7 @@
         "destroyUndead": 4,
         "channelDivinity": 3,
         "cantripsKnown": 5,
-        "spellSlotPerSpellLvl":[
+        "spellSlotPerSpellLvl": [
           4,
           3,
           3,
@@ -1134,21 +1140,23 @@
       }
     ],
     "hpStart": 8,
-    "hpNext": 5
+    "hpNext": {
+      "const": 5,
+      "roll": [
+        1,
+        12
+      ]
+    }
   },
-  "Druid": {
+  "druid": {
     "init": {
       "description": "A priest of the Old Faith, wielding the powers of nature — moonlight and plant growth, fire and lightning—and adopting animal forms",
       "hitDiceCoeffiecient": 8,
       "primaryAblitiy": "wisdom",
-      "savingThrowsBonus": {
-        "strength": false,
-        "dexterity": false,
-        "constitution": false,
-        "intelligence": true,
-        "wisdom": true,
-        "charisma": false
-      },
+      "savingThrowsBonus": [
+        "intelligence",
+        "wisdom"
+      ],
       "proficiencies": {
         "armor": [
           "light",
@@ -1166,10 +1174,11 @@
           "sickles",
           "slings",
           "spears"
-        ]
+        ],
+        "tools": []
       },
       "skillsChoice": 2,
-      "skills": [
+      "skill": [
         "arcana",
         "animal handling",
         "insight",
@@ -1241,8 +1250,7 @@
       },
       {
         "proficiencyBonus": 2,
-        "features": [
-        ],
+        "features": [],
         "cantripsKnown": 2,
         "spellsKnown": 0,
         "spellSlotPerSpellLvl": [
@@ -1279,8 +1287,7 @@
       },
       {
         "proficiencyBonus": 3,
-        "features": [
-        ],
+        "features": [],
         "cantripsKnown": 3,
         "spellsKnown": 0,
         "spellSlotPerSpellLvl": [
@@ -1316,8 +1323,7 @@
       },
       {
         "proficiencyBonus": 3,
-        "features": [
-        ],
+        "features": [],
         "cantripsKnown": 3,
         "spellsKnown": 0,
         "spellSlotPerSpellLvl": [
@@ -1354,8 +1360,7 @@
       },
       {
         "proficiencyBonus": 4,
-        "features": [
-        ],
+        "features": [],
         "cantripsKnown": 3,
         "spellsKnown": 0,
         "spellSlotPerSpellLvl": [
@@ -1429,8 +1434,7 @@
       },
       {
         "proficiencyBonus": 5,
-        "features": [
-        ],
+        "features": [],
         "cantripsKnown": 4,
         "spellsKnown": 0,
         "spellSlotPerSpellLvl": [
@@ -1466,8 +1470,7 @@
       },
       {
         "proficiencyBonus": 5,
-        "features": [
-        ],
+        "features": [],
         "cantripsKnown": 4,
         "spellsKnown": 0,
         "spellSlotPerSpellLvl": [
@@ -1503,8 +1506,7 @@
       },
       {
         "proficiencyBonus": 6,
-        "features": [
-        ],
+        "features": [],
         "cantripsKnown": 4,
         "spellsKnown": 0,
         "spellSlotPerSpellLvl": [
@@ -1579,21 +1581,23 @@
       }
     ],
     "hpStart": 8,
-    "hpNext": 5
+    "hpNext": {
+      "const": 5,
+      "roll": [
+        1,
+        12
+      ]
+    }
   },
-  "Fighter": {
+  "fighter": {
     "init": {
       "description": "A master of martial combat, skilled with a variety of weapons and armor",
       "hitDiceCoeffiecient": 10,
       "primaryAblitiy": "strength",
-      "savingThrowsBonus": {
-        "strength": true,
-        "dexterity": false,
-        "constitution": true,
-        "intelligence": false,
-        "wisdom": false,
-        "charisma": false
-      },
+      "savingThrowsBonus": [
+        "strength",
+        "constitution"
+      ],
       "proficiencies": {
         "armor": [
           "light",
@@ -1604,10 +1608,11 @@
         "weapon": [
           "simple",
           "martial"
-        ]
+        ],
+        "tools": []
       },
       "skillsChoice": 2,
-      "skills": [
+      "skill": [
         "acrobatics",
         "animal handling",
         "athletics",
@@ -1618,7 +1623,7 @@
         "survival"
       ],
       "equipment": [
-      	"chaimail"
+        "chaimail"
       ],
       "equipmentToChoice": 1,
       "equipmentToChooseFrom": [
@@ -1645,8 +1650,8 @@
       {
         "proficiencyBonus": 2,
         "features": [
-        	"fighting style",
-        	"second wind"
+          "fighting style",
+          "second wind"
         ],
         "action surge": 0,
         "indomitable": 0,
@@ -1655,7 +1660,7 @@
       {
         "proficiencyBonus": 2,
         "features": [
-        	"action surge"
+          "action surge"
         ],
         "action surge": 1,
         "indomitable": 0,
@@ -1664,7 +1669,7 @@
       {
         "proficiencyBonus": 2,
         "features": [
-        	"martial archetype"
+          "martial archetype"
         ],
         "action surge": 1,
         "indomitable": 0,
@@ -1673,7 +1678,7 @@
       {
         "proficiencyBonus": 2,
         "features": [
-        	"ability score improvement"
+          "ability score improvement"
         ],
         "action surge": 1,
         "indomitable": 0,
@@ -1682,7 +1687,7 @@
       {
         "proficiencyBonus": 3,
         "features": [
-        	"extra attack"
+          "extra attack"
         ],
         "action surge": 1,
         "indomitable": 0,
@@ -1691,7 +1696,7 @@
       {
         "proficiencyBonus": 3,
         "features": [
-        	"ability score improvement"
+          "ability score improvement"
         ],
         "action surge": 1,
         "indomitable": 0,
@@ -1700,7 +1705,7 @@
       {
         "proficiencyBonus": 3,
         "features": [
-        	"martial archetype feature"
+          "martial archetype feature"
         ],
         "action surge": 1,
         "indomitable": 0,
@@ -1709,7 +1714,7 @@
       {
         "proficiencyBonus": 3,
         "features": [
-        	"ability score improvement"
+          "ability score improvement"
         ],
         "action surge": 1,
         "indomitable": 0,
@@ -1718,7 +1723,7 @@
       {
         "proficiencyBonus": 4,
         "features": [
-        	"indomitable"
+          "indomitable"
         ],
         "action surge": 1,
         "indomitable": 1,
@@ -1727,7 +1732,7 @@
       {
         "proficiencyBonus": 4,
         "features": [
-        	"martial archetype feature"
+          "martial archetype feature"
         ],
         "action surge": 1,
         "indomitable": 1,
@@ -1736,7 +1741,7 @@
       {
         "proficiencyBonus": 4,
         "features": [
-        	"extra attack"
+          "extra attack"
         ],
         "action surge": 1,
         "indomitable": 1,
@@ -1745,7 +1750,7 @@
       {
         "proficiencyBonus": 4,
         "features": [
-        	"ability score improvement"
+          "ability score improvement"
         ],
         "action surge": 1,
         "indomitable": 1,
@@ -1754,7 +1759,7 @@
       {
         "proficiencyBonus": 5,
         "features": [
-        	"indomitable"
+          "indomitable"
         ],
         "action surge": 1,
         "indomitable": 2,
@@ -1763,7 +1768,7 @@
       {
         "proficiencyBonus": 5,
         "features": [
-        	"ability score improvement"
+          "ability score improvement"
         ],
         "action surge": 1,
         "indomitable": 2,
@@ -1772,7 +1777,7 @@
       {
         "proficiencyBonus": 5,
         "features": [
-        	"martial archetype feature"
+          "martial archetype feature"
         ],
         "action surge": 1,
         "indomitable": 2,
@@ -1781,7 +1786,7 @@
       {
         "proficiencyBonus": 5,
         "features": [
-        	"ability score improvement"
+          "ability score improvement"
         ],
         "action surge": 1,
         "indomitable": 2,
@@ -1790,8 +1795,8 @@
       {
         "proficiencyBonus": 6,
         "features": [
-        	"action surge",
-        	"indomitable"
+          "action surge",
+          "indomitable"
         ],
         "action surge": 2,
         "indomitable": 3,
@@ -1800,16 +1805,7 @@
       {
         "proficiencyBonus": 6,
         "features": [
-        	"martial archetype feature"
-        ],
-				"action surge": 2,
-        "indomitable": 3,
-        "extra attack": 2
-      },
-      {
-        "proficiencyBonus": 6,
-        "features": [
-        	"ability score improvement"
+          "martial archetype feature"
         ],
         "action surge": 2,
         "indomitable": 3,
@@ -1818,7 +1814,16 @@
       {
         "proficiencyBonus": 6,
         "features": [
-        	"extra attack"
+          "ability score improvement"
+        ],
+        "action surge": 2,
+        "indomitable": 3,
+        "extra attack": 2
+      },
+      {
+        "proficiencyBonus": 6,
+        "features": [
+          "extra attack"
         ],
         "action surge": 2,
         "indomitable": 3,
@@ -1826,6 +1831,12 @@
       }
     ],
     "hpStart": 10,
-    "hpNext": 6
+    "hpNext": {
+      "const": 6,
+      "roll": [
+        1,
+        12
+      ]
+    }
   }
 }
