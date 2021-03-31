@@ -1,12 +1,12 @@
 {
-  "barbarian": {
+  "cl_barbarian": {
     "init": {
       "description": "A fierce warrior of primitive background who can enter a battle rage",
       "hitDiceCoeffiecient": 12,
-      "primaryAblitiy": "strength",
+      "primaryAblitiy": "ch_strength",
       "savingThrowsBonus": [
-        "strength",
-        "constitution"
+        "ch_strength",
+        "ch_constitution"
       ],
       "proficiencies": {
         "armor": [
@@ -22,11 +22,11 @@
       },
       "skillsChoice": 2,
       "skill": [
-        "athletics",
-        "intimidation",
-        "nature",
-        "perception",
-        "survival"
+        "sk_athletics",
+        "sk_intimidation",
+        "sk_nature",
+        "sk_perception",
+        "sk_survival"
       ],
       "equipment": [
         "explorer's pack",
@@ -224,14 +224,14 @@
       ]
     }
   },
-  "bard": {
+  "cl_bard": {
     "init": {
       "description": "An inspiring magician whose power echoes the music of creation",
       "hitDiceCoeffiecient": 8,
-      "primaryAblitiy": "charisma",
+      "primaryAblitiy": "ch_charisma",
       "savingThrowsBonus": [
-        "dexterity",
-        "charisma"
+        "ch_dexterity",
+        "ch_charisma"
       ],
       "proficiencies": {
         "armor": [
@@ -248,10 +248,10 @@
       },
       "skillsChoice": 3,
       "skill": [
-        "acrobatics",
-        "athletics",
-        "arcana",
-        "deception"
+        "sk_acrobatics",
+        "sk_athletics",
+        "sk_arcana",
+        "sk_deception"
       ],
       "equipment": [
         "any musical instrument",
@@ -707,14 +707,14 @@
       ]
     }
   },
-  "cleric": {
+  "cl_cleric": {
     "init": {
       "description": "A priestly champion who wields divine magic in service of a higher power",
       "hitDiceCoeffiecient": 8,
-      "primaryAblitiy": "wisdom",
+      "primaryAblitiy": "ch_wisdom",
       "savingThrowsBonus": [
-        "wisdom",
-        "charisma"
+        "ch_wisdom",
+        "ch_charisma"
       ],
       "proficiencies": {
         "armor": [
@@ -729,11 +729,11 @@
       },
       "skillsChoice": 2,
       "skill": [
-        "history",
-        "insight",
-        "medicine",
-        "persuasion",
-        "religion"
+        "sk_history",
+        "sk_insight",
+        "sk_medicine",
+        "sk_persuasion",
+        "sk_religion"
       ],
       "equipment": [
         "Shield",
@@ -1148,14 +1148,14 @@
       ]
     }
   },
-  "druid": {
+  "cl_druid": {
     "init": {
       "description": "A priest of the Old Faith, wielding the powers of nature — moonlight and plant growth, fire and lightning—and adopting animal forms",
       "hitDiceCoeffiecient": 8,
-      "primaryAblitiy": "wisdom",
+      "primaryAblitiy": "ch_wisdom",
       "savingThrowsBonus": [
-        "intelligence",
-        "wisdom"
+        "ch_intelligence",
+        "ch_wisdom"
       ],
       "proficiencies": {
         "armor": [
@@ -1179,14 +1179,14 @@
       },
       "skillsChoice": 2,
       "skill": [
-        "arcana",
+        "sk_arcana",
         "animal handling",
-        "insight",
-        "medicine",
-        "nature",
-        "perception",
-        "religion",
-        "survival"
+        "sk_insight",
+        "sk_medicine",
+        "sk_nature",
+        "sk_perception",
+        "sk_religion",
+        "sk_survival"
       ],
       "equipment": [
         "leather armor",
@@ -1589,14 +1589,14 @@
       ]
     }
   },
-  "fighter": {
+  "cl_fighter": {
     "init": {
       "description": "A master of martial combat, skilled with a variety of weapons and armor",
       "hitDiceCoeffiecient": 10,
-      "primaryAblitiy": "strength",
+      "primaryAblitiy": "ch_strength",
       "savingThrowsBonus": [
-        "strength",
-        "constitution"
+        "ch_strength",
+        "ch_constitution"
       ],
       "proficiencies": {
         "armor": [
@@ -1613,14 +1613,14 @@
       },
       "skillsChoice": 2,
       "skill": [
-        "acrobatics",
+        "sk_acrobatics",
         "animal handling",
-        "athletics",
-        "history",
-        "insight",
-        "intimidation",
-        "perception",
-        "survival"
+        "sk_athletics",
+        "sk_history",
+        "sk_insight",
+        "sk_intimidation",
+        "sk_perception",
+        "sk_survival"
       ],
       "equipment": [
         "chaimail"

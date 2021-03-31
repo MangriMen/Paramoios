@@ -1,11 +1,11 @@
 [
-    "lawful good",
-    "neutral good",
-    "chaotic good",
-    "lawful neutral",
-    "true neutral",
-    "chaotic neutral",
-    "lawful evil",
-    "neutral evil",
-    "chaotic evil"
+    "al_lawful_good",
+    "al_neutral_good",
+    "al_chaotic_good",
+    "al_lawful_neutral",
+    "al_true_neutral",
+    "al_chaotic_neutral",
+    "al_lawful_evil",
+    "al_neutral_evil",
+    "al_chaotic _evil"
 ]

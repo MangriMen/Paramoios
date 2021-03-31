@@ -1,160 +1,42 @@
 'use strict';
 
-let activeTab = null;
-
-let tabs = Array.from(document.getElementsByClassName("navigation-tab"));
-
-tabs.forEach(tab => tab.addEventListener('click', selectPage));
-tabs[0].dispatchEvent(new Event('click'));
-
-function selectPage() {
-    activeTab = this;
-    document.getElementById('tabs').querySelectorAll('span').forEach(tab => {
-        tab.classList.remove('active-tab');
-        if (tab.id == activeTab.id) { tab.classList.add('active-tab'); }
-    })
-
-    document.getElementById('content-page').querySelectorAll('div').forEach(page => {
-        if (page.id != activeTab.id + "-page" && page.dataset.type == 'page') { page.style.display = 'none' } else if (page.dataset.type == 'page') { page.style.display = 'grid' };
-    })
-}
-
-const allAlignments = [
-    "Lawful Good",
-    "Lawful Neutral",
-    "Lawful Evil",
-    "Neutral Good",
-    "True Neutral",
-    "Neutral Evil",
-    "Chaotic Good",
-    "Chaotic Neutral",
-    "Chaotic Evil",
-]
-
 const allCharacteristics = [
-    "Strength",
-    "Dexterity",
-    "Constitution",
-    "Intelligence",
-    "Wisdom",
-    "Charisma",
+    "ch_strength",
+    "ch_dexterity",
+    "ch_constitution",
+    "ch_intelligence",
+    "ch_wisdom",
+    "ch_charisma",
 ]
 
 const allLanguages = {
-    "CommonLang": {
+    "lang_common": {
         "Typical Speakers": ["Humans"],
         "Script": "CommonScript"
     },
-    "DwarvishLang": {
+    "lang_dwarvish": {
         "Typical Speakers": ["Dwarves"],
         "Script": "DwarvishScript"
     },
-    "ElvishLang": {
+    "lang_elvish": {
         "Typical Speakers": ["Elves"],
         "Script": "ElvishScript"
     },
-    "GiantLang": {
+    "lang_giant": {
         "Typical Speakers": ["Ogres", "Giants"],
         "Script": "DwarvishScript"
     },
-    "GnomishLang": {
+    "lang_gnomish": {
         "Typical Speakers": ["Gnomes"],
         "Script": "DwarvishScript"
     },
-    "HalflingLang": {
+    "lang_halfling": {
         "Typical Speakers": ["Haflings"],
         "Script": "CommonScript"
     },
-    "OrcLang": {
+    "lang_orc": {
         "Typical Speakers": ["Orcs"],
         "Script": "DwarvishScript"
-    },
-}
-
-const growthWeightTable = {
-    "human": {
-        "baseGrowth": 56,
-        "growthCube": [2, 10],
-        "baseWeight": 110,
-        "weightCube": [2, 4]
-    },
-    "dwarf mountain": {
-        "baseGrowth": 48,
-        "growthCube": [2, 4],
-        "baseWeight": 130,
-        "weightCube": [2, 6]
-    },
-    "dwarf hill": {
-        "baseGrowth": 44,
-        "growthCube": [2, 4],
-        "baseWeight": 115,
-        "weightCube": [2, 6]
-    },
-    "elf high": {
-        "baseGrowth": 54,
-        "growthCube": [2, 10],
-        "baseWeight": 90,
-        "weightCube": [1, 4]
-    },
-    "elf wood": {
-        "baseGrowth": 54,
-        "growthCube": [1, 4],
-        "baseWeight": 100,
-        "weightCube": [1, 4]
-    },
-    "elf dark (drow)": {
-        "baseGrowth": 53,
-        "growthCube": [2, 6],
-        "baseWeight": 75,
-        "weightCube": [1, 6]
-    },
-    "halfling lightfoot": {
-        "baseGrowth": 31,
-        "growthCube": [2, 4],
-        "baseWeight": 35,
-        "weightCube": [1, 1]
-    },
-    "halfling stout": {
-        "baseGrowth": 31,
-        "growthCube": [2, 4],
-        "baseWeight": 35,
-        "weightCube": [1, 1]
-    },
-    "dragonborn": {
-        "baseGrowth": 66,
-        "growthCube": [2, 8],
-        "baseWeight": 175,
-        "weightCube": [2, 6]
-    },
-    "gnome forest": {
-        "baseGrowth": 35,
-        "growthCube": [2, 4],
-        "baseWeight": 35,
-        "weightCube": [1, 1]
-    },
-    "gnome rock": {
-        "baseGrowth": 35,
-        "growthCube": [2, 4],
-        "baseWeight": 35,
-        "weightCube": [1, 1]
-    },
-    "half-elf": {
-        "baseGrowth": 57,
-        "growthCube": [2, 8],
-        "baseWeight": 110,
-        "weightCube": [2, 4]
-    },
-    "half-orc": {
-        "baseGrowth": 58,
-        "growthCube": [2, 10],
-        "baseWeight": 140,
-        "weightCube": [2, 6]
-    },
-    "tiefling": {
-        "baseGrowth": 57,
-        "growthCube": [2, 8],
-        "baseWeight": 110,
-        "weightCube": [2, 4]
     },
 }
 
@@ -297,7 +179,7 @@ class CharacteristicsCard {
         let label = document.createElement('span');
         label.id = this.characteristic + '-label';
         label.classList = 'characteristics-table-label border-radius default-inner-shadow';
-        label.textContent = translateTo('language', capitalize('firstOfAllWord', this.characteristic));
+        label.textContent = translateTo('language', this.characteristic);
 
         this.card = document.createElement('div');
         this.card.id = this.characteristic + '-box';
@@ -401,7 +283,7 @@ function createInfoCardFromFeature(feature, place) {
 
     let cardTitle = document.createElement('span');
     cardTitle.classList = 'card-title';
-    cardTitle.textContent = translateTo('language', capitalize('firstOfAllWord', feature));
+    cardTitle.textContent = translateTo('language', feature);
 
     let cardDescription = document.createElement('span');
     cardDescription.classList = 'card-description';
@@ -480,7 +362,7 @@ function createFeaturesBox(feature, place) {
     featuresImg.src = 'images/buttons/profile/img_placeholder.jpg';
 
     let featuresText = document.createElement('span');
-    featuresText.textContent = translateTo('language', capitalize('firstOfAllWord', place[feature]));
+    featuresText.textContent = translateTo('language', place[feature]);
 
     featuresBox.appendChild(featuresImg);
     featuresBox.appendChild(featuresText);
@@ -490,9 +372,9 @@ function createFeaturesBox(feature, place) {
     return featuresBox;
 }
 
-function createCharacteristicBox(characteristic, group, place, selectArray = null) {
+function createCharacteristicBox(characteristic, group, groupId, place, selectArray = null) {
     let characteristicBox = document.createElement('div');
-    characteristicBox.dataset.id = characteristic;
+    characteristicBox.dataset.id = groupId;
     characteristicBox.dataset.group = group;
     characteristicBox.classList = 'characteristic-box default-background border-style border-radius default-inner-shadow';
     let characteristicText;
@@ -521,7 +403,7 @@ function createCharacteristicBox(characteristic, group, place, selectArray = nul
 
     characteristicBox.appendChild(characteristicText);
 
-    if (place[characteristic]) {
+    if (place && place[characteristic]) {
         let characteristicValue = document.createElement('span');
         characteristicValue.textContent = addSignToNumber(place[characteristic]);
         characteristicBox.appendChild(characteristicValue);
@@ -530,8 +412,13 @@ function createCharacteristicBox(characteristic, group, place, selectArray = nul
     return characteristicBox;
 }
 
+function getRaceGrowthWeight(race, subrace) {
+    return ((subrace == "") ? user.race[race].growthWeight : user.race[race].subrace[subrace].growthWeight)
+}
+
 function rollGrowthWeight() {
-    let growthCube = growthWeightTable[raceSelect.value + (subraceSelect.value ? (" " + subraceSelect.value) : "")].growthCube;
+    let growthWeightObject = getRaceGrowthWeight(raceSelect.value, subraceSelect.value);
+    let growthCube = growthWeightObject.growthCube;
     let gRollResult = rollDice(growthCube[0], growthCube[1]).value;
 
     let isMetric = (getCookie("isMetric") == "true");
@@ -541,8 +428,8 @@ function rollGrowthWeight() {
     let gMeasure = measureSystem[isMetric | 0];
 
     let baseG = [
-        Math.floor((growthWeightTable[raceSelect.value + (subraceSelect.value ? (" " + subraceSelect.value) : "")].baseGrowth * multiplier) / gDivider),
-        ((growthWeightTable[raceSelect.value + (subraceSelect.value ? (" " + subraceSelect.value) : "")].baseGrowth * multiplier) % gDivider)
+        Math.floor((growthWeightObject.baseGrowth * multiplier) / gDivider),
+        ((growthWeightObject.baseGrowth * multiplier) % gDivider)
     ];
 
     let rollG = [
@@ -559,13 +446,13 @@ function rollGrowthWeight() {
     document.getElementById('growth-roll').textContent = "" + rollG[0] + gMeasure[0] + (isMetric ? " " : "") + Math.round(rollG[1]) + gMeasure[1] + " = ";
     document.getElementById('growth-result').textContent = "" + resultG[0] + gMeasure[0] + (isMetric ? " " : "") + Math.round(resultG[1]) + gMeasure[1];
 
-    let weightCube = growthWeightTable[raceSelect.value + (subraceSelect.value ? (" " + subraceSelect.value) : "")].weightCube;
+    let weightCube = growthWeightObject.weightCube;
     let wRollResult = rollDice(weightCube[0], weightCube[1]).value;
 
     let wDivider = (isMetric ? KGTOLBCONST : 1);
     let wMeasure = weightSystem[isMetric | 0];
 
-    let baseW = growthWeightTable[raceSelect.value + (subraceSelect.value ? (" " + subraceSelect.value) : "")].baseWeight;
+    let baseW = growthWeightObject.baseWeight;
     let rollW = wRollResult * gRollResult;
     let resultW = (baseW + rollW);
 
@@ -632,10 +519,10 @@ function loadCharacteristicsCards() {
 }
 
 function loadAlignmentSelect() {
-    for (let alignment of allAlignments) {
+    for (let alignment of user.alignment) {
         let option = document.createElement('option');
         option.value = alignment;
-        option.textContent = translateTo('language', capitalize('firstOfAllWord', alignment));
+        option.textContent = translateTo('language', alignment);
         alignmentSelect.append(option);
     }
 }
@@ -654,7 +541,7 @@ function loadBackgroundSelect() {
 function loadSkills() {
     clearElement(skillsBox);
     for (let skill of user.background[backgroundSelect.value].skillProfencies) {
-        let skillsBoxElement = createCharacteristicBox(skill, false, user.background[backgroundSelect.value].skillProfencies);
+        let skillsBoxElement = createCharacteristicBox(skill, false, skill, user.background[backgroundSelect.value].skillProfencies);
         skillsBox.appendChild(skillsBoxElement);
     }
     // dispatchAllSelect(skillsBox);
@@ -667,24 +554,24 @@ function loadLanguages() {
     }
     else {
         for (let language = 0; language < user.background[backgroundSelect.value].languages; language++) {
-            let languagesBoxElement = createCharacteristicBox(`any${language}`, true, user.background[backgroundSelect.value].languages, allLanguages);
+            let languagesBoxElement = createCharacteristicBox(`any${language}`, true, "anyLanguage0", user.background[backgroundSelect.value].languages, allLanguages);
             languagesBox.appendChild(languagesBoxElement);
         }
-        // dispatchAllSelect(languagesBox);
+        dispatchAllSelect(languagesBox);
     }
 }
 
 function loadEquipment() {
     clearElement(equipmentBox);
     for (let thing of user.background[backgroundSelect.value].equipment) {
-        let equipmentBoxElement = createCharacteristicBox(thing, false, user.background[backgroundSelect.value].equipment);
+        let equipmentBoxElement = createCharacteristicBox(thing, false, thing, user.background[backgroundSelect.value].equipment);
         equipmentBox.appendChild(equipmentBoxElement);
     }
     for (let choice = 0; choice < user.background[backgroundSelect.value].equipmentToChoice; choice++) {
-        let equipmentBoxElement = createCharacteristicBox(`any${choice}`, true, user.background[backgroundSelect.value].equipmentToChoice, user.background[backgroundSelect.value].equipmentToChooseFrom[choice]);
+        let equipmentBoxElement = createCharacteristicBox(`any${choice}`, true, "anyChoice0", user.background[backgroundSelect.value].equipmentToChoice, user.background[backgroundSelect.value].equipmentToChooseFrom[choice]);
         equipmentBox.appendChild(equipmentBoxElement);
     }
-    // dispatchAllSelect(equipmentBox);
+    dispatchAllSelect(equipmentBox);
 }
 
 // Select chage event catched
@@ -704,18 +591,24 @@ function raceSelected() {
         raceTraitsFeaturesElements.appendChild(featuresBox);
     }
     for (let characteristic in user.race[raceSelect.value].abilityScoreInc) {
-        let characteristicBox = createCharacteristicBox(characteristic, false, user.race[raceSelect.value].abilityScoreInc, allCharacteristics);
+        let characteristicBox = createCharacteristicBox(characteristic, (characteristic.substr(0, 3) == "any"), "anyFeature0", user.race[raceSelect.value].abilityScoreInc, allCharacteristics);
         characteristicBox.dataset.origin = "race";
         characteristicsIncreaseElements.appendChild(characteristicBox);
     }
-    // dispatchAllSelect(characteristicsIncreaseElements);
+    dispatchAllSelect(characteristicsIncreaseElements);
     for (let subrace in user.race[raceSelect.value].subrace) {
         let option = document.createElement('option');
         option.value = subrace;
         option.textContent = translateTo('language', subrace);
         subraceSelect.appendChild(option);
     }
-    !subraceSelect.firstChild ? subraceBoxCached.parentElement.removeChild(subraceBoxCached) : raceChoosingBox.append(subraceBoxCached);
+
+    if (subraceSelect.childElementCount > 0) {
+        raceChoosingBox.append(subraceBoxCached);
+    }
+    else {
+        if (subraceBoxCached.parentElement) { subraceBoxCached.parentElement.removeChild(subraceBoxCached) }
+    }
 
     if (subraceSelect.firstChild)
         subraceSelect.dispatchEvent(new Event('change'));
@@ -749,7 +642,7 @@ function subraceSelected() {
         }
     }
     for (let characteristic in user.race[raceSelect.value].subrace[subraceSelect.value].abilityScoreInc) {
-        let characteristicBox = createCharacteristicBox(characteristic, false, user.race[raceSelect.value].subrace[subraceSelect.value].abilityScoreInc, allCharacteristics);
+        let characteristicBox = createCharacteristicBox(characteristic, characteristic.substr(0, 3) == "any", "anyFeature0", user.race[raceSelect.value].subrace[subraceSelect.value].abilityScoreInc, allCharacteristics);
         characteristicBox.dataset.origin = "subrace";
         characteristicsIncreaseElements.appendChild(characteristicBox);
     }
@@ -778,6 +671,8 @@ function backgroundSelected() {
 function additionalCharacteristicSelected(element, array) {
     let wrapper = Array.from(element.parentElement.parentElement.querySelectorAll(`[data-id="${element.parentElement.dataset.id}"][data-group="true"]`));
     if (wrapper.length == 0) return;
+
+    if (!Array.isArray(array)) { array = Object.keys(array); }
 
     for (let i = 1; i <= wrapper.length; i++) {
         if (i == wrapper.length) {
@@ -1025,7 +920,7 @@ class Builder {
                     this.raceTraitsFeaturesElements.appendChild(featuresBox);
                 }
                 for (let characteristic in raceObject.abilityScoreInc) {
-                    let characteristicBox = createCharacteristicBox(characteristic, false, raceObject.abilityScoreInc, allCharacteristics);
+                    let characteristicBox = createCharacteristicBox(characteristic, false, characteristic, raceObject.abilityScoreInc, allCharacteristics);
                     characteristicBox.dataset.origin = "race";
                     this.characteristicsIncreaseElements.appendChild(characteristicBox);
                 }
@@ -1075,7 +970,7 @@ class Builder {
                     "class",
                     "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum magni quasi dolores non molestiae quae quia quod, ab eaque dignissimos.",
                     {
-                        picture: "Images/creatures/humanoids/races/Dwarf.png",
+                        picture: "Images/creatures/humanoids/races/rc_dwarf.png",
                         animation: true
                     });
 
@@ -1104,7 +999,7 @@ class Builder {
                 let classObject = user.class[className];
 
                 this.classCard.setText(classObject.init.description);
-                this.classCard.setImg("Images/creatures/humanoids/races/" + "Dwarf" + ".png"); //className
+                this.classCard.setImg("Images/creatures/humanoids/races/" + "rc_dwarf" + ".png"); //className
 
                 this.hitDice.innerText = `1d${classObject.init.hitDiceCoeffiecient}`;
                 this.hitDiceStart.innerText = `${classObject.hpStart} + ${translateTo('language', "constitution modifier")}`;
@@ -1117,7 +1012,7 @@ class Builder {
 
                 clearElement(this.skill);
                 for (let skill = 0; skill < classObject.init.skillsChoice; skill++) {
-                    let skillBoxElement = createCharacteristicBox(`anyClassSkill`, true, classObject.init.skillsChoice, classObject.init.skill);
+                    let skillBoxElement = createCharacteristicBox(`anyClassSkill`, true, "anyClassSkill", classObject.init.skillsChoice, classObject.init.skill);
                     this.skill.appendChild(skillBoxElement);
                 }
                 dispatchAllSelect(this.skill);
@@ -1129,7 +1024,7 @@ class Builder {
                 }
                 for (const [index, eq] of classObject.init.equipmentToChooseFrom.entries()) {
                     for (let equipment = 0; equipment < classObject.init.equipmentToChoice; equipment++) {
-                        let equipmentBoxElement = createCharacteristicBox(`anyClassEquipment${index}`, true, classObject.init.equipmentToChoice, eq);
+                        let equipmentBoxElement = createCharacteristicBox(`anyClassEquipment${index}`, true, `anyClassEquipment${index}`, classObject.init.equipmentToChoice, eq);
                         this.equipment.appendChild(equipmentBoxElement);
                     }
                 }

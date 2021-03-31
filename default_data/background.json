@@ -1,9 +1,9 @@
 {
-  "acolyte": {
+  "bg_acolyte": {
     "description": "",
     "skillProfencies": [
-      "insight",
-      "religion"
+      "sk_insight",
+      "sk_religion"
     ],
     "languages": 2,
     "equipment": [
@@ -72,11 +72,11 @@
       ]
     }
   },
-  "charlatan": {
+  "bg_charlatan": {
     "description": "",
     "skillProfencies": [
       "Deception",
-      "Sleight of Hand"
+      "sk_sleight_of_hand"
     ],
     "toolProfencies": [
       "Disguise kit",
@@ -147,7 +147,7 @@
       ]
     }
   },
-  "entertainer": {
+  "bg_entertainer": {
     "description": "",
     "skillProfencies": [
       "Acrobatics",
@@ -234,10 +234,10 @@
       ]
     }
   },
-  "folk hero": {
+  "bg_folk_hero": {
     "description": "",
     "skillProfencies": [
-      "Animal Handling",
+      "sk_animal_handling",
       "Survival"
     ],
     "toolProfencies": [
@@ -317,7 +317,7 @@
       ]
     }
   },
-  "guild artisan": {
+  "bg_guild_artisan": {
     "description": "",
     "skillProfencies": [
       "Insight",
@@ -408,7 +408,7 @@
       ]
     }
   },
-  "hermit": {
+  "bg_hermit": {
     "description": "",
     "skillProfencies": [
       "Medicine",
@@ -487,7 +487,7 @@
       ]
     }
   },
-  "noble": {
+  "bg_noble": {
     "description": "",
     "skillProfencies": [
       "History",
@@ -557,7 +557,7 @@
       ]
     }
   },
-  "outlander": {
+  "bg_outlander": {
     "description": "",
     "skillProfencies": [
       "Athletics",
@@ -640,7 +640,7 @@
       ]
     }
   },
-  "sage": {
+  "bg_sage": {
     "description": "",
     "skillProfencies": [
       "Arcana",
@@ -720,7 +720,7 @@
       ]
     }
   },
-  "sailor": {
+  "bg_sailor": {
     "description": "",
     "skillProfencies": [
       "Athletics",
@@ -801,7 +801,7 @@
       ]
     }
   },
-  "soldier": {
+  "bg_soldier": {
     "description": "",
     "skillProfencies": [
       "Athletics",
@@ -882,10 +882,10 @@
       ]
     }
   },
-  "urchin": {
+  "bg_urchin": {
     "description": "",
     "skillProfencies": [
-      "Sleight of Hand",
+      "sk_sleight_of_hand",
       "Stealth"
     ],
     "toolProfencies": [

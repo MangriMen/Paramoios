@@ -1,7 +1,7 @@
 {
-  "dwarf": {
+  "rc_dwarf": {
     "abilityScoreInc": {
-      "constitution": 2
+      "ch_constitution": 2
     },
     "growthDes": "Something about growth",
     "alignmentDes": "Something about alignment",
@@ -20,17 +20,41 @@
       "dwarvish"
     ],
     "subrace": {
-      "hill": {
+      "sr_hill": {
         "abilityScoreInc": {
-          "wisdom": 1
+          "ch_wisdom": 1
+        },
+        "growthWeight": {
+          "baseGrowth": 44,
+          "growthCube": [
+            2,
+            4
+          ],
+          "baseWeight": 115,
+          "weightCube": [
+            2,
+            6
+          ]
         },
         "skill": [
           "dwarven endurance"
         ]
       },
-      "mountain": {
+      "sr_mountain": {
         "abilityScoreInc": {
-          "strength": 2
+          "ch_strength": 2
+        },
+        "growthWeight": {
+          "baseGrowth": 48,
+          "growthCube": [
+            2,
+            4
+          ],
+          "baseWeight": 130,
+          "weightCube": [
+            2,
+            6
+          ]
         },
         "skill": [
           "dwarf armor mastery"
@@ -38,9 +62,9 @@
       }
     }
   },
-  "elf": {
+  "rc_elf": {
     "abilityScoreInc": {
-      "dexterity": 2
+      "ch_dexterity": 2
     },
     "growthDes": "Something about growth",
     "alignmentDes": "Something about alignment",
@@ -58,17 +82,41 @@
       "elvish"
     ],
     "subrace": {
-      "high": {
+      "sr_high": {
         "abilityScoreInc": {
-          "intelligence": 1
+          "ch_intelligence": 1
+        },
+        "growthWeight": {
+          "baseGrowth": 54,
+          "growthCube": [
+            2,
+            10
+          ],
+          "baseWeight": 90,
+          "weightCube": [
+            1,
+            4
+          ]
         },
         "skill": [
           "elven weapon mastery"
         ]
       },
-      "wood": {
+      "sr_wood": {
         "abilityScoreInc": {
-          "wisdom": 2
+          "ch_wisdom": 2
+        },
+        "growthWeight": {
+          "baseGrowth": 54,
+          "growthCube": [
+            1,
+            4
+          ],
+          "baseWeight": 100,
+          "weightCube": [
+            1,
+            4
+          ]
         },
         "speed": 5,
         "skill": [
@@ -77,9 +125,21 @@
           "mask of the wild"
         ]
       },
-      "drow": {
+      "sr_drow": {
         "abilityScoreInc": {
-          "charisma": 1
+          "ch_charisma": 1
+        },
+        "growthWeight": {
+          "baseGrowth": 53,
+          "growthCube": [
+            2,
+            6
+          ],
+          "baseWeight": 75,
+          "weightCube": [
+            1,
+            6
+          ]
         },
         "skill": [
           "superior darkvision",
@@ -90,9 +150,9 @@
       }
     }
   },
-  "halfling": {
+  "rc_halfling": {
     "abilityScoreInc": {
-      "dexterity": 2
+      "ch_dexterity": 2
     },
     "growthDes": "Something about growth",
     "alignmentDes": "Something about alignment",
@@ -109,17 +169,41 @@
       "dwarvish"
     ],
     "subrace": {
-      "lightfoot": {
+      "sr_lightfoot": {
         "abilityScoreInc": {
-          "charisma": 1
+          "ch_charisma": 1
+        },
+        "growthWeight": {
+          "baseGrowth": 31,
+          "growthCube": [
+            2,
+            4
+          ],
+          "baseWeight": 35,
+          "weightCube": [
+            1,
+            1
+          ]
         },
         "skill": [
           "naturally stealthy"
         ]
       },
-      "stout": {
+      "sr_stout": {
         "abilityScoreInc": {
-          "constitution": 1
+          "ch_constitution": 1
+        },
+        "growthWeight": {
+          "baseGrowth": 31,
+          "growthCube": [
+            2,
+            4
+          ],
+          "baseWeight": 35,
+          "weightCube": [
+            1,
+            1
+          ]
         },
         "skill": [
           "stout resilience"
@@ -127,14 +211,26 @@
       }
     }
   },
-  "human": {
+  "rc_human": {
     "abilityScoreInc": {
-      "strength": 1,
-      "dexterity": 1,
-      "constitution": 1,
-      "intelligence": 1,
-      "wisdom": 1,
-      "charisma": 1
+      "ch_strength": 1,
+      "ch_dexterity": 1,
+      "ch_constitution": 1,
+      "ch_intelligence": 1,
+      "ch_wisdom": 1,
+      "ch_charisma": 1
+    },
+    "growthWeight": {
+      "baseGrowth": 56,
+      "growthCube": [
+        2,
+        10
+      ],
+      "baseWeight": 110,
+      "weightCube": [
+        2,
+        4
+      ]
     },
     "growthDes": "Something about growth",
     "alignmentDes": "Something about alignment",
@@ -148,10 +244,22 @@
     ],
     "subrace": {}
   },
-  "dragonborn": {
+  "rc_dragonborn": {
     "abilityScoreInc": {
-      "strength": 2,
-      "charisma": 1
+      "ch_strength": 2,
+      "ch_charisma": 1
+    },
+    "growthWeight": {
+      "baseGrowth": 66,
+      "growthCube": [
+        2,
+        8
+      ],
+      "baseWeight": 175,
+      "weightCube": [
+        2,
+        6
+      ]
     },
     "growthDes": "Something about growth",
     "alignmentDes": "Something about alignment",
@@ -169,9 +277,9 @@
     ],
     "subrace": {}
   },
-  "gnome": {
+  "rc_gnome": {
     "abilityScoreInc": {
-      "intelligence": 2
+      "ch_intelligence": 2
     },
     "growthDes": "Something about growth",
     "alignmentDes": "Something about alignment",
@@ -187,18 +295,42 @@
       "gnomish"
     ],
     "subrace": {
-      "forest": {
+      "sr_forest": {
         "abilityScoreInc": {
-          "dexterity": 1
+          "ch_dexterity": 1
+        },
+        "growthWeight": {
+          "baseGrowth": 35,
+          "growthCube": [
+            2,
+            4
+          ],
+          "baseWeight": 35,
+          "weightCube": [
+            1,
+            1
+          ]
         },
         "skill": [
           "natural illusionist",
           "speak with small beasts"
         ]
       },
-      "rock": {
+      "sr_rock": {
         "abilityScoreInc": {
-          "constitution": 1
+          "ch_constitution": 1
+        },
+        "growthWeight": {
+          "baseGrowth": 35,
+          "growthCube": [
+            2,
+            4
+          ],
+          "baseWeight": 35,
+          "weightCube": [
+            1,
+            1
+          ]
         },
         "skill": [
           "artificer's lore",
@@ -207,11 +339,23 @@
       }
     }
   },
-  "half-elf": {
+  "rc_half-elf": {
     "abilityScoreInc": {
-      "charisma": 2,
+      "ch_charisma": 2,
       "any1": 1,
       "any2": 1
+    },
+    "growthWeight": {
+      "baseGrowth": 57,
+      "growthCube": [
+        2,
+        8
+      ],
+      "baseWeight": 110,
+      "weightCube": [
+        2,
+        4
+      ]
     },
     "growthDes": "Something about growth",
     "alignmentDes": "Something about alignment",
@@ -230,10 +374,22 @@
     ],
     "subrace": {}
   },
-  "half-orc": {
+  "rc_half-orc": {
     "abilityScoreInc": {
-      "strength": 2,
-      "constitution": 1
+      "ch_strength": 2,
+      "ch_constitution": 1
+    },
+    "growthWeight": {
+      "baseGrowth": 58,
+      "growthCube": [
+        2,
+        10
+      ],
+      "baseWeight": 140,
+      "weightCube": [
+        2,
+        6
+      ]
     },
     "growthDes": "Something about growth",
     "alignmentDes": "Something about alignment",
@@ -252,10 +408,22 @@
     ],
     "subrace": {}
   },
-  "tiefling": {
+  "rc_tiefling": {
     "abilityScoreInc": {
-      "intelligence": 1,
-      "charisma": 2
+      "ch_intelligence": 1,
+      "ch_charisma": 2
+    },
+    "growthWeight": {
+      "baseGrowth": 57,
+      "growthCube": [
+        2,
+        8
+      ],
+      "baseWeight": 110,
+      "weightCube": [
+        2,
+        4
+      ]
     },
     "growthDes": "Something about growth",
     "alignmentDes": "Something about alignment",

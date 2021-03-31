@@ -22,12 +22,12 @@
     "failures": 0
   },
   "characteristic": {
-    "strength": 0,
-    "dexterity": 0,
-    "constitution": 0,
-    "intelligence": 0,
-    "wisdom": 0,
-    "charisma": 0
+    "ch_strength": 0,
+    "ch_dexterity": 0,
+    "ch_constitution": 0,
+    "ch_intelligence": 0,
+    "ch_wisdom": 0,
+    "ch_charisma": 0
   },
   "characteristicBonus": {
     "strengthBonus": -5,
@@ -38,32 +38,32 @@
     "charismaBonus": -5
   },
   "savingThrowProf": {
-    "strength": false,
-    "dexterity": false,
-    "constitution": false,
-    "intelligence": false,
-    "wisdom": false,
-    "charisma": false
+    "ch_strength": false,
+    "ch_dexterity": false,
+    "ch_constitution": false,
+    "ch_intelligence": false,
+    "ch_wisdom": false,
+    "ch_charisma": false
   },
   "skillProf": {
-    "acrobatics": false,
+    "sk_acrobatics": false,
     "animalHandling": false,
-    "arcana": false,
-    "athletics": false,
-    "deception": false,
-    "history": false,
-    "insight": false,
-    "intimidation": false,
-    "investigation": false,
-    "medicine": false,
-    "nature": false,
-    "perception": false,
+    "sk_arcana": false,
+    "sk_athletics": false,
+    "sk_deception": false,
+    "sk_history": false,
+    "sk_insight": false,
+    "sk_intimidation": false,
+    "sk_investigation": false,
+    "sk_medicine": false,
+    "sk_nature": false,
+    "sk_perception": false,
     "perfomance": false,
-    "persuasion": false,
-    "religion": false,
+    "sk_persuasion": false,
+    "sk_religion": false,
     "sleightOfHand": false,
-    "stealth": false,
-    "survival": false
+    "sk_stealth": false,
+    "sk_survival": false
   },
   "passiveWisdom": -5,
   "armorProf": {},
