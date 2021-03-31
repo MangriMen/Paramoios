@@ -224,7 +224,7 @@ let russianVocabulary = {
     "shield": "Щиты",
     "simple": "Простое оружие",
     "martial": "Воинское оружие",
-    "none": "Нет",
+    "text_none": "Нет",
 
     "M": "м",
     "Cm": "см",
@@ -728,4 +728,37 @@ function zeroIfUndefined(value) {
 function isEmpty(obj) {
     for (let x in obj) { return false; }
     return true;
+}
+
+function fillSpanWithComma(span, inputArray) {
+    let isComma = false;
+    span.innerText = '';
+    if (inputArray.length == 0) {
+        span.innerText += translateTo('language', "text_none");
+        return;
+    }
+    for (let element of inputArray) {
+        span.innerText += (isComma ? ", " : "") + translateTo('language', element);
+        isComma = true;
+    }
+}
+
+function addToSetFromObjectOrArray(outputSet, inputObjArr) {
+    for (const key in inputObjArr) {
+        outputSet.add(inputObjArr[key]);
+    }
+}
+
+function ifHasSetPropertyToTrue(objectWithBoolean, inputArray) {
+    for (let key of inputArray) {
+        if (objectWithBoolean.hasOwnProperty(key)) {
+            objectWithBoolean[key] = true;
+        }
+    }
+}
+
+function dispatchAllSelect(box) {
+    Array.from(box.getElementsByTagName('select')).forEach(element => {
+        element.dispatchEvent(new Event('change'));
+    });
 }

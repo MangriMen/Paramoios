@@ -42,17 +42,8 @@ const allLanguages = {
 
 let isMetric = (getCookie("isMetric") == "true");
 
-let raceChoosingBox = document.getElementById('race-choosing-box');
-let raceSelect = document.getElementById('race-select');
-let subraceSelect = document.getElementById('subrace-select');
-let subraceBoxCached = subraceSelect.parentElement;
-// let classSelect = document.getElementById('class-select');
 let alignmentSelect = document.getElementById('alignment');
 let backgroundSelect = document.getElementById('background-select');
-let characteristicsIncreaseElements = document.getElementById('characteristics-increase-elements');
-let raceTraitsFeaturesElements = document.getElementById('race-traits-features-elements');
-let addInfoBox = document.getElementById('race-add-info-box');
-let raceCard = document.getElementById('race-card');
 let addInfoBoxBackground = document.getElementById('add-info-box-background');
 let backgroundCard = document.getElementById('background-card');
 let manuallyCheckbox = document.getElementById('manually-checkbox');
@@ -62,23 +53,17 @@ let selectedAdditionalInfoBackground = null;
 let isSwitching = false;
 let isSwitchingBackground = false;
 
-let raceFeatures = [];
+let raceP = null;
+let classP = null;
+let characteristicCards = null;
 
-document.getElementById('growth-primary-measure').textContent = measureSystem[isMetric | 0][0];
-document.getElementById('growth-secondary-measure').textContent = measureSystem[isMetric | 0][1];
-document.getElementById('weight-measure').textContent = weightSystem[isMetric | 0];
+// document.getElementById('growth-primary-measure').textContent = measureSystem[isMetric | 0][0];
+// document.getElementById('growth-secondary-measure').textContent = measureSystem[isMetric | 0][1];
+// document.getElementById('weight-measure').textContent = weightSystem[isMetric | 0];
 
-raceSelect.addEventListener('change', raceSelected);
-raceSelect.addEventListener('change', optionSelected);
-raceSelect.addEventListener('change', rollGrowthWeight);
-
-subraceSelect.addEventListener('change', subraceSelected);
-subraceSelect.addEventListener('change', optionSelected);
-
-document.getElementById('roll-growth-weight-button').addEventListener('click', rollGrowthWeight);
+document.getElementById('roll-growth-weight-button').addEventListener('click', () => { rollGrowthWeight(raceP); });
 
 backgroundSelect.addEventListener('change', backgroundSelected);
-backgroundSelect.addEventListener('change', optionSelected);
 
 const traitsText = document.getElementById('traits-text');
 document.getElementById('traits-roll-button').addEventListener('click', function () { rollPersonalityField("traits") });
@@ -207,9 +192,10 @@ class CharacteristicsCard {
     }
 
     calcModifiers() {
-        this.raceTr.lastChild.textContent = "+" + zeroIfUndefined(user.race[raceSelect.value].abilityScoreInc[this.characteristic]);
-        if (subraceSelect.firstChild)
-            this.raceTr.lastChild.textContent = "+" + zeroIfUndefined(user.race[raceSelect.value].subrace[subraceSelect.value].abilityScoreInc[this.characteristic]);
+        this.raceTr.lastChild.textContent = "+" + zeroIfUndefined(raceP.raceObject.abilityScoreInc[this.characteristic]);
+        if (raceP.subraceSelect.childElementCount > 0) {
+            this.raceTr.lastChild.textContent = "+" + zeroIfUndefined(raceP.subraceObject.abilityScoreInc[this.characteristic]);
+        }
         this.increaseTr.lastChild.textContent = "+" + 0;
         this.otherTr.lastChild.textContent = "+" + 0;
     }
@@ -221,15 +207,6 @@ class CharacteristicsCard {
     getTotalScore() {
         return removeSignFromNumber(this.sumTr.lastChild.textContent);
     }
-}
-
-let characteristicCards = {
-    "strengthCard": new CharacteristicsCard("strength"),
-    "dexterityCard": new CharacteristicsCard("dexterity"),
-    "constitutionCard": new CharacteristicsCard("constitution"),
-    "intelligenceCard": new CharacteristicsCard("intelligence"),
-    "wisdomCard": new CharacteristicsCard("wisdom"),
-    "charismaCard": new CharacteristicsCard("charisma")
 }
 
 function displayManuallyGrowthWeight() {
@@ -276,83 +253,7 @@ function createOptionForChooseCharacteristic(defchar) {
     return option;
 }
 
-function createInfoCardFromFeature(feature, place) {
-    let card = document.createElement('div');
-    card.id = feature + '-card';
-    card.classList = 'card-box';
-
-    let cardTitle = document.createElement('span');
-    cardTitle.classList = 'card-title';
-    cardTitle.textContent = translateTo('language', feature);
-
-    let cardDescription = document.createElement('span');
-    cardDescription.classList = 'card-description';
-    if (place.hasOwnProperty(feature) && place[feature].hasOwnProperty('description')) {
-        if (place[feature].description.hasOwnProperty(language)) {
-            cardDescription.innerText = place[feature].description[language];
-        }
-        else {
-            cardDescription.innerText = translateTo('language', "Missing Description");
-        }
-    }
-    else {
-        cardDescription.innerText = translateTo('language', "Missing Description");
-    }
-
-    card.appendChild(cardTitle);
-    card.appendChild(cardDescription);
-
-    return card;
-}
-
-function switchCard(element) {
-    addInfoBox.style.transform = "rotateY(90deg)";
-
-    setTimeout(() => {
-        addInfoBox.querySelector('div').style.filter = "blur(2px)";
-    }, 600);
-
-    setTimeout(() => {
-        addInfoBox.querySelector('div').style.filter = "";
-        clearElement(addInfoBox);
-        addInfoBox.appendChild((element == "race" ? raceCard : createInfoCardFromFeature(element.id, user.feature)));
-        addInfoBox.style.transform = "rotateY(0deg)";
-        addInfoBox.querySelector('div').style.filter = "blur(2px)";
-        setTimeout(() => {
-            addInfoBox.querySelector('div').style.filter = "";
-            isSwitching = false;
-        }, 400);
-    }, 1000);
-}
-
-function additionalSelect(element) {
-    if (selectedAdditionalInfo != null) {
-        selectedAdditionalInfo.classList.toggle('item-pressed');
-    }
-    selectedAdditionalInfo = element;
-    selectedAdditionalInfo.classList.toggle('item-pressed');
-}
-
-function additionalUnselect() {
-    selectedAdditionalInfo.classList.toggle('item-pressed');
-    selectedAdditionalInfo = null;
-}
-
-function displayAdditionalInfo() {
-    if (!isSwitching) {
-        isSwitching = true;
-        if (selectedAdditionalInfo != this) {
-            additionalSelect(this);
-            switchCard(this);
-        }
-        else {
-            additionalUnselect();
-            switchCard("race");
-        }
-    }
-}
-
-function createFeaturesBox(feature, place) {
+function createFeaturesBox(feature, place, holder = null) {
     let featuresBox = document.createElement('button');
     featuresBox.id = place[feature];
     featuresBox.classList = 'feature-box default-background border-style border-radius default-inner-shadow default-button input-font-style';
@@ -367,7 +268,15 @@ function createFeaturesBox(feature, place) {
     featuresBox.appendChild(featuresImg);
     featuresBox.appendChild(featuresText);
 
-    featuresBox.addEventListener('click', displayAdditionalInfo);
+    let featureCard = new InfoCard(
+        place[feature],
+        user.feature[place[feature]].description[language],
+        {
+            title: translateTo('language', place[feature])
+        }
+    );
+
+    featuresBox.addEventListener('click', () => { holder.switchCard(featureCard, featuresBox); })
 
     return featuresBox;
 }
@@ -416,8 +325,8 @@ function getRaceGrowthWeight(race, subrace) {
     return ((subrace == "") ? user.race[race].growthWeight : user.race[race].subrace[subrace].growthWeight)
 }
 
-function rollGrowthWeight() {
-    let growthWeightObject = getRaceGrowthWeight(raceSelect.value, subraceSelect.value);
+function rollGrowthWeight(raceP) {
+    let growthWeightObject = getRaceGrowthWeight(raceP.raceSelect.value, raceP.subraceSelect.value);
     let growthCube = growthWeightObject.growthCube;
     let gRollResult = rollDice(growthCube[0], growthCube[1]).value;
 
@@ -499,15 +408,6 @@ function changeRaceCard() {
 
 // Load functions
 
-function loadRaceSelect() {
-    for (let race in user.race) {
-        let option = document.createElement('option');
-        option.value = race;
-        option.textContent = translateTo('language', race);
-        raceSelect.appendChild(option);
-    }
-}
-
 function loadCharacteristicsCards() {
     let fragment = new DocumentFragment();
     for (let card in characteristicCards) {
@@ -519,21 +419,17 @@ function loadCharacteristicsCards() {
 }
 
 function loadAlignmentSelect() {
+    let fragment = new DocumentFragment();
     for (let alignment of user.alignment) {
-        let option = document.createElement('option');
-        option.value = alignment;
-        option.textContent = translateTo('language', alignment);
-        alignmentSelect.append(option);
+        Select.add(fragment, alignment, translateTo('language', alignment));
     }
+    alignmentSelect.append(fragment);
 }
 
 function loadBackgroundSelect() {
     let fragment = new DocumentFragment();
     for (let background in user.background) {
-        let option = document.createElement('option');
-        option.value = background;
-        option.textContent = translateTo('language', background);
-        fragment.append(option);
+        Select.add(fragment, background, translateTo('language', background));
     }
     backgroundSelect.append(fragment);
 }
@@ -544,7 +440,7 @@ function loadSkills() {
         let skillsBoxElement = createCharacteristicBox(skill, false, skill, user.background[backgroundSelect.value].skillProfencies);
         skillsBox.appendChild(skillsBoxElement);
     }
-    // dispatchAllSelect(skillsBox);
+    dispatchAllSelect(skillsBox);
 }
 
 function loadLanguages() {
@@ -574,84 +470,6 @@ function loadEquipment() {
     dispatchAllSelect(equipmentBox);
 }
 
-// Select chage event catched
-
-function optionSelected() {
-    choosedCharacter.json[this.id.split('-')[0]] = this.value;
-}
-
-function raceSelected() {
-    clearElement(subraceSelect);
-    clearElement(characteristicsIncreaseElements);
-    clearElement(raceTraitsFeaturesElements);
-    changeRaceCard();
-    for (let feature in user.race[raceSelect.value].skill) {
-        let featuresBox = createFeaturesBox(feature, user.race[raceSelect.value].skill);
-        featuresBox.dataset.origin = "race";
-        raceTraitsFeaturesElements.appendChild(featuresBox);
-    }
-    for (let characteristic in user.race[raceSelect.value].abilityScoreInc) {
-        let characteristicBox = createCharacteristicBox(characteristic, (characteristic.substr(0, 3) == "any"), "anyFeature0", user.race[raceSelect.value].abilityScoreInc, allCharacteristics);
-        characteristicBox.dataset.origin = "race";
-        characteristicsIncreaseElements.appendChild(characteristicBox);
-    }
-    dispatchAllSelect(characteristicsIncreaseElements);
-    for (let subrace in user.race[raceSelect.value].subrace) {
-        let option = document.createElement('option');
-        option.value = subrace;
-        option.textContent = translateTo('language', subrace);
-        subraceSelect.appendChild(option);
-    }
-
-    if (subraceSelect.childElementCount > 0) {
-        raceChoosingBox.append(subraceBoxCached);
-    }
-    else {
-        if (subraceBoxCached.parentElement) { subraceBoxCached.parentElement.removeChild(subraceBoxCached) }
-    }
-
-    if (subraceSelect.firstChild)
-        subraceSelect.dispatchEvent(new Event('change'));
-    else {
-        for (let card in characteristicCards)
-            CharacteristicsCard.calcSum(characteristicCards[card]);
-    }
-    rollGrowthWeight();
-}
-
-function subraceSelected() {
-    raceFeatures = [];
-    Array.from(characteristicsIncreaseElements.childNodes).forEach(node => {
-        if (node.dataset.origin == "subrace") {
-            characteristicsIncreaseElements.removeChild(node);
-        }
-    });
-    Array.from(raceTraitsFeaturesElements.childNodes).forEach(node => {
-        if (node.dataset.origin == "subrace") {
-            raceTraitsFeaturesElements.removeChild(node);
-        }
-        else {
-            raceFeatures.push(node.id);
-        }
-    });
-    for (let feature in user.race[raceSelect.value].subrace[subraceSelect.value].skill) {
-        if (!(user.race[raceSelect.value].subrace[subraceSelect.value].skill[feature] in raceFeatures)) {
-            let featuresBox = createFeaturesBox(feature, user.race[raceSelect.value].subrace[subraceSelect.value].skill);
-            featuresBox.dataset.origin = "subrace";
-            raceTraitsFeaturesElements.appendChild(featuresBox);
-        }
-    }
-    for (let characteristic in user.race[raceSelect.value].subrace[subraceSelect.value].abilityScoreInc) {
-        let characteristicBox = createCharacteristicBox(characteristic, characteristic.substr(0, 3) == "any", "anyFeature0", user.race[raceSelect.value].subrace[subraceSelect.value].abilityScoreInc, allCharacteristics);
-        characteristicBox.dataset.origin = "subrace";
-        characteristicsIncreaseElements.appendChild(characteristicBox);
-    }
-    // dispatchAllSelect(characteristicsIncreaseElements);
-
-    for (let card in characteristicCards)
-        CharacteristicsCard.calcSum(characteristicCards[card]);
-}
-
 function backgroundSelected() {
     rollPersonalityField("traits");
     rollPersonalityField("ideals");
@@ -661,12 +479,6 @@ function backgroundSelected() {
     loadLanguages();
     loadEquipment();
 }
-
-// class BoundedSelect {
-//     constructor() {
-
-//     }
-// }
 
 function additionalCharacteristicSelected(element, array) {
     let wrapper = Array.from(element.parentElement.parentElement.querySelectorAll(`[data-id="${element.parentElement.dataset.id}"][data-group="true"]`));
@@ -717,12 +529,6 @@ function additionalCharacteristicSelected(element, array) {
     }
 }
 
-function dispatchAllSelect(box) {
-    Array.from(box.getElementsByTagName('select')).forEach(element => {
-        element.dispatchEvent(new Event('change'));
-    });
-}
-
 function getBackgroundLanguageArray() {
     let out = [];
     Array.from(languagesBox.childNodes).forEach(language => {
@@ -734,407 +540,421 @@ function getBackgroundLanguageArray() {
     });
     return out;
 }
-
 class Select {
-    constructor(select) {
-        this.element = select;
-    }
-
-    getValue() {
-        return this.element.value;
-    }
-
-    addNew(value, text) {
+    static add(select, value, text) {
         let option = document.createElement('option');
         option.value = value;
         option.textContent = translateTo('language', text);
-        this.element.append(option);
+        select.append(option);
     }
 
-    addOption(option) {
-        this.element.append(option);
-    }
-
-    clear() {
-        clearElement(this.element);
-    }
-
-    isEmpty() {
-        if (this.element.firstChild) {
-            return 0;
-        }
-        return 1;
+    static isEmpty(select) {
+        return !select.firstChild;
     }
 }
-
-function fillSpanWithComma(span, inputArray) {
-    let isComma = false;
-    span.innerText = '';
-    if (inputArray.length == 0) {
-        span.innerText += translateTo('language', "None");
-        return;
+class InfoCardHolder {
+    constructor() {
+        this.box = document.createElement('div');
+        this.box.classList = 'add-info-box default-background border-style border-radius default-shadow';
+        this.isSwitching = false;
+        this.isMainCard = false;
+        this.currentCard;
+        this.currentElement;
     }
-    for (let element of inputArray) {
-        span.innerText += (isComma ? ", " : "") + translateTo('language', element);
-        isComma = true;
-    }
-}
 
-class Builder {
-    constructor(block) {
-        let builder = this;
-        user = JSON.parse(localStorage[localStorage.loggedUser]);
-        userJSONFix();
-        this.infoCardHolder = class InfoCardHolder {
-            constructor() {
-                this.box = document.createElement('div');
-                this.box.classList = 'add-info-box default-background border-style border-radius default-shadow';
-                this.isSwitching = false;
-                this.isMainCard = false;
+    setMainCard(mainCard) {
+        this.mainCard = mainCard;
+        this.isMainCard = true;
+        this.currentCard = this.mainCard;
+    }
+
+    removeMainCard() {
+        delete this.mainCard;
+    }
+
+    switchCard(InfoCard, element = null) {
+        if (this.isSwitching) { return; }
+        else if (this.mainCard && this.isMainCard && (InfoCard.box == this.mainCard)) { return; }
+        if (element) {
+            if (this.currentElement) {
+                this.currentElement.classList.toggle('item-pressed');
             }
+            if (this.currentElement != element) {
+                this.currentElement = element;
+                this.currentElement.classList.toggle('item-pressed');
+            }
+        }
+        this.isSwitching = true;
+        this.box.style.transform = "rotateY(90deg)";
 
-            setMainCard(mainCard) {
-                this.mainCard = mainCard;
+        setTimeout(() => {
+            this.box.querySelector('div').style.filter = "blur(2px)";
+        }, 600);
+
+        setTimeout(() => {
+            this.box.querySelector('div').style.filter = "";
+            clearElement(this.box);
+            if (this.mainCard && !this.isMainCard && this.currentCard == InfoCard.box) {
                 this.isMainCard = true;
+                this.currentCard = this.mainCard;
+                this.box.appendChild(this.mainCard);
+            } else {
+                this.isMainCard = false;
+                this.currentCard = InfoCard.box;
+                this.box.appendChild(InfoCard.box);
             }
-
-            removeMainCard() {
-                delete this.mainCard;
-            }
-
-            switchCard(InfoCard) {
-                if (this.isSwitching) { return; }
-                else if (this.mainCard && this.isMainCard && (InfoCard.box == this.mainCard)) { return; }
-                this.isSwitching = true;
-                this.box.style.transform = "rotateY(90deg)";
-
-                setTimeout(() => {
-                    this.box.querySelector('div').style.filter = "blur(2px)";
-                }, 600);
-
-                setTimeout(() => {
-                    this.box.querySelector('div').style.filter = "";
-                    clearElement(this.box);
-                    if (this.mainCard && !this.isMainCard) {
-                        this.isMainCard = true;
-                        this.box.appendChild(this.mainCard);
-                    } else {
-                        this.isMainCard = false;
-                        this.box.appendChild(InfoCard.box);
-                    }
-                    this.box.style.transform = "rotateY(0deg)";
-                    this.box.querySelector('div').style.filter = "blur(2px)";
-                    setTimeout(() => {
-                        this.box.querySelector('div').style.filter = "";
-                        this.isSwitching = false;
-                    }, 400);
-                }, 1000);
-            }
-        }
-        this.infoCard = class InfoCard {
-            constructor(id, text, options = {}) {
-                options = {
-                    title: "",
-                    picture: "",
-                    animation: false,
-                    ...options
-                }
-
-                this.box = document.createElement('div');
-                this.box.id = id + '-card';
-                this.box.classList = 'card-box';
-
-                this.text = document.createElement('span');
-                this.text.classList = 'card-description';
-                this.text.innerText = text;
-
-                if (options.picture == "") {
-                    this.title = document.createElement('span');
-                    this.title.classList = 'card-title';
-                    this.title.innerText = options.title;
-
-                    this.box.append(this.title);
-                } else {
-                    this.img = document.createElement('img');
-                    this.img.classList = 'add-info-img';
-                    this.img.src = options.picture;
-
-                    this.box.append(this.img);
-                }
-
-                this.box.append(this.text);
-
-                if (options.animation) {
-                    this.animationBox = document.createElement('div');
-                    this.animationBox.classList = 'card-bottom-animation-box';
-
-                    this.animation = document.createElement('div');
-                    this.animation.classList = 'card-bottom-animation';
-                    this.animation.dataset.animation = true;
-
-                    this.animationInner = document.createElement('div');
-                    this.animationInner.classList = 'card-bottom-animation-inner';
-                    this.animationInner.dataset.animation = true;
-
-                    this.animation.append(this.animationInner);
-                    this.animationBox.append(this.animation);
-
-                    this.box.append(this.animationBox);
-                }
-            }
-
-            setText(text) {
-                this.text.innerText = text;
-            }
-
-            setImg(src) {
-                this.img.src = src;
-            }
-        }
-        this.race = class Race {
-            constructor(block) {
-                // this.rootPage = block.getElementById('class-page');
-                // this.raceSelect = new Select(block.getElementById('race-select'))
-                // this.subraceSelect = new Select(block.getElementById('subrace-select'));
-
-                // this.characteristicsIncreaseElements = block.getElementById("characteristics-increase-elements")
-                // this.raceTraitsFeaturesElements = block.getElementById("race-traits-features-elements");
-
-                // for (let race in user.race) {
-                //     this.raceSelect.addNew(race, translateTo('language', race));
-                // }
-
-                // this.raceSelect.element.addEventListener('change', () => { this.load(this.raceSelect.getValue()); });
-            }
-
-            load(raceName) {
-                let raceObject = user.race[raceName];
-
-                clearElement(this.subraceSelect.element);
-                clearElement(this.characteristicsIncreaseElements);
-                clearElement(this.raceTraitsFeaturesElements);
-                changeRaceCard();
-                for (let feature in raceObject.skill) {
-                    let featuresBox = createFeaturesBox(feature, raceObject.skill);
-                    featuresBox.dataset.origin = "race";
-                    this.raceTraitsFeaturesElements.appendChild(featuresBox);
-                }
-                for (let characteristic in raceObject.abilityScoreInc) {
-                    let characteristicBox = createCharacteristicBox(characteristic, false, characteristic, raceObject.abilityScoreInc, allCharacteristics);
-                    characteristicBox.dataset.origin = "race";
-                    this.characteristicsIncreaseElements.appendChild(characteristicBox);
-                }
-                // dispatchAllSelect(characteristicsIncreaseElements);
-                for (let subrace in raceObject.subrace) {
-                    this.subraceSelect.addNew(subrace, translateTo('language', subrace));
-                }
-
-                !this.subraceSelect.element.firstChild ? subraceBoxCached.parentElement.removeChild(subraceBoxCached) : raceChoosingBox.append(subraceBoxCached);
-
-                if (!this.subraceSelect.isEmpty())
-                    this.subraceSelect.element.dispatchEvent(new Event('change'));
-                else {
-                    for (let card in characteristicCards)
-                        CharacteristicsCard.calcSum(characteristicCards[card]);
-                }
-                rollGrowthWeight();
-            }
-
-            init() {
-                // this.raceSelect.element.dispatchEvent(new Event('change'));
-            }
-        }
-        this.class = class Class {
-            constructor(block) {
-                // Caching
-                this.rootPage = block.getElementById('class-page');
-
-                this.classSelect = new Select(block.getElementById('class-select'));
-
-                this.hitDice = block.getElementById('hit-dice-value');
-                this.hitDiceStart = block.getElementById('hit-dice-start-value');
-                this.hitDiceNext = block.getElementById('hit-dice-next-value');
-
-                this.armor = block.getElementById('armor-value');
-                this.weapon = block.getElementById('weapon-value');
-                this.tools = block.getElementById('tools-value');
-                this.savingThrows = block.getElementById('saving-throws-value');
-                this.skill = block.getElementById('skill-value');
-                this.equipment = block.getElementById('class-equipment');
-                this.money = block.getElementById('class-money');
-
-                // Creating objects
-                this.infoCardHolder = new builder.infoCardHolder();
-
-                this.classCard = new builder.infoCard(
-                    "class",
-                    "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum magni quasi dolores non molestiae quae quia quod, ab eaque dignissimos.",
-                    {
-                        picture: "Images/creatures/humanoids/races/rc_dwarf.png",
-                        animation: true
-                    });
-
-                this.testCard = new builder.infoCard(
-                    "some-feature",
-                    "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet, rem?",
-                    {
-                        title: "Тестовая способность"
-                    }
-                )
-
-                // Installation
-                this.classSelect.element.addEventListener('change', () => { this.load(this.classSelect.getValue()); });
-                this.infoCardHolder.setMainCard(this.classCard.box);
-
-                for (let class_ in user.class) {
-                    this.classSelect.addNew(class_, translateTo('language', class_));
-                }
-
-                // Appending to DOM
-                this.infoCardHolder.box.append(this.classCard.box);
-                this.rootPage.prepend(this.infoCardHolder.box);
-            }
-
-            load(className) {
-                let classObject = user.class[className];
-
-                this.classCard.setText(classObject.init.description);
-                this.classCard.setImg("Images/creatures/humanoids/races/" + "rc_dwarf" + ".png"); //className
-
-                this.hitDice.innerText = `1d${classObject.init.hitDiceCoeffiecient}`;
-                this.hitDiceStart.innerText = `${classObject.hpStart} + ${translateTo('language', "constitution modifier")}`;
-                this.hitDiceNext.innerText = `${classObject.hpNext.roll[0]}d${classObject.hpNext.roll[1]} (${translateTo('language', "or")} ${classObject.hpNext.const}) + ${translateTo('language', "constitution modifier")}`;
-
-                fillSpanWithComma(this.armor, classObject.init.proficiencies.armor);
-                fillSpanWithComma(this.weapon, classObject.init.proficiencies.weapon);
-                fillSpanWithComma(this.tools, classObject.init.proficiencies.tools);
-                fillSpanWithComma(this.savingThrows, classObject.init.savingThrowsBonus);
-
-                clearElement(this.skill);
-                for (let skill = 0; skill < classObject.init.skillsChoice; skill++) {
-                    let skillBoxElement = createCharacteristicBox(`anyClassSkill`, true, "anyClassSkill", classObject.init.skillsChoice, classObject.init.skill);
-                    this.skill.appendChild(skillBoxElement);
-                }
-                dispatchAllSelect(this.skill);
-
-                clearElement(this.equipment);
-                for (let equipment of classObject.init.equipment) {
-                    let equipmentBoxElement = createCharacteristicBox(equipment, false, classObject.init.equipment);
-                    this.equipment.appendChild(equipmentBoxElement);
-                }
-                for (const [index, eq] of classObject.init.equipmentToChooseFrom.entries()) {
-                    for (let equipment = 0; equipment < classObject.init.equipmentToChoice; equipment++) {
-                        let equipmentBoxElement = createCharacteristicBox(`anyClassEquipment${index}`, true, `anyClassEquipment${index}`, classObject.init.equipmentToChoice, eq);
-                        this.equipment.appendChild(equipmentBoxElement);
-                    }
-                }
-                dispatchAllSelect(this.equipment);
-
-                clearElement(this.money);
-                let goldText = document.createElement('span');
-                goldText.textContent = translateTo('language', "Gold") + ": " + (rollDice(classObject.init.money.diceCount, classObject.init.money.diceType).value * classObject.init.money.multiplyBy) + " " + translateTo('language', "Coins");
-                this.money.appendChild(goldText);
-            }
-
-            init() {
-                this.classSelect.element.dispatchEvent(new Event('change'));
-            }
-        }
-        this.race = new this.race(block);
-        this.class = new this.class(block);
+            this.box.style.transform = "rotateY(0deg)";
+            this.box.querySelector('div').style.filter = "blur(2px)";
+            setTimeout(() => {
+                this.box.querySelector('div').style.filter = "";
+                this.isSwitching = false;
+            }, 400);
+        }, 1000);
     }
+}
+class InfoCard {
+    constructor(id, text, options = {}) {
+        options = {
+            title: "",
+            picture: "",
+            animation: false,
+            ...options
+        }
 
-    addToSetFromObjectOrArray(outputSet, inputObjArr) {
-        for (const key in inputObjArr) {
-            outputSet.add(inputObjArr[key]);
+        this.box = document.createElement('div');
+        this.box.id = id + '-card';
+        this.box.classList = 'card-box';
+
+        this.text = document.createElement('span');
+        this.text.classList = 'card-description';
+        this.text.innerText = text;
+
+        if (options.picture == "") {
+            this.title = document.createElement('span');
+            this.title.classList = 'card-title';
+            this.title.innerText = options.title;
+
+            this.box.append(this.title);
+        } else {
+            this.img = document.createElement('img');
+            this.img.classList = 'add-info-img';
+            this.img.src = options.picture;
+
+            this.box.append(this.img);
+        }
+
+        this.box.append(this.text);
+
+        if (options.animation) {
+            this.animationBox = document.createElement('div');
+            this.animationBox.classList = 'card-bottom-animation-box';
+
+            this.animation = document.createElement('div');
+            this.animation.classList = 'card-bottom-animation';
+            this.animation.dataset.animation = true;
+
+            this.animationInner = document.createElement('div');
+            this.animationInner.classList = 'card-bottom-animation-inner';
+            this.animationInner.dataset.animation = true;
+
+            this.animation.append(this.animationInner);
+            this.animationBox.append(this.animation);
+
+            this.box.append(this.animationBox);
         }
     }
 
-    ifHasSetPropertyToTrue(objectWithBoolean, inputArray) {
-        for (let key of inputArray) {
-            if (objectWithBoolean.hasOwnProperty(key)) {
-                objectWithBoolean[key] = true;
-            }
-        }
+    setText(text) {
+        this.text.innerText = text;
     }
 
-    init() {
-        this.race.init();
-        this.class.init();
-    }
-
-    writeToCharacter() {
-        // Name
-        newCharacter.playerName = user.name;
-        newCharacter.charName = document.getElementById('name').textContent;
-
-        // Primary fields
-        newCharacter.race = raceSelect.value;
-        newCharacter.class = classSelect.value;
-        newCharacter.alignment = alignmentSelect.value;
-        newCharacter.background = backgroundSelect.value;
-
-        // Level
-        newCharacter.level = 1;
-        newCharacter.experience = 0;
-
-        // Hp
-        newCharacter.hp = user.class[classSelect.value].hpStart;
-        newCharacter.hpNext = user.class[classSelect.value].hpNext;
-        newCharacter.hpTemp = newCharacter.hp;
-        newCharacter.hpMax = newCharacter.hp;
-        newCharacter.hitDiceCoeffiecient = user.class[classSelect.value].init.hitDiceCoeffiecient;
-        newCharacter.hitDiceLeft = 1;
-
-        // Capability
-        newCharacter.speed = user.race[raceSelect.value].speed;
-        newCharacter.maxWeight = Math.round10(lbToKg(newCharacter.abilityScore.strength * 15), -1);
-
-        // Personality
-        // newCharacter.age =
-        newCharacter.height = charHeight;
-        newCharacter.weight = charWeight;
-
-        newCharacter.traits = traitsText.textContent;
-        newCharacter.ideals = idealsText.textContent;
-        newCharacter.bonds = bondsText.textContent;
-        newCharacter.flaws = flawsText.textContent;
-
-        // Passive
-        // newCharacter.armorClass = 0;
-        // newCharacter.initiative = 0;
-        // newCharacter.proficiencyBonus = 0;
-        newCharacter.passiveWisdom = 10 + newCharacter.abilityScoreBonus.wisdomBonus;
-
-        // Ability
-        for (let abilityCard in characteristicCards) {
-            newCharacter.abilityScore[characteristicCards[abilityCard].characteristic] = characteristicCards[abilityCard].getTotalScore();
-            newCharacter.abilityScoreBonus[characteristicCards[abilityCard].characteristic + "Bonus"] = characteristicCards[abilityCard].getCalcModifier();
-        }
-
-        // Proficiency
-        for (let proficiencyGroup in user.class[classSelect.value].init.proficiencies) {
-            this.addToSetFromObjectOrArray(newCharacter.proficiencies[proficiencyGroup],
-                user.class[classSelect.value].init.proficiencies[proficiencyGroup]);
-        }
-        this.ifHasSetPropertyToTrue(newCharacter.savingThrowProf, user.class[classSelect.value].init.savingThrowsBonus);
-        this.ifHasSetPropertyToTrue(newCharacter.skillProf, user.background[backgroundSelect.value].skillProfencies);
-
-        // Money
-        for (let coin in newCharacter.money) {
-            newCharacter.money[coin] += user.background[backgroundSelect.value].money[coin];
-        }
-
-        // Language
-        this.addToSetFromObjectOrArray(newCharacter.languages, user.race[raceSelect.value].languages);
-        this.addToSetFromObjectOrArray(newCharacter.languages, user.race[raceSelect.value].subrace[subraceSelect.value].languages);
-        this.addToSetFromObjectOrArray(newCharacter.languages, getBackgroundLanguageArray());
+    setImg(src) {
+        this.img.src = src;
     }
 }
 
-// Save character
+class Race_ {
+    constructor(block) {
+        // Caching
+        this.rootPage = block.getElementById('race-page');
 
-let builder = new Builder(document);
+        this.raceSelect = block.getElementById('race-select');
+        this.subraceSelect = block.getElementById('subrace-select');
+        this.characteristicsIncreaseElements = block.getElementById("characteristics-increase-elements")
+        this.raceTraitsFeaturesElements = block.getElementById("race-traits-features-elements");
+        this.subraceBoxCached = this.subraceSelect.parentElement;
+        this.raceChoosingBox = document.getElementById('race-choosing-box');
+
+        // Creating objects
+        this.infoCardHolder = new InfoCardHolder();
+
+        this.raceCard = new InfoCard(
+            "race",
+            "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum magni quasi dolores non molestiae quae quia quod, ab eaque dignissimos.",
+            {
+                picture: "Images/creatures/humanoids/races/rc_dwarf.png",
+                animation: true
+            });
+
+        // Installation
+        this.infoCardHolder.setMainCard(this.raceCard.box);
+
+        for (let race in user.race) {
+            Select.add(this.raceSelect, race, translateTo('language', race));
+        }
+
+        // Installing event listeners
+        this.raceSelect.addEventListener('change', () => { this.load(this.raceSelect.value); });
+        this.subraceSelect.addEventListener('change', () => { this.loadSubrace(this.subraceSelect.value) });
+
+        // Adding to DOM
+        this.infoCardHolder.box.append(this.raceCard.box);
+        this.rootPage.prepend(this.infoCardHolder.box);
+
+        // Dispatching events
+        this.raceSelect.dispatchEvent(new Event('change'));
+        this.subraceSelect.dispatchEvent(new Event('change'));
+    }
+
+    load(raceName) {
+        this.raceObject = user.race[raceName];
+
+        clearElement(this.subraceSelect);
+        clearElement(this.characteristicsIncreaseElements);
+        clearElement(this.raceTraitsFeaturesElements);
+        // changeRaceCard();
+
+        for (let feature in this.raceObject.skill) {
+            let featuresBox = createFeaturesBox(feature, this.raceObject.skill, this.infoCardHolder);
+            featuresBox.dataset.origin = "race";
+            this.raceTraitsFeaturesElements.appendChild(featuresBox);
+        }
+
+        for (let characteristic in this.raceObject.abilityScoreInc) {
+            let characteristicBox = createCharacteristicBox(characteristic, (characteristic.substr(0, 3) == "any"), "anyFeature0", this.raceObject.abilityScoreInc, allCharacteristics);
+            characteristicBox.dataset.origin = "race";
+            this.characteristicsIncreaseElements.appendChild(characteristicBox);
+        }
+        dispatchAllSelect(this.characteristicsIncreaseElements);
+
+        for (let subrace in this.raceObject.subrace) {
+            Select.add(this.subraceSelect, subrace, translateTo('language', subrace));
+        }
+
+        if (this.subraceSelect.childElementCount > 0) {
+            this.raceChoosingBox.append(this.subraceBoxCached);
+            this.subraceSelect.dispatchEvent(new Event('change'));
+        }
+        else {
+            if (this.subraceBoxCached.parentElement) { this.subraceBoxCached.parentElement.removeChild(this.subraceBoxCached) }
+            for (let card in characteristicCards)
+                CharacteristicsCard.calcSum(characteristicCards[card]);
+        }
+
+        rollGrowthWeight(this);
+    }
+
+    loadSubrace(subraceName) {
+        this.subraceObject = this.raceObject.subrace[subraceName];
+
+        this.raceFeatures = [];
+
+        Array.from(this.characteristicsIncreaseElements.childNodes).forEach(node => {
+            if (node.dataset.origin == "subrace") { this.characteristicsIncreaseElements.removeChild(node); }
+        });
+
+        Array.from(this.raceTraitsFeaturesElements.childNodes).forEach(node => {
+            node.dataset.origin == "subrace"
+                ? this.raceTraitsFeaturesElements.removeChild(node)
+                : this.raceFeatures.push(node.id);
+        });
+
+        for (let feature in this.subraceObject.skill) {
+            if (!(this.subraceObject.skill[feature] in this.raceFeatures)) {
+                let featuresBox = createFeaturesBox(feature, this.subraceObject.skill, this.infoCardHolder);
+                featuresBox.dataset.origin = "subrace";
+                this.raceTraitsFeaturesElements.appendChild(featuresBox);
+            }
+        }
+
+        for (let characteristic in this.subraceObject.abilityScoreInc) {
+            let characteristicBox = createCharacteristicBox(characteristic, characteristic.substr(0, 3) == "any", "anyFeature0", this.subraceObject.abilityScoreInc, allCharacteristics);
+            characteristicBox.dataset.origin = "subrace";
+            this.characteristicsIncreaseElements.appendChild(characteristicBox);
+        }
+        dispatchAllSelect(this.characteristicsIncreaseElements);
+
+        for (let card in characteristicCards) {
+            CharacteristicsCard.calcSum(characteristicCards[card]);
+        }
+    }
+}
+class Class_ {
+    constructor(block) {
+        // Caching
+        this.rootPage = block.getElementById('class-page');
+        this.classObject = null;
+
+        this.classSelect = block.getElementById('class-select');
+
+        this.hitDice = block.getElementById('hit-dice-value');
+        this.hitDiceStart = block.getElementById('hit-dice-start-value');
+        this.hitDiceNext = block.getElementById('hit-dice-next-value');
+
+        this.armor = block.getElementById('armor-value');
+        this.weapon = block.getElementById('weapon-value');
+        this.tools = block.getElementById('tools-value');
+        this.savingThrows = block.getElementById('saving-throws-value');
+        this.skill = block.getElementById('skill-value');
+        this.equipment = block.getElementById('class-equipment');
+        this.money = block.getElementById('class-money');
+
+        // Creating objects
+        this.infoCardHolder = new InfoCardHolder();
+
+        this.classCard = new InfoCard(
+            "class",
+            "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum magni quasi dolores non molestiae quae quia quod, ab eaque dignissimos.",
+            {
+                picture: "Images/creatures/humanoids/races/rc_dwarf.png",
+                animation: true
+            });
+
+        this.testCard = new InfoCard(
+            "some-feature",
+            "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet, rem?",
+            {
+                title: "Тестовая способность"
+            }
+        )
+
+        // Installation
+        this.infoCardHolder.setMainCard(this.classCard.box);
+
+        for (let class_ in user.class) {
+            Select.add(this.classSelect, class_, translateTo('language', class_));
+        }
+
+        // Installing event listeners
+        this.classSelect.addEventListener('change', () => { this.load(this.classSelect.value); });
+
+        // Appending to DOM
+        this.infoCardHolder.box.append(this.classCard.box);
+        this.rootPage.prepend(this.infoCardHolder.box);
+
+        // Init
+        this.classSelect.dispatchEvent(new Event('change'));
+    }
+
+    load(className) {
+        this.classObject = user.class[className];
+
+        this.classCard.setText(this.classObject.init.description);
+        this.classCard.setImg("Images/creatures/humanoids/races/" + "rc_dwarf" + ".png"); //className
+
+        this.hitDice.innerText = `1d${this.classObject.init.hitDiceCoeffiecient}`;
+        this.hitDiceStart.innerText = `${this.classObject.hpStart} + ${translateTo('language', "constitution modifier")}`;
+        this.hitDiceNext.innerText = `${this.classObject.hpNext.roll[0]}d${this.classObject.hpNext.roll[1]} (${translateTo('language', "or")} ${this.classObject.hpNext.const}) + ${translateTo('language', "constitution modifier")}`;
+
+        fillSpanWithComma(this.armor, this.classObject.init.proficiencies.armor);
+        fillSpanWithComma(this.weapon, this.classObject.init.proficiencies.weapon);
+        fillSpanWithComma(this.tools, this.classObject.init.proficiencies.tools);
+        fillSpanWithComma(this.savingThrows, this.classObject.init.savingThrowsBonus);
+
+        clearElement(this.skill);
+        for (let skill = 0; skill < this.classObject.init.skillsChoice; skill++) {
+            let skillBoxElement = createCharacteristicBox(`anyClassSkill`, true, "anyClassSkill", this.classObject.init.skillsChoice, this.classObject.init.skill);
+            this.skill.appendChild(skillBoxElement);
+        }
+        dispatchAllSelect(this.skill);
+
+        clearElement(this.equipment);
+        for (let equipment of this.classObject.init.equipment) {
+            let equipmentBoxElement = createCharacteristicBox(equipment, false, this.classObject.init.equipment);
+            this.equipment.appendChild(equipmentBoxElement);
+        }
+        for (const [index, eq] of this.classObject.init.equipmentToChooseFrom.entries()) {
+            for (let equipment = 0; equipment < this.classObject.init.equipmentToChoice; equipment++) {
+                let equipmentBoxElement = createCharacteristicBox(`anyClassEquipment${index}`, true, `anyClassEquipment${index}`, this.classObject.init.equipmentToChoice, eq);
+                this.equipment.appendChild(equipmentBoxElement);
+            }
+        }
+        dispatchAllSelect(this.equipment);
+
+        clearElement(this.money);
+        let goldText = document.createElement('span');
+        goldText.textContent = translateTo('language', "Gold") + ": " + (rollDice(this.classObject.init.money.diceCount, this.classObject.init.money.diceType).value * this.classObject.init.money.multiplyBy) + " " + translateTo('language', "Coins");
+        this.money.appendChild(goldText);
+    }
+}
+
+function writeToCharacter() {
+    // Name
+    newCharacter.playerName = user.name;
+    newCharacter.charName = document.getElementById('name').textContent;
+
+    // Primary fields
+    newCharacter.race = raceSelect.value;
+    newCharacter.class = classSelect.value;
+    newCharacter.alignment = alignmentSelect.value;
+    newCharacter.background = backgroundSelect.value;
+
+    // Level
+    newCharacter.level = 1;
+    newCharacter.experience = 0;
+
+    // Hp
+    newCharacter.hp = user.class[classSelect.value].hpStart;
+    newCharacter.hpNext = user.class[classSelect.value].hpNext;
+    newCharacter.hpTemp = newCharacter.hp;
+    newCharacter.hpMax = newCharacter.hp;
+    newCharacter.hitDiceCoeffiecient = user.class[classSelect.value].init.hitDiceCoeffiecient;
+    newCharacter.hitDiceLeft = 1;
+
+    // Capability
+    newCharacter.speed = user.race[raceSelect.value].speed;
+    newCharacter.maxWeight = Math.round10(lbToKg(newCharacter.abilityScore.strength * 15), -1);
+
+    // Personality
+    // newCharacter.age =
+    newCharacter.height = charHeight;
+    newCharacter.weight = charWeight;
+
+    newCharacter.traits = traitsText.textContent;
+    newCharacter.ideals = idealsText.textContent;
+    newCharacter.bonds = bondsText.textContent;
+    newCharacter.flaws = flawsText.textContent;
+
+    // Passive
+    // newCharacter.armorClass = 0;
+    // newCharacter.initiative = 0;
+    // newCharacter.proficiencyBonus = 0;
+    newCharacter.passiveWisdom = 10 + newCharacter.abilityScoreBonus.wisdomBonus;
+
+    // Ability
+    for (let abilityCard in characteristicCards) {
+        newCharacter.abilityScore[characteristicCards[abilityCard].characteristic] = characteristicCards[abilityCard].getTotalScore();
+        newCharacter.abilityScoreBonus[characteristicCards[abilityCard].characteristic + "Bonus"] = characteristicCards[abilityCard].getCalcModifier();
+    }
+
+    // Proficiency
+    for (let proficiencyGroup in user.class[classSelect.value].init.proficiencies) {
+        this.addToSetFromObjectOrArray(newCharacter.proficiencies[proficiencyGroup],
+            user.class[classSelect.value].init.proficiencies[proficiencyGroup]);
+    }
+    this.ifHasSetPropertyToTrue(newCharacter.savingThrowProf, user.class[classSelect.value].init.savingThrowsBonus);
+    this.ifHasSetPropertyToTrue(newCharacter.skillProf, user.background[backgroundSelect.value].skillProfencies);
+
+    // Money
+    for (let coin in newCharacter.money) {
+        newCharacter.money[coin] += user.background[backgroundSelect.value].money[coin];
+    }
+
+    // Language
+    this.addToSetFromObjectOrArray(newCharacter.languages, user.race[raceSelect.value].languages);
+    this.addToSetFromObjectOrArray(newCharacter.languages, user.race[raceSelect.value].subrace[subraceSelect.value].languages);
+    this.addToSetFromObjectOrArray(newCharacter.languages, getBackgroundLanguageArray());
+}
 
 // When DOM is loaded
 
@@ -1144,12 +964,22 @@ window.addEventListener("load", function () {
     choosedCharacter = user["character" + localStorage.numOfChoosedChar];
     choosedCharacter.json = user.defaultCharacter;
 
-    loadRaceSelect();
+    raceP = new Race_(document);
+    classP = new Class_(document);
+    // Characteristics = new Characteristics(document);
+    // Personality = new Personality(document);
+    characteristicCards = {
+        "strengthCard": new CharacteristicsCard("strength"),
+        "dexterityCard": new CharacteristicsCard("dexterity"),
+        "constitutionCard": new CharacteristicsCard("constitution"),
+        "intelligenceCard": new CharacteristicsCard("intelligence"),
+        "wisdomCard": new CharacteristicsCard("wisdom"),
+        "charismaCard": new CharacteristicsCard("charisma")
+    }
+
     loadAlignmentSelect();
     loadCharacteristicsCards();
     loadBackgroundSelect();
 
-    raceSelected();
-    builder.init();
     backgroundSelected();
 });

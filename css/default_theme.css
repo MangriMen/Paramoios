@@ -356,3 +356,7 @@ select::-ms-expand {
     border: none !important;
   }
 }
+
+.display-block {
+  display: block;
+}

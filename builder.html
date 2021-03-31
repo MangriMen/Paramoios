@@ -53,26 +53,15 @@
                 <span id='characteristics' class="navigation-tab unselectable default-background-disabled border-style border-radius">
                     Характеристики
                 </span>
+                <span id='background' class="navigation-tab unselectable default-background-disabled border-style border-radius">
+                    Предыстория
+                </span>
                 <span id='personality' class="navigation-tab unselectable default-background-disabled border-style border-radius">
                     Личность
-                </span>
-                <span id='base5' class="navigation-tab unselectable default-background-disabled border-style border-radius">
-                    Что-то ещё
                 </span>
             </div>
             <div id='content-page' class="default-background border-style border-radius">
                 <div id='race-page' data-type='page'>
-                    <div id='race-add-info-box' class='add-info-box default-background border-style border-radius default-shadow'>
-                        <div id='race-card' class='card-box'>
-                            <img id='add-info-race-img' class="add-info-img" src="" class="border-radius">
-                            <span id='add-info-race-text'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum magni quasi dolores non molestiae quae quia quod, ab eaque dignissimos.</span>
-                            <div class='card-bottom-animation-box'>
-                                <div class='card-bottom-animation' data-animation="true">
-                                    <div class='card-bottom-animation-inner' data-animation="true"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div id='race-info-box' class='info-box'>
                         <div id='race-choosing-box' class="choosing-box">
                             <span id='race-choosing-text'>Выбор Расы</span>
@@ -145,7 +134,7 @@
                                 <div id='class-equipment' class="characteristics-flex-elements"></div>
                             </div>
                             <div id="class-money-box">
-                                <span id="class-money-text" class="builder-text text-to-center">Деньги</span>
+                                <span id="class-money-text" class="builder-text text-to-center display-block">Деньги</span>
                                 <div id="class-money" class="characteristics-flex-elements"></div>
                             </div>
                         </div>
@@ -154,43 +143,7 @@
                 <div id='characteristics-page' data-type='page'>
                     <span id='characteristics-left-text'>Осталось распределить <span id='characteristics-left-value'>27</span>/27 очков</span>
                 </div>
-                <div id='personality-page' data-type='page'>
-                    <div id='name-sex-box' class='default-background default-inner-shadow border-style border-radius'>
-                        <label id='name-lable' for='name'>Имя персонажа:</label><input id='name' list="name-list" placeholder=" " type='text' autocomplete="off" maxlength="20" required class='input-font-style select-hover-focus default-background border-style border-radius'>
-                        <datalist id="name-list">
-                            <!-- <option>testName1</option>
-                            <option>testName2</option> -->
-                        </datalist>
-                        <label id='sex-label' for='sex'>Пол:</label><input id='sex' type='text' placeholder=" " maxlength="18" required class='input-font-style select-hover-focus default-background border-style border-radius'>
-                        <label id='alignment-label' for='alignment'>Мировоззрение:</label>
-                        <select id='alignment' class='input-font-style select-hover-focus default-background border-style border-radius'></select>
-                    </div>
-                    <div id='growth-weight-box' class='default-background default-inner-shadow border-style border-radius'>
-                        <div id='manually-checkbox-box'>
-                            <span id='manually-checkbox-span'>Ручной ввод</span>
-                            <label id='manually-checkbox-label' for="manually-checkbox" class="switch">
-                                <input type="checkbox" id='manually-checkbox'>
-                                <span id='checkbox-slider' class="slider round"></span>
-                            </label>
-                        </div>
-                        <label id='growth-label' for='growth'>Рост: </label>
-                        <div id='table-growth'>
-                            <span id='growth-base'></span><span id='growth-roll'></span><span id='growth-result'></span>
-                        </div>
-                        <label id='weight-label' for='weight'>Вес: </label>
-                        <div id='table-weight'>
-                            <span id='weight-base'></span><span id='weight-roll'></span><span id='weight-result'></span>
-                        </div>
-                        <button id='roll-growth-weight-button' class='default-button border-radius d6-roll-button'></button>
-                        <div id='growth'>
-                            <input id='growth-primary' type='number' min="0" max="10" placeholder=" " class='input-font-style default-background border-style border-radius'><span id='growth-primary-measure'></span>
-                            <input id='growth-secondary' type='number' min="0" max="99" placeholder=" " class='input-font-style default-background border-style border-radius'><span id='growth-secondary-measure'></span>
-                        </div>
-                        <div id='weight'>
-                            <input id='weight-primary' min="1" max="1000" placeholder=" " type='number' class='input-font-style default-background border-style border-radius'>
-                            <span id='weight-measure'></span>
-                        </div>
-                    </div>
+                <div id='background-page' data-type='page'>
                     <div id='background-box' class='default-background default-background border-style border-radius default-inner-shadow'>
                         <span id='background-label'>Выбор предыстории</span>
                         <select id='background-select' class='input-font-style select-hover-focus default-background border-style border-radius'></select>
@@ -239,8 +192,44 @@
                         </div>
                     </div>
                 </div>
-                <div id='base5-page' data-type='page'>
-
+                <div id='personality-page' data-type='page'>
+                    <div id='name-sex-box' class='default-background default-inner-shadow border-style border-radius'>
+                        <label id='name-lable' for='name'>Имя персонажа:</label><input id='name' list="name-list" placeholder=" " type='text' autocomplete="off" maxlength="20" required class='input-font-style select-hover-focus default-background border-style border-radius'>
+                        <datalist id="name-list">
+                            <!-- <option>testName1</option>
+                                                <option>testName2</option> -->
+                        </datalist>
+                        <label id='sex-label' for='sex'>Пол:</label><input id='sex' type='text' placeholder=" " maxlength="18" required class='input-font-style select-hover-focus default-background border-style border-radius'>
+                        <label id='alignment-label' for='alignment'>Мировоззрение:</label>
+                        <select id='alignment' class='input-font-style select-hover-focus default-background border-style border-radius'></select>
+                        <label id='age-label' for='alignment'>Возраст:</label><input id='age' type='text' placeholder=" " maxlength="18" required class='input-font-style select-hover-focus default-background border-style border-radius'>
+                    </div>
+                    <div id='growth-weight-box' class='default-background default-inner-shadow border-style border-radius'>
+                        <div id='manually-checkbox-box'>
+                            <span id='manually-checkbox-span'>Ручной ввод</span>
+                            <label id='manually-checkbox-label' for="manually-checkbox" class="switch">
+                                <input type="checkbox" id='manually-checkbox'>
+                                <span id='checkbox-slider' class="slider round"></span>
+                            </label>
+                        </div>
+                        <label id='growth-label' for='growth'>Рост: </label>
+                        <div id='table-growth'>
+                            <span id='growth-base'></span><span id='growth-roll'></span><span id='growth-result'></span>
+                        </div>
+                        <label id='weight-label' for='weight'>Вес: </label>
+                        <div id='table-weight'>
+                            <span id='weight-base'></span><span id='weight-roll'></span><span id='weight-result'></span>
+                        </div>
+                        <button id='roll-growth-weight-button' class='default-button border-radius d6-roll-button'></button>
+                        <div id='growth'>
+                            <input id='growth-primary' type='number' min="0" max="10" placeholder=" " class='input-font-style default-background border-style border-radius'><span id='growth-primary-measure'></span>
+                            <input id='growth-secondary' type='number' min="0" max="99" placeholder=" " class='input-font-style default-background border-style border-radius'><span id='growth-secondary-measure'></span>
+                        </div>
+                        <div id='weight'>
+                            <input id='weight-primary' min="1" max="1000" placeholder=" " type='number' class='input-font-style default-background border-style border-radius'>
+                            <span id='weight-measure'></span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </nav>
