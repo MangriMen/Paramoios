@@ -21,9 +21,8 @@ input {
   text-align: center;
 }
 
-input:valid:not(:placeholder-shown) {
-  border-color: "";
-}
+/* input:valid:not(:placeholder-shown) {
+} */
 
 input:invalid:not(:placeholder-shown) {
   border-color: red;
@@ -359,4 +358,9 @@ select::-ms-expand {
 
 .display-block {
   display: block;
+}
+
+.display-disable:disabled {
+  background-color: var(--bg-d-color);
+  color: black;
 }

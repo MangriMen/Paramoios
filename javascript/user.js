@@ -11,6 +11,7 @@ var observer = new MutationObserver(function (mutations) {
         }, 0)
     });
 });
+
 var config = { attributes: true, childList: false, characterData: false };
 observer.observe(document.getElementById('user-btn-img'), config);
 
@@ -456,7 +457,9 @@ let avatarFullImage = document.getElementById('avatar-full-image');
 let avatarCropLayout = document.getElementById('avatar-crop-layout');
 let avatarCropBox = document.getElementById('avatar-crop-box');
 let chooseAvatar = document.getElementById('choose-avatar');
+let btnChangePassword = document.getElementById('player-change-password')
 
+btnChangePassword.addEventListener('click', changePassword);
 avatarInput.addEventListener('change', cropAvatar);
 avatarCropLayout.addEventListener('click', closeCrop);
 
@@ -520,3 +523,77 @@ function closeCrop() {
     chooseAvatar.style.display = 'block';
     avatarInput.value = "";
 }
+
+function changePassword() {
+    const parent = btnChangePassword.parentElement;
+
+    btnChangePassword.parentElement.removeChild(btnChangePassword);
+
+    let changePassBox = document.createElement('form');
+    changePassBox.addEventListener("submit", submitPassword);
+
+    let changeInput = document.createElement('input');
+    changeInput.type = "password";
+
+    let changeSubmit = document.createElement('input');
+    changeSubmit.type = "submit";
+    changeSubmit.value = translateTo('language', "btn_submit");
+
+    let changeCancel = document.createElement('input');
+    changeCancel.type = "button";
+    changeCancel.value = translateTo('language', "btn_cancel");
+    changeCancel.addEventListener('click', cancelPassword);
+
+    changeSubmit.style.marginRight = changeCancel.style.marginRight = changeInput.style.marginRight = "1rem";
+    changeSubmit.classList = changeCancel.classList = (changeInput.classList = "display-disable default-background border-style border-radius default-inner-shadow input-font-style")
+        + " default-button";
+
+    changePassBox.append(changeInput, changeSubmit, changeCancel);
+    parent.append(changePassBox);
+
+    async function submitPassword(e) {
+        e.preventDefault();
+        if (changeInput.value.length < 6) {
+            bAlert("Минимальная длинна пароля должна составлять 6 символов!", 3000);
+        }
+        else {
+            changeInput.disabled = true;
+            changeSubmit.disabled = true;
+            changeCancel.disabled = true;
+            await ajaxChangePassword(changeInput.value);
+            cancelPassword();
+        }
+    }
+
+    function cancelPassword() {
+        const parent = changePassBox.parentElement;
+
+        parent.removeChild(changePassBox);
+        parent.append(btnChangePassword);
+    }
+
+    async function ajaxChangePassword(newPassword) {
+        const object = {
+            changePassword: newPassword
+        }
+        const request = await fetch(
+            '../user_control.php',
+            {
+                method: 'POST',
+                body: JSON.stringify(object)
+            }
+        );
+
+        if (request.ok) {
+            const data = await request.json();
+            if (data.changed) {
+                bAlert(translateTo('language', "pass_change_successfull"), 5000);
+            } else {
+                bAlert(translateTo('language', "pass_change_error"), 5000);
+            }
+        } else {
+            alert("Ошибка подключения к базе данных, код ошибки HTTP: " + request.status);
+        }
+    }
+}
+

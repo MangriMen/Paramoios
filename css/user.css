@@ -341,13 +341,17 @@ nav {
   font-size: 2rem;
   line-height: 1.5rem;
   display: grid;
-  grid-template-rows: 2rem 2rem auto;
+  grid-template-rows: 2rem 2rem 2rem auto;
   row-gap: 1rem;
   align-items: center;
 }
 
 #player-email {
   font-size: 1.5rem;
+}
+
+#player-change-password {
+  max-width: 10rem;
 }
 
 #characters-page {

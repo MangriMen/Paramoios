@@ -215,6 +215,12 @@ const levelDependenceTable = {
 }
 
 let russianVocabulary = {
+    "btn_submit": "Ок",
+    "btn_cancel": "Отмена",
+
+    "pass_change_successfull": "Пароль успешно изменён",
+    "pass_change_error": "Не удалось изменить пароль",
+
     "select item": "Выберите Пункт",
     "missing description": "Отсутствует Описание",
     "or": "или",
