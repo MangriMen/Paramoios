@@ -15,25 +15,6 @@ var observer = new MutationObserver(function (mutations) {
 var config = { attributes: true, childList: false, characterData: false };
 observer.observe(document.getElementById('user-btn-img'), config);
 
-let activeTab = null;
-
-let tabs = Array.from(document.getElementsByClassName("navigation-tab"));
-
-tabs.forEach(tab => tab.addEventListener('click', selectPage));
-tabs[0].dispatchEvent(new Event('click'));
-
-function selectPage() {
-    activeTab = this;
-    document.getElementById('tabs').querySelectorAll('span').forEach(tab => {
-        tab.classList.remove('active-tab');
-        if (tab.id == activeTab.id) { tab.classList.add('active-tab'); }
-    })
-
-    document.getElementById('content-page').querySelectorAll('div').forEach(page => {
-        if (page.id != activeTab.id + "-page" && page.dataset.type == 'page') { page.style.display = 'none' } else if (page.dataset.type == 'page') { page.style.display = 'grid' };
-    })
-}
-
 async function loadCharacters() {
     await fetchUser();
     await getLogged();
@@ -458,10 +439,13 @@ let avatarCropLayout = document.getElementById('avatar-crop-layout');
 let avatarCropBox = document.getElementById('avatar-crop-box');
 let chooseAvatar = document.getElementById('choose-avatar');
 let btnChangePassword = document.getElementById('player-change-password')
+let dataContentList = document.getElementById('data-content-list');
+let dataContentAdd = document.getElementById('data-content-add');
 
 btnChangePassword.addEventListener('click', changePassword);
 avatarInput.addEventListener('change', cropAvatar);
 avatarCropLayout.addEventListener('click', closeCrop);
+dataContentAdd.addEventListener('click', addContent);
 
 let croppr = null;
 
@@ -597,3 +581,44 @@ function changePassword() {
     }
 }
 
+setTimeout(displayContent, 10);
+
+function displayContent() {
+    let fragment = document.createDocumentFragment();
+    var objectStore = db.transaction("content").objectStore("content");
+
+    objectStore.openCursor().onsuccess = function (event) {
+        var cursor = event.target.result;
+        if (cursor) {
+            let box = document.createElement('div');
+            box.classList = "default-background border-style border-radius default-inner-shadow input-font-style data-content-list-entry";
+
+            let name = document.createElement('span');
+            name.textContent = cursor.key;
+
+            box.append(name);
+            dataContentList.append(box);
+
+            cursor.continue();
+        }
+    };
+
+    dataContentList.append(fragment);
+}
+
+function addContent() {
+    // const link = prompt("Введите ссылку на файл");
+
+    let object = {
+        name: "some",
+        json: JSON.stringify(user.character1.json)
+    }
+
+    let objectStore = db.transaction(["content"], "readwrite").objectStore("content");
+
+    let rq = objectStore.put(object);
+
+    rq.onerror = function () {
+        console.log("Ошибка: ", rq.error);
+    };
+}

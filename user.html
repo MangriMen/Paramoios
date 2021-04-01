@@ -66,6 +66,9 @@
                 <span id='profile-settings' class="navigation-tab default-background-disabled border-style border-radius">
                     Настройки
                 </span>
+                <span id='data-content' class="navigation-tab default-background-disabled border-style border-radius">
+                    Контент
+                </span>
             </div>
             <div id='content-page' class="default-background border-style border-radius">
                 <div id='characters-page' data-type='page'>
@@ -86,6 +89,10 @@
                         <button id='player-change-password' class="default-button default-background border-style border-radius default-inner-shadow input-font-style">Изменить пароль</button>
                     </div>
                 </div>
+                <div id='data-content-page' data-type='page'>
+                    <input type="button" id='data-content-add' value="+" class="default-button default-background border-style border-radius default-inner-shadow input-font-style">
+                    <div id='data-content-list'></div>
+                </div>
             </div>
         </nav>
     </main>
@@ -93,6 +100,7 @@
     </footer>
     <script src="javascript/app.js"></script>
     <script src="javascript/data.js"></script>
+    <script src="javascript/extensions.js"></script>
     <script src="javascript/main_func.js"></script>
     <script src="javascript/auth.js"></script>
     <script src="javascript/user.js"></script>

@@ -682,3 +682,20 @@ nav {
 #avatar-crop-field img {
   max-width: 100%;
 }
+
+#data-content-page {
+  display: none;
+  max-width: inherit;
+  grid-template-columns: auto;
+  grid-template-rows: auto auto;
+  row-gap: 1rem;
+}
+
+#data-content-add {
+  font-size: 1.5rem;
+}
+
+.data-content-list-entry {
+  font-size: 1.5rem;
+  text-align: center;
+}
