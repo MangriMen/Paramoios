@@ -653,6 +653,7 @@ let beautifulAlertContainer = document.createElement('div');
 beautifulAlertContainer.id = 'beautiful-container';
 document.body.appendChild(beautifulAlertContainer);
 let beautifulAlertList = [];
+let is_bAlert = false;
 
 function createBAlert(text, delay) {
     let beautifulAlert = document.createElement('span');
@@ -664,15 +665,19 @@ function createBAlert(text, delay) {
 }
 
 function bAlert(text, delay = 3000) {
-    beautifulAlertContainer.appendChild(createBAlert(text, delay));
-    if (beautifulAlertContainer.childElementCount > 1) { return; }
+    beautifulAlertContainer.prepend(createBAlert(text, delay));
     let beautifulTimer = setTimeout(function bAlertHide() {
-        if (beautifulAlertContainer.childElementCount == 0) {
-            return;
-        } else {
-            setTimeout(function () { beautifulAlertContainer.removeChild(beautifulAlertContainer.lastChild) }, 1000);
+        if (is_bAlert) return;
+        if (beautifulAlertContainer.childElementCount > 0) {
+            is_bAlert = true;
+            setTimeout(function () {
+                beautifulAlertContainer.removeChild(beautifulAlertContainer.lastChild);
+                is_bAlert = false;
+                if (beautifulAlertContainer.childElementCount > 0) {
+                    beautifulTimer = setTimeout(bAlertHide, beautifulAlertContainer.lastChild.dataset.delay);
+                }
+            }, 1000);
             beautifulAlertContainer.lastChild.classList.add('beautiful-alert-erase-translate');
-            beautifulTimer = setTimeout(bAlertHide, beautifulAlertContainer.lastChild.dataset.delay);
         }
     }, delay);
 }
