@@ -958,28 +958,32 @@ function writeToCharacter() {
 
 // When DOM is loaded
 
+setTimeout(loadContentToArrayAndUser, 50);
+
 window.addEventListener("load", function () {
     user = JSON.parse(localStorage[localStorage.loggedUser]);
     userJSONFix();
+
     choosedCharacter = user["character" + localStorage.numOfChoosedChar];
     choosedCharacter.json = user.defaultCharacter;
+    setTimeout(function () {
+        raceP = new Race_(document);
+        classP = new Class_(document);
+        // Characteristics = new Characteristics(document);
+        // Personality = new Personality(document);
+        characteristicCards = {
+            "strengthCard": new CharacteristicsCard("strength"),
+            "dexterityCard": new CharacteristicsCard("dexterity"),
+            "constitutionCard": new CharacteristicsCard("constitution"),
+            "intelligenceCard": new CharacteristicsCard("intelligence"),
+            "wisdomCard": new CharacteristicsCard("wisdom"),
+            "charismaCard": new CharacteristicsCard("charisma")
+        }
 
-    raceP = new Race_(document);
-    classP = new Class_(document);
-    // Characteristics = new Characteristics(document);
-    // Personality = new Personality(document);
-    characteristicCards = {
-        "strengthCard": new CharacteristicsCard("strength"),
-        "dexterityCard": new CharacteristicsCard("dexterity"),
-        "constitutionCard": new CharacteristicsCard("constitution"),
-        "intelligenceCard": new CharacteristicsCard("intelligence"),
-        "wisdomCard": new CharacteristicsCard("wisdom"),
-        "charismaCard": new CharacteristicsCard("charisma")
-    }
+        loadAlignmentSelect();
+        loadCharacteristicsCards();
+        loadBackgroundSelect();
 
-    loadAlignmentSelect();
-    loadCharacteristicsCards();
-    loadBackgroundSelect();
-
-    backgroundSelected();
+        backgroundSelected();
+    }, 100);
 });

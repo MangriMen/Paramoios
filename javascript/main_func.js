@@ -52,39 +52,6 @@
 let language = 'ru';
 let selectedVocabulary = null;
 
-
-if (!window.indexedDB) {
-    window.alert("Ваш браузер не поддерживает стабильную версию IndexedDB. Такие-то функции будут недоступны");
-}
-
-const dbName = "MainDB";
-
-var db;
-connectDB();
-
-function connectDB() {
-    const DBOPEN = window.indexedDB.open(dbName, 3);
-
-    DBOPEN.onerror = function (event) {
-        alert("Не удалось открыть базу данных!")
-    };
-
-    DBOPEN.onsuccess = function (event) {
-        console.log("DB connected");
-        db = event.target.result;
-        db.onerror = function (event) {
-            alert("Database error: " + event.target.error);
-        };
-    };
-
-    DBOPEN.onupgradeneeded = function (event) {
-        db = event.target.result;
-        if (!db.objectStoreNames.contains('content')) {
-            db.createObjectStore('content', { keyPath: 'name' });
-        }
-    };
-}
-
 class Character {
     constructor(parsedJSON = "default") {
         if (typeof (parsedJSON) == Object) {
@@ -248,6 +215,12 @@ const levelDependenceTable = {
 }
 
 let russianVocabulary = {
+    "default_alignment": "Стандартные мировоззрения",
+    "default_background": "Стандартные предыстории ",
+    "default_class": "Стандартные классы ",
+    "default_race": "Стандартные расы",
+    "default_feature": "Стандартные способности",
+
     "btn_submit": "Ок",
     "btn_cancel": "Отмена",
 

@@ -699,20 +699,36 @@ nav {
 .data-content-list-entry {
   font-size: 1.5rem;
   text-align: center;
-  margin-bottom: 1rem;
   display: flex;
   align-items: center;
+  margin-bottom: 0.7rem;
   justify-content: space-between;
   padding: 0.2rem 0.4rem;
+  /* max-width: 10rem; */
+}
+
+.data-content-list-entry:last-child {
+  margin-bottom: 0;
+}
+
+.data-content-list-entry span {
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 #data-content-list {
   height: inherit;
   display: flex;
   flex-direction: column;
+  overflow: auto;
+  box-sizing: border-box;
+  padding: 1rem;
 }
 
 .content-delete-button {
+  margin-left: 0.5rem;
   height: 70%;
-  width: 1.2rem;
+  line-height: 70%;
+  box-sizing: border-box;
+  padding: 0.15rem;
 }

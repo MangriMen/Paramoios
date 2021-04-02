@@ -581,44 +581,106 @@ function changePassword() {
     }
 }
 
+setTimeout(loadDefaultContent, 50);
 setTimeout(displayContent, 100);
 
-function createContentElement(text) {
+function createContentElement(text, allowedToRemove) {
     let box = document.createElement('div');
     box.classList = "default-background border-style border-radius default-inner-shadow input-font-style data-content-list-entry";
     box.dataset.key = text;
 
     let name = document.createElement('span');
-    name.textContent = text;
+    name.textContent = translateTo("language", text);
 
-    let deleteButton = document.createElement('button')
-    deleteButton.classList = "display-disable default-background border-style border-radius default-inner-shadow input-font-style default-button content-delete-button";
-    deleteButton.addEventListener('click', removeContentFromDb);
+    box.append(name);
 
-    box.append(name, deleteButton);
+    if (allowedToRemove) {
+        let deleteButton = document.createElement('button')
+        deleteButton.classList = "display-disable default-background border-style border-radius default-inner-shadow input-font-style default-button content-delete-button";
+        deleteButton.textContent = "X";
+        deleteButton.addEventListener('click', removeContentFromDb);
+
+        box.append(deleteButton);
+    }
+
     return box;
 }
 
-function displayContent() {
-    let fragment = new DocumentFragment();
-    var objectStore = db.transaction("content").objectStore("content");
+async function loadDefaultContent() {
+    let objectStore = await getObjectStore("default_content", "readonly");
 
-    objectStore.openCursor().onsuccess = function (event) {
-        let cursor = event.target.result;
-        if (cursor) {
-            fragment.append(createContentElement(cursor.key));
+    let rq = await objectStore.count();
+    rq.onsuccess = async function (event) {
+        if (rq.result == 0) {
+            let defaultContent = await getDefaultContent();
+            defaultContent.alignment ? defaultContent.alignment = JSON.parse(defaultContent.alignment) : null;
+            defaultContent.background ? defaultContent.background = JSON.parse(defaultContent.background) : null;
+            defaultContent.class ? defaultContent.class = JSON.parse(defaultContent.class) : null;
+            defaultContent.race ? defaultContent.race = JSON.parse(defaultContent.race) : null;
+            defaultContent.feature ? defaultContent.feature = JSON.parse(defaultContent.feature) : null;
 
-            cursor.continue();
+            objectStore = await getObjectStore("default_content", "readwrite");
+
+            for (let content in defaultContent) {
+                let object = {
+                    name: "default_" + content,
+                    json: JSON.stringify(defaultContent[content])
+                }
+                let rq = objectStore.put(object);
+
+                rq.onsuccess = function () {
+                    dataContentList.prepend(createContentElement(object.name));
+                }
+            }
         }
-        else {
+    }
+}
+
+async function loadContentToArrayAndDisplay() {
+    let content = await getObjectStore("content", "readonly");
+    let rq_content = content.getAll();
+
+    let counter = 0;
+
+    rq_content.onsuccess = async function (event) {
+        contentArray = rq_content.result;
+
+        let default_content = await getObjectStore("default_content", "readonly");
+        let rq_default_content = default_content.getAll();
+
+        rq_default_content.onsuccess = function () {
+            defaultContentArray = rq_default_content.result;
+
+            clearElement(dataContentList);
+            let fragment = new DocumentFragment();
+
+            for (let content of contentArray) {
+                fragment.append(createContentElement(content.name, true));
+            }
+            let splitter = document.createElement('div');
+            splitter.dataset.key = "splitter";
+            fragment.append(splitter);
+            for (let content of defaultContentArray) {
+                fragment.append(createContentElement(content.name, false));
+            }
+
             dataContentList.append(fragment);
         }
-    };
+    }
+}
 
+async function displayContent() {
+    if (contentArray.length == 0) {
+        await loadContentToArrayAndDisplay();
+    }
 }
 
 function addContent() {
     openFile();
+}
+
+function insertAfter(newNode, existingNode) {
+    existingNode.parentNode.insertBefore(newNode, existingNode.nextSibling);
 }
 
 async function addContentToDB() {
@@ -627,12 +689,23 @@ async function addContentToDB() {
         json: JSON.stringify(contentBuff.json)
     }
 
-    let objectStore = db.transaction(["content"], "readwrite").objectStore("content");
-
+    let objectStore = await getObjectStore("content", "readwrite");
     let rq = objectStore.put(object);
 
     rq.onsuccess = function () {
-        dataContentList.prepend(createContentElement(object.name));
+        for (let node of Array.from(dataContentList.childNodes)) {
+            if (node.dataset.key == object.name) {
+                return;
+            }
+            else if (node.dataset.key == "splitter") {
+                node.parentElement.insertBefore(createContentElement(object.name, true), node);
+                return;
+            }
+            else if (node.dataset.key > object.name) {
+                insertAfter(createContentElement(object.name, true), node);
+                return;
+            }
+        }
     }
 
     rq.onerror = function () {
@@ -641,8 +714,7 @@ async function addContentToDB() {
 }
 
 async function removeContentFromDb() {
-
-    let objectStore = db.transaction(["content"], "readwrite").objectStore("content");
+    let objectStore = await getObjectStore("content", "readwrite");
 
     let element = this;
     let key = element.parentElement.dataset.key;
