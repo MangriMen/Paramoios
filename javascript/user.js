@@ -581,42 +581,77 @@ function changePassword() {
     }
 }
 
-setTimeout(displayContent, 10);
+setTimeout(displayContent, 100);
+
+function createContentElement(text) {
+    let box = document.createElement('div');
+    box.classList = "default-background border-style border-radius default-inner-shadow input-font-style data-content-list-entry";
+    box.dataset.key = text;
+
+    let name = document.createElement('span');
+    name.textContent = text;
+
+    let deleteButton = document.createElement('button')
+    deleteButton.classList = "display-disable default-background border-style border-radius default-inner-shadow input-font-style default-button content-delete-button";
+    deleteButton.addEventListener('click', removeContentFromDb);
+
+    box.append(name, deleteButton);
+    return box;
+}
 
 function displayContent() {
-    let fragment = document.createDocumentFragment();
+    let fragment = new DocumentFragment();
     var objectStore = db.transaction("content").objectStore("content");
 
     objectStore.openCursor().onsuccess = function (event) {
-        var cursor = event.target.result;
+        let cursor = event.target.result;
         if (cursor) {
-            let box = document.createElement('div');
-            box.classList = "default-background border-style border-radius default-inner-shadow input-font-style data-content-list-entry";
-
-            let name = document.createElement('span');
-            name.textContent = cursor.key;
-
-            box.append(name);
-            dataContentList.append(box);
+            fragment.append(createContentElement(cursor.key));
 
             cursor.continue();
         }
+        else {
+            dataContentList.append(fragment);
+        }
     };
 
-    dataContentList.append(fragment);
 }
 
 function addContent() {
-    // const link = prompt("Введите ссылку на файл");
+    openFile();
+}
 
+async function addContentToDB() {
     let object = {
-        name: "some",
-        json: JSON.stringify(user.character1.json)
+        name: contentBuff.name,
+        json: JSON.stringify(contentBuff.json)
     }
 
     let objectStore = db.transaction(["content"], "readwrite").objectStore("content");
 
     let rq = objectStore.put(object);
+
+    rq.onsuccess = function () {
+        dataContentList.prepend(createContentElement(object.name));
+    }
+
+    rq.onerror = function () {
+        console.log("Ошибка: ", rq.error);
+    };
+}
+
+async function removeContentFromDb() {
+
+    let objectStore = db.transaction(["content"], "readwrite").objectStore("content");
+
+    let element = this;
+    let key = element.parentElement.dataset.key;
+
+    let rq = objectStore.delete(key);
+
+    rq.onsuccess = function () {
+        element.parentElement.parentElement.removeChild(element.parentElement);
+    }
 
     rq.onerror = function () {
         console.log("Ошибка: ", rq.error);
