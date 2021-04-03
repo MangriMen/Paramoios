@@ -68,6 +68,22 @@ select::-ms-expand {
   }
 }
 
+img, button {
+  user-select: none;
+}
+
+.brd-tl-rad {
+  border-top-left-radius: 4px;
+}
+
+.brd-tr-rad {
+  border-top-right-radius: 4px;
+}
+
+.brd-rad {
+  border-radius: 4px;
+}
+
 .unselectable {
   -webkit-touch-callout: none;
   /* iOS Safari */

@@ -958,7 +958,7 @@ function writeToCharacter() {
 
 // When DOM is loaded
 
-setTimeout(loadContentToArrayAndUser, 50);
+// setTimeout(loadContentToArrayAndUser, 50);
 
 window.addEventListener("load", function () {
     user = JSON.parse(localStorage[localStorage.loggedUser]);
@@ -966,7 +966,38 @@ window.addEventListener("load", function () {
 
     choosedCharacter = user["character" + localStorage.numOfChoosedChar];
     choosedCharacter.json = user.defaultCharacter;
-    setTimeout(function () {
+
+    loadContentToArray(function () {
+        for (let defaultContent of defaultContentArray) {
+            let name = defaultContent.name.split("_")[1];
+            if (name == "alignment") {
+                user[name] = defaultContent.json.al_;
+            }
+            else {
+                user[name] = defaultContent.json;
+            }
+        }
+
+        for (let content of contentArray) {
+            for (let element in content.json) {
+                let name = element.split("_")[0];
+                if (name == "rc") {
+                    user.race[element] = content.json[element];
+                }
+                else if (name == "cl") {
+                    user.class[element] = content.json[element];
+                }
+                else if (name == "bg") {
+                    user.background[element] = content.json[element];
+                }
+                else if (name == "al") {
+                    for (let al of content.json[element]) {
+                        user.alignment.push(al);
+                    }
+                }
+            }
+        }
+
         raceP = new Race_(document);
         classP = new Class_(document);
         // Characteristics = new Characteristics(document);
@@ -985,5 +1016,5 @@ window.addEventListener("load", function () {
         loadBackgroundSelect();
 
         backgroundSelected();
-    }, 100);
+    });
 });

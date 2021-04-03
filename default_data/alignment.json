@@ -1,4 +1,5 @@
-[
+{
+	"al_":[
     "al_lawful_good",
     "al_neutral_good",
     "al_chaotic_good",
@@ -7,5 +8,6 @@
     "al_chaotic_neutral",
     "al_lawful_evil",
     "al_neutral_evil",
-    "al_chaotic _evil"
-]
+    "al_chaotic_evil"
+	]
+}

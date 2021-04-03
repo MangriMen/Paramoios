@@ -15,6 +15,11 @@ var observer = new MutationObserver(function (mutations) {
 var config = { attributes: true, childList: false, characterData: false };
 observer.observe(document.getElementById('user-btn-img'), config);
 
+document.getElementById('characters').addEventListener('click', () => {
+    adjustAllLevels();
+    adjustAllBarWidth();
+});
+
 async function loadCharacters() {
     await fetchUser();
     await getLogged();
@@ -41,7 +46,7 @@ async function loadCharacters() {
             hpBar.classList = 'hp-bar border-style border-radius default-background default-shadow';
 
             let hpBarAnimation = document.createElement('div');
-            hpBarAnimation.classList = 'bar-animation';
+            hpBarAnimation.classList = 'brd-tl-rad brd-tr-rad bar-animation';
 
             let hpBarFill = document.createElement('div');
             hpBarFill.classList = 'bar-fill hp-color';
@@ -611,7 +616,7 @@ async function loadDefaultContent() {
 
     let rq = await objectStore.count();
     rq.onsuccess = async function (event) {
-        if (rq.result == 0) {
+        if (rq.result | 1) {
             let defaultContent = await getDefaultContent();
             defaultContent.alignment ? defaultContent.alignment = JSON.parse(defaultContent.alignment) : null;
             defaultContent.background ? defaultContent.background = JSON.parse(defaultContent.background) : null;
@@ -627,30 +632,14 @@ async function loadDefaultContent() {
                     json: JSON.stringify(defaultContent[content])
                 }
                 let rq = objectStore.put(object);
-
-                rq.onsuccess = function () {
-                    dataContentList.prepend(createContentElement(object.name));
-                }
             }
         }
     }
 }
 
-async function loadContentToArrayAndDisplay() {
-    let content = await getObjectStore("content", "readonly");
-    let rq_content = content.getAll();
-
-    let counter = 0;
-
-    rq_content.onsuccess = async function (event) {
-        contentArray = rq_content.result;
-
-        let default_content = await getObjectStore("default_content", "readonly");
-        let rq_default_content = default_content.getAll();
-
-        rq_default_content.onsuccess = function () {
-            defaultContentArray = rq_default_content.result;
-
+async function displayContent() {
+    if (contentArray.length == 0) {
+        loadContentToArray(function () {
             clearElement(dataContentList);
             let fragment = new DocumentFragment();
 
@@ -665,13 +654,7 @@ async function loadContentToArrayAndDisplay() {
             }
 
             dataContentList.append(fragment);
-        }
-    }
-}
-
-async function displayContent() {
-    if (contentArray.length == 0) {
-        await loadContentToArrayAndDisplay();
+        });
     }
 }
 

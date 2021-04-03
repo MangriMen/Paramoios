@@ -110,15 +110,11 @@ function userJSONFix() {
     }
 }
 
-async function loadContentToArrayAndUser() {
+async function loadContentToArray(callbackFunc) {
     let content = await getObjectStore("content", "readonly");
     let rq_content = content.getAll();
 
-    let counter = 0;
-
     rq_content.onsuccess = async function (event) {
-        // contentArray = rq_content.result;
-
         for (let cnt of rq_content.result) {
             let object = {};
             object.name = cnt.name;
@@ -137,9 +133,7 @@ async function loadContentToArrayAndUser() {
                 defaultContentArray.push(object);
             }
 
-            for (let defaultContent of defaultContentArray) {
-                user[defaultContent.name.split("_")[1]] = defaultContent.json;
-            }
+            callbackFunc();
         }
     }
 }

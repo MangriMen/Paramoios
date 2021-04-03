@@ -298,7 +298,7 @@ let russianVocabulary = {
     "al_chaotic_neutral": "Хаотично Нейтральный",
     "al_lawful_evil": "Законно Злой",
     "al_neutral_evil": "Нейтрально Злой",
-    "al_chaotic _evil": "Хаотично Злой",
+    "al_chaotic_evil": "Хаотично Злой",
 
     "cl_title": "Класс",
     "cl_barbarian": "Варвар",
