@@ -55,6 +55,7 @@ let isSwitchingBackground = false;
 
 let raceP = null;
 let classP = null;
+let backgroundP = null;
 let characteristicCards = null;
 
 // document.getElementById('growth-primary-measure').textContent = measureSystem[isMetric | 0][0];
@@ -888,6 +889,55 @@ class Class_ {
     }
 }
 
+class Background_ {
+    constructor(block) {
+        // Caching
+        this.rootPage = block.getElementById('background-page');
+        this.backgroundObject = null;
+
+        this.backgroundSelect = block.getElementById('background-select');
+        // Creating objects
+        this.infoCardHolder = new InfoCardHolder();
+
+        this.backgroundCard = new InfoCard(
+            "background",
+            "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum magni quasi dolores non molestiae quae quia quod, ab eaque dignissimos.",
+            {
+                picture: "Images/creatures/humanoids/races/rc_dwarf.png",
+                animation: true
+            });
+
+        this.testCard = new InfoCard(
+            "some-feature",
+            "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet, rem?",
+            {
+                title: "Тестовая способность"
+            }
+        )
+
+        // Installation
+        this.infoCardHolder.setMainCard(this.backgroundCard.box);
+
+        for (let background_ in user.background) {
+            Select.add(this.backgroundSelect, background_, translateTo('language', background_));
+        }
+
+        // Installing event listeners
+        this.backgroundSelect.addEventListener('change', () => { this.load(this.backgroundSelect.value); });
+
+        // Appending to DOM
+        this.infoCardHolder.box.append(this.backgroundCard.box);
+        this.rootPage.prepend(this.infoCardHolder.box);
+
+        // Init
+        this.backgroundSelect.dispatchEvent(new Event('change'));
+    }
+
+    load(backgroundName) {
+        this.backgroundObject = user.background[backgroundName];
+    }
+}
+
 function writeToCharacter() {
     // Name
     newCharacter.playerName = user.name;
@@ -960,14 +1010,16 @@ function writeToCharacter() {
 
 // setTimeout(loadContentToArrayAndUser, 50);
 
-window.addEventListener("load", function () {
-    user = JSON.parse(localStorage[localStorage.loggedUser]);
+window.addEventListener("load", async function () {
+    user = await JSON.parse(localStorage[localStorage.loggedUser]);
     userJSONFix();
+    console.log("user", user)
 
     choosedCharacter = user["character" + localStorage.numOfChoosedChar];
     choosedCharacter.json = user.defaultCharacter;
 
     loadContentToArray(function () {
+        console.log("started", user)
         for (let defaultContent of defaultContentArray) {
             let name = defaultContent.name.split("_")[1];
             if (name == "alignment") {
@@ -1001,6 +1053,7 @@ window.addEventListener("load", function () {
         raceP = new Race_(document);
         classP = new Class_(document);
         // Characteristics = new Characteristics(document);
+        backgroundP = new Background_(document);
         // Personality = new Personality(document);
         characteristicCards = {
             "strengthCard": new CharacteristicsCard("strength"),
@@ -1016,5 +1069,9 @@ window.addEventListener("load", function () {
         loadBackgroundSelect();
 
         backgroundSelected();
+
+        applyAnimation();
+
+        console.log("end", user);
     });
 });
