@@ -11,10 +11,10 @@
     <!-- PWA -->
     <meta name="description" content="DnD5CharlistI - простой способ создать персонажа для DnD">
     <link rel="manifest" href="/manifest.json">
-    <meta name="theme-color" content="#681e22">
+    <meta name="theme-color" content="var(--accent-n-color)">
     <!-- ios support -->
     <link rel="apple-touch-icon" href="images/icons/app_icon/96x96.png">
-    <meta name="apple-moblie-web-app-status-bar" content="#681e22">
+    <meta name="apple-moblie-web-app-status-bar" content="var(--accent-n-color)">
     <link rel="shortcut icon" href="images/icons/app_icon/16x16.png" type="image/png">
     <!-- technical -->
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=5, user-scalable=no">
@@ -155,7 +155,7 @@
             </div>
         </section>
         <section id="central">
-            <div id="skills">
+            <div id="skill">
                 <div id="acrobatics" class="skill-box">
                     <span class="border-style border-radius skill-bonus default-background default-shadow" data-modifier="dexterity" id="acrobatics-bonus">-1</span>
                     <span id="acrobatics-origin" class="skill-origin gray-text">DEX</span>
@@ -334,7 +334,7 @@
             <div id="central-3">
                 <div id="health">
                     <div id="hp-bar" class="border-style border-radius default-background default-shadow">
-                        <div class="bar-animation">
+                        <div class="brd-rad bar-animation">
                             <div id="hp-bar-fill" class="bar-fill hp-color">
                                 <div id="hp-liquid" class="wave-main wave-hp hp-color"></div>
                             </div>
@@ -434,8 +434,9 @@
     <footer>
     </footer>
     <script src="javascript/app.js"></script>
-    <script src="javascript/auth.js"></script>
+    <script src="javascript/data.js"></script>
     <script src="javascript/main_func.js"></script>
+    <script src="javascript/auth.js"></script>
     <script src="javascript/onclick.js"></script>
     <script src="javascript/svg_fix.js"></script>
 </body>

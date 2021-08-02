@@ -15,7 +15,12 @@ orAuth.classList = 'or text-black-shadow';
 orAuth.textContent = 'или регистрация?';
 orAuth.addEventListener('click', changeAuth);
 
-authTitle.after(orAuth);
+if (authTitle) {
+    authTitle.after(orAuth);
+}
+else {
+    setTimeout(function () { location.href = "user.html" }, 3000);
+}
 
 function changeAuth() {
     if (getComputedStyle(registration).display == 'none') {

@@ -1,6 +1,4 @@
 {
-  "default": true,
-  "initiative": 0,
   "playerName": "",
   "charName": "",
   "class": "",
@@ -9,29 +7,27 @@
   "background": "",
   "level": 1,
   "experience": 0,
+  "armorClass": 0,
+  "initiative": 0,
+  "speed": 0,
+  "inspiration": 0,
+  "proficiencyBonus": 0,
   "hpMax": 0,
   "hp": 0,
   "hpTemp": 0,
-  "armorClass": 0,
-  "speed": 0,
-  "proficiencyBonus": 0,
-  "passiveWisdom": -5,
-  "inspiration": 0,
   "hitDiceCoeffiecient": 0,
   "hitDiceLeft": 0,
-  "maxWeight": 0,
-  "specialization": "",
-  "death-saves": {
+  "deathSaves": {
     "successes": 0,
     "failures": 0
   },
   "characteristic": {
-    "strength": 0,
-    "dexterity": 0,
-    "constitution": 0,
-    "intelligence": 0,
-    "wisdom": 0,
-    "charisma": 0
+    "ch_strength": 0,
+    "ch_dexterity": 0,
+    "ch_constitution": 0,
+    "ch_intelligence": 0,
+    "ch_wisdom": 0,
+    "ch_charisma": 0
   },
   "characteristicBonus": {
     "strengthBonus": -5,
@@ -41,34 +37,38 @@
     "wisdomBonus": -5,
     "charismaBonus": -5
   },
-  "savingThrowsBonus": {
-    "strength": false,
-    "dexterity": false,
-    "constitution": false,
-    "intelligence": false,
-    "wisdom": false,
-    "charisma": false
+  "savingThrowProf": {
+    "ch_strength": false,
+    "ch_dexterity": false,
+    "ch_constitution": false,
+    "ch_intelligence": false,
+    "ch_wisdom": false,
+    "ch_charisma": false
   },
-  "skillsBonus": {
-    "acrobatics": false,
+  "skillProf": {
+    "sk_acrobatics": false,
     "animalHandling": false,
-    "arcana": false,
-    "athletics": false,
-    "deception": false,
-    "history": false,
-    "insight": false,
-    "intimidation": false,
-    "investigation": false,
-    "medicine": false,
-    "nature": false,
-    "perception": false,
+    "sk_arcana": false,
+    "sk_athletics": false,
+    "sk_deception": false,
+    "sk_history": false,
+    "sk_insight": false,
+    "sk_intimidation": false,
+    "sk_investigation": false,
+    "sk_medicine": false,
+    "sk_nature": false,
+    "sk_perception": false,
     "perfomance": false,
-    "persuasion": false,
-    "religion": false,
+    "sk_persuasion": false,
+    "sk_religion": false,
     "sleightOfHand": false,
-    "stealth": false,
-    "survival": false
+    "sk_stealth": false,
+    "sk_survival": false
   },
+  "passiveWisdom": -5,
+  "armorProf": {},
+  "weaponProf": {},
+  "toolProf": {},
   "armament": {
     "weapons": [
       "fists"
@@ -88,41 +88,35 @@
     "gold": 0,
     "platinum": 0
   },
-  "personality": {
-    "languages": [
-      "default"
-    ],
-    "otherProfincies": [
-      ""
-    ],
-    "features": [
-      ""
-    ],
-    "traits": [
-      ""
-    ],
-    "appearance": {
-      "age": 0,
-      "height": 0,
-      "weight": 0,
-      "eyes": "",
-      "skin": "",
-      "hair": "",
-      "backstory": "",
-      "additionalFeaturesAndTraits": "",
-      "treasure": [
-        {
-          "name": "",
-          "description": "",
-          "else": ""
-        }
-      ],
-      "image": "default",
-      "look": "",
-      "personalityTraits": "",
-      "ideals": "",
-      "bonds": "",
-      "flaws": ""
+  "languages": [
+    "default"
+  ],
+  "maxWeight": 0,
+  "specialization": "",
+  "otherProfincies": [
+    ""
+  ],
+  "features": [
+    ""
+  ],
+  "age": 0,
+  "height": 0,
+  "weight": 0,
+  "eyes": "",
+  "skin": "",
+  "hair": "",
+  "backstory": "",
+  "additionalFeaturesAndTraits": "",
+  "treasure": [
+    {
+      "name": "",
+      "description": "",
+      "else": ""
     }
-  }
+  ],
+  "image": "default",
+  "traits": "",
+  "ideals": "",
+  "bonds": "",
+  "flaws": ""
 }

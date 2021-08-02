@@ -1,9 +1,9 @@
 {
-  "Acolyte": {
+  "bg_acolyte": {
     "description": "",
     "skillProfencies": [
-      "insight",
-      "religion"
+      "sk_insight",
+      "sk_religion"
     ],
     "languages": 2,
     "equipment": [
@@ -72,11 +72,11 @@
       ]
     }
   },
-  "Charlatan": {
+  "bg_charlatan": {
     "description": "",
     "skillProfencies": [
-      "Deception",
-      "Sleight of Hand"
+      "sk_deception",
+      "sk_sleight_of_hand"
     ],
     "toolProfencies": [
       "Disguise kit",
@@ -108,9 +108,7 @@
       "falseIdentity"
     ],
     "specializationChoice": 1,
-    "specialization": [
-    
-    ],
+    "specialization": [],
     "additionalFeature": [],
     "personality": {
       "personalityTraits": [
@@ -149,11 +147,11 @@
       ]
     }
   },
-  "Entertainer": {
+  "bg_entertainer": {
     "description": "",
     "skillProfencies": [
-      "Acrobatics",
-      "Performance"
+      "sk_acrobatics",
+      "sk_performance"
     ],
     "toolProfencies": [
       "Disguise kit",
@@ -236,11 +234,11 @@
       ]
     }
   },
-  "Folk Hero": {
+  "bg_folk_hero": {
     "description": "",
     "skillProfencies": [
-      "Animal Handling",
-      "Survival"
+      "sk_animal_handling",
+      "sk_survival"
     ],
     "toolProfencies": [
       "One type of artisan's tools",
@@ -256,8 +254,7 @@
     ],
     "equipmentToChoice": 0,
     "equipmentToChooseFrom": [
-      [
-      ]
+      []
     ],
     "money": {
       "copper": 0,
@@ -320,11 +317,11 @@
       ]
     }
   },
-  "Guild Artisan": {
+  "bg_guild_artisan": {
     "description": "",
     "skillProfencies": [
-      "Insight",
-      "Persuasion"
+      "sk_insight",
+      "sk_persuasion"
     ],
     "toolProfencies": [
       "A set of artisan's tools"
@@ -338,8 +335,7 @@
     ],
     "equipmentToChoice": 0,
     "equipmentToChooseFrom": [
-      [
-      ]
+      []
     ],
     "money": {
       "copper": 0,
@@ -412,11 +408,11 @@
       ]
     }
   },
-  "Hermit": {
+  "bg_hermit": {
     "description": "",
     "skillProfencies": [
-      "Medicine",
-      "Religion"
+      "sk_medicine",
+      "sk_religion"
     ],
     "toolProfencies": [
       "Herbalism kit"
@@ -430,8 +426,7 @@
     ],
     "equipmentToChoice": 0,
     "equipmentToChooseFrom": [
-      [
-      ]
+      []
     ],
     "money": {
       "copper": 0,
@@ -492,11 +487,11 @@
       ]
     }
   },
-  "Noble": {
+  "bg_noble": {
     "description": "",
     "skillProfencies": [
-      "History",
-      "Persuasion"
+      "sk_history",
+      "sk_persuasion"
     ],
     "toolProfencies": [
       "One type o f gaming set"
@@ -510,8 +505,7 @@
     ],
     "equipmentToChoice": 0,
     "equipmentToChooseFrom": [
-      [
-      ]
+      []
     ],
     "money": {
       "copper": 0,
@@ -563,11 +557,11 @@
       ]
     }
   },
-  "Outlander": {
+  "bg_outlander": {
     "description": "",
     "skillProfencies": [
-      "Athletics",
-      "Survival"
+      "sk_athletics",
+      "sk_survival"
     ],
     "toolProfencies": [
       "One type of musical instrument"
@@ -582,8 +576,7 @@
     ],
     "equipmentToChoice": 0,
     "equipmentToChooseFrom": [
-      [
-      ]
+      []
     ],
     "money": {
       "copper": 0,
@@ -647,11 +640,11 @@
       ]
     }
   },
-  "Sage": {
+  "bg_sage": {
     "description": "",
     "skillProfencies": [
-      "Arcana",
-      "History"
+      "sk_arcana",
+      "sk_history"
     ],
     "toolProfencies": [],
     "languages": 2,
@@ -665,8 +658,7 @@
     ],
     "equipmentToChoice": 0,
     "equipmentToChooseFrom": [
-      [
-      ]
+      []
     ],
     "money": {
       "copper": 0,
@@ -728,10 +720,10 @@
       ]
     }
   },
-  "Sailor": {
+  "bg_sailor": {
     "description": "",
     "skillProfencies": [
-      "Athletics",
+      "sk_athletics",
       "Perception"
     ],
     "toolProfencies": [
@@ -748,8 +740,7 @@
     ],
     "equipmentToChoice": 0,
     "equipmentToChooseFrom": [
-      [
-      ]
+      []
     ],
     "money": {
       "copper": 0,
@@ -810,11 +801,11 @@
       ]
     }
   },
-  "Soldier": {
+  "bg_soldier": {
     "description": "",
     "skillProfencies": [
-      "Athletics",
-      "Intimidation"
+      "sk_athletics",
+      "sk_intimidation"
     ],
     "toolProfencies": [
       "One type o f gaming set",
@@ -830,8 +821,7 @@
     ],
     "equipmentToChoice": 0,
     "equipmentToChooseFrom": [
-      [
-      ]
+      []
     ],
     "money": {
       "copper": 0,
@@ -892,11 +882,11 @@
       ]
     }
   },
-  "Urchin": {
+  "bg_urchin": {
     "description": "",
     "skillProfencies": [
-      "Sleight of Hand",
-      "Stealth"
+      "sk_sleight_of_hand",
+      "sk_stealth"
     ],
     "toolProfencies": [
       "Disguise kit",
@@ -913,8 +903,7 @@
     ],
     "equipmentToChoice": 0,
     "equipmentToChooseFrom": [
-      [
-      ]
+      []
     ],
     "money": {
       "copper": 0,

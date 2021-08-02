@@ -11,37 +11,21 @@ var observer = new MutationObserver(function (mutations) {
         }, 0)
     });
 });
+
 var config = { attributes: true, childList: false, characterData: false };
 observer.observe(document.getElementById('user-btn-img'), config);
 
-let activeTab = null;
-
-let characterTab = document.getElementById('characters');
-characterTab.addEventListener('click', selectPage);
-characterTab.dispatchEvent(new Event('click'));
-
-document.getElementById('profile-settings').addEventListener('click', selectPage);
-
-function selectPage() {
-    activeTab = this;
-    document.getElementById('tabs').querySelectorAll('span').forEach(tab => {
-        tab.classList.remove('non-active-tab');
-        if (tab.id != activeTab.id) { tab.classList.add('non-active-tab'); }
-    })
-
-    document.getElementById('content-page').querySelectorAll('div').forEach(page => {
-        if (page.id != activeTab.id + "-page" && page.dataset.type == 'page') { page.style.display = 'none' } else if (page.dataset.type == 'page') { page.style.display = 'grid' };
-    })
-}
+document.getElementById('characters').addEventListener('click', () => {
+    adjustAllLevels();
+    adjustAllBarWidth();
+});
 
 async function loadCharacters() {
     await fetchUser();
     await getLogged();
 
     user = JSON.parse(localStorage[localStorage.loggedUser]);
-    user.character1.json ? user.character1.json = JSON.parse(user.character1.json) : null;
-    user.character2.json ? user.character2.json = JSON.parse(user.character2.json) : null;
-    user.character3.json ? user.character3.json = JSON.parse(user.character3.json) : null;
+    userJSONFix();
 
     for (let i = 1; i <= 3; i++) {
         if (user['character' + i].json) {
@@ -62,7 +46,7 @@ async function loadCharacters() {
             hpBar.classList = 'hp-bar border-style border-radius default-background default-shadow';
 
             let hpBarAnimation = document.createElement('div');
-            hpBarAnimation.classList = 'bar-animation';
+            hpBarAnimation.classList = 'brd-tl-rad brd-tr-rad bar-animation';
 
             let hpBarFill = document.createElement('div');
             hpBarFill.classList = 'bar-fill hp-color';
@@ -100,6 +84,7 @@ async function loadCharacters() {
             xp.readOnly = 'readonly'
             xp.classList = 'xp border-style input-font-style bar-text';
             xp.value = user['character' + i].json.experience;
+            xp.disabled = true;
 
             xpBar.appendChild(xpBarAnimation);
             xpBar.appendChild(xp);
@@ -128,6 +113,7 @@ async function loadCharacters() {
             characterName.type = 'text';
             characterName.classList = 'character-name text-auto-width align-to-right text-to-right input-font-style';
             characterName.value = user['character' + i].json.charName;
+            characterName.disabled = true;
 
             let characterOrigin = document.createElement('div');
             characterOrigin.classList = 'character-origin align-to-right gray-text text-to-right';
@@ -179,6 +165,7 @@ async function loadCharacters() {
             copper.readOnly = 'readonly';
             copper.classList = 'currency-value border-style border-radius input-font-style';
             copper.value = user['character' + i].json.money.copper;
+            copper.disabled = true;
 
             copperBox.appendChild(copperImg);
             copperBox.appendChild(copper);
@@ -196,6 +183,7 @@ async function loadCharacters() {
             silver.readOnly = 'readonly';
             silver.classList = 'currency-value border-style border-radius input-font-style';
             silver.value = user['character' + i].json.money.silver;
+            silver.disabled = true;
 
             silverBox.appendChild(silverImg);
             silverBox.appendChild(silver);
@@ -213,6 +201,7 @@ async function loadCharacters() {
             electrum.readOnly = 'readonly';
             electrum.classList = 'currency-value border-style border-radius input-font-style';
             electrum.value = user['character' + i].json.money.electrum;
+            electrum.disabled = true;
 
             electrumBox.appendChild(electrumImg);
             electrumBox.appendChild(electrum);
@@ -230,6 +219,7 @@ async function loadCharacters() {
             gold.readOnly = 'readonly';
             gold.classList = 'currency-value border-style border-radius input-font-style';
             gold.value = user['character' + i].json.money.gold;
+            gold.disabled = true;
 
             goldBox.appendChild(goldImg);
             goldBox.appendChild(gold);
@@ -247,6 +237,7 @@ async function loadCharacters() {
             platinum.readOnly = 'readonly';
             platinum.classList = 'currency-value border-style border-radius input-font-style';
             platinum.value = user['character' + i].json.money.platinum;
+            platinum.disabled = true;
 
             platinumBox.appendChild(platinumImg);
             platinumBox.appendChild(platinum);
@@ -276,6 +267,7 @@ async function loadCharacters() {
             strengthValue.readOnly = 'readonly';
             strengthValue.value = user['character' + i].json.characteristic.strength;
             strengthValue.classList = 'characteristic-value default-background border-style border-radius default-button input-font-style';
+            strengthValue.disabled = true;
 
             strength.appendChild(strengthText);
             strength.appendChild(strengthBonus);
@@ -298,6 +290,7 @@ async function loadCharacters() {
             dexterityValue.readOnly = 'readonly';
             dexterityValue.value = user['character' + i].json.characteristic.dexterity;
             dexterityValue.classList = 'characteristic-value default-background border-style border-radius default-button input-font-style';
+            dexterityValue.disabled = true;
 
             dexterity.appendChild(dexterityText);
             dexterity.appendChild(dexterityBonus);
@@ -320,6 +313,7 @@ async function loadCharacters() {
             constitutionValue.readOnly = 'readonly';
             constitutionValue.value = user['character' + i].json.characteristic.constitution;
             constitutionValue.classList = 'characteristic-value default-background border-style border-radius default-button input-font-style';
+            constitutionValue.disabled = true;
 
             constitution.appendChild(constitutionText);
             constitution.appendChild(constitutionBonus);
@@ -342,6 +336,7 @@ async function loadCharacters() {
             intelligenceValue.readOnly = 'readonly';
             intelligenceValue.value = user['character' + i].json.characteristic.intelligence;
             intelligenceValue.classList = 'characteristic-value default-background border-style border-radius default-button input-font-style';
+            intelligence.disabled = true;
 
             intelligence.appendChild(intelligenceText);
             intelligence.appendChild(intelligenceBonus);
@@ -364,6 +359,7 @@ async function loadCharacters() {
             wisdomValue.readOnly = 'readonly';
             wisdomValue.value = user['character' + i].json.characteristic.wisdom;
             wisdomValue.classList = 'characteristic-value default-background border-style border-radius default-button input-font-style';
+            wisdomValue.disabled = true;
 
             wisdom.appendChild(wisdomText);
             wisdom.appendChild(wisdomBonus);
@@ -386,6 +382,7 @@ async function loadCharacters() {
             charismaValue.readOnly = 'readonly';
             charismaValue.value = user['character' + i].json.characteristic.charisma;
             charismaValue.classList = 'characteristic-value default-background border-style border-radius default-button input-font-style';
+            charismaValue.disabled = true;
 
             charisma.appendChild(charismaText);
             charisma.appendChild(charismaBonus);
@@ -430,7 +427,9 @@ async function loadCharacters() {
 }
 
 function newCharacter() {
-    alert("Новый персонаж redirect");
+    localStorage.numOfChoosedChar = this.dataset.characterNumber;
+
+    document.location.href = "builder.html";
 }
 
 function loadCharacterFromProfile() {
@@ -444,9 +443,14 @@ let avatarFullImage = document.getElementById('avatar-full-image');
 let avatarCropLayout = document.getElementById('avatar-crop-layout');
 let avatarCropBox = document.getElementById('avatar-crop-box');
 let chooseAvatar = document.getElementById('choose-avatar');
+let btnChangePassword = document.getElementById('player-change-password')
+let dataContentList = document.getElementById('data-content-list');
+let dataContentAdd = document.getElementById('data-content-add');
 
+btnChangePassword.addEventListener('click', changePassword);
 avatarInput.addEventListener('change', cropAvatar);
 avatarCropLayout.addEventListener('click', closeCrop);
+dataContentAdd.addEventListener('click', addContent);
 
 let croppr = null;
 
@@ -507,4 +511,204 @@ function closeCrop() {
     }
     chooseAvatar.style.display = 'block';
     avatarInput.value = "";
+}
+
+function changePassword() {
+    const parent = btnChangePassword.parentElement;
+
+    btnChangePassword.parentElement.removeChild(btnChangePassword);
+
+    let changePassBox = document.createElement('form');
+    changePassBox.addEventListener("submit", submitPassword);
+
+    let changeInput = document.createElement('input');
+    changeInput.type = "password";
+
+    let changeSubmit = document.createElement('input');
+    changeSubmit.type = "submit";
+    changeSubmit.value = translateTo('language', "btn_submit");
+
+    let changeCancel = document.createElement('input');
+    changeCancel.type = "button";
+    changeCancel.value = translateTo('language', "btn_cancel");
+    changeCancel.addEventListener('click', cancelPassword);
+
+    changeSubmit.style.marginRight = changeCancel.style.marginRight = changeInput.style.marginRight = "1rem";
+    changeSubmit.classList = changeCancel.classList = (changeInput.classList = "display-disable default-background border-style border-radius default-inner-shadow input-font-style")
+        + " default-button";
+
+    changePassBox.append(changeInput, changeSubmit, changeCancel);
+    parent.append(changePassBox);
+
+    async function submitPassword(e) {
+        e.preventDefault();
+        if (changeInput.value.length < 6) {
+            bAlert("Минимальная длинна пароля должна составлять 6 символов!", 3000);
+        }
+        else {
+            changeInput.disabled = true;
+            changeSubmit.disabled = true;
+            changeCancel.disabled = true;
+            await ajaxChangePassword(changeInput.value);
+            cancelPassword();
+        }
+    }
+
+    function cancelPassword() {
+        const parent = changePassBox.parentElement;
+
+        parent.removeChild(changePassBox);
+        parent.append(btnChangePassword);
+    }
+
+    async function ajaxChangePassword(newPassword) {
+        const object = {
+            changePassword: newPassword
+        }
+        const request = await fetch(
+            '../user_control.php',
+            {
+                method: 'POST',
+                body: JSON.stringify(object)
+            }
+        );
+
+        if (request.ok) {
+            const data = await request.json();
+            if (data.changed) {
+                bAlert(translateTo('language', "pass_change_successfull"), 5000);
+            } else {
+                bAlert(translateTo('language', "pass_change_error"), 5000);
+            }
+        } else {
+            alert("Ошибка подключения к базе данных, код ошибки HTTP: " + request.status);
+        }
+    }
+}
+
+setTimeout(loadDefaultContent, 50);
+setTimeout(displayContent, 100);
+
+function createContentElement(text, allowedToRemove) {
+    let box = document.createElement('div');
+    box.classList = "default-background border-style border-radius default-inner-shadow input-font-style data-content-list-entry";
+    box.dataset.key = text;
+
+    let name = document.createElement('span');
+    name.textContent = translateTo("language", text);
+
+    box.append(name);
+
+    if (allowedToRemove) {
+        let deleteButton = document.createElement('button')
+        deleteButton.classList = "display-disable default-background border-style border-radius default-inner-shadow input-font-style default-button content-delete-button";
+        deleteButton.textContent = "X";
+        deleteButton.addEventListener('click', removeContentFromDb);
+
+        box.append(deleteButton);
+    }
+
+    return box;
+}
+
+async function loadDefaultContent() {
+    let objectStore = await getObjectStore("default_content", "readonly");
+
+    let rq = await objectStore.count();
+    rq.onsuccess = async function (event) {
+        if (rq.result | 1) {
+            let defaultContent = await getDefaultContent();
+            defaultContent.alignment ? defaultContent.alignment = JSON.parse(defaultContent.alignment) : null;
+            defaultContent.background ? defaultContent.background = JSON.parse(defaultContent.background) : null;
+            defaultContent.class ? defaultContent.class = JSON.parse(defaultContent.class) : null;
+            defaultContent.race ? defaultContent.race = JSON.parse(defaultContent.race) : null;
+            defaultContent.feature ? defaultContent.feature = JSON.parse(defaultContent.feature) : null;
+
+            objectStore = await getObjectStore("default_content", "readwrite");
+
+            for (let content in defaultContent) {
+                let object = {
+                    name: "default_" + content,
+                    json: JSON.stringify(defaultContent[content])
+                }
+                let rq = objectStore.put(object);
+            }
+        }
+    }
+}
+
+async function displayContent() {
+    if (contentArray.length == 0) {
+        loadContentToArray(function () {
+            clearElement(dataContentList);
+            let fragment = new DocumentFragment();
+
+            for (let content of contentArray) {
+                fragment.append(createContentElement(content.name, true));
+            }
+            let splitter = document.createElement('div');
+            splitter.dataset.key = "splitter";
+            fragment.append(splitter);
+            for (let content of defaultContentArray) {
+                fragment.append(createContentElement(content.name, false));
+            }
+
+            dataContentList.append(fragment);
+        });
+    }
+}
+
+function addContent() {
+    openFile();
+}
+
+function insertAfter(newNode, existingNode) {
+    existingNode.parentNode.insertBefore(newNode, existingNode.nextSibling);
+}
+
+async function addContentToDB() {
+    let object = {
+        name: contentBuff.name,
+        json: JSON.stringify(contentBuff.json)
+    }
+
+    let objectStore = await getObjectStore("content", "readwrite");
+    let rq = objectStore.put(object);
+
+    rq.onsuccess = function () {
+        for (let node of Array.from(dataContentList.childNodes)) {
+            if (node.dataset.key == object.name) {
+                return;
+            }
+            else if (node.dataset.key == "splitter") {
+                node.parentElement.insertBefore(createContentElement(object.name, true), node);
+                return;
+            }
+            else if (node.dataset.key > object.name) {
+                insertAfter(createContentElement(object.name, true), node);
+                return;
+            }
+        }
+    }
+
+    rq.onerror = function () {
+        console.log("Ошибка: ", rq.error);
+    };
+}
+
+async function removeContentFromDb() {
+    let objectStore = await getObjectStore("content", "readwrite");
+
+    let element = this;
+    let key = element.parentElement.dataset.key;
+
+    let rq = objectStore.delete(key);
+
+    rq.onsuccess = function () {
+        element.parentElement.parentElement.removeChild(element.parentElement);
+    }
+
+    rq.onerror = function () {
+        console.log("Ошибка: ", rq.error);
+    };
 }

@@ -1,7 +1,7 @@
 'use strict'
 
-let language = 'ru';
-let selectedVocabulary = null;
+// let language = 'ru';
+// let selectedVocabulary = null;
 
 let character = null;
 let characterInput = document.getElementById('character-input')
@@ -13,7 +13,7 @@ let characterRace = document.getElementById('character-race');
 let characterClass = document.getElementById('character-class');
 let characterBackground = document.getElementById('character-background');
 let characterStats = document.getElementById('character-stats');
-let characterSkills = document.getElementById('skills');
+let characterSkills = document.getElementById('skill');
 
 let hpFillEl = document.getElementById('hp-bar-fill').classList;
 let hpWaveEl = document.getElementById('hp-liquid').classList;
@@ -63,13 +63,13 @@ document.getElementById('cancel-item').addEventListener('click', addNewItemToInv
 document.getElementById('confirm-item').addEventListener('click', addNewItemToInventory);
 
 document.getElementById('death-saves-dice').addEventListener('click', rollDeathSave);
-document.getElementById('d20-dice').addEventListener('click', () => { let rolled = rollDice(20); rollAlert(rolled.value, `На D${rolled.type} выпало:`) });
-document.getElementById('d12-dice').addEventListener('click', () => { let rolled = rollDice(12); rollAlert(rolled.value, `На D${rolled.type} выпало:`) });
-document.getElementById('d100-dice').addEventListener('click', () => { let rolled = rollDice(100); rollAlert(rolled.value, `На D${rolled.type} выпало:`) });
-document.getElementById('d10-dice').addEventListener('click', () => { let rolled = rollDice(10); rollAlert(rolled.value, `На D${rolled.type} выпало:`) });
-document.getElementById('d8-dice').addEventListener('click', () => { let rolled = rollDice(8); rollAlert(rolled.value, `На D${rolled.type} выпало:`) });
-document.getElementById('d6-dice').addEventListener('click', () => { let rolled = rollDice(6); rollAlert(rolled.value, `На D${rolled.type} выпало:`) });
-document.getElementById('d4-dice').addEventListener('click', () => { let rolled = rollDice(4); rollAlert(rolled.value, `На D${rolled.type} выпало:`) });
+document.getElementById('d20-dice').addEventListener('click', () => { let rolled = rollDice(1, 20); rollAlert(rolled.value, `На D${rolled.type} выпало:`) });
+document.getElementById('d12-dice').addEventListener('click', () => { let rolled = rollDice(1, 12); rollAlert(rolled.value, `На D${rolled.type} выпало:`) });
+document.getElementById('d100-dice').addEventListener('click', () => { let rolled = rollDice(1, 100); rollAlert(rolled.value, `На D${rolled.type} выпало:`) });
+document.getElementById('d10-dice').addEventListener('click', () => { let rolled = rollDice(1, 10); rollAlert(rolled.value, `На D${rolled.type} выпало:`) });
+document.getElementById('d8-dice').addEventListener('click', () => { let rolled = rollDice(1, 8); rollAlert(rolled.value, `На D${rolled.type} выпало:`) });
+document.getElementById('d6-dice').addEventListener('click', () => { let rolled = rollDice(1, 6); rollAlert(rolled.value, `На D${rolled.type} выпало:`) });
+document.getElementById('d4-dice').addEventListener('click', () => { let rolled = rollDice(1, 4); rollAlert(rolled.value, `На D${rolled.type} выпало:`) });
 
 document.getElementById('strength-death-save-checkbox').addEventListener('click', characteristicCheckBoxDropDown);
 document.getElementById('dexterity-death-save-checkbox').addEventListener('click', characteristicCheckBoxDropDown);
@@ -252,15 +252,8 @@ function hpValidation(actual, maximum) {
 let successMarkCount = 0;
 let failsMarkCount = 0;
 
-function rollDice(diceType) {
-  return {
-    value: Math.floor(Math.random() * diceType + 1),
-    type: diceType
-  }
-}
-
 function rollDeathSave() {
-  let rollResult = rollDice(20).value;
+  let rollResult = rollDice(1, 20).value;
 
   rollAlert(rollResult, 'На D20 выпало:');
 
@@ -541,6 +534,7 @@ function loadCharacterJSON() {
 
   input = characterInput;
 
+  console.log(input.files[0]);
   if (!input) {
     alert("Um, couldn't find the fileinput element.");
   }
@@ -563,97 +557,6 @@ function loadCharacterJSON() {
   }
 }
 
-let russianVocabulary = {
-  "Alignment": "Мировоззрение",
-  "Lawful Good": "Законопослушный Добрый",
-  "Lawful Neutral": "Законопослушный Нейтральный",
-  "Lawful Evil": "Законопослушный Злой",
-  "Neutral Good": "Нейтральный Добрый",
-  "True Neutral": "Истинно Нейтральный",
-  "Neutral Evil": "Нейтральный Злой",
-  "Chaotic Good": "Хаотичный Добрый",
-  "Chaotic Neutral": "Хаточино Нейтральный",
-  "Chaotic Evil": "Хаотично Злой",
-  "Class": "Класс",
-  "Barbarian": "Варвар",
-  "Bard": "Бард",
-  "Cleric": "Жрец",
-  "Druid": "Друид",
-  "Fighter": "Воин",
-  "Monk": "Монах",
-  "Paladin": "Паладин",
-  "Ranger": "Следопыт",
-  "Rogue": "Плут",
-  "Sorcerer": "Чародей",
-  "Warlock": "Колдун",
-  "Wizard": "Волшебник",
-  "Race": "Раса",
-  "Dwarf": "Дварф",
-  "Elf": "Эльф",
-  "Hafling": "Полурослик",
-  "Human": "Человек",
-  "Dragonborn": "Драконорожденный",
-  "Gnome": "Гном",
-  "Half-Elf": "Полуэльф",
-  "Half-Orc": "Полуорк",
-  "Tiefling": "Тифлинг",
-  "Background": "Предыстория",
-  "Acolyte": "Прислужник",
-  "Charlatan": "Шарлатан",
-  "Criminal": "Преступник",
-  "Entertainer": "Артист",
-  "Folk Hero": "Народный Герой",
-  "Guild Artisan": "Гилдейский Ремесленник",
-  "Hermit": "Отшельник",
-  "Noble": "Благородный",
-  "Outlander": "Чужеземец",
-  "Sage": "Мудрец",
-  "Sailor": "Моряк",
-  "Soldier": "Солдат",
-  "Urchin": "Беспризорник",
-}
-
-function capitalize(option, str) {
-  if (option == 'firstOfWord') {
-    return str.charAt(0).toUpperCase() + str.slice(1);
-  } else if (option == 'firstOfAllWord') {
-    var pieces = str.split(" ");
-    for (var i = 0; i < pieces.length; i++) {
-      var j = pieces[i].charAt(0).toUpperCase();
-      pieces[i] = j + pieces[i].substr(1);
-    }
-    return pieces.join(" ");
-  }
-}
-
-function getKeyByValue(object, value) {
-  return Object.keys(object).find(key => object[key] === value);
-}
-
-function translateTo(option, str) {
-  if (language == 'ru') {
-    selectedVocabulary = russianVocabulary;
-  } else {
-    return;
-  }
-
-  if (option == 'language') {
-    var translatedWord = selectedVocabulary[fillStringIfEmpty(capitalize('firstOfAllWord', str))];
-  } else if (option == 'save') {
-    var translatedWord = getKeyByValue(selectedVocabulary, str);
-  }
-
-  return translatedWord != null ? translatedWord : String(undefined);
-}
-
-function fillStringIfEmpty(str) {
-  return str != '' ? str : String(undefined);
-}
-
-function calculateBonus(value) {
-  return Math.floor((value - 10) / 2);
-}
-
 function updateBonus() {
   characterStats.querySelectorAll('div.characteristic').forEach(
     statsBox => {
@@ -670,10 +573,6 @@ function updateBonus() {
     });
 }
 
-function addSignToNumber(value) {
-  if (isNaN(value)) return '';
-  return value < 0 ? value : '+' + value;
-}
 
 function loadCharacter() {
   loadPlayerName();

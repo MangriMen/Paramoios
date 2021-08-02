@@ -14,10 +14,10 @@
     <!-- PWA -->
     <meta name="description" content="DnD5CharlistI - простой способ создать персонажа для DnD">
     <link rel="manifest" href="/manifest.json">
-    <meta name="theme-color" content="#681e22">
+    <meta name="theme-color" content="var(--accent-n-color)">
     <!-- ios support -->
     <link rel="apple-touch-icon" href="images/icons/app_icon/96x96.png">
-    <meta name="apple-moblie-web-app-status-bar" content="#681e22">
+    <meta name="apple-moblie-web-app-status-bar" content="var(--accent-n-color)">
     <link rel="shortcut icon" href="/images/icons/app_icon/16x16.png" type="image/png">
     <!-- technical -->
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=5, user-scalable=no">
@@ -60,14 +60,24 @@
     <main class="border-style border-radius">
         <nav>
             <div id='tabs'>
-                <span id='characters' class="navigation-tab default-background border-style border-radius">
+                <span id='characters' class="navigation-tab default-background-disabled border-style border-radius">
                     Персонажи
                 </span>
-                <span id='profile-settings' class="navigation-tab default-background border-style border-radius">
+                <span id='profile-settings' class="navigation-tab default-background-disabled border-style border-radius">
                     Настройки
+                </span>
+                <span id='data-content' class="navigation-tab default-background-disabled border-style border-radius">
+                    Пользовательское
                 </span>
             </div>
             <div id='content-page' class="default-background border-style border-radius">
+                <div id='characters-page' data-type='page'>
+                    <div id='characters-loading-overlay' class='loading-overlay'>
+                        <div class='loading-animation'>
+                            <div class='loading-animation-inner'></div>
+                        </div>
+                    </div>
+                </div>
                 <div id='profile-settings-page' data-type='page'>
                     <a id='avatar-change-overlay' href="#">
                         <span id='avatar-change-text' class="default-background border-style border-radius">Изменить</span>
@@ -76,14 +86,12 @@
                     <div id='information-box'>
                         <span id='player-name'></span>
                         <span id='player-email'></span>
+                        <button id='player-change-password' class="default-button default-background border-style border-radius default-inner-shadow input-font-style">Изменить пароль</button>
                     </div>
                 </div>
-                <div id='characters-page' data-type='page'>
-                    <div id='characters-loading-overlay' class='loading-overlay'>
-                        <div class='loading-animation'>
-                            <div class='loading-animation-inner'></div>
-                        </div>
-                    </div>
+                <div id='data-content-page' data-type='page'>
+                    <input type="button" id='data-content-add' value="+" class="default-button default-background border-style border-radius default-inner-shadow input-font-style">
+                    <div id='data-content-list' class="border-style border-radius"></div>
                 </div>
             </div>
         </nav>
@@ -91,8 +99,10 @@
     <footer>
     </footer>
     <script src="javascript/app.js"></script>
-    <script src="javascript/auth.js"></script>
+    <script src="javascript/data.js"></script>
+    <script src="javascript/extensions.js"></script>
     <script src="javascript/main_func.js"></script>
+    <script src="javascript/auth.js"></script>
     <script src="javascript/user.js"></script>
     <script src="javascript/svg_fix.js"></script>
 </body>

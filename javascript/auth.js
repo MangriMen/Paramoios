@@ -1,5 +1,20 @@
 'use strict'
-let user = null;
+
+checkLogin();
+
+async function checkLogin() {
+    await getLogged();
+
+    if (localStorage.loggedUser) {
+    }
+    else {
+        location.href = "/login.php";
+    }
+}
+
+if (getCookie('isMetric') == undefined) {
+    setCookie('isMetric', true, { expires: getExpires() });
+}
 
 document.getElementById('user-btn').addEventListener('click', function (e) { toggleUserMenu(e); });
 
@@ -48,9 +63,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     if (localStorage.loggedUser) {
         user = JSON.parse(localStorage[localStorage.loggedUser]);
-        user.character1.json ? user.character1.json = JSON.parse(user.character1.json) : null;
-        user.character2.json ? user.character2.json = JSON.parse(user.character2.json) : null;
-        user.character3.json ? user.character3.json = JSON.parse(user.character3.json) : null;
+        userJSONFix();
 
         img.src = user.avatar;
         if (window.location.pathname == '/user.html') {
