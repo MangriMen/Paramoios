@@ -21,15 +21,10 @@ html {
 body {
   margin: 0;
   background-color: var(--accent-n-color);
-  overflow-y: hidden;
 }
 
 header {
   height: 60px;
-}
-#scrollbar-wrapper {
-  height: calc(100vh - 1.6rem);
-  overflow-y: auto;
 }
 
 input {
