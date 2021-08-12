@@ -6,6 +6,9 @@
   --bg-l-color: #edd6ad;
   --accent-n-color: #681e22;
   --accent-l-color: #b5353b;
+  --scrollbar-default-color: #dbb57b;
+  --scrollbar-hover-color: #c2a06d;
+  --scrollbar-active-color: #a88b5e;
 }
 
 a {
