@@ -566,7 +566,7 @@ function changePassword() {
             changePassword: newPassword
         }
         const request = await fetch(
-            '../user_control.php',
+            '../php/user_control.php',
             {
                 method: 'POST',
                 body: JSON.stringify(object)

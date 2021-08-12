@@ -23,7 +23,7 @@ let img = document.getElementById('user-btn-img');
 let logout = document.createElement('a');
 logout.id = 'link-logout';
 logout.classList = 'user-menu-buttons-down input-font-style default-background border-style';
-logout.href = 'logout.php';
+logout.href = 'php/logout.php';
 logout.addEventListener('click', userLogout);
 let logoutImg = document.createElement('img');
 logoutImg.src = 'img/buttons/profile/logout.svg';
@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 })
 
 async function getUser() {
-    const request = await fetch('../logged.php', {
+    const request = await fetch('../php/logged.php', {
         method: 'POST',
         body: 'get-user'
     });
@@ -98,7 +98,7 @@ async function getUser() {
 }
 
 async function getLogged() {
-    const request = await fetch('../logged.php', {
+    const request = await fetch('../php/logged.php', {
         method: 'POST',
         body: 'get-logged'
     });
@@ -116,7 +116,7 @@ async function getLogged() {
 }
 
 async function fetchUser() {
-    const request = await fetch('../fetch.php', {
+    const request = await fetch('../php/fetch.php', {
         method: 'POST',
         body: 'fetch-user'
     });
