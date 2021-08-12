@@ -52,7 +52,7 @@ login.appendChild(loginImg);
 let register = document.createElement('a');
 register.id = 'link-register';
 register.classList = 'user-menu-buttons-down input-font-style default-background border-style';
-register.href = 'form_register.php';
+register.href = '../login.php';
 let registerImg = document.createElement('img');
 registerImg.src = 'img/buttons/profile/register.svg';
 registerImg.classList = 'link-auth-img user-menu-buttons-down-img';
