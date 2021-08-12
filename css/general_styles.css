@@ -68,7 +68,7 @@ a, a:link, a:visited, a:focus, a:hover, a:active {
 ::-webkit-scrollbar, ::-webkit-scrollbar-corner {
   width: 16px;
   height: 16px;
-  background: url("../images/background/backmenu.jpg");
+  background: url("../img/background/backmenu.jpg");
 }
 
 :not(body)::-webkit-scrollbar {

@@ -867,7 +867,7 @@ main {
 }
 
 #fight-bonuses-checkbox-lable {
-  background-image: url('../images/icons/success_mark.svg');
+  background-image: url('../img/icons/success_mark.svg');
   position: absolute;
   margin: 1rem;
   height: 1rem;
@@ -875,11 +875,11 @@ main {
 }
 
 #fight-bonuses-checkbox:unchecked+label {
-  background-image: url('../images/icons/success_mark.svg');
+  background-image: url('../img/icons/success_mark.svg');
 }
 
 #fight-bonuses-checkbox:checked+label {
-  background-image: url('../images/icons/success_mark_checked.svg');
+  background-image: url('../img/icons/success_mark_checked.svg');
 }
 
 #attacks-and-spellcasting {

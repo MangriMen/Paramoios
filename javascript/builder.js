@@ -260,8 +260,8 @@ function createFeaturesBox(feature, place, holder = null) {
     featuresBox.classList = 'feature-box default-background border-style border-radius default-inner-shadow default-button input-font-style';
 
     let featuresImg = document.createElement('img');
-    // feautresImg.src = 'images/icons/features/' + place[feature];
-    featuresImg.src = 'images/buttons/profile/img_placeholder.jpg';
+    // feautresImg.src = 'img/icons/features/' + place[feature];
+    featuresImg.src = 'img/buttons/profile/img_placeholder.jpg';
 
     let featuresText = document.createElement('span');
     featuresText.textContent = translateTo('language', place[feature]);
@@ -403,7 +403,7 @@ function rollPersonalityField(personality) {
 }
 
 function changeRaceCard() {
-    raceCard.querySelector('#add-info-race-img').src = 'Images/creatures/humanoids/races/' + raceSelect.value + '.png'
+    raceCard.querySelector('#add-info-race-img').src = 'img/creatures/humanoids/races/' + raceSelect.value + '.png'
     raceCard.querySelector('#add-info-race-text').textContent = "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum magni quasi dolores non molestiae quae quia quod, ab eaque dignissimos.";
 }
 
@@ -693,7 +693,7 @@ class Race_ {
             "race",
             "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum magni quasi dolores non molestiae quae quia quod, ab eaque dignissimos.",
             {
-                picture: "Images/creatures/humanoids/races/rc_dwarf.png",
+                picture: "img/creatures/humanoids/races/rc_dwarf.png",
                 animation: true
             });
 
@@ -817,7 +817,7 @@ class Class_ {
             "class",
             "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum magni quasi dolores non molestiae quae quia quod, ab eaque dignissimos.",
             {
-                picture: "Images/creatures/humanoids/races/rc_dwarf.png",
+                picture: "img/creatures/humanoids/races/rc_dwarf.png",
                 animation: true
             });
 
@@ -851,7 +851,7 @@ class Class_ {
         this.classObject = user.class[className];
 
         this.classCard.setText(this.classObject.init.description);
-        this.classCard.setImg("Images/creatures/humanoids/races/" + "rc_dwarf" + ".png"); //className
+        this.classCard.setImg("img/creatures/humanoids/races/" + "rc_dwarf" + ".png"); //className
 
         this.hitDice.innerText = `1d${this.classObject.init.hitDiceCoeffiecient}`;
         this.hitDiceStart.innerText = `${this.classObject.hpStart} + ${translateTo('language', "constitution modifier")}`;
@@ -903,7 +903,7 @@ class Background_ {
             "background",
             "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum magni quasi dolores non molestiae quae quia quod, ab eaque dignissimos.",
             {
-                picture: "Images/creatures/humanoids/races/rc_dwarf.png",
+                picture: "img/creatures/humanoids/races/rc_dwarf.png",
                 animation: true
             });
 

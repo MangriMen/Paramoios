@@ -37,7 +37,7 @@ pip3 install pyinstaller
 
 ### Собрать приложение можно используя pyinstaller через команду
 ```
-Windows: PyInstaller --noconsole --onedir --add-data  "MainWindow.ui;." --add-data "CharGenWindow.ui;." --add-data "default_data/;default_data" --add-data "images/;images" --add-data "fonts/;fonts" --add-data "saves/;saves" main.py
-Linux: pyinstaller --noconsole --onedir --add-data  MainWindow.ui:. --add-data CharGenWindow.ui:. --add-data default_data/:default_data --add-data images/:images --add-data fonts/:fonts --add-data saves/:saves main.py
+Windows: PyInstaller --noconsole --onedir --add-data  "MainWindow.ui;." --add-data "CharGenWindow.ui;." --add-data "default_data/;default_data" --add-data "img/;images" --add-data "fonts/;fonts" --add-data "saves/;saves" main.py
+Linux: pyinstaller --noconsole --onedir --add-data  MainWindow.ui:. --add-data CharGenWindow.ui:. --add-data default_data/:default_data --add-data img/:images --add-data fonts/:fonts --add-data saves/:saves main.py
 ```
 *При этом сборка происходит для той ОС на которой она была запущена

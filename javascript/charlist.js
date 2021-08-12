@@ -260,7 +260,7 @@ function rollDeathSave() {
   console.log('At start | Fails: ' + failsMarkCount + '  Success: ' + successMarkCount);
 
   if (rollResult < 10) {
-    document.getElementById(`fail-mark-${failsMarkCount + 1}`).src = 'images/icons/failures_mark_checked.svg';
+    document.getElementById(`fail-mark-${failsMarkCount + 1}`).src = 'img/icons/failures_mark_checked.svg';
     failsMarkCount += 1;
   } else if (rollResult >= 20) {
     rollDeathSaveClear(true);
@@ -268,7 +268,7 @@ function rollDeathSave() {
     changeHp();
     return;
   } else {
-    document.getElementById(`success-mark-${successMarkCount + 1}`).src = 'images/icons/success_mark_checked.svg';
+    document.getElementById(`success-mark-${successMarkCount + 1}`).src = 'img/icons/success_mark_checked.svg';
     successMarkCount += 1;
   }
 
@@ -291,8 +291,8 @@ function rollDeathSaveClear(isTwenty = false) {
   }
   successMarkCount = 0;
   failsMarkCount = 0;
-  successMarks.forEach(mark => mark.src = 'images/icons/success_mark.svg');
-  failuresMarks.forEach(mark => mark.src = 'images/icons/failures_mark.svg');
+  successMarks.forEach(mark => mark.src = 'img/icons/success_mark.svg');
+  failuresMarks.forEach(mark => mark.src = 'img/icons/failures_mark.svg');
   deathSavesOverlay.style.display = 'none';
 }
 
@@ -321,7 +321,7 @@ function displayItemDialog() {
     return;
   }
   document.getElementById('addition-name').value = null;
-  let pts = "images/items/";
+  let pts = "img/items/";
   let itemsImgSrcs = [pts + "axe.svg", pts + "rope.svg", pts + "shield.svg", pts + "sword.svg", pts + "traveler_pack.svg"];
   let imageSelect = document.getElementById('image-select');
   while (imageSelect.firstChild) {
@@ -417,7 +417,7 @@ function createAdditionalInfo(item) {
   itemAdditionalClose.addEventListener("click", closeAdditionalInfo);
 
   itemAdditionalCloseImg.id = "item-additional-close-img";
-  itemAdditionalCloseImg.src = "images/icons/control_icon/close.svg";
+  itemAdditionalCloseImg.src = "img/icons/control_icon/close.svg";
 
   itemAdditionalClose.appendChild(itemAdditionalCloseImg);
 
@@ -440,9 +440,9 @@ function toggleDiceList() {
   document.getElementById('dice-list-checkbox').checked = !document.getElementById('dice-list-checkbox').checked;
 
   if (document.getElementById('dice-list-checkbox').checked) {
-    mainDiceImg.src = "images/icons/control_icon/close.svg";
+    mainDiceImg.src = "img/icons/control_icon/close.svg";
   } else {
-    mainDiceImg.src = "images/buttons/dices/D20.svg";
+    mainDiceImg.src = "img/buttons/dices/D20.svg";
   }
 }
 

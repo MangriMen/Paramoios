@@ -37,7 +37,7 @@ async function loadCharacters() {
             let avatar = document.createElement('img');
             avatar.alt = 'User avatar';
             avatar.classList = 'avatar border-style border-radius';
-            avatar.src = 'images/buttons/profile/profile_placeholder.png';
+            avatar.src = 'img/buttons/profile/profile_placeholder.png';
 
             let profileAndLevel = document.createElement('div');
             profileAndLevel.classList = 'profile-and-level';
@@ -156,7 +156,7 @@ async function loadCharacters() {
             copperBox.classList = 'currency-box default-background border-style border-radius default-inner-shadow';
 
             let copperImg = document.createElement('img');
-            copperImg.src = 'images/money/copper.svg';
+            copperImg.src = 'img/money/copper.svg';
             copperImg.classList = 'currency-img';
             copperImg.alt = 'copper coin';
 
@@ -174,7 +174,7 @@ async function loadCharacters() {
             silverBox.classList = 'currency-box default-background border-style border-radius default-inner-shadow';
 
             let silverImg = document.createElement('img');
-            silverImg.src = 'images/money/silver.svg';
+            silverImg.src = 'img/money/silver.svg';
             silverImg.classList = 'currency-img';
             silverImg.alt = 'silver coin';
 
@@ -192,7 +192,7 @@ async function loadCharacters() {
             electrumBox.classList = 'currency-box default-background border-style border-radius default-inner-shadow';
 
             let electrumImg = document.createElement('img');
-            electrumImg.src = 'images/money/electrum.svg';
+            electrumImg.src = 'img/money/electrum.svg';
             electrumImg.classList = 'currency-img';
             electrumImg.alt = 'electrum coin';
 
@@ -210,7 +210,7 @@ async function loadCharacters() {
             goldBox.classList = 'currency-box default-background border-style border-radius default-inner-shadow';
 
             let goldImg = document.createElement('img');
-            goldImg.src = 'images/money/gold.svg';
+            goldImg.src = 'img/money/gold.svg';
             goldImg.classList = 'currency-img';
             goldImg.alt = 'gold coin';
 
@@ -228,7 +228,7 @@ async function loadCharacters() {
             platinumBox.classList = 'currency-box default-background border-style border-radius default-inner-shadow';
 
             let platinumImg = document.createElement('img');
-            platinumImg.src = 'images/money/platinum.svg';
+            platinumImg.src = 'img/money/platinum.svg';
             platinumImg.classList = 'currency-img';
             platinumImg.alt = 'platinum coin';
 

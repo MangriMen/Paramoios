@@ -26,7 +26,7 @@ logout.classList = 'user-menu-buttons-down input-font-style default-background b
 logout.href = 'logout.php';
 logout.addEventListener('click', userLogout);
 let logoutImg = document.createElement('img');
-logoutImg.src = 'images/buttons/profile/logout.svg';
+logoutImg.src = 'img/buttons/profile/logout.svg';
 logoutImg.classList = 'link-auth-img user-menu-buttons-down-img';
 logout.appendChild(logoutImg);
 
@@ -37,7 +37,7 @@ userSettings.href = 'user.html';
 let userSettingsImg = document.createElement('img');
 userSettingsImg.id = 'user-settings-img';
 userSettingsImg.classList = 'user-menu-buttons-down-img';
-userSettingsImg.src = 'images/buttons/profile/settings.svg';
+userSettingsImg.src = 'img/buttons/profile/settings.svg';
 userSettings.appendChild(userSettingsImg);
 
 let login = document.createElement('a');
@@ -45,7 +45,7 @@ login.id = 'link-login';
 login.classList = 'user-menu-buttons-down input-font-style default-background border-style';
 login.href = 'login.php';
 let loginImg = document.createElement('img');
-loginImg.src = 'images/buttons/profile/login.svg';
+loginImg.src = 'img/buttons/profile/login.svg';
 loginImg.classList = 'link-auth-img user-menu-buttons-down-img';
 login.appendChild(loginImg);
 
@@ -54,7 +54,7 @@ register.id = 'link-register';
 register.classList = 'user-menu-buttons-down input-font-style default-background border-style';
 register.href = 'form_register.php';
 let registerImg = document.createElement('img');
-registerImg.src = 'images/buttons/profile/register.svg';
+registerImg.src = 'img/buttons/profile/register.svg';
 registerImg.classList = 'link-auth-img user-menu-buttons-down-img';
 register.appendChild(registerImg);
 
