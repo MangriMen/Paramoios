@@ -85,7 +85,7 @@ async function getObjectStore(name, mode) {
 
 async function getDefaultContent() {
     const request = await fetch(
-        "../logged.php",
+        "../php/logged.php",
         {
             method: "POST",
             body: "get-default-content"

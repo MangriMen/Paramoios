@@ -593,7 +593,7 @@
   align-self: center;
   justify-self: left;
   background-color: #82262b;
-  background-image: url("../images/buttons/dices/D6_Top.svg");
+  background-image: url("../img/buttons/dices/D6_Top.svg");
 }
 
 #manually-checkbox-box {
@@ -706,7 +706,7 @@ input:checked+.slider:before {
   height: 1.5rem;
   width: 1.5rem;
   background-color: #82262b;
-  background-image: url("../images/buttons/dices/D6_Top.svg");
+  background-image: url("../img/buttons/dices/D6_Top.svg");
 }
 
 .personality-box {

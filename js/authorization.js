@@ -23,10 +23,10 @@ let img = document.getElementById('user-btn-img');
 let logout = document.createElement('a');
 logout.id = 'link-logout';
 logout.classList = 'user-menu-buttons-down input-font-style default-background border-style';
-logout.href = 'logout.php';
+logout.href = 'php/logout.php';
 logout.addEventListener('click', userLogout);
 let logoutImg = document.createElement('img');
-logoutImg.src = 'images/buttons/profile/logout.svg';
+logoutImg.src = 'img/buttons/profile/logout.svg';
 logoutImg.classList = 'link-auth-img user-menu-buttons-down-img';
 logout.appendChild(logoutImg);
 
@@ -37,7 +37,7 @@ userSettings.href = 'user.html';
 let userSettingsImg = document.createElement('img');
 userSettingsImg.id = 'user-settings-img';
 userSettingsImg.classList = 'user-menu-buttons-down-img';
-userSettingsImg.src = 'images/buttons/profile/settings.svg';
+userSettingsImg.src = 'img/buttons/profile/settings.svg';
 userSettings.appendChild(userSettingsImg);
 
 let login = document.createElement('a');
@@ -45,16 +45,16 @@ login.id = 'link-login';
 login.classList = 'user-menu-buttons-down input-font-style default-background border-style';
 login.href = 'login.php';
 let loginImg = document.createElement('img');
-loginImg.src = 'images/buttons/profile/login.svg';
+loginImg.src = 'img/buttons/profile/login.svg';
 loginImg.classList = 'link-auth-img user-menu-buttons-down-img';
 login.appendChild(loginImg);
 
 let register = document.createElement('a');
 register.id = 'link-register';
 register.classList = 'user-menu-buttons-down input-font-style default-background border-style';
-register.href = 'form_register.php';
+register.href = '../login.php';
 let registerImg = document.createElement('img');
-registerImg.src = 'images/buttons/profile/register.svg';
+registerImg.src = 'img/buttons/profile/register.svg';
 registerImg.classList = 'link-auth-img user-menu-buttons-down-img';
 register.appendChild(registerImg);
 
@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 })
 
 async function getUser() {
-    const request = await fetch('../logged.php', {
+    const request = await fetch('../php/logged.php', {
         method: 'POST',
         body: 'get-user'
     });
@@ -98,7 +98,7 @@ async function getUser() {
 }
 
 async function getLogged() {
-    const request = await fetch('../logged.php', {
+    const request = await fetch('../php/logged.php', {
         method: 'POST',
         body: 'get-logged'
     });
@@ -116,7 +116,7 @@ async function getLogged() {
 }
 
 async function fetchUser() {
-    const request = await fetch('../fetch.php', {
+    const request = await fetch('../php/fetch.php', {
         method: 'POST',
         body: 'fetch-user'
     });

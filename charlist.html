@@ -13,9 +13,9 @@
     <link rel="manifest" href="/manifest.json">
     <meta name="theme-color" content="var(--accent-n-color)">
     <!-- ios support -->
-    <link rel="apple-touch-icon" href="images/icons/app_icon/96x96.png">
+    <link rel="apple-touch-icon" href="img/icons/app_icon/96x96.png">
     <meta name="apple-moblie-web-app-status-bar" content="var(--accent-n-color)">
-    <link rel="shortcut icon" href="images/icons/app_icon/16x16.png" type="image/png">
+    <link rel="shortcut icon" href="img/icons/app_icon/16x16.png" type="image/png">
     <!-- technical -->
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=5, user-scalable=no">
     <style>
@@ -36,7 +36,7 @@
                 <input type="checkbox" id='user-checkbox'>
                 <span id='open-character' class='header-buttons user-menu-buttons input-font-style'>Open character</span>
                 <span id='save-character' class='header-buttons user-menu-buttons input-font-style'>Save character</span>
-                <img id="user-btn-img" class="default-background" alt="User avatar image" src="images/buttons/profile/profile_placeholder.png">
+                <img id="user-btn-img" class="default-background" alt="User avatar image" src="img/buttons/profile/profile_placeholder.png">
             </button>
         </div>
     </header>
@@ -45,7 +45,7 @@
     <main class="border-style border-radius">
         <section id="naming">
             <div id="profile-and-level">
-                <img id="avatar" alt="User avatar" class="border-style border-radius" src="images/buttons/profile/profile_placeholder.png">
+                <img id="avatar" alt="User avatar" class="border-style border-radius" src="img/buttons/profile/profile_placeholder.png">
                 <div id="xp-bar" class="border-style border-radius default-background">
                     <div class="bar-animation">
                         <div id="xp-bar-fill" class="bar-fill xp-color">
@@ -106,30 +106,30 @@
                 <div id="constitution-death-save-checkbox" class="characteristic-not-proficient characteristic-death-save-checkbox border-style"></div>
             </div>
             <button id="main-dice" class="default-button">
-                <img id="main-dice-img" class="d20-svg" alt="Main dice button" src="images/buttons/dices/D20.svg">
+                <img id="main-dice-img" class="d20-svg" alt="Main dice button" src="img/buttons/dices/D20.svg">
             </button>
             <div id="dice-list">
                 <input type="checkbox" id='dice-list-checkbox'>
                 <button id="d20-dice" class="default-button dice-in-list">
-                    <img class="dice-in-list-svg" alt="Main dice button" src="images/buttons/dices/D20.svg">
+                    <img class="dice-in-list-svg" alt="Main dice button" src="img/buttons/dices/D20.svg">
                 </button>
                 <button id="d12-dice" class="default-button dice-in-list">
-                    <img class="dice-in-list-svg" alt="Main dice button" src="images/buttons/dices/D12.svg">
+                    <img class="dice-in-list-svg" alt="Main dice button" src="img/buttons/dices/D12.svg">
                 </button>
                 <button id="d100-dice" class="default-button dice-in-list">
-                    <img class="dice-in-list-svg" alt="Main dice button" src="images/buttons/dices/D100.svg">
+                    <img class="dice-in-list-svg" alt="Main dice button" src="img/buttons/dices/D100.svg">
                 </button>
                 <button id="d10-dice" class="default-button dice-in-list">
-                    <img class="dice-in-list-svg" alt="Main dice button" src="images/buttons/dices/D10.svg">
+                    <img class="dice-in-list-svg" alt="Main dice button" src="img/buttons/dices/D10.svg">
                 </button>
                 <button id="d8-dice" class="default-button dice-in-list">
-                    <img class="dice-in-list-svg" alt="Main dice button" src="images/buttons/dices/D8.svg">
+                    <img class="dice-in-list-svg" alt="Main dice button" src="img/buttons/dices/D8.svg">
                 </button>
                 <button id="d6-dice" class="default-button dice-in-list">
-                    <img class="dice-in-list-svg" alt="Main dice button" src="images/buttons/dices/D6.svg">
+                    <img class="dice-in-list-svg" alt="Main dice button" src="img/buttons/dices/D6.svg">
                 </button>
                 <button id="d4-dice" class="default-button dice-in-list">
-                    <img class="dice-in-list-svg" alt="Main dice button" src="images/buttons/dices/D4.svg">
+                    <img class="dice-in-list-svg" alt="Main dice button" src="img/buttons/dices/D4.svg">
                 </button>
             </div>
             <div id="intelligence" class="characteristic">
@@ -251,20 +251,20 @@
                 <div id='fight-bonuses'>
                     <div id='fight-bonuses-armor'>
                         <input class='fight-bonuses-value input-font-style' type="number" onKeyPress="if(this.value.length==2) return false;">
-                        <img class="armor-svg default-shadow aiis-svg img-svg" alt="Armor icon" src="images/icons/armor.svg">
+                        <img class="armor-svg default-shadow aiis-svg img-svg" alt="Armor icon" src="img/icons/armor.svg">
                     </div>
                     <div id='fight-bonuses-initiative'>
                         <input class='fight-bonuses-value input-font-style' type="number" onKeyPress="if(this.value.length==2) return false;">
-                        <img class="initiative-svg default-shadow aiis-svg img-svg" alt="Initiative icon" src="images/icons/initiative.svg">
+                        <img class="initiative-svg default-shadow aiis-svg img-svg" alt="Initiative icon" src="img/icons/initiative.svg">
                     </div>
                     <div id='fight-bonuses-inspiration'>
                         <input id='fight-bonuses-checkbox' type="checkbox" onKeyPress="if(this.value.length==2) return false;">
-                        <label id='fight-bonuses-checkbox-lable' for='fight-bonuses-checkbox' class='death-saves-mark' alt="Success mark unchecked" src="images/icons/success_mark.svg"></label>
-                        <img class="inspiration-svg default-shadow aiis-svg img-svg" alt="Inspiration icon" src="images/icons/inspiration.svg">
+                        <label id='fight-bonuses-checkbox-lable' for='fight-bonuses-checkbox' class='death-saves-mark' alt="Success mark unchecked" src="img/icons/success_mark.svg"></label>
+                        <img class="inspiration-svg default-shadow aiis-svg img-svg" alt="Inspiration icon" src="img/icons/inspiration.svg">
                     </div>
                     <div id='fight-bonuses-speed'>
                         <input class='fight-bonuses-value input-font-style' type="number" onKeyPress="if(this.value.length==2) return false;">
-                        <img class="speed-svg default-shadow aiis-svg img-svg" alt="Speed icon" src="images/icons/speed.svg">
+                        <img class="speed-svg default-shadow aiis-svg img-svg" alt="Speed icon" src="img/icons/speed.svg">
                     </div>
                 </div>
                 <div id="attacks-and-spellcasting" class="default-background border-style border-radius default-shadow">
@@ -298,27 +298,27 @@
                     <span id="equipment-label" class="block-label default-background border-style border-radius default-shadow label-auto-width">Снаряжение</span>
                     <div id="money-box">
                         <div id="copper-box" class="currency-box default-background border-style border-radius default-inner-shadow">
-                            <img src="images/money/copper.svg" class="currency-img" alt="">
+                            <img src="img/money/copper.svg" class="currency-img" alt="">
                             <input type="number" onKeyPress="if(this.value.length==6) return false;" id="copper" class="number-input currency-value border-style border-radius default-hover-active input-font-style" value="200">
                         </div>
                         <div id="silver-box" class="currency-box default-background border-style border-radius default-inner-shadow">
-                            <img src="images/money/silver.svg" class="currency-img" alt="">
+                            <img src="img/money/silver.svg" class="currency-img" alt="">
                             <input type="number" onKeyPress="if(this.value.length==6) return false;" id="silver" class="number-input currency-value border-style border-radius default-hover-active input-font-style" value="10">
                         </div>
                         <div id="electrum-box" class="currency-box default-background border-style border-radius default-inner-shadow">
-                            <img src="images/money/electrum.svg" class="currency-img" alt="">
+                            <img src="img/money/electrum.svg" class="currency-img" alt="">
                             <input type="number" onKeyPress="if(this.value.length==6) return false;" id="electrum" class="number-input currency-value border-style border-radius default-hover-active input-font-style" value="0">
                         </div>
                         <div id="gold-box" class="currency-box default-background border-style border-radius default-inner-shadow">
-                            <img src="images/money/gold.svg" class="currency-img" alt="">
+                            <img src="img/money/gold.svg" class="currency-img" alt="">
                             <input type="number" onKeyPress="if(this.value.length==6) return false;" id="gold" class="number-input currency-value border-style border-radius default-hover-active input-font-style" value="5">
                         </div>
                         <div id="platinum-box" class="currency-box default-background border-style border-radius default-inner-shadow">
-                            <img src="images/money/platinum.svg" class="currency-img" alt="">
+                            <img src="img/money/platinum.svg" class="currency-img" alt="">
                             <input type="number" onKeyPress="if(this.value.length==6) return false;" id="platinum" class="number-input currency-value border-style border-radius default-hover-active input-font-style" value="0">
                         </div>
                     </div>
-                    <button type="button" name="Add new item to inventory" id="new-item" class="default-background border-style border-radius default-hover-active default-button default-shadow"><img class="new-item-img" src="images/icons/control_icon/new_item.svg" alt="New item cross"></button>
+                    <button type="button" name="Add new item to inventory" id="new-item" class="default-background border-style border-radius default-hover-active default-button default-shadow"><img class="new-item-img" src="img/icons/control_icon/new_item.svg" alt="New item cross"></button>
                     <div id='equipment-flexible' class="default-textarea-scrollbar default-background border-style border-radius default-shadow">
                     </div>
                 </div>
@@ -367,17 +367,17 @@
                             <div id='success' class="death-saves-state default-background border-style border-radius default-inner-shadow">
                                 <span id='successes-text'>Успехи</span>
                                 <div class="death-saves-marks">
-                                    <img id='success-mark-1' class='death-saves-mark' alt="Success mark unchecked" src="images/icons/success_mark.svg">
-                                    <img id='success-mark-2' class='death-saves-mark' alt="Success mark unchecked" src="images/icons/success_mark.svg">
-                                    <img id='success-mark-3' class='death-saves-mark' alt="Success mark unchecked" src="images/icons/success_mark.svg">
+                                    <img id='success-mark-1' class='death-saves-mark' alt="Success mark unchecked" src="img/icons/success_mark.svg">
+                                    <img id='success-mark-2' class='death-saves-mark' alt="Success mark unchecked" src="img/icons/success_mark.svg">
+                                    <img id='success-mark-3' class='death-saves-mark' alt="Success mark unchecked" src="img/icons/success_mark.svg">
                                 </div>
                             </div>
                             <div id='fails' class="death-saves-state default-background border-style border-radius default-inner-shadow">
                                 <span id='fails-text'>Провалы</span>
                                 <div class="death-saves-marks">
-                                    <img id='fail-mark-1' class='death-saves-mark' alt="Failure mark unchecked" src="images/icons/failures_mark.svg">
-                                    <img id='fail-mark-2' class='death-saves-mark' alt="Failure mark unchecked" src="images/icons/failures_mark.svg">
-                                    <img id='fail-mark-3' class='death-saves-mark' alt="Failure mark unchecked" src="images/icons/failures_mark.svg">
+                                    <img id='fail-mark-1' class='death-saves-mark' alt="Failure mark unchecked" src="img/icons/failures_mark.svg">
+                                    <img id='fail-mark-2' class='death-saves-mark' alt="Failure mark unchecked" src="img/icons/failures_mark.svg">
+                                    <img id='fail-mark-3' class='death-saves-mark' alt="Failure mark unchecked" src="img/icons/failures_mark.svg">
                                 </div>
                             </div>
                             <div id='death-saves-interactive'>
@@ -385,7 +385,7 @@
 
                                 </div>
                                 <button id="death-saves-dice" class="default-button death-saves-dice-svg">
-                                    <img alt="Main dice button" src="images/buttons/dices/D20.svg">
+                                    <img alt="Main dice button" src="img/buttons/dices/D20.svg">
                                 </button>
                             </div>
                         </div>
@@ -414,7 +414,7 @@
                 <span id="other-proficiencies-and-languages-label" class="block-label default-background border-style border-radius default-shadow label-auto-width">Другие умения и языки</span>
                 <div id="other-proficiencies-and-languages-box">
                     <div id='other-proficiencies-and-languages-flexible' class="default-textarea-scrollbar default-inner-shadow border-style border-radius default-shadow"></div>
-                    <button type="button" name="Add new proficiency or language to list" id="new-proficiency" class="default-background border-style border-radius default-hover-active default-button default-shadow"><img class="new-item-img" src="images/icons/control_icon/new_item.svg" alt="New feature cross"></button>
+                    <button type="button" name="Add new proficiency or language to list" id="new-proficiency" class="default-background border-style border-radius default-hover-active default-button default-shadow"><img class="new-item-img" src="img/icons/control_icon/new_item.svg" alt="New feature cross"></button>
                 </div>
             </div>
             <div id="features-and-traits" class="default-background border-style border-radius default-shadow">
@@ -426,19 +426,19 @@
                         <div id='fundamental-feature-2' class='fundamental-features border-style border-radius default-inner-shadow'></div>
                     </div>
                     <div id='features-and-traits-flexible' class="default-textarea-scrollbar default-inner-shadow border-style border-radius default-shadow"></div>
-                    <button type="button" name="Add new feature to list" id="new-feature" class="default-background border-style border-radius default-hover-active default-button default-shadow"><img class="new-item-img" src="images/icons/control_icon/new_item.svg" alt="New feature cross"></button>
+                    <button type="button" name="Add new feature to list" id="new-feature" class="default-background border-style border-radius default-hover-active default-button default-shadow"><img class="new-item-img" src="img/icons/control_icon/new_item.svg" alt="New feature cross"></button>
                 </div>
             </div>
         </section>
     </main>
     <footer>
     </footer>
-    <script src="javascript/app.js"></script>
-    <script src="javascript/database.js"></script>
-    <script src="javascript/utils.js"></script>
-    <script src="javascript/authorization.js"></script>
-    <script src="javascript/charlist.js"></script>
-    <script src="javascript/svg_fix.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/database.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/authorization.js"></script>
+    <script src="js/charlist.js"></script>
+    <script src="js/svg_fix.js"></script>
 </body>
 
 </html>
