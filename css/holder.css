@@ -34,6 +34,7 @@ main {
   width: 40vw;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .main-text {
@@ -152,7 +153,7 @@ main {
 @media (max-width: 570px) {
   #stand-by {
     box-sizing: border-box;
-    display: block;
+    display: flex;
     position: static;
     border: 6px solid #e9c996;
     box-shadow: 0 0 20px 2px #212121;
@@ -162,7 +163,6 @@ main {
     height: 12vh;
     width: auto;
     font-size: 2.5em;
-    line-height: 10vh;
   }
   main {
     display: flex;
@@ -188,7 +188,6 @@ main {
     font-size: 2em;
     height: 12vh;
     border-bottom: 4px solid #e9c996;
-    line-height: 11vh;
   }
   .main-text {
     font-size: 0.65em;
@@ -199,9 +198,20 @@ main {
   }
 }
 
-@media (max-width: 280px) {
+@media (max-width: 170px) {
   #stand-by {
-    height: 15vh;
-    line-height: 7vh;
+    height: 16vh;
+  }
+}
+
+@media (max-height: 250px) {
+  #stand-by {
+    height: 26vh;
+  }
+}
+
+@media (max-height: 200px) {
+  #stand-by {
+    height: 34vh;
   }
 }
