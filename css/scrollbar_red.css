@@ -1,9 +1,9 @@
 ::-webkit-scrollbar, ::-webkit-scrollbar-corner {
-    background: url("../img/background/backmenu_red.jpg");
-  }
+  background: url("../img/background/backmenu_red.jpg");
+}
   
-  ::-webkit-scrollbar-thumb,
-  ::-webkit-scrollbar-thumb:hover,
-  ::-webkit-scrollbar-thumb:active {
-    border-color: var(--accent-n-color);
-  }
+::-webkit-scrollbar-thumb,
+::-webkit-scrollbar-thumb:hover,
+::-webkit-scrollbar-thumb:active {
+  border-color: var(--accent-n-color);
+}
