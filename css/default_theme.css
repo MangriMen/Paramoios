@@ -115,6 +115,12 @@ img, button {
   cursor: pointer;
 }
 
+.default-button:disabled,
+.default-button:disabled:hover {
+  background-color: var(--bg-d-color);
+  border-color: gray;
+}
+
 .default-background {
   background-color: var(--bg-n-color);
 }
