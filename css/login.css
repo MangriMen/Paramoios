@@ -74,6 +74,10 @@ main {
   margin-bottom: 1rem;
 }
 
+#block_for_messages {
+  text-align: center;
+}
+
 .mesage_error {
   display: block;
   font-size: 1rem !important;
