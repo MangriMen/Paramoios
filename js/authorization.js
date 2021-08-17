@@ -1,14 +1,12 @@
 'use strict'
 
-checkLogin();
-
 async function checkLogin() {
     await getLogged();
 
     if (localStorage.loggedUser) {
     }
     else {
-        location.href = "/login.php";
+        location.href = "/login.html";
     }
 }
 
@@ -16,67 +14,69 @@ if (getCookie('isMetric') == undefined) {
     setCookie('isMetric', true, { expires: getExpires() });
 }
 
-document.getElementById('user-btn').addEventListener('click', function (e) { toggleUserMenu(e); });
+if (document.getElementById('user-btn')) {
+    document.getElementById('user-btn').addEventListener('click', function (e) { toggleUserMenu(e); });
 
-let img = document.getElementById('user-btn-img');
+    let img = document.getElementById('user-btn-img');
 
-let logout = document.createElement('a');
-logout.id = 'link-logout';
-logout.classList = 'user-menu-buttons-down input-font-style default-background border-style';
-logout.href = 'php/logout.php';
-logout.addEventListener('click', userLogout);
-let logoutImg = document.createElement('img');
-logoutImg.src = 'img/buttons/profile/logout.svg';
-logoutImg.classList = 'link-auth-img user-menu-buttons-down-img';
-logout.appendChild(logoutImg);
+    let logout = document.createElement('a');
+    logout.id = 'link-logout';
+    logout.classList = 'user-menu-buttons-down input-font-style default-background border-style';
+    logout.href = 'php/logout.php';
+    logout.addEventListener('click', userLogout);
+    let logoutImg = document.createElement('img');
+    logoutImg.src = 'img/buttons/profile/logout.svg';
+    logoutImg.classList = 'link-auth-img user-menu-buttons-down-img';
+    logout.appendChild(logoutImg);
 
-let userSettings = document.createElement('a');
-userSettings.id = 'user-settings';
-userSettings.classList = 'user-menu-buttons-down default-background border-style';
-userSettings.href = 'user.html';
-let userSettingsImg = document.createElement('img');
-userSettingsImg.id = 'user-settings-img';
-userSettingsImg.classList = 'user-menu-buttons-down-img';
-userSettingsImg.src = 'img/buttons/profile/settings.svg';
-userSettings.appendChild(userSettingsImg);
+    let userSettings = document.createElement('a');
+    userSettings.id = 'user-settings';
+    userSettings.classList = 'user-menu-buttons-down default-background border-style';
+    userSettings.href = 'user.html';
+    let userSettingsImg = document.createElement('img');
+    userSettingsImg.id = 'user-settings-img';
+    userSettingsImg.classList = 'user-menu-buttons-down-img';
+    userSettingsImg.src = 'img/buttons/profile/settings.svg';
+    userSettings.appendChild(userSettingsImg);
 
-let login = document.createElement('a');
-login.id = 'link-login';
-login.classList = 'user-menu-buttons-down input-font-style default-background border-style';
-login.href = 'login.php';
-let loginImg = document.createElement('img');
-loginImg.src = 'img/buttons/profile/login.svg';
-loginImg.classList = 'link-auth-img user-menu-buttons-down-img';
-login.appendChild(loginImg);
+    let login = document.createElement('a');
+    login.id = 'link-login';
+    login.classList = 'user-menu-buttons-down input-font-style default-background border-style';
+    login.href = '../login.html';
+    let loginImg = document.createElement('img');
+    loginImg.src = 'img/buttons/profile/login.svg';
+    loginImg.classList = 'link-auth-img user-menu-buttons-down-img';
+    login.appendChild(loginImg);
 
-let register = document.createElement('a');
-register.id = 'link-register';
-register.classList = 'user-menu-buttons-down input-font-style default-background border-style';
-register.href = '../login.php';
-let registerImg = document.createElement('img');
-registerImg.src = 'img/buttons/profile/register.svg';
-registerImg.classList = 'link-auth-img user-menu-buttons-down-img';
-register.appendChild(registerImg);
+    let register = document.createElement('a');
+    register.id = 'link-register';
+    register.classList = 'user-menu-buttons-down input-font-style default-background border-style';
+    register.href = '../login.html';
+    let registerImg = document.createElement('img');
+    registerImg.src = 'img/buttons/profile/register.svg';
+    registerImg.classList = 'link-auth-img user-menu-buttons-down-img';
+    register.appendChild(registerImg);
 
-document.addEventListener("DOMContentLoaded", async function () {
-    await getLogged();
+    document.addEventListener("DOMContentLoaded", async function () {
+        await getLogged();
 
-    if (localStorage.loggedUser) {
-        user = JSON.parse(localStorage[localStorage.loggedUser]);
-        userJSONFix();
+        if (localStorage.loggedUser) {
+            user = JSON.parse(localStorage[localStorage.loggedUser]);
+            userJSONFix();
 
-        img.src = user.avatar;
-        if (window.location.pathname == '/user.html') {
-            document.getElementById('player-name').textContent = 'Имя: ' + user.name;
-            document.getElementById('player-email').textContent = 'Email: ' + user.email;
+            img.src = user.avatar;
+            if (window.location.pathname == '/user.html') {
+                document.getElementById('player-name').textContent = 'Имя: ' + user.name;
+                document.getElementById('player-email').textContent = 'Email: ' + user.email;
+            }
+            document.getElementById('user-checkbox').after(userSettings);
+            document.getElementById('user-checkbox').after(logout);
+        } else {
+            document.getElementById('user-checkbox').after(login);
+            document.getElementById('user-checkbox').after(register);
         }
-        document.getElementById('user-checkbox').after(userSettings);
-        document.getElementById('user-checkbox').after(logout);
-    } else {
-        document.getElementById('user-checkbox').after(login);
-        document.getElementById('user-checkbox').after(register);
-    }
-})
+    })
+}
 
 async function getUser() {
     const request = await fetch('../php/logged.php', {

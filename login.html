@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            "use strict";
+            //================ Проверка email ==================
+
+            //регулярное выражение для проверки email
+            var pattern = /^[a-z0-9][a-z0-9\._-]*[a-z0-9]*@([a-z0-9]+([a-z0-9-]*[a-z0-9]+)*\.)+[a-z]+/i;
+            var mail = $('input[name=email]');
+
+            mail.blur(function () {
+                if (mail.val() != '') {
+
+                    // Проверяем, если введенный email соответствует регулярному выражению
+                    if (mail.val().search(pattern) == 0) {
+                        // Убираем сообщение об ошибке
+                        $('#valid_email_message').text('');
+
+                        //Активируем кнопку отправки
+                        $('input[type=submit]').attr('disabled', false);
+                    } else {
+                        //Выводим сообщение об ошибке
+                        $('#valid_email_message').text('Неправильный Email');
+
+                        // Дезактивируем кнопку отправки
+                        $('input[type=submit]').attr('disabled', true);
+                    }
+                } else {
+                    $('#valid_email_message').text('Введите Ваш email');
+                }
+            });
+
+            //================ Проверка длины пароля ==================
+            var password = $('input[name=password]');
+
+            password.blur(function () {
+                if (password.val() != '') {
+
+                    //Если длина введенного пароля меньше шести символов, то выводим сообщение об ошибке
+                    if (password.val().length < 6) {
+                        //Выводим сообщение об ошибке
+                        $('#valid_password_message').text('Минимальная длина пароля 6 символов');
+
+                        // Дезактивируем кнопку отправки
+                        $('input[type=submit]').attr('disabled', true);
+
+                    } else {
+                        // Убираем сообщение об ошибке
+                        $('#valid_password_message').text('');
+
+                        //Активируем кнопку отправки
+                        $('input[type=submit]').attr('disabled', false);
+                    }
+                } else {
+                    $('#valid_password_message').text('Введите пароль');
+                }
+            });
+        });
+    </script>
+    <link rel="stylesheet" type="text/css" href="css/general_styles.css">
+    <link rel="stylesheet" type="text/css" href="css/default_theme.css">
+    <link rel="stylesheet" type="text/css" href="css/scrollbar_red.css">
+    <link rel="stylesheet" type="text/css" href="css/login.css">
+    <meta name="description" content="DnD5CharlistI - простой способ создать персонажа для DnD">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=5">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#681e22">
+    <!-- ios support -->
+    <link rel="apple-touch-icon" href="img/icons/app_icon/96x96.png">
+    <meta name="apple-moblie-web-app-status-bar" content="#681e22">
+    <link rel="shortcut icon" href="/img/icons/app_icon/16x16.png" type="image/png">
+    <style>
+        img[alt="www.000webhost.com"] {
+            display: none
+        }
+    </style>
+    <title>DnD5CharlistI</title>
+</head>
+
+<body>
+    <main>
+        <div id="auth-menu">
+            <span id='welcome'>Добро<br>пожаловать</span>
+            <div id="block_for_messages">Регистрация прошла успешно!!! Теперь Вы можете авторизоваться используя Ваш логин и пароль.</div>
+            <div id="authorized">
+                <h2>Вы уже авторизованы</h2>
+            </div>
+            <div id='auth'>
+                <div id="form_auth">
+                    <h2 id='auth-title' class='auth-title'>Авторизация</h2>
+                    <form action="php/auth.php" method="post" name="form_auth">
+                        <table>
+
+                            <tbody>
+                                <tr style="height: 95px;">
+                                    <td valign="top" class='auth-text'> Email: </td>
+                                    <td valign="top">
+                                        <input type="email" name="email" placeholder=" " required="required"
+                                            class='auth-input default-shadow default-hover-active default-button input-font-style'><br>
+                                        <span id="valid_email_message" class="mesage_error"></span>
+                                    </td>
+                                </tr>
+
+                                <tr style="height: 95px;">
+                                    <td valign="top" class='auth-text'> Пароль: </td>
+                                    <td valign="top">
+                                        <input type="password" name="password" placeholder="Минимум 6 символов"
+                                            required="required"
+                                            class='auth-input default-shadow default-hover-active default-button input-font-style'><br>
+                                        <span id="valid_password_message" class="mesage_error"></span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="2">
+                                        <input id='submit-btn' type="submit" name="btn_submit_auth" value="Войти"
+                                            class='auth-input default-shadow default-hover-active default-button input-font-style'>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            <div id='registration'>
+                <div id="form_register">
+                    <h2 id='registration-title' class='auth-title'>Регистрация</h2>
+                    <form action="php/register.php" method="post" name="form_register">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td valign="top" class='auth-text'> Имя: </td>
+                                    <td td valign="top">
+                                        <input type="text" name="name" placeholder=" " required="required"
+                                            class='auth-input default-shadow default-hover-active default-button input-font-style'>
+                                    </td>
+                                </tr>
+                                <tr style="height: 95px;">
+                                    <td valign="top" class='auth-text'> Email: </td>
+                                    <td valign="top">
+                                        <input type="email" name="email" placeholder=" " required="required"
+                                            class='auth-input default-shadow default-hover-active default-button input-font-style'><br>
+                                        <span id="valid_email_message" class="mesage_error"></span>
+                                    </td>
+                                </tr>
+                                <tr style="height: 95px;">
+                                    <td valign="top" class='auth-text'> Пароль: </td>
+                                    <td valign="top">
+                                        <input type="password" name="password" placeholder="минимум 6 символов"
+                                            required="required"
+                                            class='auth-input default-shadow default-hover-active default-button input-font-style'><br>
+                                        <span id="valid_password_message" class="mesage_error"></span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="2" id='captcha'>
+                                        <div>
+                                            <span> Введите капчу: </span><br>
+                                            <img class='auth-input' src="php/captcha.php" alt="Изображение капчи"><br>
+                                            <input type="text" name="captcha" placeholder="Проверочный код"
+                                                class='auth-input default-shadow default-hover-active default-button input-font-style'>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="2">
+                                        <input type="submit" name="btn_submit_register" value="Зарегистрироватся!"
+                                            class='auth-input default-shadow default-hover-active default-button input-font-style'>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <section id="message">
+            <span class="main-text">
+                <p class="hello text-black-shadow">Hello there!</p>
+                <p class="hello russian text-black-shadow"> Привет!</p>
+                <p class="text-black-shadow">We are the DnD5CharlistI team - a bunch of people with a dream of making
+                    truly comfortable and
+                    unique character list for worldwide-famous game "Dungeons and Dragons",
+                    and possibly bring it closer to the web.</p>
+
+
+                <p class="russian text-black-shadow">Мы - команда DnD5CharlistI - группа людей, мечтающих сделать
+                    действительно удобный и
+                    уникальный лист персонажа для всемирно известной игры "Dungeons and Dragons",
+                    и, возможно, сделать шаг к упрощению её онлайн-компаний.</p>
+                <br>
+                <p class="text-black-shadow">Our version of charlist is in develop right now, being re-worked and
+                    polished. And that's what we alerady did:</p>
+                <p class="russian text-black-shadow">Наша версия листа персонажа сейчас разрабатывается и всячески
+                    полируется. И вот что мы уже успели сделать:</p>
+
+                <ol class="things-list text-black-shadow">
+                    <li>All main characteristics of a character were reorganised and got a fresh look
+                        <div class="russian russian-right">Все основные характеристики персонажа получили новое
+                            расположение и свежий образ</div>
+                    </li>
+                    <li>Visually-new inventory table was made
+                        <div class="russian russian-right">Основан фундамент для визуально новой таблицы инвентаря</div>
+                    </li>
+                    <li>Created an opportunity of account integration
+                        <div class="russian russian-right">Создана возможность интеграции информации аккаунта в лист
+                            персонажа</div>
+                    </li>
+                    <li>New and handy "roll-a-dice" button. Now you can blame imperfect digital RNG.
+                        <div class="russian russian-right">Удобная кнопка прокидывания кубиков. Теперь вините цифровой
+                            псевдорандом.</div>
+                    </li>
+                    <li>Added support of different color themes
+                        <div class="russian russian-right">Создана возможность поддержки различных цветовых схем</div>
+                    </li>
+                    <br>
+                    <span>And so on...
+                        <div class="russian russian-right">И так далее...</div>
+                    </span>
+                </ol>
+                <br>
+                <br>
+                <p class="text-black-shadow">Consider supporting us now to get <span
+                        class="absolutely-nothing">absolutely nothing</span>.
+                    Yea, you read it right. You can donate and prey its not a scam, or trust us and get something when
+                    it'll be finished. Just make sure we'll be able to identify you later.</p>
+                <p class="text-black-shadow russian">Поддержав нас сейчас, вы можете получить ваше личное <span
+                        class="absolutely-nothing"> абсолютное ничего</span>.
+                    Да, вы всё правильно поняли. Вы можете задонатить и надеяться что это не мошенничество, а можете
+                    поверить нам и получить что-то когда мы закончим. Просто удостоверьтесь, что мы сможем
+                    идентифицировать вас позже.</p>
+                <div class="donations text-black-shadow">
+                    <a rel=”noreferrer” href="https://www.donationalerts.com/r/mangrimen" target="_blank"><img
+                            class="logo" alt="Donation Alerts" src="img/logo/DA_Alert_White.svg"></a>
+                </div>
+            </span>
+        </section>
+    </main>
+    <script src="js/app.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/authorization.js"></script>
+    <script src="js/svg_fix.js"></script>
+    <script src="js/login.js"></script>
+</body>
+
+</html>
