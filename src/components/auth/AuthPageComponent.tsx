@@ -52,6 +52,8 @@ function AuthPageComponent() {
             padding: "0 2rem",
             flexBasis: "42%",
             boxSizing: "border-box",
+            overflowY: "auto",
+            overflowX: "hidden",
           }}
         >
           <Typography
@@ -69,24 +71,11 @@ function AuthPageComponent() {
           >
             {t("welcome")}
           </Typography>
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              height: "100%",
-              position: {
-                xs: "",
-                md: "absolute",
-              },
-            }}
-          >
-            {isLogin ? (
-              <LoginComponent changeComponentType={changeComponentType} />
-            ) : (
-              <RegisterComponent changeComponentType={changeComponentType} />
-            )}
-          </Box>
+          {isLogin ? (
+            <LoginComponent changeComponentType={changeComponentType} />
+          ) : (
+            <RegisterComponent changeComponentType={changeComponentType} />
+          )}
         </Box>
         <Box
           sx={{
