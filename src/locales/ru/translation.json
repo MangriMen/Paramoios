@@ -1,0 +1,14 @@
+{
+  "auth": {
+    "welcome": "Добро пожаловать",
+    "authorize": "Авторизация",
+    "register": "Регистрация",
+    "logIn": "Войти",
+    "signUp": "Зарегестрироваться",
+    "orRegister": "или регистрация?",
+    "orLogin": "или авторизация?",
+    "usernamePlaceholder": "Имя",
+    "emailPlaceholder": "Email",
+    "passwordPlaceholder": "Пароль"
+  }
+}
