@@ -28,7 +28,7 @@ function LoginComponent({ changeComponentType }: any) {
   const auth = getAuth();
 
   const [formData, setFormData] = useState({
-    username: "",
+    email: "",
     password: "",
   });
 
@@ -41,6 +41,12 @@ function LoginComponent({ changeComponentType }: any) {
 
   const handlerSubmit = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
+    dispatch(
+      authActions.login({
+        email: formData.email,
+        password: formData.password,
+      })
+    );
   };
 
   const tempInputStyle = {
@@ -113,13 +119,13 @@ function LoginComponent({ changeComponentType }: any) {
             margin={"normal"}
             required
             fullWidth
-            id={"username"}
-            label={t("usernamePlaceholder")}
+            id={"email"}
+            label={t("emailPlaceholder")}
             InputLabelProps={tempInputLabelStyle}
-            name={"username"}
-            autoComplete={"username"}
+            name={"email"}
+            autoComplete={"email"}
             autoFocus
-            value={formData.username}
+            value={formData.email}
             onChange={handlerChange}
             variant={"outlined"}
             color="secondary"
@@ -146,29 +152,6 @@ function LoginComponent({ changeComponentType }: any) {
             fullWidth
             variant={"contained"}
             sx={{ mt: 3, mb: 2, fontSize: "1.1rem" }}
-            onClick={
-              () =>
-                signInWithEmailAndPassword(
-                  auth,
-                  formData.username,
-                  formData.password
-                )
-                  .then((userCredential) => {
-                    const user = userCredential.user;
-                    navigate("/user");
-                  })
-                  .catch((error) => {
-                    const errorCode = error.code;
-                    const errorMessage = error.message;
-                    console.log("[", errorCode, "] ", errorMessage);
-                  })
-              // dispatch(
-              //   authActions.login({
-              //     username: formData.username,
-              //     password: formData.password,
-              //   })
-              // )
-            }
           >
             {t("logIn")}
           </Button>

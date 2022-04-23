@@ -19,6 +19,8 @@ import { useNavigate } from "react-router-dom";
 import { getAuth, signOut } from "firebase/auth";
 // import { useTranslation } from "react-i18next";
 import "helpers/firebase";
+import { useDispatch } from "react-redux";
+import { authActions } from "ducks/auth/actions";
 
 interface IUserMenuItem {
   name: string;
@@ -31,6 +33,8 @@ function NavbarComponent() {
   const theme = useTheme();
 
   const auth = getAuth();
+
+  const dispatch = useDispatch();
 
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
@@ -58,13 +62,7 @@ function NavbarComponent() {
       icon: <LogoutIcon sx={{ color: "#ffffff" }} />,
       onClick: () => {
         handleCloseUserMenu();
-        signOut(auth)
-          .then(() => {
-            navigate("/auth");
-          })
-          .catch((error) => {
-            alert("Error when sign out");
-          });
+        dispatch(authActions.logout());
       },
     },
   ];
