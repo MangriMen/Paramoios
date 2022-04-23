@@ -1,10 +1,8 @@
+import { Route, Routes } from "react-router";
 import NavbarComponent from "./NavbarComponent";
 import MainPageComponent from "./MainPageComponent";
-import { Route, Routes } from "react-router";
-import UserComponent from "./UserComponent";
-import UserDisplay from "./UserDisplay";
-import LoginComponent from "./auth/LoginComponent";
 import AuthPageComponent from "./auth/AuthPageComponent";
+import UserPageComponent from "./user/UserPageComponent";
 
 function AppContainer() {
   return (
@@ -24,9 +22,8 @@ function AppContainer() {
           path="/user"
           element={
             <>
-              <LoginComponent />
-              <UserComponent />
-              <UserDisplay />
+              <NavbarComponent />
+              <UserPageComponent />
             </>
           }
         ></Route>

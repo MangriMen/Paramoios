@@ -5,6 +5,7 @@ import App from "components/App";
 import "locales";
 import { Provider } from "react-redux";
 import { store } from "store";
+import "helpers/firebase.ts";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

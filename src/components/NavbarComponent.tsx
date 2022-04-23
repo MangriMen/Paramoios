@@ -8,6 +8,7 @@ import {
   MenuItem,
   Toolbar,
   Tooltip,
+  Link,
   Typography,
   useTheme,
 } from "@mui/material";
@@ -15,7 +16,9 @@ import { useState } from "react";
 import PersonIcon from "@mui/icons-material/Person";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router-dom";
+import { getAuth, signOut } from "firebase/auth";
 // import { useTranslation } from "react-i18next";
+import "helpers/firebase";
 
 interface IUserMenuItem {
   name: string;
@@ -26,6 +29,9 @@ interface IUserMenuItem {
 function NavbarComponent() {
   //   const { t } = useTranslation("translation");
   const theme = useTheme();
+
+  const auth = getAuth();
+
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -52,7 +58,13 @@ function NavbarComponent() {
       icon: <LogoutIcon sx={{ color: "#ffffff" }} />,
       onClick: () => {
         handleCloseUserMenu();
-        alert("logout");
+        signOut(auth)
+          .then(() => {
+            navigate("/auth");
+          })
+          .catch((error) => {
+            alert("Error when sign out");
+          });
       },
     },
   ];
@@ -71,29 +83,37 @@ function NavbarComponent() {
             justifyContent: "space-between",
           }}
         >
-          <Typography
-            sx={{ userSelect: "none", cursor: "" }}
+          <Link
+            component="button"
+            sx={{ color: "#FFFFFF", userSelect: "none", cursor: "" }}
             fontSize="1rem"
             fontWeight="500"
+            variant="button"
+            underline="none"
+            onClick={() => navigate("/")}
           >
             Paramoios
-          </Typography>
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
+          </Link>
+          <Box zIndex="100" sx={{ flexGrow: 0 }}>
+            <Tooltip
+              sx={{
+                mt: {
+                  sm: "1.6rem",
+                  lg: "1.6rem",
+                },
+              }}
+              title="Open settings"
+            >
               <IconButton onClick={handleOpenUserMenu}>
                 <Avatar
                   sx={{
-                    mt: {
-                      sm: "1.6rem",
-                      lg: "1.6rem",
-                    },
                     width: "48px",
                     height: "48px",
                     border: "4px solid",
                     borderColor: theme.palette.primary.main,
                   }}
                 >
-                  Pa
+                  {auth.currentUser?.displayName}
                 </Avatar>
               </IconButton>
             </Tooltip>

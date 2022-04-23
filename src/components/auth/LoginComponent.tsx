@@ -12,6 +12,9 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { authActions } from "ducks/auth/actions";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import "helpers/firebase";
+import { useNavigate } from "react-router-dom";
 
 function LoginComponent({ changeComponentType }: any) {
   const { t } = useTranslation("translation", { keyPrefix: "auth" });
@@ -19,6 +22,10 @@ function LoginComponent({ changeComponentType }: any) {
   const theme = useTheme();
 
   const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+
+  const auth = getAuth();
 
   const [formData, setFormData] = useState({
     username: "",
@@ -139,13 +146,28 @@ function LoginComponent({ changeComponentType }: any) {
             fullWidth
             variant={"contained"}
             sx={{ mt: 3, mb: 2, fontSize: "1.1rem" }}
-            onClick={() =>
-              dispatch(
-                authActions.login({
-                  username: formData.username,
-                  password: formData.password,
-                })
-              )
+            onClick={
+              () =>
+                signInWithEmailAndPassword(
+                  auth,
+                  formData.username,
+                  formData.password
+                )
+                  .then((userCredential) => {
+                    const user = userCredential.user;
+                    navigate("/user");
+                  })
+                  .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    console.log("[", errorCode, "] ", errorMessage);
+                  })
+              // dispatch(
+              //   authActions.login({
+              //     username: formData.username,
+              //     password: formData.password,
+              //   })
+              // )
             }
           >
             {t("logIn")}
