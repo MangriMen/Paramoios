@@ -11,12 +11,10 @@ import {
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-function RegisterComponent(props: any) {
+function RegisterComponent({ changeComponentType }: any) {
   const { t } = useTranslation("translation", { keyPrefix: "auth" });
 
   const theme = useTheme();
-
-  const { changeComponentType } = props;
 
   const [formData, setFormData] = useState({
     username: "",

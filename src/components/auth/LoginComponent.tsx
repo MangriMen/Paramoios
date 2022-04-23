@@ -10,13 +10,15 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+import { authActions } from "ducks/auth/actions";
 
-function LoginComponent(props: any) {
+function LoginComponent({ changeComponentType }: any) {
   const { t } = useTranslation("translation", { keyPrefix: "auth" });
 
   const theme = useTheme();
 
-  const { changeComponentType } = props;
+  const dispatch = useDispatch();
 
   const [formData, setFormData] = useState({
     username: "",
@@ -32,7 +34,6 @@ function LoginComponent(props: any) {
 
   const handlerSubmit = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
-    console.log(formData);
   };
 
   const tempInputStyle = {
@@ -138,6 +139,14 @@ function LoginComponent(props: any) {
             fullWidth
             variant={"contained"}
             sx={{ mt: 3, mb: 2, fontSize: "1.1rem" }}
+            onClick={() =>
+              dispatch(
+                authActions.login({
+                  username: formData.username,
+                  password: formData.password,
+                })
+              )
+            }
           >
             {t("logIn")}
           </Button>

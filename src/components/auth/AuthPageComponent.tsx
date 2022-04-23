@@ -41,7 +41,7 @@ function AuthPageComponent() {
             },
             borderLeft: "10px solid",
             borderRight: "10px solid",
-            boxShadow: "0 0 60px #212121",
+            boxShadow: "0 0 60px 2px #212121",
             backgroundColor: theme.palette.primary.main,
             borderColor: theme.palette.secondary.main,
             top: "0px",

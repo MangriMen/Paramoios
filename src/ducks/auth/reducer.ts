@@ -5,10 +5,11 @@ const initialState = {};
 export function authReducer(state = initialState, action: any) {
   switch (action.type) {
     case types.LOGIN:
-      break;
+      console.log("KEK");
+      return state;
     case types.LOGOUT:
-      break;
+      return state;
     default:
-      break;
+      return state;
   }
 }
