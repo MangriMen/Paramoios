@@ -50,7 +50,7 @@ function AuthPageComponent() {
               md: "100vh",
             },
             padding: "0 2rem",
-            flexBasis: "42%",
+            flexBasis: "50%",
             boxSizing: "border-box",
             overflowY: "auto",
             overflowX: "hidden",
@@ -82,7 +82,7 @@ function AuthPageComponent() {
             display: "flex",
             flexDirection: "row",
             justifyContent: "center",
-            flexBasis: "58%",
+            flexBasis: "50%",
             paddingLeft: {
               xs: "0",
               md: "80px",
@@ -90,6 +90,7 @@ function AuthPageComponent() {
             paddingRight: {
               xs: "0",
               md: "40px",
+              lg: "20px",
             },
           }}
         >
