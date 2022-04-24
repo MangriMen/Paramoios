@@ -12,9 +12,6 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { authActions } from "ducks/auth/actions";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import "helpers/firebase";
-import { useNavigate } from "react-router-dom";
 
 function LoginComponent({ changeComponentType }: any) {
   const { t } = useTranslation("translation", { keyPrefix: "auth" });
@@ -22,10 +19,6 @@ function LoginComponent({ changeComponentType }: any) {
   const theme = useTheme();
 
   const dispatch = useDispatch();
-
-  const navigate = useNavigate();
-
-  const auth = getAuth();
 
   const [formData, setFormData] = useState({
     email: "",
