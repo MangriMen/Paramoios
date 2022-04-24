@@ -1,17 +1,11 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 import { authActions } from "./actions";
+import { login, logout } from "./services";
 import { types } from "./types";
-import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
-import "helpers/firebase";
 
 function* loginSaga({ payload }: any): Generator<unknown, void, any> {
-  const auth = getAuth();
   try {
-    yield call(
-      (payload) =>
-        signInWithEmailAndPassword(auth, payload.email, payload.password),
-      payload
-    );
+    yield call(login, payload);
     yield put(authActions.loginSuccess());
   } catch (err) {
     yield put(authActions.loginFailed(String(err)));
@@ -19,9 +13,8 @@ function* loginSaga({ payload }: any): Generator<unknown, void, any> {
 }
 
 function* logoutSaga({ payload }: any): Generator<unknown, void, any> {
-  const auth = getAuth();
   try {
-    yield call((payload) => signOut(auth), payload);
+    yield call(logout, payload);
     yield put(authActions.logoutSuccess());
   } catch (err) {
     yield put(authActions.logoutFailed(String(err)));
