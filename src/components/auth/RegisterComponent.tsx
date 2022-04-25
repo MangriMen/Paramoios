@@ -10,22 +10,16 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  updateProfile,
-} from "firebase/auth";
 import "helpers/firebase";
-import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { authActions } from "ducks/auth/actions";
 
 function RegisterComponent({ changeComponentType }: any) {
   const { t } = useTranslation("translation", { keyPrefix: "auth" });
 
   const theme = useTheme();
 
-  const navigate = useNavigate();
-
-  const auth = getAuth();
+  const dispatch = useDispatch();
 
   const [formData, setFormData] = useState({
     username: "",
@@ -42,7 +36,13 @@ function RegisterComponent({ changeComponentType }: any) {
 
   const handlerSubmit = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
-    console.log(formData);
+    dispatch(
+      authActions.register({
+        username: formData.username,
+        email: formData.email,
+        password: formData.password,
+      })
+    );
   };
 
   const tempInputStyle = {
@@ -166,32 +166,6 @@ function RegisterComponent({ changeComponentType }: any) {
             fullWidth
             variant={"contained"}
             sx={{ mt: 3, mb: 2, fontSize: "1.1rem" }}
-            onClick={
-              () =>
-                createUserWithEmailAndPassword(
-                  auth,
-                  formData.email,
-                  formData.password
-                )
-                  .then((userCredential) => {
-                    const user = userCredential.user;
-                    updateProfile(user, {
-                      displayName: formData.username,
-                    });
-                    navigate("/user");
-                  })
-                  .catch((error) => {
-                    const errorCode = error.code;
-                    const errorMessage = error.message;
-                    console.log("[", errorCode, "] ", errorMessage);
-                  })
-              // dispatch(
-              //   authActions.login({
-              //     username: formData.username,
-              //     password: formData.password,
-              //   })
-              // )
-            }
           >
             {t("signUp")}
           </Button>

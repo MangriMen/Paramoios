@@ -5,4 +5,7 @@ export const types = {
   LOGOUT: "@@auth/LOGOUT",
   LOGOUT_SUCCESS: "@@auth/LOGOUT_SUCCESS",
   LOGOUT_FAILED: "@@auth/LOGOUT_FAILED",
+  REGISTER: "@@auth/REGISTER",
+  REGISTER_SUCCESS: "@@auth/REGISTER_SUCCESS",
+  REGISTER_FAILED: "@@auth/LREGISTER_FAILED",
 } as const;

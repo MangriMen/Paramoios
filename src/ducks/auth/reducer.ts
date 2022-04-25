@@ -22,6 +22,15 @@ export function authReducer(state = initialState, action: any) {
     case types.LOGOUT_FAILED:
       console.log("LOGOUT FAILED");
       return state;
+    case types.REGISTER:
+      console.log("TRY REGISTER");
+      return state;
+    case types.REGISTER_SUCCESS:
+      console.log("REGISTER_SUCCES");
+      return state;
+    case types.REGISTER_FAILED:
+      console.log("REGISTER_FAILED");
+      return state;
     default:
       return state;
   }
