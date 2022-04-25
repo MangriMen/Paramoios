@@ -17,8 +17,9 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router-dom";
 import { auth } from "helpers/firebase";
 // import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { authSlice } from "ducks/auth";
+import { getIsLogged } from "ducks/auth/selectors";
 
 interface IUserMenuItem {
   name: string;
@@ -34,15 +35,21 @@ function NavbarComponent() {
 
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
+  const isLogged = useSelector(getIsLogged);
+
+  const navigate = useNavigate();
+
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget);
+    if (isLogged) {
+      setAnchorElUser(event.currentTarget);
+    } else {
+      navigate("/auth");
+    }
   };
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-
-  const navigate = useNavigate();
 
   const userSettings: Array<IUserMenuItem> = [
     {
@@ -59,6 +66,7 @@ function NavbarComponent() {
       onClick: () => {
         handleCloseUserMenu();
         dispatch(authSlice.actions.logout());
+        navigate("/");
       },
     },
   ];
