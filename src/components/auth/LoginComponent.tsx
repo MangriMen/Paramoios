@@ -11,7 +11,7 @@ import {
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-import { authActions } from "ducks/auth/actions";
+import { authSlice } from "ducks/auth";
 
 function LoginComponent({ changeComponentType }: any) {
   const { t } = useTranslation("translation", { keyPrefix: "auth" });
@@ -35,7 +35,7 @@ function LoginComponent({ changeComponentType }: any) {
   const handlerSubmit = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
     dispatch(
-      authActions.login({
+      authSlice.actions.login({
         email: formData.email,
         password: formData.password,
       })

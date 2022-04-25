@@ -1,5 +1,16 @@
-import { userReducer } from "./reducer";
-import { userActions } from "./actions";
+import { createSlice } from "@reduxjs/toolkit";
 import { getUser } from "./selectors";
 
-export { userReducer, userActions, getUser };
+const initialState = { user: { name: "", email: "" } };
+
+export const userSlice = createSlice({
+  name: "@@user",
+  initialState,
+  reducers: {
+    updateUser: (state, action) => {
+      state.user = action.payload;
+    },
+  },
+});
+
+export { getUser };

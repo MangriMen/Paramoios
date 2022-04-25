@@ -1,6 +1,6 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
-import ru from "./ru";
+import ru from "../assets/locales/ru";
 
 const resources = {
   ru,

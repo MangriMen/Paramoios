@@ -10,9 +10,8 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import "helpers/firebase";
 import { useDispatch } from "react-redux";
-import { authActions } from "ducks/auth/actions";
+import { authSlice } from "ducks/auth";
 
 function RegisterComponent({ changeComponentType }: any) {
   const { t } = useTranslation("translation", { keyPrefix: "auth" });
@@ -37,7 +36,7 @@ function RegisterComponent({ changeComponentType }: any) {
   const handlerSubmit = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
     dispatch(
-      authActions.register({
+      authSlice.actions.register({
         username: formData.username,
         email: formData.email,
         password: formData.password,

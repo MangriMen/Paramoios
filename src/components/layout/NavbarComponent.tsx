@@ -9,18 +9,16 @@ import {
   Toolbar,
   Tooltip,
   Link,
-  Typography,
   useTheme,
 } from "@mui/material";
 import { useState } from "react";
 import PersonIcon from "@mui/icons-material/Person";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router-dom";
-import { getAuth, signOut } from "firebase/auth";
+import { auth } from "helpers/firebase";
 // import { useTranslation } from "react-i18next";
-import "helpers/firebase";
 import { useDispatch } from "react-redux";
-import { authActions } from "ducks/auth/actions";
+import { authSlice } from "ducks/auth";
 
 interface IUserMenuItem {
   name: string;
@@ -31,8 +29,6 @@ interface IUserMenuItem {
 function NavbarComponent() {
   //   const { t } = useTranslation("translation");
   const theme = useTheme();
-
-  const auth = getAuth();
 
   const dispatch = useDispatch();
 
@@ -62,7 +58,7 @@ function NavbarComponent() {
       icon: <LogoutIcon sx={{ color: "#ffffff" }} />,
       onClick: () => {
         handleCloseUserMenu();
-        dispatch(authActions.logout());
+        dispatch(authSlice.actions.logout());
       },
     },
   ];

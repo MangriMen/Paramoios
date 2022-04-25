@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "styles/index.css";
+import "assets/styles/index.css";
 import App from "components/App";
-import "locales";
+import "helpers/i18next";
 import { Provider } from "react-redux";
-import { store } from "store";
+import { store } from "ducks/store";
 import "helpers/firebase.ts";
 
 const root = ReactDOM.createRoot(

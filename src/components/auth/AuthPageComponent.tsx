@@ -1,14 +1,27 @@
 import { Box, Container, Typography, useTheme } from "@mui/material";
-import "styles/deprecated/login.css";
-import donationAlertLogo from "images/deprecated/DA_Alert_White.svg";
+import "assets/styles/deprecated/login.css";
+import donationAlertLogo from "assets/images/deprecated/DA_Alert_White.svg";
 import LoginComponent from "./LoginComponent";
 import RegisterComponent from "./RegisterComponent";
 import { useTranslation } from "react-i18next";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getIsLogged } from "ducks/auth/selectors";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function AuthPageComponent() {
   const theme = useTheme();
   const { t } = useTranslation("translation", { keyPrefix: "auth" });
+
+  const isLogged = useSelector(getIsLogged);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isLogged) {
+      navigate("/user");
+    }
+  }, [isLogged, navigate]);
 
   const [isLogin, setLogin] = useState(true);
 
