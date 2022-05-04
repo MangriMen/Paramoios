@@ -5,11 +5,16 @@
     "register": "Регистрация",
     "signIn": "Войти",
     "signUp": "Зарегестрироваться",
+    "signOut": "Выйти",
     "orRegister": "или регистрация?",
     "orLogin": "или авторизация?",
     "usernamePlaceholder": "Имя",
     "emailPlaceholder": "Email",
     "passwordPlaceholder": "Пароль",
     "confirmPasswordPlaceholder": "Подтверждение пароля"
+  },
+  "navbar": {
+    "menu": "Меню",
+    "profile": "Профиль"
   }
 }

@@ -18,18 +18,21 @@ import { getIsLogged } from 'ducks/auth/selectors';
 import { stringAvatar, stringToColor } from 'helpers/avatar';
 import { auth } from 'helpers/firebase';
 import { useState } from 'react';
-// import { useTranslation } from "react-i18next";
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 interface IUserMenuItem {
   name: string;
   icon: JSX.Element;
+  tooltip?: string;
   onClick: () => void;
 }
 
 function NavbarComponent() {
-  //   const { t } = useTranslation("translation");
+  const { t } = useTranslation('translation', { keyPrefix: 'navbar' });
+  const { t: tAuth } = useTranslation('translation', { keyPrefix: 'auth' });
+
   const theme = useTheme();
 
   const dispatch = useDispatch();
@@ -56,6 +59,7 @@ function NavbarComponent() {
     {
       name: 'Profile',
       icon: <PersonIcon sx={{ color: '#ffffff' }} />,
+      tooltip: t('profile'),
       onClick: () => {
         handleCloseUserMenu();
         navigate('/user');
@@ -64,6 +68,7 @@ function NavbarComponent() {
     {
       name: 'Logout',
       icon: <LogoutIcon sx={{ color: '#ffffff' }} />,
+      tooltip: tAuth('signOut'),
       onClick: () => {
         handleCloseUserMenu();
         dispatch(authSlice.actions.logout());
@@ -99,13 +104,14 @@ function NavbarComponent() {
           </Link>
           <Box zIndex="100" sx={{ flexGrow: 0 }}>
             <Tooltip
+              disableInteractive
               sx={{
                 mt: {
                   sm: '1.6rem',
                   lg: '1.6rem',
                 },
               }}
-              title="Open settings"
+              title={isLogged ? t('menu') : tAuth('signIn')}
             >
               <IconButton onClick={handleOpenUserMenu}>
                 <Avatar
@@ -146,24 +152,30 @@ function NavbarComponent() {
               onClose={handleCloseUserMenu}
             >
               {userSettings.map((setting) => (
-                <MenuItem
-                  key={setting.name}
-                  onClick={setting.onClick}
-                  sx={{
-                    padding: '0.5rem',
-                    backgroundColor: theme.palette.secondary.main,
-                    border: '3px solid',
-                    borderColor: theme.palette.primary.main,
-                    borderRadius: '50%',
-                    boxShadow: '5',
-                    marginBottom: '0.5rem',
-                    '&:hover': {
-                      backgroundColor: theme.palette.primary.main,
-                    },
-                  }}
+                <Tooltip
+                  disableInteractive
+                  placement="left"
+                  title={setting.tooltip || ''}
                 >
-                  {setting.icon}
-                </MenuItem>
+                  <MenuItem
+                    key={setting.name}
+                    onClick={setting.onClick}
+                    sx={{
+                      padding: '0.5rem',
+                      backgroundColor: theme.palette.secondary.main,
+                      border: '3px solid',
+                      borderColor: theme.palette.primary.main,
+                      borderRadius: '50%',
+                      boxShadow: '5',
+                      marginBottom: '0.5rem',
+                      '&:hover': {
+                        backgroundColor: theme.palette.primary.main,
+                      },
+                    }}
+                  >
+                    {setting.icon}
+                  </MenuItem>
+                </Tooltip>
               ))}
             </Menu>
           </Box>
