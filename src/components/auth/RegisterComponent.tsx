@@ -1,174 +1,70 @@
-import {
-  Box,
-  Button,
-  Container,
-  CssBaseline,
-  Link,
-  TextField,
-  Typography,
-  useTheme,
-} from "@mui/material";
-import React, { useState } from "react";
-import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
-import { authSlice } from "ducks/auth";
+import { Box, Container, CssBaseline, Typography } from '@mui/material';
+import ParLink from 'components/common/ParLink';
+import { authSlice } from 'ducks/auth';
+import { Formik } from 'formik';
+import { registerInitialValues, registerSchema } from 'helpers/auth';
+import { useTranslation } from 'react-i18next';
+import { useDispatch } from 'react-redux';
+
+import AuthFormButton from './AuthFormButton';
+import AuthFormField from './AuthFormField';
 
 function RegisterComponent({ changeComponentType }: any) {
-  const { t } = useTranslation("translation", { keyPrefix: "auth" });
-
-  const theme = useTheme();
+  const { t } = useTranslation('translation', { keyPrefix: 'auth' });
 
   const dispatch = useDispatch();
 
-  const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    password: "",
-  });
-
-  const handlerChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData((prevState) => ({
-      ...prevState,
-      [event.target.name]: event.target.value,
-    }));
-  };
-
-  const handlerSubmit = (event: React.ChangeEvent<HTMLInputElement>) => {
-    event.preventDefault();
+  const handlerSubmit = (values: typeof registerInitialValues) => {
     dispatch(
       authSlice.actions.register({
-        username: formData.username,
-        email: formData.email,
-        password: formData.password,
-      })
+        username: values.username,
+        email: values.email,
+        password: values.password,
+      }),
     );
   };
 
-  const tempInputStyle = {
-    "& .MuiOutlinedInput-root": {
-      fontSize: "1.4rem",
-      input: {
-        "&:-webkit-autofill": {
-          WebkitTextFillColor: theme.palette.secondary.main,
-          WebkitBoxShadow:
-            "0 0 0 1000px " + theme.palette.primary.dark + " inset",
-        },
-      },
-      color: theme.palette.secondary.main,
-      "& fieldset": {
-        borderColor: theme.palette.secondary.main,
-        borderWidth: "2px",
-      },
-      "&:hover fieldset": { borderColor: theme.palette.secondary.main },
-    },
-  };
-
-  const tempInputLabelStyle = {
-    sx: {
-      fontSize: "1.4rem",
-      color: theme.palette.secondary.main,
-    },
-  };
-
   return (
-    <Container component={"main"} maxWidth={"xs"}>
+    <Container component={'main'} maxWidth={'xs'}>
       <CssBaseline />
       <Box
         sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
         }}
       >
         <Typography
-          component={"h2"}
-          variant={"h2"}
+          component={'h2'}
+          variant={'h2'}
           fontWeight="bold"
-          sx={{ fontSize: { xs: "3rem" } }}
+          sx={{ fontSize: { xs: '3rem' } }}
         >
-          {t("register")}
+          {t('register')}
         </Typography>
-        <Link
-          color="secondary"
-          component="button"
-          underline="none"
-          variant="button"
-          sx={{
-            fontSize: "1.4rem",
-            textShadow: "1px 1px 5px black",
-            fontWeight: "bold",
-            "&:hover": {
-              color: theme.palette.secondary.light,
-            },
-          }}
-          onClick={changeComponentType}
-        >
-          {t("orLogin")}
-        </Link>
-        <Box
-          component={"form"}
+        <ParLink component="button" onClick={changeComponentType}>
+          {t('orLogin')}
+        </ParLink>
+        <Formik
+          initialValues={registerInitialValues}
+          validationSchema={registerSchema}
           onSubmit={handlerSubmit}
-          sx={{
-            maxWidth: "21rem",
-            mt: 1,
-          }}
+          validateOnBlur
         >
-          <TextField
-            margin={"normal"}
-            required
-            fullWidth
-            id={"username"}
-            label={t("usernamePlaceholder")}
-            InputLabelProps={tempInputLabelStyle}
-            name={"username"}
-            autoComplete={"username"}
-            autoFocus
-            value={formData.username}
-            onChange={handlerChange}
-            variant={"outlined"}
-            color="secondary"
-            sx={tempInputStyle}
-          />
-          <TextField
-            margin={"normal"}
-            required
-            fullWidth
-            id={"email"}
-            label={t("emailPlaceholder")}
-            InputLabelProps={tempInputLabelStyle}
-            name={"email"}
-            type={"email"}
-            autoComplete={"email"}
-            value={formData.email}
-            onChange={handlerChange}
-            color="secondary"
-            sx={tempInputStyle}
-          />
-          <TextField
-            margin={"normal"}
-            required
-            fullWidth
-            id={"password"}
-            label={t("passwordPlaceholder")}
-            InputLabelProps={tempInputLabelStyle}
-            name={"password"}
-            type={"password"}
-            autoComplete={"current-password"}
-            value={formData.password}
-            onChange={handlerChange}
-            color="secondary"
-            sx={tempInputStyle}
-          />
-          <Button
-            color="secondary"
-            type={"submit"}
-            fullWidth
-            variant={"contained"}
-            sx={{ mt: 3, mb: 2, fontSize: "1.1rem" }}
-          >
-            {t("signUp")}
-          </Button>
-        </Box>
+          {({ handleSubmit }) => (
+            <Box
+              component={'form'}
+              onSubmit={handleSubmit}
+              sx={{ maxWidth: '21rem' }}
+            >
+              <AuthFormField fieldName="username" required autoFocus />
+              <AuthFormField fieldName="email" required />
+              <AuthFormField fieldName="password" required />
+              <AuthFormField fieldName="confirmPassword" required />
+              <AuthFormButton type="submit">{t('signUp')}</AuthFormButton>
+            </Box>
+          )}
+        </Formik>
       </Box>
     </Container>
   );
