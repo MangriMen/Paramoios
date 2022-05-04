@@ -1,6 +1,7 @@
-import i18n from "i18next";
-import { initReactI18next } from "react-i18next";
-import ru from "../assets/locales/ru";
+import i18n from 'i18next';
+import { initReactI18next } from 'react-i18next';
+
+import ru from '../assets/locales/ru';
 
 const resources = {
   ru,
@@ -8,5 +9,5 @@ const resources = {
 
 i18n.use(initReactI18next).init({
   resources,
-  fallbackLng: ["en", "ru"],
+  fallbackLng: ['en', 'ru'],
 });

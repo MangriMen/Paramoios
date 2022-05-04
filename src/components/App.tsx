@@ -1,17 +1,18 @@
-import { createTheme, ThemeProvider } from "@mui/material";
-import { BrowserRouter } from "react-router-dom";
-import AppContainer from "./AppContainer";
+import { ThemeProvider, createTheme } from '@mui/material';
+import { BrowserRouter } from 'react-router-dom';
+
+import AppContainer from './AppContainer';
 
 const theme = createTheme({
   typography: {
-    fontFamily: "Eberron",
+    fontFamily: 'Eberron',
   },
   palette: {
     primary: {
-      main: "#681e22",
+      main: '#681e22',
     },
     secondary: {
-      main: "#e9c996",
+      main: '#e9c996',
     },
   },
 });

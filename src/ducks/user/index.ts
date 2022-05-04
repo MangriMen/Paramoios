@@ -1,10 +1,11 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { getUser } from "./selectors";
+import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = { user: { name: "", email: "" } };
+import { getUser } from './selectors';
+
+const initialState = { user: { name: '', email: '' } };
 
 export const userSlice = createSlice({
-  name: "@@user",
+  name: '@@user',
   initialState,
   reducers: {
     updateUser: (state, action) => {

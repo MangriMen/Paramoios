@@ -3,12 +3,13 @@
     "welcome": "Добро пожаловать",
     "authorize": "Авторизация",
     "register": "Регистрация",
-    "logIn": "Войти",
+    "signIn": "Войти",
     "signUp": "Зарегестрироваться",
     "orRegister": "или регистрация?",
     "orLogin": "или авторизация?",
     "usernamePlaceholder": "Имя",
     "emailPlaceholder": "Email",
-    "passwordPlaceholder": "Пароль"
+    "passwordPlaceholder": "Пароль",
+    "confirmPasswordPlaceholder": "Подтверждение пароля"
   }
 }

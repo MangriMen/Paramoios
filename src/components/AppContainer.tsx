@@ -1,8 +1,9 @@
-import { Route, Routes } from "react-router";
-import NavbarComponent from "./layout/NavbarComponent";
-import MainPageComponent from "./MainPageComponent";
-import AuthPageComponent from "./auth/AuthPageComponent";
-import UserPageComponent from "./user/UserPageComponent";
+import { Route, Routes } from 'react-router';
+
+import MainPageComponent from './MainPageComponent';
+import AuthPageComponent from './auth/AuthPageComponent';
+import NavbarComponent from './common/NavbarComponent';
+import UserPageComponent from './user/UserPageComponent';
 
 function AppContainer() {
   return (

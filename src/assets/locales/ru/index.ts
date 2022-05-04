@@ -1,4 +1,4 @@
-import translation from "./translation.json";
+import translation from './translation.json';
 
 const ru = {
   translation,

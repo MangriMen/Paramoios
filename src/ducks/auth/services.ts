@@ -1,10 +1,10 @@
-import { auth } from "helpers/firebase";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
   updateProfile,
-} from "firebase/auth";
+} from 'firebase/auth';
+import { auth } from 'helpers/firebase';
 
 export function login(payload: any) {
   return signInWithEmailAndPassword(auth, payload.email, payload.password);

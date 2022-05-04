@@ -1,4 +1,4 @@
-import { Container, Typography, useTheme } from "@mui/material";
+import { Container, Typography, useTheme } from '@mui/material';
 
 function MainPageComponent() {
   const theme = useTheme();
@@ -6,12 +6,12 @@ function MainPageComponent() {
     <Container
       maxWidth="lg"
       sx={{
-        mt: "1rem",
+        mt: '1rem',
         backgroundColor: theme.palette.secondary.main,
-        border: "4px solid",
+        border: '4px solid',
         borderColor: theme.palette.primary.main,
-        borderRadius: "4px",
-        height: "500px",
+        borderRadius: '4px',
+        height: '500px',
       }}
     >
       <Typography>Hello World</Typography>
