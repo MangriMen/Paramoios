@@ -66,7 +66,7 @@ function AuthPageComponent() {
               xs: '100%',
               md: '100vh',
             },
-            padding: '0 2rem',
+            padding: '2rem',
             flexBasis: '50%',
             boxSizing: 'border-box',
             overflowY: 'auto',
@@ -84,6 +84,7 @@ function AuthPageComponent() {
                 lg: '5rem',
                 xl: '6rem',
               },
+              lineHeight: 1,
             }}
           >
             {t('welcome')}
