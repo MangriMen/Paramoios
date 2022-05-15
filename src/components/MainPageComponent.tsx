@@ -1,4 +1,11 @@
-import { Box, Container, Grid, Typography, useTheme } from '@mui/material';
+import {
+  Avatar,
+  Box,
+  Container,
+  Grid,
+  Typography,
+  useTheme,
+} from '@mui/material';
 
 function MainPageComponent() {
   const theme = useTheme();
@@ -11,37 +18,61 @@ function MainPageComponent() {
         border: '4px solid',
         borderColor: theme.palette.primary.main,
         borderRadius: '4px',
-        padding: '1rem',
         flexGrow: '1',
       }}
     >
-      <Grid container spacing={4}>
+      <Grid
+        container
+        spacing={3}
+        flexDirection="row"
+        justifyContent="space-between"
+        padding="1rem 0"
+        alignItems="stretch"
+      >
         <Grid item xs={2}>
-          <Box
+          <Avatar
             sx={{
               border: '4px solid',
               borderColor: theme.palette.primary.main,
               backgroundColor: theme.palette.secondary.main,
               borderRadius: '4px',
-              height: '50%',
-              padding: '2rem',
+              padding: '3rem',
             }}
-          ></Box>
+          ></Avatar>
         </Grid>
         <Grid item xs={10}>
           <Typography sx={{ fontSize: '5rem' }}>Hello World</Typography>
         </Grid>
-        <Grid item xs={2}>
-          <Box
-            sx={{
-              border: '4px solid',
-              borderColor: theme.palette.primary.main,
-              backgroundColor: theme.palette.secondary.main,
-              borderRadius: '4px',
-              padding: '2rem',
-            }}
-          ></Box>
-        </Grid>
+        {Array.from(Array(7)).map((_, index) => (
+          <Grid item xs={1.5} key={index}>
+            <Box
+              sx={{
+                border: '4px solid',
+                borderColor: theme.palette.primary.main,
+                backgroundColor: theme.palette.secondary.main,
+                borderRadius: '4px',
+                padding: '2rem',
+              }}
+            >
+              {index}
+            </Box>
+          </Grid>
+        ))}
+        {Array.from(Array(3)).map((_, index) => (
+          <Grid item xs={4} key={index}>
+            <Box
+              sx={{
+                border: '4px solid',
+                borderColor: theme.palette.primary.main,
+                backgroundColor: theme.palette.secondary.main,
+                borderRadius: '4px',
+                padding: '2rem',
+              }}
+            >
+              {index}
+            </Box>
+          </Grid>
+        ))}
       </Grid>
     </Container>
   );
