@@ -30,6 +30,7 @@ function MainPageComponent() {
         padding: '1rem',
       }}
     >
+      {/* Grid container header of charlist, contains avatar and character name */}
       <Grid
         container
         flexDirection="row"
@@ -43,7 +44,7 @@ function MainPageComponent() {
           <Typography sx={{ fontSize: '5rem' }}>Hello World</Typography>
         </Grid>
       </Grid>
-
+      {/* Grid container with character stats */}
       <Grid
         container
         flexDirection="row"
@@ -52,11 +53,12 @@ function MainPageComponent() {
       >
         {Array.from(Array(7)).map((_, index) => (
           <Grid item xs={1.5} key={index}>
-            <Box sx={boxSx}>{index}</Box>
+            <Box sx={boxSx}></Box>
           </Grid>
         ))}
       </Grid>
       <Grid container>
+        {/* Grid container with character skills */}
         <Grid
           container
           flexDirection="row"
@@ -82,15 +84,19 @@ function MainPageComponent() {
             </Grid>
           </Grid>
           <Grid item xs={4}>
+            {/* Grid container with character skills */}
             <Grid
               container
               flexDirection="column"
               height="100%"
               justifyContent="space-between"
             >
-              {Array.from(Array(3)).map((_, index) => (
-                <Box sx={{ ...boxSx }} key={index}></Box>
-              ))}
+              {/* Fight bonuses */}
+              <Box sx={{ ...boxSx }}></Box>
+              {/* Attacks and spellcasting */}
+              <Box sx={{ ...boxSx }}></Box>
+              {/* Equipment */}
+              <Box sx={{ ...boxSx }}></Box>
             </Grid>
           </Grid>
           <Grid item xs={4}>
@@ -100,7 +106,10 @@ function MainPageComponent() {
               height="100%"
               justifyContent="space-between"
             >
-              {Array.from(Array(5)).map((_, index) => (
+              {/* Health */}
+              <Box sx={{ ...boxSx }} />
+              {/* Boards with traits, ideals, bonds, flaws */}
+              {Array.from(Array(4)).map((_, index) => (
                 <Box sx={{ ...boxSx }} key={index} />
               ))}
             </Grid>
@@ -108,9 +117,11 @@ function MainPageComponent() {
         </Grid>
         <Grid container columnSpacing={3} flexDirection="row">
           <Grid item xs={4}>
+            {/* Languages */}
             <Box sx={{ ...boxSx }} />
           </Grid>
           <Grid item xs={8}>
+            {/* Features and traits */}
             <Box sx={{ ...boxSx }} />
           </Grid>
         </Grid>
