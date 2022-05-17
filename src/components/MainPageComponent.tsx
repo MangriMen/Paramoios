@@ -1,11 +1,4 @@
-import {
-  Avatar,
-  Box,
-  Container,
-  Grid,
-  Typography,
-  useTheme,
-} from '@mui/material';
+import { Avatar, Container, Grid, Typography, useTheme } from '@mui/material';
 
 import MainBoxStyled from './MainBoxStyled';
 
