@@ -7,16 +7,10 @@ import {
   useTheme,
 } from '@mui/material';
 
+import MainBoxStyled from './MainBoxStyled';
+
 function MainPageComponent() {
   const theme = useTheme();
-  const boxSx = {
-    border: '4px solid',
-    borderColor: theme.palette.primary.main,
-    backgroundColor: theme.palette.secondary.main,
-    borderRadius: '4px',
-    padding: '1rem',
-    mb: '1rem',
-  };
 
   return (
     <Container
@@ -38,7 +32,16 @@ function MainPageComponent() {
         mb="1rem"
       >
         <Grid item xs={2}>
-          <Avatar sx={boxSx}></Avatar>
+          <Avatar
+            sx={{
+              width: 'auto',
+              height: 'auto',
+              border: '4px solid',
+              borderRadius: '4px',
+              borderColor: theme.palette.primary.main,
+              fontSize: '128px',
+            }}
+          ></Avatar>
         </Grid>
         <Grid item xs={10}>
           <Typography sx={{ fontSize: '5rem' }}>Hello World</Typography>
@@ -53,7 +56,7 @@ function MainPageComponent() {
       >
         {Array.from(Array(7)).map((_, index) => (
           <Grid item xs={1.5} key={index}>
-            <Box sx={boxSx}></Box>
+            <MainBoxStyled />
           </Grid>
         ))}
       </Grid>
@@ -76,7 +79,7 @@ function MainPageComponent() {
                     justifyContent="space-between"
                   >
                     {Array.from(Array(3)).map((_, index) => (
-                      <Box sx={{ ...boxSx }} key={index}></Box>
+                      <MainBoxStyled key={index} mb="1rem" />
                     ))}
                   </Grid>
                 </Grid>
@@ -92,11 +95,11 @@ function MainPageComponent() {
               justifyContent="space-between"
             >
               {/* Fight bonuses */}
-              <Box sx={{ ...boxSx }}></Box>
+              <MainBoxStyled mb="1rem" />
               {/* Attacks and spellcasting */}
-              <Box sx={{ ...boxSx }}></Box>
+              <MainBoxStyled mb="1rem" />
               {/* Equipment */}
-              <Box sx={{ ...boxSx }}></Box>
+              <MainBoxStyled mb="1rem" />
             </Grid>
           </Grid>
           <Grid item xs={4}>
@@ -107,10 +110,10 @@ function MainPageComponent() {
               justifyContent="space-between"
             >
               {/* Health */}
-              <Box sx={{ ...boxSx }} />
+              <MainBoxStyled />
               {/* Boards with traits, ideals, bonds, flaws */}
               {Array.from(Array(4)).map((_, index) => (
-                <Box sx={{ ...boxSx }} key={index} />
+                <MainBoxStyled key={index} mb="1rem" />
               ))}
             </Grid>
           </Grid>
@@ -118,11 +121,11 @@ function MainPageComponent() {
         <Grid container columnSpacing={3} flexDirection="row">
           <Grid item xs={4}>
             {/* Languages */}
-            <Box sx={{ ...boxSx }} />
+            <MainBoxStyled />
           </Grid>
           <Grid item xs={8}>
             {/* Features and traits */}
-            <Box sx={{ ...boxSx }} />
+            <MainBoxStyled />
           </Grid>
         </Grid>
       </Grid>
