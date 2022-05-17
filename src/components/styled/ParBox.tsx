@@ -5,11 +5,10 @@ const BoxStyled = styled(Box)(({ theme }) => ({
   borderColor: theme.palette.primary.main,
   backgroundColor: theme.palette.secondary.main,
   borderRadius: '4px',
-  padding: '1rem',
 }));
 
-function MainBoxStyled({ children, ...props }: BoxProps) {
+function ParBox({ children, ...props }: BoxProps) {
   return <BoxStyled {...props}>{children}</BoxStyled>;
 }
 
-export default MainBoxStyled;
+export default ParBox;
