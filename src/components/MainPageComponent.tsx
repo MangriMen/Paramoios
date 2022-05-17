@@ -1,22 +1,13 @@
-import { Avatar, Container, Grid, Typography, useTheme } from '@mui/material';
+import { Avatar, Grid, Typography, useTheme } from '@mui/material';
 
-import MainBoxStyled from './MainBoxStyled';
+import ParBox from './styled/ParBox';
+import ParContainer from './styled/ParContainer';
 
 function MainPageComponent() {
   const theme = useTheme();
 
   return (
-    <Container
-      maxWidth="lg"
-      sx={{
-        mt: '1rem',
-        backgroundColor: theme.palette.secondary.main,
-        border: '4px solid',
-        borderColor: theme.palette.primary.main,
-        borderRadius: '4px',
-        padding: '1rem',
-      }}
-    >
+    <ParContainer maxWidth="lg" sx={{ marginTop: '1rem', padding: '1rem' }}>
       {/* Grid container header of charlist, contains avatar and character name */}
       <Grid
         container
@@ -49,7 +40,7 @@ function MainPageComponent() {
       >
         {Array.from(Array(7)).map((_, index) => (
           <Grid item xs={1.5} key={index}>
-            <MainBoxStyled />
+            <ParBox padding="1rem" />
           </Grid>
         ))}
       </Grid>
@@ -72,7 +63,7 @@ function MainPageComponent() {
                     justifyContent="space-between"
                   >
                     {Array.from(Array(3)).map((_, index) => (
-                      <MainBoxStyled key={index} mb="1rem" />
+                      <ParBox key={index} mb="1rem" padding="1rem" />
                     ))}
                   </Grid>
                 </Grid>
@@ -88,11 +79,11 @@ function MainPageComponent() {
               justifyContent="space-between"
             >
               {/* Fight bonuses */}
-              <MainBoxStyled mb="1rem" />
+              <ParBox mb="1rem" padding="1rem" />
               {/* Attacks and spellcasting */}
-              <MainBoxStyled mb="1rem" />
+              <ParBox mb="1rem" padding="1rem" />
               {/* Equipment */}
-              <MainBoxStyled mb="1rem" />
+              <ParBox mb="1rem" padding="1rem" />
             </Grid>
           </Grid>
           <Grid item xs={4}>
@@ -103,10 +94,10 @@ function MainPageComponent() {
               justifyContent="space-between"
             >
               {/* Health */}
-              <MainBoxStyled />
+              <ParBox padding="1rem" />
               {/* Boards with traits, ideals, bonds, flaws */}
               {Array.from(Array(4)).map((_, index) => (
-                <MainBoxStyled key={index} mb="1rem" />
+                <ParBox key={index} mb="1rem" padding="1rem" />
               ))}
             </Grid>
           </Grid>
@@ -114,15 +105,15 @@ function MainPageComponent() {
         <Grid container columnSpacing={3} flexDirection="row">
           <Grid item xs={4}>
             {/* Languages */}
-            <MainBoxStyled />
+            <ParBox padding="1rem" />
           </Grid>
           <Grid item xs={8}>
             {/* Features and traits */}
-            <MainBoxStyled />
+            <ParBox padding="1rem" />
           </Grid>
         </Grid>
       </Grid>
-    </Container>
+    </ParContainer>
   );
 }
 
