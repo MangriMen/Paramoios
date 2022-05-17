@@ -2,7 +2,6 @@ import { Button, ButtonProps, styled } from '@mui/material';
 
 const ButtonStyled = styled(Button)(({ theme }) => ({
   marginTop: '1rem',
-  marginBottom: '1.5rem',
   fontSize: '1.1rem',
 }));
 
