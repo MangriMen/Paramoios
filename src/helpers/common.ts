@@ -1,10 +1,13 @@
-export function tryConst<T>(
-  tryFunction: () => T,
-): ReturnType<typeof tryFunction> | any {
+export function tryCall<T extends (...args: Parameters<T>) => ReturnType<T>>(
+  tryFunction: T,
+  ...args: Parameters<T>
+): ReturnType<T> | undefined {
   try {
-    return tryFunction();
-  } catch (e: any) {
-    console.log(e);
+    return tryFunction(...args);
+  } catch (e) {
+    if (e instanceof Error) {
+      console.log(e.message);
+    }
     return undefined;
   }
 }
