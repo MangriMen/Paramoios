@@ -1,7 +1,7 @@
 import { Box, Container, Typography, useTheme } from '@mui/material';
 import donationAlertLogo from 'assets/images/deprecated/DA_Alert_White.svg';
 import 'assets/styles/deprecated/login.css';
-import { getIsLogged } from 'ducks/auth/selectors';
+import { getError, getIsLogged } from 'ducks/auth/selectors';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
@@ -27,6 +27,14 @@ function AuthPageComponent() {
   const [isLogin, setLogin] = useState(true);
 
   const changeComponentType = () => setLogin(!isLogin);
+
+  const error = useSelector(getError);
+
+  useEffect(() => {
+    if (error) {
+      alert(error);
+    }
+  }, [error]);
 
   return (
     <Box

@@ -22,9 +22,9 @@ function* registerSaga({ payload }: any): Generator<unknown, void, any> {
   yield call(setUserDisplayName, payload);
 }
 
-function* logoutSaga({ payload }: any): Generator<unknown, void, any> {
+function* logoutSaga(): Generator<unknown, void, any> {
   try {
-    yield call(logout, payload);
+    yield call(logout);
     yield put(authSlice.actions.logoutSuccess());
   } catch (err) {
     yield put(authSlice.actions.logoutFailed(String(err)));
