@@ -117,14 +117,14 @@ function NavbarComponent() {
                 <Avatar
                   sx={{
                     backgroundColor: stringToColor(
-                      auth.currentUser?.displayName,
+                      auth?.currentUser?.displayName,
                     ),
                     width: '48px',
                     height: '48px',
                     border: '4px solid',
                     borderColor: theme.palette.primary.main,
                   }}
-                  children={stringAvatar(auth.currentUser?.displayName)}
+                  children={stringAvatar(auth?.currentUser?.displayName)}
                 ></Avatar>
               </IconButton>
             </Tooltip>

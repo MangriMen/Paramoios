@@ -1,5 +1,5 @@
 import { Avatar, Box, Typography, useTheme } from '@mui/material';
-import { getAuth } from 'firebase/auth';
+import { auth } from 'helpers/firebase';
 
 function stringToColor(string: string) {
   let hash = 0;
@@ -26,7 +26,6 @@ function stringAvatar(name: string) {
 }
 
 function UserCardComponent() {
-  const auth = getAuth();
   const user = auth?.currentUser;
 
   const theme = useTheme();
