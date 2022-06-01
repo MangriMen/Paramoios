@@ -9,6 +9,8 @@ function NotFoundPageComponent() {
     <ParBox
       minWidth="100%"
       minHeight="calc(100% - 2rem)"
+      padding="0.5rem"
+      boxSizing="border-box"
       border="0"
       display="flex"
       flexDirection="column"
@@ -25,12 +27,14 @@ function NotFoundPageComponent() {
         alignItems="center"
         fontSize={{
           xs: '2rem',
+          sm: '3.5rem',
           md: '4rem',
         }}
       >
         <Typography
           fontSize={{
             xs: '8rem',
+            sm: '9rem',
             md: '10rem',
           }}
           lineHeight="10rem"
@@ -45,13 +49,12 @@ function NotFoundPageComponent() {
           color="primary"
           textAlign="center"
         >
-          {t(
-            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque quo accusantium, minus sapiente facilis consequuntur error tenetur laboriosam recusandae ut!',
-          )}
+          {t('notFound')}
         </Typography>
         <Typography
           fontSize={{
             xs: '1.5rem',
+            sm: '2rem',
             md: '3rem',
           }}
           fontWeight="bold"
