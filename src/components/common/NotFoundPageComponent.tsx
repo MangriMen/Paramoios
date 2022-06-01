@@ -7,13 +7,9 @@ function NotFoundPageComponent() {
 
   return (
     <ParBox
-      position="fixed"
-      height="100%"
-      width="100%"
-      // TODO Fix when bug/#30 is merged
-      sx={{
-        border: '0',
-      }}
+      minWidth="100%"
+      minHeight="calc(100% - 2rem)"
+      border="0"
       display="flex"
       flexDirection="column"
       justifyContent="center"
@@ -27,16 +23,41 @@ function NotFoundPageComponent() {
         flexDirection="column"
         justifyContent="center"
         alignItems="center"
-        fontSize="4rem"
-        marginBottom="20rem"
+        fontSize={{
+          xs: '2rem',
+          md: '4rem',
+        }}
       >
-        <Typography fontSize="10rem" lineHeight="10rem" color="primary">
+        <Typography
+          fontSize={{
+            xs: '8rem',
+            md: '10rem',
+          }}
+          lineHeight="10rem"
+          color="primary"
+          textAlign="center"
+        >
           404
         </Typography>
-        <Typography fontSize="inherit" fontWeight="bold" color="primary">
-          {t('notFound')}
+        <Typography
+          fontSize="inherit"
+          fontWeight="bold"
+          color="primary"
+          textAlign="center"
+        >
+          {t(
+            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque quo accusantium, minus sapiente facilis consequuntur error tenetur laboriosam recusandae ut!',
+          )}
         </Typography>
-        <Typography fontSize="3rem" fontWeight="bold" color="primary.light">
+        <Typography
+          fontSize={{
+            xs: '1.5rem',
+            md: '3rem',
+          }}
+          fontWeight="bold"
+          color="primary.light"
+          textAlign="center"
+        >
           {t('notFoundDescription')}
         </Typography>
       </ParBox>
