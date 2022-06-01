@@ -43,18 +43,18 @@ function UserCardComponent() {
         }}
       >
         <Avatar
-          variant="square"
-          sx={{
-            backgroundColor: stringToColor(String(user?.displayName)),
-            width: '200px',
-            height: '200px',
-            border: '4px solid',
-            borderRadius: '4px',
-            borderColor: theme.palette.primary.main,
-            fontSize: '128px',
-          }}
-          children={stringAvatar(String(user?.displayName))}
-        ></Avatar>
+    variant="square"
+    sx={{
+        backgroundColor: stringToColor(String(user?.displayName)),
+        width: '200px',
+        height: '200px',
+        border: '4px solid',
+        borderRadius: '4px',
+        borderColor: theme.palette.primary.main,
+        fontSize: '128px',
+    }}
+    children={stringAvatar(String(user?.displayName))}
+    />
         <Box
           sx={{
             display: 'flex',
