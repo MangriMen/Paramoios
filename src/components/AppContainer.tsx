@@ -27,14 +27,6 @@ function AppContainer() {
             </PageWithNavbar>
           }
         />
-        <Route
-          path="*" //error 404 page
-          element={
-            <PageWithNavbar>
-              <MainPageComponent />
-            </PageWithNavbar>
-          }
-        />
       </Routes>
     </>
   );
