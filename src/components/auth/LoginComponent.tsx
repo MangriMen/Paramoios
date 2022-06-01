@@ -58,6 +58,7 @@ function LoginComponent({ changeComponentType }: any) {
             >
               <AuthFormField fieldName="email" required autoFocus />
               <AuthFormField
+                type="password"
                 fieldName="password"
                 autoComplete={'current-password'}
                 required

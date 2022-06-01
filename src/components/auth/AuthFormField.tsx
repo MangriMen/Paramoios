@@ -37,7 +37,6 @@ function AuthFormField({
       id={fieldName}
       name={fieldName}
       autoComplete={fieldName}
-      type={fieldName}
       label={t(`${fieldName}Placeholder`)}
       value={values[fieldName]}
       error={!!(touched[fieldName] && errors[fieldName])}
