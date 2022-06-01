@@ -27,7 +27,6 @@ function stringAvatar(name: string) {
 
 function UserCardComponent() {
   const user = auth?.currentUser;
-
   const theme = useTheme();
 
   return (
@@ -43,18 +42,18 @@ function UserCardComponent() {
         }}
       >
         <Avatar
-    variant="square"
-    sx={{
-        backgroundColor: stringToColor(String(user?.displayName)),
-        width: '200px',
-        height: '200px',
-        border: '4px solid',
-        borderRadius: '4px',
-        borderColor: theme.palette.primary.main,
-        fontSize: '128px',
-    }}
-    children={stringAvatar(String(user?.displayName))}
-    />
+          variant="square"
+          sx={{
+            backgroundColor: stringToColor(String(user?.displayName)),
+            width: '200px',
+            height: '200px',
+            border: '4px solid',
+            borderRadius: '4px',
+            borderColor: theme.palette.primary.main,
+            fontSize: '128px',
+          }}
+          children={stringAvatar(String(user?.displayName))}
+        />
         <Box
           sx={{
             display: 'flex',
