@@ -59,7 +59,7 @@ function RegisterComponent({ changeComponentType }: any) {
             >
               <AuthFormField fieldName="username" required autoFocus />
               <AuthFormField fieldName="email" required />
-              <AuthFormField fieldName="password" required />
+              <AuthFormField type="password" fieldName="password" required />
               <AuthFormField
                 type="password"
                 fieldName="confirmPassword"
