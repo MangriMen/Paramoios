@@ -1,3 +1,4 @@
+import { ROUTE } from 'consts';
 import { Route, Routes } from 'react-router';
 
 import MainPageComponent from './MainPageComponent';
@@ -10,22 +11,30 @@ function AppContainer() {
     <>
       <Routes>
         <Route
-    path="/"
-    element={
-        <PageWithNavbar>
-            <MainPageComponent/>
-        </PageWithNavbar>
-    }
-    />
-        <Route path="/auth" element={<AuthPageComponent/>}/>
+          path={ROUTE.HOME}
+          element={
+            <PageWithNavbar>
+              <MainPageComponent />
+            </PageWithNavbar>
+          }
+        />
+        <Route path={ROUTE.AUTH} element={<AuthPageComponent />} />
         <Route
-    path="/me"
-    element={
-        <PageWithNavbar>
-            <UserPageComponent/>
-        </PageWithNavbar>
-    }
-    />
+          path={ROUTE.ME}
+          element={
+            <PageWithNavbar>
+              <UserPageComponent />
+            </PageWithNavbar>
+          }
+        />
+        <Route
+          path="*" //error 404 page
+          element={
+            <PageWithNavbar>
+              <MainPageComponent />
+            </PageWithNavbar>
+          }
+        />
       </Routes>
     </>
   );
