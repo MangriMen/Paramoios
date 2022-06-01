@@ -16,5 +16,9 @@
   "navbar": {
     "menu": "Меню",
     "profile": "Профиль"
+  },
+  "page": {
+    "notFound": "Страница не найдена",
+    "notFoundDescription": "Возможно, здесь была гильдия воров"
   }
 }
