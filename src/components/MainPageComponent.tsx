@@ -25,7 +25,7 @@ function MainPageComponent() {
               borderColor: theme.palette.primary.main,
               fontSize: '128px',
             }}
-          ></Avatar>
+          />
         </Grid>
         <Grid item xs={10}>
           <Typography sx={{ fontSize: '5rem' }}>Hello World</Typography>
