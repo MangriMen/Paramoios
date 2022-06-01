@@ -6,7 +6,9 @@ export const authSlice = createSlice({
   name: '@@auth',
   initialState,
   reducers: {
-    login: (state, action) => {},
+    login: (state, action) => {
+      state.error = '';
+    },
     loginSuccess: (state) => {
       state.isLogged = true;
     },
@@ -14,14 +16,18 @@ export const authSlice = createSlice({
       state.isLogged = false;
       state.error = action.payload;
     },
-    register: (state, action) => {},
+    register: (state, action) => {
+      state.error = '';
+    },
     registerSuccess: (state) => {
       state.isLogged = true;
     },
     registerFailed: (state, action) => {
       state.error = action.payload;
     },
-    logout: (state) => {},
+    logout: (state) => {
+      state.error = '';
+    },
     logoutSuccess: (state) => {
       state.isLogged = false;
     },
