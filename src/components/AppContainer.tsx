@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router';
 
 import MainPageComponent from './MainPageComponent';
 import AuthPageComponent from './auth/AuthPageComponent';
+import NotFoundPageComponent from './common/NotFoundPageComponent';
 import PageWithNavbar from './layout/PageWithNavbar';
 import UserPageComponent from './user/UserPageComponent';
 
@@ -23,6 +24,14 @@ function AppContainer() {
           element={
             <PageWithNavbar>
               <UserPageComponent />
+            </PageWithNavbar>
+          }
+        ></Route>
+        <Route
+          path="*"
+          element={
+            <PageWithNavbar>
+              <NotFoundPageComponent />
             </PageWithNavbar>
           }
         ></Route>

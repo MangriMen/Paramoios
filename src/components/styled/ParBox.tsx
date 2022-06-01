@@ -5,6 +5,7 @@ const BoxStyled = styled(Box)(({ theme }) => ({}));
 function ParBox({ children, ...props }: BoxProps) {
   return (
     <BoxStyled
+      bgcolor="secondary.main"
       border="4px solid"
       borderColor="primary.main"
       borderRadius="4px"
