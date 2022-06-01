@@ -10,22 +10,22 @@ function AppContainer() {
     <>
       <Routes>
         <Route
-          path="/"
-          element={
-            <PageWithNavbar>
-              <MainPageComponent />
-            </PageWithNavbar>
-          }
-        ></Route>
-        <Route path="/auth" element={<AuthPageComponent />}></Route>
+    path="/"
+    element={
+        <PageWithNavbar>
+            <MainPageComponent/>
+        </PageWithNavbar>
+    }
+    />
+        <Route path="/auth" element={<AuthPageComponent/>}/>
         <Route
-          path="/user"
-          element={
-            <PageWithNavbar>
-              <UserPageComponent />
-            </PageWithNavbar>
-          }
-        ></Route>
+    path="/me"
+    element={
+        <PageWithNavbar>
+            <UserPageComponent/>
+        </PageWithNavbar>
+    }
+    />
       </Routes>
     </>
   );
