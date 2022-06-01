@@ -60,7 +60,11 @@ function RegisterComponent({ changeComponentType }: any) {
               <AuthFormField fieldName="username" required autoFocus />
               <AuthFormField fieldName="email" required />
               <AuthFormField fieldName="password" required />
-              <AuthFormField fieldName="confirmPassword" required />
+              <AuthFormField
+                type="password"
+                fieldName="confirmPassword"
+                required
+              />
               <AuthFormButton type="submit">{t('signUp')}</AuthFormButton>
             </Box>
           )}
