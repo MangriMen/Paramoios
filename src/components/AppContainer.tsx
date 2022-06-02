@@ -29,7 +29,15 @@ function AppContainer() {
           }
         />
         <Route
-          path={ROUTE.HOME}
+          path={ROUTE.PAGE_404}
+          element={
+            <PageWithNavbar>
+              <NotFoundPageComponent />
+            </PageWithNavbar>
+          }
+        />
+        <Route
+          path={ROUTE.SETTINGS}
           element={
             <PageWithNavbar>
               <NotFoundPageComponent />
