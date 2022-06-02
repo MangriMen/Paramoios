@@ -1,5 +1,8 @@
-import { Avatar, Box, Typography, useTheme } from '@mui/material';
+import { Avatar, Box, Button, Typography, useTheme } from '@mui/material';
 import { auth } from 'helpers/firebase';
+import { useNavigate } from 'react-router-dom';
+
+import { ROUTE } from '../../consts';
 
 function stringToColor(string: string) {
   let hash = 0;
@@ -28,6 +31,7 @@ function stringAvatar(name: string) {
 function UserCardComponent() {
   const user = auth?.currentUser;
   const theme = useTheme();
+  const navigate = useNavigate();
 
   return (
     <>
@@ -35,7 +39,7 @@ function UserCardComponent() {
         sx={{
           display: 'flex',
           flexDirection: 'row',
-          justifyContent: 'center',
+          justifyContent: 'space-between',
           mt: '1rem',
           mb: '1rem',
           flexWrap: 'wrap',
@@ -65,6 +69,7 @@ function UserCardComponent() {
               xs: '28px',
             },
             flexWrap: 'wrap',
+            padding: '2vh',
           }}
         >
           <Typography variant="h3" fontSize="inherit">
@@ -73,6 +78,9 @@ function UserCardComponent() {
           <Typography variant="h3" fontSize="inherit">
             Email: {user?.email}
           </Typography>
+        </Box>
+        <Box>
+          <Button onClick={() => navigate(ROUTE.SETTINGS)}>Settings</Button>
         </Box>
       </Box>
     </>
