@@ -6,6 +6,7 @@ import AuthPageComponent from './auth/AuthPageComponent';
 import NotFoundPageComponent from './common/NotFoundPageComponent';
 import PageWithNavbar from './layout/PageWithNavbar';
 import UserPageComponent from './user/UserPageComponent';
+import { UserSettingsComponent } from './user/UserSettingsComponent';
 
 function AppContainer() {
   return (
@@ -40,7 +41,7 @@ function AppContainer() {
           path={ROUTE.SETTINGS}
           element={
             <PageWithNavbar>
-              <NotFoundPageComponent />
+              <UserSettingsComponent />
             </PageWithNavbar>
           }
         />
