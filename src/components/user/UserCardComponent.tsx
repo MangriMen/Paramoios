@@ -1,8 +1,7 @@
 import { Avatar, Box, Button, Typography, useTheme } from '@mui/material';
+import { ROUTE } from 'consts';
 import { auth } from 'helpers/firebase';
 import { useNavigate } from 'react-router-dom';
-
-import { ROUTE } from '../../consts';
 
 function stringToColor(string: string) {
   let hash = 0;
