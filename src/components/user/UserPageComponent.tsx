@@ -1,23 +1,18 @@
-import { Container, useTheme } from '@mui/material';
+import ParContainer from 'components/styled/ParContainer';
 
 import UserCardComponent from './UserCardComponent';
 
 function UserPageComponent() {
-  const theme = useTheme();
-
   return (
-    <Container
+    <ParContainer
       maxWidth="lg"
       sx={{
         mt: '1rem',
-        border: '4px solid',
-        borderColor: theme.palette.primary.main,
-        borderRadius: '4px',
-        backgroundColor: theme.palette.secondary.main,
+        padding: '1.5rem',
       }}
     >
       <UserCardComponent />
-    </Container>
+    </ParContainer>
   );
 }
 
