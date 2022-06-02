@@ -1,5 +1,5 @@
 import { Box, Container, CssBaseline, Typography } from '@mui/material';
-import ParLink from 'components/common/ParLink';
+import ParLink from 'components/styled/ParLink';
 import { authSlice } from 'ducks/auth';
 import { Formik } from 'formik';
 import { registerInitialValues, registerSchema } from 'helpers/auth';
@@ -59,8 +59,12 @@ function RegisterComponent({ changeComponentType }: any) {
             >
               <AuthFormField fieldName="username" required autoFocus />
               <AuthFormField fieldName="email" required />
-              <AuthFormField fieldName="password" required />
-              <AuthFormField fieldName="confirmPassword" required />
+              <AuthFormField type="password" fieldName="password" required />
+              <AuthFormField
+                type="password"
+                fieldName="confirmPassword"
+                required
+              />
               <AuthFormButton type="submit">{t('signUp')}</AuthFormButton>
             </Box>
           )}

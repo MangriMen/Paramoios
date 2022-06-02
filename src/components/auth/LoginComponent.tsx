@@ -1,5 +1,5 @@
 import { Box, Container, CssBaseline, Typography } from '@mui/material';
-import ParLink from 'components/common/ParLink';
+import ParLink from 'components/styled/ParLink';
 import { authSlice } from 'ducks/auth';
 import { Formik } from 'formik';
 import { loginInitialValues, loginSchema } from 'helpers/auth';
@@ -58,6 +58,7 @@ function LoginComponent({ changeComponentType }: any) {
             >
               <AuthFormField fieldName="email" required autoFocus />
               <AuthFormField
+                type="password"
                 fieldName="password"
                 autoComplete={'current-password'}
                 required

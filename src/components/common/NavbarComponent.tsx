@@ -2,21 +2,20 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import PersonIcon from '@mui/icons-material/Person';
 import {
   AppBar,
-  Avatar,
   Box,
   Container,
   IconButton,
-  Link,
   Menu,
   MenuItem,
   Toolbar,
   Tooltip,
-  useTheme,
+  styled,
 } from '@mui/material';
+import ParAvatar from 'components/styled/ParAvatar';
+import ParLink from 'components/styled/ParLink';
 import { ROUTE } from 'consts';
 import { authSlice } from 'ducks/auth';
 import { getIsLogged } from 'ducks/auth/selectors';
-import { stringAvatar, stringToColor } from 'helpers/avatar';
 import { auth } from 'helpers/firebase';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -30,11 +29,30 @@ interface IUserMenuItem {
   onClick: () => void;
 }
 
+const StyledMenu = styled(Menu)(({ theme }) => ({
+  '& .MuiPaper-root': {
+    backgroundColor: 'rgba(0, 0, 0, 0)',
+    boxShadow: 'none',
+    padding: '0 0.8rem',
+  },
+}));
+
+const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
+  border: '0.2rem solid',
+  borderColor: theme.palette.primary.main,
+  borderRadius: '50%',
+  backgroundColor: theme.palette.secondary.main,
+  boxShadow: '5',
+  marginBottom: '0.5rem',
+  padding: '0.5rem',
+  '&:hover': {
+    backgroundColor: theme.palette.primary.main,
+  },
+}));
+
 function NavbarComponent() {
   const { t } = useTranslation('translation', { keyPrefix: 'navbar' });
   const { t: tAuth } = useTranslation('translation', { keyPrefix: 'auth' });
-
-  const theme = useTheme();
 
   const dispatch = useDispatch();
 
@@ -92,59 +110,44 @@ function NavbarComponent() {
             justifyContent: 'space-between',
           }}
         >
-          <Link
+          <ParLink
             component="button"
-            sx={{ color: '#FFFFFF', userSelect: 'none', cursor: '' }}
             fontSize="1rem"
             fontWeight="500"
-            variant="button"
-            underline="none"
+            sx={{ color: '#FFFFFF' }}
             onClick={() => navigate('/')}
           >
             Paramoios
-          </Link>
-          <Box zIndex="100" sx={{ flexGrow: 0 }}>
+          </ParLink>
+          <Box>
             <Tooltip
               disableInteractive
               sx={{
-                mt: {
-                  sm: '1.6rem',
-                  lg: '1.6rem',
-                },
+                mt: '1.6rem',
               }}
               title={isLogged ? t('menu') : tAuth('signIn')}
             >
               <IconButton onClick={handleOpenUserMenu}>
-                <Avatar
+                <ParAvatar
                   sx={{
-                    backgroundColor: stringToColor(
-                      auth?.currentUser?.displayName,
-                    ),
-                    width: '48px',
-                    height: '48px',
-                    border: '4px solid',
-                    borderColor: theme.palette.primary.main,
+                    width: '3rem',
+                    height: '3rem',
                   }}
-                  children={stringAvatar(auth?.currentUser?.displayName)}
-                />
+                >
+                  {auth?.currentUser?.displayName}
+                </ParAvatar>
               </IconButton>
             </Tooltip>
-            <Menu
+            <StyledMenu
               sx={{
-                mt: '45px',
-                '& .MuiPaper-root': {
-                  backgroundColor: 'rgba(0, 0, 0, 0)', // fixed menu transparent
-                  boxShadow: 'none',
-                  padding: '0 0.8rem',
-                },
+                mt: '2.6rem',
               }}
-              id="menu-appbar"
+              keepMounted
               anchorEl={anchorElUser}
               anchorOrigin={{
                 vertical: 'top',
                 horizontal: 'right',
               }}
-              keepMounted
               transformOrigin={{
                 vertical: 'top',
                 horizontal: 'right',
@@ -156,29 +159,15 @@ function NavbarComponent() {
                 <Tooltip
                   disableInteractive
                   placement="left"
+                  key={setting.name}
                   title={setting.tooltip || ''}
                 >
-                  <MenuItem
-                    key={setting.name}
-                    onClick={setting.onClick}
-                    sx={{
-                      padding: '0.5rem',
-                      backgroundColor: theme.palette.secondary.main,
-                      border: '3px solid',
-                      borderColor: theme.palette.primary.main,
-                      borderRadius: '50%',
-                      boxShadow: '5',
-                      marginBottom: '0.5rem',
-                      '&:hover': {
-                        backgroundColor: theme.palette.primary.main,
-                      },
-                    }}
-                  >
+                  <StyledMenuItem onClick={setting.onClick}>
                     {setting.icon}
-                  </MenuItem>
+                  </StyledMenuItem>
                 </Tooltip>
               ))}
-            </Menu>
+            </StyledMenu>
           </Box>
         </Toolbar>
       </Container>
