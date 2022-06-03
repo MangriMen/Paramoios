@@ -20,5 +20,13 @@
   "page": {
     "notFound": "Страница не найдена",
     "notFoundDescription": "Возможно, здесь была гильдия воров"
+  },
+  "userProfile": {
+    "name": "Имя",
+    "email": "Почта",
+    "otherInfo": "Дополнительная информация",
+    "settings": "Настройки",
+    "description": "Описание",
+    "yourCharacters": "Твои персонажи"
   }
 }
