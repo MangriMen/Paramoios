@@ -3,7 +3,7 @@ import { Link, styled } from '@mui/material';
 const LinkStyled = styled(Link)(({ theme }) => ({
   textShadow: '1px 1px 5px black',
   '&:hover': {
-    color: theme.palette.secondary.light,
+    filter: 'brightness(115%)',
   },
 }));
 

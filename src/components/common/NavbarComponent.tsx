@@ -13,11 +13,11 @@ import {
 } from '@mui/material';
 import ParAvatar from 'components/styled/ParAvatar';
 import ParLink from 'components/styled/ParLink';
+import { ROUTE } from 'consts';
 import { authSlice } from 'ducks/auth';
 import { getIsLogged } from 'ducks/auth/selectors';
 import { auth } from 'helpers/firebase';
-import { useState } from 'react';
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -66,7 +66,7 @@ function NavbarComponent() {
     if (isLogged) {
       setAnchorElUser(event.currentTarget);
     } else {
-      navigate('/auth');
+      navigate(ROUTE.AUTH);
     }
   };
 
@@ -81,7 +81,7 @@ function NavbarComponent() {
       tooltip: t('profile'),
       onClick: () => {
         handleCloseUserMenu();
-        navigate('/user');
+        navigate(ROUTE.ME);
       },
     },
     {
@@ -91,7 +91,7 @@ function NavbarComponent() {
       onClick: () => {
         handleCloseUserMenu();
         dispatch(authSlice.actions.logout());
-        navigate('/');
+        navigate(ROUTE.HOME);
       },
     },
   ];
