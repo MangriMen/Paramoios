@@ -15,7 +15,7 @@ function ParAvatar({ children, sx, ...props }: AvatarProps) {
       }}
       children={stringAvatar(children?.toString())}
       {...props}
-    ></AvatarStyled>
+    />
   );
 }
 
