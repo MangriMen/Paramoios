@@ -13,9 +13,10 @@ function ParAvatar({ children, sx, ...props }: AvatarProps) {
         backgroundColor: stringToColor(children?.toString()),
         ...sx,
       }}
-      children={stringAvatar(children?.toString())}
       {...props}
-    />
+    >
+      {stringAvatar(children?.toString())}
+    </AvatarStyled>
   );
 }
 
