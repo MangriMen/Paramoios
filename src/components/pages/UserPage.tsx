@@ -1,8 +1,8 @@
 import ParContainer from 'components/styled/ParContainer';
 
-import UserCardComponent from './UserCardComponent';
+import UserCard from '../user/UserCard';
 
-function UserPageComponent() {
+function UserPage() {
   return (
     <ParContainer
       maxWidth="lg"
@@ -11,9 +11,9 @@ function UserPageComponent() {
         padding: '1.5rem',
       }}
     >
-      <UserCardComponent />
+      <UserCard />
     </ParContainer>
   );
 }
 
-export default UserPageComponent;
+export default UserPage;

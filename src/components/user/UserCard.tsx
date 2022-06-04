@@ -7,7 +7,7 @@ import { userInfo } from 'mocks/mockUserInfo';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-function UserCardComponent() {
+function UserCard() {
   const { t } = useTranslation('translation', { keyPrefix: 'userProfile' });
   const user = auth?.currentUser;
   const navigate = useNavigate();
@@ -216,4 +216,4 @@ function UserCardComponent() {
   );
 }
 
-export default UserCardComponent;
+export default UserCard;

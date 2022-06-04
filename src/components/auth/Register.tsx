@@ -2,21 +2,22 @@ import { Box, Container, CssBaseline, Typography } from '@mui/material';
 import ParLink from 'components/styled/ParLink';
 import { authSlice } from 'ducks/auth';
 import { Formik } from 'formik';
-import { loginInitialValues, loginSchema } from 'helpers/auth';
+import { registerInitialValues, registerSchema } from 'helpers/auth';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 
-import AuthFormButton from './AuthFormButton';
-import AuthFormField from './AuthFormField';
+import AuthFormButton from './FormButton';
+import AuthFormField from './FormField';
 
-function LoginComponent({ changeComponentType }: any) {
+function Register({ changeComponentType }: any) {
   const { t } = useTranslation('translation', { keyPrefix: 'auth' });
 
   const dispatch = useDispatch();
 
-  const handlerSubmit = (values: typeof loginInitialValues) => {
+  const handlerSubmit = (values: typeof registerInitialValues) => {
     dispatch(
-      authSlice.actions.login({
+      authSlice.actions.register({
+        username: values.username,
         email: values.email,
         password: values.password,
       }),
@@ -39,14 +40,14 @@ function LoginComponent({ changeComponentType }: any) {
           fontWeight="bold"
           sx={{ fontSize: { xs: '3rem' } }}
         >
-          {t('authorize')}
+          {t('register')}
         </Typography>
         <ParLink component="button" onClick={changeComponentType}>
-          {t('orRegister')}
+          {t('orLogin')}
         </ParLink>
         <Formik
-          initialValues={loginInitialValues}
-          validationSchema={loginSchema}
+          initialValues={registerInitialValues}
+          validationSchema={registerSchema}
           onSubmit={handlerSubmit}
           validateOnBlur
         >
@@ -56,16 +57,15 @@ function LoginComponent({ changeComponentType }: any) {
               onSubmit={handleSubmit}
               sx={{ maxWidth: '21rem' }}
             >
-              <AuthFormField fieldName="email" required autoFocus />
+              <AuthFormField fieldName="username" required autoFocus />
+              <AuthFormField fieldName="email" required />
+              <AuthFormField type="password" fieldName="password" required />
               <AuthFormField
                 type="password"
-                fieldName="password"
-                autoComplete={'current-password'}
+                fieldName="confirmPassword"
                 required
               />
-              <AuthFormButton type={'submit'} fullWidth>
-                {t('signIn')}
-              </AuthFormButton>
+              <AuthFormButton type="submit">{t('signUp')}</AuthFormButton>
             </Box>
           )}
         </Formik>
@@ -74,4 +74,4 @@ function LoginComponent({ changeComponentType }: any) {
   );
 }
 
-export default LoginComponent;
+export default Register;

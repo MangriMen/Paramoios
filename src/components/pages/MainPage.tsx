@@ -1,9 +1,9 @@
 import { Avatar, Grid, Typography, useTheme } from '@mui/material';
 
-import ParBox from './styled/ParBox';
-import ParContainer from './styled/ParContainer';
+import ParBox from '../styled/ParBox';
+import ParContainer from '../styled/ParContainer';
 
-function MainPageComponent() {
+function MainPage() {
   const theme = useTheme();
 
   return (
@@ -117,4 +117,4 @@ function MainPageComponent() {
   );
 }
 
-export default MainPageComponent;
+export default MainPage;

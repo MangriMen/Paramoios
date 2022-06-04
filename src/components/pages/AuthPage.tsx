@@ -8,10 +8,10 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import LoginComponent from './LoginComponent';
-import RegisterComponent from './RegisterComponent';
+import Login from '../auth/Login';
+import Register from '../auth/Register';
 
-function AuthPageComponent() {
+function AuthPage() {
   const theme = useTheme();
   const { t } = useTranslation('translation', { keyPrefix: 'auth' });
 
@@ -99,9 +99,9 @@ function AuthPageComponent() {
             {t('welcome')}
           </Typography>
           {isLogin ? (
-            <LoginComponent changeComponentType={changeComponentType} />
+            <Login changeComponentType={changeComponentType} />
           ) : (
-            <RegisterComponent changeComponentType={changeComponentType} />
+            <Register changeComponentType={changeComponentType} />
           )}
         </Box>
         <Box
@@ -236,4 +236,4 @@ function AuthPageGreetings() {
   );
 }
 
-export default AuthPageComponent;
+export default AuthPage;

@@ -1,7 +1,7 @@
 import { ThemeProvider, createTheme } from '@mui/material';
 import { BrowserRouter } from 'react-router-dom';
 
-import AppContainer from './AppContainer';
+import AppRoutes from './AppRoutes';
 
 const theme = createTheme({
   typography: {
@@ -22,7 +22,7 @@ function App() {
     <>
       <ThemeProvider theme={theme}>
         <BrowserRouter>
-          <AppContainer />
+          <AppRoutes />
         </BrowserRouter>
       </ThemeProvider>
     </>

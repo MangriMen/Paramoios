@@ -1,13 +1,13 @@
 import { ROUTE } from 'consts';
 import { Route, Routes } from 'react-router';
 
-import MainPageComponent from './MainPageComponent';
-import AuthPageComponent from './auth/AuthPageComponent';
-import NotFoundPageComponent from './common/NotFoundPageComponent';
 import PageWithNavbar from './layout/PageWithNavbar';
-import UserPageComponent from './user/UserPageComponent';
+import AuthPage from './pages/AuthPage';
+import MainPage from './pages/MainPage';
+import NotFoundPage from './pages/NotFoundPage';
+import UserPage from './pages/UserPage';
 
-function AppContainer() {
+function AppRoutes() {
   return (
     <>
       <Routes>
@@ -15,16 +15,16 @@ function AppContainer() {
           path={ROUTE.HOME}
           element={
             <PageWithNavbar>
-              <MainPageComponent />
+              <MainPage />
             </PageWithNavbar>
           }
         />
-        <Route path={ROUTE.AUTH} element={<AuthPageComponent />} />
+        <Route path={ROUTE.AUTH} element={<AuthPage />} />
         <Route
           path={ROUTE.ME}
           element={
             <PageWithNavbar>
-              <UserPageComponent />
+              <UserPage />
             </PageWithNavbar>
           }
         />
@@ -32,7 +32,7 @@ function AppContainer() {
           path={ROUTE.PAGE_404}
           element={
             <PageWithNavbar>
-              <NotFoundPageComponent />
+              <NotFoundPage />
             </PageWithNavbar>
           }
         />
@@ -40,7 +40,7 @@ function AppContainer() {
           path={ROUTE.SETTINGS}
           element={
             <PageWithNavbar>
-              <NotFoundPageComponent />
+              <NotFoundPage />
             </PageWithNavbar>
           }
         />
@@ -49,4 +49,4 @@ function AppContainer() {
   );
 }
 
-export default AppContainer;
+export default AppRoutes;

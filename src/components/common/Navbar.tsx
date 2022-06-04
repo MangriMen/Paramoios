@@ -50,7 +50,7 @@ const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
   },
 }));
 
-function NavbarComponent() {
+function Navbar() {
   const { t } = useTranslation('translation', { keyPrefix: 'navbar' });
   const { t: tAuth } = useTranslation('translation', { keyPrefix: 'auth' });
 
@@ -175,4 +175,4 @@ function NavbarComponent() {
   );
 }
 
-export default NavbarComponent;
+export default Navbar;
