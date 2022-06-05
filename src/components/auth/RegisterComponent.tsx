@@ -3,6 +3,7 @@ import ParLink from 'components/styled/ParLink';
 import { authSlice } from 'ducks/auth';
 import { Formik } from 'formik';
 import { registerInitialValues, registerSchema } from 'helpers/auth';
+import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 
@@ -14,15 +15,18 @@ function RegisterComponent({ changeComponentType }: any) {
 
   const dispatch = useDispatch();
 
-  const handlerSubmit = (values: typeof registerInitialValues) => {
-    dispatch(
-      authSlice.actions.register({
-        username: values.username,
-        email: values.email,
-        password: values.password,
-      }),
-    );
-  };
+  const handlerSubmit = useCallback(
+    (values: typeof registerInitialValues) => {
+      dispatch(
+        authSlice.actions.register({
+          username: values.username,
+          email: values.email,
+          password: values.password,
+        }),
+      );
+    },
+    [dispatch],
+  );
 
   return (
     <Container component={'main'} maxWidth={'xs'}>

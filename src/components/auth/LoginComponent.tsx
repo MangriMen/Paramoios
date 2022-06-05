@@ -3,6 +3,7 @@ import ParLink from 'components/styled/ParLink';
 import { authSlice } from 'ducks/auth';
 import { Formik } from 'formik';
 import { loginInitialValues, loginSchema } from 'helpers/auth';
+import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 
@@ -14,14 +15,17 @@ function LoginComponent({ changeComponentType }: any) {
 
   const dispatch = useDispatch();
 
-  const handlerSubmit = (values: typeof loginInitialValues) => {
-    dispatch(
-      authSlice.actions.login({
-        email: values.email,
-        password: values.password,
-      }),
-    );
-  };
+  const handlerSubmit = useCallback(
+    (values: typeof loginInitialValues) => {
+      dispatch(
+        authSlice.actions.login({
+          email: values.email,
+          password: values.password,
+        }),
+      );
+    },
+    [dispatch],
+  );
 
   return (
     <Container component={'main'} maxWidth={'xs'}>
