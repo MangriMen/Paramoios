@@ -13,10 +13,10 @@ import {
 } from '@mui/material';
 import ParAvatar from 'components/styled/ParAvatar';
 import ParLink from 'components/styled/ParLink';
+import { auth } from 'configs/firebase';
 import { ROUTE } from 'consts';
 import { authSlice } from 'ducks/auth';
 import { getIsLogged } from 'ducks/auth/selectors';
-import { auth } from 'helpers/firebase';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';

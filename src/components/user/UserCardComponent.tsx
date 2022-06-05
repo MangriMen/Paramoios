@@ -1,8 +1,8 @@
 import { Box, Card, Divider, Typography } from '@mui/material';
 import ParAvatar from 'components/styled/ParAvatar';
 import ParLink from 'components/styled/ParLink';
+import { auth } from 'configs/firebase';
 import { ROUTE } from 'consts';
-import { auth } from 'helpers/firebase';
 import { userInfo } from 'mocks/mockUserInfo';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';

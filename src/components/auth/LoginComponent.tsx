@@ -2,19 +2,29 @@ import { Box, Container, CssBaseline, Typography } from '@mui/material';
 import ParLink from 'components/styled/ParLink';
 import { authSlice } from 'ducks/auth';
 import { Formik } from 'formik';
-import { loginInitialValues, loginSchema } from 'helpers/auth';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
+import { loginSchema } from 'schemas/auth';
 
 import AuthFormButton from './AuthFormButton';
 import AuthFormField from './AuthFormField';
+
+interface ILoginValues {
+  email: string;
+  password: string;
+}
 
 function LoginComponent({ changeComponentType }: any) {
   const { t } = useTranslation('translation', { keyPrefix: 'auth' });
 
   const dispatch = useDispatch();
 
-  const handlerSubmit = (values: typeof loginInitialValues) => {
+  const initialValues: ILoginValues = {
+    email: '',
+    password: '',
+  };
+
+  const handlerSubmit = (values: ILoginValues) => {
     dispatch(
       authSlice.actions.login({
         email: values.email,
@@ -45,7 +55,7 @@ function LoginComponent({ changeComponentType }: any) {
           {t('orRegister')}
         </ParLink>
         <Formik
-          initialValues={loginInitialValues}
+          initialValues={initialValues}
           validationSchema={loginSchema}
           onSubmit={handlerSubmit}
           validateOnBlur
