@@ -1,4 +1,5 @@
 import { Container, ContainerProps, styled } from '@mui/material';
+import { FC } from 'react';
 
 const ContainerStyled = styled(Container)(({ theme }) => ({
   border: '4px solid',
@@ -7,8 +8,8 @@ const ContainerStyled = styled(Container)(({ theme }) => ({
   borderRadius: '4px',
 }));
 
-function ParBox({ children, ...props }: ContainerProps) {
+const ParBox: FC<ContainerProps> = ({ children, ...props }) => {
   return <ContainerStyled {...props}>{children}</ContainerStyled>;
-}
+};
 
 export default ParBox;

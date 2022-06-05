@@ -1,12 +1,13 @@
 import { Avatar, AvatarProps, styled } from '@mui/material';
 import { stringAvatar, stringToColor } from 'helpers/avatar';
+import { FC } from 'react';
 
 const AvatarStyled = styled(Avatar)(({ theme }) => ({
   border: '4px solid',
   borderColor: theme.palette.primary.main,
 }));
 
-function ParAvatar({ children, sx, ...props }: AvatarProps) {
+const ParAvatar: FC<AvatarProps> = ({ children, sx, ...props }) => {
   return (
     <AvatarStyled
       sx={{
@@ -17,6 +18,6 @@ function ParAvatar({ children, sx, ...props }: AvatarProps) {
       {...props}
     />
   );
-}
+};
 
 export default ParAvatar;

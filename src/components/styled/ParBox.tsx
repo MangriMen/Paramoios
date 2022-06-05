@@ -1,8 +1,9 @@
 import { Box, BoxProps, styled } from '@mui/material';
+import { FC } from 'react';
 
 const BoxStyled = styled(Box)(({ theme }) => ({}));
 
-function ParBox({ children, ...props }: BoxProps) {
+const ParBox: FC<BoxProps> = ({ children, ...props }) => {
   return (
     <BoxStyled
       bgcolor="secondary.main"
@@ -14,6 +15,6 @@ function ParBox({ children, ...props }: BoxProps) {
       {children}
     </BoxStyled>
   );
-}
+};
 
 export default ParBox;
