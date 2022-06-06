@@ -1,30 +1,50 @@
-import { ThemeProvider, createTheme } from '@mui/material';
-import { BrowserRouter } from 'react-router-dom';
+import { ROUTE } from 'consts';
+import { Route, Routes } from 'react-router';
 
-import AppRoutes from './AppRoutes';
-
-const theme = createTheme({
-  typography: {
-    fontFamily: 'Eberron',
-  },
-  palette: {
-    primary: {
-      main: '#681e22',
-    },
-    secondary: {
-      main: '#e9c996',
-    },
-  },
-});
+import PageWithNavbar from './layout/PageWithNavbar';
+import AuthPage from './pages/AuthPage';
+import MainPage from './pages/MainPage';
+import NotFoundPage from './pages/NotFoundPage';
+import UserPage from './pages/UserPage';
 
 function App() {
   return (
     <>
-      <ThemeProvider theme={theme}>
-        <BrowserRouter>
-          <AppRoutes />
-        </BrowserRouter>
-      </ThemeProvider>
+      <Routes>
+        <Route
+          path={ROUTE.HOME}
+          element={
+            <PageWithNavbar>
+              <MainPage />
+            </PageWithNavbar>
+          }
+        />
+        <Route path={ROUTE.AUTH} element={<AuthPage />} />
+        <Route
+          path={ROUTE.ME}
+          element={
+            <PageWithNavbar>
+              <UserPage />
+            </PageWithNavbar>
+          }
+        />
+        <Route
+          path={ROUTE.PAGE_404}
+          element={
+            <PageWithNavbar>
+              <NotFoundPage />
+            </PageWithNavbar>
+          }
+        />
+        <Route
+          path={ROUTE.SETTINGS}
+          element={
+            <PageWithNavbar>
+              <NotFoundPage />
+            </PageWithNavbar>
+          }
+        />
+      </Routes>
     </>
   );
 }
