@@ -17,7 +17,7 @@ import { ROUTE } from 'consts';
 import { authSlice } from 'ducks/auth';
 import { getIsLogged } from 'ducks/auth/selectors';
 import { auth } from 'helpers/firebase';
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -62,40 +62,37 @@ function NavbarComponent() {
 
   const navigate = useNavigate();
 
-  const handleOpenUserMenu = useCallback(
-    (event: React.MouseEvent<HTMLElement>) => {
-      if (isLogged) {
-        setAnchorElUser(event.currentTarget);
-      } else {
-        navigate(ROUTE.AUTH);
-      }
-    },
-    [isLogged, navigate],
-  );
+  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+    if (isLogged) {
+      setAnchorElUser(event.currentTarget);
+    } else {
+      navigate(ROUTE.AUTH);
+    }
+  };
 
-  const handleCloseUserMenu = useCallback(() => {
+  const handleCloseUserMenu = () => {
     setAnchorElUser(null);
-  }, []);
+  };
 
   const userSettings: Array<IUserMenuItem> = [
     {
       name: 'Profile',
       icon: <PersonIcon sx={{ color: '#ffffff' }} />,
       tooltip: t('profile'),
-      onClick: useCallback(() => {
+      onClick: () => {
         handleCloseUserMenu();
         navigate(ROUTE.ME);
-      }, [handleCloseUserMenu, navigate]),
+      },
     },
     {
       name: 'Logout',
       icon: <LogoutIcon sx={{ color: '#ffffff' }} />,
       tooltip: tAuth('signOut'),
-      onClick: useCallback(() => {
+      onClick: () => {
         handleCloseUserMenu();
         dispatch(authSlice.actions.logout());
         navigate(ROUTE.HOME);
-      }, [dispatch, handleCloseUserMenu, navigate]),
+      },
     },
   ];
 
