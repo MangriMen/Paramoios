@@ -1,9 +1,11 @@
+type StringOrEmpty = string | null | undefined;
+
 /**
- * Used to get color as a hash of the input string for automatically generated avatars
- * @param string any string, can be user name/nickname
- * @returns color in hex with alpha, calculated as a hash of the input string
+ * @used For automatically generated avatar colors.
+ * @param string Any string to get hash from.
+ * @returns Color (as a hash string from input value) or undefined.
  */
-export function stringToColor(string: string | null | undefined) {
+export function stringToColor(string: StringOrEmpty): string | undefined {
   if (string === undefined || string === null) return undefined;
 
   let hash = 0;
@@ -25,10 +27,10 @@ export function stringToColor(string: string | null | undefined) {
 }
 
 /**
- * Used to get  first letter of the input string for automatically generated avatars
- * @param name - real name/nikname
- * @returns first letter of name
+ * @used For automatically generated avatars.
+ * @param name - Username.
+ * @returns First letter of name variable or undefined.
  */
-export function stringAvatar(name: string | null | undefined) {
+export function stringAvatar(name: StringOrEmpty): string | undefined {
   return name === undefined || name === null ? undefined : `${name.charAt(0)}`;
 }
