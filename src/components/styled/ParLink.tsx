@@ -8,7 +8,9 @@ const LinkStyled = styled(Link)(() => ({
   },
 })) as typeof Link;
 
-const ParLink: FC<LinkProps & any> = ({ children, ...props }) => {
+type ParLinkProps = LinkProps & { component: React.ElementType<any> };
+
+const ParLink: FC<ParLinkProps> = ({ children, ...props }) => {
   return (
     <LinkStyled
       fontSize="1.4rem"
