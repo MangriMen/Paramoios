@@ -22,7 +22,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-interface IUserMenuItem {
+interface UserMenuItem {
   name: string;
   icon: JSX.Element;
   tooltip?: string;
@@ -74,7 +74,7 @@ function NavbarComponent() {
     setAnchorElUser(null);
   };
 
-  const userSettings: Array<IUserMenuItem> = [
+  const userSettings: Array<UserMenuItem> = [
     {
       name: 'Profile',
       icon: <PersonIcon sx={{ color: '#ffffff' }} />,

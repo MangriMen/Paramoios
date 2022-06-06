@@ -9,7 +9,7 @@ import { loginSchema } from 'schemas/auth';
 import AuthFormButton from './AuthFormButton';
 import AuthFormField from './AuthFormField';
 
-interface ILoginValues {
+interface LoginValues {
   email: string;
   password: string;
 }
@@ -19,18 +19,13 @@ function LoginComponent({ changeComponentType }: any) {
 
   const dispatch = useDispatch();
 
-  const initialValues: ILoginValues = {
+  const initialValues: LoginValues = {
     email: '',
     password: '',
   };
 
-  const handlerSubmit = (values: ILoginValues) => {
-    dispatch(
-      authSlice.actions.login({
-        email: values.email,
-        password: values.password,
-      }),
-    );
+  const handlerSubmit = ({ email, password }: LoginValues) => {
+    dispatch(authSlice.actions.login({ email, password }));
   };
 
   return (

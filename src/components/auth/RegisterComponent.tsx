@@ -9,7 +9,7 @@ import { registerSchema } from 'schemas/auth';
 import AuthFormButton from './AuthFormButton';
 import AuthFormField from './AuthFormField';
 
-interface IRegisterValues {
+interface RegisterValues {
   username: string;
   email: string;
   password: string;
@@ -21,21 +21,15 @@ function RegisterComponent({ changeComponentType }: any) {
 
   const dispatch = useDispatch();
 
-  const initialValues: IRegisterValues = {
+  const initialValues: RegisterValues = {
     username: '',
     email: '',
     password: '',
     confirmPassword: '',
   };
 
-  const handlerSubmit = (values: IRegisterValues) => {
-    dispatch(
-      authSlice.actions.register({
-        username: values.username,
-        email: values.email,
-        password: values.password,
-      }),
-    );
+  const handlerSubmit = ({ username, email, password }: RegisterValues) => {
+    dispatch(authSlice.actions.register({ username, email, password }));
   };
 
   return (
