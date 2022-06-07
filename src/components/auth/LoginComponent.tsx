@@ -2,13 +2,18 @@ import { Box, Container, CssBaseline, Typography } from '@mui/material';
 import ParLink from 'components/styled/ParLink';
 import { authSlice } from 'ducks/auth';
 import { Form, Formik } from 'formik';
-import { loginInitialValues, loginSchema } from 'helpers/auth';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
+import { loginSchema } from 'schemas/auth';
 
 import AuthFormButton from './AuthFormButton';
 import AuthFormField from './AuthFormField';
+
+interface LoginValues {
+  email: string;
+  password: string;
+}
 
 const LoginComponent: FC<{ changeComponentType: () => void }> = ({
   changeComponentType,
@@ -17,13 +22,13 @@ const LoginComponent: FC<{ changeComponentType: () => void }> = ({
 
   const dispatch = useDispatch();
 
-  const handlerSubmit = (values: typeof loginInitialValues) => {
-    dispatch(
-      authSlice.actions.login({
-        email: values.email,
-        password: values.password,
-      }),
-    );
+  const initialValues: LoginValues = {
+    email: '',
+    password: '',
+  };
+
+  const handlerSubmit = ({ email, password }: LoginValues) => {
+    dispatch(authSlice.actions.login({ email, password }));
   };
 
   return (
@@ -48,7 +53,7 @@ const LoginComponent: FC<{ changeComponentType: () => void }> = ({
           {t('orRegister')}
         </ParLink>
         <Formik
-          initialValues={loginInitialValues}
+          initialValues={initialValues}
           validationSchema={loginSchema}
           onSubmit={handlerSubmit}
           validateOnBlur

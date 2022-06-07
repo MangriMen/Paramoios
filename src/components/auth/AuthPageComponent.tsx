@@ -1,5 +1,5 @@
 import { Box, Container, Typography, useTheme } from '@mui/material';
-import donationAlertLogo from 'assets/images/deprecated/DA_Alert_White.svg';
+import donationAlertLogo from 'assets/images/icons/DA_Alert_White.svg';
 import 'assets/styles/deprecated/login.css';
 import { ROUTE } from 'consts';
 import { getError, getIsLogged } from 'ducks/auth/selectors';
