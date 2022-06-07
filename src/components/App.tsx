@@ -1,4 +1,5 @@
 import { ROUTE } from 'consts';
+import { FC } from 'react';
 import { Route, Routes } from 'react-router';
 
 import PageWithNavbar from './layout/PageWithNavbar';
@@ -7,7 +8,7 @@ import MainPage from './pages/MainPage';
 import NotFoundPage from './pages/NotFoundPage';
 import UserPage from './pages/UserPage';
 
-function App() {
+const App: FC = () => {
   return (
     <>
       <Routes>
@@ -47,6 +48,6 @@ function App() {
       </Routes>
     </>
   );
-}
+};
 
 export default App;

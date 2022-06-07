@@ -1,13 +1,14 @@
 import { Box, Card, Divider, Typography } from '@mui/material';
 import ParAvatar from 'components/styled/ParAvatar';
 import ParLink from 'components/styled/ParLink';
+import { auth } from 'configs/firebase';
 import { ROUTE } from 'consts';
-import { auth } from 'helpers/firebase';
 import { userInfo } from 'mocks/mockUserInfo';
+import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-function UserCard() {
+const UserCard: FC = () => {
   const { t } = useTranslation('translation', { keyPrefix: 'userProfile' });
   const user = auth?.currentUser;
   const navigate = useNavigate();
@@ -214,6 +215,6 @@ function UserCard() {
       </Box>
     </Box>
   );
-}
+};
 
 export default UserCard;

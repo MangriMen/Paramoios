@@ -1,27 +1,38 @@
 import { Box, Container, CssBaseline, Typography } from '@mui/material';
 import ParLink from 'components/styled/ParLink';
 import { authSlice } from 'ducks/auth';
-import { Formik } from 'formik';
-import { registerInitialValues, registerSchema } from 'helpers/auth';
+import { Form, Formik } from 'formik';
+import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
+import { registerSchema } from 'schemas/auth';
 
-import AuthFormButton from './FormButton';
-import AuthFormField from './FormField';
+import FormButton from './FormButton';
+import FormField from './FormField';
 
-function Register({ changeComponentType }: any) {
+interface RegisterValues {
+  username: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
+
+const Register: FC<{ changeComponentType: () => void }> = ({
+  changeComponentType,
+}) => {
   const { t } = useTranslation('translation', { keyPrefix: 'auth' });
 
   const dispatch = useDispatch();
 
-  const handlerSubmit = (values: typeof registerInitialValues) => {
-    dispatch(
-      authSlice.actions.register({
-        username: values.username,
-        email: values.email,
-        password: values.password,
-      }),
-    );
+  const initialValues: RegisterValues = {
+    username: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+  };
+
+  const handlerSubmit = ({ username, email, password }: RegisterValues) => {
+    dispatch(authSlice.actions.register({ username, email, password }));
   };
 
   return (
@@ -46,32 +57,24 @@ function Register({ changeComponentType }: any) {
           {t('orLogin')}
         </ParLink>
         <Formik
-          initialValues={registerInitialValues}
+          initialValues={initialValues}
           validationSchema={registerSchema}
           onSubmit={handlerSubmit}
           validateOnBlur
         >
-          {({ handleSubmit }) => (
-            <Box
-              component={'form'}
-              onSubmit={handleSubmit}
-              sx={{ maxWidth: '21rem' }}
-            >
-              <AuthFormField fieldName="username" required autoFocus />
-              <AuthFormField fieldName="email" required />
-              <AuthFormField type="password" fieldName="password" required />
-              <AuthFormField
-                type="password"
-                fieldName="confirmPassword"
-                required
-              />
-              <AuthFormButton type="submit">{t('signUp')}</AuthFormButton>
+          <Form>
+            <Box sx={{ maxWidth: '21rem' }}>
+              <FormField fieldName="username" required autoFocus />
+              <FormField fieldName="email" required />
+              <FormField type="password" fieldName="password" required />
+              <FormField type="password" fieldName="confirmPassword" required />
+              <FormButton type="submit">{t('signUp')}</FormButton>
             </Box>
-          )}
+          </Form>
         </Formik>
       </Box>
     </Container>
   );
-}
+};
 
 export default Register;

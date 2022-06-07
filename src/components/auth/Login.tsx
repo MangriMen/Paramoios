@@ -1,26 +1,34 @@
 import { Box, Container, CssBaseline, Typography } from '@mui/material';
 import ParLink from 'components/styled/ParLink';
 import { authSlice } from 'ducks/auth';
-import { Formik } from 'formik';
-import { loginInitialValues, loginSchema } from 'helpers/auth';
+import { Form, Formik } from 'formik';
+import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
+import { loginSchema } from 'schemas/auth';
 
 import FormButton from './FormButton';
 import FormField from './FormField';
 
-function Login({ changeComponentType }: any) {
+interface LoginValues {
+  email: string;
+  password: string;
+}
+
+const Login: FC<{ changeComponentType: () => void }> = ({
+  changeComponentType,
+}) => {
   const { t } = useTranslation('translation', { keyPrefix: 'auth' });
 
   const dispatch = useDispatch();
 
-  const handlerSubmit = (values: typeof loginInitialValues) => {
-    dispatch(
-      authSlice.actions.login({
-        email: values.email,
-        password: values.password,
-      }),
-    );
+  const initialValues: LoginValues = {
+    email: '',
+    password: '',
+  };
+
+  const handlerSubmit = ({ email, password }: LoginValues) => {
+    dispatch(authSlice.actions.login({ email, password }));
   };
 
   return (
@@ -45,17 +53,13 @@ function Login({ changeComponentType }: any) {
           {t('orRegister')}
         </ParLink>
         <Formik
-          initialValues={loginInitialValues}
+          initialValues={initialValues}
           validationSchema={loginSchema}
           onSubmit={handlerSubmit}
           validateOnBlur
         >
-          {({ handleSubmit }) => (
-            <Box
-              component={'form'}
-              onSubmit={handleSubmit}
-              sx={{ maxWidth: '21rem' }}
-            >
+          <Form>
+            <Box sx={{ maxWidth: '21rem' }}>
               <FormField fieldName="email" required autoFocus />
               <FormField
                 type="password"
@@ -67,11 +71,11 @@ function Login({ changeComponentType }: any) {
                 {t('signIn')}
               </FormButton>
             </Box>
-          )}
+          </Form>
         </Formik>
       </Box>
     </Container>
   );
-}
+};
 
 export default Login;

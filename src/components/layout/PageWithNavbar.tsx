@@ -1,13 +1,13 @@
 import Navbar from 'components/common/Navbar';
-import { ReactNode } from 'react';
+import { FC, ReactNode } from 'react';
 
-function PageWithNavbar({ children }: { children: ReactNode }): JSX.Element {
+const PageWithNavbar: FC<{ children: ReactNode }> = ({ children }) => {
   return (
     <>
       <Navbar />
       {children}
     </>
   );
-}
+};
 
 export default PageWithNavbar;
