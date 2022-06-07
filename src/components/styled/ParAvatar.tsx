@@ -14,9 +14,10 @@ const ParAvatar: FC<AvatarProps> = ({ children, sx, ...props }) => {
         backgroundColor: stringToColor(children?.toString()),
         ...sx,
       }}
-      children={stringAvatar(children?.toString())}
       {...props}
-    />
+    >
+      {stringAvatar(children?.toString())}
+    </AvatarStyled>
   );
 };
 

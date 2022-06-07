@@ -3,7 +3,7 @@ import donationAlertLogo from 'assets/images/deprecated/DA_Alert_White.svg';
 import 'assets/styles/deprecated/login.css';
 import { ROUTE } from 'consts';
 import { getError, getIsLogged } from 'ducks/auth/selectors';
-import { FC, useEffect, useState } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -27,7 +27,9 @@ const AuthPageComponent: FC = () => {
 
   const [isLogin, setLogin] = useState(true);
 
-  const changeComponentType = () => setLogin(!isLogin);
+  const changeComponentType = useCallback(() => {
+    setLogin(!isLogin);
+  }, [isLogin]);
 
   const error = useSelector(getError);
 

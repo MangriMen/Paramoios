@@ -1,7 +1,7 @@
 import { Box, Container, CssBaseline, Typography } from '@mui/material';
 import ParLink from 'components/styled/ParLink';
 import { authSlice } from 'ducks/auth';
-import { Formik } from 'formik';
+import { Form, Formik } from 'formik';
 import { loginInitialValues, loginSchema } from 'helpers/auth';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -53,12 +53,8 @@ const LoginComponent: FC<{ changeComponentType: () => void }> = ({
           onSubmit={handlerSubmit}
           validateOnBlur
         >
-          {({ handleSubmit }) => (
-            <Box
-              component={'form'}
-              onSubmit={handleSubmit}
-              sx={{ maxWidth: '21rem' }}
-            >
+          <Form>
+            <Box sx={{ maxWidth: '21rem' }}>
               <AuthFormField fieldName="email" required autoFocus />
               <AuthFormField
                 type="password"
@@ -70,7 +66,7 @@ const LoginComponent: FC<{ changeComponentType: () => void }> = ({
                 {t('signIn')}
               </AuthFormButton>
             </Box>
-          )}
+          </Form>
         </Formik>
       </Box>
     </Container>
