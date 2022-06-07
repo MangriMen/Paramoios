@@ -7,15 +7,15 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { loginSchema } from 'schemas/auth';
 
-import AuthFormButton from './AuthFormButton';
-import AuthFormField from './AuthFormField';
+import FormButton from './FormButton';
+import FormField from './FormField';
 
 interface LoginValues {
   email: string;
   password: string;
 }
 
-const LoginComponent: FC<{ changeComponentType: () => void }> = ({
+const Login: FC<{ changeComponentType: () => void }> = ({
   changeComponentType,
 }) => {
   const { t } = useTranslation('translation', { keyPrefix: 'auth' });
@@ -60,16 +60,16 @@ const LoginComponent: FC<{ changeComponentType: () => void }> = ({
         >
           <Form>
             <Box sx={{ maxWidth: '21rem' }}>
-              <AuthFormField fieldName="email" required autoFocus />
-              <AuthFormField
+              <FormField fieldName="email" required autoFocus />
+              <FormField
                 type="password"
                 fieldName="password"
                 autoComplete={'current-password'}
                 required
               />
-              <AuthFormButton type={'submit'} fullWidth>
+              <FormButton type={'submit'} fullWidth>
                 {t('signIn')}
-              </AuthFormButton>
+              </FormButton>
             </Box>
           </Form>
         </Formik>
@@ -78,4 +78,4 @@ const LoginComponent: FC<{ changeComponentType: () => void }> = ({
   );
 };
 
-export default LoginComponent;
+export default Login;

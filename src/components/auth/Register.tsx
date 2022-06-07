@@ -7,8 +7,8 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { registerSchema } from 'schemas/auth';
 
-import AuthFormButton from './AuthFormButton';
-import AuthFormField from './AuthFormField';
+import FormButton from './FormButton';
+import FormField from './FormField';
 
 interface RegisterValues {
   username: string;
@@ -17,7 +17,7 @@ interface RegisterValues {
   confirmPassword: string;
 }
 
-const RegisterComponent: FC<{ changeComponentType: () => void }> = ({
+const Register: FC<{ changeComponentType: () => void }> = ({
   changeComponentType,
 }) => {
   const { t } = useTranslation('translation', { keyPrefix: 'auth' });
@@ -64,15 +64,11 @@ const RegisterComponent: FC<{ changeComponentType: () => void }> = ({
         >
           <Form>
             <Box sx={{ maxWidth: '21rem' }}>
-              <AuthFormField fieldName="username" required autoFocus />
-              <AuthFormField fieldName="email" required />
-              <AuthFormField type="password" fieldName="password" required />
-              <AuthFormField
-                type="password"
-                fieldName="confirmPassword"
-                required
-              />
-              <AuthFormButton type="submit">{t('signUp')}</AuthFormButton>
+              <FormField fieldName="username" required autoFocus />
+              <FormField fieldName="email" required />
+              <FormField type="password" fieldName="password" required />
+              <FormField type="password" fieldName="confirmPassword" required />
+              <FormButton type="submit">{t('signUp')}</FormButton>
             </Box>
           </Form>
         </Formik>
@@ -81,4 +77,4 @@ const RegisterComponent: FC<{ changeComponentType: () => void }> = ({
   );
 };
 
-export default RegisterComponent;
+export default Register;

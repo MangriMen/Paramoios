@@ -8,7 +8,7 @@ import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-const UserCardComponent: FC = () => {
+const UserCard: FC = () => {
   const { t } = useTranslation('translation', { keyPrefix: 'userProfile' });
   const user = auth?.currentUser;
   const navigate = useNavigate();
@@ -217,4 +217,4 @@ const UserCardComponent: FC = () => {
   );
 };
 
-export default UserCardComponent;
+export default UserCard;

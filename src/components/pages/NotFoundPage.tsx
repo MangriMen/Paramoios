@@ -3,7 +3,7 @@ import ParBox from 'components/styled/ParBox';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
-const NotFoundPageComponent: FC = () => {
+const NotFoundPage: FC = () => {
   const { t } = useTranslation('translation', { keyPrefix: 'page' });
 
   return (
@@ -69,4 +69,4 @@ const NotFoundPageComponent: FC = () => {
   );
 };
 
-export default NotFoundPageComponent;
+export default NotFoundPage;
