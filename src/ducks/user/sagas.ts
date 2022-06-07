@@ -1,16 +1,53 @@
-import { all, takeLatest } from 'redux-saga/effects';
+import { all, call, put, takeLatest } from 'redux-saga/effects';
+import {
+  setUserDisplayName,
+  setUserEmail,
+  setUserPassword,
+} from 'tools/requests/requests';
 
-import { updateUser } from './index';
+import {
+  updateEmail,
+  updatePassword,
+  updateUserError,
+  updateUserSuccess,
+  updateUsername,
+} from './index';
 
-//add update requests
-export function* updateSagas({ payload }: any): Generator<unknown, void, any> {
+//add update requests.ts
+function* updateUsernameSaga({ payload }: any): Generator<unknown, void, any> {
   try {
-    console.log(payload.userInfo[payload.name]);
-  } catch (e) {
-    console.log(payload);
+    //yield call(setUserDisplayName, payload);
+    console.log('YES');
+    yield put(updateUserSuccess());
+  } catch (err) {
+    yield put(updateUserError(err));
+  }
+}
+
+function* updateEmailSaga({ payload }: any): Generator<unknown, void, any> {
+  try {
+    //yield call(setUserEmail, payload);
+    console.log('YES');
+    yield put(updateUserSuccess());
+  } catch (err) {
+    yield put(updateUserError(err));
+  }
+}
+
+function* updatePasswordSaga({ payload }: any): Generator<unknown, void, any> {
+  try {
+    //yield call(setUserPassword, payload);
+    console.log('YES');
+    yield put(updateUserSuccess());
+  } catch (err) {
+    yield put(updateUserError(err));
   }
 }
 
 export function* updateSagaWatcher() {
-  yield all([takeLatest(updateUser, updateSagas)]);
+  yield all([
+    takeLatest(updateUsername, updateUsernameSaga),
+    takeLatest(updateEmail, updateEmailSaga),
+    takeLatest(updatePassword, updatePasswordSaga),
+  ]);
 }

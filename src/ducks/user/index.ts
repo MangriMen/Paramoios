@@ -2,42 +2,53 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   error: null,
-  loading: false,
-  userInfo: {
-    userName: '',
-    email: '',
-    password: '',
+  loading: {
+    username: false,
+    email: false,
+    password: false,
   },
-  type: 0,
 };
 
 export const userSlice = createSlice({
   name: '@@user',
   initialState,
   reducers: {
-    updateUser(state, action) {
+    updateUsername(state, action) {
       state.error = null;
-      state.loading = true;
-      state.userInfo = {
-        userName: '',
-        email: '',
-        password: '',
-      };
-      state.type = 0;
+      state.loading.username = true;
     },
-    updateUserSuccess(state, action) {
+    updateEmail(state, action) {
       state.error = null;
-      state.loading = false;
-      state.userInfo = action.payload;
-      state.type = action.payload;
+      state.loading.email = true;
+    },
+    updatePassword(state, action) {
+      state.error = null;
+      state.loading.password = true;
+    },
+    updateUserSuccess(state) {
+      state.error = null;
+      state.loading = {
+        username: false,
+        email: false,
+        password: false,
+      };
     },
     updateUserError(state, action) {
       state.error = action.payload;
-      state.loading = false;
+      state.loading = {
+        username: false,
+        email: false,
+        password: false,
+      };
     },
   },
 });
 
 export default userSlice.reducer;
-export const { updateUser, updateUserSuccess, updateUserError } =
-  userSlice.actions;
+export const {
+  updateUsername,
+  updateEmail,
+  updatePassword,
+  updateUserSuccess,
+  updateUserError,
+} = userSlice.actions;
