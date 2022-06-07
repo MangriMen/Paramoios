@@ -29,9 +29,3 @@ export function register(payload: any) {
 
   return createUserWithEmailAndPassword(auth, payload.email, payload.password);
 }
-
-export function setUserDisplayName(payload: any) {
-  if (auth?.currentUser) {
-    return updateProfile(auth.currentUser, { displayName: payload.username });
-  }
-}

@@ -1,7 +1,8 @@
 import { authSlice } from 'ducks/auth';
 import { call, put, takeLatest } from 'redux-saga/effects';
+import { setUserDisplayName } from 'tools/requests/requests';
 
-import { login, logout, register, setUserDisplayName } from './services';
+import { login, logout, register } from './services';
 
 function* loginSaga({ payload }: any): Generator<unknown, void, any> {
   try {
