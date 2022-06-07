@@ -3,7 +3,7 @@ import donationAlertLogo from 'assets/images/deprecated/DA_Alert_White.svg';
 import 'assets/styles/deprecated/login.css';
 import { ROUTE } from 'consts';
 import { getError, getIsLogged } from 'ducks/auth/selectors';
-import { useCallback, useEffect, useState } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import LoginComponent from './LoginComponent';
 import RegisterComponent from './RegisterComponent';
 
-function AuthPageComponent() {
+const AuthPageComponent: FC = () => {
   const theme = useTheme();
   const { t } = useTranslation('translation', { keyPrefix: 'auth' });
 
@@ -130,9 +130,9 @@ function AuthPageComponent() {
       </Container>
     </Box>
   );
-}
+};
 
-function AuthPageGreetings() {
+const AuthPageGreetings: FC = () => {
   return (
     <section id="message" style={{ fontSize: '1.25rem' }}>
       <span className="main-text">
@@ -236,6 +236,6 @@ function AuthPageGreetings() {
       </span>
     </section>
   );
-}
+};
 
 export default AuthPageComponent;

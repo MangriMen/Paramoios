@@ -3,13 +3,16 @@ import ParLink from 'components/styled/ParLink';
 import { authSlice } from 'ducks/auth';
 import { Form, Formik } from 'formik';
 import { registerInitialValues, registerSchema } from 'helpers/auth';
+import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 
 import AuthFormButton from './AuthFormButton';
 import AuthFormField from './AuthFormField';
 
-function RegisterComponent({ changeComponentType }: any) {
+const RegisterComponent: FC<{ changeComponentType: () => void }> = ({
+  changeComponentType,
+}) => {
   const { t } = useTranslation('translation', { keyPrefix: 'auth' });
 
   const dispatch = useDispatch();
@@ -68,6 +71,6 @@ function RegisterComponent({ changeComponentType }: any) {
       </Box>
     </Container>
   );
-}
+};
 
 export default RegisterComponent;

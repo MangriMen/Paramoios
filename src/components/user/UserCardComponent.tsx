@@ -4,10 +4,11 @@ import ParLink from 'components/styled/ParLink';
 import { ROUTE } from 'consts';
 import { auth } from 'helpers/firebase';
 import { userInfo } from 'mocks/mockUserInfo';
+import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-function UserCardComponent() {
+const UserCardComponent: FC = () => {
   const { t } = useTranslation('translation', { keyPrefix: 'userProfile' });
   const user = auth?.currentUser;
   const navigate = useNavigate();
@@ -214,6 +215,6 @@ function UserCardComponent() {
       </Box>
     </Box>
   );
-}
+};
 
 export default UserCardComponent;
