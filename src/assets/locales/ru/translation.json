@@ -11,7 +11,9 @@
     "usernamePlaceholder": "Имя",
     "emailPlaceholder": "Email",
     "passwordPlaceholder": "Пароль",
-    "confirmPasswordPlaceholder": "Подтверждение пароля"
+    "confirmPasswordPlaceholder": "Подтверждение пароля",
+    "currentPasswordPlaceholder": "Текущий пароль",
+    "newPasswordPlaceholder": "Новый пароль"
   },
   "navbar": {
     "menu": "Меню",
