@@ -1,9 +1,10 @@
 import { Avatar, Grid, Typography, useTheme } from '@mui/material';
+import { FC } from 'react';
 
 import ParBox from './styled/ParBox';
 import ParContainer from './styled/ParContainer';
 
-function MainPageComponent() {
+const MainPageComponent: FC = () => {
   const theme = useTheme();
 
   return (
@@ -115,6 +116,6 @@ function MainPageComponent() {
       </Grid>
     </ParContainer>
   );
-}
+};
 
 export default MainPageComponent;

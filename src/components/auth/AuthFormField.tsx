@@ -1,5 +1,6 @@
 import { TextField, TextFieldProps, styled, useTheme } from '@mui/material';
 import { useFormikContext } from 'formik';
+import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 const TextFieldStyled = styled(TextField)(({ theme }) => ({
@@ -21,11 +22,11 @@ const TextFieldStyled = styled(TextField)(({ theme }) => ({
   },
 }));
 
-function AuthFormField({
+const AuthFormField: FC<TextFieldProps & { fieldName: string }> = ({
   fieldName,
   children,
   ...props
-}: TextFieldProps & { fieldName: string }) {
+}) => {
   const { t } = useTranslation('translation', { keyPrefix: 'auth' });
 
   const { values, touched, errors, handleChange }: any = useFormikContext();
@@ -57,6 +58,6 @@ function AuthFormField({
       {children}
     </TextFieldStyled>
   );
-}
+};
 
 export default AuthFormField;

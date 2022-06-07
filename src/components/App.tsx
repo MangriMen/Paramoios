@@ -1,4 +1,5 @@
 import { ThemeProvider, createTheme } from '@mui/material';
+import { FC } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
 import AppContainer from './AppContainer';
@@ -17,7 +18,7 @@ const theme = createTheme({
   },
 });
 
-function App() {
+const App: FC = () => {
   return (
     <>
       <ThemeProvider theme={theme}>
@@ -27,6 +28,6 @@ function App() {
       </ThemeProvider>
     </>
   );
-}
+};
 
 export default App;

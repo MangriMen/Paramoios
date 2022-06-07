@@ -1,8 +1,9 @@
 import ParContainer from 'components/styled/ParContainer';
+import { FC } from 'react';
 
 import UserCardComponent from './UserCardComponent';
 
-function UserPageComponent() {
+const UserPageComponent: FC = () => {
   return (
     <ParContainer
       maxWidth="lg"
@@ -14,6 +15,6 @@ function UserPageComponent() {
       <UserCardComponent />
     </ParContainer>
   );
-}
+};
 
 export default UserPageComponent;

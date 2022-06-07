@@ -17,7 +17,7 @@ import { auth } from 'configs/firebase';
 import { ROUTE } from 'consts';
 import { authSlice } from 'ducks/auth';
 import { getIsLogged } from 'ducks/auth/selectors';
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -29,7 +29,7 @@ interface UserMenuItem {
   onClick: () => void;
 }
 
-const StyledMenu = styled(Menu)(({ theme }) => ({
+const StyledMenu = styled(Menu)(() => ({
   '& .MuiPaper-root': {
     backgroundColor: 'rgba(0, 0, 0, 0)',
     boxShadow: 'none',
@@ -50,7 +50,7 @@ const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
   },
 }));
 
-function NavbarComponent() {
+const NavbarComponent: FC = () => {
   const { t } = useTranslation('translation', { keyPrefix: 'navbar' });
   const { t: tAuth } = useTranslation('translation', { keyPrefix: 'auth' });
 
@@ -173,6 +173,6 @@ function NavbarComponent() {
       </Container>
     </AppBar>
   );
-}
+};
 
 export default NavbarComponent;
