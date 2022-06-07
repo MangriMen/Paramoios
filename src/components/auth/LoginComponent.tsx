@@ -1,7 +1,7 @@
 import { Box, Container, CssBaseline, Typography } from '@mui/material';
 import ParLink from 'components/styled/ParLink';
 import { authSlice } from 'ducks/auth';
-import { Formik } from 'formik';
+import { Form, Formik } from 'formik';
 import { loginInitialValues, loginSchema } from 'helpers/auth';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
@@ -50,12 +50,8 @@ function LoginComponent({ changeComponentType }: any) {
           onSubmit={handlerSubmit}
           validateOnBlur
         >
-          {({ handleSubmit }) => (
-            <Box
-              component={'form'}
-              onSubmit={handleSubmit}
-              sx={{ maxWidth: '21rem' }}
-            >
+          <Form>
+            <Box sx={{ maxWidth: '21rem' }}>
               <AuthFormField fieldName="email" required autoFocus />
               <AuthFormField
                 type="password"
@@ -67,7 +63,7 @@ function LoginComponent({ changeComponentType }: any) {
                 {t('signIn')}
               </AuthFormButton>
             </Box>
-          )}
+          </Form>
         </Formik>
       </Box>
     </Container>

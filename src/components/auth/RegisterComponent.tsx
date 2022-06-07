@@ -1,7 +1,7 @@
 import { Box, Container, CssBaseline, Typography } from '@mui/material';
 import ParLink from 'components/styled/ParLink';
 import { authSlice } from 'ducks/auth';
-import { Formik } from 'formik';
+import { Form, Formik } from 'formik';
 import { registerInitialValues, registerSchema } from 'helpers/auth';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
@@ -51,12 +51,8 @@ function RegisterComponent({ changeComponentType }: any) {
           onSubmit={handlerSubmit}
           validateOnBlur
         >
-          {({ handleSubmit }) => (
-            <Box
-              component={'form'}
-              onSubmit={handleSubmit}
-              sx={{ maxWidth: '21rem' }}
-            >
+          <Form>
+            <Box sx={{ maxWidth: '21rem' }}>
               <AuthFormField fieldName="username" required autoFocus />
               <AuthFormField fieldName="email" required />
               <AuthFormField type="password" fieldName="password" required />
@@ -67,7 +63,7 @@ function RegisterComponent({ changeComponentType }: any) {
               />
               <AuthFormButton type="submit">{t('signUp')}</AuthFormButton>
             </Box>
-          )}
+          </Form>
         </Formik>
       </Box>
     </Container>
