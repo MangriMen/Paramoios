@@ -12,7 +12,7 @@ export function tryCall<T extends (...args: Parameters<T>) => ReturnType<T>>(
     return function_(...args);
   } catch (e) {
     if (e instanceof Error) {
-      console.log(e.message);
+      console.error(e.message);
     }
     return undefined;
   }
