@@ -65,6 +65,8 @@ const Login: FC<{ changeComponentType: () => void }> = ({
                 required
                 autoFocus
                 themeColor="secondary"
+                fullWidth
+                margin="normal"
               />
               <FormField
                 type="password"
@@ -72,8 +74,15 @@ const Login: FC<{ changeComponentType: () => void }> = ({
                 autoComplete={'current-password'}
                 required
                 themeColor="secondary"
+                fullWidth
+                margin="normal"
               />
-              <FormButton type={'submit'} fullWidth>
+              <FormButton
+                type={'submit'}
+                fullWidth
+                color="secondary"
+                sx={{ mt: '1rem' }}
+              >
                 {t('signIn')}
               </FormButton>
             </Box>
