@@ -25,10 +25,16 @@
   },
   "userProfile": {
     "name": "Имя",
-    "email": "Почта",
+    "email": "Email",
     "otherInfo": "Дополнительная информация",
     "settings": "Настройки",
     "description": "Описание",
     "yourCharacters": "Твои персонажи"
+  },
+  "userSettings": {
+    "changeAvatar": "Изменить аватар",
+    "changeUsername": "Изменить имя",
+    "changeEmail": "Изменить email",
+    "changePassword": "Изменить пароль"
   }
 }
