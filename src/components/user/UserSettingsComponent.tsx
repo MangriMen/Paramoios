@@ -1,34 +1,27 @@
-import { Box, Button, Typography, styled, useTheme } from '@mui/material';
-import AuthFormField from 'components/auth/AuthFormField';
+import { Box, Button, Typography, styled } from '@mui/material';
+import FormButton from 'components/auth/FormButton';
+import FormField from 'components/auth/FormField';
 import ParAvatar from 'components/styled/ParAvatar';
+import ParContainer from 'components/styled/ParContainer';
+import { auth } from 'configs/firebase';
 import { updateEmail, updatePassword, updateUsername } from 'ducks/user';
 import { Form, Formik, FormikValues } from 'formik';
-import { auth } from 'helpers/firebase';
 import { userInfo } from 'mocks/mockUserInfo';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
-import * as yup from 'yup';
+import {
+  emailSettingsSchema,
+  passwordSettingsSchema,
+  usernameSettingsSchema,
+} from 'schemas/userSettings';
 
-import AuthFormButton from '../auth/AuthFormButton';
-import ParContainer from '../styled/ParContainer';
-
-const Input = styled('input')({
-  display: 'none',
-});
-
-interface UsernameValue {
-  username: string;
-}
-
-interface EmailValue {
-  email: string;
-}
-
-interface PasswordValue {
-  newPassword: string;
-  confirmPassword: string;
-  currentPassword: string;
-}
+import {
+  EmailValue,
+  PasswordValue,
+  UsernameValue,
+  activeButtons,
+} from './interfaces';
 
 const usernameSettingsInitialValue: UsernameValue = {
   username: '',
@@ -44,88 +37,59 @@ const passwordSettingsInitialValue: PasswordValue = {
   currentPassword: '',
 };
 
-const usernameSettingsSchema = yup.object({
-  username: yup.string().required('Username is required'),
-});
-
-const emailSettingsSchema = yup.object({
-  email: yup.string().email().required('Email is required'),
-});
-
-const passwordSettingsSchema = yup.object({
-  newPassword: yup
-    .string()
-    .required('Password is required')
-    .matches(/^\S*$/, 'whitespace is not allowed')
-    .min(8, 'password should be 8 chars minimum.'),
-  confirmPassword: yup
-    .string()
-    .required('Password is required')
-    .oneOf([yup.ref('newPassword')], 'Passwords must match'),
-});
-
-interface activeButtons {
-  username: boolean;
-  email: boolean;
-  password: boolean;
-}
-
 export const UserSettingsComponent = () => {
-  const theme = useTheme();
   const dispatch = useDispatch();
   const user = auth?.currentUser;
   const [file, setFile] = useState('');
+  const { t } = useTranslation('translation', { keyPrefix: 'userSettings' });
 
-  const TextFieldStyle = {
-    minHeight: '79px',
-    '& .MuiOutlinedInput-root': {
-      fontSize: '1rem',
-      input: {
-        '&:-webkit-autofill': {
-          WebkitTextFillColor: theme.palette.primary.main,
-          WebkitBoxShadow:
-            '0 0 0 1000px ' + theme.palette.secondary.light + ' inset',
-        },
-      },
-      color: theme.palette.primary.main,
-      '& fieldset': {
-        borderColor: theme.palette.primary.main,
-        borderWidth: '2px',
-      },
-      '&:hover fieldset': {
-        borderColor: theme.palette.primary.main,
-      },
-    },
-  };
-
-  const avatarButtonStyle = {
-    width: '200px',
-    height: '200px',
-    border: '4px solid',
-    borderRadius: '4px',
-    borderColor: theme.palette.primary.main,
-    fontSize: '20px',
-    backgroundImage: `url(${userInfo.userImage})`,
-    backgroundSize: 'cover',
-  };
-
-  const [buttons, setButtons] = useState({
+  const [buttons, setButtons] = useState<activeButtons>({
     username: false,
     email: false,
     password: false,
   });
+
+  useEffect(() => {
+    const timerId = setTimeout(() => {
+      setButtons((prevState: activeButtons) => ({
+        ...prevState,
+        username: false,
+      }));
+    }, 5000);
+    return () => {
+      clearTimeout(timerId);
+    };
+  }, [buttons.username]);
+
+  useEffect(() => {
+    const timerId = setTimeout(() => {
+      setButtons((prevState: activeButtons) => ({
+        ...prevState,
+        email: false,
+      }));
+    }, 5000);
+    return () => {
+      clearTimeout(timerId);
+    };
+  }, [buttons.email]);
+
+  useEffect(() => {
+    const timerId = setTimeout(() => {
+      setButtons((prevState: activeButtons) => ({
+        ...prevState,
+        password: false,
+      }));
+    }, 5000);
+    return () => {
+      clearTimeout(timerId);
+    };
+  }, [buttons.password]);
 
   const submitUsernameHandler = (values: FormikValues) => {
     setButtons((prevState: activeButtons) => ({
       ...prevState,
       username: !prevState.username,
     }));
-    setTimeout(() => {
-      setButtons((prevState: activeButtons) => ({
-        ...prevState,
-        username: false,
-      }));
-    }, 5000);
     dispatch(updateUsername(values));
   };
 
@@ -134,12 +98,6 @@ export const UserSettingsComponent = () => {
       ...prevState,
       email: !prevState.email,
     }));
-    setTimeout(() => {
-      setButtons((prevState: activeButtons) => ({
-        ...prevState,
-        email: false,
-      }));
-    }, 5000);
     dispatch(updateEmail(values));
   };
 
@@ -148,12 +106,6 @@ export const UserSettingsComponent = () => {
       ...prevState,
       password: !prevState.password,
     }));
-    setTimeout(() => {
-      setButtons((prevState: activeButtons) => ({
-        ...prevState,
-        password: false,
-      }));
-    }, 5000);
     dispatch(updatePassword(values));
   };
 
@@ -174,17 +126,18 @@ export const UserSettingsComponent = () => {
         sx={{
           display: 'flex',
           flexDirection: 'row',
-          justifyContent: { xs: 'center', md: 'start' },
+          justifyContent: 'center',
           flexWrap: 'wrap',
         }}
       >
         <label>
-          <Input
+          <input
             accept="image/*"
             multiple
             type="file"
             value={file}
             onChange={(e) => setFile(e.target.value)}
+            style={{ display: 'none' }}
           />
           <Button
             component="span"
@@ -232,7 +185,7 @@ export const UserSettingsComponent = () => {
                 bottom: '-8px',
               }}
             >
-              Change avatar
+              {t('changeAvatar')}
             </Typography>
           </Button>
         </label>
@@ -253,8 +206,8 @@ export const UserSettingsComponent = () => {
         >
           <Box
             display="grid"
-            gridTemplateRows="11rem 5rem 11rem"
-            rowGap="0.5rem"
+            gridTemplateRows="12rem 5rem 12rem"
+            rowGap="1rem"
             marginRight={{ xs: '0', sm: '1rem' }}
           >
             <Formik
@@ -266,33 +219,21 @@ export const UserSettingsComponent = () => {
               <Form style={{ gridRow: '1' }}>
                 <Box
                   display="grid"
-                  gridTemplateRows="1.5rem 5rem 2rem"
+                  gridTemplateRows="3rem 5rem 2rem"
                   rowGap="1rem"
                   justifyItems="center"
                 >
-                  <Typography gridRow="1">{user?.displayName}</Typography>
-                  <AuthFormField
-                    fullWidth={false}
-                    fieldName="username"
-                    color="primary"
-                    InputLabelProps={{
-                      sx: {
-                        fontSize: '1rem',
-                        color: theme.palette.primary.main,
-                      },
-                    }}
-                    margin="none"
-                    sx={{ ...TextFieldStyle, gridRow: '2' }}
-                  />
-                  <AuthFormButton
+                  <Typography gridRow="1" fontSize="2rem">
+                    {user?.displayName}
+                  </Typography>
+                  <FormField fieldName="username" sx={{ gridRow: '2' }} />
+                  <FormButton
                     type="submit"
                     sx={{ gridRow: '3' }}
                     disabled={buttons.username}
-                    color="primary"
-                    fullWidth={false}
                   >
-                    Change name
-                  </AuthFormButton>
+                    {t('changeUsername')}
+                  </FormButton>
                 </Box>
               </Form>
             </Formik>
@@ -306,34 +247,25 @@ export const UserSettingsComponent = () => {
               <Form style={{ gridRow: '3' }}>
                 <Box
                   display="grid"
-                  gridTemplateRows="1.5rem 5rem 2rem"
+                  gridTemplateRows="3rem 5rem 2rem"
                   rowGap="1rem"
                   justifyItems="center"
                 >
-                  <Typography gridRow="1">{user?.email}</Typography>
-                  <AuthFormField
-                    fullWidth={false}
+                  <Typography gridRow="1" fontSize="2rem">
+                    {user?.email}
+                  </Typography>
+                  <FormField
                     type="email"
                     fieldName="email"
-                    color="primary"
-                    InputLabelProps={{
-                      sx: {
-                        fontSize: '1rem',
-                        color: theme.palette.primary.main,
-                      },
-                    }}
-                    sx={{ ...TextFieldStyle, gridRow: '2' }}
-                    margin="none"
+                    sx={{ gridRow: '2' }}
                   />
-                  <AuthFormButton
+                  <FormButton
                     type="submit"
                     sx={{ gridRow: '3' }}
                     disabled={buttons.email}
-                    color="primary"
-                    fullWidth={false}
                   >
-                    Change email
-                  </AuthFormButton>
+                    {t('changeEmail')}
+                  </FormButton>
                 </Box>
               </Form>
             </Formik>
@@ -348,62 +280,33 @@ export const UserSettingsComponent = () => {
             <Form>
               <Box
                 display="grid"
-                gridTemplateRows="1.5rem 5rem 1.5rem 5rem 1.5rem 5rem 2rem"
+                gridTemplateRows="3rem 5rem 2.5rem 5rem 2.5rem 5rem 2rem"
                 rowGap="1rem"
                 justifyItems="center"
               >
-                <AuthFormField
+                <FormField
                   type="password"
-                  fullWidth={false}
                   fieldName="currentPassword"
-                  color="primary"
-                  InputLabelProps={{
-                    sx: {
-                      fontSize: '1rem',
-                      color: theme.palette.primary.main,
-                    },
-                  }}
-                  sx={{ ...TextFieldStyle, gridRow: '2' }}
-                  margin="none"
+                  sx={{ gridRow: '2' }}
                 />
-                <AuthFormField
+                <FormField
                   type="password"
-                  fullWidth={false}
                   fieldName="newPassword"
-                  color="primary"
-                  InputLabelProps={{
-                    sx: {
-                      fontSize: '1rem',
-                      color: theme.palette.primary.main,
-                    },
-                  }}
-                  sx={{ ...TextFieldStyle, gridRow: '4' }}
-                  margin="none"
+                  sx={{ gridRow: '4' }}
                 />
-                <AuthFormField
+                <FormField
                   type="password"
-                  fullWidth={false}
                   fieldName="confirmPassword"
-                  color="primary"
-                  InputLabelProps={{
-                    sx: {
-                      fontSize: '1rem',
-                      color: theme.palette.primary.main,
-                    },
-                  }}
-                  sx={{ ...TextFieldStyle, gridRow: '6' }}
-                  margin="none"
+                  sx={{ gridRow: '6' }}
                 />
 
-                <AuthFormButton
+                <FormButton
                   type="submit"
                   sx={{ gridRow: '7' }}
                   disabled={buttons.password}
-                  color="primary"
-                  fullWidth={false}
                 >
-                  Change password
-                </AuthFormButton>
+                  {t('changePassword')}
+                </FormButton>
               </Box>
             </Form>
           </Formik>
