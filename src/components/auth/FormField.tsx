@@ -1,29 +1,42 @@
-import { TextField, TextFieldProps, styled, useTheme } from '@mui/material';
+import { TextField, TextFieldProps, styled } from '@mui/material';
 import { useFormikContext } from 'formik';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
-const TextFieldStyled = styled(TextField)(({ theme }) => ({
+type AuthFormFieldProps = TextFieldProps & {
+  fieldName: string;
+  themeColor?: TextFieldProps['color'];
+};
+
+const TextFieldStyled = styled(TextField, {
+  shouldForwardProp: (prop) => prop !== 'themeColor',
+})<any>(({ theme, themeColor }) => ({
   '& .MuiOutlinedInput-root': {
     fontSize: '1.4rem',
     input: {
       '&:-webkit-autofill': {
-        WebkitTextFillColor: theme.palette.secondary.main,
-        WebkitBoxShadow:
-          '0 0 0 1000px ' + theme.palette.primary.dark + ' inset',
+        WebkitTextFillColor: theme.palette[themeColor].main,
+        WebkitBoxShadow: `0 0 0 1000px
+          ${
+            theme.palette[themeColor === 'secondary' ? 'primary' : 'secondary'][
+              themeColor === 'secondary' ? 'dark' : 'light'
+            ]
+          }
+          inset`,
       },
     },
-    color: theme.palette.secondary.main,
+    color: theme.palette[themeColor].main,
     '& fieldset': {
-      borderColor: theme.palette.secondary.main,
+      borderColor: theme.palette[themeColor].main,
       borderWidth: '2px',
     },
-    '&:hover fieldset': { borderColor: theme.palette.secondary.main },
+    '&:hover fieldset': { borderColor: theme.palette[themeColor].main },
   },
 }));
 
-const AuthFormField: FC<TextFieldProps & { fieldName: string }> = ({
+const AuthFormField: FC<AuthFormFieldProps> = ({
   fieldName,
+  themeColor,
   children,
   ...props
 }) => {
@@ -31,7 +44,7 @@ const AuthFormField: FC<TextFieldProps & { fieldName: string }> = ({
 
   const { values, touched, errors, handleChange }: any = useFormikContext();
 
-  const theme = useTheme();
+  const calculatedColor = themeColor || 'primary';
 
   return (
     <TextFieldStyled
@@ -45,12 +58,13 @@ const AuthFormField: FC<TextFieldProps & { fieldName: string }> = ({
       onChange={handleChange}
       fullWidth
       margin="normal"
-      color="secondary"
+      color={calculatedColor}
+      themeColor={calculatedColor}
       variant="outlined"
       InputLabelProps={{
         sx: {
           fontSize: '1.4rem',
-          color: theme.palette.secondary.main,
+          color: `${calculatedColor}.main`,
         },
       }}
       {...props}

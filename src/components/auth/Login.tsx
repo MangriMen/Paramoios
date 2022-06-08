@@ -60,12 +60,18 @@ const Login: FC<{ changeComponentType: () => void }> = ({
         >
           <Form>
             <Box sx={{ maxWidth: '21rem' }}>
-              <FormField fieldName="email" required autoFocus />
+              <FormField
+                fieldName="email"
+                required
+                autoFocus
+                themeColor="secondary"
+              />
               <FormField
                 type="password"
                 fieldName="password"
                 autoComplete={'current-password'}
                 required
+                themeColor="secondary"
               />
               <FormButton type={'submit'} fullWidth>
                 {t('signIn')}
