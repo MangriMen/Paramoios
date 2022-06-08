@@ -7,6 +7,7 @@ import AuthPage from './pages/AuthPage';
 import MainPage from './pages/MainPage';
 import NotFoundPage from './pages/NotFoundPage';
 import UserPage from './pages/UserPage';
+import { UserSettingsComponent } from './user/UserSettingsComponent';
 
 const App: FC = () => {
   return (
@@ -41,7 +42,7 @@ const App: FC = () => {
           path={ROUTE.SETTINGS}
           element={
             <PageWithNavbar>
-              <NotFoundPage />
+              <UserSettingsComponent />
             </PageWithNavbar>
           }
         />
