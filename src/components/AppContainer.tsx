@@ -1,7 +1,7 @@
 import { ROUTE } from 'consts';
 import { Route, Routes } from 'react-router';
 
-import MainPageComponent from './CharList';
+import MainPageComponent from './MainPage';
 import AuthPageComponent from './auth/AuthPageComponent';
 import NotFoundPageComponent from './common/NotFoundPageComponent';
 import PageWithNavbar from './layout/PageWithNavbar';
