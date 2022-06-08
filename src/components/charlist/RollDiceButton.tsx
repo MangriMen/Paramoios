@@ -20,12 +20,7 @@ import { FC } from 'react';
 import React from 'react';
 
 import ParBox from '../styled/ParBox';
-
-interface DiceMenuItem {
-  name: string;
-  iconName: string;
-  onClick: () => void;
-}
+import { DiceMenu } from './interfaces';
 
 const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
   borderRadius: '50%',
@@ -55,7 +50,7 @@ const RollDiceButton: FC = () => {
     setAnchorEl(null);
   };
 
-  const dice: Array<DiceMenuItem> = [
+  const dice: Array<DiceMenu> = [
     {
       name: 'D20',
       iconName: D20Icon,
