@@ -1,10 +1,11 @@
 import { Avatar, Grid, Typography, useTheme } from '@mui/material';
+import RollDiceButton from 'components/RollDiceButton';
+import { FC } from 'react';
 
-import RollDiceButton from './RollDiceButton';
-import ParBox from './styled/ParBox';
-import ParContainer from './styled/ParContainer';
+import ParBox from '../styled/ParBox';
+import ParContainer from '../styled/ParContainer';
 
-function CharList() {
+const MainPage: FC = () => {
   const theme = useTheme();
 
   return (
@@ -113,6 +114,6 @@ function CharList() {
       </Grid>
     </ParContainer>
   );
-}
+};
 
-export default CharList;
+export default MainPage;

@@ -1,8 +1,9 @@
 import { Typography } from '@mui/material';
 import ParBox from 'components/styled/ParBox';
+import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
-function NotFoundPageComponent() {
+const NotFoundPage: FC = () => {
   const { t } = useTranslation('translation', { keyPrefix: 'page' });
 
   return (
@@ -66,6 +67,6 @@ function NotFoundPageComponent() {
       </ParBox>
     </ParBox>
   );
-}
+};
 
-export default NotFoundPageComponent;
+export default NotFoundPage;

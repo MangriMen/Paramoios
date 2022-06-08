@@ -23,15 +23,3 @@ export const loginSchema = yup.object({
   email: yup.string().required('Username is required'),
   password: yup.string().required('Password is required'),
 });
-
-export const loginInitialValues = {
-  email: '',
-  password: '',
-};
-
-export const registerInitialValues = {
-  username: '',
-  email: '',
-  password: '',
-  confirmPassword: '',
-};

@@ -1,17 +1,17 @@
 import { Box, Container, Typography, useTheme } from '@mui/material';
-import donationAlertLogo from 'assets/images/deprecated/DA_Alert_White.svg';
+import donationAlertLogo from 'assets/images/icons/DA_Alert_White.svg';
 import 'assets/styles/deprecated/login.css';
 import { ROUTE } from 'consts';
 import { getError, getIsLogged } from 'ducks/auth/selectors';
-import { useEffect, useState } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import LoginComponent from './LoginComponent';
-import RegisterComponent from './RegisterComponent';
+import Login from '../auth/Login';
+import Register from '../auth/Register';
 
-function AuthPageComponent() {
+const AuthPage: FC = () => {
   const theme = useTheme();
   const { t } = useTranslation('translation', { keyPrefix: 'auth' });
 
@@ -27,7 +27,9 @@ function AuthPageComponent() {
 
   const [isLogin, setLogin] = useState(true);
 
-  const changeComponentType = () => setLogin(!isLogin);
+  const changeComponentType = useCallback(() => {
+    setLogin(!isLogin);
+  }, [isLogin]);
 
   const error = useSelector(getError);
 
@@ -99,9 +101,9 @@ function AuthPageComponent() {
             {t('welcome')}
           </Typography>
           {isLogin ? (
-            <LoginComponent changeComponentType={changeComponentType} />
+            <Login changeComponentType={changeComponentType} />
           ) : (
-            <RegisterComponent changeComponentType={changeComponentType} />
+            <Register changeComponentType={changeComponentType} />
           )}
         </Box>
         <Box
@@ -128,9 +130,9 @@ function AuthPageComponent() {
       </Container>
     </Box>
   );
-}
+};
 
-function AuthPageGreetings() {
+const AuthPageGreetings: FC = () => {
   return (
     <section id="message" style={{ fontSize: '1.25rem' }}>
       <span className="main-text">
@@ -234,6 +236,6 @@ function AuthPageGreetings() {
       </span>
     </section>
   );
-}
+};
 
-export default AuthPageComponent;
+export default AuthPage;

@@ -1,10 +1,10 @@
+import { auth } from 'configs/firebase';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
   updateProfile,
 } from 'firebase/auth';
-import { auth } from 'helpers/firebase';
 
 export function login(payload: any) {
   if (auth === undefined) {
