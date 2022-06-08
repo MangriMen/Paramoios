@@ -64,10 +64,25 @@ const Register: FC<{ changeComponentType: () => void }> = ({
         >
           <Form>
             <Box sx={{ maxWidth: '21rem' }}>
-              <FormField fieldName="username" required autoFocus />
-              <FormField fieldName="email" required />
-              <FormField type="password" fieldName="password" required />
-              <FormField type="password" fieldName="confirmPassword" required />
+              <FormField
+                fieldName="username"
+                required
+                autoFocus
+                themeColor="secondary"
+              />
+              <FormField fieldName="email" required themeColor="secondary" />
+              <FormField
+                type="password"
+                fieldName="password"
+                required
+                themeColor="secondary"
+              />
+              <FormField
+                type="password"
+                fieldName="confirmPassword"
+                required
+                themeColor="secondary"
+              />
               <FormButton type="submit">{t('signUp')}</FormButton>
             </Box>
           </Form>
