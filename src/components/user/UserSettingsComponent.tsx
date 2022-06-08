@@ -1,11 +1,4 @@
-import {
-  Box,
-  Button,
-  Container,
-  Typography,
-  styled,
-  useTheme,
-} from '@mui/material';
+import { Box, Button, Typography, styled, useTheme } from '@mui/material';
 import AuthFormField from 'components/auth/AuthFormField';
 import ParAvatar from 'components/styled/ParAvatar';
 import { updateEmail, updatePassword, updateUsername } from 'ducks/user';
@@ -16,8 +9,11 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import * as yup from 'yup';
 
+import AuthFormButton from '../auth/AuthFormButton';
+import ParContainer from '../styled/ParContainer';
+
 const Input = styled('input')({
-  //display: 'none',
+  display: 'none',
 });
 
 interface UsernameValue {
@@ -29,7 +25,7 @@ interface EmailValue {
 }
 
 interface PasswordValue {
-  password: string;
+  newPassword: string;
   confirmPassword: string;
   currentPassword: string;
 }
@@ -43,7 +39,7 @@ const emailSettingsInitialValue: EmailValue = {
 };
 
 const passwordSettingsInitialValue: PasswordValue = {
-  password: '',
+  newPassword: '',
   confirmPassword: '',
   currentPassword: '',
 };
@@ -167,24 +163,19 @@ export const UserSettingsComponent = () => {
   };
 
   return (
-    <Container
+    <ParContainer
       maxWidth="lg"
       sx={{
         mt: '1rem',
-        border: '4px solid',
-        borderColor: theme.palette.primary.main,
-        borderRadius: '4px',
-        backgroundColor: theme.palette.secondary.main,
+        padding: '1.5rem',
       }}
     >
       <Box
         sx={{
           display: 'flex',
           flexDirection: 'row',
-          justifyContent: 'center',
-          mt: '1rem',
-          mb: '1rem',
-          alignItems: 'center',
+          justifyContent: { xs: 'center', md: 'start' },
+          flexWrap: 'wrap',
         }}
       >
         <label>
@@ -200,19 +191,49 @@ export const UserSettingsComponent = () => {
             onClick={() => {
               console.log(file);
             }}
+            sx={{
+              '&:hover .avatar-box': {
+                backgroundColor: '#212121',
+                opacity: '0.1',
+              },
+              '&:hover .avatar-button': {
+                filter: 'brightness(85%)',
+              },
+              padding: '0',
+              mr: { xs: '0', sm: '1rem' },
+            }}
           >
             <ParAvatar
               src={userInfo.userImage}
               sx={{
-                width: '200px',
-                height: '200px',
+                width: '15rem',
+                height: '15rem',
                 border: '4px solid',
                 borderRadius: '4px',
-                fontSize: '20px',
-                backgroundSize: 'cover',
               }}
             />
-            <Typography position="absolute">Change avatar</Typography>
+            <Box
+              position="absolute"
+              className="avatar-box"
+              sx={{
+                width: '100%',
+                height: '100%',
+              }}
+            />
+            <Typography
+              className="avatar-button"
+              position="absolute"
+              sx={{
+                backgroundColor: 'secondary.main',
+                borderRadius: '4px',
+                padding: '0.375rem 1rem',
+                lineHeight: '1.25',
+                border: '2px solid',
+                bottom: '-8px',
+              }}
+            >
+              Change avatar
+            </Typography>
           </Button>
         </label>
 
@@ -220,133 +241,39 @@ export const UserSettingsComponent = () => {
           sx={{
             display: 'flex',
             flexDirection: 'row',
-            justifyContent: 'center',
-            ml: '1rem',
-            mr: '1rem',
+            justifyContent: 'space-evenly',
             fontSize: {
               lg: '32px',
               xs: '28px',
             },
             flexWrap: 'wrap',
+            flexGrow: '1',
+            padding: { xs: '1.3rem 0', md: '0' },
           }}
         >
-          <Box padding="1rem">
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'row',
-              }}
-            >
-              <Formik
-                initialValues={usernameSettingsInitialValue}
-                validationSchema={usernameSettingsSchema}
-                onSubmit={submitUsernameHandler}
-                validateOnBlur
-              >
-                <Form>
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'center',
-                    }}
-                  >
-                    <Typography>{user?.displayName}</Typography>
-                    <AuthFormField
-                      fullWidth={false}
-                      fieldName="username"
-                      color="primary"
-                      InputLabelProps={{
-                        sx: {
-                          fontSize: '1rem',
-                          color: theme.palette.primary.main,
-                        },
-                      }}
-                      sx={TextFieldStyle}
-                    />
-                    <Button
-                      type="submit"
-                      sx={{ mb: '1rem' }}
-                      disabled={buttons.username}
-                    >
-                      Change name
-                    </Button>
-                  </Box>
-                </Form>
-              </Formik>
-            </Box>
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'row',
-              }}
-            >
-              <Formik
-                initialValues={emailSettingsInitialValue}
-                validationSchema={emailSettingsSchema}
-                onSubmit={submitEmailHandler}
-                validateOnBlur
-              >
-                <Form>
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'center',
-                    }}
-                  >
-                    <Typography>{user?.email}</Typography>
-                    <AuthFormField
-                      fullWidth={false}
-                      type="email"
-                      fieldName="email"
-                      color="primary"
-                      InputLabelProps={{
-                        sx: {
-                          fontSize: '1rem',
-                          color: theme.palette.primary.main,
-                        },
-                      }}
-                      sx={TextFieldStyle}
-                    />
-                    <Button
-                      type="submit"
-                      sx={{ mb: '1rem' }}
-                      disabled={buttons.email}
-                    >
-                      Change email
-                    </Button>
-                  </Box>
-                </Form>
-              </Formik>
-            </Box>
-          </Box>
-
           <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'row',
-              padding: '1rem',
-            }}
+            display="grid"
+            gridTemplateRows="11rem 5rem 11rem"
+            rowGap="0.5rem"
+            marginRight={{ xs: '0', sm: '1rem' }}
           >
             <Formik
-              initialValues={passwordSettingsInitialValue}
-              validationSchema={passwordSettingsSchema}
-              onSubmit={submitPasswordHandler}
+              initialValues={usernameSettingsInitialValue}
+              validationSchema={usernameSettingsSchema}
+              onSubmit={submitUsernameHandler}
               validateOnBlur
             >
-              <Form>
+              <Form style={{ gridRow: '1' }}>
                 <Box
-                  sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                  }}
+                  display="grid"
+                  gridTemplateRows="1.5rem 5rem 2rem"
+                  rowGap="1rem"
+                  justifyItems="center"
                 >
+                  <Typography gridRow="1">{user?.displayName}</Typography>
                   <AuthFormField
-                    type="password"
                     fullWidth={false}
-                    fieldName="newPassword"
+                    fieldName="username"
                     color="primary"
                     InputLabelProps={{
                       sx: {
@@ -354,48 +281,134 @@ export const UserSettingsComponent = () => {
                         color: theme.palette.primary.main,
                       },
                     }}
-                    sx={TextFieldStyle}
+                    margin="none"
+                    sx={{ ...TextFieldStyle, gridRow: '2' }}
                   />
-                  <AuthFormField
-                    type="password"
-                    fullWidth={false}
-                    fieldName="confirmPassword"
-                    color="primary"
-                    InputLabelProps={{
-                      sx: {
-                        fontSize: '1rem',
-                        color: theme.palette.primary.main,
-                      },
-                    }}
-                    sx={TextFieldStyle}
-                  />
-                  <AuthFormField
-                    type="password"
-                    fullWidth={false}
-                    fieldName="currentPassword"
-                    color="primary"
-                    InputLabelProps={{
-                      sx: {
-                        fontSize: '1rem',
-                        color: theme.palette.primary.main,
-                      },
-                    }}
-                    sx={TextFieldStyle}
-                  />
-
-                  <Button
+                  <AuthFormButton
                     type="submit"
-                    sx={{ mb: '1rem' }}
-                    disabled={buttons.password}
+                    sx={{ gridRow: '3' }}
+                    disabled={buttons.username}
+                    color="primary"
+                    fullWidth={false}
                   >
-                    Change password
-                  </Button>
+                    Change name
+                  </AuthFormButton>
+                </Box>
+              </Form>
+            </Formik>
+
+            <Formik
+              initialValues={emailSettingsInitialValue}
+              validationSchema={emailSettingsSchema}
+              onSubmit={submitEmailHandler}
+              validateOnBlur
+            >
+              <Form style={{ gridRow: '3' }}>
+                <Box
+                  display="grid"
+                  gridTemplateRows="1.5rem 5rem 2rem"
+                  rowGap="1rem"
+                  justifyItems="center"
+                >
+                  <Typography gridRow="1">{user?.email}</Typography>
+                  <AuthFormField
+                    fullWidth={false}
+                    type="email"
+                    fieldName="email"
+                    color="primary"
+                    InputLabelProps={{
+                      sx: {
+                        fontSize: '1rem',
+                        color: theme.palette.primary.main,
+                      },
+                    }}
+                    sx={{ ...TextFieldStyle, gridRow: '2' }}
+                    margin="none"
+                  />
+                  <AuthFormButton
+                    type="submit"
+                    sx={{ gridRow: '3' }}
+                    disabled={buttons.email}
+                    color="primary"
+                    fullWidth={false}
+                  >
+                    Change email
+                  </AuthFormButton>
                 </Box>
               </Form>
             </Formik>
           </Box>
+
+          <Formik
+            initialValues={passwordSettingsInitialValue}
+            validationSchema={passwordSettingsSchema}
+            onSubmit={submitPasswordHandler}
+            validateOnBlur
+          >
+            <Form>
+              <Box
+                display="grid"
+                gridTemplateRows="1.5rem 5rem 1.5rem 5rem 1.5rem 5rem 2rem"
+                rowGap="1rem"
+                justifyItems="center"
+              >
+                <AuthFormField
+                  type="password"
+                  fullWidth={false}
+                  fieldName="currentPassword"
+                  color="primary"
+                  InputLabelProps={{
+                    sx: {
+                      fontSize: '1rem',
+                      color: theme.palette.primary.main,
+                    },
+                  }}
+                  sx={{ ...TextFieldStyle, gridRow: '2' }}
+                  margin="none"
+                />
+                <AuthFormField
+                  type="password"
+                  fullWidth={false}
+                  fieldName="newPassword"
+                  color="primary"
+                  InputLabelProps={{
+                    sx: {
+                      fontSize: '1rem',
+                      color: theme.palette.primary.main,
+                    },
+                  }}
+                  sx={{ ...TextFieldStyle, gridRow: '4' }}
+                  margin="none"
+                />
+                <AuthFormField
+                  type="password"
+                  fullWidth={false}
+                  fieldName="confirmPassword"
+                  color="primary"
+                  InputLabelProps={{
+                    sx: {
+                      fontSize: '1rem',
+                      color: theme.palette.primary.main,
+                    },
+                  }}
+                  sx={{ ...TextFieldStyle, gridRow: '6' }}
+                  margin="none"
+                />
+
+                <AuthFormButton
+                  type="submit"
+                  sx={{ gridRow: '7' }}
+                  disabled={buttons.password}
+                  color="primary"
+                  fullWidth={false}
+                >
+                  Change password
+                </AuthFormButton>
+              </Box>
+            </Form>
+          </Formik>
         </Box>
       </Box>
-    </Container>
+    </ParContainer>
   );
 };
