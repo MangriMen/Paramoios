@@ -1,8 +1,31 @@
-import CasinoIcon from '@mui/icons-material/Casino';
-import { Button, FormControl, Menu, MenuItem, styled } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
+import {
+  Box,
+  Button,
+  FormControl,
+  Menu,
+  MenuItem,
+  Tooltip,
+  Typography,
+  styled,
+} from '@mui/material';
+import { grey } from '@mui/material/colors';
+import D4Icon from 'assets/images/dice/D4.svg';
+import D6Icon from 'assets/images/dice/D6.svg';
+import D8Icon from 'assets/images/dice/D8.svg';
+import D10Icon from 'assets/images/dice/D10.svg';
+import D12Icon from 'assets/images/dice/D12.svg';
+import D20Icon from 'assets/images/dice/D20.svg';
+import D100Icon from 'assets/images/dice/D100.svg';
 import React from 'react';
 
 import ParBox from './styled/ParBox';
+
+interface DiceMenuItem {
+  name: string;
+  iconName: string;
+  onClick: () => void;
+}
 
 const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
   borderRadius: '50%',
@@ -19,7 +42,6 @@ const StyledMenu = styled(Menu)(({ theme }) => ({
   '& .MuiPaper-root': {
     backgroundColor: 'rgba(0, 0, 0, 0)',
     boxShadow: 'none',
-    padding: '0 0.8rem',
   },
 }));
 
@@ -32,34 +54,112 @@ function RollDiceButton() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const dice: Array<DiceMenuItem> = [
+    {
+      name: 'D20',
+      iconName: D20Icon,
+      onClick: () => {
+        handleClose();
+      },
+    },
+    {
+      name: 'D12',
+      iconName: D12Icon,
+      onClick: () => {
+        handleClose();
+      },
+    },
+    {
+      name: 'D100',
+      iconName: D100Icon,
+      onClick: () => {
+        handleClose();
+      },
+    },
+    {
+      name: 'D10',
+      iconName: D10Icon,
+      onClick: () => {
+        handleClose();
+      },
+    },
+    {
+      name: 'D8',
+      iconName: D8Icon,
+      onClick: () => {
+        handleClose();
+      },
+    },
+    {
+      name: 'D6',
+      iconName: D6Icon,
+      onClick: () => {
+        handleClose();
+      },
+    },
+    {
+      name: 'D4',
+      iconName: D4Icon,
+      onClick: () => {
+        handleClose();
+      },
+    },
+  ];
+
   return (
     <ParBox
       bgcolor="primary.main"
       sx={{
         borderRadius: '50%',
+        '&:hover': {
+          borderColor: 'primary.light',
+          backgroundColor: 'primary.light',
+        },
       }}
     >
       <Button
-        id="basic-button"
-        aria-controls={open ? 'basic-menu' : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
-        sx={{ height: '100%', borderRadius: '50%' }}
-      />
+        sx={{
+          height: '100%',
+          borderRadius: '50%',
+        }}
+      >
+        {open ? (
+          <CloseIcon fontSize="large" sx={{ color: grey[50] }} />
+        ) : (
+          <Box component="img" src={D20Icon} />
+        )}
+      </Button>
       <FormControl>
         <StyledMenu
           id="basic-menu"
           anchorEl={anchorEl}
           open={open}
           onClose={handleClose}
-          MenuListProps={{
-            'aria-labelledby': 'basic-button',
+          sx={{
+            display: 'flex',
+            width: '100%',
+            justifyContent: 'center',
           }}
         >
-          <StyledMenuItem onClick={handleClose}>
-            <CasinoIcon />
-          </StyledMenuItem>
+          {dice.map((dices) => (
+            <Tooltip
+              disableInteractive
+              placement="left"
+              key={dices.name}
+              title={<Typography> {dices.name || ''} </Typography>}
+            >
+              <StyledMenuItem onClick={dices.onClick}>
+                <Box
+                  component="img"
+                  src={dices.iconName}
+                  width="48px"
+                  height="48px"
+                ></Box>
+              </StyledMenuItem>
+            </Tooltip>
+          ))}
         </StyledMenu>
       </FormControl>
     </ParBox>
