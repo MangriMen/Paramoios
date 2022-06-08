@@ -1,5 +1,5 @@
+import { auth } from 'configs/firebase';
 import { updateEmail, updatePassword, updateProfile } from 'firebase/auth';
-import { auth } from 'helpers/firebase';
 
 export function setUserDisplayName(payload: any) {
   if (auth?.currentUser) {
