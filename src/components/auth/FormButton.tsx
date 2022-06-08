@@ -3,7 +3,7 @@ import { FC } from 'react';
 
 const AuthFormButton: FC<ButtonProps> = ({ children, ...props }) => {
   return (
-    <Button color="secondary" variant="contained" fullWidth {...props}>
+    <Button color="primary" variant="contained" {...props}>
       {children}
     </Button>
   );
