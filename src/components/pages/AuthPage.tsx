@@ -1,8 +1,14 @@
-import { Box, Container, Typography, useTheme } from '@mui/material';
+import {
+  Box,
+  CircularProgress,
+  Container,
+  Typography,
+  useTheme,
+} from '@mui/material';
 import donationAlertLogo from 'assets/images/icons/DA_Alert_White.svg';
 import 'assets/styles/deprecated/login.css';
 import { ROUTE } from 'consts';
-import { getError, getIsLogged } from 'ducks/auth/selectors';
+import { getError, getIsLoading, getIsLogged } from 'ducks/auth/selectors';
 import { FC, useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
@@ -14,6 +20,8 @@ import Register from '../auth/Register';
 const AuthPage: FC = () => {
   const theme = useTheme();
   const { t } = useTranslation('translation', { keyPrefix: 'auth' });
+
+  const isLoading = useSelector(getIsLoading);
 
   const isLogged = useSelector(getIsLogged);
 
@@ -100,11 +108,21 @@ const AuthPage: FC = () => {
           >
             {t('welcome')}
           </Typography>
-          {isLogin ? (
-            <Login changeComponentType={changeComponentType} />
-          ) : (
-            <Register changeComponentType={changeComponentType} />
-          )}
+          <Box
+            flexGrow="1"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+          >
+            {isLoading ? (
+              <CircularProgress color="secondary" />
+            ) : isLogin ? (
+              <Login changeComponentType={changeComponentType} />
+            ) : (
+              <Register changeComponentType={changeComponentType} />
+            )}
+          </Box>
+          <Box flexGrow="1" />
         </Box>
         <Box
           sx={{
