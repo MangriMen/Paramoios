@@ -113,13 +113,20 @@ const AuthPage: FC = () => {
             display="flex"
             justifyContent="center"
             alignItems="center"
+            minHeight="21rem"
           >
             {isLoading ? (
-              <CircularProgress color="secondary" />
+              <CircularProgress color="secondary" size="3rem" />
             ) : isLogin ? (
-              <Login changeComponentType={changeComponentType} />
+              <Login
+                isSubmitEnabled={isLoading}
+                changeFormType={changeComponentType}
+              />
             ) : (
-              <Register changeComponentType={changeComponentType} />
+              <Register
+                isSubmitEnabled={isLoading}
+                changeFormType={changeComponentType}
+              />
             )}
           </Box>
           <Box flexGrow="1" />
