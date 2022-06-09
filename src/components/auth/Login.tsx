@@ -1,4 +1,4 @@
-import { Box, Container, CssBaseline, Typography } from '@mui/material';
+import { Box, Container, Typography } from '@mui/material';
 import ParLink from 'components/styled/ParLink';
 import { authSlice } from 'ducks/auth';
 import { Form, Formik } from 'formik';
@@ -33,7 +33,6 @@ const Login: FC<{ changeComponentType: () => void }> = ({
 
   return (
     <Container component={'main'} maxWidth={'xs'}>
-      <CssBaseline />
       <Box
         sx={{
           display: 'flex',
