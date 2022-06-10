@@ -78,6 +78,7 @@ const LiquidBar: FC<LiquidBarProps> = ({
   maxValue,
   height,
   fontSize,
+  bgcolor,
   ...props
 }) => {
   const value_ = value ?? 10;
@@ -93,7 +94,12 @@ const LiquidBar: FC<LiquidBarProps> = ({
       alignItems="center"
       {...props}
     >
-      <LiquidBarBase height="inherit" value={value} maxValue={maxValue} />
+      <LiquidBarBase
+        bgcolor={bgcolor}
+        height="inherit"
+        value={value}
+        maxValue={maxValue}
+      />
       <Typography
         position="absolute"
         fontSize={fontSize ?? height ?? 'inherit'}
