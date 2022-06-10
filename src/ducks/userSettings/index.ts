@@ -10,7 +10,7 @@ const initialState = {
   },
 };
 
-export const userSlice = createSlice({
+export const userSettingsSlice = createSlice({
   name: '@@user',
   initialState,
   reducers: {
@@ -39,7 +39,7 @@ export const userSlice = createSlice({
         image: false,
       };
     },
-    updateUserError(state, action) {
+    updateUserFailed(state, action) {
       state.error = action.payload;
       state.loading = {
         username: false,
@@ -51,12 +51,12 @@ export const userSlice = createSlice({
   },
 });
 
-export default userSlice.reducer;
+export default userSettingsSlice.reducer;
 export const {
   updateUsername,
   updateEmail,
   updatePassword,
   updateImage,
   updateUserSuccess,
-  updateUserError,
-} = userSlice.actions;
+  updateUserFailed,
+} = userSettingsSlice.actions;

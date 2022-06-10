@@ -8,42 +8,40 @@ import {
   uploadFileToStorage,
 } from 'tools/requests/requests';
 
+import { fetchUserSaga } from '../user/sagas';
 import {
   updateEmail,
   updateImage,
   updatePassword,
-  updateUserError,
+  updateUserFailed,
   updateUserSuccess,
   updateUsername,
 } from './index';
 
-//add update requests.ts
 function* updateUsernameSaga({ payload }: any): Generator<unknown, void, any> {
   try {
     yield call(setUserDisplayName, payload);
     yield put(updateUserSuccess());
   } catch (err) {
-    yield put(updateUserError(err));
+    yield put(updateUserFailed(err));
   }
 }
 
 function* updateEmailSaga({ payload }: any): Generator<unknown, void, any> {
   try {
-    //yield call(setUserEmail, payload);
-    console.log('YES');
+    yield call(setUserEmail, payload);
     yield put(updateUserSuccess());
   } catch (err) {
-    yield put(updateUserError(err));
+    yield put(updateUserFailed(err));
   }
 }
 
 function* updatePasswordSaga({ payload }: any): Generator<unknown, void, any> {
   try {
-    //yield call(setUserPassword, payload);
-    console.log('YES');
+    yield call(setUserPassword, payload);
     yield put(updateUserSuccess());
   } catch (err) {
-    yield put(updateUserError(err));
+    yield put(updateUserFailed(err));
   }
 }
 
@@ -54,12 +52,13 @@ function* updateImageSaga({ payload }: any): Generator<unknown, void, any> {
     yield call(setUserAvatar, url);
     yield put(updateUserSuccess());
   } catch (err) {
-    yield put(updateUserError(err));
+    yield put(updateUserFailed(err));
   }
 }
 
 export function* updateSagaWatcher() {
   yield all([
+    takeLatest(updateUserSuccess, fetchUserSaga),
     takeLatest(updateUsername, updateUsernameSaga),
     takeLatest(updateEmail, updateEmailSaga),
     takeLatest(updatePassword, updatePasswordSaga),
