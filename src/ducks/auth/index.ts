@@ -1,6 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { auth } from 'configs/firebase';
 
-const initialState = { isLogged: false, error: '' };
+const initialState = {
+  isLogged: !auth?.currentUser,
+  error: '',
+};
 
 export const authSlice = createSlice({
   name: '@@auth',
@@ -9,7 +13,7 @@ export const authSlice = createSlice({
     login: (state, action) => {
       state.error = '';
     },
-    loginSuccess: (state) => {
+    loginSuccess: (state, action) => {
       state.isLogged = true;
     },
     loginFailed: (state, action) => {
@@ -19,7 +23,7 @@ export const authSlice = createSlice({
     register: (state, action) => {
       state.error = '';
     },
-    registerSuccess: (state) => {
+    registerSuccess: (state, action) => {
       state.isLogged = true;
     },
     registerFailed: (state, action) => {

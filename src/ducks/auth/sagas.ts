@@ -6,8 +6,13 @@ import { login, logout, register } from './services';
 
 function* loginSaga({ payload }: any): Generator<unknown, void, any> {
   try {
-    yield call(login, payload);
-    yield put(authSlice.actions.loginSuccess());
+    const response = yield call(login, payload);
+    yield put(
+      authSlice.actions.loginSuccess({
+        avatar: response.user.photoURL,
+        token: response.user.accessToken,
+      }),
+    );
   } catch (err) {
     yield put(authSlice.actions.loginFailed(String(err)));
   }
@@ -15,12 +20,17 @@ function* loginSaga({ payload }: any): Generator<unknown, void, any> {
 
 function* registerSaga({ payload }: any): Generator<unknown, void, any> {
   try {
-    yield call(register, payload);
-    yield put(authSlice.actions.registerSuccess());
+    const response = yield call(register, payload);
+    yield call(setUserDisplayName, payload);
+    yield put(
+      authSlice.actions.registerSuccess({
+        avatar: response.user.photoURL,
+        token: response.user.accessToken,
+      }),
+    );
   } catch (err) {
     yield put(authSlice.actions.registerFailed(String(err)));
   }
-  yield call(setUserDisplayName, payload);
 }
 
 function* logoutSaga(): Generator<unknown, void, any> {
