@@ -2,10 +2,11 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   error: null,
-  loading: {
-    username: false,
-    email: false,
-    password: false,
+  isLoading: false,
+  user: {
+    avatar: '',
+    username: '',
+    email: '',
   },
 };
 
@@ -13,42 +14,26 @@ export const userSlice = createSlice({
   name: '@@user',
   initialState,
   reducers: {
-    updateUsername(state, action) {
+    fetchUser(state) {
       state.error = null;
-      state.loading.username = true;
+      state.isLoading = true;
     },
-    updateEmail(state, action) {
-      state.error = null;
-      state.loading.email = true;
+    fetchUserSuccess(state, action) {
+      state.isLoading = false;
+      state.user.avatar = action.payload.avatar;
+      state.user.username = action.payload.username;
+      state.user.email = action.payload.email;
     },
-    updatePassword(state, action) {
-      state.error = null;
-      state.loading.password = true;
-    },
-    updateUserSuccess(state) {
-      state.error = null;
-      state.loading = {
-        username: false,
-        email: false,
-        password: false,
-      };
-    },
-    updateUserError(state, action) {
+    fetchUserFailed(state, action) {
+      state.isLoading = false;
+      state.user.avatar = '';
+      state.user.username = '';
+      state.user.email = '';
       state.error = action.payload;
-      state.loading = {
-        username: false,
-        email: false,
-        password: false,
-      };
     },
   },
 });
 
 export default userSlice.reducer;
-export const {
-  updateUsername,
-  updateEmail,
-  updatePassword,
-  updateUserSuccess,
-  updateUserError,
-} = userSlice.actions;
+export const { fetchUser, fetchUserSuccess, fetchUserFailed } =
+  userSlice.actions;
