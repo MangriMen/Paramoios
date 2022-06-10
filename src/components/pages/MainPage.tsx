@@ -1,9 +1,8 @@
 import { Avatar, Box, Grid, Typography, useTheme } from '@mui/material';
 import LiquidBar from 'components/charlist/LiquidBar';
+import ParBox from 'components/styled/ParBox';
+import ParContainer from 'components/styled/ParContainer';
 import { FC } from 'react';
-
-import ParBox from '../styled/ParBox';
-import ParContainer from '../styled/ParContainer';
 
 const MainPage: FC = () => {
   const theme = useTheme();
