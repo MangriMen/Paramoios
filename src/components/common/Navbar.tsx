@@ -13,10 +13,10 @@ import {
 } from '@mui/material';
 import ParAvatar from 'components/styled/ParAvatar';
 import ParLink from 'components/styled/ParLink';
-import { auth } from 'configs/firebase';
 import { ROUTE } from 'consts';
 import { authSlice } from 'ducks/auth';
 import { getIsLogged } from 'ducks/auth/selectors';
+import { selectUser } from 'ducks/user/selectors';
 import React, { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
@@ -55,6 +55,8 @@ const Navbar: FC = () => {
   const { t: tAuth } = useTranslation('translation', { keyPrefix: 'auth' });
 
   const dispatch = useDispatch();
+
+  const user = useSelector(selectUser);
 
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
@@ -129,12 +131,13 @@ const Navbar: FC = () => {
             >
               <IconButton onClick={handleOpenUserMenu}>
                 <ParAvatar
+                  src={user.avatar}
                   sx={{
                     width: '3rem',
                     height: '3rem',
                   }}
                 >
-                  {auth?.currentUser?.displayName}
+                  {user.username || undefined}
                 </ParAvatar>
               </IconButton>
             </Tooltip>
