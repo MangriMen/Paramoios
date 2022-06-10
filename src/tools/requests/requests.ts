@@ -16,7 +16,7 @@ export function setUserEmail(payload: any) {
 
 export function setUserPassword(payload: any) {
   if (auth?.currentUser) {
-    return updatePassword(auth.currentUser, `${payload.password}`);
+    return updatePassword(auth.currentUser, `${payload.newPassword}`);
   }
 }
 
