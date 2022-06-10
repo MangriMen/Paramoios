@@ -1,5 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
+import { getStorage } from 'firebase/storage';
 import { tryCall } from 'helpers/common';
 
 const firebaseConfig = {
@@ -15,5 +16,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 export const auth = tryCall(getAuth, app);
+
+export const storage = tryCall(getStorage, app);
 
 export default app;
