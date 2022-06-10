@@ -1,13 +1,13 @@
 import { RootState } from 'ducks/store';
 
-export function getIsLoading(state: RootState) {
+export function selectIsLoading(state: RootState) {
   return state.auth.isLoading;
 }
 
-export function getIsLogged(state: RootState) {
+export function selectIsLogged(state: RootState) {
   return state.auth.isLogged;
 }
 
-export function getError(state: RootState) {
+export function selectError(state: RootState) {
   return state.auth.error;
 }

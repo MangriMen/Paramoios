@@ -8,7 +8,11 @@ import {
 import donationAlertLogo from 'assets/images/icons/DA_Alert_White.svg';
 import 'assets/styles/deprecated/login.css';
 import { ROUTE } from 'consts';
-import { getError, getIsLoading, getIsLogged } from 'ducks/auth/selectors';
+import {
+  selectError,
+  selectIsLoading,
+  selectIsLogged,
+} from 'ducks/auth/selectors';
 import { FC, useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
@@ -21,9 +25,9 @@ const AuthPage: FC = () => {
   const theme = useTheme();
   const { t } = useTranslation('translation', { keyPrefix: 'auth' });
 
-  const isLoading = useSelector(getIsLoading);
+  const isLoading = useSelector(selectIsLoading);
 
-  const isLogged = useSelector(getIsLogged);
+  const isLogged = useSelector(selectIsLogged);
 
   const navigate = useNavigate();
 
@@ -39,7 +43,7 @@ const AuthPage: FC = () => {
     setLogin(!isLogin);
   }, [isLogin]);
 
-  const error = useSelector(getError);
+  const error = useSelector(selectError);
 
   useEffect(() => {
     if (error) {
