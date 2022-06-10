@@ -16,10 +16,10 @@ import D10Icon from 'assets/images/dice/D10.svg';
 import D12Icon from 'assets/images/dice/D12.svg';
 import D20Icon from 'assets/images/dice/D20.svg';
 import D100Icon from 'assets/images/dice/D100.svg';
+import ParBox from 'components/styled/ParBox';
 import { FC } from 'react';
 import React from 'react';
 
-import ParBox from '../styled/ParBox';
 import { DiceMenu } from './interfaces';
 
 const StyledMenuItem = styled(MenuItem)(({ theme }) => ({

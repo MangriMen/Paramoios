@@ -1,8 +1,8 @@
 import { Avatar, Grid, Typography, useTheme } from '@mui/material';
+import ParBox from 'components/styled/ParBox';
+import ParContainer from 'components/styled/ParContainer';
 import { FC } from 'react';
 
-import ParBox from '../styled/ParBox';
-import ParContainer from '../styled/ParContainer';
 import RollDiceButton from './RollDiceButton';
 
 const MainPage: FC = () => {
