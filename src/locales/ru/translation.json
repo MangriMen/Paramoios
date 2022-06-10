@@ -35,6 +35,7 @@
     "changeAvatar": "Изменить аватар",
     "changeUsername": "Изменить имя",
     "changeEmail": "Изменить email",
-    "changePassword": "Изменить пароль"
+    "changePassword": "Изменить пароль",
+    "chooseAvatar": "Выбрать аватар"
   }
 }
