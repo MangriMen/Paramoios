@@ -1,5 +1,8 @@
+import { auth } from 'configs/firebase';
 import { ROUTE } from 'consts';
+import { fetchUser } from 'ducks/user';
 import { FC } from 'react';
+import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router';
 
 import PageWithNavbar from './layout/PageWithNavbar';
@@ -10,6 +13,11 @@ import UserPage from './pages/UserPage';
 import { UserSettingsComponent } from './user/UserSettingsComponent';
 
 const App: FC = () => {
+  const dispatch = useDispatch();
+  auth?.onAuthStateChanged(() => {
+    dispatch(fetchUser());
+  });
+
   return (
     <>
       <Routes>
