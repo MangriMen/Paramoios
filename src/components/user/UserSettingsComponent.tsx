@@ -1,15 +1,19 @@
-import { Box, Button, Typography, styled } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import FormButton from 'components/auth/FormButton';
 import FormField from 'components/auth/FormField';
 import ParAvatar from 'components/styled/ParAvatar';
 import ParContainer from 'components/styled/ParContainer';
-import { auth } from 'configs/firebase';
-import { updateEmail, updatePassword, updateUsername } from 'ducks/user';
+import { selectUser } from 'ducks/user/selectors';
+import {
+  updateEmail,
+  updateImage,
+  updatePassword,
+  updateUsername,
+} from 'ducks/userSettings';
 import { Form, Formik, FormikValues } from 'formik';
-import { userInfo } from 'mocks/mockUserInfo';
-import React, { useEffect, useState } from 'react';
+import React, { BaseSyntheticEvent, FC, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   emailSettingsSchema,
   passwordSettingsSchema,
@@ -37,16 +41,23 @@ const passwordSettingsInitialValue: PasswordValue = {
   currentPassword: '',
 };
 
-export const UserSettingsComponent = () => {
+export const UserSettingsComponent: FC = () => {
   const dispatch = useDispatch();
-  const user = auth?.currentUser;
-  const [file, setFile] = useState('');
+  const user = useSelector(selectUser);
+
   const { t } = useTranslation('translation', { keyPrefix: 'userSettings' });
+
+  const [fileResult, setFileResult] = useState<string | undefined>(undefined);
+
+  const [changeAvatarButton, setChangeAvatarButton] = useState(false);
+
+  const [avatarError, setAvatarError] = useState('');
 
   const [buttons, setButtons] = useState<activeButtons>({
     username: false,
     email: false,
     password: false,
+    avatar: true,
   });
 
   useEffect(() => {
@@ -55,7 +66,7 @@ export const UserSettingsComponent = () => {
         ...prevState,
         username: false,
       }));
-    }, 5000);
+    }, 3000);
     return () => {
       clearTimeout(timerId);
     };
@@ -67,7 +78,7 @@ export const UserSettingsComponent = () => {
         ...prevState,
         email: false,
       }));
-    }, 5000);
+    }, 3000);
     return () => {
       clearTimeout(timerId);
     };
@@ -79,11 +90,26 @@ export const UserSettingsComponent = () => {
         ...prevState,
         password: false,
       }));
-    }, 5000);
+    }, 3000);
     return () => {
       clearTimeout(timerId);
     };
   }, [buttons.password]);
+
+  useEffect(() => {
+    if (changeAvatarButton) {
+      const timerId = setTimeout(() => {
+        setChangeAvatarButton(false);
+        setButtons((prevState: activeButtons) => ({
+          ...prevState,
+          avatar: false,
+        }));
+      }, 3000);
+      return () => {
+        clearTimeout(timerId);
+      };
+    }
+  }, [changeAvatarButton]);
 
   const submitUsernameHandler = (values: FormikValues) => {
     setButtons((prevState: activeButtons) => ({
@@ -109,10 +135,49 @@ export const UserSettingsComponent = () => {
     dispatch(updatePassword(values));
   };
 
-  const handleOnChange = (event: any) => {
-    setFile(event.target.value);
-    console.log(file);
+  const submitImageHandler = () => {
+    setButtons((prevState: activeButtons) => ({
+      ...prevState,
+      avatar: !prevState.avatar,
+    }));
+    setChangeAvatarButton(true);
+    dispatch(updateImage(fileResult));
   };
+
+  const handleOnChangeAvatar = (event: BaseSyntheticEvent) => {
+    const file = event.target.files[0];
+    if (file === undefined) {
+      return;
+    }
+
+    setButtons((prevState: activeButtons) => ({
+      ...prevState,
+      avatar: true,
+    }));
+
+    if (file.size > 1024 * 1024) {
+      setFileResult(undefined);
+      setChangeAvatarButton(false);
+      setAvatarError('Please upload a picture smaller than 1 MB');
+      return;
+    }
+
+    setAvatarError('');
+
+    const fr = new FileReader();
+    fr.onload = onLoadImage;
+    fr.readAsDataURL(file);
+
+    setButtons((prevState: activeButtons) => ({
+      ...prevState,
+      avatar: false,
+    }));
+  };
+
+  function onLoadImage(event: ProgressEvent<FileReader>) {
+    if (typeof event.target?.result === 'string')
+      setFileResult(event.target.result);
+  }
 
   return (
     <ParContainer
@@ -130,65 +195,98 @@ export const UserSettingsComponent = () => {
           flexWrap: 'wrap',
         }}
       >
-        <label>
-          <input
-            accept="image/*"
-            multiple
-            type="file"
-            value={file}
-            onChange={(e) => setFile(e.target.value)}
-            style={{ display: 'none' }}
-          />
-          <Button
-            component="span"
-            onClick={() => {
-              console.log(file);
-            }}
-            sx={{
-              '&:hover .avatar-box': {
-                backgroundColor: '#212121',
-                opacity: '0.1',
-              },
-              '&:hover .avatar-button': {
-                filter: 'brightness(85%)',
-              },
-              padding: '0',
-              mr: { xs: '0', sm: '1rem' },
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            flexWrap: 'wrap',
+            alignItems: 'center',
+            width: '15.5rem',
+          }}
+        >
+          <label
+            style={{
+              width: '15.5rem',
+              height: '15.5rem',
             }}
           >
-            <ParAvatar
-              src={userInfo.userImage}
-              sx={{
-                width: '15rem',
-                height: '15rem',
-                border: '4px solid',
-                borderRadius: '4px',
-              }}
+            <input
+              accept="image/*"
+              multiple
+              type="file"
+              onChange={(e) => handleOnChangeAvatar(e)}
+              style={{ display: 'none' }}
             />
-            <Box
-              position="absolute"
-              className="avatar-box"
+            <Button
+              component="span"
               sx={{
-                width: '100%',
-                height: '100%',
-              }}
-            />
-            <Typography
-              className="avatar-button"
-              position="absolute"
-              sx={{
-                backgroundColor: 'secondary.main',
-                borderRadius: '4px',
-                padding: '0.375rem 1rem',
-                lineHeight: '1.25',
-                border: '2px solid',
-                bottom: '-8px',
+                '&:hover .avatar-box': {
+                  backgroundColor: '#212121',
+                  opacity: '0.1',
+                },
+                '&:hover .avatar-button': {
+                  filter: 'brightness(85%)',
+                },
+                padding: '0',
+                mr: { xs: '0', sm: '1rem' },
               }}
             >
-              {t('changeAvatar')}
-            </Typography>
-          </Button>
-        </label>
+              <ParAvatar
+                src={fileResult ?? user.avatar}
+                sx={{
+                  width: '15rem',
+                  height: '15rem',
+                  border: '4px solid',
+                  borderRadius: '4px',
+                  borderColor: 'primary.main',
+                  fontSize: '7.75rem',
+                }}
+              >
+                {user.username || undefined}
+              </ParAvatar>
+              <Box
+                position="absolute"
+                className="avatar-box"
+                sx={{
+                  width: '100%',
+                  height: '100%',
+                }}
+              />
+              <Typography
+                className="avatar-button"
+                position="absolute"
+                sx={{
+                  backgroundColor: 'secondary.main',
+                  borderRadius: '4px',
+                  padding: '0.375rem 1rem',
+                  lineHeight: '1.25',
+                  border: '2px solid',
+                  bottom: '-8px',
+                }}
+              >
+                {t('chooseAvatar')}
+              </Typography>
+            </Button>
+          </label>
+          <FormButton
+            onClick={submitImageHandler}
+            disabled={buttons.avatar}
+            sx={{ marginTop: '2rem', height: '2rem' }}
+          >
+            {t('changeAvatar')}
+          </FormButton>
+          <Typography
+            color="error"
+            textAlign="center"
+            sx={{
+              mt: '1rem',
+              width: '15.5rem',
+              wordWrap: 'break-word',
+            }}
+          >
+            {!!avatarError && avatarError}
+          </Typography>
+        </Box>
 
         <Box
           sx={{
@@ -209,6 +307,7 @@ export const UserSettingsComponent = () => {
             gridTemplateRows="12rem 5rem 12rem"
             rowGap="1rem"
             marginRight={{ xs: '0', sm: '1rem' }}
+            marginLeft={{ xs: '0', sm: '1rem' }}
           >
             <Formik
               initialValues={usernameSettingsInitialValue}
@@ -224,7 +323,7 @@ export const UserSettingsComponent = () => {
                   justifyItems="center"
                 >
                   <Typography gridRow="1" fontSize="2rem">
-                    {user?.displayName}
+                    {user.username}
                   </Typography>
                   <FormField fieldName="username" sx={{ gridRow: '2' }} />
                   <FormButton
@@ -252,7 +351,7 @@ export const UserSettingsComponent = () => {
                   justifyItems="center"
                 >
                   <Typography gridRow="1" fontSize="2rem">
-                    {user?.email}
+                    {user.email}
                   </Typography>
                   <FormField
                     type="email"
