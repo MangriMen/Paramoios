@@ -1,21 +1,20 @@
 import { Box, BoxProps, Typography, styled } from '@mui/material';
 import { FC } from 'react';
 
-const BarParent = styled(Box)(({ theme }) => ({
+const BarParent = styled(Box)(() => ({
   position: 'relative',
-  borderRadius: '4px',
+  borderRadius: 'inherit',
   width: '100%',
   minHeight: '100%',
 }));
 
-const BarChild = styled(Box)(({ theme }) => ({
-  borderRadius: 'inherit',
+const BarChild = styled(Box)(() => ({
   height: 'inherit',
   maxWidth: '100%',
   transition: 'width 0.5s ease-out',
 }));
 
-const BarLiquidBlock = styled(Box)(({ theme }) => ({
+const BarLiquidBlock = styled(Box)(() => ({
   borderRadius: '40%',
   transition: 'left 0.5s ease-out',
   animation: 'wave 8s linear infinite',
@@ -52,6 +51,7 @@ const LiquidBarBase: FC<LiquidBarProps> = ({
   return (
     <BarParent position="relative" overflow="hidden" height={height_}>
       <BarChild
+        width="100%"
         bgcolor={bgcolor_}
         sx={{ filter: 'contrast(65%) brightness(120%)' }}
       />
@@ -92,6 +92,8 @@ const LiquidBar: FC<LiquidBarProps> = ({
       display="flex"
       justifyContent="center"
       alignItems="center"
+      boxSizing="border-box"
+      overflow="hidden"
       {...props}
     >
       <LiquidBarBase
@@ -102,7 +104,7 @@ const LiquidBar: FC<LiquidBarProps> = ({
       />
       <Typography
         position="absolute"
-        fontSize={fontSize ?? height ?? 'inherit'}
+        fontSize={fontSize ?? 'inherit'}
         sx={{
           color: '#FFF',
         }}
