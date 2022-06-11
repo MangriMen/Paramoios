@@ -1,4 +1,4 @@
-import { Avatar, Box, Grid, Typography, useTheme } from '@mui/material';
+import { Avatar, Grid, Typography, useTheme } from '@mui/material';
 import LiquidBar from 'components/charlist/LiquidBar';
 import ParBox from 'components/styled/ParBox';
 import ParContainer from 'components/styled/ParContainer';
@@ -10,9 +10,6 @@ const MainPage: FC = () => {
   return (
     <ParContainer maxWidth="lg" sx={{ marginTop: '1rem', padding: '1rem' }}>
       {/* Grid container header of charlist, contains avatar and character name */}
-      <Box>
-        <LiquidBar value={50} maxValue={100} />
-      </Box>
       <Grid
         container
         flexDirection="row"
@@ -29,6 +26,16 @@ const MainPage: FC = () => {
               borderColor: theme.palette.primary.main,
               fontSize: '128px',
             }}
+          />
+          <LiquidBar
+            borderRadius="4px"
+            border="4px solid"
+            height="1.8rem"
+            fontSize="1.2rem"
+            borderColor="primary.main"
+            bgcolor="green"
+            value={50}
+            maxValue={100}
           />
         </Grid>
         <Grid item xs={10}>
