@@ -4,6 +4,7 @@ import {
   Button,
   Menu,
   MenuItem,
+  Slide,
   Tooltip,
   Typography,
   styled,
@@ -52,53 +53,32 @@ const RollDiceButton: FC = () => {
 
   const dice: Array<DiceMenu> = [
     {
-      name: 'D20',
+      name: '20',
       iconName: D20Icon,
-      onClick: () => {
-        handleClose();
-      },
     },
     {
-      name: 'D12',
+      name: '12',
       iconName: D12Icon,
-      onClick: () => {
-        handleClose();
-      },
     },
     {
-      name: 'D100',
+      name: '100',
       iconName: D100Icon,
-      onClick: () => {
-        handleClose();
-      },
     },
     {
-      name: 'D10',
+      name: '10',
       iconName: D10Icon,
-      onClick: () => {
-        handleClose();
-      },
     },
     {
-      name: 'D8',
+      name: '8',
       iconName: D8Icon,
-      onClick: () => {
-        handleClose();
-      },
     },
     {
-      name: 'D6',
+      name: '6',
       iconName: D6Icon,
-      onClick: () => {
-        handleClose();
-      },
     },
     {
-      name: 'D4',
+      name: '4',
       iconName: D4Icon,
-      onClick: () => {
-        handleClose();
-      },
     },
   ];
 
@@ -142,9 +122,9 @@ const RollDiceButton: FC = () => {
             disableInteractive
             placement="left"
             key={dices.name}
-            title={<Typography> {dices.name || ''} </Typography>}
+            title={<Typography> {'D' + dices.name || ''} </Typography>}
           >
-            <StyledMenuItem onClick={dices.onClick}>
+            <StyledMenuItem onClick={handleClose}>
               <Box
                 component="img"
                 src={dices.iconName}
