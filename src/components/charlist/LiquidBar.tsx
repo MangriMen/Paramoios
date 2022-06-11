@@ -15,6 +15,7 @@ const BarChild = styled(Box)(() => ({
 }));
 
 const BarLiquidBlock = styled(Box)(() => ({
+  aspectRatio: '1/1',
   borderRadius: '40%',
   transition: 'left 0.5s ease-out',
   animation: 'wave 8s linear infinite',
@@ -41,7 +42,7 @@ const LiquidBarBase: FC<LiquidBarProps> = ({
   const height_ = height ?? '1.5rem';
   const bgcolor_ = bgcolor ?? 'primary.main';
 
-  const nonNegativeValueForFilledBar = value_ - 2 >= 0 ? value_ - 2 : 0;
+  const nonNegativeValueForFilledBar = value_ - 1.5 >= 0 ? value_ - 1.5 : 0;
   const filledBarWidth = Math.round(
     (nonNegativeValueForFilledBar * 100) / maxValue_,
   );
@@ -49,7 +50,13 @@ const LiquidBarBase: FC<LiquidBarProps> = ({
   const waveOffset = Math.round((value_ * 100) / maxValue_);
 
   return (
-    <BarParent position="relative" overflow="hidden" height={height_}>
+    <BarParent
+      position="relative"
+      display="flex"
+      alignItems="center"
+      overflow="hidden"
+      height={height_}
+    >
       <BarChild
         width="100%"
         bgcolor={bgcolor_}
@@ -64,10 +71,10 @@ const LiquidBarBase: FC<LiquidBarProps> = ({
       <BarLiquidBlock
         bgcolor={bgcolor_}
         position="absolute"
-        width="6rem"
-        height="6rem"
-        top="-160%"
-        left={`calc(${waveOffset}% - 6.${value_ > 0 ? '0' : '3'}rem)`}
+        height="333%"
+        left={`calc(${waveOffset}% - (${height_} * 3.33) - ${
+          value_ > 0 ? '0' : '1'
+        }% + ${value_ >= maxValue_ ? '1' : '0'}%)`}
       />
     </BarParent>
   );
@@ -98,7 +105,7 @@ const LiquidBar: FC<LiquidBarProps> = ({
     >
       <LiquidBarBase
         bgcolor={bgcolor}
-        height="inherit"
+        height={height_}
         value={value}
         maxValue={maxValue}
       />
