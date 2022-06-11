@@ -4,7 +4,6 @@ import {
   Button,
   Menu,
   MenuItem,
-  Slide,
   Tooltip,
   Typography,
   styled,
