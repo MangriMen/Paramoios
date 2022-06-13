@@ -16,7 +16,7 @@ import ParLink from 'components/styled/ParLink';
 import { auth } from 'configs/firebase';
 import { ROUTE } from 'consts';
 import { authSlice } from 'ducks/auth';
-import { getIsLogged } from 'ducks/auth/selectors';
+import { selectIsLogged } from 'ducks/auth/selectors';
 import React, { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
@@ -58,7 +58,7 @@ const Navbar: FC = () => {
 
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
-  const isLogged = useSelector(getIsLogged);
+  const isLogged = useSelector(selectIsLogged);
 
   const navigate = useNavigate();
 
