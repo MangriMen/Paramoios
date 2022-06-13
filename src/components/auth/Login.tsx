@@ -1,6 +1,6 @@
 import { Box, Container, Typography } from '@mui/material';
 import ParLink from 'components/styled/ParLink';
-import { authSlice } from 'ducks/auth';
+import { loginRequest } from 'ducks/auth';
 import { Form, Formik } from 'formik';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -22,7 +22,7 @@ const Login: FC<AuthFormProps> = ({ isSubmitEnabled, changeFormType }) => {
   const dispatch = useDispatch();
 
   const handlerSubmit = ({ email, password }: LoginValue) => {
-    dispatch(authSlice.actions.login({ email, password }));
+    dispatch(loginRequest({ email, password }));
   };
 
   return (
@@ -58,6 +58,8 @@ const Login: FC<AuthFormProps> = ({ isSubmitEnabled, changeFormType }) => {
                 required
                 autoFocus
                 themeColor="secondary"
+                fullWidth
+                margin="normal"
               />
               <FormField
                 type="password"
@@ -65,8 +67,15 @@ const Login: FC<AuthFormProps> = ({ isSubmitEnabled, changeFormType }) => {
                 autoComplete={'current-password'}
                 required
                 themeColor="secondary"
+                fullWidth
+                margin="normal"
               />
-              <FormButton type={'submit'} disabled={isSubmitEnabled} fullWidth>
+              <FormButton
+                type={'submit'}
+                fullWidth
+                color="secondary"
+                sx={{ mt: '1rem' }}
+              >
                 {t('signIn')}
               </FormButton>
             </Box>

@@ -56,8 +56,6 @@ const AuthFormField: FC<AuthFormFieldProps> = ({
       error={!!(touched[fieldName] && errors[fieldName])}
       helperText={touched[fieldName] && errors[fieldName]}
       onChange={handleChange}
-      fullWidth
-      margin="normal"
       color={calculatedColor}
       themeColor={calculatedColor}
       variant="outlined"

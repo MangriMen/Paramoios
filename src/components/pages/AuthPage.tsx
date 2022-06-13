@@ -7,6 +7,8 @@ import {
 } from '@mui/material';
 import donationAlertLogo from 'assets/images/icons/DA_Alert_White.svg';
 import 'assets/styles/deprecated/login.css';
+import Login from 'components/auth/Login';
+import Register from 'components/auth/Register';
 import { ROUTE } from 'consts';
 import {
   selectError,
@@ -17,9 +19,6 @@ import { FC, useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-
-import Login from '../auth/Login';
-import Register from '../auth/Register';
 
 const AuthPage: FC = () => {
   const theme = useTheme();

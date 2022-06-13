@@ -1,17 +1,37 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { selectUser } from './selectors';
-
-const initialState = { user: { name: '', email: '' } };
+const initialState = {
+  error: null,
+  isLoading: false,
+  user: {
+    avatar: '',
+    username: '',
+    email: '',
+  },
+};
 
 export const userSlice = createSlice({
   name: '@@user',
   initialState,
   reducers: {
-    updateUser: (state, action) => {
-      state.user = action.payload;
+    fetchUser(state) {
+      state.error = null;
+      state.isLoading = true;
+    },
+    fetchUserSuccess(state, action) {
+      state.isLoading = false;
+      state.user.avatar = action.payload.avatar;
+      state.user.username = action.payload.username;
+      state.user.email = action.payload.email;
+    },
+    fetchUserFailed(state, action) {
+      state.isLoading = false;
+      state.user = initialState.user;
+      state.error = action.payload;
     },
   },
 });
 
-export { selectUser };
+export default userSlice.reducer;
+export const { fetchUser, fetchUserSuccess, fetchUserFailed } =
+  userSlice.actions;

@@ -1,38 +1,49 @@
-import { authSlice } from 'ducks/auth';
 import { call, put, takeLatest } from 'redux-saga/effects';
+import { setUserDisplayName } from 'tools/requests/requests';
 
-import { login, logout, register, setUserDisplayName } from './services';
+import {
+  loginFailed,
+  loginRequest,
+  loginSuccess,
+  logoutFailed,
+  logoutRequest,
+  logoutSuccess,
+  registerFailed,
+  registerRequest,
+  registerSuccess,
+} from './index';
+import { login, logout, register } from './services';
 
 function* loginSaga({ payload }: any): Generator<unknown, void, any> {
   try {
     yield call(login, payload);
-    yield put(authSlice.actions.loginSuccess());
+    yield put(loginSuccess());
   } catch (err) {
-    yield put(authSlice.actions.loginFailed(String(err)));
+    yield put(loginFailed(String(err)));
   }
 }
 
 function* registerSaga({ payload }: any): Generator<unknown, void, any> {
   try {
     yield call(register, payload);
-    yield put(authSlice.actions.registerSuccess());
+    yield call(setUserDisplayName, payload);
+    yield put(registerSuccess());
   } catch (err) {
-    yield put(authSlice.actions.registerFailed(String(err)));
+    yield put(registerFailed(String(err)));
   }
-  yield call(setUserDisplayName, payload);
 }
 
 function* logoutSaga(): Generator<unknown, void, any> {
   try {
     yield call(logout);
-    yield put(authSlice.actions.logoutSuccess());
+    yield put(logoutSuccess());
   } catch (err) {
-    yield put(authSlice.actions.logoutFailed(String(err)));
+    yield put(logoutFailed(String(err)));
   }
 }
 
 export function* watchAuth() {
-  yield takeLatest(authSlice.actions.login, loginSaga);
-  yield takeLatest(authSlice.actions.register, registerSaga);
-  yield takeLatest(authSlice.actions.logout, logoutSaga);
+  yield takeLatest(loginRequest, loginSaga);
+  yield takeLatest(registerRequest, registerSaga);
+  yield takeLatest(logoutRequest, logoutSaga);
 }

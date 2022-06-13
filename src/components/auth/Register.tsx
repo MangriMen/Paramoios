@@ -1,6 +1,6 @@
 import { Box, Container, Typography } from '@mui/material';
 import ParLink from 'components/styled/ParLink';
-import { authSlice } from 'ducks/auth';
+import { registerRequest } from 'ducks/auth';
 import { Form, Formik } from 'formik';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -24,7 +24,7 @@ const Register: FC<AuthFormProps> = ({ isSubmitEnabled, changeFormType }) => {
   const dispatch = useDispatch();
 
   const handlerSubmit = ({ username, email, password }: RegisterValue) => {
-    dispatch(authSlice.actions.register({ username, email, password }));
+    dispatch(registerRequest({ username, email, password }));
   };
 
   return (
@@ -60,21 +60,39 @@ const Register: FC<AuthFormProps> = ({ isSubmitEnabled, changeFormType }) => {
                 required
                 autoFocus
                 themeColor="secondary"
+                margin="normal"
+                fullWidth
               />
-              <FormField fieldName="email" required themeColor="secondary" />
+              <FormField
+                fieldName="email"
+                required
+                themeColor="secondary"
+                margin="normal"
+                fullWidth
+              />
               <FormField
                 type="password"
                 fieldName="password"
                 required
                 themeColor="secondary"
+                margin="normal"
+                fullWidth
               />
               <FormField
                 type="password"
                 fieldName="confirmPassword"
                 required
                 themeColor="secondary"
+                margin="normal"
+                fullWidth
               />
-              <FormButton type="submit" disabled={isSubmitEnabled}>
+
+              <FormButton
+                type="submit"
+                color="secondary"
+                fullWidth
+                sx={{ mt: '1rem' }}
+              >
                 {t('signUp')}
               </FormButton>
             </Box>
