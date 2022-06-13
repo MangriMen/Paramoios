@@ -14,13 +14,14 @@ import {
 import ParAvatar from 'components/styled/ParAvatar';
 import ParLink from 'components/styled/ParLink';
 import { ROUTE } from 'consts';
-import { authSlice } from 'ducks/auth';
 import { getIsLogged } from 'ducks/auth/selectors';
 import { selectUser } from 'ducks/user/selectors';
 import React, { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+
+import { logoutRequest } from '../../ducks/auth';
 
 interface UserMenuItem {
   name: string;
@@ -92,7 +93,7 @@ const Navbar: FC = () => {
       tooltip: tAuth('signOut'),
       onClick: () => {
         handleCloseUserMenu();
-        dispatch(authSlice.actions.logout());
+        dispatch(logoutRequest());
         navigate(ROUTE.HOME);
       },
     },
