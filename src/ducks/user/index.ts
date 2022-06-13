@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { getUser } from './selectors';
+import { selectUser } from './selectors';
 
 const initialState = { user: { name: '', email: '' } };
 
@@ -14,4 +14,4 @@ export const userSlice = createSlice({
   },
 });
 
-export { getUser };
+export { selectUser };

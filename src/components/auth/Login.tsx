@@ -1,4 +1,4 @@
-import { Box, Container, CssBaseline, Typography } from '@mui/material';
+import { Box, Container, Typography } from '@mui/material';
 import ParLink from 'components/styled/ParLink';
 import { authSlice } from 'ducks/auth';
 import { Form, Formik } from 'formik';
@@ -9,31 +9,24 @@ import { loginSchema } from 'schemas/auth';
 
 import FormButton from './FormButton';
 import FormField from './FormField';
+import { AuthFormProps, LoginValue } from './interfaces';
 
-interface LoginValues {
-  email: string;
-  password: string;
-}
+const initialValues: LoginValue = {
+  email: '',
+  password: '',
+};
 
-const Login: FC<{ changeComponentType: () => void }> = ({
-  changeComponentType,
-}) => {
+const Login: FC<AuthFormProps> = ({ isSubmitEnabled, changeFormType }) => {
   const { t } = useTranslation('translation', { keyPrefix: 'auth' });
 
   const dispatch = useDispatch();
 
-  const initialValues: LoginValues = {
-    email: '',
-    password: '',
-  };
-
-  const handlerSubmit = ({ email, password }: LoginValues) => {
+  const handlerSubmit = ({ email, password }: LoginValue) => {
     dispatch(authSlice.actions.login({ email, password }));
   };
 
   return (
     <Container component={'main'} maxWidth={'xs'}>
-      <CssBaseline />
       <Box
         sx={{
           display: 'flex',
@@ -49,7 +42,7 @@ const Login: FC<{ changeComponentType: () => void }> = ({
         >
           {t('authorize')}
         </Typography>
-        <ParLink component="button" onClick={changeComponentType}>
+        <ParLink component="button" onClick={changeFormType}>
           {t('orRegister')}
         </ParLink>
         <Formik
@@ -73,7 +66,7 @@ const Login: FC<{ changeComponentType: () => void }> = ({
                 required
                 themeColor="secondary"
               />
-              <FormButton type={'submit'} fullWidth>
+              <FormButton type={'submit'} disabled={isSubmitEnabled} fullWidth>
                 {t('signIn')}
               </FormButton>
             </Box>
