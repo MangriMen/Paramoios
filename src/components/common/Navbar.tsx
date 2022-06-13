@@ -14,14 +14,14 @@ import {
 import ParAvatar from 'components/styled/ParAvatar';
 import ParLink from 'components/styled/ParLink';
 import { ROUTE } from 'consts';
-import { getIsLogged } from 'ducks/auth/selectors';
-import { selectUser } from 'ducks/user/selectors';
+import { logoutRequest } from 'ducks/auth';
+import { selectIsLogged } from 'ducks/auth/selectors';
 import React, { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import { logoutRequest } from '../../ducks/auth';
+import { selectUser } from '../../ducks/user/selectors';
 
 interface UserMenuItem {
   name: string;
@@ -61,7 +61,7 @@ const Navbar: FC = () => {
 
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
-  const isLogged = useSelector(getIsLogged);
+  const isLogged = useSelector(selectIsLogged);
 
   const navigate = useNavigate();
 

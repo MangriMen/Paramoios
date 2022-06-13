@@ -1,4 +1,4 @@
-import { Box, Container, CssBaseline, Typography } from '@mui/material';
+import { Box, Container, Typography } from '@mui/material';
 import ParLink from 'components/styled/ParLink';
 import { registerRequest } from 'ducks/auth';
 import { Form, Formik } from 'formik';
@@ -9,35 +9,26 @@ import { registerSchema } from 'schemas/auth';
 
 import FormButton from './FormButton';
 import FormField from './FormField';
+import { AuthFormProps, RegisterValue } from './interfaces';
 
-interface RegisterValues {
-  username: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-}
+const initialValues: RegisterValue = {
+  username: '',
+  email: '',
+  password: '',
+  confirmPassword: '',
+};
 
-const Register: FC<{ changeComponentType: () => void }> = ({
-  changeComponentType,
-}) => {
+const Register: FC<AuthFormProps> = ({ isSubmitEnabled, changeFormType }) => {
   const { t } = useTranslation('translation', { keyPrefix: 'auth' });
 
   const dispatch = useDispatch();
 
-  const initialValues: RegisterValues = {
-    username: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-  };
-
-  const handlerSubmit = ({ username, email, password }: RegisterValues) => {
+  const handlerSubmit = ({ username, email, password }: RegisterValue) => {
     dispatch(registerRequest({ username, email, password }));
   };
 
   return (
     <Container component={'main'} maxWidth={'xs'}>
-      <CssBaseline />
       <Box
         sx={{
           display: 'flex',
@@ -53,7 +44,7 @@ const Register: FC<{ changeComponentType: () => void }> = ({
         >
           {t('register')}
         </Typography>
-        <ParLink component="button" onClick={changeComponentType}>
+        <ParLink component="button" onClick={changeFormType}>
           {t('orLogin')}
         </ParLink>
         <Formik
@@ -95,6 +86,7 @@ const Register: FC<{ changeComponentType: () => void }> = ({
                 margin="normal"
                 fullWidth
               />
+
               <FormButton
                 type="submit"
                 color="secondary"

@@ -1,8 +1,9 @@
 import { Avatar, Grid, Typography, useTheme } from '@mui/material';
+import ParBox from 'components/styled/ParBox';
+import ParContainer from 'components/styled/ParContainer';
 import { FC } from 'react';
 
-import ParBox from '../styled/ParBox';
-import ParContainer from '../styled/ParContainer';
+import RollDiceButton from './RollDiceButton';
 
 const MainPage: FC = () => {
   const theme = useTheme();
@@ -33,17 +34,14 @@ const MainPage: FC = () => {
         </Grid>
       </Grid>
       {/* Grid container with character stats */}
-      <Grid
-        container
-        flexDirection="row"
-        justifyContent="space-between"
-        mb="1rem"
-      >
-        {Array.from(Array(7)).map((_, index) => (
-          <Grid item xs={1.5} key={index}>
-            <ParBox padding="1rem" />
-          </Grid>
-        ))}
+      <Grid container justifyContent="space-between" mb="1rem">
+        <ParBox padding="2rem"></ParBox>
+        <ParBox padding="2rem"></ParBox>
+        <ParBox padding="2rem"></ParBox>
+        <RollDiceButton></RollDiceButton>
+        <ParBox padding="2rem"></ParBox>
+        <ParBox padding="2rem"></ParBox>
+        <ParBox padding="2rem"></ParBox>
       </Grid>
       <Grid container>
         {/* Grid container with character skills */}
