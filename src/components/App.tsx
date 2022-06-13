@@ -1,5 +1,6 @@
 import { auth } from 'configs/firebase';
 import { ROUTE } from 'consts';
+import { loginSuccess, logoutSuccess } from 'ducks/auth';
 import { fetchUser } from 'ducks/user';
 import { FC } from 'react';
 import { useDispatch } from 'react-redux';
@@ -14,8 +15,13 @@ import { UserSettingsComponent } from './user/UserSettingsComponent';
 
 const App: FC = () => {
   const dispatch = useDispatch();
-  auth?.onAuthStateChanged(() => {
-    dispatch(fetchUser());
+  auth?.onAuthStateChanged((user) => {
+    if (user) {
+      dispatch(fetchUser());
+      dispatch(loginSuccess());
+    } else {
+      dispatch(logoutSuccess);
+    }
   });
 
   return (
