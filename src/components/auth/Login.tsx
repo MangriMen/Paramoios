@@ -1,6 +1,6 @@
 import { Box, Container, CssBaseline, Typography } from '@mui/material';
 import ParLink from 'components/styled/ParLink';
-import { authSlice } from 'ducks/auth';
+import { loginRequest } from 'ducks/auth';
 import { Form, Formik } from 'formik';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -28,7 +28,7 @@ const Login: FC<{ changeComponentType: () => void }> = ({
   };
 
   const handlerSubmit = ({ email, password }: LoginValues) => {
-    dispatch(authSlice.actions.login({ email, password }));
+    dispatch(loginRequest({ email, password }));
   };
 
   return (

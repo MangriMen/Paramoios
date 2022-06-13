@@ -1,6 +1,6 @@
 import { Box, Container, CssBaseline, Typography } from '@mui/material';
 import ParLink from 'components/styled/ParLink';
-import { authSlice } from 'ducks/auth';
+import { registerRequest } from 'ducks/auth';
 import { Form, Formik } from 'formik';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -32,7 +32,7 @@ const Register: FC<{ changeComponentType: () => void }> = ({
   };
 
   const handlerSubmit = ({ username, email, password }: RegisterValues) => {
-    dispatch(authSlice.actions.register({ username, email, password }));
+    dispatch(registerRequest({ username, email, password }));
   };
 
   return (
