@@ -26,9 +26,7 @@ export const userSlice = createSlice({
     },
     fetchUserFailed(state, action) {
       state.isLoading = false;
-      state.user.avatar = '';
-      state.user.username = '';
-      state.user.email = '';
+      state.user = initialState.user;
       state.error = action.payload;
     },
   },

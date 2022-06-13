@@ -32,21 +32,11 @@ export const userSettingsSlice = createSlice({
     },
     updateUserSuccess(state) {
       state.error = null;
-      state.loading = {
-        username: false,
-        email: false,
-        password: false,
-        image: false,
-      };
+      state.loading = initialState.loading;
     },
     updateUserFailed(state, action) {
       state.error = action.payload;
-      state.loading = {
-        username: false,
-        email: false,
-        password: false,
-        image: false,
-      };
+      state.loading = initialState.loading;
     },
   },
 });
