@@ -20,7 +20,7 @@ const App: FC = () => {
       dispatch(fetchUser());
       dispatch(loginSuccess());
     } else {
-      dispatch(logoutSuccess);
+      dispatch(logoutSuccess());
     }
   });
 
