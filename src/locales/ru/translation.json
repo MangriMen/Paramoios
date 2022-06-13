@@ -25,7 +25,7 @@
   },
   "userProfile": {
     "name": "Имя",
-    "email": "Email",
+    "email": "Почта",
     "otherInfo": "Дополнительная информация",
     "settings": "Настройки",
     "description": "Описание",
