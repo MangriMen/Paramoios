@@ -52,31 +52,31 @@ const RollDiceButton: FC = () => {
 
   const dices: Array<DiceMenu> = [
     {
-      edges: '20',
+      edges: 20,
       iconName: D20Icon,
     },
     {
-      edges: '12',
+      edges: 12,
       iconName: D12Icon,
     },
     {
-      edges: '100',
+      edges: 100,
       iconName: D100Icon,
     },
     {
-      edges: '10',
+      edges: 10,
       iconName: D10Icon,
     },
     {
-      edges: '8',
+      edges: 8,
       iconName: D8Icon,
     },
     {
-      edges: '6',
+      edges: 6,
       iconName: D6Icon,
     },
     {
-      edges: '4',
+      edges: 4,
       iconName: D4Icon,
     },
   ];
