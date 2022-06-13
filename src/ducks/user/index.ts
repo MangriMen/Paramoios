@@ -14,4 +14,4 @@ export const userSlice = createSlice({
   },
 });
 
-export { selectUser as getUser };
+export { selectUser };
