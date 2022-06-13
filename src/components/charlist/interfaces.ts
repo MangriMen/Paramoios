@@ -1,4 +1,4 @@
 export interface DiceMenu {
-  name: string;
+  edges: string;
   iconName: string;
 }

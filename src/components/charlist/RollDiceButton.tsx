@@ -50,33 +50,33 @@ const RollDiceButton: FC = () => {
     setAnchorEl(null);
   };
 
-  const dice: Array<DiceMenu> = [
+  const dices: Array<DiceMenu> = [
     {
-      name: '20',
+      edges: '20',
       iconName: D20Icon,
     },
     {
-      name: '12',
+      edges: '12',
       iconName: D12Icon,
     },
     {
-      name: '100',
+      edges: '100',
       iconName: D100Icon,
     },
     {
-      name: '10',
+      edges: '10',
       iconName: D10Icon,
     },
     {
-      name: '8',
+      edges: '8',
       iconName: D8Icon,
     },
     {
-      name: '6',
+      edges: '6',
       iconName: D6Icon,
     },
     {
-      name: '4',
+      edges: '4',
       iconName: D4Icon,
     },
   ];
@@ -116,17 +116,17 @@ const RollDiceButton: FC = () => {
           justifyContent: 'center',
         }}
       >
-        {dice.map((dices) => (
+        {dices.map((dice) => (
           <Tooltip
             disableInteractive
             placement="left"
-            key={dices.name}
-            title={<Typography> {'D' + dices.name || ''} </Typography>}
+            key={dice.edges}
+            title={<Typography> {`D ${dice.edges}`} </Typography>}
           >
             <StyledMenuItem onClick={handleClose}>
               <Box
                 component="img"
-                src={dices.iconName}
+                src={dice.iconName}
                 width="48px"
                 height="48px"
               ></Box>
