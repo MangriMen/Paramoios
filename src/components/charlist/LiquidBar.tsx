@@ -1,6 +1,10 @@
 import { Box, BoxProps, Typography, styled } from '@mui/material';
 import { FC } from 'react';
 
+const DEFAULT_VALUE = 10;
+const DEFAULT_MAX_VALUE = 10;
+const DEFAULT_HEIGHT = '1.5rem';
+
 const BarParent = styled(Box)(() => ({
   position: 'relative',
   borderRadius: 'inherit',
@@ -31,23 +35,33 @@ type LiquidBarProps = BoxProps & {
   maxValue?: number;
 };
 
+function getCalcStringForWaveLeftOffset(rangedValue: number, waveSize: string) {
+  const emptyFillPercent = +(rangedValue <= 0);
+  const fullFillPercent = +(rangedValue >= 100);
+
+  return `calc(${rangedValue}% - (${waveSize}) - ${emptyFillPercent}% + ${fullFillPercent}%)`;
+}
+
 const LiquidBarBase: FC<LiquidBarProps> = ({
   value,
   maxValue,
   height,
   bgcolor,
 }) => {
-  const value_ = value ?? 10;
-  const maxValue_ = maxValue ?? 100;
-  const height_ = height ?? '1.5rem';
-  const bgcolor_ = bgcolor ?? 'primary.main';
+  const value_ = value ?? DEFAULT_VALUE;
+  const maxValue_ = maxValue ?? DEFAULT_MAX_VALUE;
+  const height_ = height ?? DEFAULT_HEIGHT;
 
-  const nonNegativeValueForFilledBar = value_ - 1.5 >= 0 ? value_ - 1.5 : 0;
-  const filledBarWidth = Math.round(
-    (nonNegativeValueForFilledBar * 100) / maxValue_,
+  const waveHeightPercent = 333;
+  const waveWidth = 1;
+
+  const rangedValue = Math.round((value_ * 100) / maxValue_);
+
+  const barWidthPercent = Math.max(rangedValue - waveWidth, 0);
+  const wavePositionPercent = getCalcStringForWaveLeftOffset(
+    rangedValue,
+    `${height_} * ${waveHeightPercent / 100}`,
   );
-
-  const waveOffset = Math.round((value_ * 100) / maxValue_);
 
   return (
     <BarParent
@@ -56,25 +70,25 @@ const LiquidBarBase: FC<LiquidBarProps> = ({
       alignItems="center"
       overflow="hidden"
       height={height_}
+      bgcolor={bgcolor}
     >
       <BarChild
         width="100%"
-        bgcolor={bgcolor_}
+        bgcolor="inherit"
         sx={{ filter: 'contrast(65%) brightness(120%)' }}
       />
       <BarChild
         position="absolute"
         top="0"
-        bgcolor={bgcolor_}
-        width={`${filledBarWidth}%`}
+        width={`${barWidthPercent}%`}
+        bgcolor="inherit"
       />
       <BarLiquidBlock
-        bgcolor={bgcolor_}
+        overflow="hidden"
         position="absolute"
-        height="333%"
-        left={`calc(${waveOffset}% - (${height_} * 3.33) - ${
-          value_ > 0 ? '0' : '1'
-        }% + ${value_ >= maxValue_ ? '1' : '0'}%)`}
+        height={`${waveHeightPercent}%`}
+        left={wavePositionPercent}
+        bgcolor="inherit"
       />
     </BarParent>
   );
@@ -84,23 +98,23 @@ const LiquidBar: FC<LiquidBarProps> = ({
   value,
   maxValue,
   height,
-  fontSize,
   bgcolor,
   ...props
 }) => {
-  const value_ = value ?? 10;
-  const maxValue_ = maxValue ?? 100;
-  const height_ = height ?? '1.5rem';
+  const value_ = value ?? DEFAULT_VALUE;
+  const maxValue_ = maxValue ?? DEFAULT_MAX_VALUE;
+  const height_ = height ?? DEFAULT_HEIGHT;
 
   return (
     <Box
       position="relative"
-      height={height_}
       display="flex"
       justifyContent="center"
       alignItems="center"
       boxSizing="border-box"
       overflow="hidden"
+      height={height_}
+      color="white"
       {...props}
     >
       <LiquidBarBase
@@ -109,13 +123,7 @@ const LiquidBar: FC<LiquidBarProps> = ({
         value={value}
         maxValue={maxValue}
       />
-      <Typography
-        position="absolute"
-        fontSize={fontSize ?? 'inherit'}
-        sx={{
-          color: '#FFF',
-        }}
-      >
+      <Typography position="absolute" fontSize="inherit">
         {value_}/{maxValue_}
       </Typography>
     </Box>
