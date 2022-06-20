@@ -30,13 +30,13 @@ interface UserMenuItem {
   onClick: () => void;
 }
 
-const StyledMenu = styled(Menu)(() => ({
+const StyledMenu = styled(Menu)({
   '& .MuiPaper-root': {
     backgroundColor: 'rgba(0, 0, 0, 0)',
     boxShadow: 'none',
     padding: '0 0.8rem',
   },
-}));
+});
 
 const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
   border: '0.2rem solid',
