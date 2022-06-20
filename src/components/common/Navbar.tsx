@@ -132,6 +132,7 @@ const Navbar: FC = () => {
             >
               <IconButton onClick={handleOpenUserMenu}>
                 <ParAvatar
+                  key={user.avatar}
                   src={user.avatar}
                   sx={{
                     width: '3rem',
