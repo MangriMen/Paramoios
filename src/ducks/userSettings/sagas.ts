@@ -1,4 +1,13 @@
-import { all, call, put, takeLatest } from 'redux-saga/effects';
+import { PayloadAction } from '@reduxjs/toolkit';
+import { UploadResult } from 'firebase/storage';
+import {
+  CallEffect,
+  PutEffect,
+  all,
+  call,
+  put,
+  takeLatest,
+} from 'redux-saga/effects';
 import {
   getFileUrlFromStorage,
   setUserAvatar,
@@ -18,7 +27,15 @@ import {
   updateUsername,
 } from './index';
 
-function* updateUsernameSaga({ payload }: any): Generator<unknown, void, any> {
+function* updateUsernameSaga({
+  payload,
+}: PayloadAction<string>): Generator<
+  | CallEffect<Promise<void> | undefined>
+  | PutEffect<PayloadAction<void>>
+  | PutEffect<PayloadAction<string>>,
+  void,
+  Promise<void> | undefined
+> {
   try {
     yield call(setUserDisplayName, payload);
     yield put(updateUserSuccess());
@@ -27,7 +44,15 @@ function* updateUsernameSaga({ payload }: any): Generator<unknown, void, any> {
   }
 }
 
-function* updateEmailSaga({ payload }: any): Generator<unknown, void, any> {
+function* updateEmailSaga({
+  payload,
+}: PayloadAction<string>): Generator<
+  | CallEffect<Promise<void> | undefined>
+  | PutEffect<PayloadAction<void>>
+  | PutEffect<PayloadAction<string>>,
+  void,
+  Promise<void> | undefined
+> {
   try {
     yield call(setUserEmail, payload);
     yield put(updateUserSuccess());
@@ -36,7 +61,15 @@ function* updateEmailSaga({ payload }: any): Generator<unknown, void, any> {
   }
 }
 
-function* updatePasswordSaga({ payload }: any): Generator<unknown, void, any> {
+function* updatePasswordSaga({
+  payload,
+}: PayloadAction<string>): Generator<
+  | CallEffect<Promise<void> | undefined>
+  | PutEffect<PayloadAction<void>>
+  | PutEffect<PayloadAction<string>>,
+  void,
+  Promise<void> | undefined
+> {
   try {
     yield call(setUserPassword, payload);
     yield put(updateUserSuccess());
@@ -45,7 +78,17 @@ function* updatePasswordSaga({ payload }: any): Generator<unknown, void, any> {
   }
 }
 
-function* updateImageSaga({ payload }: any): Generator<unknown, void, any> {
+function* updateImageSaga({
+  payload,
+}: PayloadAction<string>): Generator<
+  | CallEffect<Promise<UploadResult> | undefined>
+  | CallEffect<Promise<string> | undefined>
+  | CallEffect<Promise<void> | undefined>
+  | PutEffect<PayloadAction<void>>
+  | PutEffect<PayloadAction<string>>,
+  void,
+  UploadResult & string
+> {
   try {
     const response = yield call(uploadFileToStorage, payload);
     const url = yield call(getFileUrlFromStorage, response.ref);
