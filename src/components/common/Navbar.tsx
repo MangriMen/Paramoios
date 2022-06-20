@@ -54,6 +54,9 @@ const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
 const Navbar: FC = () => {
   const { t } = useTranslation('translation', { keyPrefix: 'navbar' });
   const { t: tAuth } = useTranslation('translation', { keyPrefix: 'auth' });
+  const { t: tUserProfile } = useTranslation('translation', {
+    keyPrefix: 'userProfile',
+  });
 
   const dispatch = useDispatch();
 
@@ -132,6 +135,7 @@ const Navbar: FC = () => {
             >
               <IconButton onClick={handleOpenUserMenu}>
                 <ParAvatar
+                  alt={tUserProfile('avatar')}
                   key={user.avatar}
                   src={user.avatar}
                   sx={{
