@@ -2,11 +2,14 @@ import {
   Box,
   CircularProgress,
   Container,
+  Link,
+  List,
+  ListItem,
   Typography,
+  styled,
   useTheme,
 } from '@mui/material';
 import donationAlertLogo from 'assets/images/icons/DA_Alert_White.svg';
-import 'assets/styles/deprecated/login.css';
 import Login from 'components/auth/Login';
 import Register from 'components/auth/Register';
 import { ROUTE } from 'consts';
@@ -72,17 +75,32 @@ const AuthPage: FC = () => {
         }}
       >
         <Box
-          id="auth-menu"
           sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            color: 'white',
             position: {
-              xs: 'fixed',
+              xs: 'static',
               md: 'sticky',
             },
-            borderLeft: '10px solid',
-            borderRight: '10px solid',
+            borderTopWidth: '0',
+            borderBottomWidth: {
+              xs: '6px',
+              md: '0',
+            },
+            borderLeftWidth: {
+              xs: '0',
+              md: '10px',
+            },
+            borderRightWidth: {
+              xs: '0',
+              md: '10px',
+            },
+            borderStyle: 'solid',
+            borderColor: theme.palette.secondary.main,
             boxShadow: '0 0 60px 2px #212121',
             backgroundColor: theme.palette.primary.main,
-            borderColor: theme.palette.secondary.main,
             top: '0px',
             height: {
               xs: '100%',
@@ -160,109 +178,168 @@ const AuthPage: FC = () => {
   );
 };
 
+const GreetingsText = styled(Typography)({
+  fontSize: 'inherit',
+  textShadow: '1px 1px 5px black',
+  lineHeight: '1.08',
+  marginBlockStart: '1em',
+  marginBlockEnd: '1em',
+});
+
+const CheckListItem = styled(ListItem)({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'flex-start',
+});
+
+const CheckListItemText = styled(Typography)({
+  fontSize: 'inherit',
+  textShadow: '1px 1px 5px black',
+  lineHeight: '1.08',
+});
+
+const CheckListItemTextRight = styled(CheckListItemText)({
+  alignSelf: 'flex-end',
+  textAlign: 'right',
+});
+
 const AuthPageGreetings: FC = () => {
   return (
-    <section id="message" style={{ fontSize: '1.25rem' }}>
-      <span className="main-text">
-        <p className="hello text-black-shadow">Hello there!</p>
-        <p className="hello russian text-black-shadow"> Привет!</p>
-        <p className="text-black-shadow">
+    <Box
+      display="flex"
+      alignItems="center"
+      textAlign="center"
+      color="white"
+      fontSize="1.25rem"
+      padding="0 1rem"
+    >
+      <Box
+        component="span"
+        fontSize={{
+          xs: '1.2em',
+          sm: '1em',
+          md: '1.2em',
+        }}
+      >
+        <GreetingsText fontSize="1.5em" margin="10px">
+          Hello there!
+        </GreetingsText>
+        <GreetingsText fontSize="1.5em" margin="10px" color="secondary">
+          Привет!
+        </GreetingsText>
+        <GreetingsText>
           We are the DnD5CharlistI team - a bunch of people with a dream of
           making truly comfortable and unique character list for
           worldwide-famous game "Dungeons and Dragons", and possibly bring it
           closer to the web.
-        </p>
+        </GreetingsText>
 
-        <p className="russian text-black-shadow">
+        <GreetingsText color="secondary">
           Мы - команда DnD5CharlistI - группа людей, мечтающих сделать
           действительно удобный и уникальный лист персонажа для всемирно
           известной игры "Dungeons and Dragons", и, возможно, сделать шаг к
           упрощению её онлайн-компаний.
-        </p>
+        </GreetingsText>
         <br />
-        <p className="text-black-shadow">
+        <GreetingsText>
           Our version of charlist is in develop right now, being re-worked and
           polished. And that's what we alerady did:
-        </p>
-        <p className="russian text-black-shadow">
+        </GreetingsText>
+        <GreetingsText color="secondary">
           Наша версия листа персонажа сейчас разрабатывается и всячески
           полируется. И вот что мы уже успели сделать:
-        </p>
-
-        <ol className="things-list text-black-shadow">
-          <li>
-            All main characteristics of a character were reorganised and got a
-            fresh look
-            <div className="russian russian-right">
+        </GreetingsText>
+        <List>
+          <CheckListItem>
+            <CheckListItemText>
+              All main characteristics of a character were reorganised and got a
+              fresh look
+            </CheckListItemText>
+            <CheckListItemTextRight color="secondary">
               Все основные характеристики персонажа получили новое расположение
               и свежий образ
-            </div>
-          </li>
-          <li>
-            Visually-new inventory table was made
-            <div className="russian russian-right">
+            </CheckListItemTextRight>
+          </CheckListItem>
+          <CheckListItem>
+            <CheckListItemText>
+              Visually-new inventory table was made
+            </CheckListItemText>
+            <CheckListItemTextRight color="secondary">
               Основан фундамент для визуально новой таблицы инвентаря
-            </div>
-          </li>
-          <li>
-            Created an opportunity of account integration
-            <div className="russian russian-right">
+            </CheckListItemTextRight>
+          </CheckListItem>
+          <CheckListItem>
+            <CheckListItemText>
+              Created an opportunity of account integration
+            </CheckListItemText>
+            <CheckListItemTextRight color="secondary">
               Создана возможность интеграции информации аккаунта в лист
               персонажа
-            </div>
-          </li>
-          <li>
-            New and handy "roll-a-dice" button. Now you can blame imperfect
-            digital RNG.
-            <div className="russian russian-right">
+            </CheckListItemTextRight>
+          </CheckListItem>
+          <CheckListItem>
+            <CheckListItemText>
+              New and handy "roll-a-dice" button. Now you can blame imperfect
+              digital RNG.
+            </CheckListItemText>
+            <CheckListItemTextRight color="secondary">
               Удобная кнопка прокидывания кубиков. Теперь вините цифровой
               псевдорандом.
-            </div>
-          </li>
-          <li>
-            Added support of different color themes
-            <div className="russian russian-right">
+            </CheckListItemTextRight>
+          </CheckListItem>
+          <CheckListItem>
+            <CheckListItemText>
+              Added support of different color themes
+            </CheckListItemText>
+            <CheckListItemTextRight color="secondary">
               Создана возможность поддержки различных цветовых схем
-            </div>
-          </li>
+            </CheckListItemTextRight>
+          </CheckListItem>
           <br />
-          <span>
-            And so on...
-            <div className="russian russian-right">И так далее...</div>
-          </span>
-        </ol>
+          <CheckListItem>
+            <CheckListItemText>And so on...</CheckListItemText>
+            <CheckListItemTextRight color="secondary">
+              И так далее...
+            </CheckListItemTextRight>
+          </CheckListItem>
+        </List>
         <br />
         <br />
-        <p className="text-black-shadow">
+        <GreetingsText>
           Consider supporting us now to get{' '}
-          <span className="absolutely-nothing">absolutely nothing</span>. Yea,
-          you read it right. You can donate and prey its not a scam, or trust us
-          and get something when it'll be finished. Just make sure we'll be able
-          to identify you later.
-        </p>
-        <p className="text-black-shadow russian">
+          <GreetingsText display="inline" fontWeight="bold" fontStyle="italic">
+            absolutely nothing
+          </GreetingsText>
+          . Yea, you read it right. You can donate and prey its not a scam, or
+          trust us and get something when it'll be finished. Just make sure
+          we'll be able to identify you later.
+        </GreetingsText>
+        <GreetingsText color="secondary">
           Поддержав нас сейчас, вы можете получить ваше личное{' '}
-          <span className="absolutely-nothing"> абсолютное ничего</span>. Да, вы
-          всё правильно поняли. Вы можете задонатить и надеяться что это не
-          мошенничество, а можете поверить нам и получить что-то когда мы
+          <GreetingsText display="inline" fontWeight="bold" fontStyle="italic">
+            абсолютное ничего
+          </GreetingsText>
+          . Да, вы всё правильно поняли. Вы можете задонатить и надеяться что
+          это не мошенничество, а можете поверить нам и получить что-то когда мы
           закончим. Просто удостоверьтесь, что мы сможем идентифицировать вас
           позже.
-        </p>
-        <div className="donations text-black-shadow">
-          <a
-            rel="noreferrer"
+        </GreetingsText>
+        <Box display="flex" justifyContent="center">
+          <Link
             href="https://www.donationalerts.com/r/mangrimen"
+            rel="noreferrer"
             target="_blank"
           >
-            <img
-              className="logo"
+            <Box
+              component="img"
+              width="2.5rem"
               alt="Donation Alerts"
               src={donationAlertLogo}
             />
-          </a>
-        </div>
-      </span>
-    </section>
+          </Link>
+        </Box>
+      </Box>
+    </Box>
   );
 };
 
