@@ -1,6 +1,8 @@
 import { Avatar, Grid, Typography, useTheme } from '@mui/material';
+import D6Icon from 'assets/images/dice/D6.svg';
 import ParBox from 'components/styled/ParBox';
 import ParContainer from 'components/styled/ParContainer';
+import { ParInventory, ParInventoryItem } from 'components/styled/ParInventory';
 import { FC } from 'react';
 
 import RollDiceButton from './RollDiceButton';
@@ -82,7 +84,18 @@ const MainPage: FC = () => {
               {/* Attacks and spellcasting */}
               <ParBox mb="1rem" padding="1rem" />
               {/* Equipment */}
-              <ParBox mb="1rem" padding="1rem" />
+              <ParBox mb="1rem" padding="1rem">
+                <ParInventory>
+                  <ParInventoryItem
+                    icon={D6Icon}
+                    tooltip="Test"
+                    data={{
+                      name: 'Sword',
+                      description: 'Stone sword',
+                    }}
+                  />
+                </ParInventory>
+              </ParBox>
             </Grid>
           </Grid>
           <Grid item xs={4}>
