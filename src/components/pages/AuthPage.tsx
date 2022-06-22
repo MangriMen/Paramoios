@@ -1,4 +1,5 @@
 import {
+  AlertProps,
   Box,
   CircularProgress,
   Container,
@@ -9,13 +10,14 @@ import donationAlertLogo from 'assets/images/icons/DA_Alert_White.svg';
 import 'assets/styles/deprecated/login.css';
 import Login from 'components/auth/Login';
 import Register from 'components/auth/Register';
+import { ParSnackbar } from 'components/styled/ParSnackbar';
 import { ROUTE } from 'consts';
 import {
   selectError,
   selectIsLoading,
   selectIsLogged,
 } from 'ducks/auth/selectors';
-import { FC, useCallback, useEffect, useState } from 'react';
+import { FC, useCallback, useEffect, useLayoutEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -44,11 +46,21 @@ const AuthPage: FC = () => {
 
   const error = useSelector(selectError);
 
-  useEffect(() => {
-    if (error) {
-      alert(error);
+  useLayoutEffect(() => {
+    if (!error || error === undefined || error === '') {
+      return;
     }
+
+    setSeverity('error');
+    setIsOpen(true);
   }, [error]);
+
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [severity, setSeverity] = useState<AlertProps['severity']>();
+
+  const handleClose = () => {
+    setIsOpen(false);
+  };
 
   return (
     <Box
@@ -57,6 +69,12 @@ const AuthPage: FC = () => {
         backgroundColor: theme.palette.primary.main,
       }}
     >
+      <ParSnackbar
+        severity={severity}
+        open={isOpen}
+        onClose={handleClose}
+        message={error}
+      />
       <Container
         maxWidth="xl"
         sx={{
