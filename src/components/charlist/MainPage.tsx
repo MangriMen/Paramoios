@@ -1,7 +1,8 @@
 import { Avatar, Grid, Typography, useTheme } from '@mui/material';
+import { Inventory } from 'components/common/Inventory/Inventory';
+import { InventoryItem } from 'components/common/Inventory/InventoryItem';
 import ParBox from 'components/styled/ParBox';
 import ParContainer from 'components/styled/ParContainer';
-import { ParInventory, ParInventoryItem } from 'components/styled/ParInventory';
 import { FC } from 'react';
 
 import RollDiceButton from './RollDiceButton';
@@ -84,36 +85,36 @@ const MainPage: FC = () => {
               <ParBox mb="1rem" padding="1rem" />
               {/* Equipment */}
               <ParBox mb="1rem" padding="1rem">
-                <ParInventory rows={2} cols={4}>
-                  <ParInventoryItem
+                <Inventory rows={2} cols={4}>
+                  <InventoryItem
                     data={{
                       name: 'Sword',
                       description: 'Stone sword',
                     }}
                     positionIndex={0}
                   />
-                  <ParInventoryItem
+                  <InventoryItem
                     data={{
                       name: 'Helmet',
                       description: 'Stone sword',
                     }}
                     positionIndex={1}
                   />
-                  <ParInventoryItem
+                  <InventoryItem
                     data={{
                       name: 'Rope',
                       description: 'Stone sword',
                     }}
                     positionIndex={2}
                   />
-                  <ParInventoryItem
+                  <InventoryItem
                     data={{
                       name: 'Stone',
                       description: 'Stone sword',
                     }}
                     positionIndex={23}
                   />
-                </ParInventory>
+                </Inventory>
               </ParBox>
             </Grid>
           </Grid>
