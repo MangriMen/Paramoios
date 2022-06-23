@@ -37,5 +37,9 @@
     "changeEmail": "Изменить email",
     "changePassword": "Изменить пароль",
     "chooseAvatar": "Выбрать аватар"
+  },
+  "charlist": {
+    "attacksAndSpellcasting": "Атаки и заклинания",
+    "equipment": "Снаряжение"
   }
 }

@@ -2,10 +2,12 @@ import { Avatar, Grid, Typography, useTheme } from '@mui/material';
 import ParBox from 'components/styled/ParBox';
 import ParContainer from 'components/styled/ParContainer';
 import { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import RollDiceButton from './RollDiceButton';
 
 const MainPage: FC = () => {
+  const { t } = useTranslation('translation', { keyPrefix: 'charlist' });
   const theme = useTheme();
 
   return (
@@ -34,11 +36,16 @@ const MainPage: FC = () => {
         </Grid>
       </Grid>
       {/* Grid container with character stats */}
-      <Grid container justifyContent="space-between" mb="1rem">
+      <Grid
+        container
+        justifyContent="space-between"
+        alignItems="center"
+        mb="1rem"
+      >
         <ParBox padding="2rem"></ParBox>
         <ParBox padding="2rem"></ParBox>
         <ParBox padding="2rem"></ParBox>
-        <RollDiceButton></RollDiceButton>
+        <RollDiceButton sx={{ width: '4.5rem' }}></RollDiceButton>
         <ParBox padding="2rem"></ParBox>
         <ParBox padding="2rem"></ParBox>
         <ParBox padding="2rem"></ParBox>
@@ -80,9 +87,13 @@ const MainPage: FC = () => {
               {/* Fight bonuses */}
               <ParBox mb="1rem" padding="1rem" />
               {/* Attacks and spellcasting */}
-              <ParBox mb="1rem" padding="1rem" />
+              <ParBox
+                title={t('attacksAndSpellcasting')}
+                mb="1rem"
+                padding="1rem"
+              />
               {/* Equipment */}
-              <ParBox mb="1rem" padding="1rem" />
+              <ParBox title={t('equipment')} mb="1rem" padding="1rem" />
             </Grid>
           </Grid>
           <Grid item xs={4}>
