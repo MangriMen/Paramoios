@@ -1,5 +1,4 @@
 import { Avatar, Grid, Typography, useTheme } from '@mui/material';
-import D6Icon from 'assets/images/dice/D6.svg';
 import ParBox from 'components/styled/ParBox';
 import ParContainer from 'components/styled/ParContainer';
 import { ParInventory, ParInventoryItem } from 'components/styled/ParInventory';
@@ -85,14 +84,34 @@ const MainPage: FC = () => {
               <ParBox mb="1rem" padding="1rem" />
               {/* Equipment */}
               <ParBox mb="1rem" padding="1rem">
-                <ParInventory>
+                <ParInventory rows={2} cols={4}>
                   <ParInventoryItem
-                    icon={D6Icon}
-                    tooltip="Test"
                     data={{
                       name: 'Sword',
                       description: 'Stone sword',
                     }}
+                    positionIndex={0}
+                  />
+                  <ParInventoryItem
+                    data={{
+                      name: 'Helmet',
+                      description: 'Stone sword',
+                    }}
+                    positionIndex={1}
+                  />
+                  <ParInventoryItem
+                    data={{
+                      name: 'Rope',
+                      description: 'Stone sword',
+                    }}
+                    positionIndex={2}
+                  />
+                  <ParInventoryItem
+                    data={{
+                      name: 'Stone',
+                      description: 'Stone sword',
+                    }}
+                    positionIndex={23}
                   />
                 </ParInventory>
               </ParBox>
