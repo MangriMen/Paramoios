@@ -30,11 +30,11 @@ import {
 function* updateUsernameSaga({
   payload,
 }: PayloadAction<string>): Generator<
-  | CallEffect<Promise<void> | undefined>
+  | CallEffect<void>
   | PutEffect<PayloadAction<void>>
   | PutEffect<PayloadAction<string>>,
   void,
-  Promise<void> | undefined
+  void
 > {
   try {
     yield call(setUserDisplayName, payload);
@@ -47,11 +47,11 @@ function* updateUsernameSaga({
 function* updateEmailSaga({
   payload,
 }: PayloadAction<string>): Generator<
-  | CallEffect<Promise<void> | undefined>
+  | CallEffect<void>
   | PutEffect<PayloadAction<void>>
   | PutEffect<PayloadAction<string>>,
   void,
-  Promise<void> | undefined
+  void
 > {
   try {
     yield call(setUserEmail, payload);
@@ -64,11 +64,11 @@ function* updateEmailSaga({
 function* updatePasswordSaga({
   payload,
 }: PayloadAction<string>): Generator<
-  | CallEffect<Promise<void> | undefined>
+  | CallEffect<void>
   | PutEffect<PayloadAction<void>>
   | PutEffect<PayloadAction<string>>,
   void,
-  Promise<void> | undefined
+  void
 > {
   try {
     yield call(setUserPassword, payload);
@@ -81,9 +81,9 @@ function* updatePasswordSaga({
 function* updateImageSaga({
   payload,
 }: PayloadAction<string>): Generator<
-  | CallEffect<Promise<UploadResult> | undefined>
-  | CallEffect<Promise<string> | undefined>
-  | CallEffect<Promise<void> | undefined>
+  | CallEffect<UploadResult>
+  | CallEffect<string>
+  | CallEffect<void>
   | PutEffect<PayloadAction<void>>
   | PutEffect<PayloadAction<string>>,
   void,
