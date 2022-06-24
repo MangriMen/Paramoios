@@ -1,4 +1,5 @@
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { fetchUserSaga } from 'ducks/user/sagas';
+import { all, call, put, takeLatest } from 'redux-saga/effects';
 import { setUserDisplayName } from 'tools/requests/requests';
 
 import {
@@ -43,7 +44,10 @@ function* logoutSaga(): Generator<unknown, void, any> {
 }
 
 export function* watchAuth() {
-  yield takeLatest(loginRequest, loginSaga);
-  yield takeLatest(registerRequest, registerSaga);
-  yield takeLatest(logoutRequest, logoutSaga);
+  yield all([
+    takeLatest(logoutSuccess, fetchUserSaga),
+    takeLatest(loginRequest, loginSaga),
+    takeLatest(registerRequest, registerSaga),
+    takeLatest(logoutRequest, logoutSaga),
+  ]);
 }

@@ -1,3 +1,4 @@
+import { fetchUserSaga } from 'ducks/user/sagas';
 import { all, call, put, takeLatest } from 'redux-saga/effects';
 import {
   getFileUrlFromStorage,
@@ -8,7 +9,6 @@ import {
   uploadFileToStorage,
 } from 'tools/requests/requests';
 
-import { fetchUserSaga } from '../user/sagas';
 import {
   updateEmail,
   updateImage,
