@@ -39,6 +39,12 @@
     "chooseAvatar": "Выбрать аватар"
   },
   "charlist": {
+    "traits": "Черты",
+    "ideals": "Идеалы",
+    "bonds": "Привязанности",
+    "flaws": "Пороки",
+    "otherProficienciesAndLanguages": "Другие умения и языки",
+    "featureAndTraits": "Особенности и способности",
     "attacksAndSpellcasting": "Атаки и заклинания",
     "equipment": "Снаряжение"
   }

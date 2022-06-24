@@ -106,20 +106,24 @@ const MainPage: FC = () => {
               {/* Health */}
               <ParBox padding="1rem" />
               {/* Boards with traits, ideals, bonds, flaws */}
-              {Array.from(Array(4)).map((_, index) => (
-                <ParBox key={index} mb="1rem" padding="1rem" />
-              ))}
+              <ParBox title={t('traits')} mb="1rem" padding="1rem" />
+              <ParBox title={t('ideals')} mb="1rem" padding="1rem" />
+              <ParBox title={t('bonds')} mb="1rem" padding="1rem" />
+              <ParBox title={t('flaws')} mb="1rem" padding="1rem" />
             </Grid>
           </Grid>
         </Grid>
         <Grid container columnSpacing={3} flexDirection="row">
           <Grid item xs={4}>
             {/* Languages */}
-            <ParBox padding="1rem" />
+            <ParBox
+              title={t('otherProficienciesAndLanguages')}
+              padding="1rem"
+            />
           </Grid>
           <Grid item xs={8}>
             {/* Features and traits */}
-            <ParBox padding="1rem" />
+            <ParBox title={t('featureAndTraits')} padding="1rem" />
           </Grid>
         </Grid>
       </Grid>
