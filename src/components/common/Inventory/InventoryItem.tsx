@@ -1,6 +1,7 @@
 import { Box, Popover, Tooltip, Typography } from '@mui/material';
 import ParBox from 'components/styled/ParBox';
 import { FC, useState } from 'react';
+import { useDrag } from 'react-dnd';
 
 export interface InventoryItemDataProps {
   name: string;
@@ -25,7 +26,15 @@ export const InventoryItemPopover: FC<InventoryItemDataProps> = ({
   );
 };
 
-export const InventoryItem: FC<InventoryItemProps> = ({ icon, data }) => {
+export const ItemTypes = {
+  INVENTORY_ITEM: 'inventoryItem',
+};
+
+export const InventoryItem: FC<InventoryItemProps> = ({
+  icon,
+  data,
+  positionIndex,
+}) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -38,13 +47,28 @@ export const InventoryItem: FC<InventoryItemProps> = ({ icon, data }) => {
 
   const open = Boolean(anchorEl);
 
+  const [{ isDragging }, drag] = useDrag(() => ({
+    item: { positionIndex: positionIndex },
+    type: ItemTypes.INVENTORY_ITEM,
+    collect: (monitor) => ({
+      isDragging: !!monitor.isDragging(),
+    }),
+  }));
+
   return (
     <>
       <Tooltip
-        title={<Typography fontSize="0.9rem">{data.name ?? ''}</Typography>}
+        title={
+          isDragging
+            ? ''
+            : data.name ?? (
+                <Typography fontSize="0.9rem">{data.name}</Typography>
+              )
+        }
         disableInteractive
       >
         <Box
+          ref={drag}
           component="button"
           onClick={handleClick}
           sx={{
