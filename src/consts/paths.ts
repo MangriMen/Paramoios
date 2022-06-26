@@ -3,5 +3,6 @@ export const ROUTE = {
   AUTH: '/auth',
   HOME: '/',
   SETTINGS: '/settings',
+  CHARLIST: '/charlist',
   PAGE_404: '*',
 };
