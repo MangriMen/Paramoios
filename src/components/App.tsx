@@ -6,9 +6,10 @@ import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router';
 
-import MainPage from './charlist/MainPage';
+import Charlist from './charlist/Charlist';
 import PageWithNavbar from './layout/PageWithNavbar';
 import AuthPage from './pages/AuthPage';
+import MainPage from './pages/Mainpage';
 import NotFoundPage from './pages/NotFoundPage';
 import UserPage from './pages/UserPage';
 import { UserSettingsComponent } from './user/UserSettingsComponent';
@@ -27,15 +28,16 @@ const App: FC = () => {
   return (
     <>
       <Routes>
+        <Route path={ROUTE.HOME} element={<MainPage />} />
+        <Route path={ROUTE.AUTH} element={<AuthPage />} />
         <Route
-          path={ROUTE.HOME}
+          path={ROUTE.CHARLIST}
           element={
             <PageWithNavbar>
-              <MainPage />
+              <Charlist />
             </PageWithNavbar>
           }
         />
-        <Route path={ROUTE.AUTH} element={<AuthPage />} />
         <Route
           path={ROUTE.ME}
           element={
