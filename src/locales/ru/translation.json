@@ -37,5 +37,10 @@
     "changeEmail": "Изменить email",
     "changePassword": "Изменить пароль",
     "chooseAvatar": "Выбрать аватар"
+  },
+  "mainPage": {
+    "welcome": "Добро пожаловать",
+    "myProfile": "Мой профиль",
+    "lastCharlist": "Последний персонаж"
   }
 }
