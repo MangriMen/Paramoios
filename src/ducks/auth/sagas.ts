@@ -44,7 +44,7 @@ function* registerSaga({
   payload,
 }: PayloadAction<RegisterPayload>): Generator<
   | CallEffect<UserCredential>
-  | CallEffect<Promise<void> | undefined>
+  | CallEffect<void>
   | PutEffect<PayloadAction<undefined>>
   | PutEffect<PayloadAction<string>>,
   void,
