@@ -5,7 +5,7 @@ import { FC } from 'react';
 
 import RollDiceButton from './RollDiceButton';
 
-const MainPage: FC = () => {
+const Charlist: FC = () => {
   const theme = useTheme();
 
   return (
@@ -116,4 +116,4 @@ const MainPage: FC = () => {
   );
 };
 
-export default MainPage;
+export default Charlist;
