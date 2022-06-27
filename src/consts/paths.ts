@@ -1,7 +1,8 @@
 export const ROUTE = {
-  ME: '/me',
-  AUTH: '/auth',
-  HOME: '/',
-  SETTINGS: '/settings',
+  ROOT: '/',
+  HOME: '',
+  AUTH: 'auth',
+  ME: 'me',
+  SETTINGS: 'settings',
   PAGE_404: '*',
 };

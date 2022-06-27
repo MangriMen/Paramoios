@@ -27,39 +27,15 @@ const App: FC = () => {
   return (
     <>
       <Routes>
-        <Route
-          path={ROUTE.HOME}
-          element={
-            <PageWithNavbar>
-              <MainPage />
-            </PageWithNavbar>
-          }
-        />
-        <Route path={ROUTE.AUTH} element={<AuthPage />} />
-        <Route
-          path={ROUTE.ME}
-          element={
-            <PageWithNavbar>
-              <UserPage />
-            </PageWithNavbar>
-          }
-        />
-        <Route
-          path={ROUTE.PAGE_404}
-          element={
-            <PageWithNavbar>
-              <NotFoundPage />
-            </PageWithNavbar>
-          }
-        />
-        <Route
-          path={ROUTE.SETTINGS}
-          element={
-            <PageWithNavbar>
-              <UserSettingsComponent />
-            </PageWithNavbar>
-          }
-        />
+        <Route path={ROUTE.ROOT}>
+          <Route path={ROUTE.AUTH} element={<AuthPage />} />
+        </Route>
+        <Route path={ROUTE.ROOT} element={<PageWithNavbar />}>
+          <Route path={ROUTE.HOME} element={<MainPage />} />
+          <Route path={ROUTE.ME} element={<UserPage />} />
+          <Route path={ROUTE.PAGE_404} element={<NotFoundPage />} />
+          <Route path={ROUTE.SETTINGS} element={<UserSettingsComponent />} />
+        </Route>
       </Routes>
     </>
   );

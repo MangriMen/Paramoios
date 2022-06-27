@@ -32,7 +32,7 @@ const AuthPage: FC = () => {
 
   useEffect(() => {
     if (isLogged) {
-      navigate(ROUTE.ME);
+      navigate(`${ROUTE.ROOT}${ROUTE.ME}`);
     }
   }, [isLogged, navigate]);
 
