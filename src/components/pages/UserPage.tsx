@@ -1,7 +1,6 @@
 import ParContainer from 'components/styled/ParContainer';
+import UserCard from 'components/user/UserCard';
 import { FC } from 'react';
-
-import UserCard from '../user/UserCard';
 
 const UserPage: FC = () => {
   return (

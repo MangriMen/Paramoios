@@ -16,12 +16,11 @@ import ParLink from 'components/styled/ParLink';
 import { ROUTE } from 'consts';
 import { logoutRequest } from 'ducks/auth';
 import { selectIsLogged } from 'ducks/auth/selectors';
+import { selectUser } from 'ducks/user/selectors';
 import React, { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-
-import { selectUser } from '../../ducks/user/selectors';
 
 interface UserMenuItem {
   name: string;

@@ -28,7 +28,7 @@ const Register: FC<AuthFormProps> = ({ isSubmitEnabled, changeFormType }) => {
   };
 
   return (
-    <Container component={'main'} maxWidth={'xs'}>
+    <Container component="main" maxWidth="xs">
       <Box
         sx={{
           display: 'flex',
@@ -37,8 +37,8 @@ const Register: FC<AuthFormProps> = ({ isSubmitEnabled, changeFormType }) => {
         }}
       >
         <Typography
-          component={'h2'}
-          variant={'h2'}
+          component="h2"
+          variant="h2"
           fontWeight="bold"
           sx={{ fontSize: { xs: '3rem' } }}
         >

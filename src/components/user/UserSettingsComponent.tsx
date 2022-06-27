@@ -11,7 +11,7 @@ import {
   updateUsername,
 } from 'ducks/userSettings';
 import { Form, Formik, FormikValues } from 'formik';
-import React, { BaseSyntheticEvent, FC, useEffect, useState } from 'react';
+import { BaseSyntheticEvent, FC, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import {
