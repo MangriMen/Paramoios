@@ -1,4 +1,5 @@
-import { Avatar, Grid, Typography, useTheme } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
+import ParAvatar from 'components/styled/ParAvatar';
 import ParBox from 'components/styled/ParBox';
 import ParContainer from 'components/styled/ParContainer';
 import { FC } from 'react';
@@ -6,8 +7,6 @@ import { FC } from 'react';
 import RollDiceButton from './RollDiceButton';
 
 const MainPage: FC = () => {
-  const theme = useTheme();
-
   return (
     <ParContainer maxWidth="lg" sx={{ marginTop: '1rem', padding: '1rem' }}>
       {/* Grid container header of charlist, contains avatar and character name */}
@@ -18,14 +17,16 @@ const MainPage: FC = () => {
         mb="1rem"
       >
         <Grid item xs={2}>
-          <Avatar
+          <ParAvatar
             sx={{
               width: 'auto',
               height: 'auto',
-              border: '4px solid',
+              aspectRatio: '1/1',
+              borderWidth: '2px',
+              borderStyle: 'solid',
               borderRadius: '4px',
-              borderColor: theme.palette.primary.main,
               fontSize: '128px',
+              borderColor: 'primary.main',
             }}
           />
         </Grid>
