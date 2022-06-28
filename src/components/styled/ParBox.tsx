@@ -6,10 +6,10 @@ const BoxStyled = styled(Box)(({ theme }) => ({}));
 const ParBox: FC<BoxProps> = ({ children, ...props }) => {
   return (
     <BoxStyled
-      bgcolor="secondary.main"
-      border="4px solid"
-      borderColor="primary.main"
+      border="2px solid"
       borderRadius="4px"
+      borderColor="primary.main"
+      bgcolor="secondary.main"
       {...props}
     >
       {children}

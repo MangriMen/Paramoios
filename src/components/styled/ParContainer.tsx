@@ -4,7 +4,7 @@ const ParContainer = styled(Container)(({ theme }) => ({
   border: '4px solid',
   borderColor: theme.palette.primary.main,
   backgroundColor: theme.palette.secondary.main,
-  borderRadius: '4px',
+  borderRadius: '2px',
 }));
 
 export default ParContainer;
