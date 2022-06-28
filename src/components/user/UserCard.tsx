@@ -9,40 +9,42 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
+const characterCards = (characters: any) =>
+  characters.map((character: any) => (
+    <Card
+      variant="outlined"
+      key={character.id}
+      sx={{
+        display: 'flex',
+        flexDiration: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        padding: '1rem',
+        mb: '1rem',
+        borderWidth: '2px',
+        borderColor: 'primary.main',
+        backgroundColor: 'secondary.main',
+        fontSize: { xs: '1.2rem', lg: '1.5rem' },
+      }}
+    >
+      <Typography fontSize="inherit">Link: {character.id}</Typography>
+      <Box>
+        <Typography fontSize="inherit">Lvl: {character.level}</Typography>
+        <Typography fontSize="inherit">Race: {character.race}</Typography>
+        <Typography fontSize="inherit">Class: {character.class}</Typography>
+      </Box>
+      <ParAvatar src={character.image} />
+    </Card>
+  ));
+
 const UserCard: FC = () => {
   const { t } = useTranslation('translation', { keyPrefix: 'userProfile' });
   const user = useSelector(selectUser);
   const navigate = useNavigate();
 
-  const characterCard = (array: any) =>
-    array.map((item: any) => (
-      <Card
-        variant="outlined"
-        key={item.idLink}
-        sx={{
-          display: 'flex',
-          flexDiration: 'row',
-          justifyContent: 'space-between',
-          backgroundColor: '#e9c996',
-          alignItems: 'center',
-          padding: '1rem',
-          mt: '1rem',
-          mb: '1rem',
-          borderWidth: '2px',
-          borderColor: '#681e22',
-          fontSize: { xs: '1.2rem', lg: '1.5rem' },
-        }}
-      >
-        <Typography fontSize="inherit">Link: {item.idLink}</Typography>
-        <Box>
-          <Typography fontSize="inherit">Lvl: {item.lvl}</Typography>
-          <Typography fontSize="inherit">Race: {item.race}</Typography>
-          <Typography fontSize="inherit">Class: {item.class}</Typography>
-        </Box>
-
-        <ParAvatar src={item.img} />
-      </Card>
-    ));
+  const toSettings = () => {
+    navigate(ROUTE.SETTINGS);
+  };
 
   return (
     <Box
@@ -156,7 +158,7 @@ const UserCard: FC = () => {
         <ParLink
           color="primary"
           component="button"
-          onClick={() => navigate(ROUTE.SETTINGS)}
+          onClick={toSettings}
           sx={{ textShadow: '1px 1px 1px #681e22' }}
         >
           {t('settings')}
@@ -207,13 +209,14 @@ const UserCard: FC = () => {
           sx={{
             wordWrap: 'break-word',
             width: '100%',
+            mb: '1rem',
           }}
           fontSize={{ xs: '1.2rem', lg: '1.5rem' }}
           color="primary"
         >
           {t('yourCharacters')}:
         </Typography>
-        {characterCard(userInfo.userCharacters)}
+        {characterCards(userInfo.userCharacters)}
       </Box>
     </Box>
   );
