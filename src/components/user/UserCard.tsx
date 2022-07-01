@@ -1,4 +1,4 @@
-import { Box, Card, Divider, Typography, TypographyProps } from '@mui/material';
+import { Box, Card, Typography, TypographyProps } from '@mui/material';
 import ParAvatar from 'components/styled/ParAvatar';
 import ParDivider from 'components/styled/ParDivider';
 import ParLink from 'components/styled/ParLink';
