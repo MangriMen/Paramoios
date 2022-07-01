@@ -1,5 +1,6 @@
-import { Box, Card, Divider, Typography } from '@mui/material';
+import { Box, Card, Divider, Typography, TypographyProps } from '@mui/material';
 import ParAvatar from 'components/styled/ParAvatar';
+import ParDivider from 'components/styled/ParDivider';
 import ParLink from 'components/styled/ParLink';
 import { ROUTE } from 'consts';
 import { selectUser } from 'ducks/user/selectors';
@@ -37,6 +38,22 @@ const characterCards = (characters: any) =>
     </Card>
   ));
 
+export const StyledTypography: FC<TypographyProps> = ({ sx, ...props }) => {
+  return (
+    <Typography
+      variant="h3"
+      fontSize="inherit"
+      color="primary"
+      sx={{
+        ...sx,
+        wordWrap: 'break-word',
+        width: '100%',
+      }}
+      {...props}
+    />
+  );
+};
+
 const UserCard: FC = () => {
   const { t } = useTranslation('translation', { keyPrefix: 'userProfile' });
   const user = useSelector(selectUser);
@@ -68,83 +85,26 @@ const UserCard: FC = () => {
       </ParAvatar>
       <Box
         sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          flexWrap: 'wrap',
           width: {
             xs: '100%',
             md: 'auto',
           },
-          display: 'flex',
-          flexDirection: 'column',
-          fontSize: {
-            lg: '32px',
-            xs: '28px',
-          },
-          flexWrap: 'wrap',
           padding: '0.7rem',
+          fontSize: {
+            xs: '1.75rem',
+            lg: '2rem',
+          },
         }}
       >
-        <Typography
-          variant="h3"
-          fontSize="inherit"
-          sx={{
-            wordWrap: 'break-word',
-            width: '100%',
-          }}
-          color="primary"
-        >
-          {t('name')}:
-        </Typography>
-        <Typography
-          variant="h3"
-          fontSize="inherit"
-          sx={{
-            wordWrap: 'break-word',
-            width: '100%',
-          }}
-        >
-          {user.username}
-        </Typography>
-        <Typography
-          variant="h3"
-          fontSize="inherit"
-          sx={{
-            wordWrap: 'break-word',
-            width: '100%',
-          }}
-          color="primary"
-        >
-          {t('email')}:
-        </Typography>
-        <Typography
-          variant="h3"
-          fontSize="inherit"
-          sx={{
-            wordWrap: 'break-word',
-            width: '100%',
-          }}
-        >
-          {user.email}
-        </Typography>
-        <Typography
-          variant="h3"
-          fontSize="inherit"
-          sx={{
-            wordWrap: 'break-word',
-            width: '100%',
-          }}
-          color="primary"
-        >
-          {t('otherInfo')}:
-        </Typography>
-        <Typography
-          variant="h3"
-          fontSize="inherit"
-          sx={{
-            wordWrap: 'break-word',
-            width: '100%',
-          }}
-        >
-          {userInfo.otherInfo}
-        </Typography>
+        <StyledTypography>{t('name')}:</StyledTypography>
+        <StyledTypography color="black">{user.username}</StyledTypography>
+        <StyledTypography>{t('email')}:</StyledTypography>
+        <StyledTypography color="black">{user.email}</StyledTypography>
+        <StyledTypography>{t('otherInfo')}:</StyledTypography>
+        <StyledTypography color="black">{userInfo.otherInfo}</StyledTypography>
       </Box>
       <Box
         sx={{
@@ -159,63 +119,30 @@ const UserCard: FC = () => {
           color="primary"
           component="button"
           onClick={toSettings}
-          sx={{ textShadow: '1px 1px 1px #681e22' }}
+          textShadowBase="1px 1px 1px"
+          textShadowColor="primary"
         >
           {t('settings')}
         </ParLink>
       </Box>
       <Box>
-        <Divider
-          sx={{
-            margin: '2rem',
-            borderColor: '#681e22',
-            backgroundColor: '#681e22',
-            borderWidth: '2px',
-            borderRadius: '2px',
-          }}
-        />
-        <Typography
-          variant="h3"
-          fontSize={{ xs: '1.2rem', lg: '1.5rem' }}
-          sx={{
-            wordWrap: 'break-word',
-            width: '100%',
-          }}
-          color="primary"
-        >
+        <ParDivider sx={{ margin: '2rem' }} />
+        <StyledTypography fontSize={{ xs: '1.2rem', lg: '1.5rem' }}>
           {t('description')}:
-        </Typography>
-        <Typography
-          variant="h3"
+        </StyledTypography>
+        <StyledTypography
+          color="black"
           fontSize={{ xs: '1.2rem', lg: '1.5rem' }}
-          sx={{
-            wordWrap: 'break-word',
-            width: '100%',
-          }}
         >
           {userInfo.descriptions}
-        </Typography>
-        <Divider
-          sx={{
-            margin: '2rem',
-            borderColor: '#681e22',
-            backgroundColor: '#681e22',
-            borderWidth: '2px',
-            borderRadius: '2px',
-          }}
-        />
-        <Typography
-          variant="h3"
-          sx={{
-            wordWrap: 'break-word',
-            width: '100%',
-            mb: '1rem',
-          }}
+        </StyledTypography>
+        <ParDivider sx={{ margin: '2rem' }} />
+        <StyledTypography
           fontSize={{ xs: '1.2rem', lg: '1.5rem' }}
-          color="primary"
+          sx={{ mb: '1rem' }}
         >
           {t('yourCharacters')}:
-        </Typography>
+        </StyledTypography>
         {characterCards(userInfo.userCharacters)}
       </Box>
     </Box>
