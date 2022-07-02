@@ -1,5 +1,5 @@
 export interface FetchUserPayload {
-  username: string;
-  email: string;
-  avatar: string;
+  username: string | null | undefined;
+  email: string | null | undefined;
+  avatar: string | null | undefined;
 }

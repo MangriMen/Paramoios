@@ -24,9 +24,9 @@ export function* fetchUserSaga(): Generator<
     const response = yield call(get);
     yield put(
       fetchUserSuccess({
-        username: String(response?.displayName),
-        email: String(response?.email),
-        avatar: String(response?.photoURL),
+        username: response?.displayName,
+        email: response?.email,
+        avatar: response?.photoURL,
       }),
     );
   } catch (err) {
