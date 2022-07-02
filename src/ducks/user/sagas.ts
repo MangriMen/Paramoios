@@ -14,19 +14,19 @@ import { FetchUserPayload } from './interfaces';
 import { get } from './services';
 
 export function* fetchUserSaga(): Generator<
-  | CallEffect<User | null | undefined>
+  | CallEffect<User>
   | PutEffect<PayloadAction<FetchUserPayload>>
   | PutEffect<PayloadAction<string>>,
   void,
-  User | null | undefined
+  User
 > {
   try {
     const response = yield call(get);
     yield put(
       fetchUserSuccess({
-        username: response?.displayName,
-        email: response?.email,
-        avatar: response?.photoURL,
+        username: response.displayName ?? '',
+        email: response.email ?? '',
+        avatar: response.photoURL ?? '',
       }),
     );
   } catch (err) {

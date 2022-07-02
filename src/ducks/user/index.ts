@@ -22,10 +22,9 @@ export const userSlice = createSlice({
     },
     fetchUserSuccess(state, action: PayloadAction<FetchUserPayload>) {
       state.isLoading = initialState.isLoading;
-      state.user.username =
-        action.payload.username ?? initialState.user.username;
-      state.user.email = action.payload.email ?? initialState.user.email;
-      state.user.avatar = action.payload.avatar ?? initialState.user.avatar;
+      state.user.username = action.payload.username;
+      state.user.email = action.payload.email;
+      state.user.avatar = action.payload.avatar;
     },
     fetchUserFailed(state, action: PayloadAction<string>) {
       state.isLoading = initialState.isLoading;
