@@ -1,4 +1,5 @@
 import { Avatar, Grid, Typography, useTheme } from '@mui/material';
+import LiquidBar from 'components/charlist/LiquidBar';
 import ParBox from 'components/styled/ParBox';
 import ParContainer from 'components/styled/ParContainer';
 import { FC } from 'react';
@@ -27,6 +28,16 @@ const MainPage: FC = () => {
               borderColor: theme.palette.primary.main,
               fontSize: '128px',
             }}
+          />
+          <LiquidBar
+            borderRadius="4px"
+            border="4px solid"
+            height="1.8rem"
+            fontSize="1.2rem"
+            borderColor="primary.main"
+            bgcolor="green"
+            value={50}
+            maxValue={100}
           />
         </Grid>
         <Grid item xs={10}>
