@@ -1,7 +1,6 @@
 import { Box, Container, Typography } from '@mui/material';
 import ParLink from 'components/styled/ParLink';
 import { loginRequest } from 'ducks/auth';
-import { LoginPayload } from 'ducks/auth/interfaces';
 import { Form, Formik } from 'formik';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -10,9 +9,9 @@ import { loginSchema } from 'schemas/auth';
 
 import FormButton from './FormButton';
 import FormField from './FormField';
-import { AuthFormProps } from './interfaces';
+import { AuthFormProps, LoginValues } from './interfaces';
 
-const initialValues: LoginPayload = {
+const initialValues: LoginValues = {
   email: '',
   password: '',
 };
@@ -22,7 +21,7 @@ const Login: FC<AuthFormProps> = ({ changeFormType }) => {
 
   const dispatch = useDispatch();
 
-  const handlerSubmit = ({ email, password }: LoginPayload) => {
+  const handlerSubmit = ({ email, password }: LoginValues) => {
     dispatch(loginRequest({ email, password }));
   };
 
