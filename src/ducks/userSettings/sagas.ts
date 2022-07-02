@@ -1,4 +1,5 @@
 import { PayloadAction } from '@reduxjs/toolkit';
+import { fetchUserSaga } from 'ducks/user/sagas';
 import { UploadResult } from 'firebase/storage';
 import {
   CallEffect,
@@ -17,7 +18,6 @@ import {
   uploadFileToStorage,
 } from 'tools/requests/requests';
 
-import { fetchUserSaga } from '../user/sagas';
 import {
   updateEmail,
   updateImage,

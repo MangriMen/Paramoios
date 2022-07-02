@@ -1,8 +1,10 @@
 import { PayloadAction } from '@reduxjs/toolkit';
+import { fetchUserSaga } from 'ducks/user/sagas';
 import { UserCredential } from 'firebase/auth';
 import {
   CallEffect,
   PutEffect,
+  all,
   call,
   put,
   takeLatest,
@@ -75,7 +77,10 @@ function* logoutSaga(): Generator<
 }
 
 export function* watchAuth() {
-  yield takeLatest(loginRequest, loginSaga);
-  yield takeLatest(registerRequest, registerSaga);
-  yield takeLatest(logoutRequest, logoutSaga);
+  yield all([
+    takeLatest(logoutSuccess, fetchUserSaga),
+    takeLatest(loginRequest, loginSaga),
+    takeLatest(registerRequest, registerSaga),
+    takeLatest(logoutRequest, logoutSaga),
+  ]);
 }

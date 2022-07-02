@@ -1,12 +1,12 @@
 import { Link, LinkProps, styled } from '@mui/material';
 import { FC } from 'react';
 
-const LinkStyled = styled(Link)(() => ({
+const LinkStyled = styled(Link)({
   textShadow: '1px 1px 5px black',
   '&:hover': {
     filter: 'brightness(115%)',
   },
-})) as typeof Link;
+}) as typeof Link;
 
 type ParLinkProps = LinkProps & { component: React.ElementType<any> };
 

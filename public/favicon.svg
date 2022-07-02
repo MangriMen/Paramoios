@@ -1,0 +1,31 @@
+<svg id="Logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
+    <defs>
+        <style>
+            .cls-1 {
+                fill: #681e22;
+            }
+
+            .cls-2 {
+                font-size: 800px;
+                fill: #e9c996;
+                font-family: Eberron;
+                filter: url(#TextDropwShadow);
+            }
+        </style>
+        <filter id="TextDropwShadow">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="25" />
+            <feOffset dx="0" dy="0" result="offsetblur" />
+            <feComposite in2="offsetblur" operator="in" />
+            <feMerge>
+                <feMergeNode />
+                <feMergeNode in="SourceGraphic" />
+            </feMerge>
+        </filter>
+    </defs>
+
+    <g id="Background">
+        <rect class="cls-1" width="1000" height="1000" rx="200" />
+    </g>
+
+    <text class="cls-2" transform="translate(293.57 786.54)">P</text>
+</svg>
