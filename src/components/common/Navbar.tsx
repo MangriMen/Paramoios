@@ -101,8 +101,6 @@ const Navbar: FC = () => {
     },
   ];
 
-  console.log(user.avatar);
-
   return (
     <AppBar position="static" sx={{ maxHeight: '2rem' }}>
       <Container maxWidth="lg" sx={{ maxHeight: 'inherit' }}>
