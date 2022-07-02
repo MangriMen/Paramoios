@@ -1,6 +1,6 @@
-import { Box, Container, CssBaseline, Typography } from '@mui/material';
+import { Box, Container, Typography } from '@mui/material';
 import ParLink from 'components/styled/ParLink';
-import { authSlice } from 'ducks/auth';
+import { registerRequest } from 'ducks/auth';
 import { Form, Formik } from 'formik';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -9,35 +9,26 @@ import { registerSchema } from 'schemas/auth';
 
 import FormButton from './FormButton';
 import FormField from './FormField';
+import { AuthFormProps, RegisterValue } from './interfaces';
 
-interface RegisterValues {
-  username: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-}
+const initialValues: RegisterValue = {
+  username: '',
+  email: '',
+  password: '',
+  confirmPassword: '',
+};
 
-const Register: FC<{ changeComponentType: () => void }> = ({
-  changeComponentType,
-}) => {
+const Register: FC<AuthFormProps> = ({ isSubmitEnabled, changeFormType }) => {
   const { t } = useTranslation('translation', { keyPrefix: 'auth' });
 
   const dispatch = useDispatch();
 
-  const initialValues: RegisterValues = {
-    username: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-  };
-
-  const handlerSubmit = ({ username, email, password }: RegisterValues) => {
-    dispatch(authSlice.actions.register({ username, email, password }));
+  const handlerSubmit = ({ username, email, password }: RegisterValue) => {
+    dispatch(registerRequest({ username, email, password }));
   };
 
   return (
     <Container component={'main'} maxWidth={'xs'}>
-      <CssBaseline />
       <Box
         sx={{
           display: 'flex',
@@ -53,7 +44,7 @@ const Register: FC<{ changeComponentType: () => void }> = ({
         >
           {t('register')}
         </Typography>
-        <ParLink component="button" onClick={changeComponentType}>
+        <ParLink component="button" onClick={changeFormType}>
           {t('orLogin')}
         </ParLink>
         <Formik
@@ -69,21 +60,41 @@ const Register: FC<{ changeComponentType: () => void }> = ({
                 required
                 autoFocus
                 themeColor="secondary"
+                margin="normal"
+                fullWidth
               />
-              <FormField fieldName="email" required themeColor="secondary" />
+              <FormField
+                fieldName="email"
+                required
+                themeColor="secondary"
+                margin="normal"
+                fullWidth
+              />
               <FormField
                 type="password"
                 fieldName="password"
                 required
                 themeColor="secondary"
+                margin="normal"
+                fullWidth
               />
               <FormField
                 type="password"
                 fieldName="confirmPassword"
                 required
                 themeColor="secondary"
+                margin="normal"
+                fullWidth
               />
-              <FormButton type="submit">{t('signUp')}</FormButton>
+
+              <FormButton
+                type="submit"
+                color="secondary"
+                fullWidth
+                sx={{ mt: '1rem' }}
+              >
+                {t('signUp')}
+              </FormButton>
             </Box>
           </Form>
         </Formik>

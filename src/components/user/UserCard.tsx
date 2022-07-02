@@ -1,16 +1,17 @@
 import { Box, Card, Divider, Typography } from '@mui/material';
 import ParAvatar from 'components/styled/ParAvatar';
 import ParLink from 'components/styled/ParLink';
-import { auth } from 'configs/firebase';
 import { ROUTE } from 'consts';
+import { selectUser } from 'ducks/user/selectors';
 import { userInfo } from 'mocks/mockUserInfo';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 const UserCard: FC = () => {
   const { t } = useTranslation('translation', { keyPrefix: 'userProfile' });
-  const user = auth?.currentUser;
+  const user = useSelector(selectUser);
   const navigate = useNavigate();
 
   const characterCard = (array: any) =>
@@ -53,6 +54,7 @@ const UserCard: FC = () => {
       }}
     >
       <ParAvatar
+        src={user.avatar}
         variant="rounded"
         sx={{
           width: '15rem',
@@ -60,7 +62,7 @@ const UserCard: FC = () => {
           fontSize: '7.75rem',
         }}
       >
-        {user?.displayName}
+        {user.username || undefined}
       </ParAvatar>
       <Box
         sx={{
@@ -97,7 +99,7 @@ const UserCard: FC = () => {
             width: '100%',
           }}
         >
-          {user?.displayName}
+          {user.username}
         </Typography>
         <Typography
           variant="h3"
@@ -118,7 +120,7 @@ const UserCard: FC = () => {
             width: '100%',
           }}
         >
-          {user?.email}
+          {user.email}
         </Typography>
         <Typography
           variant="h3"
