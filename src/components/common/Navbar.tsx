@@ -77,12 +77,6 @@ const Navbar: FC = () => {
     setAnchorElUser(null);
   };
 
-  useEffect(() => {
-    if (!isLogged) {
-      navigate(ROUTE.AUTH);
-    }
-  }, [isLogged, navigate]);
-
   const userSettings: Array<UserMenuItem> = [
     {
       name: 'Profile',
