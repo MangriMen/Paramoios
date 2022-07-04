@@ -9,32 +9,16 @@ import donationAlertLogo from 'assets/images/icons/DA_Alert_White.svg';
 import 'assets/styles/deprecated/login.css';
 import Login from 'components/auth/Login';
 import Register from 'components/auth/Register';
-import { ROUTE } from 'consts';
-import {
-  selectError,
-  selectIsLoading,
-  selectIsLogged,
-} from 'ducks/auth/selectors';
+import { selectError, selectIsLoading } from 'ducks/auth/selectors';
 import { FC, useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 
 const AuthPage: FC = () => {
   const theme = useTheme();
   const { t } = useTranslation('translation', { keyPrefix: 'auth' });
 
   const isLoading = useSelector(selectIsLoading);
-
-  const isLogged = useSelector(selectIsLogged);
-
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (isLogged) {
-      navigate(`${ROUTE.ROOT}${ROUTE.ME}`);
-    }
-  }, [isLogged, navigate]);
 
   const [isLogin, setLogin] = useState(true);
 
