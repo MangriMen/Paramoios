@@ -16,7 +16,7 @@ import ParLink from 'components/styled/ParLink';
 import { ROUTE } from 'consts';
 import { logoutRequest } from 'ducks/auth';
 import { selectIsLogged } from 'ducks/auth/selectors';
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';

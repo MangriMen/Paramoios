@@ -11,7 +11,7 @@ import donationAlertLogo from 'assets/images/icons/DA_Alert_White.svg';
 import 'assets/styles/deprecated/login.css';
 import { ROUTE } from 'consts';
 import { selectError } from 'ducks/auth/selectors';
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
