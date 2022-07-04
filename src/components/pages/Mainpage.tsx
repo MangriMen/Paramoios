@@ -49,8 +49,6 @@ const MainPage: FC = () => {
     }
   }, [error]);
 
-  const [checked] = useState(true);
-
   return (
     <Box
       sx={{
@@ -121,7 +119,7 @@ const MainPage: FC = () => {
           >
             <Slide
               direction="up"
-              in={checked}
+              in={true}
               mountOnEnter
               timeout={1250}
               easing="cubic-bezier(0.215, 0.61, 0.355, 1)"

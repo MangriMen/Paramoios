@@ -9,7 +9,7 @@ import { Route, Routes } from 'react-router';
 import Charlist from './charlist/Charlist';
 import PageWithNavbar from './layout/PageWithNavbar';
 import AuthPage from './pages/AuthPage';
-import MainPage from './pages/Mainpage';
+import MainPage from './pages/MainPage';
 import NotFoundPage from './pages/NotFoundPage';
 import UserPage from './pages/UserPage';
 import { UserSettingsComponent } from './user/UserSettingsComponent';
