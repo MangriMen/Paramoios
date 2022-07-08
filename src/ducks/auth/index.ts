@@ -1,4 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+
+import { LoginPayload, RegisterPayload } from './interfaces';
 
 const initialState = {
   isLoading: false,
@@ -10,7 +12,7 @@ export const authSlice = createSlice({
   name: '@@auth',
   initialState,
   reducers: {
-    loginRequest: (state, action) => {
+    loginRequest: (state, action: PayloadAction<LoginPayload>) => {
       state.isLoading = true;
       state.error = '';
     },
@@ -18,12 +20,12 @@ export const authSlice = createSlice({
       state.isLoading = false;
       state.isLogged = true;
     },
-    loginFailed: (state, action) => {
+    loginFailed: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
       state.isLogged = false;
       state.error = action.payload;
     },
-    registerRequest: (state, action) => {
+    registerRequest: (state, action: PayloadAction<RegisterPayload>) => {
       state.isLoading = true;
       state.error = '';
     },
@@ -31,7 +33,7 @@ export const authSlice = createSlice({
       state.isLogged = true;
       state.isLoading = false;
     },
-    registerFailed: (state, action) => {
+    registerFailed: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
       state.error = action.payload;
     },
@@ -43,7 +45,7 @@ export const authSlice = createSlice({
       state.isLoading = false;
       state.isLogged = false;
     },
-    logoutFailed: (state, action) => {
+    logoutFailed: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
       state.isLogged = true;
       state.error = action.payload;

@@ -5,12 +5,22 @@ import {
   signOut,
 } from 'firebase/auth';
 
-export function login(payload: any) {
+import { LoginPayload, RegisterPayload } from './interfaces';
+
+export function login(payload: LoginPayload) {
   if (auth === undefined) {
     throw new Error('Login failed. With auth being undefined');
   }
 
   return signInWithEmailAndPassword(auth, payload.email, payload.password);
+}
+
+export function register(payload: RegisterPayload) {
+  if (auth === undefined) {
+    throw new Error('Register failed. With auth being undefined');
+  }
+
+  return createUserWithEmailAndPassword(auth, payload.email, payload.password);
 }
 
 export function logout() {
@@ -19,12 +29,4 @@ export function logout() {
   }
 
   return signOut(auth);
-}
-
-export function register(payload: any) {
-  if (auth === undefined) {
-    throw new Error('Register failed. With auth being undefined');
-  }
-
-  return createUserWithEmailAndPassword(auth, payload.email, payload.password);
 }

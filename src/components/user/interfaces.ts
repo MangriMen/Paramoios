@@ -7,9 +7,9 @@ export interface EmailValue {
 }
 
 export interface PasswordValue {
+  currentPassword: string;
   newPassword: string;
   confirmPassword: string;
-  currentPassword: string;
 }
 
 export interface activeButtons {
