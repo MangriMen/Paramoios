@@ -9,19 +9,19 @@ import { loginSchema } from 'schemas/auth';
 
 import FormButton from './FormButton';
 import FormField from './FormField';
-import { AuthFormProps, LoginValue } from './interfaces';
+import { AuthFormProps, LoginValues } from './interfaces';
 
-const initialValues: LoginValue = {
+const initialValues: LoginValues = {
   email: '',
   password: '',
 };
 
-const Login: FC<AuthFormProps> = ({ isSubmitEnabled, changeFormType }) => {
+const Login: FC<AuthFormProps> = ({ changeFormType }) => {
   const { t } = useTranslation('translation', { keyPrefix: 'auth' });
 
   const dispatch = useDispatch();
 
-  const handlerSubmit = ({ email, password }: LoginValue) => {
+  const handlerSubmit = ({ email, password }: LoginValues) => {
     dispatch(loginRequest({ email, password }));
   };
 
@@ -35,8 +35,8 @@ const Login: FC<AuthFormProps> = ({ isSubmitEnabled, changeFormType }) => {
         }}
       >
         <Typography
-          component={'h2'}
-          variant={'h2'}
+          component="h2"
+          variant="h2"
           fontWeight="bold"
           sx={{ fontSize: { xs: '3rem' } }}
         >
@@ -71,7 +71,7 @@ const Login: FC<AuthFormProps> = ({ isSubmitEnabled, changeFormType }) => {
                 margin="normal"
               />
               <FormButton
-                type={'submit'}
+                type="submit"
                 fullWidth
                 color="secondary"
                 sx={{ mt: '1rem' }}

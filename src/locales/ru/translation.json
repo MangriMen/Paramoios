@@ -24,6 +24,7 @@
     "notFoundDescription": "Возможно, здесь была гильдия воров"
   },
   "userProfile": {
+    "avatar": "Аватар",
     "name": "Имя",
     "email": "Почта",
     "otherInfo": "Дополнительная информация",
