@@ -35,8 +35,8 @@ const Login: FC<AuthFormProps> = ({ changeFormType }) => {
         }}
       >
         <Typography
-          component={'h2'}
-          variant={'h2'}
+          component="h2"
+          variant="h2"
           fontWeight="bold"
           sx={{ fontSize: { xs: '3rem' } }}
         >
@@ -71,7 +71,7 @@ const Login: FC<AuthFormProps> = ({ changeFormType }) => {
                 margin="normal"
               />
               <FormButton
-                type={'submit'}
+                type="submit"
                 fullWidth
                 color="secondary"
                 sx={{ mt: '1rem' }}
