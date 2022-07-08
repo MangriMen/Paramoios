@@ -147,18 +147,15 @@ const Navbar: FC = () => {
               </IconButton>
             </Tooltip>
             <StyledMenu
-              sx={{
-                mt: '2.6rem',
-              }}
               keepMounted
               anchorEl={anchorElUser}
               anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
+                vertical: 'bottom',
+                horizontal: 'center',
               }}
               transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
+                vertical: 8,
+                horizontal: 'center',
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
