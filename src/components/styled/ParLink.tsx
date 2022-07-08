@@ -1,14 +1,34 @@
-import { Link, LinkProps, styled } from '@mui/material';
+import { Link, LinkProps, Palette, PaletteColor, styled } from '@mui/material';
 import { FC } from 'react';
 
-const LinkStyled = styled(Link)({
-  textShadow: '1px 1px 5px black',
-  '&:hover': {
-    filter: 'brightness(115%)',
-  },
-}) as typeof Link;
+const LinkStyled = styled(Link, {
+  shouldForwardProp: (prop) =>
+    prop !== 'textShadowBase' && prop !== 'textShadowColor',
+})<{
+  textShadowBase?: ParLinkProps['textShadowBase'];
+  textShadowColor?: ParLinkProps['textShadowColor'];
+}>(({ theme, textShadowBase, textShadowColor }) => {
+  const textShadowBase_ = textShadowBase?.trim() ?? '1px 1px 5px';
+  const textShadowColor_ =
+    (theme.palette[textShadowColor as keyof Palette] as PaletteColor)?.main ??
+    textShadowColor ??
+    'black';
 
-type ParLinkProps = LinkProps & { component: React.ElementType<any> };
+  const textShadow_ = `${textShadowBase_} ${textShadowColor_}`;
+
+  return {
+    textShadow: textShadow_,
+    '&:hover': {
+      filter: 'brightness(115%)',
+    },
+  };
+});
+
+type ParLinkProps = LinkProps & {
+  textShadowBase?: string;
+  textShadowColor?: LinkProps['color'];
+  component: React.ElementType<any>;
+};
 
 const ParLink: FC<ParLinkProps> = ({ children, ...props }) => {
   return (
