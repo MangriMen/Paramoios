@@ -1,4 +1,14 @@
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { PayloadAction } from '@reduxjs/toolkit';
+import { fetchUserSaga } from 'ducks/user/sagas';
+import { UserCredential } from 'firebase/auth';
+import {
+  CallEffect,
+  PutEffect,
+  all,
+  call,
+  put,
+  takeLatest,
+} from 'redux-saga/effects';
 import { setUserDisplayName } from 'tools/requests/requests';
 
 import {
@@ -12,9 +22,18 @@ import {
   registerRequest,
   registerSuccess,
 } from './index';
+import { LoginPayload, RegisterPayload } from './interfaces';
 import { login, logout, register } from './services';
 
-function* loginSaga({ payload }: any): Generator<unknown, void, any> {
+function* loginSaga({
+  payload,
+}: PayloadAction<LoginPayload>): Generator<
+  | CallEffect<UserCredential>
+  | PutEffect<PayloadAction<undefined>>
+  | PutEffect<PayloadAction<string>>,
+  void,
+  UserCredential
+> {
   try {
     yield call(login, payload);
     yield put(loginSuccess());
@@ -23,17 +42,32 @@ function* loginSaga({ payload }: any): Generator<unknown, void, any> {
   }
 }
 
-function* registerSaga({ payload }: any): Generator<unknown, void, any> {
+function* registerSaga({
+  payload,
+}: PayloadAction<RegisterPayload>): Generator<
+  | CallEffect<UserCredential>
+  | CallEffect<void>
+  | PutEffect<PayloadAction<undefined>>
+  | PutEffect<PayloadAction<string>>,
+  void,
+  UserCredential
+> {
   try {
     yield call(register, payload);
-    yield call(setUserDisplayName, payload);
+    yield call(setUserDisplayName, payload.username);
     yield put(registerSuccess());
   } catch (err) {
     yield put(registerFailed(String(err)));
   }
 }
 
-function* logoutSaga(): Generator<unknown, void, any> {
+function* logoutSaga(): Generator<
+  | CallEffect<void>
+  | PutEffect<PayloadAction<undefined>>
+  | PutEffect<PayloadAction<string>>,
+  void,
+  void
+> {
   try {
     yield call(logout);
     yield put(logoutSuccess());
@@ -43,7 +77,10 @@ function* logoutSaga(): Generator<unknown, void, any> {
 }
 
 export function* watchAuth() {
-  yield takeLatest(loginRequest, loginSaga);
-  yield takeLatest(registerRequest, registerSaga);
-  yield takeLatest(logoutRequest, logoutSaga);
+  yield all([
+    takeLatest(logoutSuccess, fetchUserSaga),
+    takeLatest(loginRequest, loginSaga),
+    takeLatest(registerRequest, registerSaga),
+    takeLatest(logoutRequest, logoutSaga),
+  ]);
 }

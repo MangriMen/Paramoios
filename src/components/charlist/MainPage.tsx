@@ -4,6 +4,7 @@ import ParBox from 'components/styled/ParBox';
 import ParContainer from 'components/styled/ParContainer';
 import { FC } from 'react';
 
+import LiquidBar from './LiquidBar';
 import RollDiceButton from './RollDiceButton';
 
 const MainPage: FC = () => {
@@ -28,6 +29,16 @@ const MainPage: FC = () => {
               fontSize: '128px',
               borderColor: 'primary.main',
             }}
+          />
+          <LiquidBar
+            borderRadius="4px"
+            border="4px solid"
+            height="1.8rem"
+            fontSize="1.2rem"
+            borderColor="primary.main"
+            bgcolor="green"
+            value={50}
+            maxValue={100}
           />
         </Grid>
         <Grid item xs={10}>
