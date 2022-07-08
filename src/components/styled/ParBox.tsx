@@ -4,10 +4,10 @@ import { FC } from 'react';
 const ParBox: FC<BoxProps> = ({ children, ...props }) => {
   return (
     <Box
-      bgcolor="secondary.main"
-      border="4px solid"
-      borderColor="primary.main"
+      border="2px solid"
       borderRadius="4px"
+      borderColor="primary.main"
+      bgcolor="secondary.main"
       {...props}
     >
       {children}
