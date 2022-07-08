@@ -1,20 +1,36 @@
-import { all, call, put, takeLatest } from 'redux-saga/effects';
+import { PayloadAction } from '@reduxjs/toolkit';
+import { User } from 'firebase/auth';
+import {
+  CallEffect,
+  PutEffect,
+  all,
+  call,
+  put,
+  takeLatest,
+} from 'redux-saga/effects';
 
 import { fetchUser, fetchUserFailed, fetchUserSuccess } from './index';
+import { FetchUserPayload } from './interfaces';
 import { get } from './services';
 
-export function* fetchUserSaga(): Generator<unknown, void, any> {
+export function* fetchUserSaga(): Generator<
+  | CallEffect<User>
+  | PutEffect<PayloadAction<FetchUserPayload>>
+  | PutEffect<PayloadAction<string>>,
+  void,
+  User
+> {
   try {
     const response = yield call(get);
     yield put(
       fetchUserSuccess({
-        username: response?.displayName,
-        email: response?.email,
-        avatar: response?.photoURL,
+        username: response.displayName ?? '',
+        email: response.email ?? '',
+        avatar: response.photoURL ?? '',
       }),
     );
   } catch (err) {
-    yield put(fetchUserFailed(err));
+    yield put(fetchUserFailed(String(err)));
   }
 }
 

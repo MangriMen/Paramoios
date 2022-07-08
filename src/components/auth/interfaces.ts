@@ -1,14 +1,13 @@
 export type AuthFormProps = {
-  isSubmitEnabled: boolean;
   changeFormType: () => void;
 };
 
-export interface LoginValue {
+export interface LoginValues {
   email: string;
   password: string;
 }
 
-export interface RegisterValue {
+export interface RegisterValues {
   username: string;
   email: string;
   password: string;
