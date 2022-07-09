@@ -9,26 +9,26 @@ import { registerSchema } from 'schemas/auth';
 
 import FormButton from './FormButton';
 import FormField from './FormField';
-import { AuthFormProps, RegisterValue } from './interfaces';
+import { AuthFormProps, RegisterValues } from './interfaces';
 
-const initialValues: RegisterValue = {
+const initialValues: RegisterValues = {
   username: '',
   email: '',
   password: '',
   confirmPassword: '',
 };
 
-const Register: FC<AuthFormProps> = ({ isSubmitEnabled, changeFormType }) => {
+const Register: FC<AuthFormProps> = ({ changeFormType }) => {
   const { t } = useTranslation('translation', { keyPrefix: 'auth' });
 
   const dispatch = useDispatch();
 
-  const handlerSubmit = ({ username, email, password }: RegisterValue) => {
+  const handlerSubmit = ({ username, email, password }: RegisterValues) => {
     dispatch(registerRequest({ username, email, password }));
   };
 
   return (
-    <Container component={'main'} maxWidth={'xs'}>
+    <Container component="main" maxWidth="xs">
       <Box
         sx={{
           display: 'flex',
@@ -37,8 +37,8 @@ const Register: FC<AuthFormProps> = ({ isSubmitEnabled, changeFormType }) => {
         }}
       >
         <Typography
-          component={'h2'}
-          variant={'h2'}
+          component="h2"
+          variant="h2"
           fontWeight="bold"
           sx={{ fontSize: { xs: '3rem' } }}
         >
