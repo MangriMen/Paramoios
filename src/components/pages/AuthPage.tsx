@@ -1,5 +1,4 @@
 import {
-  AlertProps,
   Box,
   CircularProgress,
   Container,
@@ -13,9 +12,8 @@ import {
 import donationAlertLogo from 'assets/images/icons/DA_Alert_White.svg';
 import Login from 'components/auth/Login';
 import Register from 'components/auth/Register';
-import { ParSnackbar } from 'components/styled/ParSnackbar';
-import { selectError, selectIsLoading } from 'ducks/auth/selectors';
-import { FC, useCallback, useLayoutEffect, useState } from 'react';
+import { selectIsLoading } from 'ducks/auth/selectors';
+import { FC, useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
@@ -31,24 +29,6 @@ const AuthPage: FC = () => {
     setLogin(!isLogin);
   }, [isLogin]);
 
-  const error = useSelector(selectError);
-
-  useLayoutEffect(() => {
-    if (!error || error === undefined || error === '') {
-      return;
-    }
-
-    setSeverity('error');
-    setIsOpen(true);
-  }, [error]);
-
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [severity, setSeverity] = useState<AlertProps['severity']>();
-
-  const handleClose = () => {
-    setIsOpen(false);
-  };
-
   return (
     <Box
       sx={{
@@ -56,12 +36,6 @@ const AuthPage: FC = () => {
         backgroundColor: theme.palette.primary.main,
       }}
     >
-      <ParSnackbar
-        severity={severity}
-        open={isOpen}
-        onClose={handleClose}
-        message={error}
-      />
       <Container
         maxWidth="xl"
         sx={{
@@ -180,7 +154,7 @@ const GreetingsText = styled(Typography)({
   lineHeight: '1.08',
   marginBlockStart: '1em',
   marginBlockEnd: '1em',
-});
+}) as typeof Typography;
 
 const CheckListItem = styled(ListItem)({
   display: 'flex',
@@ -303,7 +277,12 @@ const AuthPageGreetings: FC = () => {
         <br />
         <GreetingsText>
           Consider supporting us now to get{' '}
-          <GreetingsText display="inline" fontWeight="bold" fontStyle="italic">
+          <GreetingsText
+            component="span"
+            display="inline"
+            fontWeight="bold"
+            fontStyle="italic"
+          >
             absolutely nothing
           </GreetingsText>
           . Yea, you read it right. You can donate and prey its not a scam, or
@@ -312,7 +291,12 @@ const AuthPageGreetings: FC = () => {
         </GreetingsText>
         <GreetingsText color="secondary">
           Поддержав нас сейчас, вы можете получить ваше личное{' '}
-          <GreetingsText display="inline" fontWeight="bold" fontStyle="italic">
+          <GreetingsText
+            component="span"
+            display="inline"
+            fontWeight="bold"
+            fontStyle="italic"
+          >
             абсолютное ничего
           </GreetingsText>
           . Да, вы всё правильно поняли. Вы можете задонатить и надеяться что

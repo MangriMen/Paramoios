@@ -1,11 +1,12 @@
 import { Alert, AlertProps, Snackbar, SnackbarProps } from '@mui/material';
 import { FC } from 'react';
 
-interface ParSnackbarProps {
+export interface ParSnackbarProps {
   open?: SnackbarProps['open'];
   onClose?: SnackbarProps['onClose'] & AlertProps['onClose'];
   message?: SnackbarProps['message'];
   severity?: AlertProps['severity'];
+  autoHideDuration?: SnackbarProps['autoHideDuration'];
 }
 
 export const ParSnackbar: FC<ParSnackbarProps> = (props) => {
@@ -15,7 +16,7 @@ export const ParSnackbar: FC<ParSnackbarProps> = (props) => {
         vertical: 'top',
         horizontal: 'center',
       }}
-      autoHideDuration={6000}
+      autoHideDuration={props.autoHideDuration}
       open={props.open}
       onClose={props.onClose}
     >

@@ -1,9 +1,12 @@
 import MainPage from 'components/charlist/MainPage';
+import { useToast } from 'components/hooks/useToast';
 import PageWithNavbar from 'components/layout/PageWithNavbar';
 import AuthPage from 'components/pages/AuthPage';
 import NotFoundPage from 'components/pages/NotFoundPage';
 import UserPage from 'components/pages/UserPage';
 import { AuthRoute } from 'components/routes/AuthRoute';
+import { UserRoute } from 'components/routes/UserRoute';
+import { ParSnackbar } from 'components/styled/ParSnackbar';
 import { UserSettingsComponent } from 'components/user/UserSettingsComponent';
 import { auth } from 'configs/firebase';
 import { ROUTE } from 'consts';
@@ -13,10 +16,10 @@ import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router';
 
-import { UserRoute } from './routes/UserRoute';
-
 const App: FC = () => {
   const dispatch = useDispatch();
+
+  const { message, severity, open, handleClose } = useToast();
 
   auth?.onAuthStateChanged((user) => {
     if (user) {
@@ -29,6 +32,13 @@ const App: FC = () => {
 
   return (
     <>
+      <ParSnackbar
+        autoHideDuration={4000}
+        message={message}
+        severity={severity}
+        open={open}
+        onClose={handleClose}
+      />
       <Routes>
         <Route element={<AuthRoute />}>
           <Route path={ROUTE.AUTH} element={<AuthPage />} />
