@@ -96,7 +96,6 @@ const Navbar: FC = () => {
       onClick: () => {
         handleCloseUserMenu();
         dispatch(logoutRequest());
-        navigate(ROUTE.HOME);
       },
     },
   ];
