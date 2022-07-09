@@ -1,19 +1,17 @@
-import { Box, BoxProps, styled } from '@mui/material';
+import { Box, BoxProps } from '@mui/material';
 import { FC } from 'react';
-
-const BoxStyled = styled(Box)(({ theme }) => ({}));
 
 const ParBox: FC<BoxProps> = ({ children, ...props }) => {
   return (
-    <BoxStyled
-      bgcolor="secondary.main"
-      border="4px solid"
-      borderColor="primary.main"
+    <Box
+      border="2px solid"
       borderRadius="4px"
+      borderColor="primary.main"
+      bgcolor="secondary.main"
       {...props}
     >
       {children}
-    </BoxStyled>
+    </Box>
   );
 };
 

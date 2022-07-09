@@ -29,13 +29,13 @@ interface UserMenuItem {
   onClick: () => void;
 }
 
-const StyledMenu = styled(Menu)(() => ({
+const StyledMenu = styled(Menu)({
   '& .MuiPaper-root': {
     backgroundColor: 'rgba(0, 0, 0, 0)',
     boxShadow: 'none',
     padding: '0 0.8rem',
   },
-}));
+});
 
 const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
   border: '0.2rem solid',
@@ -53,6 +53,9 @@ const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
 const Navbar: FC = () => {
   const { t } = useTranslation('translation', { keyPrefix: 'navbar' });
   const { t: tAuth } = useTranslation('translation', { keyPrefix: 'auth' });
+  const { t: tUserProfile } = useTranslation('translation', {
+    keyPrefix: 'userProfile',
+  });
 
   const dispatch = useDispatch();
 
@@ -130,6 +133,8 @@ const Navbar: FC = () => {
             >
               <IconButton onClick={handleOpenUserMenu}>
                 <ParAvatar
+                  alt={tUserProfile('avatar')}
+                  key={user.avatar}
                   src={user.avatar}
                   sx={{
                     width: '3rem',
@@ -141,18 +146,15 @@ const Navbar: FC = () => {
               </IconButton>
             </Tooltip>
             <StyledMenu
-              sx={{
-                mt: '2.6rem',
-              }}
               keepMounted
               anchorEl={anchorElUser}
               anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
+                vertical: 'bottom',
+                horizontal: 'center',
               }}
               transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
+                vertical: 8,
+                horizontal: 'center',
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
