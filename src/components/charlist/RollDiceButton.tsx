@@ -16,11 +16,10 @@ import D10Icon from 'assets/images/dice/D10.svg';
 import D12Icon from 'assets/images/dice/D12.svg';
 import D20Icon from 'assets/images/dice/D20.svg';
 import D100Icon from 'assets/images/dice/D100.svg';
-import ParBox from 'components/styled/ParBox';
-import { FC } from 'react';
+import { FC, ReactNode, useEffect, useState } from 'react';
 import React from 'react';
 
-import { DiceMenu } from './interfaces';
+import { DiceMenu, RollDiceButtonProps } from './interfaces';
 
 const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
   borderRadius: '50%',
@@ -40,101 +39,107 @@ const StyledMenu = styled(Menu)({
   },
 });
 
-const RollDiceButton: FC = () => {
+const dices: Array<DiceMenu> = [
+  {
+    edges: 20,
+    iconName: D20Icon,
+  },
+  {
+    edges: 12,
+    iconName: D12Icon,
+  },
+  {
+    edges: 100,
+    iconName: D100Icon,
+  },
+  {
+    edges: 10,
+    iconName: D10Icon,
+  },
+  {
+    edges: 8,
+    iconName: D8Icon,
+  },
+  {
+    edges: 6,
+    iconName: D6Icon,
+  },
+  {
+    edges: 4,
+    iconName: D4Icon,
+  },
+];
+
+const RollDiceButton: FC<RollDiceButtonProps> = ({ sx }) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+
   const open = Boolean(anchorEl);
+
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
 
-  const dices: Array<DiceMenu> = [
-    {
-      edges: 20,
-      iconName: D20Icon,
-    },
-    {
-      edges: 12,
-      iconName: D12Icon,
-    },
-    {
-      edges: 100,
-      iconName: D100Icon,
-    },
-    {
-      edges: 10,
-      iconName: D10Icon,
-    },
-    {
-      edges: 8,
-      iconName: D8Icon,
-    },
-    {
-      edges: 6,
-      iconName: D6Icon,
-    },
-    {
-      edges: 4,
-      iconName: D4Icon,
-    },
-  ];
+  const [dicesItems, setDicesItems] = useState<ReactNode>();
+
+  useEffect(() => {
+    setDicesItems(
+      dices.map((dice) => (
+        <Tooltip
+          disableInteractive
+          placement="left"
+          key={dice.edges}
+          title={<Typography> {`D${dice.edges}`} </Typography>}
+        >
+          <StyledMenuItem onClick={handleClose}>
+            <Box
+              component="img"
+              src={dice.iconName}
+              width="48px"
+              height="48px"
+            />
+          </StyledMenuItem>
+        </Tooltip>
+      )),
+    );
+  }, []);
 
   return (
-    <ParBox
-      bgcolor="primary.main"
-      sx={{
-        borderRadius: '50%',
-        '&:hover': {
-          borderColor: 'primary.light',
-          backgroundColor: 'primary.light',
-        },
-      }}
-    >
+    <>
       <Button
         onClick={handleClick}
+        variant="contained"
         sx={{
-          height: '100%',
+          aspectRatio: '1/1',
           borderRadius: '50%',
+          ...sx,
         }}
       >
         {open ? (
           <CloseIcon fontSize="large" sx={{ color: grey[50] }} />
         ) : (
-          <Box component="img" src={D20Icon} />
+          <Box component="img" src={D20Icon} width="48px" height="48px" />
         )}
       </Button>
       <StyledMenu
-        id="basic-menu"
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
-        sx={{
-          display: 'flex',
-          width: '100%',
-          justifyContent: 'center',
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'center',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'center',
         }}
       >
-        {dices.map((dice) => (
-          <Tooltip
-            disableInteractive
-            placement="left"
-            key={dice.edges}
-            title={<Typography> {`D ${dice.edges}`} </Typography>}
-          >
-            <StyledMenuItem onClick={handleClose}>
-              <Box
-                component="img"
-                src={dice.iconName}
-                width="48px"
-                height="48px"
-              ></Box>
-            </StyledMenuItem>
-          </Tooltip>
-        ))}
+        {dicesItems}
       </StyledMenu>
-    </ParBox>
+    </>
   );
 };
 

@@ -3,11 +3,14 @@ import ParAvatar from 'components/styled/ParAvatar';
 import ParBox from 'components/styled/ParBox';
 import ParContainer from 'components/styled/ParContainer';
 import { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import LiquidBar from './LiquidBar';
 import RollDiceButton from './RollDiceButton';
 
 const MainPage: FC = () => {
+  const { t } = useTranslation('translation', { keyPrefix: 'charlist' });
+
   return (
     <ParContainer maxWidth="lg" sx={{ marginTop: '1rem', padding: '1rem' }}>
       {/* Grid container header of charlist, contains avatar and character name */}
@@ -46,11 +49,16 @@ const MainPage: FC = () => {
         </Grid>
       </Grid>
       {/* Grid container with character stats */}
-      <Grid container justifyContent="space-between" mb="1rem">
+      <Grid
+        container
+        justifyContent="space-between"
+        alignItems="center"
+        mb="1rem"
+      >
         <ParBox padding="2rem"></ParBox>
         <ParBox padding="2rem"></ParBox>
         <ParBox padding="2rem"></ParBox>
-        <RollDiceButton></RollDiceButton>
+        <RollDiceButton sx={{ width: '4.5rem' }}></RollDiceButton>
         <ParBox padding="2rem"></ParBox>
         <ParBox padding="2rem"></ParBox>
         <ParBox padding="2rem"></ParBox>
@@ -92,9 +100,13 @@ const MainPage: FC = () => {
               {/* Fight bonuses */}
               <ParBox mb="1rem" padding="1rem" />
               {/* Attacks and spellcasting */}
-              <ParBox mb="1rem" padding="1rem" />
+              <ParBox
+                title={t('attacksAndSpellcasting')}
+                mb="1rem"
+                padding="1rem"
+              />
               {/* Equipment */}
-              <ParBox mb="1rem" padding="1rem" />
+              <ParBox title={t('equipment')} mb="1rem" padding="1rem" />
             </Grid>
           </Grid>
           <Grid item xs={4}>
@@ -107,20 +119,24 @@ const MainPage: FC = () => {
               {/* Health */}
               <ParBox padding="1rem" />
               {/* Boards with traits, ideals, bonds, flaws */}
-              {Array.from(Array(4)).map((_, index) => (
-                <ParBox key={index} mb="1rem" padding="1rem" />
-              ))}
+              <ParBox title={t('traits')} mb="1rem" padding="1rem" />
+              <ParBox title={t('ideals')} mb="1rem" padding="1rem" />
+              <ParBox title={t('bonds')} mb="1rem" padding="1rem" />
+              <ParBox title={t('flaws')} mb="1rem" padding="1rem" />
             </Grid>
           </Grid>
         </Grid>
         <Grid container columnSpacing={3} flexDirection="row">
           <Grid item xs={4}>
             {/* Languages */}
-            <ParBox padding="1rem" />
+            <ParBox
+              title={t('otherProficienciesAndLanguages')}
+              padding="1rem"
+            />
           </Grid>
           <Grid item xs={8}>
             {/* Features and traits */}
-            <ParBox padding="1rem" />
+            <ParBox title={t('featureAndTraits')} padding="1rem" />
           </Grid>
         </Grid>
       </Grid>

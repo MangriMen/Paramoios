@@ -17,7 +17,7 @@ import { ROUTE } from 'consts';
 import { logoutRequest } from 'ducks/auth';
 import { selectIsLogged } from 'ducks/auth/selectors';
 import { selectUser } from 'ducks/user/selectors';
-import React, { FC, useState } from 'react';
+import React, { FC, ReactNode, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -79,7 +79,7 @@ const Navbar: FC = () => {
     setAnchorElUser(null);
   };
 
-  const userSettings: Array<UserMenuItem> = [
+  const [userSettings] = useState<Array<UserMenuItem>>([
     {
       name: 'Profile',
       icon: <PersonIcon sx={{ color: '#ffffff' }} />,
@@ -98,7 +98,26 @@ const Navbar: FC = () => {
         dispatch(logoutRequest());
       },
     },
-  ];
+  ]);
+
+  const [styledMenuItems, setStyledMenuItems] = useState<ReactNode>();
+
+  useEffect(() => {
+    setStyledMenuItems(
+      userSettings.map((setting) => (
+        <Tooltip
+          disableInteractive
+          placement="left"
+          key={setting.name}
+          title={setting.tooltip || ''}
+        >
+          <StyledMenuItem onClick={setting.onClick}>
+            {setting.icon}
+          </StyledMenuItem>
+        </Tooltip>
+      )),
+    );
+  }, [userSettings]);
 
   return (
     <AppBar position="static" sx={{ maxHeight: '2rem' }}>
@@ -159,18 +178,7 @@ const Navbar: FC = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {userSettings.map((setting) => (
-                <Tooltip
-                  disableInteractive
-                  placement="left"
-                  key={setting.name}
-                  title={setting.tooltip || ''}
-                >
-                  <StyledMenuItem onClick={setting.onClick}>
-                    {setting.icon}
-                  </StyledMenuItem>
-                </Tooltip>
-              ))}
+              {styledMenuItems}
             </StyledMenu>
           </Box>
         </Toolbar>
