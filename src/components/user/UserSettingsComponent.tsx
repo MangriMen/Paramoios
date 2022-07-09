@@ -10,8 +10,8 @@ import {
   updatePassword,
   updateUsername,
 } from 'ducks/userSettings';
-import { Form, Formik, FormikValues } from 'formik';
-import React, { BaseSyntheticEvent, FC, useEffect, useState } from 'react';
+import { Form, Formik } from 'formik';
+import { BaseSyntheticEvent, FC, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -111,28 +111,28 @@ export const UserSettingsComponent: FC = () => {
     }
   }, [changeAvatarButton]);
 
-  const submitUsernameHandler = (values: FormikValues) => {
+  const submitUsernameHandler = ({ username }: UsernameValue) => {
     setButtons((prevState: activeButtons) => ({
       ...prevState,
       username: !prevState.username,
     }));
-    dispatch(updateUsername(values));
+    dispatch(updateUsername(username));
   };
 
-  const submitEmailHandler = (values: FormikValues) => {
+  const submitEmailHandler = ({ email }: EmailValue) => {
     setButtons((prevState: activeButtons) => ({
       ...prevState,
       email: !prevState.email,
     }));
-    dispatch(updateEmail(values));
+    dispatch(updateEmail(email));
   };
 
-  const submitPasswordHandler = (values: FormikValues) => {
+  const submitPasswordHandler = ({ newPassword }: PasswordValue) => {
     setButtons((prevState: activeButtons) => ({
       ...prevState,
       password: !prevState.password,
     }));
-    dispatch(updatePassword(values));
+    dispatch(updatePassword(newPassword));
   };
 
   const submitImageHandler = () => {

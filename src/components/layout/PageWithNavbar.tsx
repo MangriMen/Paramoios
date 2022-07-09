@@ -1,11 +1,12 @@
 import Navbar from 'components/common/Navbar';
-import { FC, ReactNode } from 'react';
+import { FC } from 'react';
+import { Outlet } from 'react-router';
 
-const PageWithNavbar: FC<{ children: ReactNode }> = ({ children }) => {
+const PageWithNavbar: FC = () => {
   return (
     <>
       <Navbar />
-      {children}
+      <Outlet />
     </>
   );
 };

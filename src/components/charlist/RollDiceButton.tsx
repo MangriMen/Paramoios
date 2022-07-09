@@ -32,12 +32,12 @@ const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
   },
 }));
 
-const StyledMenu = styled(Menu)(({ theme }) => ({
+const StyledMenu = styled(Menu)({
   '& .MuiPaper-root': {
     backgroundColor: 'rgba(0, 0, 0, 0)',
     boxShadow: 'none',
   },
-}));
+});
 
 const dices: Array<DiceMenu> = [
   {

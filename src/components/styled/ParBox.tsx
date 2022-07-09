@@ -24,20 +24,20 @@ const ParBox: FC<ParBoxProps> = ({ title, children, ...props }) => {
           minWidth="20%"
           padding="0 0.4rem"
           textAlign="center"
-          bgcolor="secondary.main"
-          border="4px solid"
-          borderColor="primary.main"
+          border="2px solid"
           borderRadius="4px"
+          borderColor="primary.main"
+          bgcolor="secondary.main"
         >
           {title}
         </Typography>
       )}
       <Box
         alignSelf="stretch"
-        bgcolor="secondary.main"
-        border="4px solid"
-        borderColor="primary.main"
+        border="2px solid"
         borderRadius="4px"
+        borderColor="primary.main"
+        bgcolor="secondary.main"
         {...props}
       >
         {children}

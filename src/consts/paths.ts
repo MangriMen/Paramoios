@@ -1,7 +1,7 @@
 export const ROUTE = {
-  ME: '/me',
-  AUTH: '/auth',
   HOME: '/',
+  AUTH: '/auth',
+  ME: '/me',
   SETTINGS: '/settings',
   PAGE_404: '*',
 };
