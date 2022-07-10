@@ -1,20 +1,33 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import { ToastPayload } from './interfaces';
+import { EnqueueToastPayload, ToastState } from './interfaces';
 
-const initialState = {
-  toasts: Array<ToastPayload>(),
+const initialState: ToastState = {
+  toasts: {},
 };
 
 export const toastSlice = createSlice({
   name: '@@toast',
   initialState,
   reducers: {
-    enqueueToast: (state, action: PayloadAction<ToastPayload>) => {
-      state.toasts = [...state.toasts, action.payload];
+    enqueueToast: (
+      state: ToastState,
+      action: PayloadAction<EnqueueToastPayload>,
+    ) => {
+      const id = action.payload.id;
+      const prevToastState = state.toasts[id] ?? [];
+      state.toasts = {
+        ...state.toasts,
+        [id]: [...prevToastState, action.payload.toast],
+      };
     },
-    shiftToast: (state) => {
-      state.toasts = state.toasts.slice(1);
+    shiftToast: (state: ToastState, action: PayloadAction<string>) => {
+      const id = action.payload;
+      if (state.toasts[id] === undefined) {
+        return;
+      }
+
+      state.toasts = { ...state.toasts, [id]: state.toasts[id].slice(1) };
     },
   },
 });

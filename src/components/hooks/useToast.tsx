@@ -1,14 +1,17 @@
 import { ParSnackbarProps } from 'components/styled/ParSnackbar';
+import { RootState } from 'ducks/store';
 import { shiftToast } from 'ducks/toast';
-import { selectFirstToast, selectToastCount } from 'ducks/toast/selectors';
+import { selectToast, selectToastCount } from 'ducks/toast/selectors';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-export const useToast = () => {
+export const useToast = (id: string = 'main') => {
   const dispatch = useDispatch();
 
-  const toast = useSelector(selectFirstToast);
-  const toastCount = useSelector(selectToastCount);
+  const toast = useSelector((state: RootState) => selectToast(state, id));
+  const toastCount = useSelector((state: RootState) =>
+    selectToastCount(state, id),
+  );
 
   const [currentMessage, setCurrentMessage] =
     useState<ParSnackbarProps['message']>('');
@@ -32,7 +35,7 @@ export const useToast = () => {
   }, [toastCount]);
 
   const handleClose = () => {
-    dispatch(shiftToast());
+    dispatch(shiftToast(id));
     setIsOpen(false);
   };
 
