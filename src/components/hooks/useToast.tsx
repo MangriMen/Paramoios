@@ -41,5 +41,5 @@ export const useToast = () => {
     severity: currentMessageSeverity,
     open: isOpen,
     handleClose,
-  };
+  } as const;
 };
