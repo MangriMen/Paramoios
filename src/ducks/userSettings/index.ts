@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   error: null,
@@ -14,7 +14,7 @@ export const userSettingsSlice = createSlice({
   name: '@@user',
   initialState,
   reducers: {
-    updateUsername(state, action) {
+    updateUsername(state, action: PayloadAction<string>) {
       state.error = null;
       state.loading.username = true;
     },

@@ -1,12 +1,15 @@
-import { Avatar, Grid, Typography, useTheme } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
+import ParAvatar from 'components/styled/ParAvatar';
 import ParBox from 'components/styled/ParBox';
 import ParContainer from 'components/styled/ParContainer';
 import { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 
+import LiquidBar from './LiquidBar';
 import RollDiceButton from './RollDiceButton';
 
 const Charlist: FC = () => {
-  const theme = useTheme();
+  const { t } = useTranslation('translation', { keyPrefix: 'charlist' });
 
   return (
     <ParContainer maxWidth="lg" sx={{ marginTop: '1rem', padding: '1rem' }}>
@@ -18,15 +21,27 @@ const Charlist: FC = () => {
         mb="1rem"
       >
         <Grid item xs={2}>
-          <Avatar
+          <ParAvatar
             sx={{
               width: 'auto',
               height: 'auto',
-              border: '4px solid',
+              aspectRatio: '1/1',
+              borderWidth: '2px',
+              borderStyle: 'solid',
               borderRadius: '4px',
-              borderColor: theme.palette.primary.main,
               fontSize: '128px',
+              borderColor: 'primary.main',
             }}
+          />
+          <LiquidBar
+            borderRadius="4px"
+            border="4px solid"
+            height="1.8rem"
+            fontSize="1.2rem"
+            borderColor="primary.main"
+            bgcolor="green"
+            value={50}
+            maxValue={100}
           />
         </Grid>
         <Grid item xs={10}>
@@ -34,11 +49,16 @@ const Charlist: FC = () => {
         </Grid>
       </Grid>
       {/* Grid container with character stats */}
-      <Grid container justifyContent="space-between" mb="1rem">
+      <Grid
+        container
+        justifyContent="space-between"
+        alignItems="center"
+        mb="1rem"
+      >
         <ParBox padding="2rem"></ParBox>
         <ParBox padding="2rem"></ParBox>
         <ParBox padding="2rem"></ParBox>
-        <RollDiceButton></RollDiceButton>
+        <RollDiceButton sx={{ width: '4.5rem' }}></RollDiceButton>
         <ParBox padding="2rem"></ParBox>
         <ParBox padding="2rem"></ParBox>
         <ParBox padding="2rem"></ParBox>
@@ -80,9 +100,13 @@ const Charlist: FC = () => {
               {/* Fight bonuses */}
               <ParBox mb="1rem" padding="1rem" />
               {/* Attacks and spellcasting */}
-              <ParBox mb="1rem" padding="1rem" />
+              <ParBox
+                title={t('attacksAndSpellcasting')}
+                mb="1rem"
+                padding="1rem"
+              />
               {/* Equipment */}
-              <ParBox mb="1rem" padding="1rem" />
+              <ParBox title={t('equipment')} mb="1rem" padding="1rem" />
             </Grid>
           </Grid>
           <Grid item xs={4}>
@@ -95,20 +119,24 @@ const Charlist: FC = () => {
               {/* Health */}
               <ParBox padding="1rem" />
               {/* Boards with traits, ideals, bonds, flaws */}
-              {Array.from(Array(4)).map((_, index) => (
-                <ParBox key={index} mb="1rem" padding="1rem" />
-              ))}
+              <ParBox title={t('traits')} mb="1rem" padding="1rem" />
+              <ParBox title={t('ideals')} mb="1rem" padding="1rem" />
+              <ParBox title={t('bonds')} mb="1rem" padding="1rem" />
+              <ParBox title={t('flaws')} mb="1rem" padding="1rem" />
             </Grid>
           </Grid>
         </Grid>
         <Grid container columnSpacing={3} flexDirection="row">
           <Grid item xs={4}>
             {/* Languages */}
-            <ParBox padding="1rem" />
+            <ParBox
+              title={t('otherProficienciesAndLanguages')}
+              padding="1rem"
+            />
           </Grid>
           <Grid item xs={8}>
             {/* Features and traits */}
-            <ParBox padding="1rem" />
+            <ParBox title={t('featureAndTraits')} padding="1rem" />
           </Grid>
         </Grid>
       </Grid>
