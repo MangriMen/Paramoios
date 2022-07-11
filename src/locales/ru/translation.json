@@ -53,6 +53,8 @@
     "auth/invalid-email": "Неверное имя пользователя или пароль",
     "auth/user-not-found": "Неверное имя пользователя или пароль",
     "auth/wrong-password": "Неверное имя пользователя или пароль",
-    "auth/invalid-api-key": "Ошибка сервера"
+    "auth/invalid-api-key": "Ошибка сервера",
+
+    "user/not-logged-in": "Пользователь не авторизован"
   }
 }
