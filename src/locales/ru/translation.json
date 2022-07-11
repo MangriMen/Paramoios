@@ -48,5 +48,11 @@
     "featureAndTraits": "Особенности и способности",
     "attacksAndSpellcasting": "Атаки и заклинания",
     "equipment": "Снаряжение"
+  },
+  "firebase": {
+    "auth/invalid-email": "Неверное имя пользователя или пароль",
+    "auth/user-not-found": "Неверное имя пользователя или пароль",
+    "auth/wrong-password": "Неверное имя пользователя или пароль",
+    "auth/invalid-api-key": "Ошибка сервера"
   }
 }
