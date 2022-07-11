@@ -53,5 +53,39 @@
     "featureAndTraits": "Особенности и способности",
     "attacksAndSpellcasting": "Атаки и заклинания",
     "equipment": "Снаряжение"
+  },
+  "schemas": {
+    "register": {
+      "usernameMax": "Имя пользователя должно быть не более 20 символов",
+      "usernameRequired": "Требуется имя пользователя",
+      "email": "Почта должна быть действительной",
+      "emailRequired": "Требуется почта",
+      "passwordMin": "Пароль должен быть не менее 8 символов",
+      "passwordMustNotContainSpaces": "Пароль не должен содержать пробелов",
+      "passwordRequired": "Требуется пароль",
+      "confirmPasswordRequired": "Требуется подтверждение пароля",
+      "passwordMatch": "Пароли не совпадают"
+    },
+    "login": {
+      "usernameRequired": "Требуется имя пользователя",
+      "email": "Почта должна быть действительной",
+      "passwordMin": "Пароль должен быть не менее 8 символов",
+      "passwordRequired": "Требуется пароль"
+    },
+    "usernameSettings": {
+      "usernameMax": "Имя пользователя должно быть не более 20 символов",
+      "usernameRequired": "Требуется имя пользователя"
+    },
+    "emailSettings": {
+      "email": "Почта должна быть действительной",
+      "emailRequired": "Требуется почта"
+    },
+    "passwordSettings": {
+      "passwordRequired": "Требуется пароль",
+      "passwordMustNotContainSpaces": "Пароль не должен содержать пробелов",
+      "passwordMin": "Пароль должен быть не менее 8 символов",
+      "confirmPasswordRequired": "Требуется подтверждение пароля",
+      "passwordMatch": "Пароли не совпадают"
+    }
   }
 }
