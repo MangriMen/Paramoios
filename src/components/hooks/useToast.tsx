@@ -1,11 +1,15 @@
+import { SnackbarCloseReason } from '@mui/material';
 import { ParSnackbarProps } from 'components/styled/ParSnackbar';
 import { RootState } from 'ducks/store';
 import { shiftToast } from 'ducks/toast';
 import { selectToast, selectToastCount } from 'ducks/toast/selectors';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-export const useToast = (id: string = 'main') => {
+export const useToast = (
+  id: string = 'main',
+  shouldCloseWhenClickAway: boolean = true,
+) => {
   const dispatch = useDispatch();
 
   const toast = useSelector((state: RootState) => selectToast(state, id));
@@ -34,7 +38,17 @@ export const useToast = (id: string = 'main') => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [toastCount]);
 
-  const handleClose = () => {
+  const handleClose = (
+    _event: React.SyntheticEvent | Event,
+    reason?: SnackbarCloseReason,
+  ) => {
+    if (
+      !shouldCloseWhenClickAway &&
+      (reason === 'clickaway' || reason === 'escapeKeyDown')
+    ) {
+      return;
+    }
+
     dispatch(shiftToast(id));
     setIsOpen(false);
   };

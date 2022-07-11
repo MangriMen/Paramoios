@@ -18,7 +18,7 @@ import { Route, Routes } from 'react-router';
 const App: FC = () => {
   const dispatch = useDispatch();
 
-  const { message, severity, open, handleClose } = useToast();
+  const { message, severity, open, handleClose } = useToast('main', false);
 
   auth?.onAuthStateChanged((user) => {
     if (user) {
@@ -31,6 +31,7 @@ const App: FC = () => {
   return (
     <>
       <ParSnackbar
+        closable
         autoHideDuration={4000}
         message={message}
         severity={severity}

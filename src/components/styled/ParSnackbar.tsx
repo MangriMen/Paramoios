@@ -8,11 +8,13 @@ export interface ParSnackbarProps {
   message?: SnackbarProps['message'];
   severity?: AlertProps['severity'];
   autoHideDuration?: SnackbarProps['autoHideDuration'];
+  closable?: boolean;
 }
 
-export const ParSnackbar: FC<ParSnackbarProps> = (props) => {
+export const ParSnackbar: FC<ParSnackbarProps> = ({ closable, ...props }) => {
   return (
     <Snackbar
+      key={String(props.message?.toString())}
       anchorOrigin={{
         vertical: 'top',
         horizontal: 'center',
@@ -24,7 +26,7 @@ export const ParSnackbar: FC<ParSnackbarProps> = (props) => {
     >
       <Alert
         severity={props.severity}
-        onClose={props.onClose}
+        onClose={closable ? props.onClose : undefined}
         variant="filled"
         sx={{
           width: '100%',
