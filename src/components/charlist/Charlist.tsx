@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 import LiquidBar from './LiquidBar';
 import RollDiceButton from './RollDiceButton';
 
-const MainPage: FC = () => {
+const Charlist: FC = () => {
   const { t } = useTranslation('translation', { keyPrefix: 'charlist' });
 
   return (
@@ -144,4 +144,4 @@ const MainPage: FC = () => {
   );
 };
 
-export default MainPage;
+export default Charlist;

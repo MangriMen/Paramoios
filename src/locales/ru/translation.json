@@ -39,6 +39,11 @@
     "changePassword": "Изменить пароль",
     "chooseAvatar": "Выбрать аватар"
   },
+  "mainPage": {
+    "welcome": "Добро пожаловать",
+    "myProfile": "Мой профиль",
+    "lastCharlist": "Последний персонаж"
+  },
   "charlist": {
     "traits": "Черты",
     "ideals": "Идеалы",

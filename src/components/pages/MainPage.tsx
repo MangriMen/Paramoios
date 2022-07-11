@@ -1,29 +1,52 @@
 import {
   Box,
-  CircularProgress,
+  Button,
+  ButtonProps,
   Container,
+  Slide,
   Typography,
   useTheme,
 } from '@mui/material';
-import Login from 'components/auth/Login';
-import Register from 'components/auth/Register';
 import { Information } from 'components/common/Information';
-import { selectIsLoading } from 'ducks/auth/selectors';
-import { FC, useCallback, useState } from 'react';
+import { ROUTE } from 'consts';
+import { selectError } from 'ducks/auth/selectors';
+import { FC, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
-const AuthPage: FC = () => {
+export const StyledButton: FC<ButtonProps> = ({ ...props }) => {
+  return (
+    <Button
+      fullWidth
+      color="secondary"
+      variant="contained"
+      sx={{
+        mt: '1rem',
+        minHeight: '80px',
+        fontSize: 'clamp(1.5rem, 1.1000rem + 2.0000vw, 2rem)',
+      }}
+      {...props}
+    />
+  );
+};
+
+const MainPage: FC = () => {
   const theme = useTheme();
-  const { t } = useTranslation('translation', { keyPrefix: 'auth' });
+  const { t } = useTranslation('translation', { keyPrefix: 'mainPage' });
 
-  const isLoading = useSelector(selectIsLoading);
+  const navigate = useNavigate();
 
-  const [isLogin, setLogin] = useState(true);
+  const toProfile = () => navigate(ROUTE.ME);
+  const toCharlist = () => navigate(ROUTE.CHARLIST);
 
-  const changeComponentType = useCallback(() => {
-    setLogin(!isLogin);
-  }, [isLogin]);
+  const error = useSelector(selectError);
+
+  useEffect(() => {
+    if (error) {
+      alert(error);
+    }
+  }, [error]);
 
   return (
     <Box
@@ -108,13 +131,22 @@ const AuthPage: FC = () => {
             alignItems="center"
             minHeight="21rem"
           >
-            {isLoading && <CircularProgress color="secondary" size="3rem" />}
-            {!isLoading &&
-              (isLogin ? (
-                <Login changeFormType={changeComponentType} />
-              ) : (
-                <Register changeFormType={changeComponentType} />
-              ))}
+            <Slide
+              direction="up"
+              in={true}
+              mountOnEnter
+              timeout={1250}
+              easing="cubic-bezier(0.215, 0.61, 0.355, 1)"
+            >
+              <Box>
+                <StyledButton onClick={toProfile}>
+                  {t('myProfile')}
+                </StyledButton>
+                <StyledButton onClick={toCharlist}>
+                  {t('lastCharlist')}
+                </StyledButton>
+              </Box>
+            </Slide>
           </Box>
           <Box flexGrow="1" />
         </Box>
@@ -144,4 +176,4 @@ const AuthPage: FC = () => {
   );
 };
 
-export default AuthPage;
+export default MainPage;

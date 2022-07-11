@@ -1,7 +1,8 @@
-import MainPage from 'components/charlist/MainPage';
+import Charlist from 'components/charlist/Charlist';
 import { useToast } from 'components/hooks/useToast';
 import PageWithNavbar from 'components/layout/PageWithNavbar';
 import AuthPage from 'components/pages/AuthPage';
+import MainPage from 'components/pages/MainPage';
 import NotFoundPage from 'components/pages/NotFoundPage';
 import UserPage from 'components/pages/UserPage';
 import { AuthRoute } from 'components/routes/AuthRoute';
@@ -43,8 +44,9 @@ const App: FC = () => {
           <Route path={ROUTE.AUTH} element={<AuthPage />} />
         </Route>
         <Route element={<UserRoute />}>
+          <Route path={ROUTE.HOME} element={<MainPage />} />
           <Route element={<PageWithNavbar />}>
-            <Route path={ROUTE.HOME} element={<MainPage />} />
+            <Route path={ROUTE.CHARLIST} element={<Charlist />} />
             <Route path={ROUTE.ME} element={<UserPage />} />
             <Route path={ROUTE.PAGE_404} element={<NotFoundPage />} />
             <Route path={ROUTE.SETTINGS} element={<UserSettingsComponent />} />
