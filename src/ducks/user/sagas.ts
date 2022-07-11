@@ -8,13 +8,14 @@ import {
   put,
   takeLatest,
 } from 'redux-saga/effects';
+import { enqueueErrorToastSaga } from 'tools/sagas/sagas';
 
 import { fetchUser, fetchUserFailed, fetchUserSuccess } from './index';
 import { FetchUserPayload } from './interfaces';
 import { get } from './services';
 
 export function* fetchUserSaga(): Generator<
-  | CallEffect<User>
+  | CallEffect<User | null>
   | PutEffect<PayloadAction<FetchUserPayload>>
   | PutEffect<PayloadAction<string>>,
   void,
@@ -24,9 +25,9 @@ export function* fetchUserSaga(): Generator<
     const response = yield call(get);
     yield put(
       fetchUserSuccess({
-        username: response.displayName ?? '',
-        email: response.email ?? '',
-        avatar: response.photoURL ?? '',
+        username: response?.displayName ?? '',
+        email: response?.email ?? '',
+        avatar: response?.photoURL ?? '',
       }),
     );
   } catch (err) {
@@ -35,5 +36,8 @@ export function* fetchUserSaga(): Generator<
 }
 
 export function* fetchSagaWatcher() {
-  yield all([takeLatest(fetchUser, fetchUserSaga)]);
+  yield all([
+    takeLatest(fetchUser, fetchUserSaga),
+    takeLatest(fetchUserFailed, enqueueErrorToastSaga),
+  ]);
 }

@@ -1,7 +1,7 @@
 import { Box, BoxProps, Typography } from '@mui/material';
 import { FC } from 'react';
 
-interface ParBoxProps extends BoxProps {
+export interface ParBoxProps extends BoxProps {
   title?: string;
 }
 
