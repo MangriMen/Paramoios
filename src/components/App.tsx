@@ -1,5 +1,5 @@
 import Charlist from 'components/charlist/Charlist';
-import { useToast } from 'components/hooks/useToast';
+import PageWithMainToast from 'components/layout/PageWithMainToasts';
 import PageWithNavbar from 'components/layout/PageWithNavbar';
 import AuthPage from 'components/pages/AuthPage';
 import MainPage from 'components/pages/MainPage';
@@ -7,7 +7,6 @@ import NotFoundPage from 'components/pages/NotFoundPage';
 import UserPage from 'components/pages/UserPage';
 import { AuthRoute } from 'components/routes/AuthRoute';
 import { UserRoute } from 'components/routes/UserRoute';
-import { ParSnackbar } from 'components/styled/ParSnackbar';
 import { UserSettingsComponent } from 'components/user/UserSettingsComponent';
 import { auth } from 'configs/firebase';
 import { ROUTE } from 'consts';
@@ -19,8 +18,6 @@ import { Route, Routes } from 'react-router';
 const App: FC = () => {
   const dispatch = useDispatch();
 
-  const { message, severity, open, handleClose } = useToast('main', false);
-
   auth?.onAuthStateChanged((user) => {
     if (user) {
       dispatch(loginSuccess());
@@ -31,25 +28,22 @@ const App: FC = () => {
 
   return (
     <>
-      <ParSnackbar
-        closable
-        autoHideDuration={4000}
-        message={message}
-        severity={severity}
-        open={open}
-        onClose={handleClose}
-      />
       <Routes>
-        <Route element={<AuthRoute />}>
-          <Route path={ROUTE.AUTH} element={<AuthPage />} />
-        </Route>
-        <Route element={<UserRoute />}>
-          <Route path={ROUTE.HOME} element={<MainPage />} />
-          <Route element={<PageWithNavbar />}>
-            <Route path={ROUTE.CHARLIST} element={<Charlist />} />
-            <Route path={ROUTE.ME} element={<UserPage />} />
-            <Route path={ROUTE.PAGE_404} element={<NotFoundPage />} />
-            <Route path={ROUTE.SETTINGS} element={<UserSettingsComponent />} />
+        <Route element={<PageWithMainToast />}>
+          <Route element={<AuthRoute />}>
+            <Route path={ROUTE.AUTH} element={<AuthPage />} />
+          </Route>
+          <Route element={<UserRoute />}>
+            <Route path={ROUTE.HOME} element={<MainPage />} />
+            <Route element={<PageWithNavbar />}>
+              <Route path={ROUTE.CHARLIST} element={<Charlist />} />
+              <Route path={ROUTE.ME} element={<UserPage />} />
+              <Route path={ROUTE.PAGE_404} element={<NotFoundPage />} />
+              <Route
+                path={ROUTE.SETTINGS}
+                element={<UserSettingsComponent />}
+              />
+            </Route>
           </Route>
         </Route>
       </Routes>
