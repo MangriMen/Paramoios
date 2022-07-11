@@ -10,5 +10,3 @@ export const selectToastCount = createSelector(
   [(state: RootState) => state.toast, (_state: RootState, id: string) => id],
   (toast, id) => toast.toasts[id]?.length ?? 0,
 );
-
-export {};
