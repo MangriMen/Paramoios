@@ -6,7 +6,7 @@ export const selectToast = createSelector(
   (toast, id) => (toast.toasts[id] ? toast.toasts[id][0] : {}),
 );
 
-export const selectToastCount = createSelector(
+export const selectToastsCount = createSelector(
   [(state: RootState) => state.toast, (_state: RootState, id: string) => id],
   (toast, id) => toast.toasts[id]?.length ?? 0,
 );

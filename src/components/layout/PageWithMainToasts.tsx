@@ -4,17 +4,18 @@ import { FC } from 'react';
 import { Outlet } from 'react-router';
 
 const PageWithMainToast: FC = () => {
-  const { message, severity, open, handleClose } = useToast('main', false);
+  const { message, severity, open, onClose } = useToast('main', false);
 
   return (
     <>
       <ParSnackbar
         closable
+        key={message?.toString()}
         autoHideDuration={4000}
         message={message}
         severity={severity}
         open={open}
-        onClose={handleClose}
+        onClose={onClose}
       />
       <Outlet />
     </>

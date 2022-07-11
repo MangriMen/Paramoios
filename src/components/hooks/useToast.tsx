@@ -2,7 +2,7 @@ import { SnackbarCloseReason } from '@mui/material';
 import { ParSnackbarProps } from 'components/styled/ParSnackbar';
 import { RootState } from 'ducks/store';
 import { shiftToast } from 'ducks/toast';
-import { selectToast, selectToastCount } from 'ducks/toast/selectors';
+import { selectToast, selectToastsCount } from 'ducks/toast/selectors';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -13,32 +13,19 @@ export const useToast = (
   const dispatch = useDispatch();
 
   const toast = useSelector((state: RootState) => selectToast(state, id));
+
   const toastCount = useSelector((state: RootState) =>
-    selectToastCount(state, id),
+    selectToastsCount(state, id),
   );
 
-  const [currentMessage, setCurrentMessage] =
-    useState<ParSnackbarProps['message']>('');
-  const [currentMessageSeverity, setCurrentMessageSeverity] =
+  const [message, setMessage] = useState<ParSnackbarProps['message']>('');
+
+  const [severity, setSeverity] =
     useState<ParSnackbarProps['severity']>('info');
-  const [isOpen, setIsOpen] = useState<ParSnackbarProps['open']>(false);
 
-  useEffect(() => {
-    if (!toastCount) {
-      return;
-    }
+  const [open, setIsOpen] = useState<ParSnackbarProps['open']>(false);
 
-    const timerId = setTimeout(() => {
-      setCurrentMessage(toast?.message);
-      setCurrentMessageSeverity(toast?.severity);
-      setIsOpen(true);
-    }, 150);
-
-    return () => clearTimeout(timerId);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [toastCount]);
-
-  const handleClose = (
+  const onClose = (
     _event: React.SyntheticEvent | Event,
     reason?: SnackbarCloseReason,
   ) => {
@@ -53,10 +40,25 @@ export const useToast = (
     setIsOpen(false);
   };
 
+  useEffect(() => {
+    if (!toastCount) {
+      return;
+    }
+
+    const timerId = setTimeout(() => {
+      setMessage(toast?.message);
+      setSeverity(toast?.severity);
+      setIsOpen(true);
+    }, 150);
+
+    return () => clearTimeout(timerId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [toastCount]);
+
   return {
-    message: currentMessage,
-    severity: currentMessageSeverity,
-    open: isOpen,
-    handleClose,
+    message,
+    severity,
+    open,
+    onClose,
   } as const;
 };
