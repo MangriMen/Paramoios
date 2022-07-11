@@ -1,5 +1,5 @@
+import i18n from 'configs/i18next';
 import { FirebaseError } from 'firebase/app';
-import i18n from 'i18next';
 
 export function getErrorMessage(err: unknown) {
   if (err instanceof FirebaseError) {
