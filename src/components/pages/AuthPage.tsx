@@ -8,8 +8,8 @@ import {
 import Login from 'components/auth/Login';
 import Register from 'components/auth/Register';
 import { Information } from 'components/common/Information';
-import { selectError, selectIsLoading } from 'ducks/auth/selectors';
-import { FC, useCallback, useEffect, useState } from 'react';
+import { selectIsLoading } from 'ducks/auth/selectors';
+import { FC, useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
@@ -24,14 +24,6 @@ const AuthPage: FC = () => {
   const changeComponentType = useCallback(() => {
     setLogin(!isLogin);
   }, [isLogin]);
-
-  const error = useSelector(selectError);
-
-  useEffect(() => {
-    if (error) {
-      alert(error);
-    }
-  }, [error]);
 
   return (
     <Box

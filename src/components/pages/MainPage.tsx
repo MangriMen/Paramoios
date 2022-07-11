@@ -9,10 +9,8 @@ import {
 } from '@mui/material';
 import { Information } from 'components/common/Information';
 import { ROUTE } from 'consts';
-import { selectError } from 'ducks/auth/selectors';
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 export const StyledButton: FC<ButtonProps> = ({ ...props }) => {
@@ -39,14 +37,6 @@ const MainPage: FC = () => {
 
   const toProfile = () => navigate(ROUTE.ME);
   const toCharlist = () => navigate(ROUTE.CHARLIST);
-
-  const error = useSelector(selectError);
-
-  useEffect(() => {
-    if (error) {
-      alert(error);
-    }
-  }, [error]);
 
   return (
     <Box
