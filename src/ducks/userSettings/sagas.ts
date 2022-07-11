@@ -1,6 +1,7 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { fetchUserSaga } from 'ducks/user/sagas';
 import { UploadResult } from 'firebase/storage';
+import { getErrorMessage } from 'helpers/errors';
 import {
   CallEffect,
   PutEffect,
@@ -17,6 +18,7 @@ import {
   setUserPassword,
   uploadFileToStorage,
 } from 'tools/requests/requests';
+import { enqueueErrorToastSaga } from 'tools/sagas/sagas';
 
 import {
   updateEmail,
@@ -40,7 +42,7 @@ function* updateUsernameSaga({
     yield call(setUserDisplayName, payload);
     yield put(updateUserSuccess());
   } catch (err) {
-    yield put(updateUserFailed(err));
+    yield put(updateUserFailed(getErrorMessage(err)));
   }
 }
 
@@ -57,7 +59,7 @@ function* updateEmailSaga({
     yield call(setUserEmail, payload);
     yield put(updateUserSuccess());
   } catch (err) {
-    yield put(updateUserFailed(err));
+    yield put(updateUserFailed(getErrorMessage(err)));
   }
 }
 
@@ -74,7 +76,7 @@ function* updatePasswordSaga({
     yield call(setUserPassword, payload);
     yield put(updateUserSuccess());
   } catch (err) {
-    yield put(updateUserFailed(err));
+    yield put(updateUserFailed(getErrorMessage(err)));
   }
 }
 
@@ -95,7 +97,7 @@ function* updateImageSaga({
     yield call(setUserAvatar, url);
     yield put(updateUserSuccess());
   } catch (err) {
-    yield put(updateUserFailed(err));
+    yield put(updateUserFailed(getErrorMessage(err)));
   }
 }
 
@@ -106,5 +108,6 @@ export function* updateSagaWatcher() {
     takeLatest(updateEmail, updateEmailSaga),
     takeLatest(updatePassword, updatePasswordSaga),
     takeLatest(updateImage, updateImageSaga),
+    takeLatest(updateUserFailed, enqueueErrorToastSaga),
   ]);
 }

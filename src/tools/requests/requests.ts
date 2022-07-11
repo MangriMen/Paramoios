@@ -1,31 +1,51 @@
-import { auth, storage } from 'configs/firebase';
-import { updateEmail, updatePassword, updateProfile } from 'firebase/auth';
+import { FirebaseError } from 'firebase/app';
+import {
+  getAuth,
+  updateEmail,
+  updatePassword,
+  updateProfile,
+} from 'firebase/auth';
 import {
   StorageReference,
   getDownloadURL,
+  getStorage,
   ref,
   uploadString,
 } from 'firebase/storage';
 
 export function setUserDisplayName(payload: string) {
-  if (auth?.currentUser === null || auth?.currentUser === undefined) {
-    throw new Error('Set user name failed. With currentUser being undefined');
+  const auth = getAuth();
+
+  if (auth.currentUser === null) {
+    throw new FirebaseError(
+      'user/not-logged-in',
+      'Error update username (user/not-logged-in)',
+    );
   }
+
   return updateProfile(auth.currentUser, { displayName: payload });
 }
 
 export function setUserEmail(payload: string) {
-  if (auth?.currentUser === null || auth?.currentUser === undefined) {
-    throw new Error('Set user email failed. With currentUser being undefined');
+  const auth = getAuth();
+
+  if (auth.currentUser === null) {
+    throw new FirebaseError(
+      'user/not-logged-in',
+      'Error update email (user/not-logged-in)',
+    );
   }
 
   return updateEmail(auth.currentUser, payload);
 }
 
 export function setUserPassword(payload: string) {
-  if (auth?.currentUser === null || auth?.currentUser === undefined) {
-    throw new Error(
-      'Set user password failed. With currentUser being undefined',
+  const auth = getAuth();
+
+  if (auth.currentUser === null) {
+    throw new FirebaseError(
+      'user/not-logged-in',
+      'Error update password (user/not-logged-in)',
     );
   }
 
@@ -33,25 +53,29 @@ export function setUserPassword(payload: string) {
 }
 
 export function setUserAvatar(payload: string) {
-  if (auth?.currentUser === null || auth?.currentUser === undefined) {
-    throw new Error('Set user avatar failed. With currentUser being undefined');
+  const auth = getAuth();
+
+  if (auth.currentUser === null) {
+    throw new FirebaseError(
+      'user/not-logged-in',
+      'Error update avatar (user/not-logged-in)',
+    );
   }
 
   return updateProfile(auth.currentUser, { photoURL: payload });
 }
 
 export function uploadFileToStorage(payload: string) {
-  if (auth?.currentUser === null || auth?.currentUser === undefined) {
-    throw new Error(
-      'Upload to storage failed. With currentUser being undefined',
-    );
+  const auth = getAuth();
+
+  if (auth.currentUser === null) {
+    throw new FirebaseError('user/not-logged-in', 'Error (user/not-logged-in)');
   }
 
-  if (storage === undefined) {
-    throw new Error('Upload to storage failed. With storage being undefined');
-  }
+  const storage = getStorage();
 
   const storageRef = ref(storage, auth.currentUser.uid);
+
   return uploadString(storageRef, payload, 'data_url');
 }
 

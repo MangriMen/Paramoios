@@ -11,7 +11,6 @@ import { UserSettingsComponent } from 'components/user/UserSettingsComponent';
 import { auth } from 'configs/firebase';
 import { ROUTE } from 'consts';
 import { loginSuccess, logoutSuccess } from 'ducks/auth';
-import { fetchUser } from 'ducks/user';
 import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router';
@@ -23,7 +22,6 @@ const App: FC = () => {
 
   auth?.onAuthStateChanged((user) => {
     if (user) {
-      dispatch(fetchUser());
       dispatch(loginSuccess());
     } else {
       dispatch(logoutSuccess());

@@ -1,8 +1,8 @@
 import { PayloadAction } from '@reduxjs/toolkit';
-import { enqueueToast } from 'ducks/toast';
 import { EnqueueToastPayload } from 'ducks/toast/interfaces';
 import { fetchUserSaga } from 'ducks/user/sagas';
 import { UserCredential } from 'firebase/auth';
+import { getErrorMessage } from 'helpers/errors';
 import {
   CallEffect,
   PutEffect,
@@ -12,6 +12,7 @@ import {
   takeLatest,
 } from 'redux-saga/effects';
 import { setUserDisplayName } from 'tools/requests/requests';
+import { enqueueErrorToastSaga } from 'tools/sagas/sagas';
 
 import {
   loginFailed,
@@ -41,13 +42,7 @@ function* loginSaga({
     yield call(login, payload);
     yield put(loginSuccess());
   } catch (err) {
-    yield put(
-      enqueueToast({
-        id: 'main',
-        toast: { message: String(err), severity: 'error' },
-      }),
-    );
-    yield put(loginFailed(String(err)));
+    yield put(loginFailed(getErrorMessage(err)));
   }
 }
 
@@ -67,13 +62,7 @@ function* registerSaga({
     yield call(setUserDisplayName, payload.username);
     yield put(registerSuccess());
   } catch (err) {
-    yield put(
-      enqueueToast({
-        id: 'main',
-        toast: { message: String(err), severity: 'error' },
-      }),
-    );
-    yield put(registerFailed(String(err)));
+    yield put(registerFailed(getErrorMessage(err)));
   }
 }
 
@@ -89,21 +78,19 @@ function* logoutSaga(): Generator<
     yield call(logout);
     yield put(logoutSuccess());
   } catch (err) {
-    yield put(
-      enqueueToast({
-        id: 'main',
-        toast: { message: String(err), severity: 'error' },
-      }),
-    );
-    yield put(logoutFailed(String(err)));
+    yield put(logoutFailed(getErrorMessage(err)));
   }
 }
 
 export function* watchAuth() {
   yield all([
-    takeLatest(logoutSuccess, fetchUserSaga),
     takeLatest(loginRequest, loginSaga),
+    takeLatest(loginSuccess, fetchUserSaga),
+    takeLatest(loginFailed, enqueueErrorToastSaga),
     takeLatest(registerRequest, registerSaga),
+    takeLatest(registerFailed, enqueueErrorToastSaga),
     takeLatest(logoutRequest, logoutSaga),
+    takeLatest(logoutSuccess, fetchUserSaga),
+    takeLatest(logoutFailed, enqueueErrorToastSaga),
   ]);
 }
