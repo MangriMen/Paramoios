@@ -1,28 +1,35 @@
+import i18n from 'configs/i18next';
 import * as yup from 'yup';
+
+const t = i18n.getFixedT(null, null, 'schemas');
 
 export const registerSchema = yup.object({
   username: yup
     .string()
-    .max(20, 'nick should be less 20 chars')
-    .required('Username is required'),
+    .max(20, t('usernameMax'))
+    .required(t('usernameRequired')),
   email: yup
     .string()
-    .email('Enter a valid email')
-    .required('Email is required')
+    .email(t('email'))
+    .required(t('emailRequired'))
     .nullable(false),
   password: yup
     .string()
-    .min(8, 'Password should be of minimum 8 characters length')
+    .min(8, t('passwordMin'))
+    .matches(/^\S*$/, t('passwordMustNotContainSpaces'))
     .nullable(false)
-    .required('Password is required'),
+    .required(t('passwordRequired')),
   confirmPassword: yup
     .string()
     .nullable(false)
-    .required('Password confirmation is required')
-    .oneOf([yup.ref('password')], 'Passwords must match'),
+    .required(t('confirmPasswordRequired'))
+    .oneOf([yup.ref('password')], t('passwordMatch')),
 });
 
 export const loginSchema = yup.object({
-  email: yup.string().required('Username is required'),
-  password: yup.string().required('Password is required'),
+  email: yup.string().email(t('$email')).required(t('$usernameRequired')),
+  password: yup
+    .string()
+    .min(8, t('$passwordMin'))
+    .required(t('$passwordRequired')),
 });

@@ -36,9 +36,9 @@ const emailSettingsInitialValue: EmailValue = {
 };
 
 const passwordSettingsInitialValue: PasswordValue = {
+  currentPassword: '',
   newPassword: '',
   confirmPassword: '',
-  currentPassword: '',
 };
 
 export const UserSettingsComponent: FC = () => {
