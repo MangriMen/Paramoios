@@ -3,46 +3,30 @@ import * as yup from 'yup';
 
 const t = i18n.getFixedT(null, null, 'schemas');
 
-const usernameSettingsPrefix = `usernameSettings`;
-const emailSettingsPrefix = `emailSettings`;
-const passwordSettingsPrefix = `passwordSettings`;
-
 export const usernameSettingsSchema = yup.object({
   username: yup
     .string()
-    .max(20, t(`${usernameSettingsPrefix}.usernameMax`))
-    .required(t(`${usernameSettingsPrefix}.usernameRequired`)),
+    .max(20, t('usernameMax'))
+    .required(t('usernameRequired')),
 });
 
 export const emailSettingsSchema = yup.object({
-  email: yup
-    .string()
-    .email(t(`${emailSettingsPrefix}.email`))
-    .required(t(`${emailSettingsPrefix}.emailRequired`)),
+  email: yup.string().email(t('email')).required(t('emailRequired')),
 });
 
 export const passwordSettingsSchema = yup.object({
   currentPassword: yup
     .string()
-    .required(t(`${passwordSettingsPrefix}.passwordRequired`))
-    .matches(
-      /^\S*$/,
-      t(`${passwordSettingsPrefix}.passwordMustNotContainSpaces`),
-    )
-    .min(8, t(`${passwordSettingsPrefix}.passwordMin`)),
+    .required(t('passwordRequired'))
+    .matches(/^\S*$/, t('passwordMustNotContainSpaces'))
+    .min(8, t('passwordMin')),
   newPassword: yup
     .string()
-    .required(t(`${passwordSettingsPrefix}.passwordRequired`))
-    .matches(
-      /^\S*$/,
-      t(`${passwordSettingsPrefix}.passwordMustNotContainSpaces`),
-    )
-    .min(8, t(`${passwordSettingsPrefix}.passwordMin`)),
+    .required(t('passwordRequired'))
+    .matches(/^\S*$/, t('passwordMustNotContainSpaces'))
+    .min(8, t('passwordMin')),
   confirmPassword: yup
     .string()
-    .required(t(`${passwordSettingsPrefix}.confirmPasswordRequired`))
-    .oneOf(
-      [yup.ref('newPassword')],
-      t(`${passwordSettingsPrefix}.passwordMatch`),
-    ),
+    .required(t('confirmPasswordRequired'))
+    .oneOf([yup.ref('newPassword')], t('passwordMatch')),
 });
