@@ -9,7 +9,10 @@ import {
   put,
   takeLatest,
 } from 'redux-saga/effects';
-import { setUserDisplayName } from 'tools/requests/requests';
+import {
+  sendVerificationEmail,
+  setUserDisplayName,
+} from 'tools/requests/requests';
 
 import {
   loginFailed,
@@ -55,6 +58,7 @@ function* registerSaga({
   try {
     yield call(register, payload);
     yield call(setUserDisplayName, payload.username);
+    yield call(sendVerificationEmail);
     yield put(registerSuccess());
   } catch (err) {
     yield put(registerFailed(String(err)));

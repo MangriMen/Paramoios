@@ -1,5 +1,11 @@
 import { auth, storage } from 'configs/firebase';
-import { updateEmail, updatePassword, updateProfile } from 'firebase/auth';
+import {
+  getAuth,
+  sendEmailVerification,
+  updateEmail,
+  updatePassword,
+  updateProfile,
+} from 'firebase/auth';
 import {
   StorageReference,
   getDownloadURL,
@@ -57,4 +63,14 @@ export function uploadFileToStorage(payload: string) {
 
 export function getFileUrlFromStorage(payload: StorageReference) {
   return getDownloadURL(payload);
+}
+
+export function sendVerificationEmail() {
+  if (auth?.currentUser === null || auth?.currentUser === undefined) {
+    throw new Error(
+      'Upload to storage failed. With currentUser being undefined',
+    );
+  }
+
+  return sendEmailVerification(auth.currentUser);
 }

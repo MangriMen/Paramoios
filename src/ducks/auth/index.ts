@@ -3,7 +3,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { LoginPayload, RegisterPayload } from './interfaces';
 
 const initialState = {
-  isLoading: false,
+  isLoading: true,
   isLogged: false,
   error: '',
 };
@@ -14,39 +14,45 @@ export const authSlice = createSlice({
   reducers: {
     loginRequest: (state, action: PayloadAction<LoginPayload>) => {
       state.isLoading = true;
-      state.error = '';
+      state.isLogged = initialState.isLogged;
+      state.error = initialState.error;
     },
     loginSuccess: (state) => {
       state.isLoading = false;
       state.isLogged = true;
+      state.error = initialState.error;
     },
     loginFailed: (state, action: PayloadAction<string>) => {
-      state.isLoading = false;
-      state.isLogged = false;
+      state.isLoading = initialState.isLoading;
+      state.isLogged = initialState.isLogged;
       state.error = action.payload;
     },
     registerRequest: (state, action: PayloadAction<RegisterPayload>) => {
       state.isLoading = true;
-      state.error = '';
+      state.isLogged = initialState.isLogged;
+      state.error = initialState.error;
     },
     registerSuccess: (state) => {
       state.isLogged = true;
       state.isLoading = false;
+      state.error = initialState.error;
     },
     registerFailed: (state, action: PayloadAction<string>) => {
-      state.isLoading = false;
+      state.isLogged = initialState.isLogged;
+      state.isLoading = initialState.isLoading;
       state.error = action.payload;
     },
     logoutRequest: (state) => {
       state.isLoading = true;
-      state.error = '';
+      state.error = initialState.error;
     },
     logoutSuccess: (state) => {
       state.isLoading = false;
-      state.isLogged = false;
+      state.isLogged = initialState.isLogged;
+      state.error = initialState.error;
     },
     logoutFailed: (state, action: PayloadAction<string>) => {
-      state.isLoading = false;
+      state.isLoading = initialState.isLoading;
       state.isLogged = true;
       state.error = action.payload;
     },

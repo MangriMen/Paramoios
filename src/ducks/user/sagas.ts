@@ -27,6 +27,7 @@ export function* fetchUserSaga(): Generator<
         username: response.displayName ?? '',
         email: response.email ?? '',
         avatar: response.photoURL ?? '',
+        isEmailVerified: response.emailVerified ?? '',
       }),
     );
   } catch (err) {
