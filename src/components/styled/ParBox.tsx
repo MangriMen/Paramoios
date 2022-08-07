@@ -14,7 +14,7 @@ const ParBox: FC<ParBoxProps> = ({ title, children, ...props }) => {
       display="flex"
       flexDirection="column"
       alignItems="center"
-      marginTop={TITLE_HEIGHT}
+      marginTop={title ? TITLE_HEIGHT : 0}
     >
       {title && (
         <Typography
