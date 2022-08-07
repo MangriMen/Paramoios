@@ -1,4 +1,13 @@
-import { Box, Card, Typography, TypographyProps } from '@mui/material';
+import {
+  Box,
+  Card,
+  SvgIcon,
+  Tooltip,
+  Typography,
+  TypographyProps,
+} from '@mui/material';
+import { ReactComponent as check_circle } from 'assets/images/icons/check_circle.svg';
+import { ReactComponent as error_circle } from 'assets/images/icons/error_circle.svg';
 import ParAvatar from 'components/styled/ParAvatar';
 import ParDivider from 'components/styled/ParDivider';
 import ParLink from 'components/styled/ParLink';
@@ -38,7 +47,9 @@ const characterCards = (characters: any) =>
     </Card>
   ));
 
-export const StyledTypography: FC<TypographyProps> = ({ sx, ...props }) => {
+export const StyledTypography: FC<
+  TypographyProps & { component?: React.ElementType<any> }
+> = ({ sx, ...props }) => {
   return (
     <Typography
       variant="h3"
@@ -101,7 +112,23 @@ const UserCard: FC = () => {
       >
         <StyledTypography>{t('name')}:</StyledTypography>
         <StyledTypography color="black">{user.username}</StyledTypography>
-        <StyledTypography>{t('email')}:</StyledTypography>
+        <StyledTypography>
+          {t('email')} {''}
+          <Tooltip
+            title={
+              <Typography>
+                {user.isEmailVerified ? 'Подтверждена' : 'Не подтверждена'}
+              </Typography>
+            }
+          >
+            <SvgIcon
+              sx={{ fontSize: 'inherit' }}
+              viewBox="0 0 44 44"
+              component={user.isEmailVerified ? check_circle : error_circle}
+            />
+          </Tooltip>
+          :
+        </StyledTypography>
         <StyledTypography color="black">{user.email}</StyledTypography>
         <StyledTypography>{t('otherInfo')}:</StyledTypography>
         <StyledTypography color="black">{userInfo.otherInfo}</StyledTypography>
