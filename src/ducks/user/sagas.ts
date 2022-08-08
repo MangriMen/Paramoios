@@ -11,9 +11,10 @@ import {
 
 import { fetchUser, fetchUserFailed, fetchUserSuccess } from './index';
 import { FetchUserPayload } from './interfaces';
-import { get } from './services';
+import { get, reload } from './services';
 
 export function* fetchUserSaga(): Generator<
+  | CallEffect<void>
   | CallEffect<User>
   | PutEffect<PayloadAction<FetchUserPayload>>
   | PutEffect<PayloadAction<string>>,
@@ -21,6 +22,7 @@ export function* fetchUserSaga(): Generator<
   User
 > {
   try {
+    yield call(reload);
     const response = yield call(get);
     yield put(
       fetchUserSuccess({

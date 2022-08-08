@@ -24,6 +24,7 @@ import {
   registerFailed,
   registerRequest,
   registerSuccess,
+  sendVerificationEmailRequest,
 } from './index';
 import { LoginPayload, RegisterPayload } from './interfaces';
 import { login, logout, register } from './services';
@@ -58,7 +59,7 @@ function* registerSaga({
   try {
     yield call(register, payload);
     yield call(setUserDisplayName, payload.username);
-    yield call(sendVerificationEmail);
+    yield put(sendVerificationEmailRequest());
     yield put(registerSuccess());
   } catch (err) {
     yield put(registerFailed(String(err)));
@@ -80,11 +81,21 @@ function* logoutSaga(): Generator<
   }
 }
 
+function* sendVerificationEmailSaga(): Generator<CallEffect<void>, void, void> {
+  try {
+    yield call(sendVerificationEmail);
+    console.log('Email sent successfully');
+  } catch (err) {
+    console.error(`Error to send email: ${err}`);
+  }
+}
+
 export function* watchAuth() {
   yield all([
     takeLatest(logoutSuccess, fetchUserSaga),
     takeLatest(loginRequest, loginSaga),
     takeLatest(registerRequest, registerSaga),
     takeLatest(logoutRequest, logoutSaga),
+    takeLatest(sendVerificationEmailRequest, sendVerificationEmailSaga),
   ]);
 }

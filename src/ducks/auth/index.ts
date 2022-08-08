@@ -23,7 +23,7 @@ export const authSlice = createSlice({
       state.error = initialState.error;
     },
     loginFailed: (state, action: PayloadAction<string>) => {
-      state.isLoading = initialState.isLoading;
+      state.isLoading = false;
       state.isLogged = initialState.isLogged;
       state.error = action.payload;
     },
@@ -33,13 +33,13 @@ export const authSlice = createSlice({
       state.error = initialState.error;
     },
     registerSuccess: (state) => {
-      state.isLogged = true;
       state.isLoading = false;
+      state.isLogged = true;
       state.error = initialState.error;
     },
     registerFailed: (state, action: PayloadAction<string>) => {
+      state.isLoading = false;
       state.isLogged = initialState.isLogged;
-      state.isLoading = initialState.isLoading;
       state.error = action.payload;
     },
     logoutRequest: (state) => {
@@ -52,10 +52,11 @@ export const authSlice = createSlice({
       state.error = initialState.error;
     },
     logoutFailed: (state, action: PayloadAction<string>) => {
-      state.isLoading = initialState.isLoading;
+      state.isLoading = false;
       state.isLogged = true;
       state.error = action.payload;
     },
+    sendVerificationEmailRequest: () => {},
   },
 });
 
@@ -70,4 +71,5 @@ export const {
   logoutRequest,
   logoutSuccess,
   logoutFailed,
+  sendVerificationEmailRequest,
 } = authSlice.actions;
