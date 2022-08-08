@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Card,
   SvgIcon,
   Tooltip,
@@ -12,11 +13,12 @@ import ParAvatar from 'components/styled/ParAvatar';
 import ParDivider from 'components/styled/ParDivider';
 import ParLink from 'components/styled/ParLink';
 import { ROUTE } from 'consts';
+import { sendVerificationEmailRequest } from 'ducks/auth';
 import { selectUser } from 'ducks/user/selectors';
 import { userInfo } from 'mocks/mockUserInfo';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 const characterCards = (characters: any) =>
@@ -67,8 +69,14 @@ export const StyledTypography: FC<
 
 const UserCard: FC = () => {
   const { t } = useTranslation('translation', { keyPrefix: 'userProfile' });
-  const user = useSelector(selectUser);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const user = useSelector(selectUser);
+
+  const resendVerificationEmail = () => {
+    dispatch(sendVerificationEmailRequest());
+  };
 
   const toSettings = () => {
     navigate(ROUTE.SETTINGS);
@@ -116,14 +124,26 @@ const UserCard: FC = () => {
           {t('email')} {''}
           <Tooltip
             title={
-              <Typography>
-                {user.isEmailVerified ? 'Подтверждена' : 'Не подтверждена'}
+              <Typography textAlign="center">
+                {t(user.isEmailVerified ? 'emailVerified' : 'emailNotVerified')}
+                {!user.isEmailVerified && (
+                  <Button
+                    size="small"
+                    color="secondary"
+                    onClick={resendVerificationEmail}
+                  >
+                    {t('resendVerificationEmail')}
+                  </Button>
+                )}
               </Typography>
             }
           >
             <SvgIcon
-              sx={{ fontSize: 'inherit' }}
-              viewBox="0 0 44 44"
+              sx={{
+                fontSize: '1em',
+                verticalAlign: 'text-bottom',
+              }}
+              viewBox="4 4 42 42"
               component={user.isEmailVerified ? check_circle : error_circle}
             />
           </Tooltip>
