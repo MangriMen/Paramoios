@@ -3,7 +3,9 @@ import { CircularProgress, Container } from '@mui/material';
 export const LoaderPage = () => {
   return (
     <Container
+      maxWidth={false}
       sx={{
+        backgroundColor: 'primary.main',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
