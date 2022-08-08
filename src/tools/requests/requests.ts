@@ -1,6 +1,5 @@
 import { auth, storage } from 'configs/firebase';
 import {
-  getAuth,
   sendEmailVerification,
   updateEmail,
   updatePassword,
