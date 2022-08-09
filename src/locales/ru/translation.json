@@ -37,7 +37,10 @@
     "changeUsername": "Изменить имя",
     "changeEmail": "Изменить email",
     "changePassword": "Изменить пароль",
-    "chooseAvatar": "Выбрать аватар"
+    "chooseAvatar": "Выбрать аватар",
+    "deleteAccount": "Удалить аккаунт",
+    "deleteAccountDialogTitle": "Подтвердите действие",
+    "deleteAccountDialogText": "После удаления вы не сможете восстановить аккаунт. Удалить аккаунт?"
   },
   "mainPage": {
     "welcome": "Добро пожаловать",
@@ -64,5 +67,11 @@
     "passwordRequired": "Требуется пароль",
     "confirmPasswordRequired": "Требуется подтверждение пароля",
     "passwordMatch": "Пароли не совпадают"
+  },
+  "dialog": {
+    "yes": "Да",
+    "no": "Нет",
+    "accept": "Принять",
+    "cancel": "Отменить"
   }
 }
