@@ -15,6 +15,12 @@ const ParBox: FC<ParBoxProps> = ({ title, children, ...props }) => {
       flexDirection="column"
       alignItems="center"
       marginTop={TITLE_HEIGHT}
+      minWidth={props.minWidth}
+      width={props.width}
+      maxWidth={props.maxWidth}
+      minHeight={props.minHeight}
+      height={props.height}
+      maxHeight={props.maxHeight}
     >
       {title && (
         <Typography
