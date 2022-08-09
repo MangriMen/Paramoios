@@ -12,6 +12,9 @@ import {
 import { setUserDisplayName } from 'tools/requests/requests';
 
 import {
+  deleteUserFailed,
+  deleteUserRequest,
+  deleteUserSuccess,
   loginFailed,
   loginRequest,
   loginSuccess,
@@ -23,7 +26,7 @@ import {
   registerSuccess,
 } from './index';
 import { LoginPayload, RegisterPayload } from './interfaces';
-import { login, logout, register } from './services';
+import { deleteUser, login, logout, register } from './services';
 
 function* loginSaga({
   payload,
@@ -76,11 +79,21 @@ function* logoutSaga(): Generator<
   }
 }
 
+function* deleteUserSaga(): Generator {
+  try {
+    yield call(deleteUser);
+    yield put(deleteUserSuccess());
+  } catch (err) {
+    yield put(deleteUserFailed(String(err)));
+  }
+}
+
 export function* watchAuth() {
   yield all([
     takeLatest(logoutSuccess, fetchUserSaga),
     takeLatest(loginRequest, loginSaga),
     takeLatest(registerRequest, registerSaga),
     takeLatest(logoutRequest, logoutSaga),
+    takeLatest(deleteUserRequest, deleteUserSaga),
   ]);
 }
