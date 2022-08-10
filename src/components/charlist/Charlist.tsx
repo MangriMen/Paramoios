@@ -2,14 +2,36 @@ import { Grid, Typography } from '@mui/material';
 import ParAvatar from 'components/styled/ParAvatar';
 import ParBox from 'components/styled/ParBox';
 import ParContainer from 'components/styled/ParContainer';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import LiquidBar from './LiquidBar';
 import RollDiceButton from './RollDiceButton';
+import { Skills } from './Skills';
 
 const Charlist: FC = () => {
   const { t } = useTranslation('translation', { keyPrefix: 'charlist' });
+
+  const [skills, setSkills] = useState<{ [x: string]: boolean }>({
+    acrobatics: false,
+    animalHandling: false,
+    arcana: false,
+    athletics: false,
+    deception: false,
+    history: false,
+    insight: false,
+    intimidation: false,
+    investigation: false,
+    medicine: false,
+    nature: false,
+    perception: false,
+    perfomance: false,
+    persuasion: false,
+    religion: false,
+    sleightOfHand: false,
+    stealth: false,
+    survival: false,
+  });
 
   return (
     <ParContainer maxWidth="lg" sx={{ marginTop: '1rem', padding: '1rem' }}>
@@ -74,7 +96,8 @@ const Charlist: FC = () => {
         >
           <Grid item xs={4}>
             <Grid container height="100%" flexDirection="column">
-              {Array.from(Array(17)).map((_, index) => (
+              <Skills items={skills} setItems={setSkills} />
+              {/* {Array.from(Array(17)).map((_, index) => (
                 <Grid item key={index}>
                   <Grid
                     container
@@ -86,7 +109,7 @@ const Charlist: FC = () => {
                     ))}
                   </Grid>
                 </Grid>
-              ))}
+              ))} */}
             </Grid>
           </Grid>
           <Grid item xs={4}>
