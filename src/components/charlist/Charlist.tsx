@@ -9,29 +9,41 @@ import LiquidBar from './LiquidBar';
 import RollDiceButton from './RollDiceButton';
 import { Skills } from './Skills';
 
+export interface Ability {
+  enabled: boolean;
+  value: number;
+  override: number;
+}
+
 const Charlist: FC = () => {
   const { t } = useTranslation('translation', { keyPrefix: 'charlist' });
 
-  const [skills, setSkills] = useState<{ [x: string]: boolean }>({
-    acrobatics: false,
-    animalHandling: false,
-    arcana: false,
-    athletics: false,
-    deception: false,
-    history: false,
-    insight: false,
-    intimidation: false,
-    investigation: false,
-    medicine: false,
-    nature: false,
-    perception: false,
-    perfomance: false,
-    persuasion: false,
-    religion: false,
-    sleightOfHand: false,
-    stealth: false,
-    survival: false,
+  const [character, setCharacter] = useState<{ [x: string]: any }>({
+    skills: {
+      acrobatics: { enabled: false, value: 0, override: 0 },
+      animalHandling: { enabled: false, value: 0, override: 0 },
+      arcana: { enabled: false, value: 0, override: 0 },
+      athletics: { enabled: false, value: 0, override: 0 },
+      deception: { enabled: false, value: 0, override: 0 },
+      history: { enabled: false, value: 0, override: 0 },
+      insight: { enabled: false, value: 0, override: 0 },
+      intimidation: { enabled: false, value: 0, override: 0 },
+      investigation: { enabled: false, value: 0, override: 0 },
+      medicine: { enabled: false, value: 0, override: 0 },
+      nature: { enabled: false, value: 0, override: 0 },
+      perception: { enabled: false, value: 0, override: 0 },
+      perfomance: { enabled: false, value: 0, override: 0 },
+      persuasion: { enabled: false, value: 0, override: 0 },
+      religion: { enabled: false, value: 0, override: 0 },
+      sleightOfHand: { enabled: false, value: 0, override: 0 },
+      stealth: { enabled: false, value: 0, override: 0 },
+      survival: { enabled: false, value: 0, override: 0 },
+    },
   });
+
+  const setSkills = (newSkills: { [x: string]: Ability }) => {
+    setCharacter({ ...character, skills: newSkills });
+  };
 
   return (
     <ParContainer maxWidth="lg" sx={{ marginTop: '1rem', padding: '1rem' }}>
@@ -96,7 +108,7 @@ const Charlist: FC = () => {
         >
           <Grid item xs={4}>
             <Grid container height="100%" flexDirection="column">
-              <Skills items={skills} setItems={setSkills} />
+              <Skills items={character.skills} setItems={setSkills} />
               {/* {Array.from(Array(17)).map((_, index) => (
                 <Grid item key={index}>
                   <Grid
