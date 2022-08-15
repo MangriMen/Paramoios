@@ -39,8 +39,10 @@
     "changePassword": "Изменить пароль",
     "chooseAvatar": "Выбрать аватар",
     "information": "Информация",
+    "changeProfile": "Изменить профиль",
     "password": "Пароль",
-    "personalization": "Персонализация"
+    "personalization": "Персонализация",
+    "themeSettings": "Настройки темы"
   },
   "mainPage": {
     "welcome": "Добро пожаловать",

@@ -1,10 +1,12 @@
+import Charlist from 'components/charlist/Charlist';
 import PageWithNavbar from 'components/layout/PageWithNavbar';
 import AuthPage from 'components/pages/AuthPage';
 import MainPage from 'components/pages/MainPage';
 import NotFoundPage from 'components/pages/NotFoundPage';
 import UserPage from 'components/pages/UserPage';
+import { UserSettings } from 'components/pages/UserSettings';
 import { AuthRoute } from 'components/routes/AuthRoute';
-import { UserSettingsComponent } from 'components/user/UserSettingsComponent';
+import { UserRoute } from 'components/routes/UserRoute';
 import { auth } from 'configs/firebase';
 import { ROUTE } from 'consts';
 import { loginSuccess, logoutSuccess } from 'ducks/auth';
@@ -12,9 +14,6 @@ import { fetchUser } from 'ducks/user';
 import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router';
-
-import Charlist from './charlist/Charlist';
-import { UserRoute } from './routes/UserRoute';
 
 const App: FC = () => {
   const dispatch = useDispatch();
@@ -39,10 +38,10 @@ const App: FC = () => {
           <Route element={<PageWithNavbar />}>
             <Route path={ROUTE.CHARLIST} element={<Charlist />} />
             <Route path={ROUTE.ME} element={<UserPage />} />
-            <Route path={ROUTE.SETTINGS} element={<UserSettingsComponent />}>
+            <Route path={ROUTE.SETTINGS} element={<UserSettings />}>
               <Route
                 path={`${ROUTE.SETTINGS}/:page`}
-                element={<UserSettingsComponent />}
+                element={<UserSettings />}
               />
             </Route>
             <Route path={ROUTE.PAGE_404} element={<NotFoundPage />} />
