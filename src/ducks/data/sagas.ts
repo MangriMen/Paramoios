@@ -16,6 +16,7 @@ import {
   addPackageFailed,
   addPackageSuccess,
   initDataFailed,
+  initDataRequest,
   initDataSuccess,
   reloadDataFailed,
   reloadDataRequest,
@@ -129,6 +130,7 @@ export function* removePackageSaga({
 
 export function* watchData() {
   yield all([
+    takeLatest(initDataRequest, initSaga),
     takeLatest(reloadDataRequest, reloadSaga),
     takeLatest(activatePackageRequest, activatePackageSaga),
   ]);
