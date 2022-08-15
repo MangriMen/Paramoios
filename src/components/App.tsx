@@ -39,8 +39,13 @@ const App: FC = () => {
           <Route element={<PageWithNavbar />}>
             <Route path={ROUTE.CHARLIST} element={<Charlist />} />
             <Route path={ROUTE.ME} element={<UserPage />} />
+            <Route path={ROUTE.SETTINGS} element={<UserSettingsComponent />}>
+              <Route
+                path={`${ROUTE.SETTINGS}/:page`}
+                element={<UserSettingsComponent />}
+              />
+            </Route>
             <Route path={ROUTE.PAGE_404} element={<NotFoundPage />} />
-            <Route path={ROUTE.SETTINGS} element={<UserSettingsComponent />} />
           </Route>
         </Route>
       </Routes>

@@ -37,7 +37,10 @@
     "changeUsername": "Изменить имя",
     "changeEmail": "Изменить email",
     "changePassword": "Изменить пароль",
-    "chooseAvatar": "Выбрать аватар"
+    "chooseAvatar": "Выбрать аватар",
+    "information": "Информация",
+    "password": "Пароль",
+    "personalization": "Персонализация"
   },
   "mainPage": {
     "welcome": "Добро пожаловать",
