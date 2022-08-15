@@ -465,6 +465,7 @@ export const UserSettingsComponent: FC = () => {
         </Box>
         <Box
           sx={{
+            width: '100%',
             overflow: 'scroll',
             display: 'flex',
             justifyContent: 'flex-start',
