@@ -14,9 +14,11 @@ import {
   styled,
 } from '@mui/material';
 import ParBox from 'components/styled/ParBox';
-import { DefaultData } from 'mocks/mockDefaultData';
+import { selectProperty } from 'ducks/data/selectors';
+import { RootState } from 'ducks/store';
 import { ChangeEvent, FC, ReactNode, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 
 import { Ability } from './Charlist';
 
@@ -186,7 +188,9 @@ export const Skill: FC<{
   }, [parentRef]);
 
   const actualValue = localOverride | item.value;
-  const actualAbility = DefaultData.abilities[title];
+  const actualAbility = useSelector((state: RootState) =>
+    selectProperty(state, 'abilities', title),
+  );
 
   return (
     <Box

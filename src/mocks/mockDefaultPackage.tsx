@@ -1,4 +1,6 @@
-export const DefaultData: { [x: string]: any } = {
+import { Package } from 'ducks/data/interfaces';
+
+export const defaultPackage: Package['data'] = {
   abilities: {
     acrobatics: 'dex',
     animalHandling: 'wis',
