@@ -9,7 +9,12 @@ export function loadObjectFromDisk(key: string): any {
 }
 
 export function dumpObjectToDisk(key: string, value: { [x: string]: any }) {
-  localStorage.setItem(key, JSON.stringify(value));
+  localStorage.setItem(
+    key,
+    JSON.stringify(value, (_key, value) =>
+      value instanceof Set ? [...value] : value,
+    ),
+  );
 }
 
 export function loadOrInitObjectFromDisk(key: string, defaultValue: any) {

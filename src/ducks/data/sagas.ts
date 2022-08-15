@@ -1,4 +1,5 @@
 import { PayloadAction } from '@reduxjs/toolkit';
+import i18n from 'configs/i18next';
 import { PACKAGES, STORAGE } from 'consts';
 import { defaultPackage } from 'mocks/mockDefaultPackage';
 import {
@@ -14,6 +15,7 @@ import {
   activatePackageRequest,
   activatePackageSuccess,
   addPackageFailed,
+  addPackageRequest,
   addPackageSuccess,
   initDataFailed,
   initDataRequest,
@@ -37,12 +39,15 @@ export function* initSaga(): Generator<
   void
 > {
   try {
-    const activePackages = loadOrInitObjectFromDisk(STORAGE.activePackages, []);
+    const activePackages = loadOrInitObjectFromDisk(
+      STORAGE.activePackages,
+      new Set([]),
+    );
     if (!activePackages.includes(PACKAGES.defaultPackage)) {
-      dumpObjectToDisk(STORAGE.activePackages, [
-        ...activePackages,
-        PACKAGES.defaultPackage,
-      ]);
+      dumpObjectToDisk(
+        STORAGE.activePackages,
+        new Set([...activePackages, PACKAGES.defaultPackage]),
+      );
     }
 
     const packages = loadOrInitObjectFromDisk(STORAGE.packages, {});
@@ -87,10 +92,30 @@ export function* activatePackageSaga({
 > {
   try {
     const packages = loadObjectFromDisk(STORAGE.packages);
-    const pkg = packages[payload];
-    yield put(activatePackageSuccess({ name: payload, data: pkg }));
+    const pkg: Package['package'] = packages[payload];
+    for (const lng in pkg.translation) {
+      i18n.addResourceBundle(
+        lng,
+        PACKAGES.translationNs,
+        pkg.translation[lng],
+        true,
+      );
+    }
+
+    const activePackages = loadOrInitObjectFromDisk(STORAGE.activePackages, []);
+    dumpObjectToDisk(
+      STORAGE.activePackages,
+      new Set([...activePackages, payload]),
+    );
+
+    yield put(activatePackageSuccess({ name: payload, package: pkg }));
   } catch (err) {
-    yield put(activatePackageFailed(String(err)));
+    yield put(
+      activatePackageFailed({
+        name: payload,
+        package: { data: {}, translation: {}, error: String(err) },
+      }),
+    );
   }
 }
 
@@ -103,7 +128,7 @@ export function* addPackageSaga({
 > {
   try {
     const packages = loadObjectFromDisk(STORAGE.packages);
-    const newPackages = { ...packages, [payload.name]: payload.data };
+    const newPackages = { ...packages, [payload.name]: payload.package };
     dumpObjectToDisk(STORAGE.packages, newPackages);
     yield put(addPackageSuccess());
   } catch (err) {
@@ -133,5 +158,6 @@ export function* watchData() {
     takeLatest(initDataRequest, initSaga),
     takeLatest(reloadDataRequest, reloadSaga),
     takeLatest(activatePackageRequest, activatePackageSaga),
+    takeLatest(addPackageRequest, addPackageSaga),
   ]);
 }

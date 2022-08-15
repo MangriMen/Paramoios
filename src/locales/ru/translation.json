@@ -70,27 +70,9 @@
     "close": "Закрыть",
     "done": "Готово"
   },
-  "skills": {
+  "abilities": {
     "activate": "Активировать",
     "disable": "Деактивировать",
-    "override": "Переопределить",
-    "acrobatics": "Акробатика",
-    "animalHandling": "Уход за животными",
-    "arcana": "Магия",
-    "athletics": "Атлетика",
-    "deception": "Обман",
-    "history": "История",
-    "insight": "Проницательность",
-    "intimidation": "Запугивание",
-    "investigation": "Анализ",
-    "medicine": "Медицина",
-    "nature": "Природа",
-    "perception": "Внимательность",
-    "perfomance": "Выступление",
-    "persuasion": "Убеждение",
-    "religion": "Религия",
-    "sleightOfHand": "Ловкость рук",
-    "stealth": "Скрытность",
-    "survival": "Выживание"
+    "override": "Переопределить"
   }
 }

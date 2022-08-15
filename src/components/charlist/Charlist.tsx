@@ -2,12 +2,13 @@ import { Grid, Typography } from '@mui/material';
 import ParAvatar from 'components/styled/ParAvatar';
 import ParBox from 'components/styled/ParBox';
 import ParContainer from 'components/styled/ParContainer';
+import i18n from 'configs/i18next';
 import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { Abilities } from './Abilities';
 import LiquidBar from './LiquidBar';
 import RollDiceButton from './RollDiceButton';
-import { Skills } from './Skills';
 
 export interface Ability {
   enabled: boolean;
@@ -19,7 +20,7 @@ const Charlist: FC = () => {
   const { t } = useTranslation('translation', { keyPrefix: 'charlist' });
 
   const [character, setCharacter] = useState<{ [x: string]: any }>({
-    skills: {
+    abilities: {
       acrobatics: { enabled: false, value: 0, override: 0 },
       animalHandling: { enabled: false, value: 0, override: 0 },
       arcana: { enabled: false, value: 0, override: 0 },
@@ -41,12 +42,17 @@ const Charlist: FC = () => {
     },
   });
 
-  const setSkills = (newSkills: { [x: string]: Ability }) => {
-    setCharacter({ ...character, skills: newSkills });
+  const setAbilities = (newAbilities: { [x: string]: Ability }) => {
+    setCharacter({ ...character, abilities: newAbilities });
   };
 
   return (
     <ParContainer maxWidth="lg" sx={{ marginTop: '1rem', padding: '1rem' }}>
+      <button
+        onClick={() => {
+          i18n.removeResourceBundle('ru', 'data');
+        }}
+      ></button>
       {/* Grid container header of charlist, contains avatar and character name */}
       <Grid
         container
@@ -108,7 +114,7 @@ const Charlist: FC = () => {
         >
           <Grid item xs={4}>
             <Grid container height="100%" flexDirection="column">
-              <Skills items={character.skills} setItems={setSkills} />
+              <Abilities items={character.abilities} setItems={setAbilities} />
               {/* {Array.from(Array(17)).map((_, index) => (
                 <Grid item key={index}>
                   <Grid

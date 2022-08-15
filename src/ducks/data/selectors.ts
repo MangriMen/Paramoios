@@ -9,9 +9,13 @@ export const selectProperty = createSelector(
   ],
   (data, section, key) => {
     for (const pkg in data.collected) {
-      if (section in data.collected[pkg]) {
-        if (key in data.collected[pkg][section]) {
-          return data.collected[pkg][section][key];
+      if (data.collected[pkg].error) {
+        continue;
+      }
+
+      if (section in data.collected[pkg].data) {
+        if (key in data.collected[pkg].data[section]) {
+          return data.collected[pkg].data[section][key];
         }
       }
     }

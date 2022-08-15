@@ -1,9 +1,13 @@
 export interface DataState {
-  collected: { [x: string]: Package['data'] };
+  collected: { [x: string]: Package['package'] };
   error: string;
 }
 
 export interface Package {
   name: string;
-  data: { [x: string]: any };
+  package: {
+    data: { [x: string]: any };
+    translation: { [x: string]: { [x: string]: any } };
+    error: string;
+  };
 }

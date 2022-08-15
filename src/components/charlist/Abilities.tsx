@@ -68,7 +68,7 @@ interface SkillBaseProps {
   shadow?: boolean;
 }
 
-const SkillBaseCell = styled(ParBox)({
+const AbilityBaseCell = styled(ParBox)({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
@@ -81,7 +81,7 @@ export const SkillBase: FC<SkillBaseProps> = ({
   enabled,
   shadow,
 }) => {
-  const { t } = useTranslation('translation', { keyPrefix: 'skills' });
+  const { t } = useTranslation('data', { keyPrefix: 'abilities' });
 
   return (
     <Box
@@ -95,7 +95,7 @@ export const SkillBase: FC<SkillBaseProps> = ({
         fontSize: '1.1rem',
       }}
     >
-      <SkillBaseCell
+      <AbilityBaseCell
         shadow={shadow}
         sx={{
           transition: 'filter 0.5s',
@@ -111,7 +111,7 @@ export const SkillBase: FC<SkillBaseProps> = ({
         >
           {`${value < 0 ? '' : '+'}${value}`}
         </Typography>
-      </SkillBaseCell>
+      </AbilityBaseCell>
       <Typography
         sx={{
           gridColumn: '2',
@@ -123,19 +123,19 @@ export const SkillBase: FC<SkillBaseProps> = ({
       >
         {ability}
       </Typography>
-      <SkillBaseCell shadow={shadow} sx={{ gridColumn: '3' }}>
+      <AbilityBaseCell shadow={shadow} sx={{ gridColumn: '3' }}>
         <Typography sx={{ fontSize: 'inherit' }}>{t(title)}</Typography>
-      </SkillBaseCell>
+      </AbilityBaseCell>
     </Box>
   );
 };
 
-export const Skill: FC<{
+export const AbilityCard: FC<{
   title: string;
   item: Ability;
   onChange: (item: Ability) => void;
 }> = ({ title, item, onChange }) => {
-  const { t } = useTranslation('translation', { keyPrefix: 'skills' });
+  const { t } = useTranslation('translation', { keyPrefix: 'abilities' });
   const { t: tDialog } = useTranslation('translation', { keyPrefix: 'dialog' });
 
   const parentRef = useRef();
@@ -307,7 +307,7 @@ export const Skill: FC<{
   );
 };
 
-export const Skills: FC<{
+export const Abilities: FC<{
   items: { [x: string]: Ability };
   setItems: any;
 }> = ({ items, setItems, ...props }) => {
@@ -316,7 +316,7 @@ export const Skills: FC<{
   useEffect(() => {
     setRenderedItems(
       Object.keys(items).map((key) => (
-        <Skill
+        <AbilityCard
           key={key}
           title={key}
           item={items[key]}

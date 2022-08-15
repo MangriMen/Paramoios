@@ -14,4 +14,5 @@ export const STORAGE = {
 
 export const PACKAGES = {
   defaultPackage: 'default',
+  translationNs: 'data',
 };
