@@ -2,7 +2,6 @@ import { Grid, Typography } from '@mui/material';
 import ParAvatar from 'components/styled/ParAvatar';
 import ParBox from 'components/styled/ParBox';
 import ParContainer from 'components/styled/ParContainer';
-import i18n from 'configs/i18next';
 import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -48,11 +47,6 @@ const Charlist: FC = () => {
 
   return (
     <ParContainer maxWidth="lg" sx={{ marginTop: '1rem', padding: '1rem' }}>
-      <button
-        onClick={() => {
-          i18n.removeResourceBundle('ru', 'data');
-        }}
-      ></button>
       {/* Grid container header of charlist, contains avatar and character name */}
       <Grid
         container
