@@ -60,7 +60,7 @@ export const EditButton: FC<{
   );
 };
 
-interface SkillBaseProps {
+interface AbilityBaseProps {
   title: string;
   ability: string;
   value: number;
@@ -74,7 +74,7 @@ const AbilityBaseCell = styled(ParBox)({
   alignItems: 'center',
 });
 
-export const SkillBase: FC<SkillBaseProps> = ({
+export const SkillBase: FC<AbilityBaseProps> = ({
   title,
   ability,
   value,
