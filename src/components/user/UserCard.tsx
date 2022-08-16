@@ -1,14 +1,13 @@
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import {
   Box,
   Button,
   Card,
-  SvgIcon,
   Tooltip,
   Typography,
   TypographyProps,
 } from '@mui/material';
-import { ReactComponent as check_circle } from 'assets/images/icons/check_circle.svg';
-import { ReactComponent as error_circle } from 'assets/images/icons/error_circle.svg';
 import ParAvatar from 'components/styled/ParAvatar';
 import ParDivider from 'components/styled/ParDivider';
 import ParLink from 'components/styled/ParLink';
@@ -82,6 +81,11 @@ const UserCard: FC = () => {
     navigate(ROUTE.SETTINGS);
   };
 
+  const emailVerificationIconStyle = {
+    marginLeft: '0.5rem',
+    fontSize: '2.2rem',
+  };
+
   return (
     <Box
       sx={{
@@ -120,8 +124,8 @@ const UserCard: FC = () => {
       >
         <StyledTypography>{t('name')}:</StyledTypography>
         <StyledTypography color="black">{user.username}</StyledTypography>
-        <StyledTypography>
-          {t('email')} {''}
+        <StyledTypography sx={{ display: 'inline-flex', alignItems: 'center' }}>
+          {t('email')}
           <Tooltip
             title={
               <Typography textAlign="center">
@@ -138,14 +142,11 @@ const UserCard: FC = () => {
               </Typography>
             }
           >
-            <SvgIcon
-              sx={{
-                fontSize: '1em',
-                verticalAlign: 'text-bottom',
-              }}
-              viewBox="4 4 42 42"
-              component={user.isEmailVerified ? check_circle : error_circle}
-            />
+            {user.isEmailVerified ? (
+              <CheckCircleOutlineIcon sx={emailVerificationIconStyle} />
+            ) : (
+              <ErrorOutlineIcon sx={emailVerificationIconStyle} />
+            )}
           </Tooltip>
           :
         </StyledTypography>
