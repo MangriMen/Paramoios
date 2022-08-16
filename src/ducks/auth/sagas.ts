@@ -24,7 +24,9 @@ import {
   registerFailed,
   registerRequest,
   registerSuccess,
+  sendVerificationEmailFailed,
   sendVerificationEmailRequest,
+  sendVerificationEmailSuccess,
 } from './index';
 import { LoginPayload, RegisterPayload } from './interfaces';
 import { login, logout, register } from './services';
@@ -81,12 +83,18 @@ function* logoutSaga(): Generator<
   }
 }
 
-function* sendVerificationEmailSaga(): Generator<CallEffect<void>, void, void> {
+function* sendVerificationEmailSaga(): Generator<
+  | CallEffect<void>
+  | PutEffect<PayloadAction<void>>
+  | PutEffect<PayloadAction<string>>,
+  void,
+  void
+> {
   try {
     yield call(sendVerificationEmail);
-    console.log('Email sent successfully');
+    yield put(sendVerificationEmailSuccess());
   } catch (err) {
-    console.error(`Error to send email: ${err}`);
+    yield put(sendVerificationEmailFailed(String(err)));
   }
 }
 

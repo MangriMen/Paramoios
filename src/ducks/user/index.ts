@@ -1,8 +1,8 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import { FetchUserPayload } from './interfaces';
+import { FetchUserPayload, UserState } from './interfaces';
 
-const initialState = {
+const initialState: UserState = {
   isLoading: false,
   error: '',
   user: {

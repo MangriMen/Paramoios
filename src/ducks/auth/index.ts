@@ -1,8 +1,8 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import { LoginPayload, RegisterPayload } from './interfaces';
+import { AuthState, LoginPayload, RegisterPayload } from './interfaces';
 
-const initialState = {
+const initialState: AuthState = {
   isLoading: true,
   isLogged: false,
   error: '',
@@ -12,7 +12,7 @@ export const authSlice = createSlice({
   name: '@@auth',
   initialState,
   reducers: {
-    loginRequest: (state, action: PayloadAction<LoginPayload>) => {
+    loginRequest: (state, _action: PayloadAction<LoginPayload>) => {
       state.isLoading = true;
       state.isLogged = initialState.isLogged;
       state.error = initialState.error;
@@ -56,7 +56,15 @@ export const authSlice = createSlice({
       state.isLogged = true;
       state.error = action.payload;
     },
-    sendVerificationEmailRequest: () => {},
+    sendVerificationEmailRequest: (state) => {
+      state.error = initialState.error;
+    },
+    sendVerificationEmailSuccess: (state) => {
+      state.error = initialState.error;
+    },
+    sendVerificationEmailFailed: (state, action: PayloadAction<string>) => {
+      state.error = action.payload;
+    },
   },
 });
 
@@ -72,4 +80,6 @@ export const {
   logoutSuccess,
   logoutFailed,
   sendVerificationEmailRequest,
+  sendVerificationEmailSuccess,
+  sendVerificationEmailFailed,
 } = authSlice.actions;
