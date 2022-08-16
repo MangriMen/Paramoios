@@ -1,22 +1,18 @@
-import Charlist from 'components/charlist/Charlist';
-import PageWithNavbar from 'components/layout/PageWithNavbar';
-import AuthPage from 'components/pages/AuthPage';
-import MainPage from 'components/pages/MainPage';
-import NotFoundPage from 'components/pages/NotFoundPage';
-import UserPage from 'components/pages/UserPage';
-import { UserSettings } from 'components/pages/UserSettings';
-import { AuthRoute } from 'components/routes/AuthRoute';
-import { UserRoute } from 'components/routes/UserRoute';
+import { ThemeProvider } from '@mui/material';
 import { auth } from 'configs/firebase';
-import { ROUTE } from 'consts';
 import { loginSuccess, logoutSuccess } from 'ducks/auth';
+import { selectTheme } from 'ducks/localSettings/selectors';
 import { fetchUser } from 'ducks/user';
 import { FC } from 'react';
-import { useDispatch } from 'react-redux';
-import { Route, Routes } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+
+import { AppRoutes } from './AppRoutes';
 
 const App: FC = () => {
   const dispatch = useDispatch();
+
+  const theme = useSelector(selectTheme);
 
   auth?.onAuthStateChanged((user) => {
     if (user) {
@@ -28,27 +24,11 @@ const App: FC = () => {
   });
 
   return (
-    <>
-      <Routes>
-        <Route element={<AuthRoute />}>
-          <Route path={ROUTE.AUTH} element={<AuthPage />} />
-        </Route>
-        <Route element={<UserRoute />}>
-          <Route path={ROUTE.HOME} element={<MainPage />} />
-          <Route element={<PageWithNavbar />}>
-            <Route path={ROUTE.CHARLIST} element={<Charlist />} />
-            <Route path={ROUTE.ME} element={<UserPage />} />
-            <Route path={ROUTE.SETTINGS} element={<UserSettings />}>
-              <Route
-                path={`${ROUTE.SETTINGS}/:page`}
-                element={<UserSettings />}
-              />
-            </Route>
-            <Route path={ROUTE.PAGE_404} element={<NotFoundPage />} />
-          </Route>
-        </Route>
-      </Routes>
-    </>
+    <ThemeProvider theme={theme}>
+      <BrowserRouter>
+        <AppRoutes />
+      </BrowserRouter>
+    </ThemeProvider>
   );
 };
 

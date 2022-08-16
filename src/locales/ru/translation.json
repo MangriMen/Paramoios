@@ -41,8 +41,12 @@
     "information": "Информация",
     "changeProfile": "Изменить профиль",
     "password": "Пароль",
-    "personalization": "Персонализация",
-    "themeSettings": "Настройки темы"
+    "personalization": "Персонализация"
+  },
+  "theme": {
+    "themeSettings": "Настройки темы",
+    "default": "Стандартная",
+    "bnw": "Чёрно-белая"
   },
   "mainPage": {
     "welcome": "Добро пожаловать",
