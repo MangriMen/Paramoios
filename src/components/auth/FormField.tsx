@@ -67,7 +67,6 @@ const AuthFormField: FC<AuthFormFieldProps> = ({
           color: `${calculatedColor}.main`,
         },
       }}
-      inputProps={{ maxLength: 90 }}
       {...props}
     >
       {children}
