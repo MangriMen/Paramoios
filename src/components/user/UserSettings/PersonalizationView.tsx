@@ -7,7 +7,7 @@ import {
   styled,
 } from '@mui/material';
 import ParDivider from 'components/styled/ParDivider';
-import { setTheme } from 'ducks/localSettings';
+import { setSetting } from 'ducks/localSettings';
 import { selectThemeRaw } from 'ducks/localSettings/selectors';
 import { FC, MouseEvent } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -86,7 +86,7 @@ export const PersonalizationView = () => {
       return;
     }
 
-    dispatch(setTheme(newTheme));
+    dispatch(setSetting({ key: 'theme', value: newTheme }));
   };
 
   return (

@@ -1,13 +1,19 @@
 import { PayloadAction } from '@reduxjs/toolkit';
-import { all, takeLatest } from 'redux-saga/effects';
+import { all, put, takeLatest } from 'redux-saga/effects';
 import { saveToLocalStorage } from 'tools/localStorage/localStorage';
 
-import { setTheme } from './index';
+import { setSetting, setSettingFailed, setSettingSuccess } from './index';
+import { SettingPayload } from './interfaces';
 
-export function setThemeSaga({ payload }: PayloadAction<string>) {
-  saveToLocalStorage('theme', payload);
+export function* setSettingSaga({ payload }: PayloadAction<SettingPayload>) {
+  try {
+    saveToLocalStorage(payload.key, payload.value);
+    yield put(setSettingSuccess(payload));
+  } catch (err) {
+    yield put(setSettingFailed(String(err)));
+  }
 }
 
 export function* watchLocalSettings() {
-  yield all([takeLatest(setTheme, setThemeSaga)]);
+  yield all([takeLatest(setSetting, setSettingSaga)]);
 }

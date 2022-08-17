@@ -1,9 +1,10 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { loadFromLocalStorage } from 'tools/localStorage/localStorage';
 
-import { LocalSettingsState } from './interfaces';
+import { LocalSettingsState, SettingPayload } from './interfaces';
 
 const initialState: LocalSettingsState = {
+  error: '',
   theme: loadFromLocalStorage('theme', 'default'),
 };
 
@@ -11,11 +12,17 @@ export const localSettingsSlice = createSlice({
   name: '@@localSettings',
   initialState,
   reducers: {
-    setTheme(state, action: PayloadAction<string>) {
-      state.theme = action.payload;
+    setSetting(_state, _action: PayloadAction<SettingPayload>) {},
+    setSettingSuccess(state, action: PayloadAction<SettingPayload>) {
+      state[action.payload.key] = action.payload.value;
+      state.error = initialState.error;
+    },
+    setSettingFailed(state, action: PayloadAction<string>) {
+      state.error = action.payload;
     },
   },
 });
 
 export default localSettingsSlice.reducer;
-export const { setTheme } = localSettingsSlice.actions;
+export const { setSetting, setSettingSuccess, setSettingFailed } =
+  localSettingsSlice.actions;
