@@ -10,7 +10,7 @@ import { FC, ReactNode, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Route, Routes, useNavigate, useParams } from 'react-router';
 
-export const PageButton: FC<
+export const ViewButton: FC<
   ButtonProps & { active?: boolean; icon?: ReactNode; title?: ReactNode }
 > = ({ active, icon, title, children, sx, ...props }) => {
   return (
@@ -30,7 +30,7 @@ export const PageButton: FC<
   );
 };
 
-const iconStyle = { marginRight: '0.2rem' };
+const viewButtonIconStyle = { marginRight: '0.2rem' };
 
 export const UserSettings: FC = () => {
   const navigate = useNavigate();
@@ -61,60 +61,55 @@ export const UserSettings: FC = () => {
     <ParContainer
       maxWidth="lg"
       sx={{
-        mt: '1rem',
+        display: 'flex',
+        flexDirection: { xs: 'column', md: 'row' },
+        marginTop: '1rem',
         padding: '1.5rem',
         minHeight: 'calc(100vh - 3rem)',
       }}
     >
       <Box
         sx={{
+          minWidth: { xs: 'none', md: '14rem' },
+          width: { xs: '100%', md: 'auto' },
+          marginBottom: { xs: '1rem', md: '0' },
+          height: 'auto',
           display: 'flex',
-          flexDirection: { xs: 'column', md: 'row' },
+          flexDirection: 'column',
+          margin: '0 1.5rem 0 0',
         }}
       >
-        <Box
-          sx={{
-            minWidth: { xs: 'none', md: '14rem' },
-            width: { xs: '100%', md: 'auto' },
-            marginBottom: { xs: '1rem', md: '0' },
-            height: 'auto',
-            display: 'flex',
-            flexDirection: 'column',
-            margin: '0 1.5rem 0 0',
-          }}
-        >
-          <PageButton
-            active={page === 'information'}
-            onClick={toInformationPage}
-            icon={<InfoIcon sx={iconStyle} />}
-            title={t('information')}
-          />
-          <PageButton
-            active={page === 'password'}
-            onClick={toPasswordPage}
-            icon={<LockIcon sx={iconStyle} />}
-            title={t('password')}
-          />
-          <PageButton
-            active={page === 'personalization'}
-            onClick={toPersonalizationPage}
-            icon={<BrushIcon sx={iconStyle} />}
-            title={t('personalization')}
-          />
-        </Box>
-        <Box
-          sx={{
-            width: '100%',
-            height: { md: 'calc(100vh - 6.5rem)' },
-            overflow: { md: 'scroll' },
-          }}
-        >
-          <Routes>
-            <Route path="information" element={<InformationView />} />
-            <Route path="password" element={<PasswordView />} />
-            <Route path="personalization" element={<PersonalizationView />} />
-          </Routes>
-        </Box>
+        <ViewButton
+          active={page === 'information'}
+          onClick={toInformationPage}
+          icon={<InfoIcon sx={viewButtonIconStyle} />}
+          title={t('information')}
+        />
+        <ViewButton
+          active={page === 'password'}
+          onClick={toPasswordPage}
+          icon={<LockIcon sx={viewButtonIconStyle} />}
+          title={t('password')}
+        />
+        <ViewButton
+          active={page === 'personalization'}
+          onClick={toPersonalizationPage}
+          icon={<BrushIcon sx={viewButtonIconStyle} />}
+          title={t('personalization')}
+        />
+      </Box>
+      <Box
+        sx={{
+          width: '100%',
+          height: { md: 'calc(100vh - 6.5rem)' },
+          overflow: { md: 'scroll' },
+        }}
+      >
+        <Routes>
+          <Route path="information" element={<InformationView />} />
+          <Route path="password" element={<PasswordView />} />
+          <Route path="personalization" element={<PersonalizationView />} />
+        </Routes>
       </Box>
     </ParContainer>
   );
