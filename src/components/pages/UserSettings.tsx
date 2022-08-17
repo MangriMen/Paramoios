@@ -81,19 +81,19 @@ export const UserSettings: FC = () => {
         }}
       >
         <ViewButton
-          active={page === 'information'}
+          active={page === ROUTE_SETTINGS.INFORMATION}
           onClick={toInformationPage}
           icon={<InfoIcon sx={viewButtonIconStyle} />}
           title={t('information')}
         />
         <ViewButton
-          active={page === 'password'}
+          active={page === ROUTE_SETTINGS.PASSWORD}
           onClick={toPasswordPage}
           icon={<LockIcon sx={viewButtonIconStyle} />}
           title={t('password')}
         />
         <ViewButton
-          active={page === 'personalization'}
+          active={page === ROUTE_SETTINGS.PERSONALIZATION}
           onClick={toPersonalizationPage}
           icon={<BrushIcon sx={viewButtonIconStyle} />}
           title={t('personalization')}
