@@ -66,7 +66,12 @@ export const UserSettings: FC = () => {
         height: { xs: 'auto', md: 'calc(100vh - 3rem)' },
       }}
     >
-      <Box sx={{ display: 'flex', flexWrap: { xs: 'wrap', md: 'nowrap' } }}>
+      <Box
+        sx={{
+          display: 'flex',
+          flexWrap: { xs: 'wrap', md: 'nowrap', height: '100%' },
+        }}
+      >
         <Box
           sx={{
             minWidth: { xs: 'none', md: '14rem' },
@@ -99,8 +104,6 @@ export const UserSettings: FC = () => {
         <Box
           sx={{
             width: '100%',
-            display: 'flex',
-            justifyContent: 'flex-start',
             overflow: 'scroll',
           }}
         >

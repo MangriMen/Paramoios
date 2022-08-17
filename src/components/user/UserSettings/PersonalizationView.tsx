@@ -97,9 +97,9 @@ export const PersonalizationView = () => {
         </Typography>
         <ParDivider sx={{ width: '100%', marginBottom: '1rem' }} />
         <ToggleButtonGroupStyled
+          exclusive
           size="small"
           value={theme}
-          exclusive
           onChange={handleThemeChange}
           aria-label="theme select"
         >
