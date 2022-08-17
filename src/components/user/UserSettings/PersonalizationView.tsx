@@ -3,10 +3,9 @@ import {
   Theme,
   ToggleButton,
   ToggleButtonGroup,
-  Typography,
   styled,
 } from '@mui/material';
-import ParDivider from 'components/styled/ParDivider';
+import { SettingSection } from 'components/user/SettingSection';
 import { setSetting } from 'ducks/localSettings';
 import { selectThemeRaw } from 'ducks/localSettings/selectors';
 import { FC, MouseEvent } from 'react';
@@ -91,11 +90,7 @@ export const PersonalizationView = () => {
 
   return (
     <Box sx={{ width: '100%' }}>
-      <Box>
-        <Typography variant="h3" color="primary.dark">
-          {t('themeSettings')}
-        </Typography>
-        <ParDivider sx={{ width: '100%', marginBottom: '1rem' }} />
+      <SettingSection title={t('themeSettings')}>
         <ToggleButtonGroupStyled
           exclusive
           size="small"
@@ -110,7 +105,7 @@ export const PersonalizationView = () => {
             <ThemeIcon theme={bnwTheme} />
           </ToggleButtonStyled>
         </ToggleButtonGroupStyled>
-      </Box>
+      </SettingSection>
     </Box>
   );
 };

@@ -1,7 +1,7 @@
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import FormButton from 'components/auth/FormButton';
 import FormField from 'components/auth/FormField';
-import ParDivider from 'components/styled/ParDivider';
+import { SettingSection } from 'components/user/SettingSection';
 import { PasswordValue } from 'components/user/interfaces';
 import { updatePassword } from 'ducks/userSettings';
 import { Form, Formik } from 'formik';
@@ -41,17 +41,16 @@ export const PasswordView: FC = () => {
 
   return (
     <Box sx={{ width: '100%' }}>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: { md: 'flex-start' },
+      <SettingSection
+        title={t('changePassword')}
+        containerProps={{
+          sx: {
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: { md: 'flex-start' },
+          },
         }}
       >
-        <Typography variant="h3" color="primary.dark">
-          {t('changePassword')}
-        </Typography>
-        <ParDivider sx={{ width: '100%', marginBottom: '1rem' }} />
         <Formik
           initialValues={passwordSettingsInitialValue}
           validationSchema={passwordSettingsSchema}
@@ -69,7 +68,7 @@ export const PasswordView: FC = () => {
             </Box>
           </Form>
         </Formik>
-      </Box>
+      </SettingSection>
     </Box>
   );
 };

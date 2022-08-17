@@ -63,13 +63,13 @@ export const UserSettings: FC = () => {
       sx={{
         mt: '1rem',
         padding: '1.5rem',
-        height: { xs: 'auto', md: 'calc(100vh - 3rem)' },
+        minHeight: 'calc(100vh - 3rem)',
       }}
     >
       <Box
         sx={{
           display: 'flex',
-          flexWrap: { xs: 'wrap', md: 'nowrap', height: '100%' },
+          flexDirection: { xs: 'column', md: 'row' },
         }}
       >
         <Box
@@ -77,6 +77,7 @@ export const UserSettings: FC = () => {
             minWidth: { xs: 'none', md: '14rem' },
             width: { xs: '100%', md: 'auto' },
             marginBottom: { xs: '1rem', md: '0' },
+            height: 'auto',
             display: 'flex',
             flexDirection: 'column',
             margin: '0 1.5rem 0 0',
@@ -104,7 +105,8 @@ export const UserSettings: FC = () => {
         <Box
           sx={{
             width: '100%',
-            overflow: 'scroll',
+            height: { md: 'calc(100vh - 6.5rem)' },
+            overflow: { md: 'scroll' },
           }}
         >
           <Routes>
