@@ -148,7 +148,7 @@ export const InformationView: FC = () => {
   return (
     <Box sx={{ width: '100%' }}>
       <SettingSection
-        title={t('changeProfile')}
+        title={t('profile')}
         containerProps={{
           sx: {
             display: 'flex',

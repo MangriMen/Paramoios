@@ -22,11 +22,8 @@ export const AppRoutes: FC = () => {
         <Route element={<PageWithNavbar />}>
           <Route path={ROUTE.CHARLIST} element={<Charlist />} />
           <Route path={ROUTE.ME} element={<UserPage />} />
-          <Route path={ROUTE.SETTINGS} element={<UserSettings />}>
-            <Route
-              path={`${ROUTE.SETTINGS}/:page`}
-              element={<UserSettings />}
-            />
+          <Route path={`${ROUTE.SETTINGS}/*`} element={<UserSettings />}>
+            <Route path=":page" element={<UserSettings />} />
           </Route>
           <Route path={ROUTE.PAGE_404} element={<NotFoundPage />} />
         </Route>

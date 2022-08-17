@@ -6,6 +6,7 @@ import ParContainer from 'components/styled/ParContainer';
 import { InformationView } from 'components/user/UserSettings/InformationView';
 import { PasswordView } from 'components/user/UserSettings/PasswordView';
 import { PersonalizationView } from 'components/user/UserSettings/PersonalizationView';
+import { ROUTE_SETTINGS } from 'consts';
 import { FC, ReactNode, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Route, Routes, useNavigate, useParams } from 'react-router';
@@ -46,15 +47,15 @@ export const UserSettings: FC = () => {
   const { t } = useTranslation('translation', { keyPrefix: 'userSettings' });
 
   const toInformationPage = () => {
-    navigate('information');
+    navigate(ROUTE_SETTINGS.INFORMATION);
   };
 
   const toPasswordPage = () => {
-    navigate('password');
+    navigate(ROUTE_SETTINGS.PASSWORD);
   };
 
   const toPersonalizationPage = () => {
-    navigate('personalization');
+    navigate(ROUTE_SETTINGS.PERSONALIZATION);
   };
 
   return (
@@ -106,9 +107,15 @@ export const UserSettings: FC = () => {
         }}
       >
         <Routes>
-          <Route path="information" element={<InformationView />} />
-          <Route path="password" element={<PasswordView />} />
-          <Route path="personalization" element={<PersonalizationView />} />
+          <Route
+            path={ROUTE_SETTINGS.INFORMATION}
+            element={<InformationView />}
+          />
+          <Route path={ROUTE_SETTINGS.PASSWORD} element={<PasswordView />} />
+          <Route
+            path={ROUTE_SETTINGS.PERSONALIZATION}
+            element={<PersonalizationView />}
+          />
         </Routes>
       </Box>
     </ParContainer>

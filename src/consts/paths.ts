@@ -6,3 +6,9 @@ export const ROUTE = {
   CHARLIST: '/charlist',
   PAGE_404: '*',
 };
+
+export const ROUTE_SETTINGS = {
+  INFORMATION: 'information',
+  PASSWORD: 'password',
+  PERSONALIZATION: 'personalization',
+};
