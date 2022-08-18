@@ -15,33 +15,39 @@ export interface Ability {
   override: number;
 }
 
+export interface Character {
+  abilities: { [x: string]: Ability };
+}
+
+const characterInitialState: Character = {
+  abilities: {
+    acrobatics: { enabled: false, value: 0, override: 0 },
+    animalHandling: { enabled: false, value: 0, override: 0 },
+    arcana: { enabled: false, value: 0, override: 0 },
+    athletics: { enabled: false, value: 0, override: 0 },
+    deception: { enabled: false, value: 0, override: 0 },
+    history: { enabled: false, value: 0, override: 0 },
+    insight: { enabled: false, value: 0, override: 0 },
+    intimidation: { enabled: false, value: 0, override: 0 },
+    investigation: { enabled: false, value: 0, override: 0 },
+    medicine: { enabled: false, value: 0, override: 0 },
+    nature: { enabled: false, value: 0, override: 0 },
+    perception: { enabled: false, value: 0, override: 0 },
+    perfomance: { enabled: false, value: 0, override: 0 },
+    persuasion: { enabled: false, value: 0, override: 0 },
+    religion: { enabled: false, value: 0, override: 0 },
+    sleightOfHand: { enabled: false, value: 0, override: 0 },
+    stealth: { enabled: false, value: 0, override: 0 },
+    survival: { enabled: false, value: 0, override: 0 },
+  },
+};
+
 const Charlist: FC = () => {
   const { t } = useTranslation('translation', { keyPrefix: 'charlist' });
 
-  const [character, setCharacter] = useState<{ [x: string]: any }>({
-    abilities: {
-      acrobatics: { enabled: false, value: 0, override: 0 },
-      animalHandling: { enabled: false, value: 0, override: 0 },
-      arcana: { enabled: false, value: 0, override: 0 },
-      athletics: { enabled: false, value: 0, override: 0 },
-      deception: { enabled: false, value: 0, override: 0 },
-      history: { enabled: false, value: 0, override: 0 },
-      insight: { enabled: false, value: 0, override: 0 },
-      intimidation: { enabled: false, value: 0, override: 0 },
-      investigation: { enabled: false, value: 0, override: 0 },
-      medicine: { enabled: false, value: 0, override: 0 },
-      nature: { enabled: false, value: 0, override: 0 },
-      perception: { enabled: false, value: 0, override: 0 },
-      perfomance: { enabled: false, value: 0, override: 0 },
-      persuasion: { enabled: false, value: 0, override: 0 },
-      religion: { enabled: false, value: 0, override: 0 },
-      sleightOfHand: { enabled: false, value: 0, override: 0 },
-      stealth: { enabled: false, value: 0, override: 0 },
-      survival: { enabled: false, value: 0, override: 0 },
-    },
-  });
+  const [character, setCharacter] = useState<Character>(characterInitialState);
 
-  const setAbilities = (newAbilities: { [x: string]: Ability }) => {
+  const setAbilities = (newAbilities: Character['abilities']) => {
     setCharacter({ ...character, abilities: newAbilities });
   };
 
