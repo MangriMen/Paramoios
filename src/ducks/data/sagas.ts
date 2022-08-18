@@ -1,12 +1,15 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import i18n from 'configs/i18next';
 import { PACKAGES, STORAGE } from 'consts';
+import { RootState } from 'ducks/store';
 import { defaultPackage } from 'mocks/mockDefaultPackage';
 import {
   CallEffect,
   PutEffect,
+  SelectEffect,
   all,
   put,
+  select,
   takeLatest,
 } from 'redux-saga/effects';
 
@@ -17,6 +20,9 @@ import {
   addPackageFailed,
   addPackageRequest,
   addPackageSuccess,
+  disablePackageFailed,
+  disablePackageRequest,
+  disablePackageSuccess,
   initDataFailed,
   initDataRequest,
   initDataSuccess,
@@ -26,7 +32,7 @@ import {
   removePackageFailed,
   removePackageSuccess,
 } from './index';
-import { Package } from './interfaces';
+import { DataState, Package } from './interfaces';
 import {
   dumpObjectToDisk,
   loadObjectFromDisk,
@@ -119,6 +125,42 @@ export function* activatePackageSaga({
   }
 }
 
+export function* disablePackageSaga({
+  payload,
+}: PayloadAction<string>): Generator<
+  | SelectEffect
+  | PutEffect<PayloadAction<Package>>
+  | PutEffect<PayloadAction<string>>,
+  void,
+  void
+> {
+  try {
+    const dataCollected: any = yield select(
+      (state: RootState) => state.data.collected,
+    );
+    const collected = dataCollected as DataState['collected'];
+
+    for (const lng in collected[payload].translation) {
+      i18n.removeResourceBundle(lng, PACKAGES.translationNs);
+    }
+    for (const pkg in collected) {
+      for (const lng in collected[pkg].translation) {
+        if (lng in collected[payload].translation) {
+          i18n.addResourceBundle(
+            lng,
+            PACKAGES.translationNs,
+            collected[pkg].translation[lng],
+            true,
+          );
+        }
+      }
+    }
+    yield put(disablePackageSuccess(payload));
+  } catch (err) {
+    yield put(disablePackageFailed(String(err)));
+  }
+}
+
 export function* addPackageSaga({
   payload,
 }: PayloadAction<Package>): Generator<
@@ -158,6 +200,7 @@ export function* watchData() {
     takeLatest(initDataRequest, initSaga),
     takeLatest(reloadDataRequest, reloadSaga),
     takeLatest(activatePackageRequest, activatePackageSaga),
+    takeLatest(disablePackageRequest, disablePackageSaga),
     takeLatest(addPackageRequest, addPackageSaga),
   ]);
 }
