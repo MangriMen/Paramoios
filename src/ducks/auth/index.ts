@@ -54,10 +54,12 @@ export const authSlice = createSlice({
       state.isLoading = true;
       state.error = initialState.error;
     },
-    deleteUserSuccess: () => {},
+    deleteUserSuccess: (state) => {
+      state.isLoading = false;
+      state.isLogged = false;
+    },
     deleteUserFailed: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
-      state.isLogged = true;
       state.error = action.payload;
     },
   },
