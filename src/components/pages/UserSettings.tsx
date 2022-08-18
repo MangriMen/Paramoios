@@ -103,7 +103,8 @@ export const UserSettings: FC = () => {
         sx={{
           width: '100%',
           height: { md: 'calc(100vh - 6.5rem)' },
-          overflow: { md: 'scroll' },
+          overflowY: { md: 'auto' },
+          overflowX: 'hidden',
         }}
       >
         <Routes>
