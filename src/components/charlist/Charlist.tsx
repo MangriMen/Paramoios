@@ -1,17 +1,104 @@
 import { Grid, Typography } from '@mui/material';
-import { Inventory } from 'components/common/Inventory/Inventory';
-import { InventoryItem } from 'components/common/Inventory/InventoryItem';
+import { InventoryCard } from 'components/common/Inventory/InventoryCard';
 import ParAvatar from 'components/styled/ParAvatar';
 import ParBox from 'components/styled/ParBox';
 import ParContainer from 'components/styled/ParContainer';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import LiquidBar from './LiquidBar';
 import RollDiceButton from './RollDiceButton';
 
+export interface Ability {
+  enabled: boolean;
+  value: number;
+  override: number;
+}
+
+export interface InventoryItem {
+  name: string;
+  description: string;
+}
+
+export interface Inventory {
+  [x: number]: InventoryItem;
+}
+
+export interface Money {
+  copper: number;
+  silver: number;
+  electrum: number;
+  gold: number;
+  platinum: number;
+  [x: string]: number;
+}
+
+export interface Equipment {
+  inventory: Inventory;
+  money: Money;
+}
+
+export interface Character {
+  abilities: { [x: string]: Ability };
+  equipment: Equipment;
+}
+
+const characterInitialState: Character = {
+  abilities: {
+    acrobatics: { enabled: false, value: 0, override: 0 },
+    animalHandling: { enabled: false, value: 0, override: 0 },
+    arcana: { enabled: false, value: 0, override: 0 },
+    athletics: { enabled: false, value: 0, override: 0 },
+    deception: { enabled: false, value: 0, override: 0 },
+    history: { enabled: false, value: 0, override: 0 },
+    insight: { enabled: false, value: 0, override: 0 },
+    intimidation: { enabled: false, value: 0, override: 0 },
+    investigation: { enabled: false, value: 0, override: 0 },
+    medicine: { enabled: false, value: 0, override: 0 },
+    nature: { enabled: false, value: 0, override: 0 },
+    perception: { enabled: false, value: 0, override: 0 },
+    perfomance: { enabled: false, value: 0, override: 0 },
+    persuasion: { enabled: false, value: 0, override: 0 },
+    religion: { enabled: false, value: 0, override: 0 },
+    sleightOfHand: { enabled: false, value: 0, override: 0 },
+    stealth: { enabled: false, value: 0, override: 0 },
+    survival: { enabled: false, value: 0, override: 0 },
+  },
+  equipment: {
+    inventory: {
+      0: {
+        name: 'Helmet',
+        description: 'Stone sword',
+      },
+      2: {
+        name: 'Hummer',
+        description: 'Stone hummer',
+      },
+    },
+    money: {
+      copper: 0,
+      silver: 0,
+      electrum: 0,
+      gold: 0,
+      platinum: 0,
+    },
+  },
+};
+
 const Charlist: FC = () => {
   const { t } = useTranslation('translation', { keyPrefix: 'charlist' });
+
+  const [character, setCharacter] = useState<Character>(characterInitialState);
+
+  const setEquipment = (newEquipment: Character['equipment']) => {
+    setCharacter({ ...character, equipment: newEquipment });
+  };
+
+  const setInventory = (newInventory: Character['equipment']['inventory']) => {
+    setEquipment({ ...character.equipment, inventory: newInventory });
+  };
+
+  console.log(character);
 
   return (
     <ParContainer maxWidth="lg" sx={{ marginTop: '1rem', padding: '1rem' }}>
@@ -109,36 +196,12 @@ const Charlist: FC = () => {
               />
               {/* Equipment */}
               <ParBox mb="1rem" padding="1rem">
-                <Inventory rows={2} cols={4}>
-                  <InventoryItem
-                    data={{
-                      name: 'Sword',
-                      description: 'Stone sword',
-                    }}
-                    positionIndex={0}
-                  />
-                  <InventoryItem
-                    data={{
-                      name: 'Helmet',
-                      description: 'Stone sword',
-                    }}
-                    positionIndex={1}
-                  />
-                  <InventoryItem
-                    data={{
-                      name: 'Rope',
-                      description: 'Stone sword',
-                    }}
-                    positionIndex={2}
-                  />
-                  <InventoryItem
-                    data={{
-                      name: 'Stone',
-                      description: 'Stone sword',
-                    }}
-                    positionIndex={23}
-                  />
-                </Inventory>
+                <InventoryCard
+                  items={character.equipment.inventory}
+                  setItems={setInventory}
+                  rows={2}
+                  cols={4}
+                />
               </ParBox>
             </Grid>
           </Grid>

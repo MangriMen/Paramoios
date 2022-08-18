@@ -13,7 +13,13 @@ export const userInfo = {
       level: '16',
       race: 'Black stone',
       class: 'Rouge',
-      image: 'https://static.mineralmarket.ru/img/p/9633-89373.jpg',
+      img: 'https://static.mineralmarket.ru/img/p/9633-89373.jpg',
+      inventory: {
+        0: {
+          name: 'Helmet',
+          description: 'Stone sword',
+        },
+      },
     },
     {
       id: '2',

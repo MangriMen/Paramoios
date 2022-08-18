@@ -1,8 +1,10 @@
 import { Box } from '@mui/material';
+import { Inventory } from 'components/charlist/Charlist';
 import { Children, FC, ReactNode, useEffect, useState } from 'react';
 import { useDrop } from 'react-dnd';
 
 import { ItemTypes } from './InventoryItem';
+import { InventoryCardProps } from './interfaces';
 
 function getCoordinatesFromPosition(
   rows: number,
@@ -15,23 +17,19 @@ function getCoordinatesFromPosition(
   };
 }
 
-function getItemMapAndBounds(rows: number, cols: number, children: ReactNode) {
-  let bounds = { maxRow: 0, maxCol: 0 };
+function getItemMapAndBounds(rows: number, cols: number, items: Inventory) {
+  const bounds = { maxRow: 0, maxCol: 0 };
 
-  const itemMap = Children.toArray(children).reduce(
-    (map: { [x: string]: any }, child: any) => {
-      const { row, col } = getCoordinatesFromPosition(
-        rows,
-        cols,
-        child.props.positionIndex,
-      );
+  const itemMap = Object.keys(items).reduce(
+    (itemMap: { [x: string]: any }, key) => {
+      const { row, col } = getCoordinatesFromPosition(rows, cols, Number(key));
 
       bounds.maxRow = Math.max(bounds.maxRow, row);
       bounds.maxCol = Math.max(bounds.maxCol, col);
 
-      map[`${row};${col}`] = child;
+      itemMap[`${row};${col}`] = items[Number(key)];
 
-      return map;
+      return itemMap;
     },
     {},
   );
@@ -155,31 +153,29 @@ function createCells(
   return tempItems;
 }
 
-export const Inventory: FC<{
-  rows: number;
-  cols: number;
-  disableGrow?: boolean;
-  growDirection?: 'vertical' | 'horizontal';
-  children?: ReactNode;
-}> = ({ children, rows, cols, disableGrow, growDirection }) => {
+export const InventoryCard: FC<InventoryCardProps> = ({
+  items,
+  rows,
+  cols,
+  disableGrow,
+  growDirection = 'vertical',
+}) => {
   const [gridSize, setGridSize] = useState<{ rows: number; cols: number }>({
     rows: rows,
     cols: cols,
   });
 
-  const growDirection_ = growDirection ?? 'vertical';
-
-  const [items, setItems] = useState<ReactNode[]>();
+  const [renderedItems, setRenderedItems] = useState<ReactNode>();
 
   useEffect(() => {
     const { maxRow, maxCol, itemMap } = getItemMapAndBounds(
       gridSize.rows,
       gridSize.cols,
-      children,
+      items,
     );
 
-    const rows = Math.max(maxRow, gridSize.rows);
-    const cols = Math.max(maxCol, gridSize.cols);
+    const rows = Math.max(gridSize.rows, maxRow);
+    const cols = Math.max(gridSize.cols, maxCol);
 
     if (disableGrow) {
       if (rows === gridSize.rows && cols === gridSize.cols) {
@@ -187,7 +183,7 @@ export const Inventory: FC<{
       }
 
       setGridSize({ rows, cols });
-      setItems(createCells(rows, cols, itemMap));
+      setRenderedItems(createCells(rows, cols, itemMap));
 
       return;
     }
@@ -195,7 +191,7 @@ export const Inventory: FC<{
     const { additionalRows, additionalCols } = checkIfGrowIsNeeded(
       rows,
       cols,
-      growDirection_,
+      growDirection,
       itemMap,
     );
 
@@ -207,8 +203,10 @@ export const Inventory: FC<{
     const newCols = cols + additionalCols;
 
     setGridSize({ rows: newRows, cols: newCols });
-    setItems(createCells(newRows, newCols, itemMap));
-  }, [children, disableGrow, gridSize.cols, gridSize.rows, growDirection_]);
+    setRenderedItems(createCells(newRows, newCols, itemMap));
+  }, [items, gridSize.cols, gridSize.rows]);
+
+  // console.log(renderedItems);
 
   return (
     <Box
@@ -221,7 +219,7 @@ export const Inventory: FC<{
         alignContent: 'center',
       }}
     >
-      {items}
+      {renderedItems}
     </Box>
   );
 };
