@@ -11,16 +11,15 @@ import {
   TextField,
   Tooltip,
   Typography,
-  styled,
 } from '@mui/material';
+import { AbilityBase } from 'components/charlist/Abilities/AbilityBase';
+import { Ability } from 'components/charlist/Charlist';
 import ParBox from 'components/styled/ParBox';
 import { selectProperty } from 'ducks/data/selectors';
 import { RootState } from 'ducks/store';
-import { ChangeEvent, FC, ReactNode, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, FC, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-
-import { Ability } from './Charlist';
 
 export const EditButton: FC<{
   editing: boolean;
@@ -57,76 +56,6 @@ export const EditButton: FC<{
         {editing && <CloseIcon fontSize="small" sx={{ fontSize: '1.1rem' }} />}
       </IconButton>
     </Tooltip>
-  );
-};
-
-interface AbilityBaseProps {
-  title: string;
-  ability: string;
-  value: number;
-  enabled: boolean;
-  shadow?: boolean;
-}
-
-const AbilityBaseCell = styled(ParBox)({
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-});
-
-export const SkillBase: FC<AbilityBaseProps> = ({
-  title,
-  ability,
-  value,
-  enabled,
-  shadow,
-}) => {
-  const { t } = useTranslation('data', { keyPrefix: 'abilities' });
-
-  return (
-    <Box
-      sx={{
-        minWidth: '18rem',
-        display: 'grid',
-        gridTemplateColumns: '2.8rem 2.2rem 12rem',
-        columnGap: '0.5rem',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        fontSize: '1.1rem',
-      }}
-    >
-      <AbilityBaseCell
-        shadow={shadow}
-        sx={{
-          transition: 'filter 0.5s',
-          filter: !enabled ? 'brightness(65%)' : '',
-          gridColumn: '1',
-          zIndex: '1',
-        }}
-      >
-        <Typography
-          sx={{
-            fontSize: 'inherit',
-          }}
-        >
-          {`${value < 0 ? '' : '+'}${value}`}
-        </Typography>
-      </AbilityBaseCell>
-      <Typography
-        sx={{
-          gridColumn: '2',
-          fontSize: 'inherit',
-          textAlign: 'center',
-          color: '#606060',
-          textTransform: 'uppercase',
-        }}
-      >
-        {ability}
-      </Typography>
-      <AbilityBaseCell shadow={shadow} sx={{ gridColumn: '3' }}>
-        <Typography sx={{ fontSize: 'inherit' }}>{t(title)}</Typography>
-      </AbilityBaseCell>
-    </Box>
   );
 };
 
@@ -234,7 +163,7 @@ export const AbilityCard: FC<{
           }}
         >
           <EditButton editing={true} onClick={handleEditCancel} />
-          <SkillBase
+          <AbilityBase
             shadow
             title={title}
             ability={actualAbility}
@@ -295,7 +224,7 @@ export const AbilityCard: FC<{
       </Popover>
       <>
         <EditButton editing={false} onClick={handleEditDone} />
-        <SkillBase
+        <AbilityBase
           shadow
           title={title}
           ability={actualAbility}
@@ -305,28 +234,4 @@ export const AbilityCard: FC<{
       </>
     </Box>
   );
-};
-
-export const Abilities: FC<{
-  items: { [x: string]: Ability };
-  setItems: any;
-}> = ({ items, setItems, ...props }) => {
-  const [renderedItems, setRenderedItems] = useState<ReactNode>();
-
-  useEffect(() => {
-    setRenderedItems(
-      Object.keys(items).map((key) => (
-        <AbilityCard
-          key={key}
-          title={key}
-          item={items[key]}
-          onChange={(item: Ability) => {
-            setItems({ ...items, [key]: item });
-          }}
-        />
-      )),
-    );
-  }, [items, setItems]);
-
-  return <Box {...props}>{renderedItems}</Box>;
 };

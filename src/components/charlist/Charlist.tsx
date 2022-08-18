@@ -5,7 +5,7 @@ import ParContainer from 'components/styled/ParContainer';
 import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Abilities } from './Abilities';
+import { Abilities } from './Abilities/Abilities';
 import LiquidBar from './LiquidBar';
 import RollDiceButton from './RollDiceButton';
 
