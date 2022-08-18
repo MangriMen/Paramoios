@@ -24,6 +24,7 @@
     "notFoundDescription": "Возможно, здесь была гильдия воров"
   },
   "userProfile": {
+    "avatar": "Аватар",
     "name": "Имя",
     "email": "Почта",
     "otherInfo": "Дополнительная информация",
@@ -37,5 +38,31 @@
     "changeEmail": "Изменить email",
     "changePassword": "Изменить пароль",
     "chooseAvatar": "Выбрать аватар"
+  },
+  "mainPage": {
+    "welcome": "Добро пожаловать",
+    "myProfile": "Мой профиль",
+    "lastCharlist": "Последний персонаж"
+  },
+  "charlist": {
+    "traits": "Черты",
+    "ideals": "Идеалы",
+    "bonds": "Привязанности",
+    "flaws": "Пороки",
+    "otherProficienciesAndLanguages": "Другие умения и языки",
+    "featureAndTraits": "Особенности и способности",
+    "attacksAndSpellcasting": "Атаки и заклинания",
+    "equipment": "Снаряжение"
+  },
+  "schemas": {
+    "usernameMax": "Имя должно быть не более 20 символов",
+    "usernameRequired": "Требуется имя пользователя",
+    "email": "Почта должна быть действительной",
+    "emailRequired": "Требуется почта",
+    "passwordMin": "Пароль должен быть не менее 8 символов",
+    "passwordMustNotContainSpaces": "Пароль не должен содержать пробелов",
+    "passwordRequired": "Требуется пароль",
+    "confirmPasswordRequired": "Требуется подтверждение пароля",
+    "passwordMatch": "Пароли не совпадают"
   }
 }
