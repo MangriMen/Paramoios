@@ -65,6 +65,18 @@ export const authSlice = createSlice({
     sendVerificationEmailFailed: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
     },
+    deleteUserRequest: (state) => {
+      state.isLoading = true;
+      state.error = initialState.error;
+    },
+    deleteUserSuccess: (state) => {
+      state.isLoading = false;
+      state.isLogged = false;
+    },
+    deleteUserFailed: (state, action: PayloadAction<string>) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
   },
 });
 
@@ -82,4 +94,7 @@ export const {
   sendVerificationEmailRequest,
   sendVerificationEmailSuccess,
   sendVerificationEmailFailed,
+  deleteUserRequest,
+  deleteUserSuccess,
+  deleteUserFailed,
 } = authSlice.actions;

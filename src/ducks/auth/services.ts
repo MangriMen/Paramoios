@@ -30,3 +30,11 @@ export function logout() {
 
   return signOut(auth);
 }
+
+export function deleteUser() {
+  if (auth?.currentUser === null || auth?.currentUser === undefined) {
+    throw new Error('Delete user failed. With currentUser being undefined');
+  }
+
+  return auth.currentUser.delete();
+}
