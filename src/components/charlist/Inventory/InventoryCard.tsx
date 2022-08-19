@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 import { Inventory } from 'components/charlist/Charlist';
-import { InventoryCell } from 'components/common/Inventory/InventoryCell';
-import { InventoryCardProps } from 'components/common/Inventory/interfaces';
+import { InventoryCell } from 'components/charlist/Inventory/InventoryCell';
+import { InventoryCardProps } from 'components/charlist/Inventory/interfaces';
 import { FC, ReactNode, useEffect, useState } from 'react';
 
 export function getCoordinates(cols: number, position: number) {

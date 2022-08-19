@@ -1,10 +1,10 @@
 import { Box } from '@mui/material';
 import { Inventory } from 'components/charlist/Charlist';
-import { getCoordinates } from 'components/common/Inventory/InventoryCard';
+import { getCoordinates } from 'components/charlist/Inventory/InventoryCard';
 import {
   InventoryItemCard,
   ItemTypes,
-} from 'components/common/Inventory/InventoryItem';
+} from 'components/charlist/Inventory/InventoryItem';
 import { FC } from 'react';
 import { useDrop } from 'react-dnd';
 

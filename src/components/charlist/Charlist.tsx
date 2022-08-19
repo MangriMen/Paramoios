@@ -1,5 +1,5 @@
 import { Grid, Typography } from '@mui/material';
-import { InventoryCard } from 'components/common/Inventory/InventoryCard';
+import { InventoryCard } from 'components/charlist/Inventory/InventoryCard';
 import ParAvatar from 'components/styled/ParAvatar';
 import ParBox from 'components/styled/ParBox';
 import ParContainer from 'components/styled/ParContainer';
