@@ -6,3 +6,13 @@ export const ROUTE = {
   CHARLIST: '/charlist',
   PAGE_404: '*',
 };
+
+export const STORAGE = {
+  activePackages: 'activePackages',
+  packages: 'packages',
+};
+
+export const PACKAGES = {
+  defaultPackage: 'default',
+  translationNs: 'data',
+};

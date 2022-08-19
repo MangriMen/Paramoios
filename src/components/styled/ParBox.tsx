@@ -3,24 +3,26 @@ import { FC } from 'react';
 
 interface ParBoxProps extends BoxProps {
   title?: string;
+  shadow?: boolean;
 }
 
 const TITLE_HEIGHT = '0.9rem';
 
-const ParBox: FC<ParBoxProps> = ({ title, children, ...props }) => {
+const ParBox: FC<ParBoxProps> = ({ title, shadow, children, ...props }) => {
   return (
     <Box
       position="relative"
       display="flex"
       flexDirection="column"
       alignItems="center"
-      marginTop={title ? TITLE_HEIGHT : 0}
-      minWidth={props.minWidth}
-      width={props.width}
-      maxWidth={props.maxWidth}
+      borderRadius={props.borderRadius || '4px'}
+      marginTop={title && TITLE_HEIGHT}
       minHeight={props.minHeight}
       height={props.height}
       maxHeight={props.maxHeight}
+      minWidth={props.minWidth}
+      width={props.width}
+      maxWidth={props.maxWidth}
     >
       {title && (
         <Typography
@@ -34,6 +36,7 @@ const ParBox: FC<ParBoxProps> = ({ title, children, ...props }) => {
           borderRadius="4px"
           borderColor="primary.main"
           bgcolor="secondary.main"
+          boxShadow={shadow ? '0 0 10px 0 rgb(66 66 66 / 75%)' : ''}
         >
           {title}
         </Typography>
@@ -44,6 +47,7 @@ const ParBox: FC<ParBoxProps> = ({ title, children, ...props }) => {
         borderRadius="4px"
         borderColor="primary.main"
         bgcolor="secondary.main"
+        boxShadow={shadow ? '0 0 10px 0 rgb(66 66 66 / 75%)' : ''}
         {...props}
       >
         {children}

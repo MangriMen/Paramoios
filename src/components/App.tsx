@@ -8,8 +8,9 @@ import { UserSettingsComponent } from 'components/user/UserSettingsComponent';
 import { auth } from 'configs/firebase';
 import { ROUTE } from 'consts';
 import { loginSuccess, logoutSuccess } from 'ducks/auth';
+import { initDataRequest, reloadDataRequest } from 'ducks/data';
 import { fetchUser } from 'ducks/user';
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router';
 
@@ -18,6 +19,11 @@ import { UserRoute } from './routes/UserRoute';
 
 const App: FC = () => {
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(initDataRequest());
+    dispatch(reloadDataRequest());
+  }, [dispatch]);
 
   auth?.onAuthStateChanged((user) => {
     if (user) {
