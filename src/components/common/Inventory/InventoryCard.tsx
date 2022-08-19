@@ -1,11 +1,10 @@
 import { Box } from '@mui/material';
 import { Inventory } from 'components/charlist/Charlist';
+import { InventoryCell } from 'components/common/Inventory/InventoryCell';
+import { InventoryCardProps } from 'components/common/Inventory/interfaces';
 import { FC, ReactNode, useEffect, useState } from 'react';
 
-import { InventoryCell } from './InventoryCell';
-import { InventoryCardProps } from './interfaces';
-
-export function getCoordinatesFromPosition(cols: number, position: number) {
+export function getCoordinates(cols: number, position: number) {
   return {
     row: Math.floor(position / cols) + 1,
     col: (position % cols) + 1,
@@ -15,7 +14,7 @@ export function getCoordinatesFromPosition(cols: number, position: number) {
 function getBounds(cols: number, items: Inventory) {
   return Object.keys(items).reduce(
     (bounds: { maxRow: number; maxCol: number }, key) => {
-      const { row, col } = getCoordinatesFromPosition(cols, Number(key));
+      const { row, col } = getCoordinates(cols, Number(key));
       bounds.maxRow = Math.max(bounds.maxRow, row);
       bounds.maxCol = Math.max(bounds.maxCol, col);
       return bounds;

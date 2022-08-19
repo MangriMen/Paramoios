@@ -1,10 +1,12 @@
 import { Box } from '@mui/material';
 import { Inventory } from 'components/charlist/Charlist';
+import { getCoordinates } from 'components/common/Inventory/InventoryCard';
+import {
+  InventoryItemCard,
+  ItemTypes,
+} from 'components/common/Inventory/InventoryItem';
 import { FC } from 'react';
 import { useDrop } from 'react-dnd';
-
-import { getCoordinatesFromPosition } from './InventoryCard';
-import { InventoryItemCard, ItemTypes } from './InventoryItem';
 
 export const InventoryCell: FC<{
   index: number;
@@ -12,7 +14,7 @@ export const InventoryCell: FC<{
   items: Inventory;
   setItems: any;
 }> = ({ index, cols, items, setItems }) => {
-  const { row, col } = getCoordinatesFromPosition(cols, index);
+  const { row, col } = getCoordinates(cols, index);
 
   const [{ isOver }, drop] = useDrop(
     () => ({
