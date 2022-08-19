@@ -9,7 +9,10 @@ import {
   put,
   takeLatest,
 } from 'redux-saga/effects';
-import { setUserDisplayName } from 'tools/requests/requests';
+import {
+  sendVerificationEmail,
+  setUserDisplayName,
+} from 'tools/requests/requests';
 
 import {
   deleteUserFailed,
@@ -24,6 +27,9 @@ import {
   registerFailed,
   registerRequest,
   registerSuccess,
+  sendVerificationEmailFailed,
+  sendVerificationEmailRequest,
+  sendVerificationEmailSuccess,
 } from './index';
 import { LoginPayload, RegisterPayload } from './interfaces';
 import { deleteUser, login, logout, register } from './services';
@@ -58,6 +64,7 @@ function* registerSaga({
   try {
     yield call(register, payload);
     yield call(setUserDisplayName, payload.username);
+    yield put(sendVerificationEmailRequest());
     yield put(registerSuccess());
   } catch (err) {
     yield put(registerFailed(String(err)));
@@ -79,6 +86,21 @@ function* logoutSaga(): Generator<
   }
 }
 
+function* sendVerificationEmailSaga(): Generator<
+  | CallEffect<void>
+  | PutEffect<PayloadAction<void>>
+  | PutEffect<PayloadAction<string>>,
+  void,
+  void
+> {
+  try {
+    yield call(sendVerificationEmail);
+    yield put(sendVerificationEmailSuccess());
+  } catch (err) {
+    yield put(sendVerificationEmailFailed(String(err)));
+  }
+}
+
 function* deleteUserSaga(): Generator {
   try {
     yield call(deleteUser);
@@ -94,6 +116,7 @@ export function* watchAuth() {
     takeLatest(loginRequest, loginSaga),
     takeLatest(registerRequest, registerSaga),
     takeLatest(logoutRequest, logoutSaga),
+    takeLatest(sendVerificationEmailRequest, sendVerificationEmailSaga),
     takeLatest(deleteUserRequest, deleteUserSaga),
   ]);
 }
