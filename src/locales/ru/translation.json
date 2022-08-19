@@ -43,7 +43,16 @@
     "chooseAvatar": "Выбрать аватар",
     "deleteAccount": "Удалить аккаунт",
     "deleteAccountDialogTitle": "Подтвердите действие",
-    "deleteAccountDialogText": "После удаления вы не сможете восстановить аккаунт. Удалить аккаунт?"
+    "deleteAccountDialogText": "После удаления вы не сможете восстановить аккаунт. Удалить аккаунт?",
+    "information": "Информация",
+    "profile": "Профиль",
+    "password": "Пароль",
+    "personalization": "Персонализация"
+  },
+  "theme": {
+    "themeSettings": "Настройки темы",
+    "default": "Стандартная",
+    "bnw": "Чёрно-белая"
   },
   "mainPage": {
     "welcome": "Добро пожаловать",

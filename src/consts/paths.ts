@@ -7,6 +7,12 @@ export const ROUTE = {
   PAGE_404: '*',
 };
 
+export const ROUTE_SETTINGS = {
+  INFORMATION: 'information',
+  PASSWORD: 'password',
+  PERSONALIZATION: 'personalization',
+};
+
 export const STORAGE = {
   activePackages: 'activePackages',
   packages: 'packages',

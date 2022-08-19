@@ -1,4 +1,3 @@
-import { ThemeProvider } from '@mui/material';
 import 'assets/styles/index.css';
 import App from 'components/App';
 import 'configs/firebase.ts';
@@ -7,8 +6,6 @@ import { store } from 'ducks/store';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
-import defaultTheme from 'themes/default';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -16,11 +13,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <ThemeProvider theme={defaultTheme}>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </ThemeProvider>
+      <App />
     </Provider>
   </React.StrictMode>,
 );
