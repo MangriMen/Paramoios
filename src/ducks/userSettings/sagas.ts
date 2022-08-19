@@ -1,4 +1,5 @@
 import { PayloadAction } from '@reduxjs/toolkit';
+import { sendVerificationEmailRequest } from 'ducks/auth';
 import { fetchUserSaga } from 'ducks/user/sagas';
 import { UploadResult } from 'firebase/storage';
 import {
@@ -40,7 +41,7 @@ function* updateUsernameSaga({
     yield call(setUserDisplayName, payload);
     yield put(updateUserSuccess());
   } catch (err) {
-    yield put(updateUserFailed(err));
+    yield put(updateUserFailed(String(err)));
   }
 }
 
@@ -55,9 +56,10 @@ function* updateEmailSaga({
 > {
   try {
     yield call(setUserEmail, payload);
+    yield put(sendVerificationEmailRequest());
     yield put(updateUserSuccess());
   } catch (err) {
-    yield put(updateUserFailed(err));
+    yield put(updateUserFailed(String(err)));
   }
 }
 
@@ -74,7 +76,7 @@ function* updatePasswordSaga({
     yield call(setUserPassword, payload);
     yield put(updateUserSuccess());
   } catch (err) {
-    yield put(updateUserFailed(err));
+    yield put(updateUserFailed(String(err)));
   }
 }
 
@@ -95,7 +97,7 @@ function* updateImageSaga({
     yield call(setUserAvatar, url);
     yield put(updateUserSuccess());
   } catch (err) {
-    yield put(updateUserFailed(err));
+    yield put(updateUserFailed(String(err)));
   }
 }
 

@@ -1,9 +1,10 @@
 import { ThemeProvider } from '@mui/material';
 import { auth } from 'configs/firebase';
 import { loginSuccess, logoutSuccess } from 'ducks/auth';
+import { initDataRequest, reloadDataRequest } from 'ducks/data';
 import { selectTheme } from 'ducks/localSettings/selectors';
 import { fetchUser } from 'ducks/user';
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
@@ -13,6 +14,11 @@ const App: FC = () => {
   const dispatch = useDispatch();
 
   const theme = useSelector(selectTheme);
+
+  useEffect(() => {
+    dispatch(initDataRequest());
+    dispatch(reloadDataRequest());
+  }, [dispatch]);
 
   auth?.onAuthStateChanged((user) => {
     if (user) {

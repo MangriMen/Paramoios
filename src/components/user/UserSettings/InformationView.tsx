@@ -1,13 +1,26 @@
-import { Box, Button, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  DialogActions,
+  DialogContent,
+  Typography,
+} from '@mui/material';
 import FormButton from 'components/auth/FormButton';
 import FormField from 'components/auth/FormField';
 import ParAvatar from 'components/styled/ParAvatar';
+import ParBox from 'components/styled/ParBox';
+import {
+  ParDialog,
+  ParDialogContentText,
+  ParDialogTitle,
+} from 'components/styled/ParDialog';
 import { SettingSection } from 'components/user/SettingSection';
 import {
   EmailValue,
   UsernameValue,
   activeButtons,
 } from 'components/user/interfaces';
+import { deleteUserRequest } from 'ducks/auth';
 import { selectUser } from 'ducks/user/selectors';
 import { updateEmail, updateImage, updateUsername } from 'ducks/userSettings';
 import { Form, Formik } from 'formik';
@@ -28,11 +41,15 @@ const emailSettingsInitialValue: EmailValue = {
 };
 
 export const InformationView: FC = () => {
+  const { t } = useTranslation('translation', { keyPrefix: 'userSettings' });
+  const { t: tDialog } = useTranslation('translation', {
+    keyPrefix: 'dialog',
+  });
   const dispatch = useDispatch();
 
-  const { t } = useTranslation('translation', { keyPrefix: 'userSettings' });
-
   const user = useSelector(selectUser);
+
+  const [isOpenDialog, setIsOpenDialog] = useState<boolean>(false);
 
   const [fileResult, setFileResult] = useState<string | undefined>(undefined);
 
@@ -144,6 +161,19 @@ export const InformationView: FC = () => {
     if (typeof event.target?.result === 'string')
       setFileResult(event.target.result);
   }
+
+  const handleOpenDialog = () => {
+    setIsOpenDialog(true);
+  };
+
+  const handleCloseDialog = () => {
+    setIsOpenDialog(false);
+  };
+
+  const handleDeleteAccount = () => {
+    dispatch(deleteUserRequest());
+    setIsOpenDialog(false);
+  };
 
   return (
     <Box sx={{ width: '100%' }}>
@@ -287,6 +317,40 @@ export const InformationView: FC = () => {
             </Formik>
           </Box>
         </Box>
+        <ParBox
+          borderColor="error.main"
+          width="100%"
+          boxSizing="border-box"
+          marginTop="2rem"
+          padding="1rem"
+          display="flex"
+          justifyContent="left"
+        >
+          <ParDialog open={isOpenDialog} onClose={handleCloseDialog}>
+            <ParDialogTitle>{t('deleteAccountDialogTitle')}</ParDialogTitle>
+            <DialogContent>
+              <ParDialogContentText>
+                {t('deleteAccountDialogText')}
+              </ParDialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button color="secondary" onClick={handleCloseDialog}>
+                {tDialog('no')}
+              </Button>
+              <Button color="secondary" onClick={handleDeleteAccount}>
+                {tDialog('yes')}
+              </Button>
+            </DialogActions>
+          </ParDialog>
+          <Button
+            fullWidth
+            color="error"
+            variant="contained"
+            onClick={handleOpenDialog}
+          >
+            {t('deleteAccount')}
+          </Button>
+        </ParBox>
       </SettingSection>
     </Box>
   );

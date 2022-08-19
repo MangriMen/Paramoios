@@ -2,14 +2,54 @@ import { Grid, Typography } from '@mui/material';
 import ParAvatar from 'components/styled/ParAvatar';
 import ParBox from 'components/styled/ParBox';
 import ParContainer from 'components/styled/ParContainer';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { Abilities } from './Abilities/Abilities';
 import LiquidBar from './LiquidBar';
 import RollDiceButton from './RollDiceButton';
 
+export interface Ability {
+  enabled: boolean;
+  value: number;
+  override: number;
+}
+
+export interface Character {
+  abilities: { [x: string]: Ability };
+}
+
+const characterInitialState: Character = {
+  abilities: {
+    acrobatics: { enabled: false, value: 0, override: 0 },
+    animalHandling: { enabled: false, value: 0, override: 0 },
+    arcana: { enabled: false, value: 0, override: 0 },
+    athletics: { enabled: false, value: 0, override: 0 },
+    deception: { enabled: false, value: 0, override: 0 },
+    history: { enabled: false, value: 0, override: 0 },
+    insight: { enabled: false, value: 0, override: 0 },
+    intimidation: { enabled: false, value: 0, override: 0 },
+    investigation: { enabled: false, value: 0, override: 0 },
+    medicine: { enabled: false, value: 0, override: 0 },
+    nature: { enabled: false, value: 0, override: 0 },
+    perception: { enabled: false, value: 0, override: 0 },
+    perfomance: { enabled: false, value: 0, override: 0 },
+    persuasion: { enabled: false, value: 0, override: 0 },
+    religion: { enabled: false, value: 0, override: 0 },
+    sleightOfHand: { enabled: false, value: 0, override: 0 },
+    stealth: { enabled: false, value: 0, override: 0 },
+    survival: { enabled: false, value: 0, override: 0 },
+  },
+};
+
 const Charlist: FC = () => {
   const { t } = useTranslation('translation', { keyPrefix: 'charlist' });
+
+  const [character, setCharacter] = useState<Character>(characterInitialState);
+
+  const setAbilities = (newAbilities: Character['abilities']) => {
+    setCharacter({ ...character, abilities: newAbilities });
+  };
 
   return (
     <ParContainer maxWidth="lg" sx={{ marginTop: '1rem', padding: '1rem' }}>
@@ -74,7 +114,8 @@ const Charlist: FC = () => {
         >
           <Grid item xs={4}>
             <Grid container height="100%" flexDirection="column">
-              {Array.from(Array(17)).map((_, index) => (
+              <Abilities items={character.abilities} setItems={setAbilities} />
+              {/* {Array.from(Array(17)).map((_, index) => (
                 <Grid item key={index}>
                   <Grid
                     container
@@ -86,7 +127,7 @@ const Charlist: FC = () => {
                     ))}
                   </Grid>
                 </Grid>
-              ))}
+              ))} */}
             </Grid>
           </Grid>
           <Grid item xs={4}>

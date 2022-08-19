@@ -12,3 +12,13 @@ export const ROUTE_SETTINGS = {
   PASSWORD: 'password',
   PERSONALIZATION: 'personalization',
 };
+
+export const STORAGE = {
+  activePackages: 'activePackages',
+  packages: 'packages',
+};
+
+export const PACKAGES = {
+  defaultPackage: 'default',
+  translationNs: 'data',
+};
