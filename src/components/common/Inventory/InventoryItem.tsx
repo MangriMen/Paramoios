@@ -51,7 +51,7 @@ export const InventoryItemCard: FC<InventoryItemCardProps> = ({
     item: { positionIndex: positionIndex },
     type: ItemTypes.INVENTORY_ITEM,
     collect: (monitor) => ({
-      isDragging: !!monitor.isDragging(),
+      isDragging: monitor.isDragging(),
     }),
   }));
 

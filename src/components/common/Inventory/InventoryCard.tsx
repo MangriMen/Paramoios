@@ -1,12 +1,11 @@
 import { Box } from '@mui/material';
 import { Inventory } from 'components/charlist/Charlist';
 import { FC, ReactNode, useEffect, useState } from 'react';
-import { useDrop } from 'react-dnd';
 
-import { InventoryItemCard, ItemTypes } from './InventoryItem';
+import { InventoryCell } from './InventoryCell';
 import { InventoryCardProps } from './interfaces';
 
-function getCoordinatesFromPosition(cols: number, position: number) {
+export function getCoordinatesFromPosition(cols: number, position: number) {
   return {
     row: Math.floor(position / cols) + 1,
     col: (position % cols) + 1,
@@ -14,7 +13,7 @@ function getCoordinatesFromPosition(cols: number, position: number) {
 }
 
 function getBounds(cols: number, items: Inventory) {
-  const bounds = Object.keys(items).reduce(
+  return Object.keys(items).reduce(
     (bounds: { maxRow: number; maxCol: number }, key) => {
       const { row, col } = getCoordinatesFromPosition(cols, Number(key));
       bounds.maxRow = Math.max(bounds.maxRow, row);
@@ -23,8 +22,6 @@ function getBounds(cols: number, items: Inventory) {
     },
     { maxRow: 0, maxCol: 0 },
   );
-
-  return { maxRow: bounds.maxRow, maxCol: bounds.maxCol };
 }
 
 function checkIfGrowIsNeeded(
@@ -33,9 +30,10 @@ function checkIfGrowIsNeeded(
   growDirection: 'vertical' | 'horizontal',
   items: Inventory,
 ) {
+  const cellsCount = rows * cols;
+
   let itemsInLastRow = 0;
   let itemsInLastCol = 0;
-  const cellsCount = rows * cols;
 
   if (growDirection === 'vertical') {
     for (let i = cellsCount - cols; i <= cellsCount; i++) {
@@ -51,89 +49,6 @@ function checkIfGrowIsNeeded(
     additionalRows: Number(itemsInLastRow > 0),
     additionalCols: Number(itemsInLastCol > 0),
   };
-}
-
-export const InventoryCell: FC<{
-  index: number;
-  cols: number;
-  items: Inventory;
-  setItems: any;
-}> = ({ index, cols, items, setItems }) => {
-  const { row, col } = getCoordinatesFromPosition(cols, index);
-
-  const [{ isOver }, drop] = useDrop(
-    () => ({
-      accept: ItemTypes.INVENTORY_ITEM,
-      drop: (item: { [x: string]: number }) => {
-        const newItems = { ...items };
-        delete newItems[item.positionIndex];
-        setItems({ ...newItems, [index]: items[item.positionIndex] });
-      },
-      collect: (monitor) => ({
-        isOver: !!monitor.isOver(),
-      }),
-    }),
-    [],
-  );
-
-  return (
-    <Box
-      ref={drop}
-      gridColumn={col}
-      gridRow={row}
-      width="3rem"
-      height="3rem"
-      position="relative"
-      boxSizing="border-box"
-      sx={{
-        borderWidth: items[index] ? '0' : '1px',
-        borderStyle: 'solid',
-        borderColor: 'primary.main',
-        borderRadius: '4px',
-        filter: isOver ? 'brightness(200%)' : 'brightness(100%)',
-      }}
-    >
-      {items[index] && (
-        <InventoryItemCard data={items[index]} positionIndex={index} />
-      )}
-      {isOver && (
-        <Box
-          sx={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            height: '100%',
-            width: '100%',
-            borderRadius: '4px',
-            zIndex: 1,
-            opacity: 0.5,
-            backgroundColor: 'secondary.light',
-          }}
-        />
-      )}
-    </Box>
-  );
-};
-
-function createCells(
-  rows: number,
-  cols: number,
-  items: Inventory,
-  setItems: any,
-) {
-  const tempItems: ReactNode[] = [];
-  for (let i = 0; i < cols * rows; i++) {
-    tempItems.push(
-      <InventoryCell
-        key={i}
-        index={i}
-        cols={cols}
-        items={items}
-        setItems={setItems}
-      />,
-    );
-  }
-  return tempItems;
 }
 
 export const InventoryCard: FC<InventoryCardProps> = ({
@@ -171,12 +86,20 @@ export const InventoryCard: FC<InventoryCardProps> = ({
       newGridSize.cols += additionalCols;
     }
 
-    setGridSize({ ...newGridSize });
+    setGridSize(newGridSize);
     setRenderedItems(
-      createCells(newGridSize.rows, newGridSize.cols, items, setItems),
+      Array.from(Array(rows * cols)).map((_, index) => (
+        <InventoryCell
+          key={index}
+          index={index}
+          cols={cols}
+          items={items}
+          setItems={setItems}
+        />
+      )),
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [items, setItems]);
+  }, [rows, cols, disableGrow, growDirection, items, setItems]);
 
   return (
     <Box
