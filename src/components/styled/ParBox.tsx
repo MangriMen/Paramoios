@@ -40,6 +40,8 @@ const ParBox: FC<ParBoxProps> = ({
           borderColor="primary.main"
           bgcolor="secondary.main"
           boxShadow={shadow ? '0 0 10px 0 rgb(66 66 66 / 75%)' : ''}
+          fontSize="1.25rem"
+          lineHeight="1.2"
           {...titleProps}
         >
           {title}
