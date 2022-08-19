@@ -1,7 +1,9 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
-  error: null,
+import { UserSettingsState } from './interfaces';
+
+const initialState: UserSettingsState = {
+  error: '',
   loading: {
     username: false,
     email: false,
@@ -14,24 +16,24 @@ export const userSettingsSlice = createSlice({
   name: '@@user',
   initialState,
   reducers: {
-    updateUsername(state, action: PayloadAction<string>) {
-      state.error = null;
+    updateUsername(state, _action: PayloadAction<string>) {
+      state.error = initialState.error;
       state.loading.username = true;
     },
     updateEmail(state, action) {
-      state.error = null;
+      state.error = initialState.error;
       state.loading.email = true;
     },
     updatePassword(state, action) {
-      state.error = null;
+      state.error = initialState.error;
       state.loading.password = true;
     },
     updateImage(state, action) {
-      state.error = null;
+      state.error = initialState.error;
       state.loading.image = true;
     },
     updateUserSuccess(state) {
-      state.error = null;
+      state.error = initialState.error;
       state.loading = initialState.loading;
     },
     updateUserFailed(state, action) {

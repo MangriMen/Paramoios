@@ -1,3 +1,9 @@
+export interface AuthState {
+  isLoading: boolean;
+  isLogged: boolean;
+  error: string;
+}
+
 export interface LoginPayload {
   email: string;
   password: string;
