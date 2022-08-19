@@ -64,5 +64,14 @@
     "passwordRequired": "Требуется пароль",
     "confirmPasswordRequired": "Требуется подтверждение пароля",
     "passwordMatch": "Пароли не совпадают"
+  },
+  "equipment": {
+    "money": {
+      "copper": "Медь",
+      "silver": "Серебро",
+      "electrum": "Электрум",
+      "gold": "Золото",
+      "platinum": "Платина"
+    }
   }
 }

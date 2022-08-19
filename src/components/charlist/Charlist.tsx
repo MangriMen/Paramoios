@@ -1,11 +1,11 @@
 import { Grid, Typography } from '@mui/material';
-import { InventoryCard } from 'components/charlist/Inventory/InventoryCard';
 import ParAvatar from 'components/styled/ParAvatar';
 import ParBox from 'components/styled/ParBox';
 import ParContainer from 'components/styled/ParContainer';
 import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { EquipmentCard, MONEY_OFFSET } from './Equipment/EquipmentCard';
 import LiquidBar from './LiquidBar';
 import RollDiceButton from './RollDiceButton';
 
@@ -93,12 +93,6 @@ const Charlist: FC = () => {
   const setEquipment = (newEquipment: Character['equipment']) => {
     setCharacter({ ...character, equipment: newEquipment });
   };
-
-  const setInventory = (newInventory: Character['equipment']['inventory']) => {
-    setEquipment({ ...character.equipment, inventory: newInventory });
-  };
-
-  // console.log(character.equipment.inventory);
 
   return (
     <ParContainer maxWidth="lg" sx={{ marginTop: '1rem', padding: '1rem' }}>
@@ -195,12 +189,14 @@ const Charlist: FC = () => {
                 padding="1rem"
               />
               {/* Equipment */}
-              <ParBox mb="1rem" padding="1rem">
-                <InventoryCard
-                  items={character.equipment.inventory}
-                  setItems={setInventory}
-                  rows={2}
-                  cols={4}
+              <ParBox
+                title={t('equipment')}
+                containerProps={{ marginLeft: MONEY_OFFSET }}
+                sx={{ alignSelf: 'center', padding: '1.45rem 1rem 1rem 1rem' }}
+              >
+                <EquipmentCard
+                  items={character.equipment}
+                  setItems={setEquipment}
                 />
               </ParBox>
             </Grid>
