@@ -1,58 +1,49 @@
 import { Box } from '@mui/material';
 import { Inventory } from 'components/charlist/Charlist';
-import { Children, FC, ReactNode, useEffect, useState } from 'react';
+import { FC, ReactNode, useEffect, useState } from 'react';
 import { useDrop } from 'react-dnd';
 
-import { ItemTypes } from './InventoryItem';
+import { InventoryItemCard, ItemTypes } from './InventoryItem';
 import { InventoryCardProps } from './interfaces';
 
-function getCoordinatesFromPosition(
-  rows: number,
-  cols: number,
-  position: number,
-) {
+function getCoordinatesFromPosition(cols: number, position: number) {
   return {
     row: Math.floor(position / cols) + 1,
     col: (position % cols) + 1,
   };
 }
 
-function getItemMapAndBounds(rows: number, cols: number, items: Inventory) {
-  const bounds = { maxRow: 0, maxCol: 0 };
-
-  const itemMap = Object.keys(items).reduce(
-    (itemMap: { [x: string]: any }, key) => {
-      const { row, col } = getCoordinatesFromPosition(rows, cols, Number(key));
-
+function getBounds(cols: number, items: Inventory) {
+  const bounds = Object.keys(items).reduce(
+    (bounds: { maxRow: number; maxCol: number }, key) => {
+      const { row, col } = getCoordinatesFromPosition(cols, Number(key));
       bounds.maxRow = Math.max(bounds.maxRow, row);
       bounds.maxCol = Math.max(bounds.maxCol, col);
-
-      itemMap[`${row};${col}`] = items[Number(key)];
-
-      return itemMap;
+      return bounds;
     },
-    {},
+    { maxRow: 0, maxCol: 0 },
   );
 
-  return { maxRow: bounds.maxRow, maxCol: bounds.maxCol, itemMap };
+  return { maxRow: bounds.maxRow, maxCol: bounds.maxCol };
 }
 
 function checkIfGrowIsNeeded(
   rows: number,
   cols: number,
   growDirection: 'vertical' | 'horizontal',
-  itemMap: { [x: string]: any },
+  items: Inventory,
 ) {
   let itemsInLastRow = 0;
   let itemsInLastCol = 0;
+  const cellsCount = rows * cols;
 
   if (growDirection === 'vertical') {
-    for (let i = 1; i <= cols; i++) {
-      itemsInLastRow += Number(Boolean(itemMap[`${rows};${i}`]));
+    for (let i = cellsCount - cols; i <= cellsCount; i++) {
+      itemsInLastRow += Number(Boolean(items[i]));
     }
   } else if (growDirection === 'horizontal') {
-    for (let i = 1; i <= rows; i++) {
-      itemsInLastCol += Number(Boolean(itemMap[`${i};${cols}`]));
+    for (let i = cols - 1; i <= cellsCount; i += cols) {
+      itemsInLastCol += Number(Boolean(items[i]));
     }
   }
 
@@ -63,52 +54,48 @@ function checkIfGrowIsNeeded(
 }
 
 export const InventoryCell: FC<{
-  x: number;
-  y: number;
-  rows: number;
+  index: number;
   cols: number;
-  children?: ReactNode;
-  itemMap: { [x: string]: any };
-}> = ({ x, y, rows, cols, itemMap }) => {
-  const key = `${y};${x}`;
+  items: Inventory;
+  setItems: any;
+}> = ({ index, cols, items, setItems }) => {
+  const { row, col } = getCoordinatesFromPosition(cols, index);
 
   const [{ isOver }, drop] = useDrop(
     () => ({
       accept: ItemTypes.INVENTORY_ITEM,
       drop: (item: { [x: string]: number }) => {
-        const { row, col } = getCoordinatesFromPosition(
-          rows,
-          cols,
-          item.positionIndex,
-        );
-        const oldKey = `${row};${col}`;
-        delete Object.assign(itemMap, { [key]: itemMap[oldKey] })[oldKey];
+        const newItems = { ...items };
+        delete newItems[item.positionIndex];
+        setItems({ ...newItems, [index]: items[item.positionIndex] });
       },
       collect: (monitor) => ({
         isOver: !!monitor.isOver(),
       }),
     }),
-    [x, y],
+    [],
   );
 
   return (
     <Box
       ref={drop}
-      gridColumn={x}
-      gridRow={y}
+      gridColumn={col}
+      gridRow={row}
       width="3rem"
       height="3rem"
       position="relative"
       boxSizing="border-box"
       sx={{
-        borderWidth: itemMap[key] ? '0' : '1px',
+        borderWidth: items[index] ? '0' : '1px',
         borderStyle: 'solid',
         borderColor: 'primary.main',
         borderRadius: '4px',
         filter: isOver ? 'brightness(200%)' : 'brightness(100%)',
       }}
     >
-      {itemMap[key]}
+      {items[index] && (
+        <InventoryItemCard data={items[index]} positionIndex={index} />
+      )}
       {isOver && (
         <Box
           sx={{
@@ -131,30 +118,27 @@ export const InventoryCell: FC<{
 function createCells(
   rows: number,
   cols: number,
-  itemMap: { [x: string]: any },
+  items: Inventory,
+  setItems: any,
 ) {
   const tempItems: ReactNode[] = [];
-  for (let i = 1; i <= cols; i++) {
-    for (let j = 1; j <= rows; j++) {
-      const key = `${j};${i}`;
-      tempItems.push(
-        <InventoryCell
-          rows={rows}
-          cols={cols}
-          key={key}
-          x={i}
-          y={j}
-          itemMap={itemMap}
-        />,
-      );
-    }
+  for (let i = 0; i < cols * rows; i++) {
+    tempItems.push(
+      <InventoryCell
+        key={i}
+        index={i}
+        cols={cols}
+        items={items}
+        setItems={setItems}
+      />,
+    );
   }
-
   return tempItems;
 }
 
 export const InventoryCard: FC<InventoryCardProps> = ({
   items,
+  setItems,
   rows,
   cols,
   disableGrow,
@@ -168,45 +152,31 @@ export const InventoryCard: FC<InventoryCardProps> = ({
   const [renderedItems, setRenderedItems] = useState<ReactNode>();
 
   useEffect(() => {
-    const { maxRow, maxCol, itemMap } = getItemMapAndBounds(
-      gridSize.rows,
-      gridSize.cols,
-      items,
-    );
+    const { maxRow, maxCol } = getBounds(gridSize.cols, items);
 
-    const rows = Math.max(gridSize.rows, maxRow);
-    const cols = Math.max(gridSize.cols, maxCol);
+    const newGridSize = {
+      rows: Math.max(gridSize.rows, maxRow),
+      cols: Math.max(gridSize.cols, maxCol),
+    };
 
-    if (disableGrow) {
-      if (rows === gridSize.rows && cols === gridSize.cols) {
-        return;
-      }
+    if (!disableGrow) {
+      const { additionalRows, additionalCols } = checkIfGrowIsNeeded(
+        newGridSize.rows,
+        newGridSize.cols,
+        growDirection,
+        items,
+      );
 
-      setGridSize({ rows, cols });
-      setRenderedItems(createCells(rows, cols, itemMap));
-
-      return;
+      newGridSize.rows += additionalRows;
+      newGridSize.cols += additionalCols;
     }
 
-    const { additionalRows, additionalCols } = checkIfGrowIsNeeded(
-      rows,
-      cols,
-      growDirection,
-      itemMap,
+    setGridSize({ ...newGridSize });
+    setRenderedItems(
+      createCells(newGridSize.rows, newGridSize.cols, items, setItems),
     );
-
-    if (!additionalRows && !additionalCols) {
-      return;
-    }
-
-    const newRows = rows + additionalRows;
-    const newCols = cols + additionalCols;
-
-    setGridSize({ rows: newRows, cols: newCols });
-    setRenderedItems(createCells(newRows, newCols, itemMap));
-  }, [items, gridSize.cols, gridSize.rows]);
-
-  // console.log(renderedItems);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [items, setItems]);
 
   return (
     <Box

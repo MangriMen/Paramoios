@@ -8,7 +8,7 @@ export interface InventoryItemDataProps {
   description?: string;
 }
 
-export interface InventoryItemProps {
+export interface InventoryItemCardProps {
   icon?: any;
   data: InventoryItemDataProps;
   positionIndex: number;
@@ -19,7 +19,7 @@ export const InventoryItemPopover: FC<InventoryItemDataProps> = ({
   description,
 }) => {
   return (
-    <ParBox padding="0.25rem 0.5rem">
+    <ParBox sx={{ padding: '0.25rem 0.5rem' }}>
       <Typography fontSize="1.2rem">{name}</Typography>
       <Typography>{description}</Typography>
     </ParBox>
@@ -30,7 +30,7 @@ export const ItemTypes = {
   INVENTORY_ITEM: 'inventoryItem',
 };
 
-export const InventoryItem: FC<InventoryItemProps> = ({
+export const InventoryItemCard: FC<InventoryItemCardProps> = ({
   icon,
   data,
   positionIndex,

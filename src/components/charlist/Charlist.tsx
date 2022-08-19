@@ -98,7 +98,7 @@ const Charlist: FC = () => {
     setEquipment({ ...character.equipment, inventory: newInventory });
   };
 
-  console.log(character);
+  // console.log(character.equipment.inventory);
 
   return (
     <ParContainer maxWidth="lg" sx={{ marginTop: '1rem', padding: '1rem' }}>
