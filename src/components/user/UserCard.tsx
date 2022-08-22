@@ -1,13 +1,23 @@
-import { Box, Card, Typography, TypographyProps } from '@mui/material';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
+import {
+  Box,
+  Button,
+  Card,
+  Tooltip,
+  Typography,
+  TypographyProps,
+} from '@mui/material';
 import ParAvatar from 'components/styled/ParAvatar';
 import ParDivider from 'components/styled/ParDivider';
 import ParLink from 'components/styled/ParLink';
 import { ROUTE } from 'consts';
+import { sendVerificationEmailRequest } from 'ducks/auth';
 import { selectUser } from 'ducks/user/selectors';
 import { userInfo } from 'mocks/mockUserInfo';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 const characterCards = (characters: any) =>
@@ -38,7 +48,9 @@ const characterCards = (characters: any) =>
     </Card>
   ));
 
-export const StyledTypography: FC<TypographyProps> = ({ sx, ...props }) => {
+export const StyledTypography: FC<
+  TypographyProps & { component?: React.ElementType<any> }
+> = ({ sx, ...props }) => {
   return (
     <Typography
       variant="h3"
@@ -56,11 +68,22 @@ export const StyledTypography: FC<TypographyProps> = ({ sx, ...props }) => {
 
 const UserCard: FC = () => {
   const { t } = useTranslation('translation', { keyPrefix: 'userProfile' });
-  const user = useSelector(selectUser);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const user = useSelector(selectUser);
+
+  const resendVerificationEmail = () => {
+    dispatch(sendVerificationEmailRequest());
+  };
 
   const toSettings = () => {
     navigate(ROUTE.SETTINGS);
+  };
+
+  const emailVerificationIconStyle = {
+    marginLeft: '0.5rem',
+    fontSize: '2.2rem',
   };
 
   return (
@@ -101,7 +124,32 @@ const UserCard: FC = () => {
       >
         <StyledTypography>{t('name')}:</StyledTypography>
         <StyledTypography color="black">{user.username}</StyledTypography>
-        <StyledTypography>{t('email')}:</StyledTypography>
+        <StyledTypography sx={{ display: 'inline-flex', alignItems: 'center' }}>
+          {t('email')}
+          <Tooltip
+            title={
+              <Typography textAlign="center">
+                {t(user.isEmailVerified ? 'emailVerified' : 'emailNotVerified')}
+                {!user.isEmailVerified && (
+                  <Button
+                    size="small"
+                    color="secondary"
+                    onClick={resendVerificationEmail}
+                  >
+                    {t('resendVerificationEmail')}
+                  </Button>
+                )}
+              </Typography>
+            }
+          >
+            {user.isEmailVerified ? (
+              <CheckCircleOutlineIcon sx={emailVerificationIconStyle} />
+            ) : (
+              <ErrorOutlineIcon sx={emailVerificationIconStyle} />
+            )}
+          </Tooltip>
+          :
+        </StyledTypography>
         <StyledTypography color="black">{user.email}</StyledTypography>
         <StyledTypography>{t('otherInfo')}:</StyledTypography>
         <StyledTypography color="black">{userInfo.otherInfo}</StyledTypography>

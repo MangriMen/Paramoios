@@ -15,6 +15,5 @@ export interface PasswordValue {
 export interface activeButtons {
   username: boolean;
   email: boolean;
-  password: boolean;
   avatar: boolean;
 }
