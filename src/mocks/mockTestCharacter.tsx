@@ -1,5 +1,5 @@
 export const testCharacter = {
-  packages: 'default, unknown',
+  packages: 'default',
   character: {
     abilities: {
       acrobatics: { enabled: false, value: 0, override: 0 },
