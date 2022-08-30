@@ -1,42 +1,15 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { Ability, InventoryItem } from 'components/charlist/Charlist';
 
-import { CharacterState } from './interfaces';
+import { CharacterSave, CharacterState } from './interfaces';
 
 const initialState: CharacterState = {
   error: '',
+  packages: '',
   character: {
-    abilities: {
-      acrobatics: { enabled: false, value: 0, override: 0 },
-      animalHandling: { enabled: false, value: 0, override: 0 },
-      arcana: { enabled: false, value: 0, override: 0 },
-      athletics: { enabled: false, value: 0, override: 0 },
-      deception: { enabled: false, value: 0, override: 0 },
-      history: { enabled: false, value: 0, override: 0 },
-      insight: { enabled: false, value: 0, override: 0 },
-      intimidation: { enabled: false, value: 0, override: 0 },
-      investigation: { enabled: false, value: 0, override: 0 },
-      medicine: { enabled: false, value: 0, override: 0 },
-      nature: { enabled: false, value: 0, override: 0 },
-      perception: { enabled: false, value: 0, override: 0 },
-      perfomance: { enabled: false, value: 0, override: 0 },
-      persuasion: { enabled: false, value: 0, override: 0 },
-      religion: { enabled: false, value: 0, override: 0 },
-      sleightOfHand: { enabled: false, value: 0, override: 0 },
-      stealth: { enabled: false, value: 0, override: 0 },
-      survival: { enabled: false, value: 0, override: 0 },
-    },
+    abilities: {},
     equipment: {
-      inventory: {
-        0: {
-          name: 'Helmet',
-          description: 'Stone sword',
-        },
-        2: {
-          name: 'Hummer',
-          description: 'Stone hummer',
-        },
-      },
+      inventory: {},
       money: {
         copper: 0,
         silver: 0,
@@ -52,6 +25,16 @@ export const characterSlice = createSlice({
   name: '@@character',
   initialState,
   reducers: {
+    loadCharacterRequest: (state, _action: PayloadAction<CharacterSave>) => {
+      state.error = initialState.error;
+    },
+    loadCharacterSuccess: (state, action: PayloadAction<CharacterSave>) => {
+      state.packages = action.payload.packages;
+      state.character = action.payload.character;
+    },
+    loadCharacterFailed: (state, action: PayloadAction<string>) => {
+      state.error = action.payload;
+    },
     setCoin: (
       state,
       action: PayloadAction<{ name: string; value: number }>,
@@ -84,4 +67,11 @@ export const characterSlice = createSlice({
 });
 
 export default characterSlice.reducer;
-export const { setCoin, setInventoryItem, setAbility } = characterSlice.actions;
+export const {
+  loadCharacterRequest,
+  loadCharacterSuccess,
+  loadCharacterFailed,
+  setCoin,
+  setInventoryItem,
+  setAbility,
+} = characterSlice.actions;

@@ -2,8 +2,11 @@ import { Grid, Typography } from '@mui/material';
 import ParAvatar from 'components/styled/ParAvatar';
 import ParBox from 'components/styled/ParBox';
 import ParContainer from 'components/styled/ParContainer';
-import { FC } from 'react';
+import { loadCharacterRequest } from 'ducks/character';
+import { testCharacter } from 'mocks/mockTestCharacter';
+import { FC, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useDispatch } from 'react-redux';
 
 import { Abilities } from './Abilities/Abilities';
 import { EquipmentCard, MONEY_OFFSET } from './Equipment/EquipmentCard';
@@ -45,7 +48,12 @@ export interface Character {
 }
 
 const Charlist: FC = () => {
+  const dispatch = useDispatch();
   const { t } = useTranslation('translation', { keyPrefix: 'charlist' });
+
+  useEffect(() => {
+    dispatch(loadCharacterRequest(testCharacter));
+  }, [dispatch]);
 
   return (
     <ParContainer maxWidth="lg" sx={{ marginTop: '1rem', padding: '1rem' }}>
