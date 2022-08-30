@@ -20,7 +20,9 @@ export const InventoryItemPopover: FC<InventoryItemDataProps> = ({
 }) => {
   return (
     <ParBox sx={{ padding: '0.25rem 0.5rem' }}>
-      <Typography fontSize="1.2rem">{name}</Typography>
+      <Typography color="primary" fontSize="1.2rem">
+        {name}
+      </Typography>
       <Typography>{description}</Typography>
     </ParBox>
   );
