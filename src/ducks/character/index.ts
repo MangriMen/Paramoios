@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { InventoryItem } from 'components/charlist/Charlist';
+import { Ability, InventoryItem } from 'components/charlist/Charlist';
 
 import { CharacterState } from './interfaces';
 
@@ -74,8 +74,14 @@ export const characterSlice = createSlice({
           action.payload.value;
       }
     },
+    setAbility: (
+      state,
+      action: PayloadAction<{ name: string; value: Ability }>,
+    ) => {
+      state.character.abilities[action.payload.name] = action.payload.value;
+    },
   },
 });
 
 export default characterSlice.reducer;
-export const { setCoin, setInventoryItem } = characterSlice.actions;
+export const { setCoin, setInventoryItem, setAbility } = characterSlice.actions;

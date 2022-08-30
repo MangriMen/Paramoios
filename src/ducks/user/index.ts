@@ -1,14 +1,15 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import { FetchUserPayload } from './interfaces';
+import { FetchUserPayload, UserState } from './interfaces';
 
-const initialState = {
-  error: '',
+const initialState: UserState = {
   isLoading: false,
+  error: '',
   user: {
     avatar: '',
     username: '',
     email: '',
+    isEmailVerified: false,
   },
 };
 
@@ -17,19 +18,22 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     fetchUser(state) {
-      state.error = initialState.error;
       state.isLoading = true;
+      state.error = initialState.error;
+      state.user = initialState.user;
     },
     fetchUserSuccess(state, action: PayloadAction<FetchUserPayload>) {
       state.isLoading = initialState.isLoading;
+      state.error = initialState.error;
       state.user.username = action.payload.username;
       state.user.email = action.payload.email;
       state.user.avatar = action.payload.avatar;
+      state.user.isEmailVerified = action.payload.isEmailVerified;
     },
     fetchUserFailed(state, action: PayloadAction<string>) {
       state.isLoading = initialState.isLoading;
-      state.user = initialState.user;
       state.error = action.payload;
+      state.user = initialState.user;
     },
   },
 });

@@ -5,6 +5,7 @@ import ParContainer from 'components/styled/ParContainer';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { Abilities } from './Abilities/Abilities';
 import { EquipmentCard, MONEY_OFFSET } from './Equipment/EquipmentCard';
 import LiquidBar from './LiquidBar';
 import RollDiceButton from './RollDiceButton';
@@ -109,7 +110,8 @@ const Charlist: FC = () => {
         >
           <Grid item xs={4}>
             <Grid container height="100%" flexDirection="column">
-              {Array.from(Array(17)).map((_, index) => (
+              <Abilities />
+              {/* {Array.from(Array(17)).map((_, index) => (
                 <Grid item key={index}>
                   <Grid
                     container
@@ -121,7 +123,7 @@ const Charlist: FC = () => {
                     ))}
                   </Grid>
                 </Grid>
-              ))}
+              ))} */}
             </Grid>
           </Grid>
           <Grid item xs={4}>

@@ -30,14 +30,29 @@
     "otherInfo": "Дополнительная информация",
     "settings": "Настройки",
     "description": "Описание",
-    "yourCharacters": "Твои персонажи"
+    "yourCharacters": "Твои персонажи",
+    "emailVerified": "Подтверждена",
+    "emailNotVerified": "Не подтверждена. Обновите страницу если вы уже подтвердили почту.",
+    "resendVerificationEmail": "Нажмите чтобы отправить подтверждение ещё раз"
   },
   "userSettings": {
     "changeAvatar": "Изменить аватар",
     "changeUsername": "Изменить имя",
     "changeEmail": "Изменить email",
     "changePassword": "Изменить пароль",
-    "chooseAvatar": "Выбрать аватар"
+    "chooseAvatar": "Выбрать аватар",
+    "deleteAccount": "Удалить аккаунт",
+    "deleteAccountDialogTitle": "Подтвердите действие",
+    "deleteAccountDialogText": "После удаления вы не сможете восстановить аккаунт. Удалить аккаунт?",
+    "information": "Информация",
+    "profile": "Профиль",
+    "password": "Пароль",
+    "personalization": "Персонализация"
+  },
+  "theme": {
+    "themeSettings": "Настройки темы",
+    "default": "Стандартная",
+    "bnw": "Чёрно-белая"
   },
   "mainPage": {
     "welcome": "Добро пожаловать",
@@ -64,6 +79,20 @@
     "passwordRequired": "Требуется пароль",
     "confirmPasswordRequired": "Требуется подтверждение пароля",
     "passwordMatch": "Пароли не совпадают"
+  },
+  "dialog": {
+    "yes": "Да",
+    "no": "Нет",
+    "accept": "Принять",
+    "cancel": "Отменить",
+    "edit": "Редактировать",
+    "close": "Закрыть",
+    "done": "Готово"
+  },
+  "abilities": {
+    "activate": "Активировать",
+    "disable": "Деактивировать",
+    "override": "Переопределить"
   },
   "equipment": {
     "money": {

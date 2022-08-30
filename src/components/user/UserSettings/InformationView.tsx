@@ -1,31 +1,36 @@
-import { Box, Button, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  DialogActions,
+  DialogContent,
+  Typography,
+} from '@mui/material';
 import FormButton from 'components/auth/FormButton';
 import FormField from 'components/auth/FormField';
 import ParAvatar from 'components/styled/ParAvatar';
-import ParContainer from 'components/styled/ParContainer';
-import { selectUser } from 'ducks/user/selectors';
+import ParBox from 'components/styled/ParBox';
 import {
-  updateEmail,
-  updateImage,
-  updatePassword,
-  updateUsername,
-} from 'ducks/userSettings';
+  ParDialog,
+  ParDialogContentText,
+  ParDialogTitle,
+} from 'components/styled/ParDialog';
+import { SettingSection } from 'components/user/SettingSection';
+import {
+  EmailValue,
+  UsernameValue,
+  activeButtons,
+} from 'components/user/interfaces';
+import { deleteUserRequest } from 'ducks/auth';
+import { selectUser } from 'ducks/user/selectors';
+import { updateEmail, updateImage, updateUsername } from 'ducks/userSettings';
 import { Form, Formik } from 'formik';
 import { BaseSyntheticEvent, FC, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   emailSettingsSchema,
-  passwordSettingsSchema,
   usernameSettingsSchema,
 } from 'schemas/userSettings';
-
-import {
-  EmailValue,
-  PasswordValue,
-  UsernameValue,
-  activeButtons,
-} from './interfaces';
 
 const usernameSettingsInitialValue: UsernameValue = {
   username: '',
@@ -35,17 +40,16 @@ const emailSettingsInitialValue: EmailValue = {
   email: '',
 };
 
-const passwordSettingsInitialValue: PasswordValue = {
-  currentPassword: '',
-  newPassword: '',
-  confirmPassword: '',
-};
-
-export const UserSettingsComponent: FC = () => {
+export const InformationView: FC = () => {
+  const { t } = useTranslation('translation', { keyPrefix: 'userSettings' });
+  const { t: tDialog } = useTranslation('translation', {
+    keyPrefix: 'dialog',
+  });
   const dispatch = useDispatch();
+
   const user = useSelector(selectUser);
 
-  const { t } = useTranslation('translation', { keyPrefix: 'userSettings' });
+  const [isOpenDialog, setIsOpenDialog] = useState<boolean>(false);
 
   const [fileResult, setFileResult] = useState<string | undefined>(undefined);
 
@@ -56,7 +60,6 @@ export const UserSettingsComponent: FC = () => {
   const [buttons, setButtons] = useState<activeButtons>({
     username: false,
     email: false,
-    password: false,
     avatar: true,
   });
 
@@ -83,18 +86,6 @@ export const UserSettingsComponent: FC = () => {
       clearTimeout(timerId);
     };
   }, [buttons.email]);
-
-  useEffect(() => {
-    const timerId = setTimeout(() => {
-      setButtons((prevState: activeButtons) => ({
-        ...prevState,
-        password: false,
-      }));
-    }, 3000);
-    return () => {
-      clearTimeout(timerId);
-    };
-  }, [buttons.password]);
 
   useEffect(() => {
     if (changeAvatarButton) {
@@ -125,14 +116,6 @@ export const UserSettingsComponent: FC = () => {
       email: !prevState.email,
     }));
     dispatch(updateEmail(email));
-  };
-
-  const submitPasswordHandler = ({ newPassword }: PasswordValue) => {
-    setButtons((prevState: activeButtons) => ({
-      ...prevState,
-      password: !prevState.password,
-    }));
-    dispatch(updatePassword(newPassword));
   };
 
   const submitImageHandler = () => {
@@ -179,29 +162,37 @@ export const UserSettingsComponent: FC = () => {
       setFileResult(event.target.result);
   }
 
+  const handleOpenDialog = () => {
+    setIsOpenDialog(true);
+  };
+
+  const handleCloseDialog = () => {
+    setIsOpenDialog(false);
+  };
+
+  const handleDeleteAccount = () => {
+    dispatch(deleteUserRequest());
+    setIsOpenDialog(false);
+  };
+
   return (
-    <ParContainer
-      maxWidth="lg"
-      sx={{
-        mt: '1rem',
-        padding: '1.5rem',
-      }}
-    >
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'center',
-          flexWrap: 'wrap',
+    <Box sx={{ width: '100%' }}>
+      <SettingSection
+        title={t('profile')}
+        containerProps={{
+          sx: {
+            display: 'flex',
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            justifyContent: { xs: 'center', sm: 'space-around' },
+          },
         }}
       >
         <Box
           sx={{
             display: 'flex',
             flexDirection: 'column',
-            flexWrap: 'wrap',
             alignItems: 'center',
-            width: '15.5rem',
           }}
         >
           <label
@@ -212,7 +203,6 @@ export const UserSettingsComponent: FC = () => {
           >
             <input
               accept="image/*"
-              multiple
               type="file"
               onChange={(e) => handleOnChangeAvatar(e)}
               style={{ display: 'none' }}
@@ -220,48 +210,46 @@ export const UserSettingsComponent: FC = () => {
             <Button
               component="span"
               sx={{
-                '&:hover .avatar-box': {
+                padding: '0',
+                '&:hover .avatar-overlay': {
                   backgroundColor: '#212121',
                   opacity: '0.1',
                 },
-                '&:hover .avatar-button': {
+                '&:hover .avatar-choose-button': {
                   filter: 'brightness(85%)',
                 },
-                padding: '0',
-                mr: { xs: '0', sm: '1rem' },
               }}
             >
               <ParAvatar
                 src={fileResult ?? user.avatar}
+                variant="rounded"
                 sx={{
                   width: '15rem',
                   height: '15rem',
-                  border: '4px solid',
-                  borderRadius: '4px',
-                  borderColor: 'primary.main',
-                  fontSize: '7.75rem',
                 }}
               >
                 {user.username || undefined}
               </ParAvatar>
               <Box
                 position="absolute"
-                className="avatar-box"
+                className="avatar-overlay"
                 sx={{
                   width: '100%',
-                  height: '100%',
+                  aspectRatio: '1/1',
+                  borderRadius: '4px',
                 }}
               />
               <Typography
-                className="avatar-button"
                 position="absolute"
+                className="avatar-choose-button"
                 sx={{
                   backgroundColor: 'secondary.main',
+                  border: '2px solid',
                   borderRadius: '4px',
                   padding: '0.375rem 1rem',
                   lineHeight: '1.25',
-                  border: '2px solid',
-                  bottom: '-8px',
+                  bottom: '-0.5rem',
+                  zIndex: '1',
                 }}
               >
                 {t('chooseAvatar')}
@@ -287,50 +275,24 @@ export const UserSettingsComponent: FC = () => {
             {!!avatarError && avatarError}
           </Typography>
         </Box>
-
         <Box
           sx={{
             display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'space-evenly',
-            fontSize: {
-              lg: '32px',
-              xs: '28px',
-            },
-            flexWrap: 'wrap',
-            flexGrow: '1',
-            padding: { xs: '1.3rem 0', md: '0' },
+            flexDirection: 'column',
           }}
         >
-          <Box
-            display="grid"
-            gridTemplateRows="12rem 5rem 12rem"
-            rowGap="1rem"
-            marginRight={{ xs: '0', sm: '1rem' }}
-            marginLeft={{ xs: '0', sm: '1rem' }}
-          >
+          <Box display="grid" rowGap="2rem">
             <Formik
               initialValues={usernameSettingsInitialValue}
               validationSchema={usernameSettingsSchema}
               onSubmit={submitUsernameHandler}
               validateOnBlur
             >
-              <Form style={{ gridRow: '1' }}>
-                <Box
-                  display="grid"
-                  gridTemplateRows="3rem 5rem 2rem"
-                  rowGap="1rem"
-                  justifyItems="center"
-                >
-                  <Typography gridRow="1" fontSize="2rem">
-                    {user.username}
-                  </Typography>
-                  <FormField fieldName="username" sx={{ gridRow: '2' }} />
-                  <FormButton
-                    type="submit"
-                    sx={{ gridRow: '3' }}
-                    disabled={buttons.username}
-                  >
+              <Form>
+                <Box display="grid" rowGap="1rem" justifyItems="center">
+                  <Typography fontSize="2rem">{user.username}</Typography>
+                  <FormField fieldName="username" />
+                  <FormButton type="submit" disabled={buttons.username}>
                     {t('changeUsername')}
                   </FormButton>
                 </Box>
@@ -343,74 +305,53 @@ export const UserSettingsComponent: FC = () => {
               onSubmit={submitEmailHandler}
               validateOnBlur
             >
-              <Form style={{ gridRow: '3' }}>
-                <Box
-                  display="grid"
-                  gridTemplateRows="3rem 5rem 2rem"
-                  rowGap="1rem"
-                  justifyItems="center"
-                >
-                  <Typography gridRow="1" fontSize="2rem">
-                    {user.email}
-                  </Typography>
-                  <FormField
-                    type="email"
-                    fieldName="email"
-                    sx={{ gridRow: '2' }}
-                  />
-                  <FormButton
-                    type="submit"
-                    sx={{ gridRow: '3' }}
-                    disabled={buttons.email}
-                  >
+              <Form>
+                <Box display="grid" rowGap="1rem" justifyItems="center">
+                  <Typography fontSize="2rem">{user.email}</Typography>
+                  <FormField type="email" fieldName="email" />
+                  <FormButton type="submit" disabled={buttons.email}>
                     {t('changeEmail')}
                   </FormButton>
                 </Box>
               </Form>
             </Formik>
           </Box>
-
-          <Formik
-            initialValues={passwordSettingsInitialValue}
-            validationSchema={passwordSettingsSchema}
-            onSubmit={submitPasswordHandler}
-            validateOnBlur
-          >
-            <Form>
-              <Box
-                display="grid"
-                gridTemplateRows="3rem 5rem 2.5rem 5rem 2.5rem 5rem 2rem"
-                rowGap="1rem"
-                justifyItems="center"
-              >
-                <FormField
-                  type="password"
-                  fieldName="currentPassword"
-                  sx={{ gridRow: '2' }}
-                />
-                <FormField
-                  type="password"
-                  fieldName="newPassword"
-                  sx={{ gridRow: '4' }}
-                />
-                <FormField
-                  type="password"
-                  fieldName="confirmPassword"
-                  sx={{ gridRow: '6' }}
-                />
-
-                <FormButton
-                  type="submit"
-                  sx={{ gridRow: '7' }}
-                  disabled={buttons.password}
-                >
-                  {t('changePassword')}
-                </FormButton>
-              </Box>
-            </Form>
-          </Formik>
         </Box>
-      </Box>
-    </ParContainer>
+        <ParBox
+          borderColor="error.main"
+          width="100%"
+          boxSizing="border-box"
+          marginTop="2rem"
+          padding="1rem"
+          display="flex"
+          justifyContent="left"
+        >
+          <ParDialog open={isOpenDialog} onClose={handleCloseDialog}>
+            <ParDialogTitle>{t('deleteAccountDialogTitle')}</ParDialogTitle>
+            <DialogContent>
+              <ParDialogContentText>
+                {t('deleteAccountDialogText')}
+              </ParDialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button color="secondary" onClick={handleCloseDialog}>
+                {tDialog('no')}
+              </Button>
+              <Button color="secondary" onClick={handleDeleteAccount}>
+                {tDialog('yes')}
+              </Button>
+            </DialogActions>
+          </ParDialog>
+          <Button
+            fullWidth
+            color="error"
+            variant="contained"
+            onClick={handleOpenDialog}
+          >
+            {t('deleteAccount')}
+          </Button>
+        </ParBox>
+      </SettingSection>
+    </Box>
   );
 };

@@ -5,6 +5,7 @@ const ParDivider = styled(Divider)(({ theme }) => ({
   backgroundColor: theme.palette.primary.main,
   borderWidth: '2px',
   borderRadius: '2px',
+  boxSizing: 'border-box',
 }));
 
 export default ParDivider;
