@@ -14,6 +14,7 @@ import {
 } from '@mui/material';
 import { AbilityBase } from 'components/charlist/Abilities/AbilityBase';
 import ParBox from 'components/styled/ParBox';
+import { ABILITY_BONUS } from 'consts';
 import { setAbility } from 'ducks/character';
 import { selectCharacter } from 'ducks/character/selectors';
 import { selectProperty } from 'ducks/data/selectors';
@@ -116,7 +117,17 @@ export const AbilityCard: FC<{ name: string }> = ({ name }) => {
   };
 
   const handleOverrideChanged = (event: ChangeEvent<HTMLInputElement>) => {
-    setLocalOverride(parseInt(event.target.value));
+    console.log('ekk');
+    if (isNaN(event.target.valueAsNumber)) {
+      event.target.valueAsNumber = 0;
+    }
+
+    event.target.valueAsNumber = Math.max(
+      Math.min(event.target.valueAsNumber, ABILITY_BONUS.MAX),
+      ABILITY_BONUS.MIN,
+    );
+
+    setLocalOverride(event.target.valueAsNumber);
   };
 
   useEffect(() => {
@@ -199,16 +210,19 @@ export const AbilityCard: FC<{ name: string }> = ({ name }) => {
             label={t('override')}
             control={
               <TextField
+                type="number"
                 defaultValue={character.abilities[name].override || 0}
                 size="small"
                 color="primary"
                 onChange={handleOverrideChanged}
                 sx={{
                   borderColor: 'primary.main',
-                  width: '2.8rem',
+                  width: '3.4rem',
                   marginRight: '0.5rem',
                 }}
                 inputProps={{
+                  min: ABILITY_BONUS.MIN,
+                  max: ABILITY_BONUS.MAX,
                   sx: {
                     textAlign: 'center',
                     padding: '0.3rem',

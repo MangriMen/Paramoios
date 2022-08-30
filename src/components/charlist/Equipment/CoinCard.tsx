@@ -1,5 +1,6 @@
 import { SvgIcon, TextField, Tooltip, Typography } from '@mui/material';
 import ParBox from 'components/styled/ParBox';
+import { COINS } from 'consts';
 import { setCoin } from 'ducks/character';
 import { selectCharacter } from 'ducks/character/selectors';
 import { ChangeEvent, FC, useEffect, useState } from 'react';
@@ -30,13 +31,14 @@ export const CoinCard: FC<{
         return;
       }
 
-      if (query.target.valueAsNumber > 999999) {
-        query.target.valueAsNumber = 999999;
-      }
-
       if (isNaN(query.target.valueAsNumber)) {
         query.target.valueAsNumber = 0;
       }
+
+      query.target.valueAsNumber = Math.max(
+        Math.min(query.target.valueAsNumber, COINS.MAX),
+        COINS.MIN,
+      );
 
       dispatch(setCoin({ name, value: query.target.valueAsNumber }));
     }, 500);
@@ -90,9 +92,8 @@ export const CoinCard: FC<{
           defaultValue={character.equipment.money[name]}
           onChange={handleTextFieldChange}
           inputProps={{
-            maxLength: 6,
-            min: 0,
-            max: 999999,
+            min: COINS.MIN,
+            max: COINS.MAX,
             sx: {
               padding: '0.2rem',
               textAlign: 'center',
