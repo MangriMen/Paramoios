@@ -3,6 +3,14 @@
   src: url('../fonts/EBERRON_RUS.otf') format('truetype');
 }
 
+.smoothColor * {
+  -webkit-transition: background-color 0.5s ease-out !important;
+  -moz-transition: background-color 0.5s ease-out !important;
+  -o-transition: background-color 0.5s ease-out !important;
+  -ms-transition: background-color 0.5s ease-out !important;
+  transition: background-color 0.5s ease-out !important;
+}
+
 body {
   margin: 0;
   font-family: 'Eberron', -apple-system, BlinkMacSystemFont, 'Segoe UI',
