@@ -1,23 +1,49 @@
 import { Box, SvgIcon, TextField, Tooltip, Typography } from '@mui/material';
 import ParBox from 'components/styled/ParBox';
-import { ChangeEvent, FC } from 'react';
+import { setCoin } from 'ducks/character';
+import { selectCharacter } from 'ducks/character/selectors';
+import { ChangeEvent, FC, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-
-import { Money } from '../Charlist';
+import { useDispatch, useSelector } from 'react-redux';
 
 export const CoinCard: FC<{
   name: string;
   icon?: string;
-  items: Money;
-  setItems: any;
-}> = ({ name, icon, items, setItems }) => {
+}> = ({ name, icon }) => {
+  const dispatch = useDispatch();
+
   const { t: tMoney } = useTranslation('translation', {
     keyPrefix: 'equipment.money',
   });
 
+  const character = useSelector(selectCharacter);
+
+  const [query, setQuery] = useState<ChangeEvent<HTMLInputElement>>();
+
   const handleTextFieldChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setItems({ ...items, [name]: event.target.value });
+    setQuery(event);
   };
+
+  useEffect(() => {
+    const timerId = setTimeout(() => {
+      if (query === undefined) {
+        return;
+      }
+
+      if (query.target.valueAsNumber > 999999) {
+        query.target.valueAsNumber = 999999;
+      }
+
+      if (isNaN(query.target.valueAsNumber)) {
+        query.target.valueAsNumber = 0;
+      }
+
+      dispatch(setCoin({ name, value: query.target.valueAsNumber }));
+    }, 500);
+    return () => {
+      clearTimeout(timerId);
+    };
+  }, [dispatch, name, query]);
 
   return (
     <Tooltip
@@ -64,33 +90,38 @@ export const CoinCard: FC<{
               {tMoney(name).toUpperCase().charAt(0)}
             </Typography>
           )}
-          <TextField
-            onChange={handleTextFieldChange}
-            inputProps={{
-              maxLength: 6,
-              sx: {
-                padding: '0.2rem',
-                textAlign: 'center',
-                height: '0.8rem',
-              },
-            }}
-            sx={{
-              '& .MuiOutlinedInput-root': {
-                '& fieldset': {
-                  transition: 'border 0.1s ease-out',
-                  borderWidth: '2px',
-                  borderStyle: 'solid',
-                  borderColor: 'transparent',
+          <form noValidate>
+            <TextField
+              type="number"
+              defaultValue={character.equipment.money[name]}
+              onChange={handleTextFieldChange}
+              inputProps={{
+                maxLength: 6,
+                min: 0,
+                max: 999999,
+                sx: {
+                  padding: '0.2rem',
+                  textAlign: 'center',
+                  height: '0.8rem',
                 },
-                '&:hover fieldset, &.Mui-focused fieldset': {
-                  borderColor: 'primary.main',
+              }}
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  '& fieldset': {
+                    transition: 'border 0.1s ease-out',
+                    borderWidth: '2px',
+                    borderStyle: 'solid',
+                    borderColor: 'transparent',
+                  },
+                  '&:hover fieldset, &.Mui-focused fieldset': {
+                    borderColor: 'primary.main',
+                  },
                 },
-              },
-              minHeight: '0',
-              width: '4rem',
-            }}
-            defaultValue={items[name]}
-          />
+                minHeight: '0',
+                width: '5rem',
+              }}
+            />
+          </form>
         </ParBox>
       </Box>
     </Tooltip>

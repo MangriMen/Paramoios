@@ -1,34 +1,38 @@
 import { Box } from '@mui/material';
-import { Inventory } from 'components/charlist/Charlist';
 import { getCoordinates } from 'components/charlist/Equipment/Inventory/InventoryCard';
 import {
   InventoryItemCard,
   ItemTypes,
 } from 'components/charlist/Equipment/Inventory/InventoryItem';
+import { setInventoryItem } from 'ducks/character';
+import { selectCharacter } from 'ducks/character/selectors';
 import { FC } from 'react';
 import { useDrop } from 'react-dnd';
+import { useDispatch, useSelector } from 'react-redux';
 
 export const InventoryCell: FC<{
   index: number;
   cols: number;
-  items: Inventory;
-  setItems: any;
-}> = ({ index, cols, items, setItems }) => {
+}> = ({ index, cols }) => {
+  const dispatch = useDispatch();
+  const character = useSelector(selectCharacter);
+
   const { row, col } = getCoordinates(cols, index);
 
   const [{ isOver }, drop] = useDrop(
     () => ({
       accept: ItemTypes.INVENTORY_ITEM,
       drop: (item: { [x: string]: number }) => {
-        const newItems = { ...items };
-        delete newItems[item.positionIndex];
-        setItems({ ...newItems, [index]: items[item.positionIndex] });
+        const tempItem = character.equipment.inventory[item.positionIndex];
+        dispatch(setInventoryItem({ index: item.positionIndex, value: null }));
+        dispatch(setInventoryItem({ index, value: tempItem }));
       },
+      canDrop: () => !character.equipment.inventory[index],
       collect: (monitor) => ({
         isOver: monitor.isOver(),
       }),
     }),
-    [],
+    [character.equipment.inventory],
   );
 
   return (
@@ -41,15 +45,18 @@ export const InventoryCell: FC<{
       position="relative"
       boxSizing="border-box"
       sx={{
-        borderWidth: items[index] ? '0' : '1px',
+        borderWidth: character.equipment.inventory[index] ? '0' : '1px',
         borderStyle: 'solid',
         borderColor: 'primary.main',
         borderRadius: '4px',
         filter: isOver ? 'brightness(200%)' : 'brightness(100%)',
       }}
     >
-      {items[index] && (
-        <InventoryItemCard data={items[index]} positionIndex={index} />
+      {character.equipment.inventory[index] && (
+        <InventoryItemCard
+          data={character.equipment.inventory[index]}
+          positionIndex={index}
+        />
       )}
       {isOver && (
         <Box

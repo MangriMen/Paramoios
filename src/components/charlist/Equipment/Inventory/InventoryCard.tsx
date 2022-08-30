@@ -2,7 +2,9 @@ import { Box } from '@mui/material';
 import { Inventory } from 'components/charlist/Charlist';
 import { InventoryCell } from 'components/charlist/Equipment/Inventory/InventoryCell';
 import { InventoryCardProps } from 'components/charlist/Equipment/Inventory/interfaces';
+import { selectCharacter } from 'ducks/character/selectors';
 import { FC, ReactNode, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 export function getCoordinates(cols: number, position: number) {
   return {
@@ -51,13 +53,13 @@ function checkIfGrowIsNeeded(
 }
 
 export const InventoryCard: FC<InventoryCardProps> = ({
-  items,
-  setItems,
   rows,
   cols,
   disableGrow,
   growDirection = 'vertical',
 }) => {
+  const character = useSelector(selectCharacter);
+
   const [gridSize, setGridSize] = useState<{ rows: number; cols: number }>({
     rows: rows,
     cols: cols,
@@ -66,11 +68,14 @@ export const InventoryCard: FC<InventoryCardProps> = ({
   const [renderedItems, setRenderedItems] = useState<ReactNode>();
 
   useEffect(() => {
-    const { maxRow, maxCol } = getBounds(gridSize.cols, items);
+    const { maxRow, maxCol } = getBounds(
+      gridSize.cols,
+      character.equipment.inventory,
+    );
 
     const newGridSize = {
-      rows: Math.max(gridSize.rows, maxRow),
-      cols: Math.max(gridSize.cols, maxCol),
+      rows: Math.min(Math.max(rows, maxRow), gridSize.rows),
+      cols: Math.min(Math.max(cols, maxCol), gridSize.cols),
     };
 
     if (!disableGrow) {
@@ -78,7 +83,7 @@ export const InventoryCard: FC<InventoryCardProps> = ({
         newGridSize.rows,
         newGridSize.cols,
         growDirection,
-        items,
+        character.equipment.inventory,
       );
 
       newGridSize.rows += additionalRows;
@@ -86,19 +91,16 @@ export const InventoryCard: FC<InventoryCardProps> = ({
     }
 
     setGridSize(newGridSize);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [rows, cols, disableGrow, growDirection, character.equipment.inventory]);
+
+  useEffect(() => {
     setRenderedItems(
-      Array.from(Array(rows * cols)).map((_, index) => (
-        <InventoryCell
-          key={index}
-          index={index}
-          cols={cols}
-          items={items}
-          setItems={setItems}
-        />
+      Array.from(Array(gridSize.rows * gridSize.cols)).map((_, index) => (
+        <InventoryCell key={index} index={index} cols={gridSize.cols} />
       )),
     );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [rows, cols, disableGrow, growDirection, items, setItems]);
+  }, [gridSize.rows, gridSize.cols]);
 
   return (
     <Box

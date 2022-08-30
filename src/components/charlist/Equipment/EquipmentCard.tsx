@@ -1,38 +1,25 @@
 import { Box } from '@mui/material';
-import { Character, Equipment } from 'components/charlist/Charlist';
 import { CoinCard } from 'components/charlist/Equipment/CoinCard';
 import { InventoryCard } from 'components/charlist/Equipment/Inventory/InventoryCard';
 import ParBox from 'components/styled/ParBox';
+import { selectCharacter } from 'ducks/character/selectors';
 import { FC, ReactNode, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
-export const MONEY_OFFSET = '3.25rem';
+export const MONEY_OFFSET = '3.50rem';
 
-export const EquipmentCard: FC<{ items: Equipment; setItems: any }> = ({
-  items,
-  setItems,
-}) => {
-  const setInventory = (newInventory: Character['equipment']['inventory']) => {
-    setItems({ ...items, inventory: newInventory });
-  };
+export const EquipmentCard: FC = () => {
+  const character = useSelector(selectCharacter);
 
   const [renderedMoney, setRenderedMoney] = useState<ReactNode>();
 
   useEffect(() => {
-    const setMoney = (newMoney: Character['equipment']['money']) => {
-      setItems({ ...items, money: newMoney });
-    };
-
     setRenderedMoney(
-      Object.keys(items.money).map((key) => (
-        <CoinCard
-          key={key}
-          name={key}
-          items={items.money}
-          setItems={setMoney}
-        />
+      Object.keys(character.equipment.money).map((key) => (
+        <CoinCard key={key} name={key} />
       )),
     );
-  }, [items, items.money, setItems]);
+  }, [character.equipment.money]);
 
   return (
     <Box sx={{ position: 'relative', display: 'flex' }}>
@@ -57,12 +44,7 @@ export const EquipmentCard: FC<{ items: Equipment; setItems: any }> = ({
           marginLeft: `calc(${MONEY_OFFSET} + 1rem)`,
         }}
       >
-        <InventoryCard
-          items={items.inventory}
-          setItems={setInventory}
-          rows={4}
-          cols={3}
-        />
+        <InventoryCard rows={4} cols={3} />
       </ParBox>
     </Box>
   );
