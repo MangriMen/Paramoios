@@ -85,38 +85,45 @@ export const CoinCard: FC<{
             {tMoney(name).toUpperCase().charAt(0)}
           </Typography>
         )}
-        <form>
-          <TextField
-            type="number"
-            defaultValue={character.equipment.money[name]}
-            onChange={handleTextFieldChange}
-            inputProps={{
-              maxLength: 6,
-              min: 0,
-              max: 999999,
-              sx: {
-                padding: '0.2rem',
-                textAlign: 'center',
-                height: '0.8rem',
+        <TextField
+          type="number"
+          defaultValue={character.equipment.money[name]}
+          onChange={handleTextFieldChange}
+          inputProps={{
+            maxLength: 6,
+            min: 0,
+            max: 999999,
+            sx: {
+              padding: '0.2rem',
+              textAlign: 'center',
+              height: '0.8rem',
+              // @TODO
+              // '&': {
+              //   '-webkit-appearance': 'textfield',
+              //   '-moz-appearance': 'textfield',
+              //   appearance: 'textfield',
+              // },
+              // '&::-webkit-inner-spin-button, &::-webkit-outer-spin-button': {
+              //   '-webkit-appearance': 'none',
+              // },
+            },
+          }}
+          sx={{
+            '& .MuiOutlinedInput-root': {
+              '& fieldset': {
+                transition: 'border 0.1s ease-out',
+                borderWidth: '2px',
+                borderStyle: 'solid',
+                borderColor: 'transparent',
               },
-            }}
-            sx={{
-              '& .MuiOutlinedInput-root': {
-                '& fieldset': {
-                  transition: 'border 0.1s ease-out',
-                  borderWidth: '2px',
-                  borderStyle: 'solid',
-                  borderColor: 'transparent',
-                },
-                '&:hover fieldset, &.Mui-focused fieldset': {
-                  borderColor: 'primary.main',
-                },
+              '&:hover fieldset, &.Mui-focused fieldset': {
+                borderColor: 'primary.main',
               },
-              minHeight: '0',
-              width: '5rem',
-            }}
-          />
-        </form>
+            },
+            minHeight: '0',
+            width: '5rem',
+          }}
+        />
       </ParBox>
     </Tooltip>
   );
