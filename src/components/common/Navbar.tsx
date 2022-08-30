@@ -50,6 +50,13 @@ const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
   },
 }));
 
+const navbarMenuIconStyle = {
+  color: 'secondary.contrastText',
+  '&:hover': {
+    color: 'primary.contrastText',
+  },
+};
+
 const Navbar: FC = () => {
   const { t } = useTranslation('translation', { keyPrefix: 'navbar' });
   const { t: tAuth } = useTranslation('translation', { keyPrefix: 'auth' });
@@ -82,7 +89,7 @@ const Navbar: FC = () => {
   const [userSettings] = useState<Array<UserMenuItem>>([
     {
       name: 'Profile',
-      icon: <PersonIcon sx={{ color: '#ffffff' }} />,
+      icon: <PersonIcon sx={navbarMenuIconStyle} />,
       tooltip: t('profile'),
       onClick: () => {
         handleCloseUserMenu();
@@ -91,7 +98,7 @@ const Navbar: FC = () => {
     },
     {
       name: 'Logout',
-      icon: <LogoutIcon sx={{ color: '#ffffff' }} />,
+      icon: <LogoutIcon sx={navbarMenuIconStyle} />,
       tooltip: tAuth('signOut'),
       onClick: () => {
         handleCloseUserMenu();
@@ -137,7 +144,7 @@ const Navbar: FC = () => {
             component="button"
             fontSize="1rem"
             fontWeight="500"
-            sx={{ color: '#FFFFFF' }}
+            sx={{ color: 'primary.contrastText' }}
             onClick={() => navigate('/')}
           >
             Paramoios
