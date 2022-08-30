@@ -6,6 +6,7 @@ export interface CharacterSave {
 }
 
 export interface CharacterState {
+  isLoading: boolean;
   error: string;
   packages: CharacterSave['packages'];
   character: CharacterSave['character'];

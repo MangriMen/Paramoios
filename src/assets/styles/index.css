@@ -3,6 +3,11 @@
   src: url('../fonts/EBERRON_RUS.otf') format('truetype');
 }
 
+html,
+body {
+  height: 100%
+}
+
 body {
   margin: 0;
   font-family: 'Eberron', -apple-system, BlinkMacSystemFont, 'Segoe UI',

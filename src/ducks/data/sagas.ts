@@ -135,10 +135,9 @@ export function* disablePackageSaga({
   void
 > {
   try {
-    const dataCollected: any = yield select(
+    const collected = (yield select(
       (state: RootState) => state.data.collected,
-    );
-    const collected = dataCollected as DataState['collected'];
+    )) as unknown as DataState['collected'];
 
     for (const lng in collected[payload].translation) {
       i18n.removeResourceBundle(lng, PACKAGES.translationNs);

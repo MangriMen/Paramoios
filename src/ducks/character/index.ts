@@ -4,6 +4,7 @@ import { Ability, InventoryItem } from 'components/charlist/Charlist';
 import { CharacterSave, CharacterState } from './interfaces';
 
 const initialState: CharacterState = {
+  isLoading: false,
   error: '',
   packages: '',
   character: {
@@ -20,13 +21,16 @@ export const characterSlice = createSlice({
   initialState,
   reducers: {
     loadCharacterRequest: (state, _action: PayloadAction<CharacterSave>) => {
+      state.isLoading = true;
       state.error = initialState.error;
     },
     loadCharacterSuccess: (state, action: PayloadAction<CharacterSave>) => {
+      state.isLoading = initialState.isLoading;
       state.packages = action.payload.packages;
       state.character = action.payload.character;
     },
     loadCharacterFailed: (state, action: PayloadAction<string>) => {
+      state.isLoading = initialState.isLoading;
       state.error = action.payload;
     },
     setCoin: (
