@@ -28,13 +28,10 @@ export interface Inventory {
   [x: number]: InventoryItem;
 }
 
+export type Coin = number;
+
 export interface Money {
-  copper: number;
-  silver: number;
-  electrum: number;
-  gold: number;
-  platinum: number;
-  [x: string]: number;
+  [x: string]: Coin;
 }
 
 export interface Equipment {

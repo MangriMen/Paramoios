@@ -45,6 +45,14 @@ export function* initSaga(): Generator<
   void
 > {
   try {
+    const packages = loadOrInitObjectFromDisk(STORAGE.packages, {});
+    if (!(PACKAGES.defaultPackage in packages)) {
+      dumpObjectToDisk(STORAGE.packages, {
+        ...packages,
+        default: defaultPackage,
+      });
+    }
+
     const activePackages = loadOrInitObjectFromDisk(
       STORAGE.activePackages,
       new Set([]),
@@ -54,14 +62,6 @@ export function* initSaga(): Generator<
         STORAGE.activePackages,
         new Set([...activePackages, PACKAGES.defaultPackage]),
       );
-    }
-
-    const packages = loadOrInitObjectFromDisk(STORAGE.packages, {});
-    if (!(PACKAGES.defaultPackage in packages)) {
-      dumpObjectToDisk(STORAGE.packages, {
-        ...packages,
-        default: defaultPackage,
-      });
     }
 
     yield put(initDataSuccess());

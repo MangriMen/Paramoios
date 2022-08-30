@@ -93,14 +93,5 @@
     "activate": "Активировать",
     "disable": "Деактивировать",
     "override": "Переопределить"
-  },
-  "equipment": {
-    "money": {
-      "copper": "Медь",
-      "silver": "Серебро",
-      "electrum": "Электрум",
-      "gold": "Золото",
-      "platinum": "Платина"
-    }
   }
 }

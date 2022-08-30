@@ -10,13 +10,7 @@ const initialState: CharacterState = {
     abilities: {},
     equipment: {
       inventory: {},
-      money: {
-        copper: 0,
-        silver: 0,
-        electrum: 0,
-        gold: 0,
-        platinum: 0,
-      },
+      money: {},
     },
   },
 };

@@ -13,7 +13,7 @@ export const CoinCard: FC<{
 }> = ({ name, icon }) => {
   const dispatch = useDispatch();
 
-  const { t: tMoney } = useTranslation('translation', {
+  const { t: tMoney } = useTranslation('data', {
     keyPrefix: 'equipment.money',
   });
 
