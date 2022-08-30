@@ -27,12 +27,6 @@ const ParBox: FC<ParBoxProps> = ({
       borderRadius={props.borderRadius || '4px'}
       marginTop={title && title && TITLE_HEIGHT}
       {...containerProps}
-      minHeight={props.minHeight}
-      height={props.height}
-      maxHeight={props.maxHeight}
-      minWidth={props.minWidth}
-      width={props.width}
-      maxWidth={props.maxWidth}
     >
       {title && (
         <Typography
