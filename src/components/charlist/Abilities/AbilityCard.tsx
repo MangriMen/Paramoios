@@ -117,7 +117,6 @@ export const AbilityCard: FC<{ name: string }> = ({ name }) => {
   };
 
   const handleOverrideChanged = (event: ChangeEvent<HTMLInputElement>) => {
-    console.log('ekk');
     if (isNaN(event.target.valueAsNumber)) {
       event.target.valueAsNumber = 0;
     }
