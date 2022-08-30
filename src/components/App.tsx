@@ -5,6 +5,7 @@ import { initDataRequest, reloadDataRequest } from 'ducks/data';
 import { selectTheme } from 'ducks/localSettings/selectors';
 import { fetchUser } from 'ducks/user';
 import { FC, useEffect } from 'react';
+import { Helmet } from 'react-helmet';
 import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
@@ -30,11 +31,16 @@ const App: FC = () => {
   });
 
   return (
-    <ThemeProvider theme={theme}>
-      <BrowserRouter>
-        <AppRoutes />
-      </BrowserRouter>
-    </ThemeProvider>
+    <>
+      <Helmet>
+        <meta name="theme-color" content={theme.palette.primary.main} />
+      </Helmet>
+      <ThemeProvider theme={theme}>
+        <BrowserRouter>
+          <AppRoutes />
+        </BrowserRouter>
+      </ThemeProvider>
+    </>
   );
 };
 
