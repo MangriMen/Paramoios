@@ -6,7 +6,7 @@ import { selectCharacter } from 'ducks/character/selectors';
 import { FC, ReactNode, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
-export const MONEY_OFFSET = '3.50rem';
+export const MONEY_OFFSET = '3.25rem';
 
 export const EquipmentCard: FC = () => {
   const character = useSelector(selectCharacter);
@@ -26,7 +26,6 @@ export const EquipmentCard: FC = () => {
       <Box
         sx={{
           position: 'absolute',
-          width: '6rem',
           top: 0,
           left: `-${MONEY_OFFSET}`,
           display: 'grid',
@@ -41,7 +40,7 @@ export const EquipmentCard: FC = () => {
         sx={{
           overflowY: 'auto',
           padding: '0.5rem',
-          marginLeft: `calc(${MONEY_OFFSET} + 1rem)`,
+          marginLeft: `calc(${MONEY_OFFSET} + 1.75rem)`,
         }}
       >
         <InventoryCard rows={4} cols={3} />
