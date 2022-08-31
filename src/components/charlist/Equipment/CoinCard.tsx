@@ -19,28 +19,23 @@ export const CoinCard: FC<{
 
   const character = useSelector(selectCharacter);
 
-  const [query, setQuery] = useState<ChangeEvent<HTMLInputElement>>();
+  const [query, setQuery] = useState<number>(character.equipment.money[name]);
 
   const handleTextFieldChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setQuery(event);
+    setQuery(event.target.valueAsNumber);
   };
 
   useEffect(() => {
     const timerId = setTimeout(() => {
-      if (query === undefined) {
+      if (isNaN(query)) {
+        setQuery((prevValue) => (prevValue = 0));
         return;
       }
 
-      if (isNaN(query.target.valueAsNumber)) {
-        query.target.valueAsNumber = 0;
-      }
+      const newValue = Math.max(Math.min(query, COINS.MAX), COINS.MIN);
 
-      query.target.valueAsNumber = Math.max(
-        Math.min(query.target.valueAsNumber, COINS.MAX),
-        COINS.MIN,
-      );
-
-      dispatch(setCoin({ name, value: query.target.valueAsNumber }));
+      setQuery((prevValue) => (prevValue = newValue));
+      dispatch(setCoin({ name, value: newValue }));
     }, 500);
     return () => {
       clearTimeout(timerId);
@@ -89,7 +84,7 @@ export const CoinCard: FC<{
         )}
         <TextField
           type="number"
-          defaultValue={character.equipment.money[name]}
+          value={query.toString()}
           onChange={handleTextFieldChange}
           inputProps={{
             min: COINS.MIN,
