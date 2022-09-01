@@ -33,6 +33,7 @@ const BarLiquidBlock = styled(Box)(() => ({
 type LiquidBarProps = BoxProps & {
   value?: number;
   maxValue?: number;
+  waveColor?: BoxProps['bgcolor'];
 };
 
 function getCalcStringForWaveLeftOffset(rangedValue: number, waveSize: string) {
@@ -47,6 +48,7 @@ const LiquidBarBase: FC<LiquidBarProps> = ({
   maxValue,
   height,
   bgcolor,
+  waveColor,
 }) => {
   const value_ = value ?? DEFAULT_VALUE;
   const maxValue_ = maxValue ?? DEFAULT_MAX_VALUE;
@@ -81,14 +83,14 @@ const LiquidBarBase: FC<LiquidBarProps> = ({
         position="absolute"
         top="0"
         width={`${barWidthPercent}%`}
-        bgcolor="inherit"
+        bgcolor={waveColor ?? bgcolor}
       />
       <BarLiquidBlock
         overflow="hidden"
         position="absolute"
         height={`${waveHeightPercent}%`}
         left={wavePositionPercent}
-        bgcolor="inherit"
+        bgcolor={waveColor ?? bgcolor}
       />
     </BarParent>
   );
@@ -99,6 +101,7 @@ const LiquidBar: FC<LiquidBarProps> = ({
   maxValue,
   height,
   bgcolor,
+  waveColor,
   ...props
 }) => {
   const value_ = value ?? DEFAULT_VALUE;
@@ -119,6 +122,7 @@ const LiquidBar: FC<LiquidBarProps> = ({
     >
       <LiquidBarBase
         bgcolor={bgcolor}
+        waveColor={waveColor}
         height={height_}
         value={value}
         maxValue={maxValue}

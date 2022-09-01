@@ -6,6 +6,7 @@ import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Abilities } from './Abilities/Abilities';
+import HealthCard from './Health/HealthCard';
 import LiquidBar from './LiquidBar';
 import RollDiceButton from './RollDiceButton';
 
@@ -75,7 +76,7 @@ const Charlist: FC = () => {
           />
           <LiquidBar
             borderRadius="4px"
-            border="4px solid"
+            border="2px solid"
             height="1.8rem"
             fontSize="1.2rem"
             borderColor="primary.main"
@@ -158,7 +159,7 @@ const Charlist: FC = () => {
               justifyContent="space-between"
             >
               {/* Health */}
-              <ParBox padding="1rem" />
+              <HealthCard />
               {/* Boards with traits, ideals, bonds, flaws */}
               <ParBox title={t('traits')} mb="1rem" padding="1rem" />
               <ParBox title={t('ideals')} mb="1rem" padding="1rem" />
