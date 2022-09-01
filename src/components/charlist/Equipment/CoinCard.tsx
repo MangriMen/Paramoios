@@ -22,19 +22,24 @@ export const CoinCard: FC<{
   const [query, setQuery] = useState<number>(character.equipment.money[name]);
 
   const handleTextFieldChange = (event: ChangeEvent<HTMLInputElement>) => {
+    if (event.target.value.length < 1) {
+      setQuery((prevState) => (prevState = 0));
+      return;
+    }
+
     setQuery(event.target.valueAsNumber);
   };
 
   useEffect(() => {
     const timerId = setTimeout(() => {
       if (isNaN(query)) {
-        setQuery((prevValue) => (prevValue = 0));
+        setQuery((prevState) => (prevState = 0));
         return;
       }
 
       const newValue = Math.max(Math.min(query, COINS.MAX), COINS.MIN);
 
-      setQuery((prevValue) => (prevValue = newValue));
+      setQuery((prevState) => (prevState = newValue));
       dispatch(setCoin({ name, value: newValue }));
     }, 500);
     return () => {
