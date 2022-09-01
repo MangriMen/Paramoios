@@ -20,7 +20,7 @@ import { selectUser } from 'ducks/user/selectors';
 import React, { FC, ReactNode, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 
 interface UserMenuItem {
   name: string;
@@ -134,11 +134,11 @@ const Navbar: FC = () => {
           }}
         >
           <ParLink
-            component="button"
+            component={RouterLink}
             fontSize="1rem"
             fontWeight="500"
             sx={{ color: '#FFFFFF' }}
-            onClick={() => navigate('/')}
+            to="/"
           >
             Paramoios
           </ParLink>
