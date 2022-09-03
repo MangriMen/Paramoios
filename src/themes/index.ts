@@ -1,16 +1,19 @@
-import { Theme } from '@mui/material';
+import { Theme, ThemeOptions, createTheme } from '@mui/material';
+import { deepmerge } from '@mui/utils';
+import { COMPONENTS_DEFAULT_OPTIONS } from 'consts/componentDefaultOptions';
 
-import bnwTheme from './bnw';
-import defaultTheme from './default';
+import bnwThemeOptions from './bnw';
+import defaultThemeOptions from './default';
 
-export * from './default';
-export * from './bnw';
+function createWithDefaultOptions(themeOptions: ThemeOptions) {
+  return createTheme(deepmerge(themeOptions, COMPONENTS_DEFAULT_OPTIONS));
+}
 
 export interface Themes {
   [x: string]: Theme;
 }
 
 export const themes: Themes = {
-  default: defaultTheme,
-  bnw: bnwTheme,
+  default: createWithDefaultOptions(defaultThemeOptions),
+  bnw: createWithDefaultOptions(bnwThemeOptions),
 };

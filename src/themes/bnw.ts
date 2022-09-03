@@ -1,6 +1,6 @@
-import { createTheme } from '@mui/material';
+import { ThemeOptions } from '@mui/material';
 
-const bnwTheme = createTheme({
+const bnwThemeOptions: ThemeOptions = {
   typography: {
     fontFamily: 'Eberron',
   },
@@ -12,6 +12,6 @@ const bnwTheme = createTheme({
       main: '#fafafa',
     },
   },
-});
+};
 
-export default bnwTheme;
+export default bnwThemeOptions;

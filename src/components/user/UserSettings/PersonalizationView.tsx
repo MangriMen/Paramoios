@@ -8,11 +8,10 @@ import {
 import { SettingSection } from 'components/user/SettingSection';
 import { setSetting } from 'ducks/localSettings';
 import { selectThemeRaw } from 'ducks/localSettings/selectors';
-import { FC, MouseEvent } from 'react';
+import { FC, MouseEvent, ReactNode, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import bnwTheme from 'themes/bnw';
-import defaultTheme from 'themes/default';
+import { themes } from 'themes';
 
 export const ThemeIcon: FC<{
   theme: Theme | any;
@@ -75,6 +74,8 @@ export const PersonalizationView = () => {
 
   const { t } = useTranslation('translation', { keyPrefix: 'theme' });
 
+  const [themeButtons, setThemeButtons] = useState<ReactNode>();
+
   const theme = useSelector(selectThemeRaw);
 
   const handleThemeChange = (
@@ -84,9 +85,18 @@ export const PersonalizationView = () => {
     if (newTheme === null) {
       return;
     }
-
     dispatch(setSetting({ key: 'theme', value: newTheme }));
   };
+
+  useEffect(() => {
+    setThemeButtons(
+      Object.keys(themes).map((key) => (
+        <ToggleButtonStyled value={key} aria-label={t(key)}>
+          <ThemeIcon theme={themes[key]} />
+        </ToggleButtonStyled>
+      )),
+    );
+  }, []);
 
   return (
     <Box sx={{ width: '100%' }}>
@@ -98,12 +108,7 @@ export const PersonalizationView = () => {
           onChange={handleThemeChange}
           aria-label="theme select"
         >
-          <ToggleButtonStyled value={'default'} aria-label={t('default')}>
-            <ThemeIcon theme={defaultTheme} />
-          </ToggleButtonStyled>
-          <ToggleButtonStyled value={'bnw'} aria-label={t('bnw')}>
-            <ThemeIcon theme={bnwTheme} />
-          </ToggleButtonStyled>
+          {themeButtons}
         </ToggleButtonGroupStyled>
       </SettingSection>
     </Box>
