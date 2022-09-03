@@ -19,7 +19,7 @@ export const InventoryCell: FC<{
 
   const { row, col } = getCoordinates(cols, index);
 
-  const [{ isOver }, drop] = useDrop(
+  const [{ ableToDrop, isOver }, drop] = useDrop(
     () => ({
       accept: ItemTypes.INVENTORY_ITEM,
       drop: (item: { [x: string]: number }) => {
@@ -29,6 +29,7 @@ export const InventoryCell: FC<{
       },
       canDrop: () => !character.equipment.inventory[index],
       collect: (monitor) => ({
+        ableToDrop: monitor.canDrop(),
         isOver: monitor.isOver(),
       }),
     }),
@@ -49,7 +50,8 @@ export const InventoryCell: FC<{
         borderStyle: 'solid',
         borderColor: 'primary.main',
         borderRadius: '4px',
-        filter: isOver ? 'brightness(200%)' : 'brightness(100%)',
+        backgroundColor: isOver && ableToDrop ? 'primary.main' : '',
+        filter: isOver && ableToDrop ? 'brightness(120%)' : 'brightness(100%)',
       }}
     >
       {character.equipment.inventory[index] && (
@@ -58,7 +60,7 @@ export const InventoryCell: FC<{
           positionIndex={index}
         />
       )}
-      {isOver && (
+      {isOver && ableToDrop && (
         <Box
           sx={{
             position: 'absolute',
