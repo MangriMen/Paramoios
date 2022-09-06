@@ -45,17 +45,12 @@ const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
   boxShadow: '5',
   marginBottom: '0.5rem',
   padding: '0.5rem',
+  color: theme.palette.secondary.contrastText,
   '&:hover': {
     backgroundColor: theme.palette.primary.main,
+    color: theme.palette.primary.contrastText,
   },
 }));
-
-const navbarMenuIconStyle = {
-  color: 'secondary.contrastText',
-  '&:hover': {
-    color: 'primary.contrastText',
-  },
-};
 
 const Navbar: FC = () => {
   const { t } = useTranslation('translation', { keyPrefix: 'navbar' });
@@ -89,7 +84,7 @@ const Navbar: FC = () => {
   const [userSettings] = useState<Array<UserMenuItem>>([
     {
       name: 'Profile',
-      icon: <PersonIcon sx={navbarMenuIconStyle} />,
+      icon: <PersonIcon />,
       tooltip: t('profile'),
       onClick: () => {
         handleCloseUserMenu();
@@ -98,7 +93,7 @@ const Navbar: FC = () => {
     },
     {
       name: 'Logout',
-      icon: <LogoutIcon sx={navbarMenuIconStyle} />,
+      icon: <LogoutIcon />,
       tooltip: tAuth('signOut'),
       onClick: () => {
         handleCloseUserMenu();
