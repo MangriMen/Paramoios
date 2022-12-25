@@ -141,6 +141,7 @@ const Navbar: FC = () => {
             fontWeight="500"
             sx={{ color: 'primary.contrastText' }}
             onClick={() => navigate('/')}
+            to="/"
           >
             Paramoios
           </ParLink>
