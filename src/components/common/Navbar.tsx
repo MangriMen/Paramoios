@@ -45,8 +45,10 @@ const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
   boxShadow: '5',
   marginBottom: '0.5rem',
   padding: '0.5rem',
+  color: theme.palette.secondary.contrastText,
   '&:hover': {
     backgroundColor: theme.palette.primary.main,
+    color: theme.palette.primary.contrastText,
   },
 }));
 
@@ -82,7 +84,7 @@ const Navbar: FC = () => {
   const [userSettings] = useState<Array<UserMenuItem>>([
     {
       name: 'Profile',
-      icon: <PersonIcon sx={{ color: '#ffffff' }} />,
+      icon: <PersonIcon />,
       tooltip: t('profile'),
       onClick: () => {
         handleCloseUserMenu();
@@ -91,7 +93,7 @@ const Navbar: FC = () => {
     },
     {
       name: 'Logout',
-      icon: <LogoutIcon sx={{ color: '#ffffff' }} />,
+      icon: <LogoutIcon />,
       tooltip: tAuth('signOut'),
       onClick: () => {
         handleCloseUserMenu();
@@ -137,8 +139,8 @@ const Navbar: FC = () => {
             component={RouterLink}
             fontSize="1rem"
             fontWeight="500"
-            sx={{ color: '#FFFFFF' }}
-            to="/"
+            sx={{ color: 'primary.contrastText' }}
+            onClick={() => navigate('/')}
           >
             Paramoios
           </ParLink>

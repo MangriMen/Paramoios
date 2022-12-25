@@ -7,6 +7,7 @@ import { fetchUser } from 'ducks/user';
 import { FC, useEffect } from 'react';
 import { DndProvider } from 'react-dnd-multi-backend';
 import HTML5toTouch from 'react-dnd-multi-backend/dist/esm/HTML5toTouch';
+import { Helmet } from 'react-helmet';
 import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
@@ -32,13 +33,19 @@ const App: FC = () => {
   });
 
   return (
-    <ThemeProvider theme={theme}>
-      <BrowserRouter>
-        <DndProvider options={HTML5toTouch}>
-          <AppRoutes />
-        </DndProvider>
-      </BrowserRouter>
-    </ThemeProvider>
+    <>
+      <Helmet>
+        <meta name="theme-color" content={theme.palette.primary.main} />
+      </Helmet>
+      <ThemeProvider theme={theme}>
+        <BrowserRouter>
+          <DndProvider options={HTML5toTouch}>
+
+            <AppRoutes />
+          </DndProvider>
+        </BrowserRouter>
+      </ThemeProvider>
+    </>
   );
 };
 
