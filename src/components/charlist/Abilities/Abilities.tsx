@@ -1,28 +1,21 @@
 import { Box } from '@mui/material';
 import { AbilityCard } from 'components/charlist/Abilities/AbilityCard';
-import { Ability } from 'components/charlist/Charlist';
+import { selectCharacter } from 'ducks/character/selectors';
 import { FC, ReactNode, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
-export const Abilities: FC<{
-  items: { [x: string]: Ability };
-  setItems: any;
-}> = ({ items, setItems, ...props }) => {
+export const Abilities: FC<{}> = ({ ...props }) => {
+  const character = useSelector(selectCharacter);
+
   const [renderedItems, setRenderedItems] = useState<ReactNode>();
 
   useEffect(() => {
     setRenderedItems(
-      Object.keys(items).map((key) => (
-        <AbilityCard
-          key={key}
-          title={key}
-          item={items[key]}
-          onChange={(item: Ability) => {
-            setItems({ ...items, [key]: item });
-          }}
-        />
+      Object.keys(character.abilities).map((key) => (
+        <AbilityCard key={key} name={key} />
       )),
     );
-  }, [items, setItems]);
+  }, [character.abilities]);
 
   return <Box {...props}>{renderedItems}</Box>;
 };

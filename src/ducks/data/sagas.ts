@@ -45,6 +45,14 @@ export function* initSaga(): Generator<
   void
 > {
   try {
+    const packages = loadOrInitObjectFromDisk(STORAGE.packages, {});
+    if (!(PACKAGES.defaultPackage in packages)) {
+      dumpObjectToDisk(STORAGE.packages, {
+        ...packages,
+        default: defaultPackage,
+      });
+    }
+
     const activePackages = loadOrInitObjectFromDisk(
       STORAGE.activePackages,
       new Set([]),
@@ -54,14 +62,6 @@ export function* initSaga(): Generator<
         STORAGE.activePackages,
         new Set([...activePackages, PACKAGES.defaultPackage]),
       );
-    }
-
-    const packages = loadOrInitObjectFromDisk(STORAGE.packages, {});
-    if (!(PACKAGES.defaultPackage in packages)) {
-      dumpObjectToDisk(STORAGE.packages, {
-        ...packages,
-        default: defaultPackage,
-      });
     }
 
     yield put(initDataSuccess());
@@ -135,10 +135,9 @@ export function* disablePackageSaga({
   void
 > {
   try {
-    const dataCollected: any = yield select(
+    const collected = (yield select(
       (state: RootState) => state.data.collected,
-    );
-    const collected = dataCollected as DataState['collected'];
+    )) as unknown as DataState['collected'];
 
     for (const lng in collected[payload].translation) {
       i18n.removeResourceBundle(lng, PACKAGES.translationNs);

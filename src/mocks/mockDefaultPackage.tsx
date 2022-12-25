@@ -22,6 +22,15 @@ export const defaultPackage: Package['package'] = {
       stealth: 'dex',
       survival: 'wis',
     },
+    equipment: {
+      money: {
+        copper: 0,
+        silver: 0,
+        electrum: 0,
+        gold: 0,
+        platinum: 0,
+      },
+    },
   },
   translation: {
     ru: {
@@ -44,6 +53,15 @@ export const defaultPackage: Package['package'] = {
         sleightOfHand: 'Ловкость рук',
         stealth: 'Скрытность',
         survival: 'Выживание',
+      },
+      equipment: {
+        money: {
+          copper: 'Медь',
+          silver: 'Серебро',
+          electrum: 'Электрум',
+          gold: 'Золото',
+          platinum: 'Платина',
+        },
       },
     },
   },

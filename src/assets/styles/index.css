@@ -3,6 +3,11 @@
   src: url('../fonts/EBERRON_RUS.otf') format('truetype');
 }
 
+html,
+body {
+  height: 100%;
+}
+
 .smoothColor * {
   -webkit-transition: background-color 0.5s ease-out !important;
   -moz-transition: background-color 0.5s ease-out !important;
@@ -26,5 +31,5 @@ code {
 }
 
 #root {
-  height: 100%
+  height: 100%;
 }

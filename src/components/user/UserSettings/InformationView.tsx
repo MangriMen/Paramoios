@@ -318,8 +318,10 @@ export const InformationView: FC = () => {
           </Box>
         </Box>
         <ParBox
+          containerProps={{
+            width: '100%',
+          }}
           borderColor="error.main"
-          width="100%"
           boxSizing="border-box"
           marginTop="2rem"
           padding="1rem"

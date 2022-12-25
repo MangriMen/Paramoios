@@ -1,5 +1,5 @@
 import { Link, LinkProps, Palette, PaletteColor, styled } from '@mui/material';
-import { FC } from 'react';
+import { ElementType } from 'react';
 
 const LinkStyled = styled(Link, {
   shouldForwardProp: (prop) =>
@@ -24,13 +24,18 @@ const LinkStyled = styled(Link, {
   };
 });
 
-type ParLinkProps = LinkProps & {
+type ParLinkProps<C extends ElementType = any> = LinkProps<
+  C,
+  { component?: C }
+> & {
   textShadowBase?: string;
   textShadowColor?: LinkProps['color'];
-  component: React.ElementType<any>;
 };
 
-const ParLink: FC<ParLinkProps> = ({ children, ...props }) => {
+const ParLink = <C extends ElementType>({
+  children,
+  ...props
+}: ParLinkProps<C>) => {
   return (
     <LinkStyled
       fontSize="1.4rem"

@@ -13,13 +13,15 @@ import {
   Typography,
 } from '@mui/material';
 import { AbilityBase } from 'components/charlist/Abilities/AbilityBase';
-import { Ability } from 'components/charlist/Charlist';
 import ParBox from 'components/styled/ParBox';
+import { ABILITY_BONUS } from 'consts';
+import { setAbility } from 'ducks/character';
+import { selectCharacter } from 'ducks/character/selectors';
 import { selectProperty } from 'ducks/data/selectors';
 import { RootState } from 'ducks/store';
 import { ChangeEvent, FC, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 export const EditButton: FC<{
   editing: boolean;
@@ -59,13 +61,12 @@ export const EditButton: FC<{
   );
 };
 
-export const AbilityCard: FC<{
-  title: string;
-  item: Ability;
-  onChange: (item: Ability) => void;
-}> = ({ title, item, onChange }) => {
+export const AbilityCard: FC<{ name: string }> = ({ name }) => {
+  const dispatch = useDispatch();
   const { t } = useTranslation('translation', { keyPrefix: 'abilities' });
   const { t: tDialog } = useTranslation('translation', { keyPrefix: 'dialog' });
+
+  const character = useSelector(selectCharacter);
 
   const parentRef = useRef();
 
@@ -78,14 +79,21 @@ export const AbilityCard: FC<{
   );
 
   const confirmChanges = () => {
-    if (onChange) {
-      onChange({ ...item, enabled: localEnabled, override: localOverride });
-    }
+    dispatch(
+      setAbility({
+        name,
+        value: {
+          ...character.abilities[name],
+          enabled: localEnabled,
+          override: localOverride,
+        },
+      }),
+    );
   };
 
   const discardChanges = () => {
-    setLocalOverride(item.override);
-    setLocalEnabled(item.enabled);
+    setLocalOverride(character.abilities[name].override);
+    setLocalEnabled(character.abilities[name].enabled);
   };
 
   const handleEditDone = () => {
@@ -109,16 +117,25 @@ export const AbilityCard: FC<{
   };
 
   const handleOverrideChanged = (event: ChangeEvent<HTMLInputElement>) => {
-    setLocalOverride(parseInt(event.target.value));
+    if (isNaN(event.target.valueAsNumber)) {
+      event.target.valueAsNumber = 0;
+    }
+
+    event.target.valueAsNumber = Math.max(
+      Math.min(event.target.valueAsNumber, ABILITY_BONUS.MAX),
+      ABILITY_BONUS.MIN,
+    );
+
+    setLocalOverride(event.target.valueAsNumber);
   };
 
   useEffect(() => {
     setAnchorEl(parentRef.current);
   }, [parentRef]);
 
-  const actualValue = localOverride | item.value;
+  const actualValue = localOverride | character.abilities[name].value;
   const actualAbility = useSelector((state: RootState) =>
-    selectProperty(state, 'abilities', title),
+    selectProperty(state, 'abilities', name),
   );
 
   return (
@@ -165,7 +182,7 @@ export const AbilityCard: FC<{
           <EditButton editing={true} onClick={handleEditCancel} />
           <AbilityBase
             shadow
-            title={title}
+            title={name}
             ability={actualAbility}
             value={actualValue}
             enabled={localEnabled}
@@ -192,16 +209,19 @@ export const AbilityCard: FC<{
             label={t('override')}
             control={
               <TextField
-                defaultValue={item.override || 0}
+                type="number"
+                defaultValue={character.abilities[name].override || 0}
                 size="small"
                 color="primary"
                 onChange={handleOverrideChanged}
                 sx={{
                   borderColor: 'primary.main',
-                  width: '2.8rem',
+                  width: '3.4rem',
                   marginRight: '0.5rem',
                 }}
                 inputProps={{
+                  min: ABILITY_BONUS.MIN,
+                  max: ABILITY_BONUS.MAX,
                   sx: {
                     textAlign: 'center',
                     padding: '0.3rem',
@@ -226,10 +246,10 @@ export const AbilityCard: FC<{
         <EditButton editing={false} onClick={handleEditDone} />
         <AbilityBase
           shadow
-          title={title}
+          title={name}
           ability={actualAbility}
           value={actualValue}
-          enabled={item.enabled}
+          enabled={character.abilities[name].enabled}
         />
       </>
     </Box>

@@ -1,24 +1,17 @@
-import { createTheme } from '@mui/material';
-import { deepmerge } from '@mui/utils';
-import { COMPONENTS_DEFAULT_OPTIONS } from 'consts/componentDefaultOptions';
+import { ThemeOptions } from '@mui/material';
 
-const defaultTheme = createTheme(
-  deepmerge(
-    {
-      typography: {
-        fontFamily: 'Eberron',
-      },
-      palette: {
-        primary: {
-          main: '#681e22',
-        },
-        secondary: {
-          main: '#e9c996',
-        },
-      },
+const defaultThemeOptions: ThemeOptions = {
+  typography: {
+    fontFamily: 'Eberron',
+  },
+  palette: {
+    primary: {
+      main: '#681e22',
     },
-    COMPONENTS_DEFAULT_OPTIONS,
-  ),
-);
+    secondary: {
+      main: '#e9c996',
+    },
+  },
+};
 
-export default defaultTheme;
+export default defaultThemeOptions;
